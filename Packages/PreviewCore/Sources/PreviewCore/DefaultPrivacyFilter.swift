@@ -288,6 +288,8 @@ public struct DefaultPrivacyFilter: PreviewPrivacyFiltering {
         guard hasFollowingLine else { return false }
         let trimmed = value.trimmingCharacters(in: .whitespaces)
         guard let first = trimmed.first else { return true }
+        // A value that is only a comment is an empty value: the block under the key follows it.
+        if first == "#" { return true }
         if first == "{" || first == "[" || trimmed.hasSuffix("\\") { return true }
         guard first == "\"" || first == "'" else { return false }
         if trimmed.hasPrefix(String(repeating: String(first), count: 3)) { return true }
