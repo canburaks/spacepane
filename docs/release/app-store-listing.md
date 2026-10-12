@@ -13,12 +13,14 @@ file supersedes the name, subtitle, keywords, promotional text and description i
 [store-listing/listing.en.md](store-listing/listing.en.md); the App Store Connect answers in
 [store-listing/app-store-connect-worksheet.md](store-listing/app-store-connect-worksheet.md) still apply.
 
-**Status: entered as a draft, not submitted.** On 2026-10-10 the English (U.S.) and English (U.K.) text
-below was entered in App Store Connect for version 1.0 and saved; see
-[What App Store Connect holds](#what-app-store-connect-holds). No build has been uploaded and nothing has
-been added for review. Decision 1 is taken; four owner decisions and one validation gate are open (next two
-sections). Prices, availability and the effective store text live in App Store Connect; this file is the
-intended copy, not a second source of truth.
+**Status: entered as a draft, not submitted (updated 2026-10-12).** On 2026-10-10 the English (U.S.) and
+English (U.K.) text below was entered in App Store Connect for version 1.0.0 and saved; see
+[What App Store Connect holds](#what-app-store-connect-holds). Build 1.0.0 (1) was uploaded on 2026-10-10 and
+will not be submitted; build 2 is being prepared. Nothing has been added for review. Decisions 1, 3 and 5
+are taken; decision 2 and the validation gate are open (next two sections), and decision 4 is not a copy
+decision. The text below describes build 2: it says 12 color schemes, which the text stored in App Store
+Connect does not yet say. Prices, availability and the effective store text live in App Store Connect; this
+file is the intended copy, not a second source of truth.
 
 Every length below was counted by script: names and subtitles in characters (limit 30), keyword fields in
 UTF-8 bytes (limit 100), promotional text in characters (limit 170), descriptions in characters (limit 4,000).
@@ -28,17 +30,18 @@ UTF-8 bytes (limit 100), promotional text in characters (limit 170), description
 | # | Decision | Recommendation | Why |
 |---|---|---|---|
 | 1 | Use "Quick Look" in the app name? The earlier draft in [store-listing/listing.en.md](store-listing/listing.en.md) kept the name `SpacePane` and used the phrase only in the subtitle. | Yes, as `SpacePane for Quick Look`. **Decided 2026-10-10:** the owner saved this name in App Store Connect. | "Quick Look" is the category's head term: 11 of the top 12 store results for it carry the phrase in their name or subtitle. 12 of the 19 direct all-in-one competitors and 23 of 99 specialist preview apps have it in the name. It is not on Apple's trademark list (Finder, Mac and macOS are), and "for" is the referential wording Apple's guidelines allow. No rejection for it was found, and none was ruled out. Fallbacks B and C are below if App Review objects. |
-| 2 | Do IGES and STEP ship in 1.0 (decision 027 D20, OCCT licence)? | Not a copy decision. | If they don't ship, apply the "no CAD" swaps below. |
-| 3 | Which languages ship (D22: reviewed languages only)? | Publish English (U.S.) and English (U.K.) at launch. Add each other store language when its app translation is reviewed. | The store page lists the app's languages. A German store page for an English-only app invites refunds and one-star reviews. English (U.K.) is the default or additional store language in Türkiye, India, Indonesia, Nigeria, Germany, France, Brazil and Russia. |
-| 4 | Price model (PLAN M6). | Not a copy decision. | The description avoids price wording. If paid upfront is chosen, add the optional line under "Private by design". |
-| 5 | Primary category: keep Utilities, or Developer Tools? | Developer Tools primary, Utilities secondary. | Both are indexed by search, so this only changes where the app is browsed. 8 of the 14 direct competitors read, and all four launched since September, chose Developer Tools, and the formats proven to open in SpacePane are developer files. No data was found on which converts better. It means changing `PREV_APP_CATEGORY` and the recorded answer before the upload build; until then the copy works with either. |
+| 2 | Do IGES and STEP ship in 1.0 (decision 027 D20, OCCT licence)? | Not a copy decision. | **Open.** The legal review of the source-offer route (D20) has no recorded outcome; nothing here states or implies clearance. If they don't ship, apply the "no CAD" swaps below. |
+| 3 | Which languages ship (D22: reviewed languages only)? | Publish English (U.S.) and English (U.K.) at launch. Add each other store language when its app translation is reviewed. | **Taken (owner rule "only reviewed languages ship", applied 2026-10-12): English (U.S.) and English (U.K.) at launch.** No language has a recorded review, so build 2 ships English only; the other 13 translations stay in the repository as drafts. The store page lists the app's languages. A German store page for an English-only app invites refunds and one-star reviews. English (U.K.) is the default or additional store language in Türkiye, India, Indonesia, Nigeria, Germany, France, Brazil and Russia. |
+| 4 | Price model (PLAN M6). | Not a copy decision. | The description avoids price wording. Paid upfront is what App Store Connect holds (USD 9.99 base, 2026-10-12), so the optional line under "Private by design" may be added. |
+| 5 | Primary category: keep Utilities, or Developer Tools? | ~~Developer Tools primary, Utilities secondary.~~ Superseded: keep Utilities primary, Developer Tools secondary (review readiness plan, R-5). | **Closed (2026-10-12): Utilities primary, Developer Tools secondary.** The build setting `PREV_APP_CATEGORY` and App Store Connect already agree. The earlier reasoning is kept for the record: both categories are indexed by search, so the choice only changes where the app is browsed; 8 of the 14 direct competitors read, and all four launched since September, chose Developer Tools; no data was found on which converts better. |
 
 ## Validation gate: what the copy may claim
 
-The repository's rule is to claim Finder previews only for types seen to open in SpacePane. As of 2026-10-10,
-[the host matrix](../validation/host-matrix.json) records that for 23 of 76 types, on one
-development-signed Mac, and for no thumbnail. Plain text and Swift source were shown by another provider;
-`.env` got a generic icon.
+The repository's rule is to claim Finder previews only for types seen to open in SpacePane. As of 2026-10-12,
+[the host matrix](../validation/host-matrix.json) records the Finder preview for 4 of 76 types and the Quick
+Look panel for 23 of 76 (SpacePane's own content seen), all on development-signed builds on one Mac running
+macOS 27.2, and no Finder thumbnail for any type. Plain text and Swift source were shown by another provider
+in the panel; `.env` got a generic icon. No store-signed install has been observed.
 
 So the copy is built in two layers:
 
@@ -47,45 +50,59 @@ So the copy is built in two layers:
   files, OPML, notebooks, SQLite, ZIP, TAR, GZIP, XIP, folders, MIDI, IGES, STEP and extension-free text.
 - **The opening's safety claims are the exception.** Concealed secrets and the findings banner have been
   seen in Finder. Hidden-character and archive-risk findings pass package tests only. They are the lead
-  claim, so they are the first thing to observe on the TestFlight build; if they cannot be shown, the
-  opening falls back to secrets alone.
+  claim, so they are the first thing to observe on the internal TestFlight build; if they cannot be shown,
+  the opening falls back to secrets alone.
 - **The description's feature list and the keyword field** also name capabilities that pass package tests
   but have not been seen in Finder. Each sits behind the sentence "macOS chooses which app previews each file
   type. When it uses SpacePane, you get:". The table in [Claim check](#claim-check-before-submission) lists
-  them. Before submission, run the TestFlight host matrix and delete every line whose type did not open in
-  SpacePane.
+  them. After the installed-build validation (review readiness plan, Phase 3 and Phase 5), delete every line
+  whose type did not open in SpacePane. No claim has been cut yet.
 
 ## What App Store Connect holds
 
-Read back from the app record (Apple ID 6819445086, macOS, version 1.0, "Prepare for Submission") on
-2026-10-10 after saving. This is an observation of one day, not a mirror; App Store Connect is the source
-of truth.
+Read directly from the app record (Apple ID 6819445086, macOS, version 1.0.0, "Prepare for Submission") on
+2026-10-12. This is an observation of one day, not a mirror; App Store Connect is the source of truth. The
+text fields were first entered and read back on 2026-10-10.
 
-| Field | English (U.S.) | English (U.K.) |
-|---|---|---|
-| Name | `SpacePane for Quick Look` | same |
-| Subtitle | `Preview JSON, SQLite, Markdown` | same |
-| Promotional text | as below, 159 characters | same |
-| Description | as below, 3,721 characters | the U.K. spelling variant, 3,724 characters |
-| Keywords | as below, 98 bytes | same |
-| Support URL | `https://spacepane.com/support` | same |
-| Marketing URL | `https://spacepane.com` | same |
-| Privacy Policy URL | `https://spacepane.com/privacy` | same |
+Text fields, the same for English (U.S.) and English (U.K.) except where noted:
 
-The three addresses returned HTTP 200 on the same day. Already set on the record and left as found:
-bundle ID `org.webmeister.spacepane`, SKU `org.webmeister.spacepane`, primary language English (U.S.),
-primary category Utilities, secondary category Developer Tools, Apple's standard licence agreement.
+| Field | Held |
+|---|---|
+| Name | `SpacePane for Quick Look` |
+| Subtitle | `Preview JSON, SQLite, Markdown` |
+| Promotional text, description, keywords | Entered. The stored description still says "11 color schemes" and must be re-pasted from this file (12) before submission. |
+| Support URL | `https://spacepane.com/support` |
+| Marketing URL | `https://spacepane.com` |
+| Privacy Policy URL | `https://spacepane.com/privacy` |
+| Copyright | `2026 Can Burak Sofyalioglu` |
 
-Still empty or not started there:
+The three addresses returned HTTP 200 on 2026-10-10. Other fields entered:
 
-- Copyright. The worksheet's value is `2026 Can Burak Sofyalioglu`, pending the owner's check against the
-  seller name.
-- Screenshots and app previews.
-- The App Privacy questionnaire (not started, so nothing is published), the age rating, content rights and
-  the Digital Services Act declaration.
-- App Review contact, notes and attachment; the release option.
-- The version field reads `1.0` while `MARKETING_VERSION` is `1.0.0`. Whether App Store Connect treats the
-  two as the same version when a build is attached has not been checked; make them agree before the upload.
+- Version record: 1.0.0 (not "1.0"), matching `MARKETING_VERSION`.
+- Primary category Utilities, secondary Developer Tools. Age rating 4+. Content rights: "does not contain
+  third-party content".
+- Price: USD 9.99 base in the United States, available in 175 regions. Tax category "App Store software".
+- App Review contact: name, phone and email entered. They are not recorded in this repository.
+- App Privacy: "Data Not Collected" entered, **not yet published**.
+- Release option: "Automatically release". The review readiness plan (R-4) says manual release; change it.
+- Already set and left as found: bundle ID `org.webmeister.spacepane`, SKU `org.webmeister.spacepane`, primary
+  language English (U.S.), Apple's standard licence agreement.
+
+Builds and TestFlight:
+
+- Build 1.0.0 (1) was uploaded on 2026-10-10. It is processed and "Ready to Submit", has zero installs and is
+  not attached to the version. It will not be submitted; build 2 is being prepared.
+- An internal TestFlight group "Internal" exists (owner decision R-7: internal testing only, never external
+  testers or a public link).
+
+Not in App Store Connect yet:
+
+- Screenshots: 0 of 10. App previews: none.
+- A selected build for the version.
+- Review notes and the attachment.
+- Digital Services Act trader status: still "Set Up".
+- Paid Apps Agreement: status "New", unsigned. The Free Apps Agreement is active.
+- Accessibility label: a draft that declares only Dark Interface.
 - What's New is not offered for a first version.
 
 ## English (U.S.), primary
@@ -115,7 +132,7 @@ How the three indexed fields work together:
 
 ### Description
 
-3,721 of 4,000 characters. Plain text with line breaks; the store supports no other formatting. Apple
+3,721 of 4,000 characters, recounted with python3 on 2026-10-12 after "11" became "12" (the count does not change). Plain text with line breaks; the store supports no other formatting. Apple
 does not list the description as a search field, so it is written to convert and to feed the store's
 automatically generated tags, not to carry keywords.
 
@@ -162,7 +179,7 @@ PRIVATE BY DESIGN
 
 MAKE IT YOURS
 • Turn any file type off and SpacePane leaves it alone
-• Light, Dark and High Contrast themes with 11 color schemes
+• Light, Dark and High Contrast themes with 12 color schemes
 • Your font, size, spacing and line numbers
 • Save your look as a profile and share it as a small theme file
 
@@ -207,7 +224,8 @@ Optional line if the app is paid upfront, added as the last bullet under PRIVATE
 ## English (U.K.)
 
 Same name, subtitle, keywords, promotional text and What's New. The description differs in three spellings
-("in colour", "syntax colouring", "colour schemes"); 3,724 characters. Enter it as its own
+("in colour", "syntax colouring", "colour schemes"); 3,724 of 4,000 characters, recounted on 2026-10-12 with
+"12 colour schemes". Enter it as its own
 localization so that storefronts whose store language is English (U.K.) get the full page.
 
 ## Fallbacks if App Review rejects the name
@@ -236,33 +254,65 @@ one competitor's name only in the brand.
 
 ## Claim check before submission
 
-Evidence tiers follow the validation records: **seen** = opened in SpacePane through Quick Look on a signed
-build; **tested** = package or companion tests only.
+Evidence tiers in the "Evidence today" column follow the validation records: **seen** = opened in SpacePane
+through Quick Look on a development-signed build; **tested** = package or companion tests only. Nothing here
+was seen on a store-signed install.
 
-| Line in the copy | Evidence today | Before submission |
-|---|---|---|
-| JSON outline; concealed secrets; findings banner | Seen | Re-run on the store-signed build |
-| JSON Lines | Seen, but the resolved type belonged to another vendor's app on that Mac | Check on a Mac with no other Quick Look apps |
-| YAML, TOML, XML, property lists as outlines | Seen as concealed source; outline tested | Observe the outline in Finder |
-| SQLite tables, columns, row counts | Seen (summary) | Observe the table view |
-| ZIP, TAR, GZIP, XIP and folder listings | Seen | |
-| RAR and 7z listings | Tested | Observe, or delete from the bullet |
-| Jupyter notebooks | Seen | |
-| Markdown as a readable document with Contents | Seen as source only; rendered view tested | Observe the rendered view, or reword to "Markdown with its source" |
-| Diffs in color | Seen | |
-| CSV and TSV tables and Profile | Tested; macOS has its own CSV preview | Observe, or delete the bullet |
-| Mermaid, draw.io, Parquet, EPUB, comics, subtitles | Tested | Observe each, or delete it |
-| MIDI play and scrub controls | Seen with a silent file | Confirm audible playback |
-| Source code, 84 languages | Tested; Swift went to another provider | See the swaps above |
-| Extension-free text files | Seen | |
-| STL, OBJ, PLY, 3MF | Tested; macOS has its own previews for some | Observe, or delete |
-| STEP and IGES once switched on | Seen on one Mac | Store-signed check (D27), licence gate (D20) |
-| Hidden characters, archive risk notes, notebook health | Tested | Observe one of each in Finder |
-| No network access, read-only, no account, no analytics | Entitlements checked in the archive | Re-check the exported package |
-| Info symbol; list of other apps that preview the same types | Tested | Observe |
-| Thumbnails skip files that hold secrets | Tested; no Finder thumbnail observed | Observe a content thumbnail, or remove "SpacePane Thumbnails" claims beyond naming the extension |
-| 11 color schemes, profiles, theme files, per-type switches | Seen in the signed companion | |
-| macOS 15 or later | Never run on macOS 15 | TestFlight on macOS 15 (D21) |
+The two right-hand columns come from [the host matrix](../validation/host-matrix.json) and the format
+catalog (`Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json`), read on 2026-10-12.
+The matrix records one outcome per surface: `provider` (SpacePane's own content was seen; this is the
+matrix's word for an observation), `otherProvider` (another provider's content was seen), `generic` (a
+generic icon and metadata only) and `notObserved`. Values are given as Finder preview / Quick Look panel /
+Finder thumbnail. No claim has been cut; cuts wait for the installed-build validation (Phase 5 of the
+[review readiness plan](../plans/2026-10-12-review-readiness-plan.md)).
+
+Claims with no Finder or panel observation at all (Finder preview and Quick Look panel both `notObserved`):
+
+- RAR and 7z listings (`archive.rar`, `archive.7z`).
+- CSV and TSV tables and Profile (`data.csv`, `data.tsv`), also in the keyword field (`csv`).
+- Mermaid, draw.io, Parquet, EPUB, comics and subtitles (`text.mermaid`, `data.drawio`, `data.parquet`,
+  `document.epub`, `archive.comic-book`, and the subtitle types).
+- STL, OBJ, PLY and 3MF models (`model.stl`, `model.obj`, `model.ply`, `model.3mf`), also in the keyword
+  field (`stl`).
+- Hidden characters, archive risk notes and notebook health. These are findings, not formats, so the matrix
+  has no row for them; nothing records one seen in Finder or the panel.
+- Every thumbnail claim: `finderThumbnail` is `notObserved` for all 76 types.
+
+Observed, but not the view the copy claims, or not by SpacePane:
+
+- YAML, TOML, XML and property lists as outlines; Markdown as a rendered document: only concealed source
+  was seen in the panel.
+- Source code: the panel showed another provider (`text.source-code`).
+- CSV: macOS has its own preview, so SpacePane may never be asked.
+
+| Line in the copy | Catalog format ID(s) | Matrix: preview / panel / thumbnail | Evidence today | Before submission |
+|---|---|---|---|---|
+| JSON outline; concealed secrets; findings banner | `data.json` | provider / provider / notObserved | Seen | Re-run on the store-signed build |
+| JSON Lines | `data.json-lines` | provider / provider / notObserved | Seen, but the resolved type belonged to another vendor's app on that Mac | Check on a Mac with no other Quick Look apps |
+| YAML, TOML, XML, property lists as outlines | `data.yaml`, `data.toml`, `data.xml`, `data.property-list` | notObserved / provider / notObserved (each) | Seen as concealed source; outline tested | Observe the outline in Finder |
+| SQLite tables, columns, row counts | `database.sqlite` | notObserved / provider / notObserved | Seen (summary) | Observe the table view |
+| ZIP, TAR, GZIP, XIP and folder listings | `archive.zip`, `archive.tar`, `archive.gzip`, `archive.xip`, `container.folder` | notObserved / provider / notObserved (each) | Seen | |
+| RAR and 7z listings | `archive.rar`, `archive.7z` | notObserved / notObserved / notObserved | Tested | Observe, or delete from the bullet |
+| Jupyter notebooks | `text.jupyter-notebook` | provider / provider / notObserved | Seen | |
+| Markdown as a readable document with Contents | `text.markdown` | notObserved / provider / notObserved | Seen as source only; rendered view tested | Observe the rendered view, or reword to "Markdown with its source" |
+| Diffs in color | `text.diff` | notObserved / provider / notObserved | Seen | |
+| CSV and TSV tables and Profile | `data.csv`, `data.tsv` | notObserved / notObserved / notObserved | Tested; macOS has its own CSV preview | Observe, or delete the bullet |
+| Mermaid, draw.io, Parquet, EPUB, comics, subtitles | `text.mermaid`, `data.drawio`, `data.parquet`, `document.epub`, `archive.comic-book`; subtitles: `text.subrip`, `text.webvtt`, `text.substation-alpha`, `text.ttml`, `text.sbv`, `text.microdvd` | notObserved / notObserved / notObserved (each) | Tested | Observe each, or delete it |
+| MIDI play and scrub controls | `audio.midi` | notObserved / provider / notObserved | Seen with a silent file | Confirm audible playback |
+| Source code, 84 languages | `text.source-code` | notObserved / otherProvider / notObserved | Tested; Swift went to another provider | See the swaps above |
+| Extension-free text files | `text.extensionless` | provider / provider / notObserved | Seen | |
+| STL, OBJ, PLY, 3MF | `model.stl`, `model.obj`, `model.ply`, `model.3mf` | notObserved / notObserved / notObserved (each) | Tested; macOS has its own previews for some | Observe, or delete |
+| STEP and IGES once switched on | `cad.step`, `cad.iges` | notObserved / provider / notObserved (each) | Seen on one Mac | Store-signed check (D27), licence gate (D20); the legal review of the source-offer route has no recorded outcome |
+| Hidden characters, archive risk notes, notebook health | none (findings on text, archive and notebook types; archive risk: `archive.zip`, `archive.tar`, `archive.rar`, `archive.7z`; notebooks: `text.jupyter-notebook`) | no row | Tested | Observe one of each in Finder |
+| No network access, read-only, no account, no analytics | none | not a format claim | Entitlements checked in the archive | Re-check the exported package |
+| Info symbol; list of other apps that preview the same types | none | not a format claim | Tested | Observe |
+| Thumbnails skip files that hold secrets | thumbnail-enabled types, none observed | notObserved for all 76 | Tested; no Finder thumbnail observed | Observe a content thumbnail, or remove "SpacePane Thumbnails" claims beyond naming the extension |
+| 12 color schemes, profiles, theme files, per-type switches | none | not a format claim | Eleven schemes, profiles and switches seen in the signed companion (build 1). Aurora, the twelfth, was added on 2026-10-11 and is in the source only | Observe all twelve in build 2; the stored description still says 11 |
+| macOS 15 or later | none | not a format claim | Owner's report (2026-10-12): the app works on macOS 15. A macOS 15.2 virtual machine exists. No session has recorded an observation | Record the run on macOS 15 (D21) |
+
+The keyword field depends on the same IDs: `csv` on `data.csv`, `rar` on `archive.rar`, `stl` on
+`model.stl`, `step`, `iges` and `cad` on `cad.step` and `cad.iges`, `yaml`, `toml`, `plist`, `xml`,
+`jupyter` and `zip` on the rows above.
 
 ## Screenshots
 
@@ -289,6 +339,10 @@ claims the capture does not show. All file contents are synthetic
 Screenshots 9 and 10 are captures of the app's own window, the rest of Quick Look in Finder. If 6, 7 or 8
 cannot be used, ship seven images rather than fill the gaps with unobserved scenes.
 
+App Store Connect holds no screenshots (0 of 10, observed 2026-10-12). Build 1 has eleven color schemes and
+build 2 has twelve, so the Theme page capture is retaken from the validated build (review readiness plan,
+Phase 5).
+
 An app preview video is optional (up to three, landscape, screen capture only). One 20-second capture is
 enough: select a file, press Space, switch Outline to Source, select the next file. Record it after the
 screenshots are settled; previews show before screenshots, so a weak one costs more than none.
@@ -297,11 +351,11 @@ screenshots are settled; previews show before screenshots, so a weak one costs m
 
 | Field | Value | Note |
 |---|---|---|
-| Categories | Per decision 5; today Utilities, Developer Tools, which is also what App Store Connect held on 2026-10-10 | The primary must match `PREV_APP_CATEGORY` |
-| Accessibility labels | Declare Dark Interface only | Apple uses these labels in search. A label means every common task works with that feature, so VoiceOver, Sufficient Contrast and Differentiate Without Color wait for an audit (VoiceOver in Quick Look is unverified) |
-| App Privacy | Data Not Collected | As recorded in app-store-submission.md |
-| Age rating | 4+ | As recorded |
-| Support, privacy, marketing URLs | As recorded | The support URL must show real contact details; the mailbox and the site deployment are still open in PLAN M6 |
+| Categories | Utilities primary, Developer Tools secondary (decision 5, closed). App Store Connect holds the same (observed 2026-10-12) | The primary must match `PREV_APP_CATEGORY` |
+| Accessibility labels | Declare Dark Interface only. App Store Connect holds a draft with only Dark Interface (2026-10-12) | Apple uses these labels in search. A label means every common task works with that feature, so VoiceOver, Sufficient Contrast and Differentiate Without Color wait for an audit (VoiceOver in Quick Look is unverified) |
+| App Privacy | Data Not Collected | Entered in App Store Connect, not yet published (2026-10-12). Reasoning in app-store-submission.md |
+| Age rating | 4+ | Entered in App Store Connect (2026-10-12) |
+| Support, privacy, marketing URLs | As recorded above | The support, privacy and open-source pages are live and show `info@spacepane.com`. The domain has MX, SPF and DMARC records; whether the mailbox answers is unconfirmed (review readiness plan, Phase 0) |
 
 Custom product pages, product page optimization, in-app events and Apple Ads are iPhone and iPad features;
 none applies to a Mac app. The two levers that do exist on the Mac are the promotional text, which can be
