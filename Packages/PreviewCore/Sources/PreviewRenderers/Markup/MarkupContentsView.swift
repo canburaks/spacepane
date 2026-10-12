@@ -14,6 +14,13 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
     private static let cellIdentifier = NSUserInterfaceItemIdentifier("markup-contents-cell")
     private static let columnIdentifier = NSUserInterfaceItemIdentifier("markup-contents-column")
     private static let defaultIndentPerLevel: CGFloat = 16
+    /// Space a title keeps clear of the row's edges: the leading inset before the level indent, and the trailing one.
+    private static let baseLeadingInset: CGFloat = 10
+    private static let trailingInset: CGFloat = 8
+    /// What the text field's own cell leaves unused on each side of its text.
+    private static let fieldTextMargin: CGFloat = 2
+    /// The most lines a heading may take; the rest is truncated, so one long title cannot fill the list.
+    static let maximumTitleLines = 5
 
     var navigate: ((NativePreviewMode, NSRange) -> Void)?
     /// The leading inset added per heading level. The rail, which has a fraction of the width, sets a smaller one.
@@ -49,6 +56,19 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
     private var typography: NativeTextTypography?
     private var palette: NativeTextPalette?
     private var syntaxStyle = PreviewSyntaxStyle()
+    /// What the row heights depend on besides the titles: the clip width (a legacy scroller narrows it), the font
+    /// and the base row height, and the indent. Heights are measured again only when this changes or the titles do.
+    private struct MeasurementKey: Equatable {
+        let clipWidth: CGFloat
+        let fontName: String
+        let pointSize: CGFloat
+        let rowHeight: CGFloat
+        let maximumPointSize: CGFloat?
+        let indentPerLevel: CGFloat
+    }
+    private var measuredKey: MeasurementKey?
+    /// One measuring object for every row; tests read its counters.
+    let measurer = ContentsRowMeasurer()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -81,9 +101,14 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         tableView.setAccessibilityLabel(PreviewStrings.text(.previewModeContents))
+        scrollView.contentView.postsFrameChangedNotifications = true
+        NotificationCenter.default.addObserver(self, selector: #selector(clipWidthChanged),
+            name: NSView.frameDidChangeNotification, object: scrollView.contentView)
     }
 
     required init?(coder: NSCoder) { nil }
+
+    @objc private func clipWidthChanged() { remeasureRowsIfMeasurementKeyChanged(reloaded: false) }
 
     // MARK: SafeModeContentView
 
@@ -106,7 +131,8 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
         let rowPointSize = min(resolved.font.pointSize, maximumPointSize ?? resolved.font.pointSize)
         tableView.rowHeight = max(24, rowPointSize + CGFloat(style.typography.lineSpacing) + 10)
         tableView.setAccessibilityLabel(PreviewStrings.text(.previewModeContents))
-        if updated != headings {
+        let reloaded = updated != headings
+        if reloaded {
             headings = updated
             tableView.reloadData()
             tableView.deselectAll(nil)
@@ -119,6 +145,7 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
                 self.configure(cell, row: row)
             }
         }
+        remeasureRowsIfMeasurementKeyChanged(reloaded: reloaded)
         if selectsFirstRow, tableView.selectedRow < 0, !headings.isEmpty {
             tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
         }
@@ -143,18 +170,73 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
         return cell
     }
 
-    private func configure(_ cell: ContentsCell, row: Int) {
-        guard headings.indices.contains(row), let typography, let palette else { return }
-        let heading = headings[row]
-        let role: PreviewSyntaxRole = heading.level == 1 ? .heading : .key
-        var font = typography.font
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        guard headings.indices.contains(row), typography != nil else { return tableView.rowHeight }
+        let width = titleWidth(for: headings[row])
+        guard width > 0 else { return tableView.rowHeight }
+        let font = titleFont(for: headings[row])
+        let lineHeight = measurer.lineHeight(for: font)
+        // Whatever the single-line row keeps above and below its one line is kept around every extra line too, and
+        // never less than the field's own insets, which a large font can leave no room for in the base height.
+        let padding = max(tableView.rowHeight - lineHeight, 2 * ContentsCell.verticalInset)
+        let wrapped = measurer.wrappedHeight(of: headings[row].title, font: font, width: width)
+        let lines = min(max(wrapped, lineHeight), lineHeight * CGFloat(Self.maximumTitleLines))
+        return max(tableView.rowHeight, lines + padding)
+    }
+
+    /// The width a title can use now. It comes from the column as it fits the clip view at this moment, never from a
+    /// width kept from an earlier layout: the table style insets the column from the clip, and a legacy scroller
+    /// that appears takes its width from the clip, so rows measured before that would be too short.
+    private func titleWidth(for heading: MarkupHeading) -> CGFloat {
+        guard scrollView.contentView.bounds.width > 0, let column = tableView.tableColumns.first else { return 0 }
+        return column.width - leadingInset(for: heading) - Self.trailingInset - 2 * Self.fieldTextMargin
+    }
+
+    private func leadingInset(for heading: MarkupHeading) -> CGFloat {
+        Self.baseLeadingInset + CGFloat(max(heading.level - 1, 0)) * indentPerLevel
+    }
+
+    private func titleFont(for heading: MarkupHeading) -> NSFont {
+        var font = typography?.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
         if let cap = maximumPointSize, font.pointSize > cap,
            let capped = NSFont(descriptor: font.fontDescriptor, size: cap) { font = capped }
         if heading.level == 1 { font = NSFontManager.shared.convert(font, toHaveTrait: .boldFontMask) }
+        return font
+    }
+
+    /// Measures every row again when what the heights depend on is not what they were measured for. A reload has
+    /// just measured the rows (the table asks for every height), so it only records the key.
+    private func remeasureRowsIfMeasurementKeyChanged(reloaded: Bool) {
+        let key = MeasurementKey(clipWidth: scrollView.contentView.bounds.width,
+                                 fontName: typography?.font.fontName ?? "", pointSize: typography?.font.pointSize ?? 0,
+                                 rowHeight: tableView.rowHeight, maximumPointSize: maximumPointSize,
+                                 indentPerLevel: indentPerLevel)
+        guard key != measuredKey else { return }
+        let widthChanged = key.clipWidth != measuredKey?.clipWidth
+        measuredKey = key
+        // The column follows the clip; bring it level with the clip as it is now before measuring against it.
+        if widthChanged { tableView.sizeLastColumnToFit() }
+        guard !headings.isEmpty, !(reloaded && !widthChanged) else { return }
+        // The table animates a height change; a resize or a scroller appearing should move rows at once.
+        NSAnimationContext.beginGrouping()
+        NSAnimationContext.current.duration = 0
+        NSAnimationContext.current.allowsImplicitAnimation = false
+        tableView.noteHeightOfRows(withIndexesChanged: IndexSet(integersIn: 0..<headings.count))
+        NSAnimationContext.endGrouping()
+    }
+
+    private func configure(_ cell: ContentsCell, row: Int) {
+        guard headings.indices.contains(row), typography != nil, let palette else { return }
+        let heading = headings[row]
+        let role: PreviewSyntaxRole = heading.level == 1 ? .heading : .key
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .byWordWrapping
         cell.field.attributedStringValue = NSAttributedString(string: heading.title, attributes: [
-            .font: font, .foregroundColor: palette.color(for: role, style: syntaxStyle)
+            .font: titleFont(for: heading), .foregroundColor: palette.color(for: role, style: syntaxStyle),
+            .paragraphStyle: paragraph
         ])
-        cell.setIndent(10 + CGFloat(max(heading.level - 1, 0)) * indentPerLevel)
+        cell.field.maximumNumberOfLines = Self.maximumTitleLines
+        cell.setIndent(leadingInset(for: heading))
         cell.field.setAccessibilityLabel(PreviewStrings.format(.markupContentsItem,
             arguments: [Int64(heading.level), heading.title], locale: .current))
         cell.field.setAccessibilityHelp(PreviewStrings.text(.markupContentsHelp))
@@ -193,16 +275,62 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
     }
 }
 
-/// A single-line row whose leading inset follows the heading level.
+/// Measures heading titles for the list's rows with one text system for every row: the layout manager, text
+/// container and storage are made once, and the line height of a font is kept. The counters let tests see that
+/// rows are measured once and that no layout manager is made per row.
+@MainActor
+final class ContentsRowMeasurer {
+    private let storage = NSTextStorage()
+    private let layoutManager = NSLayoutManager()
+    private let container = NSTextContainer(size: NSSize(width: 0, height: CGFloat.greatestFiniteMagnitude))
+    private var lineHeights: [String: CGFloat] = [:]
+    /// Layout managers made by this measurer: one for its whole life.
+    private(set) var layoutManagerCount = 1
+    /// Titles measured so far.
+    private(set) var measurementCount = 0
+
+    init() {
+        container.lineFragmentPadding = 0
+        storage.addLayoutManager(layoutManager)
+        layoutManager.addTextContainer(container)
+    }
+
+    func lineHeight(for font: NSFont) -> CGFloat {
+        let key = "\(font.fontName)/\(font.pointSize)"
+        if let known = lineHeights[key] { return known }
+        let height = layoutManager.defaultLineHeight(for: font).rounded(.up)
+        lineHeights[key] = height
+        return height
+    }
+
+    /// The height `title` takes wrapped to `width` points, unbounded in lines.
+    func wrappedHeight(of title: String, font: NSFont, width: CGFloat) -> CGFloat {
+        measurementCount += 1
+        storage.setAttributedString(NSAttributedString(string: title, attributes: [.font: font]))
+        container.size = NSSize(width: max(width, 1), height: CGFloat.greatestFiniteMagnitude)
+        layoutManager.ensureLayout(for: container)
+        return layoutManager.usedRect(for: container).height.rounded(.up)
+    }
+}
+
+/// A row whose leading inset follows the heading level and whose title wraps.
 @MainActor
 final class ContentsCell: NSTableCellView {
+    /// Space the title field keeps above and below itself in the row.
+    static let verticalInset: CGFloat = 3
     let field = NSTextField(labelWithString: "")
     private var leading: NSLayoutConstraint?
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.lineBreakMode = .byTruncatingTail
+        // A title wraps (up to `maximumTitleLines`, then truncates), and the list makes the row as tall as the
+        // wrapped title. The field fills the row between small insets instead of sizing itself from one line.
+        field.lineBreakMode = .byWordWrapping
+        field.cell?.truncatesLastVisibleLine = true
+        field.usesSingleLineMode = false
+        field.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        field.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         field.isSelectable = false
         addSubview(field)
         textField = field
@@ -210,8 +338,9 @@ final class ContentsCell: NSTableCellView {
         leading = inset
         NSLayoutConstraint.activate([
             inset,
-            field.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -8),
-            field.centerYAnchor.constraint(equalTo: centerYAnchor)
+            field.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            field.topAnchor.constraint(equalTo: topAnchor, constant: Self.verticalInset),
+            field.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Self.verticalInset)
         ])
     }
 
