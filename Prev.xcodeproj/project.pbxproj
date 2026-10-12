@@ -1,0 +1,949 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 71;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B593D48BEAF624588574981 /* PrevThumbnailExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CACF971717AA5CE2CA6AFED3 /* PrevThumbnailExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3BC86B95D28A9ED543967C9B /* PreviewContracts in Frameworks */ = {isa = PBXBuildFile; productRef = 86209ED337A0CC766EF6846D /* PreviewContracts */; };
+		5632B3D6BD86941E2D153985 /* PreviewContracts in Frameworks */ = {isa = PBXBuildFile; productRef = 3D758F5D526590857CD3BF35 /* PreviewContracts */; };
+		6751153F112EC358F04DF783 /* PreviewFormats in Frameworks */ = {isa = PBXBuildFile; productRef = 081B2A77EC61D35BBE6458DC /* PreviewFormats */; };
+		704C1D708C87247FFD3D11AB /* PreviewPreferences in Frameworks */ = {isa = PBXBuildFile; productRef = EC613961E8E113AEE1237717 /* PreviewPreferences */; };
+		758DAD0C610EF114817BF3BE /* PreviewRenderers in Frameworks */ = {isa = PBXBuildFile; productRef = 32A6A4FD0C25577ADAD0CDBF /* PreviewRenderers */; };
+		909A802688AE7C4AFCC914E2 /* PreviewRenderers in Frameworks */ = {isa = PBXBuildFile; productRef = 0D78076327C3E1BAA4C258C7 /* PreviewRenderers */; };
+		9313C05B54BE6383E6F3FA80 /* PreviewRenderers in Frameworks */ = {isa = PBXBuildFile; productRef = 373505F5EA7C43694DC7F0CB /* PreviewRenderers */; };
+		945A98D320A2C4C8062A0034 /* PreviewCore in Frameworks */ = {isa = PBXBuildFile; productRef = 13FEA656C9B3571C425A5756 /* PreviewCore */; };
+		94DC0E977F99ADE3C324ACCB /* PreviewCore in Frameworks */ = {isa = PBXBuildFile; productRef = 65FD98F79DE23DA6B859494B /* PreviewCore */; };
+		A36A92556050BFE9909A4E40 /* PreviewPreferences in Frameworks */ = {isa = PBXBuildFile; productRef = 030599004D80F982F976ED03 /* PreviewPreferences */; };
+		B6EC3310CC0439AB26283981 /* PreviewThumbnails in Frameworks */ = {isa = PBXBuildFile; productRef = CFA560A96BC059E4AE658E59 /* PreviewThumbnails */; };
+		C041D98D54E68F0180C9F0E7 /* PrevPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 93BB3710961CBFC789E327C6 /* PrevPreviewExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CAD100000000000000000001 /* PreviewCADFormats in Frameworks */ = {isa = PBXBuildFile; productRef = CAD000000000000000000001 /* PreviewCADFormats */; };
+		CAD100000000000000000002 /* PreviewCADFormats in Frameworks */ = {isa = PBXBuildFile; productRef = CAD000000000000000000002 /* PreviewCADFormats */; };
+		CAD30000000000000000000D /* CADImportService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = CAD300000000000000000002 /* CADImportService.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CAD300000000000000000010 /* PreviewCADFormats in Frameworks */ = {isa = PBXBuildFile; productRef = CAD30000000000000000000E /* PreviewCADFormats */; };
+		CAD300000000000000000011 /* PreviewContracts in Frameworks */ = {isa = PBXBuildFile; productRef = CAD30000000000000000000F /* PreviewContracts */; };
+		DCE499E2BF7954FD0566AF52 /* PreviewContracts in Frameworks */ = {isa = PBXBuildFile; productRef = DE333A67D6AB150B1B109C00 /* PreviewContracts */; };
+		E51F181EA3AACEB87FB9EAB7 /* PreviewFormats in Frameworks */ = {isa = PBXBuildFile; productRef = 4BA3C03126FCA773D5A70924 /* PreviewFormats */; };
+		EA71C634C654FE38E944F1BD /* PreviewFormats in Frameworks */ = {isa = PBXBuildFile; productRef = 35F3146BC2C0B22826E2B37E /* PreviewFormats */; };
+		F3CF0F5BCBDBA2AF32FBB50D /* PreviewPreferences in Frameworks */ = {isa = PBXBuildFile; productRef = ED9F8F8A5172652C1F406E95 /* PreviewPreferences */; };
+		F7F69789D5B49634AED21737 /* PreviewCore in Frameworks */ = {isa = PBXBuildFile; productRef = B6B60C28FBA248A17260A845 /* PreviewCore */; };
+		4177E137C13643A3A1D9080B /* PreviewFileAccess in Frameworks */ = {isa = PBXBuildFile; productRef = C3581187B663487FBC5C194C /* PreviewFileAccess */; };
+		7BEAEF973E3E4E52A38046D9 /* PreviewFileAccess in Frameworks */ = {isa = PBXBuildFile; productRef = AD8934C68B03438095C86A30 /* PreviewFileAccess */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5ABCA562AB12260655D22A03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 244210E48437B6556980A702 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B70F8069132C851921ADA5F;
+			remoteInfo = PrevPreviewExtension;
+		};
+		736CCE3EF7048DF3D0519CE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 244210E48437B6556980A702 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 801C34E1488B3049B2C25A1E;
+			remoteInfo = PrevThumbnailExtension;
+		};
+		CAD30000000000000000000A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 244210E48437B6556980A702 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAD300000000000000000001;
+			remoteInfo = CADImportService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AFC32963E7959E7A34264826 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C041D98D54E68F0180C9F0E7 /* PrevPreviewExtension.appex in Embed App Extensions */,
+				0B593D48BEAF624588574981 /* PrevThumbnailExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAD30000000000000000000C /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				CAD30000000000000000000D /* CADImportService.xpc in Embed XPC Services */,
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		01B27B4E3772D87C49650F4F /* preview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = preview.entitlements; sourceTree = "<group>"; };
+		283CD9F1F8D1DEBF6D11B71A /* Thumbnail-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Thumbnail-Info.plist"; sourceTree = "<group>"; };
+		327DEDA0D9E5BD0DEA1D683A /* Local.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Local.xcconfig.example; sourceTree = "<group>"; };
+		36738BB451C2977D02FD2A30 /* Branding.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Branding.xcconfig; sourceTree = "<group>"; };
+		49F020617FA80253DE6D702A /* Preview-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Preview-Info.plist"; sourceTree = "<group>"; };
+		6280E40656CCF01BD4D28240 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		681C948D238C526E9E3424E0 /* Prev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E1AFC143ED64932CD779280 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
+		7CF00FD0D23B0406E361A549 /* Metadata.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Metadata.xcstrings; sourceTree = "<group>"; };
+		93BB3710961CBFC789E327C6 /* PrevPreviewExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrevPreviewExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CACF971717AA5CE2CA6AFED3 /* PrevThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PrevThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAD300000000000000000002 /* CADImportService.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = CADImportService.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		CED3FEF9B2CA8F094DFF9981 /* thumbnail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = thumbnail.entitlements; sourceTree = "<group>"; };
+		F9DFE42E903BA2976D92365C /* App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0A7F1EAE4FD1403E7B4CFCA6 /* Extensions/PrevThumbnailExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions/PrevThumbnailExtension; sourceTree = "<group>"; };
+		AFF87A50730392B6633ACECE /* Apps/PrevApp */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Apps/PrevApp; sourceTree = "<group>"; };
+		CAD300000000000000000003 /* Native/CADImportService */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Native/CADImportService; sourceTree = "<group>"; };
+		F0C84C3E0788BC29185B3057 /* Extensions/PrevPreviewExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions/PrevPreviewExtension; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A198A700D14E91238D2BF610 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5632B3D6BD86941E2D153985 /* PreviewContracts in Frameworks */,
+				94DC0E977F99ADE3C324ACCB /* PreviewCore in Frameworks */,
+				4177E137C13643A3A1D9080B /* PreviewFileAccess in Frameworks */,
+				EA71C634C654FE38E944F1BD /* PreviewFormats in Frameworks */,
+				CAD100000000000000000001 /* PreviewCADFormats in Frameworks */,
+				A36A92556050BFE9909A4E40 /* PreviewPreferences in Frameworks */,
+				9313C05B54BE6383E6F3FA80 /* PreviewRenderers in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAD300000000000000000004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAD300000000000000000010 /* PreviewCADFormats in Frameworks */,
+				CAD300000000000000000011 /* PreviewContracts in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED7795022B66A653601652D1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BC86B95D28A9ED543967C9B /* PreviewContracts in Frameworks */,
+				945A98D320A2C4C8062A0034 /* PreviewCore in Frameworks */,
+				E51F181EA3AACEB87FB9EAB7 /* PreviewFormats in Frameworks */,
+				CAD100000000000000000002 /* PreviewCADFormats in Frameworks */,
+				F3CF0F5BCBDBA2AF32FBB50D /* PreviewPreferences in Frameworks */,
+				758DAD0C610EF114817BF3BE /* PreviewRenderers in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6CBEC465925BE4452A20ABB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCE499E2BF7954FD0566AF52 /* PreviewContracts in Frameworks */,
+				F7F69789D5B49634AED21737 /* PreviewCore in Frameworks */,
+				7BEAEF973E3E4E52A38046D9 /* PreviewFileAccess in Frameworks */,
+				6751153F112EC358F04DF783 /* PreviewFormats in Frameworks */,
+				704C1D708C87247FFD3D11AB /* PreviewPreferences in Frameworks */,
+				909A802688AE7C4AFCC914E2 /* PreviewRenderers in Frameworks */,
+				B6EC3310CC0439AB26283981 /* PreviewThumbnails in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19F479106CE8C3BA8C106518 = {
+			isa = PBXGroup;
+			children = (
+				CAD300000000000000000003 /* Native/CADImportService */,
+				AFF87A50730392B6633ACECE /* Apps/PrevApp */,
+				F0C84C3E0788BC29185B3057 /* Extensions/PrevPreviewExtension */,
+				0A7F1EAE4FD1403E7B4CFCA6 /* Extensions/PrevThumbnailExtension */,
+				679F4E5B46EF53E000AB57E7 /* Configuration */,
+				B9E7F2871A3402983868AFC8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		679F4E5B46EF53E000AB57E7 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				6280E40656CCF01BD4D28240 /* Base.xcconfig */,
+				36738BB451C2977D02FD2A30 /* Branding.xcconfig */,
+				327DEDA0D9E5BD0DEA1D683A /* Local.xcconfig.example */,
+				7CF00FD0D23B0406E361A549 /* Metadata.xcstrings */,
+				F9DFE42E903BA2976D92365C /* App-Info.plist */,
+				49F020617FA80253DE6D702A /* Preview-Info.plist */,
+				283CD9F1F8D1DEBF6D11B71A /* Thumbnail-Info.plist */,
+				6E1AFC143ED64932CD779280 /* app.entitlements */,
+				01B27B4E3772D87C49650F4F /* preview.entitlements */,
+				CED3FEF9B2CA8F094DFF9981 /* thumbnail.entitlements */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		B9E7F2871A3402983868AFC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAD300000000000000000002 /* CADImportService.xpc */,
+				681C948D238C526E9E3424E0 /* Prev.app */,
+				93BB3710961CBFC789E327C6 /* PrevPreviewExtension.appex */,
+				CACF971717AA5CE2CA6AFED3 /* PrevThumbnailExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7B70F8069132C851921ADA5F /* PrevPreviewExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5F39B8A403FAB9FBF1182EA5 /* Build configuration list for PBXNativeTarget "PrevPreviewExtension" */;
+			buildPhases = (
+				B79CB4EE79C704A01A4D06FD /* Sources */,
+				A198A700D14E91238D2BF610 /* Frameworks */,
+				4842CDB935CF78A1D34F5228 /* Resources */,
+				BBCF628F6BE59B00ED468AC2 /* Compile localized branding metadata */,
+				CAD30000000000000000000C /* Embed XPC Services */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAD30000000000000000000B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F0C84C3E0788BC29185B3057 /* Extensions/PrevPreviewExtension */,
+			);
+			name = PrevPreviewExtension;
+			packageProductDependencies = (
+				3D758F5D526590857CD3BF35 /* PreviewContracts */,
+				65FD98F79DE23DA6B859494B /* PreviewCore */,
+				C3581187B663487FBC5C194C /* PreviewFileAccess */,
+				35F3146BC2C0B22826E2B37E /* PreviewFormats */,
+				CAD000000000000000000001 /* PreviewCADFormats */,
+				030599004D80F982F976ED03 /* PreviewPreferences */,
+				373505F5EA7C43694DC7F0CB /* PreviewRenderers */,
+			);
+			productName = PrevPreviewExtension;
+			productReference = 93BB3710961CBFC789E327C6 /* PrevPreviewExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		801C34E1488B3049B2C25A1E /* PrevThumbnailExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF725B6499F844770C13E075 /* Build configuration list for PBXNativeTarget "PrevThumbnailExtension" */;
+			buildPhases = (
+				45C8BAF5D6C09B58D3B189F3 /* Sources */,
+				F6CBEC465925BE4452A20ABB /* Frameworks */,
+				579AEB5462C4A39AE89A18C8 /* Resources */,
+				57CC4619640F6D5423EC991E /* Compile localized branding metadata */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0A7F1EAE4FD1403E7B4CFCA6 /* Extensions/PrevThumbnailExtension */,
+			);
+			name = PrevThumbnailExtension;
+			packageProductDependencies = (
+				DE333A67D6AB150B1B109C00 /* PreviewContracts */,
+				B6B60C28FBA248A17260A845 /* PreviewCore */,
+				AD8934C68B03438095C86A30 /* PreviewFileAccess */,
+				081B2A77EC61D35BBE6458DC /* PreviewFormats */,
+				EC613961E8E113AEE1237717 /* PreviewPreferences */,
+				0D78076327C3E1BAA4C258C7 /* PreviewRenderers */,
+				CFA560A96BC059E4AE658E59 /* PreviewThumbnails */,
+			);
+			productName = PrevThumbnailExtension;
+			productReference = CACF971717AA5CE2CA6AFED3 /* PrevThumbnailExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		C1E9827DB735CA9BAA54A540 /* Prev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B39C8EF3FAB3F378DE6878A9 /* Build configuration list for PBXNativeTarget "Prev" */;
+			buildPhases = (
+				17BCAE853A1D26507626D7EF /* Sources */,
+				ED7795022B66A653601652D1 /* Frameworks */,
+				61858F301F35A5605BC21FFE /* Resources */,
+				0ED737CB8B3AD6BD768A7326 /* Compile localized branding metadata */,
+				CAD200000000000000000002 /* Embed CAD worker */,
+				AFC32963E7959E7A34264826 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5FDAFED887E6199C78F5E91 /* PBXTargetDependency */,
+				8D25743B8014A02444335D16 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AFF87A50730392B6633ACECE /* Apps/PrevApp */,
+			);
+			name = Prev;
+			packageProductDependencies = (
+				86209ED337A0CC766EF6846D /* PreviewContracts */,
+				13FEA656C9B3571C425A5756 /* PreviewCore */,
+				4BA3C03126FCA773D5A70924 /* PreviewFormats */,
+				CAD000000000000000000002 /* PreviewCADFormats */,
+				ED9F8F8A5172652C1F406E95 /* PreviewPreferences */,
+				32A6A4FD0C25577ADAD0CDBF /* PreviewRenderers */,
+			);
+			productName = Prev;
+			productReference = 681C948D238C526E9E3424E0 /* Prev.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CAD300000000000000000001 /* CADImportService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAD300000000000000000009 /* Build configuration list for PBXNativeTarget "CADImportService" */;
+			buildPhases = (
+				CAD300000000000000000005 /* Sources */,
+				CAD300000000000000000004 /* Frameworks */,
+				CAD300000000000000000006 /* Resources */,
+				CAD200000000000000000001 /* Embed CAD worker */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CAD300000000000000000003 /* Native/CADImportService */,
+			);
+			name = CADImportService;
+			packageProductDependencies = (
+				CAD30000000000000000000E /* PreviewCADFormats */,
+				CAD30000000000000000000F /* PreviewContracts */,
+			);
+			productName = CADImportService;
+			productReference = CAD300000000000000000002 /* CADImportService.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		244210E48437B6556980A702 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					7B70F8069132C851921ADA5F = {
+						CreatedOnToolsVersion = 16.0;
+						ProvisioningStyle = Automatic;
+					};
+					801C34E1488B3049B2C25A1E = {
+						CreatedOnToolsVersion = 16.0;
+						ProvisioningStyle = Automatic;
+					};
+					C1E9827DB735CA9BAA54A540 = {
+						CreatedOnToolsVersion = 16.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8533BDEA17DCB03B13524C66 /* Build configuration list for PBXProject "Prev" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 19F479106CE8C3BA8C106518;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */,
+			);
+			productRefGroup = B9E7F2871A3402983868AFC8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAD300000000000000000001 /* CADImportService */,
+				C1E9827DB735CA9BAA54A540 /* Prev */,
+				7B70F8069132C851921ADA5F /* PrevPreviewExtension */,
+				801C34E1488B3049B2C25A1E /* PrevThumbnailExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4842CDB935CF78A1D34F5228 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		579AEB5462C4A39AE89A18C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61858F301F35A5605BC21FFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAD300000000000000000006 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0ED737CB8B3AD6BD768A7326 /* Compile localized branding metadata */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Configuration/Metadata.xcstrings",
+				"$(SRCROOT)/script/build_metadata.py",
+				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json",
+				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings",
+			);
+			name = "Compile localized branding metadata";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/bn.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ha.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/hi.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/id.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ku-Latn.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/pt.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ru.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/tr.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh-Hans.lproj/InfoPlist.strings",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/build_metadata.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" \"${PREVIEW_METADATA_ROLE}\"\n";
+		};
+		57CC4619640F6D5423EC991E /* Compile localized branding metadata */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Configuration/Metadata.xcstrings",
+				"$(SRCROOT)/script/build_metadata.py",
+				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json",
+				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings",
+			);
+			name = "Compile localized branding metadata";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/bn.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ha.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/hi.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/id.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ku-Latn.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/pt.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ru.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/tr.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh-Hans.lproj/InfoPlist.strings",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/build_metadata.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" \"${PREVIEW_METADATA_ROLE}\"\n";
+		};
+		BBCF628F6BE59B00ED468AC2 /* Compile localized branding metadata */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Configuration/Metadata.xcstrings",
+				"$(SRCROOT)/script/build_metadata.py",
+				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json",
+				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings",
+			);
+			name = "Compile localized branding metadata";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/bn.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ha.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/hi.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/id.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ku-Latn.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/pt.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ru.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/tr.lproj/InfoPlist.strings",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh-Hans.lproj/InfoPlist.strings",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/build_metadata.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" \"${PREVIEW_METADATA_ROLE}\"\n";
+		};
+		CAD200000000000000000001 /* Embed CAD worker */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist",
+			);
+			inputPaths = (
+				"$(SRCROOT)/script/embed_cad_worker.py",
+				"$(SRCROOT)/Configuration/CADWorker.entitlements",
+			);
+			name = "Embed CAD worker";
+			outputFileListPaths = (
+				"$(SRCROOT)/.build/cad/bundle-outputs.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\n";
+		};
+		CAD200000000000000000002 /* Embed CAD worker */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist",
+			);
+			inputPaths = (
+				"$(SRCROOT)/script/embed_cad_worker.py",
+				"$(SRCROOT)/Configuration/CADWorker.entitlements",
+			);
+			name = "Embed CAD worker";
+			outputFileListPaths = (
+				"$(SRCROOT)/.build/cad/bundle-outputs.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17BCAE853A1D26507626D7EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C8BAF5D6C09B58D3B189F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B79CB4EE79C704A01A4D06FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAD300000000000000000005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D25743B8014A02444335D16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 801C34E1488B3049B2C25A1E /* PrevThumbnailExtension */;
+			targetProxy = 736CCE3EF7048DF3D0519CE9 /* PBXContainerItemProxy */;
+		};
+		CAD30000000000000000000B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAD300000000000000000001 /* CADImportService */;
+			targetProxy = CAD30000000000000000000A /* PBXContainerItemProxy */;
+		};
+		D5FDAFED887E6199C78F5E91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B70F8069132C851921ADA5F /* PrevPreviewExtension */;
+			targetProxy = 5ABCA562AB12260655D22A03 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0E05EC13EFAAB5C4AF75BCC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6280E40656CCF01BD4D28240 /* Base.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_TESTABILITY = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		3165587B8D4198993C6B5396 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEVELOPMENT_TEAM = Z743N6D8DS;
+				INFOPLIST_FILE = "Configuration/Preview-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PREVIEW_METADATA_ROLE = preview;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).preview";
+				PRODUCT_MODULE_NAME = PrevPreviewExtension;
+				PRODUCT_NAME = PrevPreviewExtension;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		347903ED24CBAA8773638B61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6280E40656CCF01BD4D28240 /* Base.xcconfig */;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		817C6AD0F53B194D08F4281C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				DEVELOPMENT_TEAM = Z743N6D8DS;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Configuration/App-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PREVIEW_METADATA_ROLE = app;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER)";
+				PRODUCT_MODULE_NAME = Prev;
+				PRODUCT_NAME = "$(PREV_EXECUTABLE_NAME)";
+				SKIP_INSTALL = NO;
+			};
+			name = Debug;
+		};
+		905ED96FC4E26170A7B5ADF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEVELOPMENT_TEAM = Z743N6D8DS;
+				INFOPLIST_FILE = "Configuration/Thumbnail-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PREVIEW_METADATA_ROLE = thumbnail;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).thumbnail";
+				PRODUCT_MODULE_NAME = PrevThumbnailExtension;
+				PRODUCT_NAME = PrevThumbnailExtension;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		93A957D00A396086987B7AB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				DEVELOPMENT_TEAM = Z743N6D8DS;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Configuration/App-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PREVIEW_METADATA_ROLE = app;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER)";
+				PRODUCT_MODULE_NAME = Prev;
+				PRODUCT_NAME = "$(PREV_EXECUTABLE_NAME)";
+				SKIP_INSTALL = NO;
+			};
+			name = Release;
+		};
+		9FE34C8A5EAC2117575BFD9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEVELOPMENT_TEAM = Z743N6D8DS;
+				INFOPLIST_FILE = "Configuration/Thumbnail-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PREVIEW_METADATA_ROLE = thumbnail;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).thumbnail";
+				PRODUCT_MODULE_NAME = PrevThumbnailExtension;
+				PRODUCT_NAME = PrevThumbnailExtension;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CAD300000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Configuration/CADImportService.entitlements;
+				INFOPLIST_FILE = "Configuration/CADImportService-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import";
+				PRODUCT_MODULE_NAME = CADImportService;
+				PRODUCT_NAME = CADImportService;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CAD300000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Configuration/CADImportService.entitlements;
+				INFOPLIST_FILE = "Configuration/CADImportService-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import";
+				PRODUCT_MODULE_NAME = CADImportService;
+				PRODUCT_NAME = CADImportService;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D794FE598D40A5E0CB04F83B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEVELOPMENT_TEAM = Z743N6D8DS;
+				INFOPLIST_FILE = "Configuration/Preview-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PREVIEW_METADATA_ROLE = preview;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).preview";
+				PRODUCT_MODULE_NAME = PrevPreviewExtension;
+				PRODUCT_NAME = PrevPreviewExtension;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5F39B8A403FAB9FBF1182EA5 /* Build configuration list for PBXNativeTarget "PrevPreviewExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3165587B8D4198993C6B5396 /* Debug */,
+				D794FE598D40A5E0CB04F83B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8533BDEA17DCB03B13524C66 /* Build configuration list for PBXProject "Prev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				347903ED24CBAA8773638B61 /* Debug */,
+				0E05EC13EFAAB5C4AF75BCC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AF725B6499F844770C13E075 /* Build configuration list for PBXNativeTarget "PrevThumbnailExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FE34C8A5EAC2117575BFD9C /* Debug */,
+				905ED96FC4E26170A7B5ADF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B39C8EF3FAB3F378DE6878A9 /* Build configuration list for PBXNativeTarget "Prev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				817C6AD0F53B194D08F4281C /* Debug */,
+				93A957D00A396086987B7AB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CAD300000000000000000009 /* Build configuration list for PBXNativeTarget "CADImportService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAD300000000000000000007 /* Debug */,
+				CAD300000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/PreviewCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		030599004D80F982F976ED03 /* PreviewPreferences */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewPreferences;
+		};
+		081B2A77EC61D35BBE6458DC /* PreviewFormats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewFormats;
+		};
+		0D78076327C3E1BAA4C258C7 /* PreviewRenderers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewRenderers;
+		};
+		13FEA656C9B3571C425A5756 /* PreviewCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewCore;
+		};
+		32A6A4FD0C25577ADAD0CDBF /* PreviewRenderers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewRenderers;
+		};
+		35F3146BC2C0B22826E2B37E /* PreviewFormats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewFormats;
+		};
+		373505F5EA7C43694DC7F0CB /* PreviewRenderers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewRenderers;
+		};
+		3D758F5D526590857CD3BF35 /* PreviewContracts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewContracts;
+		};
+		4BA3C03126FCA773D5A70924 /* PreviewFormats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewFormats;
+		};
+		65FD98F79DE23DA6B859494B /* PreviewCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewCore;
+		};
+		86209ED337A0CC766EF6846D /* PreviewContracts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewContracts;
+		};
+		B6B60C28FBA248A17260A845 /* PreviewCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewCore;
+		};
+		CAD000000000000000000001 /* PreviewCADFormats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewCADFormats;
+		};
+		CAD000000000000000000002 /* PreviewCADFormats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewCADFormats;
+		};
+		CAD30000000000000000000E /* PreviewCADFormats */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewCADFormats;
+		};
+		CAD30000000000000000000F /* PreviewContracts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewContracts;
+		};
+		CFA560A96BC059E4AE658E59 /* PreviewThumbnails */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewThumbnails;
+		};
+		DE333A67D6AB150B1B109C00 /* PreviewContracts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewContracts;
+		};
+		EC613961E8E113AEE1237717 /* PreviewPreferences */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewPreferences;
+		};
+		ED9F8F8A5172652C1F406E95 /* PreviewPreferences */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewPreferences;
+		};
+		C3581187B663487FBC5C194C /* PreviewFileAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewFileAccess;
+		};
+		AD8934C68B03438095C86A30 /* PreviewFileAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
+			productName = PreviewFileAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 244210E48437B6556980A702 /* Project object */;
+}

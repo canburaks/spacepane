@@ -1,0 +1,19 @@
+.DS_Store
+.build/
+dist/
+Packages/*/.build/
+Packages/*/.swiftpm/
+Configuration/Local.xcconfig
+*.xcuserstate
+xcuserdata/
+__pycache__/
+
+# Developer-only Python environment for tools/check_swift_syntax.py (never committed, never shipped)
+.venv-tools/
+
+.build-check-compiler.log
+.build-test.log
+.appstoreconnect
+
+# Candidate app preview videos stay out of git (owner decision, 2026-10-12)
+docs/release/store-listing/app-preview/**/*.mp4

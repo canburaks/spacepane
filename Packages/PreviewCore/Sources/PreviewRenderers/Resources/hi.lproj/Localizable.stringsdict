@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appearance.pointsSpoken</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ पॉइंट</string>
+			<key>other</key>
+			<string>%2$@ पॉइंट</string>
+		</dict>
+	</dict>
+	<key>failure.body.structureTooDeepLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>यह पूर्वावलोकन अधिकतम %2$@ स्तर गहराई तक नेस्टेड दस्तावेज़ पढ़ता है, और यह दस्तावेज़ उससे गहरा है। इसे इस प्रकार की फ़ाइल के लिए बने ऐप में खोलें।</string>
+			<key>other</key>
+			<string>यह पूर्वावलोकन अधिकतम %2$@ स्तर गहराई तक नेस्टेड दस्तावेज़ पढ़ता है, और यह दस्तावेज़ उससे गहरा है। इसे इस प्रकार की फ़ाइल के लिए बने ऐप में खोलें।</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyLinesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>यह पूर्वावलोकन अधिकतम %2$@ पंक्तियाँ दिखाता है, और इस फ़ाइल में उससे अधिक हैं। पूरा पढ़ने के लिए इसे टेक्स्ट एडिटर में खोलें।</string>
+			<key>other</key>
+			<string>यह पूर्वावलोकन अधिकतम %2$@ पंक्तियाँ दिखाता है, और इस फ़ाइल में उससे अधिक हैं। पूरा पढ़ने के लिए इसे टेक्स्ट एडिटर में खोलें।</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyNodesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>यह पूर्वावलोकन अधिकतम %2$@ आइटम वाले दस्तावेज़ पढ़ता है, और इस दस्तावेज़ में उससे अधिक हैं। इसे इस प्रकार की फ़ाइल के लिए बने ऐप में खोलें।</string>
+			<key>other</key>
+			<string>यह पूर्वावलोकन अधिकतम %2$@ आइटम वाले दस्तावेज़ पढ़ता है, और इस दस्तावेज़ में उससे अधिक हैं। इसे इस प्रकार की फ़ाइल के लिए बने ऐप में खोलें।</string>
+		</dict>
+	</dict>
+	<key>finding.listing.hiddenCharacters</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>सूची के %2$@ नाम में छिपे वर्ण हैं।</string>
+			<key>other</key>
+			<string>सूची के %2$@ नामों में छिपे वर्ण हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ निष्कर्ष की समीक्षा करें।</string>
+			<key>other</key>
+			<string>%2$@ निष्कर्षों की समीक्षा करें।</string>
+		</dict>
+	</dict>
+	<key>finding.summary.concealed</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ संभावित गोपनीय मान छिपाया गया। चयन और कॉपी में छिपाया हुआ पाठ इस्तेमाल होता है।</string>
+			<key>other</key>
+			<string>%2$@ संभावित गोपनीय मान छिपाए गए। चयन और कॉपी में छिपाया हुआ पाठ इस्तेमाल होता है।</string>
+		</dict>
+	</dict>
+	<key>preview.count.lines</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ पंक्ति</string>
+			<key>other</key>
+			<string>%2$@ पंक्तियाँ</string>
+		</dict>
+	</dict>
+	<key>preview.diagram.noticeDrawn</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>कुल %2$@ आरेखों में से आरेख %3$@ बनाया गया है।</string>
+			<key>other</key>
+			<string>कुल %2$@ आरेखों में से आरेख %3$@ बनाया गया है।</string>
+		</dict>
+	</dict>
+	<key>preview.ebooks.notice.chaptersShown</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>कुल %3$@ अध्यायों में से %2$@ अध्याय दिखाया जा रहा है।</string>
+			<key>other</key>
+			<string>कुल %3$@ अध्यायों में से %2$@ अध्याय दिखाए जा रहे हैं।</string>
+		</dict>
+	</dict>
+	<key>preview.info.concealedCount</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>छिपाई गई संभावित गोपनीय जानकारियाँ: %2$@।</string>
+			<key>other</key>
+			<string>छिपाई गई संभावित गोपनीय जानकारियाँ: %2$@।</string>
+		</dict>
+	</dict>
+	<key>preview.profile.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>प्रोफ़ाइल के लिए शुरुआत से पढ़ी गई पंक्तियाँ: %2$@।</string>
+			<key>other</key>
+			<string>प्रोफ़ाइल के लिए शुरुआत से पढ़ी गई पंक्तियाँ: %2$@।</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>शुरुआत से दिखाई गई पंक्तियाँ: %2$@।</string>
+			<key>other</key>
+			<string>शुरुआत से दिखाई गई पंक्तियाँ: %2$@।</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRowsOfTotal</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>शुरुआत से दिखाई गई पंक्तियाँ: कुल %3$@ में से %2$@।</string>
+			<key>other</key>
+			<string>शुरुआत से दिखाई गई पंक्तियाँ: कुल %3$@ में से %2$@।</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

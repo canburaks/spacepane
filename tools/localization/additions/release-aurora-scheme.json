@@ -1,0 +1,20 @@
+{
+  "settings.scheme.aurora": {
+    "case": "schemeAurora",
+    "comment": "Name of an original dark color scheme, shown under its tile in the Theme page's color scheme gallery, beside names such as Midnight, Nord and Dracula. Not formatted. It is the palette of the live preview on the product's website: near-black gray with pink, cyan and violet accents. A proper name; transliterate it or use the word for the northern lights.",
+    "en": "Aurora",
+    "tr": "Aurora",
+    "de": "Aurora",
+    "fr": "Aurore",
+    "zh-Hans": "极光",
+    "ja": "オーロラ",
+    "hi": "ऑरोरा",
+    "ku-Latn": "Aurora",
+    "ru": "Аврора",
+    "id": "Aurora",
+    "bn": "অরোরা",
+    "ha": "Aurora",
+    "pt": "Aurora",
+    "es": "Aurora"
+  }
+}

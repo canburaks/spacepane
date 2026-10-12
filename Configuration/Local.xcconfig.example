@@ -1,0 +1,12 @@
+// Copy to Configuration/Local.xcconfig and supply identities you own.
+// Signed install/run requires a real team, owned bundle identifier and shared App Group.
+// macOS accepts TEAMID.group-name identifiers without a provisioning profile.
+// A group.* identifier instead requires the appropriate registered/provisioned group.
+// Choosing production identifiers needs an explicit compatibility decision.
+DEVELOPMENT_TEAM =
+PREVIEW_BASE_BUNDLE_IDENTIFIER =
+APP_GROUP_IDENTIFIER =
+
+// Optional display-name change does not change the identities above.
+// PREV_DISPLAY_NAME = Your App Name
+// PREV_EXECUTABLE_NAME = YourApp

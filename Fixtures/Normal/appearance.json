@@ -1,0 +1,10 @@
+{
+	"title": "Appearance fixture — Unicode and horizontal scrolling",
+	"unicode": "English · Ελληνικά · 日本語 · 😀 · é",
+	"number": -12345.6789e+2,
+	"enabled": true,
+	"empty": null,
+	"escaped": "A quoted \"word\" and a backslash \\",
+	"longLine": "This intentionally long source line helps verify that turning wrapping off creates a horizontally scrollable preview and that changing the font size, character spacing, or family recomputes the document width without modifying the source text. Turning wrapping back on should retain a usable viewport and preserve selected text.",
+	"items": [1, 2, 3]
+}

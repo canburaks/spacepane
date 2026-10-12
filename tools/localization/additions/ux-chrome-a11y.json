@@ -1,0 +1,20 @@
+{
+  "preview.mode.label": {
+    "case": "previewModeControlLabel",
+    "comment": "Accessibility label for the preview's segmented mode control. Its segments switch between Source, Outline, Rendered and other views. Keep concise; name the control, not the file content. Translations are drafts pending native-speaker review.",
+    "en": "View mode",
+    "tr": "Görünüm modu",
+    "de": "Ansichtsmodus",
+    "fr": "Mode d’affichage",
+    "zh-Hans": "视图模式",
+    "ja": "表示モード",
+    "hi": "दृश्य मोड",
+    "ku-Latn": "Moda dîtinê",
+    "ru": "Режим просмотра",
+    "id": "Mode tampilan",
+    "bn": "দেখার মোড",
+    "ha": "Yanayin dubawa",
+    "pt": "Modo de visualização",
+    "es": "Modo de vista"
+  }
+}

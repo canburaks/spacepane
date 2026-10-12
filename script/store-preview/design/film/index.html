@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SpacePane app preview film</title>
+<link rel="stylesheet" href="film.css">
+</head>
+<body>
+<!--
+  The film is a pure function of time: window.renderAt(seconds) lays out one frame and nothing else moves.
+  render.mjs steps it frame by frame. Open this file with ?t=12.5 to inspect one frame, or ?play to watch a
+  rough real-time run (the browser may drop frames; the rendered video does not).
+-->
+<div id="stage"></div>
+<script src="film.js"></script>
+</body>
+</html>

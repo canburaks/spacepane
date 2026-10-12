@@ -1,0 +1,20 @@
+{
+  "preview.markup.copyLanguageCode": {
+    "case": "markupCopyLanguageCode",
+    "comment": "Accessibility label and spoken name of the margin button beside a code card whose language is recognized (decision 027, Q-73). Formatted: argument 1 is the language's own proper name, such as Swift, C++ or PowerShell, taken from a fixed table of names; do not translate or transliterate the argument, and keep it in the sentence where the target language puts the language name. No count and no plural. The button copies one already-concealed displayed code body through the existing privacy copy service; it never copies fences, labels or surrounding prose. When the language is unknown the existing 'Copy Code Block' string is used instead. All translations are drafts pending native-speaker review.",
+    "en": "Copy %1$@ code",
+    "tr": "%1$@ kodunu kopyala",
+    "de": "%1$@-Code kopieren",
+    "fr": "Copier le code %1$@",
+    "zh-Hans": "复制 %1$@ 代码",
+    "ja": "%1$@ コードをコピー",
+    "hi": "%1$@ कोड कॉपी करें",
+    "ku-Latn": "Koda %1$@ kopî bike",
+    "ru": "Копировать код %1$@",
+    "id": "Salin kode %1$@",
+    "bn": "%1$@ কোড কপি করুন",
+    "ha": "Kwafi lambar %1$@",
+    "pt": "Copiar código %1$@",
+    "es": "Copiar código %1$@"
+  }
+}

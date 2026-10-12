@@ -1,0 +1,38 @@
+{
+  "listing.risk.hiddenCharacters": {
+    "case": "listingRiskHiddenCharacters",
+    "comment": "Risk label for an archive or folder entry whose name contains unexpected invisible characters. This does not mean a dot-prefixed hidden file. Never interpolate the name or hidden payload. Draft translations pending native-speaker review.",
+    "en": "Hidden characters in name",
+    "tr": "Adda gizli karakterler",
+    "de": "Verborgene Zeichen im Namen",
+    "fr": "Caractères masqués dans le nom",
+    "zh-Hans": "名称中有隐藏字符",
+    "ja": "名前に隠れた文字",
+    "hi": "नाम में छिपे वर्ण",
+    "ku-Latn": "Tîpên veşartî di nav de",
+    "ru": "Скрытые символы в имени",
+    "id": "Karakter tersembunyi dalam nama",
+    "bn": "নামে লুকানো অক্ষর",
+    "ha": "Haruffan da aka ɓoye a suna",
+    "pt": "Caracteres ocultos no nome",
+    "es": "Caracteres ocultos en el nombre"
+  },
+  "finding.listing.hiddenCharacters": {
+    "case": "findingListingHiddenCharacters",
+    "comment": "Safety finding counting distinct listed archive or folder entries with unexpected invisible characters in their names, once per entry. The count is not the number of characters. This does not refer to dot-prefixed hidden files. %2$@ is the locale-formatted entry count. No names or decoded payload appear here. Draft translations pending native-speaker review.",
+    "en": {"one": "%2$@ listed name contains hidden characters.", "other": "%2$@ listed names contain hidden characters."},
+    "tr": {"one": "Listelenen %2$@ ad gizli karakterler içeriyor.", "other": "Listelenen %2$@ ad gizli karakterler içeriyor."},
+    "de": {"one": "%2$@ aufgeführter Name enthält verborgene Zeichen.", "other": "%2$@ aufgeführte Namen enthalten verborgene Zeichen."},
+    "fr": {"one": "%2$@ nom répertorié contient des caractères masqués.", "many": "%2$@ noms répertoriés contiennent des caractères masqués.", "other": "%2$@ noms répertoriés contiennent des caractères masqués."},
+    "zh-Hans": {"other": "%2$@ 个列出的名称包含隐藏字符。"},
+    "ja": {"other": "一覧の %2$@ 件の名前に隠れた文字が含まれています。"},
+    "hi": {"one": "सूची के %2$@ नाम में छिपे वर्ण हैं।", "other": "सूची के %2$@ नामों में छिपे वर्ण हैं।"},
+    "ku-Latn": {"one": "%2$@ navê lîstekirî tîpên veşartî dihewîne.", "other": "%2$@ navên lîstekirî tîpên veşartî dihewînin."},
+    "ru": {"one": "%2$@ имя в списке содержит скрытые символы.", "few": "%2$@ имени в списке содержат скрытые символы.", "many": "%2$@ имён в списке содержат скрытые символы.", "other": "%2$@ имени в списке содержат скрытые символы."},
+    "id": {"other": "%2$@ nama dalam daftar mengandung karakter tersembunyi."},
+    "bn": {"one": "তালিকার %2$@টি নামে লুকানো অক্ষর রয়েছে।", "other": "তালিকার %2$@টি নামে লুকানো অক্ষর রয়েছে।"},
+    "ha": {"one": "Suna %2$@ da aka jera yana ɗauke da haruffan da aka ɓoye.", "other": "Sunaye %2$@ da aka jera suna ɗauke da haruffan da aka ɓoye."},
+    "pt": {"one": "%2$@ nome listado contém caracteres ocultos.", "many": "%2$@ nomes listados contêm caracteres ocultos.", "other": "%2$@ nomes listados contêm caracteres ocultos."},
+    "es": {"one": "%2$@ nombre de la lista contiene caracteres ocultos.", "many": "%2$@ nombres de la lista contienen caracteres ocultos.", "other": "%2$@ nombres de la lista contienen caracteres ocultos."}
+  }
+}

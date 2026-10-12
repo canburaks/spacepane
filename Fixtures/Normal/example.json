@@ -1,0 +1,7 @@
+{
+  "title": "Synthetic preview sample",
+  "preciseNumber": 12345678901234567890.1234500,
+  "duplicate": 1,
+  "duplicate": 2,
+  "unicode": "café 日本語 🌍"
+}

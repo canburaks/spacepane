@@ -1,0 +1,148 @@
+# TestFlight pipeline (decision 027 D27; PLAN.md M6). Dispatched by hand only: macOS minutes are billed at
+# ten times the Linux rate and an upload is a release action.
+#
+# Three levels, chosen by the inputs:
+# - dry run (default): an unsigned Release archive on the hosted runner. Proves that the project, the pinned
+#   OCCT CAD helper and the archive composition build there. Needs no secret.
+# - signed: a signed archive with the repository's release-archive checks, then an export whose helper
+#   identities are read back. Needs the distribution certificate and the App Store Connect API key below.
+# - upload: the signed export is uploaded; App Store Connect processes it for TestFlight.
+#
+# Repository variables (Settings → Secrets and variables → Actions → Variables), optional; the defaults are
+# the production identities PLAN.md M6 adopted on 2026-10-06:
+#   PREV_DEVELOPMENT_TEAM, PREV_BUNDLE_IDENTIFIER, PREV_APP_GROUP_IDENTIFIER
+# Repository secrets, needed for signed and upload runs:
+#   PREV_SIGNING_P12_BASE64   one .p12 holding the "Apple Distribution" and "Mac Installer Distribution"
+#                             certificates with their private keys, base64-encoded
+#   PREV_SIGNING_P12_PASSWORD the .p12 password
+#   PREV_ASC_KEY_ID           App Store Connect API key ID (App Manager role or higher)
+#   PREV_ASC_ISSUER_ID        the key's issuer ID
+#   PREV_ASC_PRIVATE_KEY      the .p8 contents
+# docs/release/testflight.md walks through creating each of them.
+name: testflight
+on:
+  workflow_dispatch:
+    inputs:
+      level:
+        description: "dry-run: unsigned archive; signed: archive, checks and export; upload: also upload to TestFlight"
+        default: dry-run
+        type: choice
+        options: [dry-run, signed, upload]
+      build_number:
+        description: "CFBundleVersion for this archive (empty: this run's number). Every upload needs a higher one."
+        default: ""
+        type: string
+concurrency:
+  group: testflight
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: macos-26
+    timeout-minutes: 240
+    env:
+      LEVEL: ${{ inputs.level }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select the newest Xcode 26 on the image
+        run: |
+          XCODE="$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -n 1)"
+          if [ -z "$XCODE" ]; then XCODE="$(ls -d /Applications/Xcode*.app | sort -V | tail -n 1)"; fi
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+          sw_vers
+      - name: Restore the pinned OCCT build (the CAD helper)
+        uses: actions/cache@v4
+        with:
+          path: .build/cad
+          key: occt-${{ runner.os }}-${{ hashFiles('script/build_cad_worker.py', 'Native/CADWorker/**') }}
+      - name: Write the release identities and the build number
+        env:
+          TEAM: ${{ vars.PREV_DEVELOPMENT_TEAM || 'Z743N6D8DS' }}
+          BUNDLE: ${{ vars.PREV_BUNDLE_IDENTIFIER || 'org.webmeister.spacepane' }}
+          GROUP: ${{ vars.PREV_APP_GROUP_IDENTIFIER || 'Z743N6D8DS.org.webmeister.spacepane.shared' }}
+          BUILD_NUMBER: ${{ inputs.build_number || github.run_number }}
+        run: |
+          cat > Configuration/Local.xcconfig <<EOF_XCCONFIG
+          // Written by the testflight workflow; never committed (.gitignore).
+          DEVELOPMENT_TEAM = $TEAM
+          PREVIEW_BASE_BUNDLE_IDENTIFIER = $BUNDLE
+          APP_GROUP_IDENTIFIER = $GROUP
+          CURRENT_PROJECT_VERSION = $BUILD_NUMBER
+          EOF_XCCONFIG
+          echo "Identities: team $TEAM, bundle $BUNDLE, group $GROUP, build $BUILD_NUMBER"
+      - name: Install the distribution certificates and the App Store Connect key
+        if: inputs.level != 'dry-run'
+        env:
+          P12_BASE64: ${{ secrets.PREV_SIGNING_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.PREV_SIGNING_P12_PASSWORD }}
+          ASC_KEY_ID: ${{ secrets.PREV_ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.PREV_ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.PREV_ASC_PRIVATE_KEY }}
+        run: |
+          for NAME in P12_BASE64 P12_PASSWORD ASC_KEY_ID ASC_ISSUER_ID ASC_PRIVATE_KEY; do
+            if [ -z "${!NAME}" ]; then echo "Secret PREV_${NAME/P12/SIGNING_P12} is not set; see docs/release/testflight.md" >&2; exit 2; fi
+          done
+          KEYCHAIN="$RUNNER_TEMP/testflight.keychain-db"
+          KEYCHAIN_PASSWORD="$(uuidgen)"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          echo "$P12_BASE64" | base64 --decode > "$RUNNER_TEMP/distribution.p12"
+          security import "$RUNNER_TEMP/distribution.p12" -k "$KEYCHAIN" -P "$P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security -T /usr/bin/productbuild
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN" login.keychain-db
+          security find-identity -v -p codesigning "$KEYCHAIN"
+          rm -f "$RUNNER_TEMP/distribution.p12"
+          mkdir -p "$RUNNER_TEMP/asc"
+          printf '%s\n' "$ASC_PRIVATE_KEY" > "$RUNNER_TEMP/asc/AuthKey_$ASC_KEY_ID.p8"
+          chmod 600 "$RUNNER_TEMP/asc/AuthKey_$ASC_KEY_ID.p8"
+          {
+            echo "PREV_ASC_KEY_PATH=$RUNNER_TEMP/asc/AuthKey_$ASC_KEY_ID.p8"
+            echo "PREV_ASC_KEY_ID=$ASC_KEY_ID"
+            echo "PREV_ASC_ISSUER_ID=$ASC_ISSUER_ID"
+            echo "PREV_KEYCHAIN=$KEYCHAIN"
+          } >> "$GITHUB_ENV"
+      - name: Repository checks
+        run: ./script/build_and_run.sh --check
+      - name: Unsigned Release archive (dry run)
+        if: inputs.level == 'dry-run'
+        run: |
+          set -o pipefail
+          ./script/build_and_run.sh --archive-unsigned 2>&1 | tee .build-archive.log
+      - name: Signed Release archive with the release-archive checks
+        if: inputs.level != 'dry-run'
+        run: |
+          set -o pipefail
+          ./script/build_and_run.sh --archive 2>&1 | tee .build-archive.log
+      - name: Export for App Store Connect and read back the helper identities
+        if: inputs.level != 'dry-run'
+        run: |
+          set -o pipefail
+          ./script/build_and_run.sh --export 2>&1 | tee .build-export.log
+      - name: Upload to App Store Connect (TestFlight)
+        if: inputs.level == 'upload'
+        run: |
+          set -o pipefail
+          ./script/build_and_run.sh --upload 2>&1 | tee .build-upload.log
+      - name: Keep the logs and the archive products
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testflight-${{ inputs.level }}-${{ github.run_number }}
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            .build-archive.log
+            .build-export.log
+            .build-upload.log
+            .build/archive/*.plist
+            .build/archive/*.json
+            .build/export/*.pkg
+            .build/export/DistributionSummary.plist
+            .build/export/ExportOptions.plist
+            .build/upload/*.plist
+      - name: Remove the signing keychain
+        if: always()
+        run: |
+          if [ -n "${PREV_KEYCHAIN:-}" ] && [ -f "$PREV_KEYCHAIN" ]; then security delete-keychain "$PREV_KEYCHAIN"; fi
+          rm -rf "$RUNNER_TEMP/asc" Configuration/Local.xcconfig

@@ -1,0 +1,79 @@
+{
+  "preview.diagram.noticeDrawn": {
+    "case": "diagramNoticeDrawn",
+    "comment": "Limits-strip notice for the Diagram mode of a Markdown (or notebook) file with more than one Mermaid diagram fence. Plural key: the first argument (the number of diagram fences in the file) selects the plural category and is never printed. %2$@ is that number of fences, formatted for the display locale; %3$@ is the position, counting from one, of the fence that is drawn, also locale-formatted. Say that diagram number %3$@ of %2$@ is drawn; the other fences stay as code in the Rendered and Source views. Keep both placeholders and write the relation in words (the language's own 'of'), never as a slash, hyphen or fraction. One short sentence. All translations are drafts pending native-speaker review.",
+    "en": {
+      "one": "Diagram %3$@ of %2$@ is drawn.",
+      "other": "Diagram %3$@ of %2$@ is drawn."
+    },
+    "tr": {
+      "one": "%2$@ diyagramdan %3$@. diyagram çizildi.",
+      "other": "%2$@ diyagramdan %3$@. diyagram çizildi."
+    },
+    "de": {
+      "one": "Diagramm %3$@ von %2$@ wird gezeichnet.",
+      "other": "Diagramm %3$@ von %2$@ wird gezeichnet."
+    },
+    "fr": {
+      "one": "Diagramme %3$@ sur %2$@ dessiné.",
+      "other": "Diagramme %3$@ sur %2$@ dessiné."
+    },
+    "zh-Hans": {
+      "other": "已绘制第 %3$@ 个图表，共 %2$@ 个。"
+    },
+    "ja": {
+      "other": "%2$@ 個中 %3$@ 個目の図を描画中。"
+    },
+    "hi": {
+      "one": "कुल %2$@ आरेखों में से आरेख %3$@ बनाया गया है।",
+      "other": "कुल %2$@ आरेखों में से आरेख %3$@ बनाया गया है।"
+    },
+    "ku-Latn": {
+      "one": "Diyagrama %3$@ ji %2$@ hatiye xêzkirin.",
+      "other": "Diyagrama %3$@ ji %2$@ hatiye xêzkirin."
+    },
+    "ru": {
+      "one": "Нарисована диаграмма %3$@ из %2$@.",
+      "few": "Нарисована диаграмма %3$@ из %2$@.",
+      "many": "Нарисована диаграмма %3$@ из %2$@.",
+      "other": "Нарисована диаграмма %3$@ из %2$@."
+    },
+    "id": {
+      "other": "Diagram %3$@ dari %2$@ digambar."
+    },
+    "bn": {
+      "one": "মোট %2$@টির মধ্যে %3$@ নম্বর ডায়াগ্রাম আঁকা হয়েছে।",
+      "other": "মোট %2$@টির মধ্যে %3$@ নম্বর ডায়াগ্রাম আঁকা হয়েছে।"
+    },
+    "ha": {
+      "one": "An zana zane na %3$@ daga cikin %2$@.",
+      "other": "An zana zane na %3$@ daga cikin %2$@."
+    },
+    "pt": {
+      "one": "Diagrama %3$@ de %2$@ desenhado.",
+      "other": "Diagrama %3$@ de %2$@ desenhado."
+    },
+    "es": {
+      "one": "Diagrama %3$@ de %2$@ dibujado.",
+      "other": "Diagrama %3$@ de %2$@ dibujado."
+    }
+  },
+  "preview.diagram.noticeReadable": {
+    "case": "diagramNoticeReadable",
+    "comment": "Quiet note under a diagram that is too large to be shown whole with readable text. Formatted key, no count and no plural: %1$@ is the scale the diagram is drawn at, already formatted as a percentage for the display locale (for example 63%). The diagram is drawn at the smallest size that keeps its labels readable instead of shrinking further, and the reader moves to the rest by scrolling or dragging. Keep %1$@ exactly once. Two short sentences. All translations are drafts pending native-speaker review.",
+    "en": "Drawn at %1$@ to stay readable. Scroll or drag for the rest.",
+    "tr": "Okunabilir kalması için %1$@ ölçeğinde çizildi. Gerisi için kaydırın veya sürükleyin.",
+    "de": "Mit %1$@ gezeichnet, damit es lesbar bleibt. Scrollen oder ziehen zeigt den Rest.",
+    "fr": "Dessiné à %1$@ pour rester lisible. Faites défiler ou glissez pour voir la suite.",
+    "zh-Hans": "为保持可读，以 %1$@ 绘制。滚动或拖动可查看其余部分。",
+    "ja": "読みやすさを保つため %1$@ で描画しています。残りはスクロールまたはドラッグで表示します。",
+    "hi": "पढ़ने योग्य रहे, इसलिए %1$@ पर बनाया गया है। बाकी देखने के लिए स्क्रॉल करें या खींचें।",
+    "ku-Latn": "Ji bo ku bixwendin bimîne, li ser %1$@ hat xêzkirin. Ji bo yên mayî bigerînin an bikişînin.",
+    "ru": "Масштаб %1$@ для читаемости. Прокрутите или перетащите, чтобы увидеть остальное.",
+    "id": "Digambar pada %1$@ agar tetap terbaca. Gulir atau seret untuk melihat sisanya.",
+    "bn": "পড়ার উপযোগী রাখতে %1$@ মাপে আঁকা হয়েছে। বাকিটা দেখতে স্ক্রল বা টেনে সরান।",
+    "ha": "An zana shi a %1$@ domin ya kasance mai karantuwa. Gungura ko ja domin ganin sauran.",
+    "pt": "Desenhado a %1$@ para continuar legível. Role ou arraste para ver o resto.",
+    "es": "Dibujado al %1$@ para que siga siendo legible. Desplázate o arrastra para ver el resto."
+  }
+}

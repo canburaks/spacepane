@@ -1,0 +1,82 @@
+{
+  "preview.ebooks.notice.chaptersShown": {
+    "case": "ebooksNoticeChaptersShown",
+    "comment": "Limits-strip sentence for a truncated e-book (EPUB): how many of its chapters the preview shows. Plural: the first argument selects the form by the number of chapters shown; %2$@ prints that number and %3$@ the total number of chapters in the book, both formatted for the display locale, so no variant carries digits. Both numbers come from the e-book adapter's own chapter list, never from the displayed text; the last chapter shown can be cut short. Describes only what this preview shows and says nothing about which app Finder uses. All translations are drafts pending native-speaker review.",
+    "en": {
+      "one": "Showing %2$@ of %3$@ chapters.",
+      "other": "Showing %2$@ of %3$@ chapters."
+    },
+    "tr": {
+      "one": "%3$@ bölümden %2$@ tanesi gösteriliyor.",
+      "other": "%3$@ bölümden %2$@ tanesi gösteriliyor."
+    },
+    "de": {
+      "one": "%2$@ von %3$@ Kapiteln wird angezeigt.",
+      "other": "%2$@ von %3$@ Kapiteln werden angezeigt."
+    },
+    "fr": {
+      "one": "Affichage de %2$@ chapitre sur %3$@.",
+      "many": "Affichage de %2$@ de chapitres sur %3$@.",
+      "other": "Affichage de %2$@ chapitres sur %3$@."
+    },
+    "zh-Hans": {
+      "other": "共 %3$@ 章，已显示 %2$@ 章。"
+    },
+    "ja": {
+      "other": "%3$@ 章中 %2$@ 章を表示しています。"
+    },
+    "hi": {
+      "one": "कुल %3$@ अध्यायों में से %2$@ अध्याय दिखाया जा रहा है।",
+      "other": "कुल %3$@ अध्यायों में से %2$@ अध्याय दिखाए जा रहे हैं।"
+    },
+    "ku-Latn": {
+      "one": "Ji %3$@ beşan %2$@ beş tê nîşandan.",
+      "other": "Ji %3$@ beşan %2$@ beş têne nîşandan."
+    },
+    "ru": {
+      "one": "Показана %2$@ глава из %3$@.",
+      "few": "Показаны %2$@ главы из %3$@.",
+      "many": "Показано %2$@ глав из %3$@.",
+      "other": "Показано %2$@ главы из %3$@."
+    },
+    "id": {
+      "other": "Menampilkan %2$@ dari %3$@ bab."
+    },
+    "bn": {
+      "one": "মোট %3$@টি অধ্যায়ের মধ্যে %2$@টি দেখানো হচ্ছে।",
+      "other": "মোট %3$@টি অধ্যায়ের মধ্যে %2$@টি দেখানো হচ্ছে।"
+    },
+    "ha": {
+      "one": "Ana nuna babi %2$@ daga cikin %3$@.",
+      "other": "Ana nuna babi %2$@ daga cikin %3$@."
+    },
+    "pt": {
+      "one": "Mostrando %2$@ de %3$@ capítulos.",
+      "many": "Mostrando %2$@ de %3$@ capítulos.",
+      "other": "Mostrando %2$@ de %3$@ capítulos."
+    },
+    "es": {
+      "one": "Se muestra %2$@ de %3$@ capítulos.",
+      "many": "Se muestran %2$@ de %3$@ capítulos.",
+      "other": "Se muestran %2$@ de %3$@ capítulos."
+    }
+  },
+  "notebook.output.figureInPages": {
+    "case": "notebookOutputFigureInPages",
+    "comment": "One inert line in a rendered Jupyter notebook, under an output whose saved picture is shown in the Pages mode instead (replaces the line \"Output not shown\" for that picture). Formatted: %1$@ is the figure's number, formatted for the display locale, matching the label \"Figure n of m\" in Pages. \"Pages\" is the name of the preview mode (the key preview.mode.pages): keep it consistent with that word and inflect it as the sentence needs. Never describes the picture's content. No plural: the number is a position, not a quantity. All translations are drafts pending native-speaker review.",
+    "en": "Figure %1$@, shown in Pages.",
+    "tr": "Şekil %1$@, Sayfalar görünümünde.",
+    "de": "Abbildung %1$@, unter Seiten angezeigt.",
+    "fr": "Figure %1$@, affichée dans Pages.",
+    "zh-Hans": "图 %1$@，显示在页面视图中。",
+    "ja": "図 %1$@、ページ表示に表示されます。",
+    "hi": "चित्र %1$@, पृष्ठों में दिखाया गया है।",
+    "ku-Latn": "Wêne %1$@, di Rûpelan de tê nîşandan.",
+    "ru": "Рисунок %1$@ показан в разделе «Страницы».",
+    "id": "Gambar %1$@, ditampilkan di Halaman.",
+    "bn": "চিত্র %1$@, পৃষ্ঠাসমূহে দেখানো হয়েছে।",
+    "ha": "Hoto na %1$@, ana nuna shi a Shafuka.",
+    "pt": "Figura %1$@, mostrada em Páginas.",
+    "es": "Figura %1$@, mostrada en Páginas."
+  }
+}

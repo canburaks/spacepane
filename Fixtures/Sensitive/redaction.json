@@ -1,0 +1,8 @@
+{
+  "title": "Synthetic privacy fixture — no real credentials",
+  "password": "SYNTHETIC_SECRET_MUST_BE_HIDDEN",
+  "nested": {
+    "api_key": "SYNTHETIC_KEY_MUST_BE_HIDDEN",
+    "safeMessage": "This field should remain visible."
+  }
+}

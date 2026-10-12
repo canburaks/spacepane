@@ -1,0 +1,21 @@
+{
+  "description": "Files on which tree-sitter-swift reports syntax errors for valid Swift (parser gaps), with the number of ERROR plus MISSING nodes tolerated in each. tools/check_swift_syntax.py fails a file only when it has MORE nodes than its entry here; a file without an entry tolerates none. Counts depend on the grammar version, so recordedWith names the versions used. Regenerate with `tools/check_swift_syntax.py --print-baseline` after upgrading the packages, keep one comment per entry naming the construct the parser cannot read, and remove an entry when its file parses cleanly. Decision 027, Q-19.",
+  "recordedWith": {
+    "tree-sitter": "0.26.0",
+    "tree-sitter-swift": "0.7.4"
+  },
+  "files": {
+    "Packages/PreviewCore/Sources/PreviewRenderers/Markup/FountainRenderer.swift": {
+      "errorNodes": 2,
+      "comment": "Known false positive. The parser reads the \"/*\" literal in the condition of `if trimmed.hasPrefix(\"/*\")` (line 107) as the start of a block comment that ends at the \"*/\" literal in the body (line 108); the two nodes are that `if` statement and the end of the file (line 236). Minimal case: func f(_ s: String) { if s.hasPrefix(\"/*\") { _ = s.contains(\"*/\") } }"
+    },
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Documents/EPUBAdapterTests.swift": {
+      "errorNodes": 37,
+      "comment": "Known false positive. The parser cannot read a raw string nested inside a raw-string interpolation: line 24 builds #\"... \\#(coverMeta ? \"\" : #\" properties=\"cover-image\"\"#)/>\"#. The first damage is a MISSING raw-string end there; the lexer then loses sync, giving 35 ERROR nodes and one more MISSING node on lines 1, 26-28, 43, 45, 46, 54, 64, 72 and 75. Minimal case: let m = #\"a \\#(f ? \"\" : #\" p=\"x\"\"#)/>\"#"
+    },
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Packages/ApplicationBundleAdapterTests.swift": {
+      "errorNodes": 3,
+      "comment": "Known false positive. The parser cannot read a freestanding macro expression after `try` in a for-in sequence: `for case let child as URL in try #require(FileManager.default.enumerator(...))` at lines 92 and 245; the third node is the `return` after the first loop (line 97). Minimal case: func f() throws { for x in try #require(g()) { print(x) } }"
+    }
+  }
+}

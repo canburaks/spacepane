@@ -1,0 +1,156 @@
+# SpacePane — App Store Connect worksheet for 1.0.0 (draft)
+
+Status: draft answers, written 2026-10-10 from the repository. Later the same day the listing text and the three URLs were entered in App Store Connect for English (U.S.) and English (U.K.); [../app-store-listing.md](../app-store-listing.md#what-app-store-connect-holds) records what the record holds and what is still empty. No other answer in this worksheet has been entered. App Store Connect's forms change; the owner confirms every answer against the live form on the day of entry. The review notes, the archive and upload steps and the sample-file zip are in [../app-store-submission.md](../app-store-submission.md) and are not repeated here. Listing text is in [listing.en.md](listing.en.md); screenshots in [screenshots.md](screenshots.md).
+
+"Basis" names the file that supports an answer, so the owner can recheck it.
+
+## 1. App information
+
+| Field | Answer | Basis / note |
+|---|---|---|
+| Name | `SpacePane for Quick Look` (24 characters; limit 2 to 30) | [../app-store-listing.md](../app-store-listing.md), owner decision 1 there; fallbacks are listed in that file. The installed app keeps the name `SpacePane` from `Configuration/Branding.xcconfig`. |
+| Subtitle | `Preview JSON, SQLite, Markdown` (30; limit 30) | [../app-store-listing.md](../app-store-listing.md) |
+| Bundle ID | `org.webmeister.spacepane` | Publication plan; set in the git-ignored `Configuration/Local.xcconfig`. Confirm the app record's identifier before the first upload. |
+| SKU | `org.webmeister.spacepane`, as found on the app record on 2026-10-10 | Never shown to customers. |
+| Primary language | English (U.S.) unless the owner prefers another English variant | Development language is `en` (`tools/localization/languages.json`). |
+| Primary category | Utilities | `PREV_APP_CATEGORY = public.app-category.utilities`, `Configuration/Branding.xcconfig`. |
+| Secondary category | Developer Tools | Owner decision recorded in the publication plan. |
+| Content rights | Draft: "No. The app does not contain, show or access third-party content." The files it previews are the user's own. | Owner confirms. Bundled third-party material is software and data under licence, not content: five MIT-licensed colour palettes (`ThirdPartyNotices/ColorSchemes/NOTICE.md`) and the pinned OCCT kernel in the 3D helper (`ThirdPartyNotices/OCCT/`, `docs/dependencies/occt.md`). If the owner prefers to answer "Yes", the rights are documented in those notices. |
+| Copyright | `2026 Can Burak Sofyalioglu` | `PREV_COPYRIGHT` is "Copyright © 2026 Can Burak Sofyalioglu. All rights reserved." in `Configuration/Branding.xcconfig`; the App Store field takes the year and rights holder only. Owner confirms the rights holder is the seller named on the developer account (the bundle prefix `org.webmeister` suggests another organization may exist). |
+| License agreement | Apple's standard end user licence agreement | Default; no custom EULA is drafted. |
+| Tax category | App Store software | Per the publication plan. Set under the app's pricing and availability. |
+
+## 2. URLs
+
+| Field | Value | Note |
+|---|---|---|
+| Marketing URL | `https://spacepane.com` | Optional field. |
+| Support URL | `https://spacepane.com/support` | Required. Page is live per the publication plan; recheck it loads on the day. |
+| Privacy Policy URL | `https://spacepane.com/privacy` | Required. Same check. |
+| Contact (public) | `info@spacepane.com` | Owner's active address (publication plan, 2026-10-10). Confirm the mailbox answers. |
+
+Open inconsistency, for the lead and the website stream, not changed here: `Configuration/Branding.xcconfig` (`PREV_SUPPORT_URL`, `PREV_PRIVACY_POLICY_URL`) and `../app-store-submission.md` still use the `.html` forms `https://spacepane.com/support.html` and `https://spacepane.com/privacy.html`, which belong to the old static `Website/` (now in the `spacepane-web` repository). The About links inside the app and the URLs entered in App Store Connect should resolve to the same live pages. Check both forms respond on the deployed site and pick one.
+
+## 3. Version information (1.0.0)
+
+| Field | Answer |
+|---|---|
+| Version | 1.0.0 (`MARKETING_VERSION`, `Configuration/Base.xcconfig`) |
+| Build | The uploaded build. `CURRENT_PROJECT_VERSION` is 1 in `Base.xcconfig`; the dry run used build 2, so raise it in `Local.xcconfig` before each upload (publication plan, Phase 4). |
+| Promotional text, description, keywords, What's New | [../app-store-listing.md](../app-store-listing.md) |
+| Screenshots | The plan in [../app-store-listing.md](../app-store-listing.md); the per-shot checks in [screenshots.md](screenshots.md) |
+| Sign-in required | No. There are no accounts. |
+| Review contact first name | `[OWNER: fill in]` |
+| Review contact last name | `[OWNER: fill in]` |
+| Review contact phone | `[OWNER: fill in; international format. Do not invent one.]` |
+| Review contact email | `[OWNER: fill in; the plan suggests info@spacepane.com if it is monitored]` |
+| Review notes | Paste the block "Notes for App Review" from [../app-store-submission.md](../app-store-submission.md). Another stream is revising it (extension enablement path, `public.data`, the `com.quicklookpro.*` aliases, the optional 3D previews and the source offer); use the revised block, not a copy made before it lands. |
+| Attachment | `SpacePane-Review-Samples.zip` from `python3 script/generate_host_fixtures.py`. |
+| Release option | **Manual release** (recommended). It lets the owner check the approved build and the website link before customers can download. Alternatives are release immediately after approval or on a set date; none is needed for 1.0.0. |
+
+## 4. Age rating (2026 questionnaire)
+
+Expected result: **4+**. The owner must read each question on the live form and confirm the answer; Apple changed this questionnaire in 2025 and the wording, grouping and options on the day control. The groups below follow the structure the task named; if the live form differs, answer the live form on the same principle.
+
+Principle: answer for the content and features SpacePane itself provides, not for whatever a user might open with it. The app supplies no media, text or imagery of its own beyond synthetic sample files and interface text, and shows only files already on the user's Mac.
+
+| Group | Answer | Reason |
+|---|---|---|
+| Content descriptors (violence, horror or fear, sexual content or nudity, mature or suggestive themes, profanity or crude humour, alcohol, tobacco or drug references, medical or health information, gambling and contests) | None for every item | The app has no such content. |
+| In-app controls (parental controls, age assurance) | No | Not provided; not needed for a local viewer. |
+| Capabilities | | |
+| - Unrestricted web access | No | No web view and no network entitlement. Links in the About page and the website open in the user's browser. If the live form treats "links that open a browser" as web access, the owner decides; the app itself has no browsing surface. |
+| - User-generated content | No | The app does not let users publish or share content. |
+| - Messaging or chat | No | |
+| - Advertising | No | No advertising. |
+| Social media | No | No social features. |
+
+Record the final rating Apple shows after submission. If it is not 4+, find which answer caused it before changing any.
+
+## 5. App Privacy
+
+**Answer: Data Not Collected.** Privacy policy URL as in section 2. No tracking.
+
+Justification (one paragraph, grounded in the entitlements read on 2026-10-10 from `Configuration/*.entitlements`): the app, the preview extension, the thumbnail extension, the 3D import service and the 3D helper all run in the App Sandbox, and none of the five entitlement files contains `com.apple.security.network.client` or `.server`, so none of them can open a network connection. The app additionally holds only user-selected read/write file access (used for files the user explicitly exports, such as a theme) and the shared App Group; the two Quick Look extensions hold only the sandbox and the same App Group; the 3D service holds only the sandbox; the helper holds the sandbox and `com.apple.security.inherit`. There is no analytics, advertising, crash-reporting or other third-party SDK: `Package.swift` and the Xcode project declare no package dependencies, and a search of the Swift sources on 2026-10-10 found no `URLSession`, network framework or web-view use. Settings and profiles stay in the App Group container on the Mac. Nothing leaves the device, so nothing is "collected" in Apple's sense. The archive checker `script/check_release_archive.py` rejects `cs.*`, temporary-exception and network keys in the signed archive, and the app, both extensions and the 3D service each carry a privacy manifest (`PrivacyInfo.xcprivacy`).
+
+Open checks: (a) read the entitlements of the signed archive, not only the source files (the checker does this on a real archive: record its output); (b) if any later change adds a network entitlement, an SDK or crash reporting, this answer and the privacy policy must be revisited before that build ships.
+
+## 6. Export compliance
+
+Info.plist: `ITSAppUsesNonExemptEncryption` is `false` in `Configuration/App-Info.plist` (the app target only; the extensions' plists do not set it). That answers "No" to Apple's encryption question without a per-build prompt.
+
+**The open check the owner must close before relying on it:** that no reader in the product decrypts content or implements encryption of its own. What a search of the shipped sources (`Packages/`, `Apps/`, `Extensions/`, `Native/CADWorker/`) found on 2026-10-10:
+
+| Finding | Where | What it does |
+|---|---|---|
+| `import CryptoKit`, `Insecure.SHA1.hash`, `SHA256.hash` | `Packages/PreviewCore/Sources/PreviewFormats/Packages/TorrentAdapter.swift` | Computes the torrent info-hash (hashing, not encryption). |
+| `import CryptoKit`, `SHA256.hash`, `Insecure.SHA1.hash` | `Packages/PreviewCore/Sources/PreviewFormats/Packages/CertificateAdapter.swift` | Shows certificate fingerprints (hashing). |
+| `import CryptoKit`, `SHA256.hash` | `Packages/PreviewCore/Sources/PreviewFormats/Containers/CompressedStreamXZ.swift` line 118 | Verifies the XZ stream's SHA-256 integrity check (hashing). |
+| `import Security`, `SecCertificateCreateWithData`, `SecCertificateCopyValues`, `SecCertificateCopyKey`, `SecKeyCopyAttributes` | `CertificateAdapter.swift`, `InstallerPackageAdapter.swift`, `ProvisioningProfileAdapter.swift` (same folder) | Reads certificate fields (inspection). No signature or chain is verified, no key is used. |
+| `SecCode` information | `Packages/PreviewCore/Sources/PreviewFormats/Packages/CodeSigningSummary.swift` | Reads signer names from an application's code signature (inspection). |
+| `CMSDecoder` (`CMSDecoderCreate`, `CMSDecoderUpdateMessage`, `CMSDecoderCopyContent`) | `ProvisioningProfileAdapter.swift`, enum `CMSContent`, around lines 96 to 117 | Extracts the content of a signed CMS message **without verifying it**. It calls `CMSDecoderIsContentEncrypted` and refuses (typed `encryptedContent` failure) if the content is encrypted. It does not decrypt. |
+| Encrypted-entry detection only | `Containers/ZIPListingAdapter.swift`, `RAR4Listing.swift`, `RAR5Listing.swift`, `SevenZipStreamsInfo.swift` and `SevenZipListingAdapter.swift` (AES coder id recognised, not run), `Packages/DiskImageAdapter.swift` (`encrcdsa` and `cdsaencr` signatures), `Documents/EPUBAdapter.swift` and `EPUBPackage.swift` (DRM descriptors), `Documents/ComicBookAdapter.swift` | Entries and archives are flagged as encrypted and listed or refused. Nothing is decrypted. |
+
+Not found: `CommonCrypto`, `CCCrypt`, any `AES`, `ChaChaPoly`, `SealedBox` or `SymmetricKey` use, `SecKeyCreateDecryptedData`, OpenSSL or other crypto libraries, or TLS code, in the Swift, C and C++ sources of the packages, app, extensions and the CAD helper. There are no remote Swift package dependencies. The pinned OCCT kernel in the CAD helper is a geometry library; its notices (`ThirdPartyNotices/OCCT/`) list no cryptographic component, and the helper has no network entitlement. (I searched the repository's own source and notice files. I did not scan the compiled OCCT static libraries for symbols; the owner may want that if certainty is needed.)
+
+Reading of the findings, offered as information and not as legal advice: the only cryptographic API use is hashing and certificate-field parsing for display, and encrypted content is detected and refused, never decrypted. That supports the plist value `NO`. The owner makes the declaration and should read Apple's export-compliance questions on the live form. Standard-hash and certificate-parsing uses are the part an owner might want to read against Apple's wording about "encryption" before answering.
+
+If App Store Connect shows the encryption question for the uploaded build anyway, the answer is consistent with the plist: the app does not use encryption beyond what Apple's operating system provides, and none is implemented by the app. Confirm the exact options on the day.
+
+## 7. Pricing and availability
+
+| Field | Answer |
+|---|---|
+| Price | Paid upfront at about USD 9.99 with local pricing adopted from that base (owner decision D-C, 2026-10-10). The repository records no price table; App Store Connect holds the effective prices. |
+| Base storefront, manual overrides | `[OWNER: not stated]` |
+| Availability | `[OWNER: all storefronts, or a list]`. Check regional compliance questions that appear. |
+| Pre-order | No. |
+| In-app purchases and subscriptions | None. State nothing about them in the listing. |
+| Tax category | App Store software |
+
+## 8. Agreements and account checklist (owner actions)
+
+The Account Holder must do these; none can be done from the repository. Order is not significant, but the Paid Apps Agreement and the trader declaration block a paid release.
+
+- [ ] Accept any pending agreements shown in App Store Connect (banner or Business section).
+- [ ] Sign the **Paid Apps Agreement**; add tax forms and banking details for the seller.
+- [ ] **Digital Services Act trader status.** Declare whether the seller is a trader. A trader's name, address, phone number and email are shown on the product page in the EU storefronts, so the owner needs contact details they accept being public. A non-trader declares that instead. If no declaration is made, the app is not offered in the EU.
+- [ ] Consider the **App Store Small Business Program** (enrol before the first sales if wanted).
+- [ ] Confirm the support mailbox `info@spacepane.com` exists and answers.
+- [ ] Publish the CAD source repository named in `Native/CADWorker/SOURCE-OFFER.md` (`canburaks/spacepane-cad-source`) and resolve the "pending legal review" wording in the offer, before external testing or release (publication plan, section "Owner decisions", D-D).
+- [ ] Confirm the final bundle identifier, the team and the seller name agree with the copyright line above.
+- [ ] Recheck Apple's current requirements pages on the day of submission; this worksheet is dated 2026-10-10.
+
+## 9. Store metadata locales for the 14 app languages
+
+Metadata locales are the languages the store page text can be provided in. They are independent of what the app ships, but the listing must not advertise a language the app does not ship (guideline 2.3). The publication plan (D-B) recommends shipping English plus only the languages that get a recorded review; no language has one today (`tools/localization/languages.json`: drafts, native-speaker review pending).
+
+| App language | Code | App Store metadata locale | Note |
+|---|---|---|---|
+| English | `en` | English (U.S.), also U.K., Australia, Canada | Primary. Choose one primary variant; others optional. |
+| Turkish | `tr` | Turkish | |
+| German | `de` | German | |
+| French | `fr` | French (France) or French (Canada) | Choose one or both. |
+| Chinese, Simplified | `zh-Hans` | Chinese, Simplified | |
+| Japanese | `ja` | Japanese | |
+| Hindi | `hi` | Hindi | |
+| Kurmanji (Kurdish, Latin script) | `ku-Latn` | **None** | No store locale. The store page cannot be offered in it. |
+| Russian | `ru` | Russian | |
+| Indonesian | `id` | Indonesian | |
+| Bengali | `bn` | Bangla (Bengali) | The brief for this draft says a locale exists; confirm that Bangla appears in the live App Store Connect locale list before planning copy. |
+| Hausa | `ha` | **None** | No store locale. |
+| Portuguese | `pt` | Portuguese (Brazil) or Portuguese (Portugal) | **Regional choice needed**; the app's `pt` resources do not say which. Needs a decision, ideally the variant the reviewer reads. |
+| Spanish | `es` | Spanish (Spain) or Spanish (Mexico) | **Regional choice needed**, same reason. |
+
+So 12 of the 14 app languages have a store locale; Kurmanji and Hausa have none. A language that has a locale still gets copy only after its app translation has a recorded review.
+
+## 10. Pre-entry verification list
+
+Do these on the store build before entering the matching fields:
+
+1. The extension names in the listing, `SpacePane Preview` and `SpacePane Thumbnails`, match what System Settings shows.
+2. The General page's "Open System Settings" button opens the right pane on the macOS versions tested; record the pane path for each version.
+3. Both URLs in section 2 load, the privacy page says "no network access" in line with section 5, and the support page shows the contact address.
+4. The description's list of types still equals `FormatCatalog.json` (76 types, 26 + 26 + 16 + 1 + 7).
+5. Every screenshot gate in [screenshots.md](screenshots.md) has its observation recorded in `docs/validation/host-matrix.json`.
+6. The signed archive's entitlements contain no network key (output of `script/check_release_archive.py`).

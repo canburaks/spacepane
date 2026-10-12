@@ -1,0 +1,157 @@
+/* SpacePane app preview film: static styles. Every animated property is written by film.js from the time value. */
+
+/* New York and SF Mono are system fonts that Chromium cannot address by name; they are read from the system at
+   render time and are not copied into the repository. SF Pro is reached through system-ui. */
+@font-face {
+  font-family: "Film Serif";
+  font-style: italic;
+  font-weight: 400 900;
+  src: url("file:///System/Library/Fonts/NewYorkItalic.ttf");
+}
+@font-face {
+  font-family: "Film Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("file:///System/Library/Fonts/SFNSMono.ttf");
+}
+
+:root {
+  --paper: #f4f1ea;
+  --surface: #fffdf8;
+  --ink: #0b0d1a;
+  --ink-muted: #6a6878;
+  --night: #07081a;
+  --brand: #4b3cff;
+  --violet: #a64dff;
+  --magenta: #ff4f9a;
+  --amber: #ffb547;
+  --mint: #4fe3c1;
+  --sans: system-ui, -apple-system, "SF Pro Display", sans-serif;
+  --serif: "Film Serif", ui-serif, "New York", Georgia, serif;
+  --mono: "Film Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #000;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  font-family: var(--sans);
+}
+
+#stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+#stage > * { position: absolute; left: 0; top: 0; }
+
+/* Worlds: the two background layers a transition runs between. */
+.world { width: 1920px; height: 1080px; overflow: hidden; }
+.world > * { position: absolute; }
+.world .base { inset: 0; }
+.world .light { border-radius: 50%; left: 0; top: 0; }
+.world .shade { inset: 0; }
+
+/* Captures: real window captures at native pixels, moved by a camera. */
+.rig { transform-origin: 0 0; }
+.rig > img { position: absolute; left: 0; top: 0; display: block; }
+.rig > .shadow { position: absolute; left: 0; top: 0; }
+.rig .mark { position: absolute; }
+
+/* Left column text. */
+.chrome { width: 1920px; height: 1080px; pointer-events: none; }
+.chrome.ink { color: var(--ink); }
+.chrome.white { color: #fff; }
+.chrome > * { position: absolute; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  height: 46px;
+  padding: 0 20px 0 16px;
+  border-radius: 23px;
+  font: 500 21px/1 var(--mono);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.chrome.white .eyebrow { background: rgba(255, 255, 255, 0.17); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2); }
+.chrome.ink .eyebrow { background: rgba(11, 13, 26, 0.06); box-shadow: inset 0 0 0 1px rgba(11, 13, 26, 0.08); }
+.eyebrow svg { width: 17px; height: 21px; flex: none; }
+.eyebrow.caps {
+  padding: 0 22px;
+  font: 600 19px/1 var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.headline {
+  font: 700 78px/84px var(--sans);
+  letter-spacing: -0.036em;
+  white-space: nowrap;
+}
+.headline.center { text-align: center; width: 1920px; }
+.headline .line { display: block; overflow: hidden; padding: 6px 12px 14px 12px; margin: -6px -12px -14px -12px; }
+.headline .word { display: inline-block; white-space: pre; transform-origin: 0 100%; }
+.headline em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 560;
+  font-size: 1.035em;
+  letter-spacing: -0.028em;
+}
+.headline .kslot { display: inline-block; width: 246px; height: 84px; vertical-align: top; }
+.chrome.white .headline { text-shadow: 0 3px 22px rgba(20, 8, 70, 0.22); }
+
+.note {
+  width: 500px;
+  font: 500 25px/34px var(--sans);
+  letter-spacing: -0.012em;
+  opacity: 0.9;
+}
+
+/* The key. */
+#key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 700;
+  white-space: nowrap;
+  background: linear-gradient(#ffffff, #ecece8);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+}
+#ring { border: 2px solid rgba(255, 255, 255, 0.9); pointer-events: none; }
+
+/* End card. */
+#end { width: 1920px; height: 1080px; color: var(--ink); }
+#end > * { position: absolute; }
+#end .name {
+  left: 0;
+  width: 1920px;
+  text-align: center;
+  font: 700 88px/96px var(--sans);
+  letter-spacing: -0.036em;
+  white-space: nowrap;
+}
+#end .name .word { display: inline-block; white-space: pre; }
+#end .name em { font-family: var(--serif); font-style: italic; font-weight: 520; letter-spacing: -0.026em; }
+#end .sub {
+  left: 0;
+  width: 1920px;
+  text-align: center;
+  font: 500 32px/42px var(--sans);
+  letter-spacing: -0.014em;
+  color: var(--ink-muted);
+}

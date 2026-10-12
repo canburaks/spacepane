@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appearance.pointsSpoken</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ punto</string>
+			<key>other</key>
+			<string>%2$@ puntos</string>
+		</dict>
+	</dict>
+	<key>failure.body.structureTooDeepLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Esta vista previa lee documentos anidados hasta %2$@ nivel de profundidad, y este es más profundo. Ábrelo en una app hecha para este tipo de archivo.</string>
+			<key>other</key>
+			<string>Esta vista previa lee documentos anidados hasta %2$@ niveles de profundidad, y este es más profundo. Ábrelo en una app hecha para este tipo de archivo.</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyLinesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Esta vista previa muestra hasta %2$@ línea, y este archivo tiene más. Ábrelo en un editor de texto para leerlo completo.</string>
+			<key>other</key>
+			<string>Esta vista previa muestra hasta %2$@ líneas, y este archivo tiene más. Ábrelo en un editor de texto para leerlo completo.</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyNodesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Esta vista previa lee documentos de hasta %2$@ elemento, y este tiene más. Ábrelo en una app hecha para este tipo de archivo.</string>
+			<key>other</key>
+			<string>Esta vista previa lee documentos de hasta %2$@ elementos, y este tiene más. Ábrelo en una app hecha para este tipo de archivo.</string>
+		</dict>
+	</dict>
+	<key>finding.listing.hiddenCharacters</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ nombres de la lista contienen caracteres ocultos.</string>
+			<key>one</key>
+			<string>%2$@ nombre de la lista contiene caracteres ocultos.</string>
+			<key>other</key>
+			<string>%2$@ nombres de la lista contienen caracteres ocultos.</string>
+		</dict>
+	</dict>
+	<key>finding.summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ hallazgos para revisar.</string>
+			<key>one</key>
+			<string>%2$@ hallazgo para revisar.</string>
+			<key>other</key>
+			<string>%2$@ hallazgos para revisar.</string>
+		</dict>
+	</dict>
+	<key>finding.summary.concealed</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos.</string>
+			<key>one</key>
+			<string>%2$@ posible secreto oculto. La selección y la copia usan el texto con los valores ocultos.</string>
+			<key>other</key>
+			<string>%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos.</string>
+		</dict>
+	</dict>
+	<key>preview.count.lines</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ línea</string>
+			<key>other</key>
+			<string>%2$@ líneas</string>
+		</dict>
+	</dict>
+	<key>preview.diagram.noticeDrawn</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Diagrama %3$@ de %2$@ dibujado.</string>
+			<key>other</key>
+			<string>Diagrama %3$@ de %2$@ dibujado.</string>
+		</dict>
+	</dict>
+	<key>preview.ebooks.notice.chaptersShown</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Se muestran %2$@ de %3$@ capítulos.</string>
+			<key>one</key>
+			<string>Se muestra %2$@ de %3$@ capítulos.</string>
+			<key>other</key>
+			<string>Se muestran %2$@ de %3$@ capítulos.</string>
+		</dict>
+	</dict>
+	<key>preview.info.concealedCount</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Posibles secretos ocultos: %2$@.</string>
+			<key>other</key>
+			<string>Posibles secretos ocultos: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.profile.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>El perfil usa las primeras filas leídas: %2$@.</string>
+			<key>one</key>
+			<string>El perfil usa las primeras filas leídas: %2$@.</string>
+			<key>other</key>
+			<string>El perfil usa las primeras filas leídas: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Filas mostradas desde el inicio: %2$@.</string>
+			<key>one</key>
+			<string>Filas mostradas desde el inicio: %2$@.</string>
+			<key>other</key>
+			<string>Filas mostradas desde el inicio: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRowsOfTotal</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Filas mostradas desde el inicio: %2$@ de %3$@.</string>
+			<key>one</key>
+			<string>Filas mostradas desde el inicio: %2$@ de %3$@.</string>
+			<key>other</key>
+			<string>Filas mostradas desde el inicio: %2$@ de %3$@.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appearance.pointsSpoken</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ xal</string>
+			<key>other</key>
+			<string>%2$@ xal</string>
+		</dict>
+	</dict>
+	<key>failure.body.structureTooDeepLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Ev pêşdîtin belgeyên heta %2$@ astan kûr dixwîne, û ev belge ji wê kûrtir e. Pelê di sepanekê de veke ku ji bo vê cureya pelê hatiye çêkirin.</string>
+			<key>other</key>
+			<string>Ev pêşdîtin belgeyên heta %2$@ astan kûr dixwîne, û ev belge ji wê kûrtir e. Pelê di sepanekê de veke ku ji bo vê cureya pelê hatiye çêkirin.</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyLinesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Ev pêşdîtin heta %2$@ rêzikan nîşan dide, û di vê pelê de ji wê bêtir hene. Ji bo xwendina hemûyê, pelê di edîtorekî nivîsê de veke.</string>
+			<key>other</key>
+			<string>Ev pêşdîtin heta %2$@ rêzikan nîşan dide, û di vê pelê de ji wê bêtir hene. Ji bo xwendina hemûyê, pelê di edîtorekî nivîsê de veke.</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyNodesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Ev pêşdîtin belgeyên heta %2$@ hêman dixwîne, û di vê belgeyê de ji wê bêtir hene. Pelê di sepanekê de veke ku ji bo vê cureya pelê hatiye çêkirin.</string>
+			<key>other</key>
+			<string>Ev pêşdîtin belgeyên heta %2$@ hêman dixwîne, û di vê belgeyê de ji wê bêtir hene. Pelê di sepanekê de veke ku ji bo vê cureya pelê hatiye çêkirin.</string>
+		</dict>
+	</dict>
+	<key>finding.listing.hiddenCharacters</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ navê lîstekirî tîpên veşartî dihewîne.</string>
+			<key>other</key>
+			<string>%2$@ navên lîstekirî tîpên veşartî dihewînin.</string>
+		</dict>
+	</dict>
+	<key>finding.summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ dîtin ji bo kontrolkirinê.</string>
+			<key>other</key>
+			<string>%2$@ dîtin ji bo kontrolkirinê.</string>
+		</dict>
+	</dict>
+	<key>finding.summary.concealed</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ sira muhtemel hat veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin.</string>
+			<key>other</key>
+			<string>%2$@ sirên muhtemel hatin veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin.</string>
+		</dict>
+	</dict>
+	<key>preview.count.lines</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ rêz</string>
+			<key>other</key>
+			<string>%2$@ rêz</string>
+		</dict>
+	</dict>
+	<key>preview.diagram.noticeDrawn</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Diyagrama %3$@ ji %2$@ hatiye xêzkirin.</string>
+			<key>other</key>
+			<string>Diyagrama %3$@ ji %2$@ hatiye xêzkirin.</string>
+		</dict>
+	</dict>
+	<key>preview.ebooks.notice.chaptersShown</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Ji %3$@ beşan %2$@ beş tê nîşandan.</string>
+			<key>other</key>
+			<string>Ji %3$@ beşan %2$@ beş têne nîşandan.</string>
+		</dict>
+	</dict>
+	<key>preview.info.concealedCount</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Agahiyên gengaz ên veşartî hatin veşartin: %2$@.</string>
+			<key>other</key>
+			<string>Agahiyên gengaz ên veşartî hatin veşartin: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.profile.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Profîl %2$@ rêzên destpêkê yên hatine xwendin bi kar tîne.</string>
+			<key>other</key>
+			<string>Profîl %2$@ rêzên destpêkê yên hatine xwendin bi kar tîne.</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Rêzên ji destpêkê têne nîşandan: %2$@.</string>
+			<key>other</key>
+			<string>Rêzên ji destpêkê têne nîşandan: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRowsOfTotal</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Rêzên ji destpêkê têne nîşandan: %2$@ ji %3$@.</string>
+			<key>other</key>
+			<string>Rêzên ji destpêkê têne nîşandan: %2$@ ji %3$@.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
