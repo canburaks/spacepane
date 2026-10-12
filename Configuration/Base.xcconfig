@@ -1,0 +1,33 @@
+#include "Branding.xcconfig"
+
+// Compile-only prototype identities. They are not approved production identities.
+PREVIEW_BASE_BUNDLE_IDENTIFIER = invalid.example.previewprototype
+APP_GROUP_IDENTIFIER = group.invalid.example.previewprototype
+DEVELOPMENT_TEAM =
+CODE_SIGN_STYLE = Automatic
+
+MACOSX_DEPLOYMENT_TARGET = 15.0
+SDKROOT = macosx
+SUPPORTED_PLATFORMS = macosx
+// Release 1.0 ships for Apple silicon only: Intel execution and the x86_64 CAD worker are unverified.
+// Apple accepts an arm64-only Mac App Store app that never shipped Intel; Intel can be added in an update.
+ARCHS = arm64
+SWIFT_VERSION = 6.0
+SWIFT_STRICT_CONCURRENCY = complete
+SWIFT_DEFAULT_ACTOR_ISOLATION = nonisolated
+SWIFT_APPROACHABLE_CONCURRENCY = NO
+SWIFT_EMIT_LOC_STRINGS = YES
+SWIFT_GENERATE_LOCALIZATION_SYMBOLS = NO
+CLANG_ENABLE_MODULES = YES
+CLANG_ENABLE_OBJC_ARC = YES
+ENABLE_APP_SANDBOX = YES
+ENABLE_HARDENED_RUNTIME = YES
+ENABLE_USER_SCRIPT_SANDBOXING = YES
+GENERATE_INFOPLIST_FILE = NO
+CURRENT_PROJECT_VERSION = 1
+MARKETING_VERSION = 1.0.0
+DEVELOPMENT_LANGUAGE = en
+CODE_SIGN_ENTITLEMENTS = Configuration/$(PREVIEW_METADATA_ROLE).entitlements
+
+// Local identity/signing choices are never committed. No global Xcode switch is needed.
+#include? "Local.xcconfig"

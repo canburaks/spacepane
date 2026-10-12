@@ -1,0 +1,12 @@
+{
+  "name": "spacepane-store-preview-design",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Source of the SpacePane Mac App Store app preview film (frame-stepped HTML, encoded with ffmpeg).",
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs",
+    "draft": "node render.mjs --draft"
+  },
+  "comment": "No dependencies of its own: render.mjs loads Playwright from the node_modules of the spacepane-web repository (SPACEPANE_WEB_REPO, default ../spacepane-web beside this repository; pinned by its pnpm-lock.yaml) and calls ffmpeg and ffprobe from PATH."
+}

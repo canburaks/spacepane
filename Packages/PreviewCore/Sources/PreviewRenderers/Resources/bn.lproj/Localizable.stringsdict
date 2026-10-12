@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appearance.pointsSpoken</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ পয়েন্ট</string>
+			<key>other</key>
+			<string>%2$@ পয়েন্ট</string>
+		</dict>
+	</dict>
+	<key>failure.body.structureTooDeepLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>এই প্রিভিউ সর্বোচ্চ %2$@ স্তর পর্যন্ত নেস্ট করা নথি পড়ে, আর এই নথি তার চেয়ে গভীর। এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।</string>
+			<key>other</key>
+			<string>এই প্রিভিউ সর্বোচ্চ %2$@ স্তর পর্যন্ত নেস্ট করা নথি পড়ে, আর এই নথি তার চেয়ে গভীর। এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyLinesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>এই প্রিভিউ সর্বোচ্চ %2$@টি লাইন দেখায়, আর এই ফাইলে তার চেয়ে বেশি আছে। পুরোটা পড়তে এটি টেক্সট এডিটরে খুলুন।</string>
+			<key>other</key>
+			<string>এই প্রিভিউ সর্বোচ্চ %2$@টি লাইন দেখায়, আর এই ফাইলে তার চেয়ে বেশি আছে। পুরোটা পড়তে এটি টেক্সট এডিটরে খুলুন।</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyNodesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>এই প্রিভিউ সর্বোচ্চ %2$@টি আইটেম পর্যন্ত নথি পড়ে, আর এই নথিতে তার চেয়ে বেশি আছে। এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।</string>
+			<key>other</key>
+			<string>এই প্রিভিউ সর্বোচ্চ %2$@টি আইটেম পর্যন্ত নথি পড়ে, আর এই নথিতে তার চেয়ে বেশি আছে। এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।</string>
+		</dict>
+	</dict>
+	<key>finding.listing.hiddenCharacters</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>তালিকার %2$@টি নামে লুকানো অক্ষর রয়েছে।</string>
+			<key>other</key>
+			<string>তালিকার %2$@টি নামে লুকানো অক্ষর রয়েছে।</string>
+		</dict>
+	</dict>
+	<key>finding.summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ফলাফল পর্যালোচনা করুন।</string>
+			<key>other</key>
+			<string>%2$@টি ফলাফল পর্যালোচনা করুন।</string>
+		</dict>
+	</dict>
+	<key>finding.summary.concealed</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি সম্ভাব্য গোপন মান লুকানো হয়েছে। নির্বাচন ও কপি করার সময় গোপন মান লুকানো পাঠ ব্যবহার করা হয়।</string>
+			<key>other</key>
+			<string>%2$@টি সম্ভাব্য গোপন মান লুকানো হয়েছে। নির্বাচন ও কপি করার সময় গোপন মান লুকানো পাঠ ব্যবহার করা হয়।</string>
+		</dict>
+	</dict>
+	<key>preview.count.lines</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি লাইন</string>
+			<key>other</key>
+			<string>%2$@টি লাইন</string>
+		</dict>
+	</dict>
+	<key>preview.diagram.noticeDrawn</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>মোট %2$@টির মধ্যে %3$@ নম্বর ডায়াগ্রাম আঁকা হয়েছে।</string>
+			<key>other</key>
+			<string>মোট %2$@টির মধ্যে %3$@ নম্বর ডায়াগ্রাম আঁকা হয়েছে।</string>
+		</dict>
+	</dict>
+	<key>preview.ebooks.notice.chaptersShown</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>মোট %3$@টি অধ্যায়ের মধ্যে %2$@টি দেখানো হচ্ছে।</string>
+			<key>other</key>
+			<string>মোট %3$@টি অধ্যায়ের মধ্যে %2$@টি দেখানো হচ্ছে।</string>
+		</dict>
+	</dict>
+	<key>preview.info.concealedCount</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>লুকানো সম্ভাব্য গোপন তথ্য: %2$@।</string>
+			<key>other</key>
+			<string>লুকানো সম্ভাব্য গোপন তথ্য: %2$@।</string>
+		</dict>
+	</dict>
+	<key>preview.profile.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>প্রোফাইলের জন্য শুরু থেকে পড়া সারি: %2$@।</string>
+			<key>other</key>
+			<string>প্রোফাইলের জন্য শুরু থেকে পড়া সারি: %2$@।</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>শুরু থেকে দেখানো সারি: %2$@।</string>
+			<key>other</key>
+			<string>শুরু থেকে দেখানো সারি: %2$@।</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRowsOfTotal</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>শুরু থেকে দেখানো সারি: মোট %3$@টির মধ্যে %2$@টি।</string>
+			<key>other</key>
+			<string>শুরু থেকে দেখানো সারি: মোট %3$@টির মধ্যে %2$@টি।</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

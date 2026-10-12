@@ -1,0 +1,132 @@
+# Continuous integration for the Swift package, the app and extension sources, and the portable
+# static gate (decision 027, backlog Q-21).
+#
+# - `static` runs on every push and pull request on a Linux runner: the checks that need no
+#   Apple toolchain (manifests, samples, localization, decision numbering, Swift syntax).
+# - `package` runs on a hosted macOS runner only when dispatched by hand or when a commit message
+#   contains `[ci-mac]`. The repository is private, so macOS minutes are billed at ten times the
+#   Linux rate; the lead triggers runs deliberately. It compiles the package, type-checks the
+#   companion and both extensions, and runs the package suite and the integration checks.
+#   It proves compilation and the package suite on the runner's OS. It proves nothing about Xcode
+#   project linking, resource embedding, signing, extension registration, Finder routing,
+#   VoiceOver, layout in real hosts or performance; those stay with Mac sessions.
+name: package
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "check: --check and --check-compiler only; full: also --test"
+        default: full
+        type: choice
+        options: [check, full]
+      archive:
+        description: "Also archive the Release app unsigned (--archive-unsigned): the project, the pinned OCCT CAD helper and the archive composition on this runner. Signing and upload live in testflight.yml."
+        default: false
+        type: boolean
+# Concurrency is per job: a newer push cancels a stale static run, but a running macOS job finishes,
+# because its result is the only compiler cloud sessions have and its minutes are already spent.
+jobs:
+  static:
+    concurrency:
+      group: static-${{ github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the Swift syntax gate's parser
+        # Pinned: tools/swift-syntax-baseline.json records error counts for exactly these parser versions.
+        run: python3 -m pip install --quiet tree-sitter==0.26.0 tree-sitter-swift==0.7.4
+      - name: Static gate
+        run: python3 script/check_static.py
+      - name: Static gate self-tests
+        run: python3 script/test_check_static.py
+      - name: Release archive check self-tests
+        run: python3 script/test_check_release_archive.py
+      - name: Swift syntax gate over every source
+        run: python3 tools/check_swift_syntax.py --all --require
+  package:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ci-mac]')
+    concurrency:
+      group: package-mac-${{ github.ref }}
+      cancel-in-progress: false
+    runs-on: macos-26
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select the newest Xcode 26 on the image
+        run: |
+          XCODE="$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -n 1)"
+          if [ -z "$XCODE" ]; then XCODE="$(ls -d /Applications/Xcode*.app | sort -V | tail -n 1)"; fi
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+          swift --version
+          sw_vers
+      - name: Restore the SwiftPM build directory
+        uses: actions/cache@v4
+        with:
+          path: Packages/PreviewCore/.build
+          key: spm-${{ runner.os }}-${{ hashFiles('Packages/PreviewCore/Package.swift') }}-${{ github.sha }}
+          restore-keys: |
+            spm-${{ runner.os }}-${{ hashFiles('Packages/PreviewCore/Package.swift') }}-
+      - name: Repository checks (project, manifests, localization, icon)
+        run: ./script/build_and_run.sh --check
+      - name: Restore the pinned OCCT build (the CAD helper) for the archive dry run
+        if: github.event_name == 'workflow_dispatch' && inputs.archive
+        uses: actions/cache@v4
+        with:
+          path: .build/cad
+          key: occt-${{ runner.os }}-${{ hashFiles('script/build_cad_worker.py', 'Native/CADWorker/**') }}
+      # Each step keeps its full output in a log and, on failure, ends with a digest of the error,
+      # fatal-error and failed-test lines, so the lines that matter sit at the tail a log reader returns.
+      - name: Build the package and type-check the app and extensions
+        run: |
+          set +e
+          set -o pipefail
+          ./script/build_and_run.sh --check-compiler 2>&1 | tee .build-check-compiler.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            echo "::group::Error digest"
+            grep -nE "error:|Fatal error|fatal error" .build-check-compiler.log | grep -v "warning:" | head -200
+            echo "::endgroup::"
+          fi
+          exit "$status"
+      - name: Package tests and integration checks
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.mode == 'full'
+        run: |
+          set +e
+          set -o pipefail
+          ./script/build_and_run.sh --test 2>&1 | tee .build-test.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            echo "::group::Error digest"
+            grep -nE "error:|Fatal error|fatal error|✘|Test run with|Issue recorded|recorded an issue|Traceback|CalledProcessError" .build-test.log | grep -v "warning:" | head -300
+            echo "::endgroup::"
+          fi
+          exit "$status"
+      - name: Unsigned Release archive (dry run of the TestFlight pipeline)
+        if: github.event_name == 'workflow_dispatch' && inputs.archive
+        run: |
+          set +e
+          set -o pipefail
+          cat > Configuration/Local.xcconfig <<EOF_XCCONFIG
+          // Written by the archive dry run; never committed (.gitignore). PLAN.md M6 identities.
+          DEVELOPMENT_TEAM = ${{ vars.PREV_DEVELOPMENT_TEAM || 'Z743N6D8DS' }}
+          PREVIEW_BASE_BUNDLE_IDENTIFIER = ${{ vars.PREV_BUNDLE_IDENTIFIER || 'org.webmeister.spacepane' }}
+          APP_GROUP_IDENTIFIER = ${{ vars.PREV_APP_GROUP_IDENTIFIER || 'Z743N6D8DS.org.webmeister.spacepane.shared' }}
+          CURRENT_PROJECT_VERSION = ${{ github.run_number }}
+          EOF_XCCONFIG
+          ./script/build_and_run.sh --archive-unsigned 2>&1 | tee .build-archive.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            echo "::group::Error digest"
+            grep -nE "error:|Fatal error|fatal error|Traceback|SystemExit|\*\* ARCHIVE FAILED" .build-archive.log | grep -v "warning:" | head -200
+            echo "::endgroup::"
+          fi
+          rm -f Configuration/Local.xcconfig
+          exit "$status"

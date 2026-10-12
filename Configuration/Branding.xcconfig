@@ -1,0 +1,23 @@
+// Visible branding is replaceable; stable technical identifiers live separately.
+// The PREV_ prefix, target names and bundle/App Group identifiers are technical and do not follow the brand.
+PREV_DISPLAY_NAME = SpacePane
+PREV_EXECUTABLE_NAME = SpacePane
+PREV_PREVIEW_DISPLAY_NAME = $(PREV_DISPLAY_NAME) Preview
+PREV_THUMBNAIL_DISPLAY_NAME = $(PREV_DISPLAY_NAME) Thumbnails
+
+// Shown in Finder's Get Info and the macOS About metadata. Names the legal rights holder.
+PREV_COPYRIGHT = Copyright © 2026 Can Burak Sofyalioglu. All rights reserved.
+// Mac App Store category UTI. App Store Connect's primary/secondary categories are chosen there.
+PREV_APP_CATEGORY = public.app-category.utilities
+
+// Optional About links. Leave empty until a destination is agreed; an empty value hides
+// its entry. https (or mailto for support/feedback) only. xcconfig treats // as a comment,
+// so write https:/$()/example.com.
+PREV_WEBSITE_URL = https:/$()/spacepane.com
+PREV_SUPPORT_URL = https:/$()/spacepane.com/support.html
+PREV_DOCUMENTATION_URL =
+PREV_PRIVACY_POLICY_URL = https:/$()/spacepane.com/privacy.html
+PREV_FEEDBACK_URL =
+// Where the written offer for the 3D import helper's source and the Open CASCADE library lives (LGPL 2.1
+// section 6). About shows it under Acknowledgements. Keep it https and public for as long as the offer runs.
+PREV_OPEN_SOURCE_URL = https:/$()/github.com/canburaks/spacepane-cad-source

@@ -1,0 +1,162 @@
+{
+  "finding.summary": {
+    "case": "findingSummary",
+    "comment": "Collapsed preview findings summary when no values were concealed. The count is the number of typed finding records/categories, not the number of occurrences within them. %2$@ is the locale-formatted count supplied by PreviewStrings.count. Do not print the raw plural-selector argument or add digits. Translations are drafts pending native-speaker review.",
+    "en": {
+      "one": "%2$@ finding to review.",
+      "other": "%2$@ findings to review."
+    },
+    "tr": {
+      "one": "%2$@ bulgu incelenmeli.",
+      "other": "%2$@ bulgu incelenmeli."
+    },
+    "de": {
+      "one": "%2$@ Befund zu prüfen.",
+      "other": "%2$@ Befunde zu prüfen."
+    },
+    "fr": {
+      "one": "%2$@ constat à examiner.",
+      "many": "%2$@ constats à examiner.",
+      "other": "%2$@ constats à examiner."
+    },
+    "zh-Hans": {
+      "other": "%2$@ 项发现待查看。"
+    },
+    "ja": {
+      "other": "確認が必要な項目が %2$@ 件あります。"
+    },
+    "hi": {
+      "one": "%2$@ निष्कर्ष की समीक्षा करें।",
+      "other": "%2$@ निष्कर्षों की समीक्षा करें।"
+    },
+    "ku-Latn": {
+      "one": "%2$@ dîtin ji bo kontrolkirinê.",
+      "other": "%2$@ dîtin ji bo kontrolkirinê."
+    },
+    "ru": {
+      "one": "%2$@ замечание для проверки.",
+      "few": "%2$@ замечания для проверки.",
+      "many": "%2$@ замечаний для проверки.",
+      "other": "%2$@ замечания для проверки."
+    },
+    "id": {
+      "other": "%2$@ temuan untuk ditinjau."
+    },
+    "bn": {
+      "one": "%2$@টি ফলাফল পর্যালোচনা করুন।",
+      "other": "%2$@টি ফলাফল পর্যালোচনা করুন।"
+    },
+    "ha": {
+      "one": "Abu %2$@ da aka gano don dubawa.",
+      "other": "Abubuwa %2$@ da aka gano don dubawa."
+    },
+    "pt": {
+      "one": "%2$@ ocorrência a rever.",
+      "many": "%2$@ ocorrências a rever.",
+      "other": "%2$@ ocorrências a rever."
+    },
+    "es": {
+      "one": "%2$@ hallazgo para revisar.",
+      "many": "%2$@ hallazgos para revisar.",
+      "other": "%2$@ hallazgos para revisar."
+    }
+  },
+  "finding.summary.concealed": {
+    "case": "findingSummaryConcealed",
+    "comment": "Collapsed preview privacy summary. Count actual concealed values, not finding categories or hidden Unicode characters. Keep the count and the complete selection/copying policy together as one sentence pair, following decision 026. %2$@ is the locale-formatted count supplied by PreviewStrings.count. Concealment already happened; selection and copying return this safe displayed text. Translations are drafts pending native-speaker review.",
+    "en": {
+      "one": "%2$@ likely secret hidden. Selection and copying use the concealed text.",
+      "other": "%2$@ likely secrets hidden. Selection and copying use the concealed text."
+    },
+    "tr": {
+      "one": "%2$@ olası sır gizlendi. Seçim ve kopyalama, gizlenmiş metni kullanır.",
+      "other": "%2$@ olası sır gizlendi. Seçim ve kopyalama, gizlenmiş metni kullanır."
+    },
+    "de": {
+      "one": "%2$@ mögliches Geheimnis ausgeblendet. Auswahl und Kopieren verwenden den unkenntlich gemachten Text.",
+      "other": "%2$@ mögliche Geheimnisse ausgeblendet. Auswahl und Kopieren verwenden den unkenntlich gemachten Text."
+    },
+    "fr": {
+      "one": "%2$@ secret potentiel masqué. La sélection et la copie utilisent le texte masqué.",
+      "many": "%2$@ secrets potentiels masqués. La sélection et la copie utilisent le texte masqué.",
+      "other": "%2$@ secrets potentiels masqués. La sélection et la copie utilisent le texte masqué."
+    },
+    "zh-Hans": {
+      "other": "%2$@ 项可能的敏感信息已隐藏。选择和复制使用隐藏后的文本。"
+    },
+    "ja": {
+      "other": "機密情報の可能性がある %2$@ 件を非表示にしました。選択とコピーには機密情報を隠したテキストを使用します。"
+    },
+    "hi": {
+      "one": "%2$@ संभावित गोपनीय मान छिपाया गया। चयन और कॉपी में छिपाया हुआ पाठ इस्तेमाल होता है।",
+      "other": "%2$@ संभावित गोपनीय मान छिपाए गए। चयन और कॉपी में छिपाया हुआ पाठ इस्तेमाल होता है।"
+    },
+    "ku-Latn": {
+      "one": "%2$@ sira muhtemel hat veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin.",
+      "other": "%2$@ sirên muhtemel hatin veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin."
+    },
+    "ru": {
+      "one": "Скрыто %2$@ возможное секретное значение. Выделение и копирование используют текст со скрытыми значениями.",
+      "few": "Скрыто %2$@ возможных секретных значения. Выделение и копирование используют текст со скрытыми значениями.",
+      "many": "Скрыто %2$@ возможных секретных значений. Выделение и копирование используют текст со скрытыми значениями.",
+      "other": "Скрыто %2$@ возможного секретного значения. Выделение и копирование используют текст со скрытыми значениями."
+    },
+    "id": {
+      "other": "%2$@ kemungkinan rahasia disembunyikan. Pemilihan dan penyalinan menggunakan teks yang sudah disamarkan."
+    },
+    "bn": {
+      "one": "%2$@টি সম্ভাব্য গোপন মান লুকানো হয়েছে। নির্বাচন ও কপি করার সময় গোপন মান লুকানো পাঠ ব্যবহার করা হয়।",
+      "other": "%2$@টি সম্ভাব্য গোপন মান লুকানো হয়েছে। নির্বাচন ও কপি করার সময় গোপন মান লুকানো পাঠ ব্যবহার করা হয়।"
+    },
+    "ha": {
+      "one": "An ɓoye sirri %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa.",
+      "other": "An ɓoye sirrika %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa."
+    },
+    "pt": {
+      "one": "%2$@ possível segredo ocultado. A seleção e a cópia usam o texto com os valores ocultos.",
+      "many": "%2$@ possíveis segredos ocultados. A seleção e a cópia usam o texto com os valores ocultos.",
+      "other": "%2$@ possíveis segredos ocultados. A seleção e a cópia usam o texto com os valores ocultos."
+    },
+    "es": {
+      "one": "%2$@ posible secreto oculto. La selección y la copia usan el texto con los valores ocultos.",
+      "many": "%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos.",
+      "other": "%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos."
+    }
+  },
+  "finding.action.showDetails": {
+    "case": "findingActionShowDetails",
+    "comment": "Native button in the collapsed preview findings band. Expands the typed findings inside the same preview, with internal scrolling. It does not open a window or read the source again. Translations are drafts pending native-speaker review.",
+    "en": "Show details",
+    "tr": "Ayrıntıları göster",
+    "de": "Details anzeigen",
+    "fr": "Afficher les détails",
+    "zh-Hans": "显示详情",
+    "ja": "詳細を表示",
+    "hi": "विवरण दिखाएँ",
+    "ku-Latn": "Hûrguliyan nîşan bide",
+    "ru": "Показать подробности",
+    "id": "Tampilkan detail",
+    "bn": "বিস্তারিত দেখান",
+    "ha": "Nuna cikakken bayani",
+    "pt": "Mostrar detalhes",
+    "es": "Mostrar detalles"
+  },
+  "finding.action.hideDetails": {
+    "case": "findingActionHideDetails",
+    "comment": "Native button in the expanded preview findings band. Collapses details and returns their space to preview content. Counterpart of Show details. Translations are drafts pending native-speaker review.",
+    "en": "Hide details",
+    "tr": "Ayrıntıları gizle",
+    "de": "Details ausblenden",
+    "fr": "Masquer les détails",
+    "zh-Hans": "隐藏详情",
+    "ja": "詳細を隠す",
+    "hi": "विवरण छिपाएँ",
+    "ku-Latn": "Hûrguliyan veşêre",
+    "ru": "Скрыть подробности",
+    "id": "Sembunyikan detail",
+    "bn": "বিস্তারিত লুকান",
+    "ha": "Ɓoye cikakken bayani",
+    "pt": "Ocultar detalhes",
+    "es": "Ocultar detalles"
+  }
+}

@@ -1,0 +1,4 @@
+Read-only preview sample
+
+Unicode: café, Ελληνικά, 日本語, 🌍
+This file is a synthetic test fixture.

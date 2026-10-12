@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>appearance.pointsSpoken</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ пункта</string>
+			<key>many</key>
+			<string>%2$@ пунктов</string>
+			<key>one</key>
+			<string>%2$@ пункт</string>
+			<key>other</key>
+			<string>%2$@ пункта</string>
+		</dict>
+	</dict>
+	<key>failure.body.structureTooDeepLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Этот предпросмотр читает документы с вложенностью до %2$@ уровней, а этот документ вложен глубже. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+			<key>many</key>
+			<string>Этот предпросмотр читает документы с вложенностью до %2$@ уровней, а этот документ вложен глубже. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+			<key>one</key>
+			<string>Этот предпросмотр читает документы с вложенностью до %2$@ уровня, а этот документ вложен глубже. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+			<key>other</key>
+			<string>Этот предпросмотр читает документы с вложенностью до %2$@ уровня, а этот документ вложен глубже. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyLinesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Этот предпросмотр показывает не более %2$@ строк, а в этом файле их больше. Чтобы прочитать файл целиком, откройте его в текстовом редакторе.</string>
+			<key>many</key>
+			<string>Этот предпросмотр показывает не более %2$@ строк, а в этом файле их больше. Чтобы прочитать файл целиком, откройте его в текстовом редакторе.</string>
+			<key>one</key>
+			<string>Этот предпросмотр показывает не более %2$@ строки, а в этом файле их больше. Чтобы прочитать файл целиком, откройте его в текстовом редакторе.</string>
+			<key>other</key>
+			<string>Этот предпросмотр показывает не более %2$@ строки, а в этом файле их больше. Чтобы прочитать файл целиком, откройте его в текстовом редакторе.</string>
+		</dict>
+	</dict>
+	<key>failure.body.tooManyNodesLimit</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Этот предпросмотр читает документы не более чем из %2$@ элементов, а в этом документе их больше. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+			<key>many</key>
+			<string>Этот предпросмотр читает документы не более чем из %2$@ элементов, а в этом документе их больше. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+			<key>one</key>
+			<string>Этот предпросмотр читает документы не более чем из %2$@ элемента, а в этом документе их больше. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+			<key>other</key>
+			<string>Этот предпросмотр читает документы не более чем из %2$@ элемента, а в этом документе их больше. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
+		</dict>
+	</dict>
+	<key>finding.listing.hiddenCharacters</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ имени в списке содержат скрытые символы.</string>
+			<key>many</key>
+			<string>%2$@ имён в списке содержат скрытые символы.</string>
+			<key>one</key>
+			<string>%2$@ имя в списке содержит скрытые символы.</string>
+			<key>other</key>
+			<string>%2$@ имени в списке содержат скрытые символы.</string>
+		</dict>
+	</dict>
+	<key>finding.summary</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ замечания для проверки.</string>
+			<key>many</key>
+			<string>%2$@ замечаний для проверки.</string>
+			<key>one</key>
+			<string>%2$@ замечание для проверки.</string>
+			<key>other</key>
+			<string>%2$@ замечания для проверки.</string>
+		</dict>
+	</dict>
+	<key>finding.summary.concealed</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Скрыто %2$@ возможных секретных значения. Выделение и копирование используют текст со скрытыми значениями.</string>
+			<key>many</key>
+			<string>Скрыто %2$@ возможных секретных значений. Выделение и копирование используют текст со скрытыми значениями.</string>
+			<key>one</key>
+			<string>Скрыто %2$@ возможное секретное значение. Выделение и копирование используют текст со скрытыми значениями.</string>
+			<key>other</key>
+			<string>Скрыто %2$@ возможного секретного значения. Выделение и копирование используют текст со скрытыми значениями.</string>
+		</dict>
+	</dict>
+	<key>preview.count.lines</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ строки</string>
+			<key>many</key>
+			<string>%2$@ строк</string>
+			<key>one</key>
+			<string>%2$@ строка</string>
+			<key>other</key>
+			<string>%2$@ строки</string>
+		</dict>
+	</dict>
+	<key>preview.diagram.noticeDrawn</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Нарисована диаграмма %3$@ из %2$@.</string>
+			<key>many</key>
+			<string>Нарисована диаграмма %3$@ из %2$@.</string>
+			<key>one</key>
+			<string>Нарисована диаграмма %3$@ из %2$@.</string>
+			<key>other</key>
+			<string>Нарисована диаграмма %3$@ из %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.ebooks.notice.chaptersShown</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Показаны %2$@ главы из %3$@.</string>
+			<key>many</key>
+			<string>Показано %2$@ глав из %3$@.</string>
+			<key>one</key>
+			<string>Показана %2$@ глава из %3$@.</string>
+			<key>other</key>
+			<string>Показано %2$@ главы из %3$@.</string>
+		</dict>
+	</dict>
+	<key>preview.info.concealedCount</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Скрыто возможных секретных значений: %2$@.</string>
+			<key>many</key>
+			<string>Скрыто возможных секретных значений: %2$@.</string>
+			<key>one</key>
+			<string>Скрыто возможных секретных значений: %2$@.</string>
+			<key>other</key>
+			<string>Скрыто возможных секретных значений: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.profile.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Профиль по первым прочитанным строкам: %2$@.</string>
+			<key>many</key>
+			<string>Профиль по первым прочитанным строкам: %2$@.</string>
+			<key>one</key>
+			<string>Профиль по первым прочитанным строкам: %2$@.</string>
+			<key>other</key>
+			<string>Профиль по первым прочитанным строкам: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRows</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Строки от начала: %2$@.</string>
+			<key>many</key>
+			<string>Строки от начала: %2$@.</string>
+			<key>one</key>
+			<string>Строки от начала: %2$@.</string>
+			<key>other</key>
+			<string>Строки от начала: %2$@.</string>
+		</dict>
+	</dict>
+	<key>preview.table.shownRowsOfTotal</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Строки от начала: %2$@ из %3$@.</string>
+			<key>many</key>
+			<string>Строки от начала: %2$@ из %3$@.</string>
+			<key>one</key>
+			<string>Строки от начала: %2$@ из %3$@.</string>
+			<key>other</key>
+			<string>Строки от начала: %2$@ из %3$@.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

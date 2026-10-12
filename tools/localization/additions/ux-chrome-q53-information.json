@@ -1,0 +1,133 @@
+{
+  "preview.info.buttonLabel": {
+    "case": "previewInfoButtonLabel",
+    "comment": "Accessibility label for the 22pt info button in a Quick Look preview header. Its numeric accessibility value indicates whether the inline panel is expanded; the label is stable across toggles. Draft translations pending native-speaker review.",
+    "en": "Preview information",
+    "tr": "Önizleme bilgileri",
+    "de": "Vorschauinformationen",
+    "fr": "Informations sur l’aperçu",
+    "zh-Hans": "预览信息",
+    "ja": "プレビュー情報",
+    "hi": "पूर्वावलोकन की जानकारी",
+    "ku-Latn": "Agahiyên pêşdîtinê",
+    "ru": "Информация о предпросмотре",
+    "id": "Informasi pratinjau",
+    "bn": "প্রিভিউ সম্পর্কে তথ্য",
+    "ha": "Bayanin samfotin",
+    "pt": "Informações da pré-visualização",
+    "es": "Información de la vista previa"
+  },
+  "preview.info.onThisMac": {
+    "case": "previewInfoOnThisMac",
+    "comment": "Privacy/provenance sentence in the inline preview information panel. Describes local app processing; does not make a claim about the file provider or Finder routing. Draft translations pending native-speaker review.",
+    "en": "Processed on this Mac",
+    "tr": "Bu Mac’te işlendi",
+    "de": "Auf diesem Mac verarbeitet",
+    "fr": "Traité sur ce Mac",
+    "zh-Hans": "在此 Mac 上处理",
+    "ja": "このMac上で処理",
+    "hi": "इस Mac पर संसाधित",
+    "ku-Latn": "Li ser vê Macê hatiye pêvajokirin",
+    "ru": "Обработано на этом Mac",
+    "id": "Diproses di Mac ini",
+    "bn": "এই Mac-এ প্রক্রিয়া করা হয়েছে",
+    "ha": "An sarrafa a wannan Mac",
+    "pt": "Processado neste Mac",
+    "es": "Procesado en este Mac"
+  },
+  "preview.info.concealedCount": {
+    "case": "previewInfoConcealedCount",
+    "comment": "Count from the already-concealed presentation, including zero. First formatter argument chooses the plural rule; second is the count formatted for the presentation locale. Likely preserves the classifier uncertainty; never show original values or locations. Draft translations pending native-speaker review.",
+    "en": {
+      "one": "%2$@ likely secret concealed.",
+      "other": "%2$@ likely secrets concealed."
+    },
+    "tr": {
+      "other": "%2$@ olası gizli bilgi gizlendi.",
+      "one": "%2$@ olası gizli bilgi gizlendi."
+    },
+    "de": {
+      "other": "Verborgene mögliche Geheimnisse: %2$@.",
+      "one": "Verborgene mögliche Geheimnisse: %2$@."
+    },
+    "fr": {
+      "other": "Secrets potentiels masqués : %2$@.",
+      "one": "Secrets potentiels masqués : %2$@."
+    },
+    "zh-Hans": {
+      "other": "已隐藏 %2$@ 项疑似机密信息。"
+    },
+    "ja": {
+      "other": "機密情報の可能性がある項目を非表示：%2$@。"
+    },
+    "hi": {
+      "other": "छिपाई गई संभावित गोपनीय जानकारियाँ: %2$@।",
+      "one": "छिपाई गई संभावित गोपनीय जानकारियाँ: %2$@।"
+    },
+    "ku-Latn": {
+      "other": "Agahiyên gengaz ên veşartî hatin veşartin: %2$@.",
+      "one": "Agahiyên gengaz ên veşartî hatin veşartin: %2$@."
+    },
+    "ru": {
+      "other": "Скрыто возможных секретных значений: %2$@.",
+      "many": "Скрыто возможных секретных значений: %2$@.",
+      "one": "Скрыто возможных секретных значений: %2$@.",
+      "few": "Скрыто возможных секретных значений: %2$@."
+    },
+    "id": {
+      "other": "Kemungkinan rahasia yang disembunyikan: %2$@."
+    },
+    "bn": {
+      "other": "লুকানো সম্ভাব্য গোপন তথ্য: %2$@।",
+      "one": "লুকানো সম্ভাব্য গোপন তথ্য: %2$@।"
+    },
+    "ha": {
+      "other": "Bayanan da ake zaton sirri da aka ɓoye: %2$@.",
+      "one": "Bayanan da ake zaton sirri da aka ɓoye: %2$@."
+    },
+    "pt": {
+      "other": "Possíveis segredos ocultos: %2$@.",
+      "one": "Possíveis segredos ocultos: %2$@."
+    },
+    "es": {
+      "other": "Posibles secretos ocultos: %2$@.",
+      "one": "Posibles secretos ocultos: %2$@."
+    }
+  },
+  "preview.info.commandsHeading": {
+    "case": "previewInfoCommandsHeading",
+    "comment": "Heading above the shortcut/help rows for the currently selected preview mode. The list updates when the mode changes. Draft translations pending native-speaker review.",
+    "en": "Commands in this view",
+    "tr": "Bu görünümdeki komutlar",
+    "de": "Befehle in dieser Ansicht",
+    "fr": "Commandes de cette vue",
+    "zh-Hans": "此视图中的命令",
+    "ja": "この表示のコマンド",
+    "hi": "इस दृश्य में कमांड",
+    "ku-Latn": "Fermanên di vê dîtinê de",
+    "ru": "Команды в этом представлении",
+    "id": "Perintah dalam tampilan ini",
+    "bn": "এই দৃশ্যের কমান্ড",
+    "ha": "Umarnin wannan kallo",
+    "pt": "Comandos nesta visualização",
+    "es": "Comandos de esta vista"
+  },
+  "preview.info.command": {
+    "case": "previewInfoCommand",
+    "comment": "One complete help row: first argument is a localized title from PreviewCommand, second its standard Mac shortcut notation. Translators may reorder the placeholders; do not translate the technical shortcut notation. Draft translations pending native-speaker review.",
+    "en": "%1$@ — %2$@",
+    "tr": "%1$@ — %2$@",
+    "de": "%1$@ — %2$@",
+    "fr": "%1$@ — %2$@",
+    "zh-Hans": "%1$@ — %2$@",
+    "ja": "%1$@ — %2$@",
+    "hi": "%1$@ — %2$@",
+    "ku-Latn": "%1$@ — %2$@",
+    "ru": "%1$@ — %2$@",
+    "id": "%1$@ — %2$@",
+    "bn": "%1$@ — %2$@",
+    "ha": "%1$@ — %2$@",
+    "pt": "%1$@ — %2$@",
+    "es": "%1$@ — %2$@"
+  }
+}
