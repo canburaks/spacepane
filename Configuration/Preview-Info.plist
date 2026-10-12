@@ -6,6 +6,10 @@
 	<string>$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>$(PREV_PREVIEW_DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>

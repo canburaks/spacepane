@@ -415,25 +415,13 @@
 			inputPaths = (
 				"$(SRCROOT)/Configuration/Metadata.xcstrings",
 				"$(SRCROOT)/script/build_metadata.py",
+				"$(SRCROOT)/tools/localization/languages.json",
 				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json",
 				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings",
 			);
 			name = "Compile localized branding metadata";
 			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/bn.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/InfoPlist.strings",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ha.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/hi.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/id.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ku-Latn.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/pt.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ru.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/tr.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh-Hans.lproj/InfoPlist.strings",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -448,25 +436,13 @@
 			inputPaths = (
 				"$(SRCROOT)/Configuration/Metadata.xcstrings",
 				"$(SRCROOT)/script/build_metadata.py",
+				"$(SRCROOT)/tools/localization/languages.json",
 				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json",
 				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings",
 			);
 			name = "Compile localized branding metadata";
 			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/bn.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/InfoPlist.strings",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ha.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/hi.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/id.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ku-Latn.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/pt.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ru.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/tr.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh-Hans.lproj/InfoPlist.strings",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -481,25 +457,13 @@
 			inputPaths = (
 				"$(SRCROOT)/Configuration/Metadata.xcstrings",
 				"$(SRCROOT)/script/build_metadata.py",
+				"$(SRCROOT)/tools/localization/languages.json",
 				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json",
 				"$(SRCROOT)/Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings",
 			);
 			name = "Compile localized branding metadata";
 			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/bn.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/InfoPlist.strings",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ha.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/hi.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/id.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ku-Latn.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/pt.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ru.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/tr.lproj/InfoPlist.strings",
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh-Hans.lproj/InfoPlist.strings",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -619,7 +583,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEVELOPMENT_TEAM = Z743N6D8DS;
 				INFOPLIST_FILE = "Configuration/Preview-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -650,7 +613,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				DEVELOPMENT_TEAM = Z743N6D8DS;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Configuration/App-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -669,7 +631,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEVELOPMENT_TEAM = Z743N6D8DS;
 				INFOPLIST_FILE = "Configuration/Thumbnail-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -688,7 +649,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				DEVELOPMENT_TEAM = Z743N6D8DS;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Configuration/App-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -707,7 +667,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEVELOPMENT_TEAM = Z743N6D8DS;
 				INFOPLIST_FILE = "Configuration/Thumbnail-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -760,7 +719,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEVELOPMENT_TEAM = Z743N6D8DS;
 				INFOPLIST_FILE = "Configuration/Preview-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
