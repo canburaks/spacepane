@@ -55,9 +55,15 @@ def main() -> None:
     for host in hosts.values():
         subprocess.run(["/usr/bin/codesign", "--verify", "--strict", str(host)], check=True, capture_output=True, text=True)
 
-    languages = json.loads((ROOT / "tools/localization/languages.json").read_text())["languages"]
-    if set(languages) != set(REGIONAL_PREFERENCES):
+    policy = json.loads((ROOT / "tools/localization/languages.json").read_text())
+    if set(policy["languages"]) != set(REGIONAL_PREFERENCES):
         raise ValueError("Update regional lookup checks for the selected language set")
+    # A build carries the ship list only; the draft languages are not in the supplied artifact's hosts.
+    languages = policy["shipped"]
+    for role, host in hosts.items():
+        present = sorted(item.name[:-len(".lproj")] for item in (host / "Contents/Resources").glob("*.lproj"))
+        if present != sorted(languages):
+            raise ValueError(f"The {role} bundle carries {present}, which differs from the ship list {sorted(languages)}")
     strings = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings").read_text())["strings"]
     metadata = json.loads((ROOT / "Configuration/Metadata.xcstrings").read_text())["strings"]
     formats = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())["formats"]
@@ -66,8 +72,9 @@ def main() -> None:
     brand = app_info["CFBundleDisplayName"]
     cases = [([language], language) for language in languages]
     cases += [([REGIONAL_PREFERENCES[language]], language) for language in languages]
-    cases += [(["pt-PT"], "pt"), (["es-ES"], "es"), (["zz-ZZ"], "en"),
-              (["zz-ZZ", "tr-TR"], "tr"), (["ar-SA"], "en")]
+    cases += [(preferences, language) for preferences, language in [(["pt-PT"], "pt"), (["es-ES"], "es"), (["zz-ZZ", "tr-TR"], "tr")]
+              if language in languages]
+    cases += [(["zz-ZZ"], "en"), (["ar-SA"], "en")]
 
     with tempfile.TemporaryDirectory(prefix="prev-resource-checks-") as temporary:
         directory = Path(temporary)

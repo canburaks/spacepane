@@ -1,6 +1,6 @@
 # App Store submission worksheet
 
-Updated 2026-10-10 for SpacePane (first written 2026-10-04, revised 2026-10-07). Use the [detailed publishing guide](app-store-publishing-guide.md) for the full workflow and [historical research](../initial/08-app-store-publishing-research.md) for problems and documented outcomes. Release gates remain in [PLAN M6](../../PLAN.md#m6--prepare-for-the-app-store-later).
+Updated 2026-10-12 for SpacePane (first written 2026-10-04, revised 2026-10-07 and 2026-10-10; the review notes, sample archive and prepared replies were completed on 2026-10-12). Use the [detailed publishing guide](app-store-publishing-guide.md) for the full workflow and [historical research](../initial/08-app-store-publishing-research.md) for problems and documented outcomes. Release gates remain in [PLAN M6](../../PLAN.md#m6--prepare-for-the-app-store-later).
 
 The owner has created the App ID, name and pricing plans, and reports (2026-10-10) that the App Store Connect app record and API key exist and that the price, roughly USD 9.99 with local pricing, is set in App Store Connect. Preserve that setup. Active contact and support email: **info@spacepane.com**. This worksheet is a preparation aid, not a claim of submission readiness or authorization to upload/release.
 
@@ -45,34 +45,62 @@ See the guide for the separate TestFlight and store-delivered XPC client test.
 
 ## Review sample files
 
+Build the attachment from the repository. The output is under `dist/`, which git ignores.
+
 ```sh
-python3 script/generate_host_fixtures.py
+python3 script/build_review_samples.py            # dist/review-samples/
+python3 script/build_review_samples.py --check    # also checks the Notes below against the archive
 ```
 
-Inspect the printed fresh directory. Select a small synthetic set, test it on the candidate in Finder and add a README naming the expected result for each file. Package it as `SpacePane-Review-Samples.zip` and attach through App Review Information. Do not assume this generator validates every catalog format or guarantees provider routing. Never include the supplied private CAD model.
+It writes `SpacePane-Review-Samples/` and `SpacePane-Review-Samples.zip` (about 300 KB, the same bytes on every run). The files come from `script/generate_host_fixtures.py`, `script/generate_store_demo_files.py` and one Swift sample in `script/generate_appearance_samples.py`, imported rather than copied; no generator makes a Python file or a `Makefile`, so the builder writes those two plain-text files itself. There is one sample for each format family the store description names, a `README.txt` that says what to look for in each, and a fake secret in `01-settings.json`. Every value is invented; the supplied private CAD model is never included. The README rows are what to look for, not Finder results: observe the set on the candidate store build before submitting (review readiness plan, Phases 3 and 4) and correct any row that Finder contradicts. `--check` fails if a file named in the Notes or the README is not in the archive, if a sample is not described, if the Notes pass 4,000 bytes or keep a bracketed placeholder, or if the README stops being plain ASCII under 80 columns and 60 lines.
 
 ## Notes for App Review
 
-**Template: replace bracketed fields and remove any feature that is not in the validated shipping build. Confirm the Notes field byte limit before pasting.** The exact System Settings labels must be checked on the listed OS; this wording gives the macOS 15 route.
+Paste the quoted block into the Notes field of App Review Information, attach `SpacePane-Review-Samples.zip`, and enter the review contact (name, phone with +country code) in App Store Connect only; none of it belongs in this repository. The block has no placeholder and is about 3,000 bytes against Apple's limit of 4,000; `python3 script/build_review_samples.py --check` recounts it. What it rests on, as of 2026-10-12:
 
-Before pasting, confirm that https://github.com/canburaks/spacepane-cad-source is public: the source offer in `Native/CADWorker/SOURCE-OFFER.md` takes effect when it is published, and it is still marked pending legal review. The notes below do not claim a legal review. Apple's limit for this field is 4,000 bytes; with its bracketed fields still in place the quoted text is under 3,000 bytes, so re-count it after filling them in.
+| Statement | Basis | Still to observe |
+| --- | --- | --- |
+| Version 1.0.0, build 2 | Build 1 was uploaded on 2026-10-10 and will not be submitted; App Store Connect holds only build 1, so build 2 is the next upload. | `CURRENT_PROJECT_VERSION = 2` must be in the archive (plan Phase 1 item 7). |
+| Tested on macOS 27.2, Apple silicon | The host matrix and the signed-host records. | Repeat on the store-signed build (plan Phases 3 and 4). |
+| Tested on macOS 15.2 | The owner's report (2026-10-12) of a run in a macOS 15.2 virtual machine, taken as given on the owner's instruction. No session observed it and it is not in the host matrix. | Record the run in `docs/validation/host-matrix.json`. |
+| Enabling the extensions | Step 1 relies on the in-app "Open System Settings" button first and gives the macOS 15 path (the companion's own setup text gives the same path) as the manual route. No path for macOS 26 or 27 is recorded in `docs/validation/` or `CHANGELOGS.md` (searched 2026-10-12), and the button, which opens the Login Items & Extensions pane (`GeneralView.swift`), has never been observed. | The exact System Settings route on 27.2, word for word. Add it to step 1 if the button lands elsewhere. |
+| Sample files and their behavior | Names come from the builder. | The README rows, on the store build. |
 
-> SpacePane [version/build] is a macOS 15+ Apple silicon utility containing Quick Look preview and thumbnail extensions. The companion provides setup, per-file-type controls, themes and built-in samples. Processing is local. No account, separate installer or in-app purchase is required. The app is Apple silicon only.
+Before pasting, confirm that https://github.com/canburaks/spacepane-cad-source is public and carries the tag for the build: the source offer in `Native/CADWorker/SOURCE-OFFER.md` points to it, and the notes claim no legal review. If STEP and IGES do not ship in 1.0 (review readiness plan, R-2), delete the 3D paragraph and the two CAD file names from the block and the two CAD samples from `SAMPLES` in the builder; `--check` fails until the notes and the archive agree.
+
+> SpacePane 1.0.0 (build 2) adds Quick Look previews and thumbnails to Finder. It is a small companion app plus two Quick Look extensions, SpacePane Preview and SpacePane Thumbnails. Everything runs on the Mac: no account, no sign-in, no network access, no in-app purchase. It needs Apple silicon and macOS 15 or later.
 >
-> Tested review environment: [macOS version and chip]. Attached: SpacePane-Review-Samples.zip and its README.
+> Tested on macOS 27.2 and on macOS 15.2, on Apple silicon.
 >
-> 1. Launch SpacePane. On macOS 15, open System Settings > General > Login Items & Extensions > Quick Look and confirm SpacePane Preview and SpacePane Thumbnails are enabled. The General page also opens System Settings. [Add the verified route for the current OS if different.]
-> 2. Unzip the attachment. In Finder select [exact tested sample filename] and press Space. Expected: [specific SpacePane mode, controls and safe content]. The attachment README lists other tested examples and thumbnail expectations.
-> 3. The synthetic [filename] contains an intentionally fake secret. SpacePane conceals likely secrets in its text presentation; the file itself is unchanged.
-> 4. In File Types, disable [tested type], then request a fresh preview. When macOS invokes SpacePane, it shows a disabled state. Re-enable the type afterwards. Existing previews and cached thumbnails may retain earlier results.
-> 5. The Theme page previews built-in samples with the selected appearance. These samples demonstrate the companion, independently of Finder provider selection.
-> 6. Optional diagnostic: General > Developer Mode reveals Try Preview and Open File. This uses the same pipeline, but does not demonstrate which provider Finder selected.
+> To see it work (about two minutes):
+> 1. Open SpacePane. On the General page, the row "Turn on the extensions" has an "Open System Settings" button. Use it to open System Settings, then switch on SpacePane Preview and SpacePane Thumbnails among the Quick Look extensions. By hand on macOS 15: System Settings > General > Login Items & Extensions > Quick Look.
+> 2. Unzip the attached SpacePane-Review-Samples.zip. Its README.txt lists every file and what to look for.
+> 3. In Finder select 01-settings.json and press Space. It opens as a JSON outline with a Source view. The file holds a deliberately fake token and password; SpacePane conceals them and the file is unchanged.
+> 4. Also try 07-stations.sqlite (database tables), 08-release.zip (archive listing, nothing extracted), 15-analysis.ipynb (notebook, never run), 16-document.md (Markdown) and Makefile (a file with no extension).
 >
-> STEP and IGES previews are optional and off by default; enable the two types in File Types, then preview the supplied synthetic model. They run in an embedded sandboxed helper built on Open CASCADE, which is under LGPL 2.1; its source is at https://github.com/canburaks/spacepane-cad-source. The helper downloads and installs nothing, and CAD thumbnails do not show the model geometry.
+> STEP and IGES 3D previews are optional and off by default, because large models take time and memory. To try 32-winch-gear.step and 33-box.iges, open SpacePane > File Types, switch on STEP and IGES, then press Space on each file. They use Open CASCADE Technology (LGPL 2.1 with exception) in a separate sandboxed helper. Source and offer: https://github.com/canburaks/spacepane-cad-source
 >
-> macOS chooses the Quick Look provider and hosts the extensions on demand, including while the companion is closed. SpacePane cannot force provider priority. Type switches control SpacePane's handling of requests, not provider selection. The preview extension declares exactly public.data only to preview files that have no filename extension as bounded text, and never for thumbnails. The com.quicklookpro.file.* identifiers in QLSupportedContentTypes are referenced aliases only; the app neither imports nor exports them.
+> macOS decides which installed app previews each file type. If another app already previews a type, Quick Look may use it. An info symbol in the preview shows when SpacePane made it.
 >
-> Review contact: [name and international phone]. Email: info@spacepane.com. Support: https://spacepane.com/support. Privacy: https://spacepane.com/privacy.
+> The preview extension declares public.data exactly once so that text files with no extension (such as Makefile) can be previewed, and only for previews, never thumbnails. Quick Look matches that type exactly, so PDFs, images and files with an extension are not routed to it, and a binary file with no extension shows a short explanation instead of its bytes.
+>
+> The com.quicklookpro.* identifiers in the extension's supported types are not declared by SpacePane, which neither imports nor exports them. They name types that another developer's Quick Look app may have declared on a user's Mac for the same file suffixes, so files tagged that way still preview. SpacePane claims no ownership of them, and a Mac without that app skips them.
+>
+> Developer Mode (off by default, on the General page) only reveals a Try Preview page and an Open File command for checking a file inside the companion. It changes nothing in Finder.
+>
+> Contact details are entered in App Store Connect. Email: info@spacepane.com. Support: https://spacepane.com/support. Privacy: https://spacepane.com/privacy.
+
+## If App Review objects
+
+Replies to paste into App Store Connect or the Resolution Center. Each states facts and promises nothing about which app Finder uses for a file type.
+
+**Guideline 4.2 (minimum functionality): "the app is only a settings window".** SpacePane is not a settings window. Its purpose is two Quick Look extensions inside the app bundle, SpacePane Preview and SpacePane Thumbnails, which macOS runs when a person presses Space on a file in Finder. They show JSON, YAML, XML and similar files as outlines, SQLite databases as tables, archives and folders as listings without extracting anything, notebooks without running them, and 3D models you can turn, and they conceal likely secrets. Quick Look extensions have no interface of their own, so the companion app turns them on, switches each file type on or off and sets the appearance; it also previews a file directly (General > Developer Mode > Try Preview). The attached samples and README show each preview in about two minutes, and we can send a short screen recording on request.
+
+**Guideline 2.1: "we could not find the app's features".** The features appear in Finder, not in the SpacePane window. After SpacePane Preview and SpacePane Thumbnails are switched on (General > "Open System Settings"; on macOS 15, System Settings > General > Login Items & Extensions > Quick Look), select 01-settings.json, 07-stations.sqlite or 08-release.zip from the attached archive in Finder and press Space. macOS decides which installed app previews a type, and SpacePane cannot override that; an info symbol in the preview shows when SpacePane made it. If a file shows another app's preview, turn on Developer Mode (General page) and open the same file in the Try Preview page, which uses the same preview engine inside SpacePane. The Theme page also previews built-in samples inside SpacePane. We are glad to answer any step that does not work as written.
+
+**Guideline 5.2.5 / 2.3.7: the app name.** "SpacePane for Quick Look" uses "Quick Look" only to name the macOS feature the app works with, and "for" shows that SpacePane is a separate product; the description states that SpacePane is not affiliated with Apple. If App Review still prefers a name without the phrase, we will change it to "SpacePane: File Previews" with the subtitle "JSON, YAML, Markdown, SQLite" (fallback B in docs/release/app-store-listing.md), keeping "quicklook" only in the keyword field. Please tell us which part of the metadata to change and we will update it at once.
+
+**The public.data declaration.** The preview extension declares public.data exactly once, so that text files with no extension (Makefile, Dockerfile, zprofile) can be previewed. It is for previews only and is never used for thumbnails; Quick Look matches the type exactly, so PDFs, images and files with an extension are not routed to it; a binary file with no extension shows a short explanation, not its contents; and the app does not declare public.item or public.content. If App Review requires it, we will remove the declaration and the extension-free file format in the next build. Every other file type is unaffected, and files without an extension return to whatever macOS shows for them.
 
 ## App Store Connect answer worksheet
 
@@ -90,14 +118,14 @@ Before pasting, confirm that https://github.com/canburaks/spacepane-cad-source i
 | Content Rights | Assess actual included/accessed content | Confirm licenses for bundled samples, assets and review/screenshot material. |
 | Description: open-source line | Last paragraph of every listing language that has a description: "3D previews use Open CASCADE Technology under the GNU LGPL 2.1 with the Open CASCADE exception. The helper's source and the written offer for the library source: https://github.com/canburaks/spacepane-cad-source" | The LGPL route needs the offer to be shown to users. Keep it only while STEP and IGES ship; translate it for localized listings. About > Acknowledgements and https://spacepane.com/open-source carry the same pointer. |
 | Copyright | Approved value from Branding.xcconfig | Match legal rights holder. |
-| Version/build | Actual uploaded values; 1.0.0 | Increment build for a replacement upload. Build 2 was used by the 2026-10-10 dry run, so use a higher number for the first upload. |
-| Compatibility | macOS 15+, Apple silicon only (`ARCHS = arm64`) | Run the candidate on the advertised OS range; macOS 15 has never been run. |
+| Version/build | 1.0.0, build 2 | Build 1 was uploaded on 2026-10-10 and will not be submitted; App Store Connect holds only build 1, so the next upload is build 2. Increment the build for every replacement upload. |
+| Compatibility | macOS 15+, Apple silicon only (`ARCHS = arm64`) | Run the candidate on the advertised OS range. The owner reports (2026-10-12) that it works in a macOS 15.2 virtual machine; no run is recorded in the host matrix yet. |
 | Pricing/availability | Set in App Store Connect (owner, 2026-10-10: roughly USD 9.99, local pricing adopted) | App Store Connect holds the effective prices; verify agreements, territories and compliance. |
 | Review login | Not required if accountless design is unchanged | Do not invent a demo account. |
 | Review contact | Reachable person, email and phone with +country code | Confirm monitored contact details separately from the public support URL. |
 | Release option | Manual recommended for first release | Approval and release are separate actions. |
 
-On October 7, the legacy `.html` support/privacy URLs redirected to the canonical pages and returned HTTP 200; both live English pages still showed `support@spacepane.com`. The owner's active address is `info@spacepane.com`; the website change is in progress and must be live before submission. Live page availability does not prove mailbox operation or every translated page.
+On October 7, the legacy `.html` support/privacy URLs redirected to the canonical pages and returned HTTP 200. The owner's active address is `info@spacepane.com`, and the review-readiness audit of 2026-10-12 found it on every live page. Live page availability does not prove mailbox operation (Phase 0 item 3 of the review readiness plan sends the test message) or every translated page.
 
 ## Submission reminder
 

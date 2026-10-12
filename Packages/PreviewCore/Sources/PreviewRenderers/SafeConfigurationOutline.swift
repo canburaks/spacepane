@@ -86,7 +86,10 @@ enum SafeConfigurationOutline {
             } else {
                 guard let split = delimiter(":", in: text) else { return nil }
                 let after = text.index(after: split)
-                guard after == text.endIndex || text[after].isWhitespace else { return nil }
+                // Concealment replaces the text after the colon, space included, so `key:••••` is a key whose
+                // value is hidden. Any other colon directly followed by text is a plain scalar, not a mapping.
+                guard after == text.endIndex || text[after].isWhitespace
+                    || text[after...].hasPrefix(SecretFieldPolicy.concealmentToken) else { return nil }
                 name = key(String(text[..<split]))
                 scalar = String(text[after...]).trimmingCharacters(in: .whitespaces)
                 guard !name.isEmpty else { return nil }

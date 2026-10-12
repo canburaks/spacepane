@@ -2,7 +2,8 @@
 -- usage: osascript theme.applescript <scheme tile number>
 -- Tiles are numbered in page order: the five light schemes first (Standard, GitHub Light, Solarized Light,
 -- One Light, Paper), then the dark ones (Standard is 6, GitHub Dark 7). The tiles are the first buttons of the
--- page. They ignore an accessibility press, so the caller clicks the returned point with the mouse.
+-- page. Builds up to 1.0.0 (1) ignored an accessibility press on a tile (fixed 2026-10-12), so the caller
+-- clicks the returned point with the mouse, which works on every build.
 property counter : 0
 property wanted : 0
 property answer : ""

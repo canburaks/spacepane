@@ -27,8 +27,8 @@ struct DocumentsQ76PagePositionTests {
     }
 
     /// A column whose decodes never finish, so only the position is under test.
-    private func makeView(_ probe: DecodeProbe) -> NativeImagePagesView {
-        let view = NativeImagePagesView(frame: NSRect(x: 0, y: 0, width: 600, height: 400),
+    private func makeView(_ probe: DecodeProbe, height: CGFloat = 400) -> NativeImagePagesView {
+        let view = NativeImagePagesView(frame: NSRect(x: 0, y: 0, width: 600, height: height),
                                         scheduler: ImagePageScheduler(maximumConcurrent: 2, decode: probe.decode()))
         view.layoutSubtreeIfNeeded()
         return view
@@ -65,9 +65,28 @@ struct DocumentsQ76PagePositionTests {
         probe.open()
     }
 
+    /// A view that is in no window sizes its pages with the main screen's scale (1 on a 1x display, 2 on a Retina
+    /// one), and pages are never magnified past twice their size in points. Three 100 x 140 pixel pages fill 970
+    /// points of column at 1x and 550 at 2x, so a 400 point viewport can scroll the second page to the top at 1x
+    /// but not at 2x: the column ends first and the first page stays on top. This pins that behaviour for both
+    /// scales without depending on the host's display.
+    @Test func aShortColumnCannotScrollALaterPageToTheTop() {
+        let sizes = Array(repeating: CGSize(width: 100, height: 140), count: 3)
+        for (scale, content) in [(CGFloat(1), CGFloat(970)), (2, 550), (3, 406)] {
+            let layout = ImagePagesLayout(pixelSizes: sizes, viewportWidth: 600, backingScale: scale)
+            #expect(layout.contentSize.height == content, "scale \(scale)")
+            let reachableTop = layout.contentSize.height - 400
+            let secondPageTop = layout.frames[1].minY - ImagePagesLayout.verticalInset
+            #expect((secondPageTop <= reachableTop) == (scale == 1), "scale \(scale)")
+            // In a 120 point viewport every scale can bring the second page to the top.
+            #expect(secondPageTop <= layout.contentSize.height - 120, "scale \(scale)")
+        }
+    }
+
     @Test func figuresAndCoversAreNamedLikeTheirAccessibilityLabels() {
         let probe = DecodeProbe(gated: true)
-        let view = makeView(probe)
+        // A viewport short enough that the second page can reach the top at any display scale (see above).
+        let view = makeView(probe, height: 120)
         view.display(modes(for: testPages(3, role: .figure)), mode: .pages, style: testStyle(locale: enUS))
         view.scrollToPage(offset: 1)
         #expect(view.positionNotice?.text == "Figure 2 of 3")
