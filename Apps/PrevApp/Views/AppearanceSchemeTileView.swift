@@ -24,10 +24,8 @@ struct AppearanceSchemeTileView: View {
         }
         .buttonStyle(.plain)
         .help(name)
-        .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(verbatim: name))
         .accessibilityHint(Text(PreviewStrings.text(hint)))
-        .accessibilityAddTraits(.isButton)
         .accessibilityAddTraits(tile.isSelected ? .isSelected : [])
     }
 
