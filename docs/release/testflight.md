@@ -61,7 +61,8 @@ Actions → testflight → Run workflow on `main` (or the release branch):
    each bundle's identifier, team and authority and the CADWorker entitlements after re-signing. Compare them
    with the checker's expectations before the first upload.
 3. `upload`. When App Store Connect finishes processing, add the build to an internal group in TestFlight.
-   External groups need Beta App Review.
+   External groups need Beta App Review, and none is planned: the owner decided on 2026-10-12 that TestFlight
+   testing is internal only, with no external testers and no public link. The internal group "Internal" exists.
 
 On a Mac the same steps are `./script/build_and_run.sh --archive`, `--export` and `--upload`, with
 `Configuration/Local.xcconfig` holding the identities and, for a machine without a signed-in Xcode, the
@@ -72,7 +73,7 @@ On a Mac the same steps are `./script/build_and_run.sh --archive`, `--export` an
 The same modes run on a Mac that holds the Apple Distribution and Mac installer certificates and the app's
 distribution profile. Set the identities in `Configuration/Local.xcconfig` (ignored by git), raise
 `CURRENT_PROJECT_VERSION` above any build App Store Connect has seen (build 2 was used by the 2026-10-10 dry
-run), and give the shell the API key:
+run; build 1.0.0 (1) was uploaded on 2026-10-10 and is not attached to the version), and give the shell the API key:
 
 ```sh
 export PREV_ASC_KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_XXXXXXXXXX.p8"   # the .p8 file; example path
@@ -103,7 +104,7 @@ run it only when you mean to send a build to Apple.
 The round is observation, not a pass by construction. Record it in a dated `docs/validation/<date>-host-matrix.md`
 per the Mac validation protocol in the platform review, at least:
 
-- Install from TestFlight on the current macOS and on macOS 15 (the deployment target, never run so far).
+- Install from TestFlight on the current macOS and on macOS 15 (the deployment target). The owner reports (2026-10-12) that the app works on macOS 15 and a macOS 15.2 virtual machine exists; no session has recorded an observation, so the run still has to be recorded.
 - Finder: panel, pane and Gallery previews for the host matrix formats; thumbnails; the Contents rail,
   alert bars and code cards; VoiceOver on the preview and the companion.
 - The CAD path under store signing (D27): turn STEP on, preview a model, record `pgrep -lf CADImportService`
@@ -121,10 +122,14 @@ per the Mac validation protocol in the platform review, at least:
 - The two `withKnownIssue` expectations (Q-72 RTL table columns, Q-74 zero-host container tracking).
 - Memory of an image-heavy document and the first-visible timing of the dataless cases.
 
-## Still open before external testers
+## Still open before the store
 
-- Q-171: the OCCT source-offer obligation. Internal testing stays inside the team; before an external group
-  or the store, either publish the offer and the packaged sources or apply the approved CAD-exclusion fallback.
+External testers are not planned (owner decision, 2026-10-12: internal TestFlight only). The items below stay open
+for the store release.
+
+- Q-171: the OCCT source-offer obligation. Internal testing stays inside the team; before the store, either
+  publish the offer and the packaged sources or apply the approved CAD-exclusion fallback. The source mirror is
+  public (release 1.0.0); the legal review of the source-offer route (decision 027 D20) has no recorded outcome.
 - Q-172: native-speaker review of the 13 translations, localized store copy, the live support and privacy
   pages and the support mailbox.
 - Screenshots after the interface settles (Q-181).

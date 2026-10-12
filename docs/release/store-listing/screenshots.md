@@ -45,7 +45,8 @@ tile is chosen with a real mouse click, because the tiles ignore an accessibilit
 
 Open before these are submitted:
 
-- Retake from the TestFlight install, or confirm each Finder scene there (provenance gate 1 below). The CAD
+- App Store Connect holds no screenshots (0 of 10, observed 2026-10-12). Build 1 has eleven color schemes and build 2 has twelve (Aurora, added 2026-10-11), so the Theme image (`09-theme.png`) is retaken from the validated build with the twelve tiles.
+- Retake from the internal TestFlight install, or confirm each Finder scene there (provenance gate 1 below). The CAD
   scene in particular has only been seen on the development-signed build.
 - Resolved 2026-10-11: Quick Look's "Open with" button named this Mac's default apps for notebooks and SQLite
   files, which are other vendors' products. The owner asked for them to go. The demo generator now gives those
