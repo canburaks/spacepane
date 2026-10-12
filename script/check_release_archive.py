@@ -4,8 +4,9 @@
 usage: check_release_archive.py PATH.xcarchive
 
 These checks mirror upload validation and App Review requirements that can be read locally: store
-metadata keys, the compiled icon, quarantine attributes, architectures, nested code signatures with
-the hardened-runtime flag and one signing team, the exact entitlement set of every bundle role, one
+metadata keys, the compiled icon, the languages each bundle carries against the ship list, quarantine
+attributes, architectures, nested code signatures with the hardened-runtime flag and one signing
+team, the exact entitlement set of every bundle role, one
 App Group everywhere, the accepted-client values of the private CAD service against the preview
 extension's identity, the privacy manifest of every bundle, and helper identity (decision 027, Q-27,
 Q-44 and Q-45). They do not replace Xcode's Validate App, which also checks provisioning and the
@@ -18,6 +19,7 @@ standard library only: the build script runs it with the system interpreter.
 """
 from __future__ import annotations
 
+import json
 from pathlib import Path
 import plistlib
 import re
@@ -58,6 +60,7 @@ HARDENED_RUNTIME = 0x10000
 HELPER_SUFFIX = ".CADWorker"
 
 PRIVACY_MANIFEST = "PrivacyInfo.xcprivacy"
+LANGUAGE_POLICY = Path(__file__).resolve().parents[1] / "tools/localization/languages.json"
 FILE_TIMESTAMP = "NSPrivacyAccessedAPICategoryFileTimestamp"
 SYSTEM_BOOT_TIME = "NSPrivacyAccessedAPICategorySystemBootTime"
 DISK_SPACE = "NSPrivacyAccessedAPICategoryDiskSpace"
@@ -334,6 +337,37 @@ def check_info_plists(report: Report, bundles: List[Bundle]) -> None:
                          f"{bundle.name} has no real PreviewAppGroupIdentifier ({group!r})")
 
 
+def shipped_languages() -> List[str]:
+    """The languages a build may carry (`shipped` in tools/localization/languages.json)."""
+    return list(json.loads(LANGUAGE_POLICY.read_text())["shipped"])
+
+
+def check_languages(report: Report, bundles: List[Bundle], shipped: List[str]) -> None:
+    """The top-level `.lproj` set of the app and both extensions is exactly the ship list.
+
+    The store lists every language found there, and macOS resolves a nested resource bundle's language
+    through its host bundle, so draft translations inside `PreviewCore_*.bundle` stay unreachable while
+    the host carries the ship list only. They are noted, not refused.
+    """
+    for bundle in bundles:
+        resources = bundle.path / "Contents/Resources"
+        present = sorted(item.name[:-len(".lproj")] for item in resources.glob("*.lproj")) if resources.is_dir() else []
+        if bundle.role == "cad-service":
+            report.check(not present and "CFBundleLocalizations" not in bundle.info,
+                         f"{bundle.name} is private and must carry no languages of its own; found {present}")
+            continue
+        report.check(present == sorted(shipped),
+                     f"{bundle.name} carries languages {present}, which differ from the ship list {sorted(shipped)}")
+        report.check(bundle.info.get("CFBundleLocalizations") == shipped,
+                     f"{bundle.name} CFBundleLocalizations {bundle.info.get('CFBundleLocalizations')!r} "
+                     f"must equal the ship list {shipped}")
+        for nested in sorted(resources.glob("*.bundle")) if resources.is_dir() else []:
+            drafts = sorted({item.name[:-len(".lproj")] for item in nested.rglob("*.lproj")} - set(shipped))
+            if drafts:
+                report.note(f"{bundle.name}/{nested.name} holds draft translations that the host's ship list keeps "
+                            f"unreachable: {', '.join(drafts)}")
+
+
 def check_extension_attributes(report: Report, bundles: List[Bundle]) -> None:
     for bundle in bundles:
         if bundle.role not in ("preview", "thumbnail"):
@@ -495,7 +529,7 @@ def check_privacy_manifests(report: Report, bundles: List[Bundle]) -> int:
     return present
 
 
-def inspect_archive(archive: Path, tools: Any) -> Report:
+def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = None) -> Report:
     report = Report()
     applications = sorted((archive / "Products/Applications").glob("*.app"))
     report.check(len(applications) == 1, "Archive must contain exactly one application")
@@ -513,6 +547,7 @@ def inspect_archive(archive: Path, tools: Any) -> Report:
     bundles = find_bundles(report, app, info)
     check_info_plists(report, bundles)
     check_extension_attributes(report, bundles)
+    check_languages(report, bundles, shipped if shipped is not None else shipped_languages())
 
     report.check("com.apple.quarantine" not in tools.quarantine(app),
                  "Remove com.apple.quarantine attributes; App Store Connect rejects them")
