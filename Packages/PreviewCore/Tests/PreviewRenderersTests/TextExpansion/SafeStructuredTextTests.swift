@@ -26,6 +26,15 @@ struct SafeStructuredTextTests {
         #expect(SafeStructuredText.configuration("title: safe\nchildren:\n  - one\n  - two", syntax: .yaml)?.count == 2)
     }
 
+    // MARK: Concealment leaves "key:••••" with no space after the colon
+
+    @Test func aConcealedYAMLValueWithoutASpaceStillMakesAKeyNode() throws {
+        let nodes = try #require(SafeStructuredText.configuration("name: x\npassword:••••\nauth:••••\nlast: 1\n", syntax: .yaml))
+        #expect(nodes.map(\.name) == ["name", "password", "auth", "last"])
+        #expect(nodes[1].value == "••••" && nodes[2].value == "••••")
+        #expect(SafeStructuredText.configuration("url:http\n", syntax: .yaml) == nil, "Only the concealment token may follow a colon directly")
+    }
+
     // MARK: YAML sequences written at the indentation of their key
 
     @Test func aSequenceIndentedLikeItsKeyStaysUnderThatKey() throws {

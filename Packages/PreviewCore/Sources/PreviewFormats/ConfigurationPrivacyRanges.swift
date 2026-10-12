@@ -80,7 +80,7 @@ enum ConfigurationPrivacyRanges {
                     let valueIndex = line.index(after: split)
                     let value = String(line[valueIndex...]).trimmingCharacters(in: .whitespaces)
                     let start = classified.uncertain ? lineStart : lineStart + line[..<valueIndex].utf8.count
-                    let continues = classified.uncertain || value.isEmpty || value.hasPrefix("|") || value.hasPrefix(">")
+                    let continues = classified.uncertain || value.isEmpty || value.hasPrefix("#") || value.hasPrefix("|") || value.hasPrefix(">")
                         || value.hasPrefix("!") || value.hasPrefix("&") || value.hasPrefix("{") || value.hasPrefix("[")
                         || value.hasPrefix("\"\"\"") || value.hasPrefix("'''") || value.hasSuffix("\\")
                         || (value.hasPrefix("\"") && !value.hasSuffix("\"")) || (value.hasPrefix("'") && !value.hasSuffix("'"))
