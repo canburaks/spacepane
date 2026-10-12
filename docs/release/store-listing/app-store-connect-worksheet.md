@@ -1,6 +1,6 @@
 # SpacePane — App Store Connect worksheet for 1.0.0 (draft)
 
-Status: draft answers, written 2026-10-10 from the repository. Later the same day the listing text and the three URLs were entered in App Store Connect for English (U.S.) and English (U.K.); [../app-store-listing.md](../app-store-listing.md#what-app-store-connect-holds) records what the record holds and what is still empty. No other answer in this worksheet has been entered. App Store Connect's forms change; the owner confirms every answer against the live form on the day of entry. The review notes, the archive and upload steps and the sample-file zip are in [../app-store-submission.md](../app-store-submission.md) and are not repeated here. Listing text is in [listing.en.md](listing.en.md); screenshots in [screenshots.md](screenshots.md).
+Status: draft answers, written 2026-10-10 from the repository and annotated on 2026-10-12 with what App Store Connect was observed to hold that day. Several answers are now entered there (marked "Entered" below); screenshots, the build selection, review notes and the attachment are not. [../app-store-listing.md](../app-store-listing.md#what-app-store-connect-holds) records the full list. App Store Connect's forms change; the owner confirms every answer against the live form on the day of entry. Where this worksheet and App Store Connect differ, App Store Connect is the record. The review notes, the archive and upload steps and the sample-file zip are in [../app-store-submission.md](../app-store-submission.md) and are not repeated here. Listing text is in [../app-store-listing.md](../app-store-listing.md) ([listing.en.md](listing.en.md) is a pointer to it); screenshots in [screenshots.md](screenshots.md).
 
 "Basis" names the file that supports an answer, so the owner can recheck it.
 
@@ -10,24 +10,24 @@ Status: draft answers, written 2026-10-10 from the repository. Later the same da
 |---|---|---|
 | Name | `SpacePane for Quick Look` (24 characters; limit 2 to 30) | [../app-store-listing.md](../app-store-listing.md), owner decision 1 there; fallbacks are listed in that file. The installed app keeps the name `SpacePane` from `Configuration/Branding.xcconfig`. |
 | Subtitle | `Preview JSON, SQLite, Markdown` (30; limit 30) | [../app-store-listing.md](../app-store-listing.md) |
-| Bundle ID | `org.webmeister.spacepane` | Publication plan; set in the git-ignored `Configuration/Local.xcconfig`. Confirm the app record's identifier before the first upload. |
+| Bundle ID | `org.webmeister.spacepane` | Publication plan; set in the git-ignored `Configuration/Local.xcconfig`. Used by build 1.0.0 (1), uploaded 2026-10-10. |
 | SKU | `org.webmeister.spacepane`, as found on the app record on 2026-10-10 | Never shown to customers. |
 | Primary language | English (U.S.) unless the owner prefers another English variant | Development language is `en` (`tools/localization/languages.json`). |
-| Primary category | Utilities | `PREV_APP_CATEGORY = public.app-category.utilities`, `Configuration/Branding.xcconfig`. |
-| Secondary category | Developer Tools | Owner decision recorded in the publication plan. |
-| Content rights | Draft: "No. The app does not contain, show or access third-party content." The files it previews are the user's own. | Owner confirms. Bundled third-party material is software and data under licence, not content: five MIT-licensed colour palettes (`ThirdPartyNotices/ColorSchemes/NOTICE.md`) and the pinned OCCT kernel in the 3D helper (`ThirdPartyNotices/OCCT/`, `docs/dependencies/occt.md`). If the owner prefers to answer "Yes", the rights are documented in those notices. |
-| Copyright | `2026 Can Burak Sofyalioglu` | `PREV_COPYRIGHT` is "Copyright © 2026 Can Burak Sofyalioglu. All rights reserved." in `Configuration/Branding.xcconfig`; the App Store field takes the year and rights holder only. Owner confirms the rights holder is the seller named on the developer account (the bundle prefix `org.webmeister` suggests another organization may exist). |
+| Primary category | Utilities. Entered (observed 2026-10-12). | `PREV_APP_CATEGORY = public.app-category.utilities`, `Configuration/Branding.xcconfig`. |
+| Secondary category | Developer Tools. Entered (observed 2026-10-12). | Owner decision recorded in the publication plan. |
+| Content rights | Entered (observed 2026-10-12): "does not contain third-party content". Reasoning: the app does not contain, show or access third-party content. The files it previews are the user's own. | Owner confirms. Bundled third-party material is software and data under licence, not content: five MIT-licensed colour palettes (`ThirdPartyNotices/ColorSchemes/NOTICE.md`) and the pinned OCCT kernel in the 3D helper (`ThirdPartyNotices/OCCT/`, `docs/dependencies/occt.md`). If the owner prefers to answer "Yes", the rights are documented in those notices. |
+| Copyright | `2026 Can Burak Sofyalioglu`. Entered (observed 2026-10-12). | `PREV_COPYRIGHT` is "Copyright © 2026 Can Burak Sofyalioglu. All rights reserved." in `Configuration/Branding.xcconfig`; the App Store field takes the year and rights holder only. Owner confirms the rights holder is the seller named on the developer account (the bundle prefix `org.webmeister` suggests another organization may exist). |
 | License agreement | Apple's standard end user licence agreement | Default; no custom EULA is drafted. |
-| Tax category | App Store software | Per the publication plan. Set under the app's pricing and availability. |
+| Tax category | App Store software. Entered (observed 2026-10-12). | Per the publication plan. Set under the app's pricing and availability. |
 
 ## 2. URLs
 
 | Field | Value | Note |
 |---|---|---|
-| Marketing URL | `https://spacepane.com` | Optional field. |
-| Support URL | `https://spacepane.com/support` | Required. Page is live per the publication plan; recheck it loads on the day. |
-| Privacy Policy URL | `https://spacepane.com/privacy` | Required. Same check. |
-| Contact (public) | `info@spacepane.com` | Owner's active address (publication plan, 2026-10-10). Confirm the mailbox answers. |
+| Marketing URL | `https://spacepane.com` | Optional field. Entered. |
+| Support URL | `https://spacepane.com/support` | Required. Entered. The support, privacy and open-source pages are live (observed 2026-10-12); recheck on the day. |
+| Privacy Policy URL | `https://spacepane.com/privacy` | Required. Entered. Same check. |
+| Contact (public) | `info@spacepane.com` | Owner's active address; it is the contact address everywhere on the website (observed 2026-10-12). The domain has MX records (Hostinger), SPF and DMARC. Whether the mailbox answers is still unconfirmed. |
 
 Open inconsistency, for the lead and the website stream, not changed here: `Configuration/Branding.xcconfig` (`PREV_SUPPORT_URL`, `PREV_PRIVACY_POLICY_URL`) and `../app-store-submission.md` still use the `.html` forms `https://spacepane.com/support.html` and `https://spacepane.com/privacy.html`, which belong to the old static `Website/` (now in the `spacepane-web` repository). The About links inside the app and the URLs entered in App Store Connect should resolve to the same live pages. Check both forms respond on the deployed site and pick one.
 
@@ -35,22 +35,22 @@ Open inconsistency, for the lead and the website stream, not changed here: `Conf
 
 | Field | Answer |
 |---|---|
-| Version | 1.0.0 (`MARKETING_VERSION`, `Configuration/Base.xcconfig`) |
-| Build | The uploaded build. `CURRENT_PROJECT_VERSION` is 1 in `Base.xcconfig`; the dry run used build 2, so raise it in `Local.xcconfig` before each upload (publication plan, Phase 4). |
+| Version | 1.0.0 (`MARKETING_VERSION`, `Configuration/Base.xcconfig`). The App Store Connect version record reads 1.0.0 (observed 2026-10-12). |
+| Build | Build 1.0.0 (1) was uploaded on 2026-10-10. It is "Ready to Submit", has zero installs and is not attached to the version; it will not be submitted. Build 2 is being prepared: `CURRENT_PROJECT_VERSION` is 1 in `Base.xcconfig`, so raise it to 2 before the next upload (review readiness plan, Phase 1 item 7). No build is selected on the version yet. |
 | Promotional text, description, keywords, What's New | [../app-store-listing.md](../app-store-listing.md) |
 | Screenshots | The plan in [../app-store-listing.md](../app-store-listing.md); the per-shot checks in [screenshots.md](screenshots.md) |
 | Sign-in required | No. There are no accounts. |
-| Review contact first name | `[OWNER: fill in]` |
-| Review contact last name | `[OWNER: fill in]` |
-| Review contact phone | `[OWNER: fill in; international format. Do not invent one.]` |
-| Review contact email | `[OWNER: fill in; the plan suggests info@spacepane.com if it is monitored]` |
-| Review notes | Paste the block "Notes for App Review" from [../app-store-submission.md](../app-store-submission.md). Another stream is revising it (extension enablement path, `public.data`, the `com.quicklookpro.*` aliases, the optional 3D previews and the source offer); use the revised block, not a copy made before it lands. |
-| Attachment | `SpacePane-Review-Samples.zip` from `python3 script/generate_host_fixtures.py`. |
-| Release option | **Manual release** (recommended). It lets the owner check the approved build and the website link before customers can download. Alternatives are release immediately after approval or on a set date; none is needed for 1.0.0. |
+| Review contact first name | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
+| Review contact last name | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
+| Review contact phone | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
+| Review contact email | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
+| Review notes | Not in App Store Connect yet (observed 2026-10-12). Paste the block "Notes for App Review" from [../app-store-submission.md](../app-store-submission.md). Another stream is revising it (extension enablement path, `public.data`, the `com.quicklookpro.*` aliases, the optional 3D previews and the source offer); use the revised block, not a copy made before it lands. |
+| Attachment | Not in App Store Connect yet (observed 2026-10-12). `SpacePane-Review-Samples.zip` from `python3 script/generate_host_fixtures.py`; the review readiness plan (Phase 1 item 6) adds a script target that builds it. |
+| Release option | **Manual release** (recommended; owner decision R-4 of the review readiness plan). App Store Connect reads "Automatically release" on 2026-10-12, so it has to be changed. It lets the owner check the approved build and the website link before customers can download. Alternatives are release immediately after approval or on a set date; none is needed for 1.0.0. |
 
 ## 4. Age rating (2026 questionnaire)
 
-Expected result: **4+**. The owner must read each question on the live form and confirm the answer; Apple changed this questionnaire in 2025 and the wording, grouping and options on the day control. The groups below follow the structure the task named; if the live form differs, answer the live form on the same principle.
+Result: **4+**, entered in App Store Connect (observed 2026-10-12). The owner must read each question on the live form and confirm the answer; Apple changed this questionnaire in 2025 and the wording, grouping and options on the day control. The groups below follow the structure the task named; if the live form differs, answer the live form on the same principle.
 
 Principle: answer for the content and features SpacePane itself provides, not for whatever a user might open with it. The app supplies no media, text or imagery of its own beyond synthetic sample files and interface text, and shows only files already on the user's Mac.
 
@@ -69,7 +69,7 @@ Record the final rating Apple shows after submission. If it is not 4+, find whic
 
 ## 5. App Privacy
 
-**Answer: Data Not Collected.** Privacy policy URL as in section 2. No tracking.
+**Answer: Data Not Collected.** Privacy policy URL as in section 2. No tracking. Entered in App Store Connect but **not yet published** (observed 2026-10-12).
 
 Justification (one paragraph, grounded in the entitlements read on 2026-10-10 from `Configuration/*.entitlements`): the app, the preview extension, the thumbnail extension, the 3D import service and the 3D helper all run in the App Sandbox, and none of the five entitlement files contains `com.apple.security.network.client` or `.server`, so none of them can open a network connection. The app additionally holds only user-selected read/write file access (used for files the user explicitly exports, such as a theme) and the shared App Group; the two Quick Look extensions hold only the sandbox and the same App Group; the 3D service holds only the sandbox; the helper holds the sandbox and `com.apple.security.inherit`. There is no analytics, advertising, crash-reporting or other third-party SDK: `Package.swift` and the Xcode project declare no package dependencies, and a search of the Swift sources on 2026-10-10 found no `URLSession`, network framework or web-view use. Settings and profiles stay in the App Group container on the Mac. Nothing leaves the device, so nothing is "collected" in Apple's sense. The archive checker `script/check_release_archive.py` rejects `cs.*`, temporary-exception and network keys in the signed archive, and the app, both extensions and the 3D service each carry a privacy manifest (`PrivacyInfo.xcprivacy`).
 
@@ -101,27 +101,30 @@ If App Store Connect shows the encryption question for the uploaded build anyway
 
 | Field | Answer |
 |---|---|
-| Price | Paid upfront at about USD 9.99 with local pricing adopted from that base (owner decision D-C, 2026-10-10). The repository records no price table; App Store Connect holds the effective prices. |
-| Base storefront, manual overrides | `[OWNER: not stated]` |
-| Availability | `[OWNER: all storefronts, or a list]`. Check regional compliance questions that appear. |
+| Price | Paid upfront, USD 9.99 (owner decision D-C, 2026-10-10). Entered (observed 2026-10-12). The repository records no price table; App Store Connect holds the effective prices. |
+| Base storefront, manual overrides | Base storefront United States, USD 9.99 (observed 2026-10-12). Manual overrides are not recorded here. |
+| Availability | 175 regions available (observed 2026-10-12). Whether that is every storefront is not recorded. Check regional compliance questions that appear. |
 | Pre-order | No. |
 | In-app purchases and subscriptions | None. State nothing about them in the listing. |
-| Tax category | App Store software |
+| Tax category | App Store software. Entered (observed 2026-10-12). |
 
 ## 8. Agreements and account checklist (owner actions)
 
 The Account Holder must do these; none can be done from the repository. Order is not significant, but the Paid Apps Agreement and the trader declaration block a paid release.
 
-- [ ] Accept any pending agreements shown in App Store Connect (banner or Business section).
-- [ ] Sign the **Paid Apps Agreement**; add tax forms and banking details for the seller.
-- [ ] **Digital Services Act trader status.** Declare whether the seller is a trader. A trader's name, address, phone number and email are shown on the product page in the EU storefronts, so the owner needs contact details they accept being public. A non-trader declares that instead. If no declaration is made, the app is not offered in the EU.
-- [ ] Consider the **App Store Small Business Program** (enrol before the first sales if wanted).
-- [ ] Confirm the support mailbox `info@spacepane.com` exists and answers.
-- [ ] Publish the CAD source repository named in `Native/CADWorker/SOURCE-OFFER.md` (`canburaks/spacepane-cad-source`) and resolve the "pending legal review" wording in the offer, before external testing or release (publication plan, section "Owner decisions", D-D).
-- [ ] Confirm the final bundle identifier, the team and the seller name agree with the copyright line above.
+- [ ] Accept any pending agreements shown in App Store Connect (banner or Business section). Observed 2026-10-12: the Free Apps Agreement is active; the Paid Apps Agreement is not (next item).
+- [ ] Sign the **Paid Apps Agreement**; add tax forms and banking details for the seller. Paid Apps Agreement: status New on 2026-10-12, unsigned.
+- [ ] **Digital Services Act trader status.** Declare whether the seller is a trader. A trader's name, address, phone number and email are shown on the product page in the EU storefronts, so the owner needs contact details they accept being public. A non-trader declares that instead. If no declaration is made, the app is not offered in the EU. Trader status: still "Set Up" on 2026-10-12.
+- [ ] Consider the **App Store Small Business Program** (enrol before the first sales if wanted). Not observed.
+- [ ] Confirm the support mailbox `info@spacepane.com` exists and answers. Mail records exist (MX at Hostinger, SPF, DMARC); delivery is unconfirmed as of 2026-10-12.
+- [x] Publish the CAD source repository named in `Native/CADWorker/SOURCE-OFFER.md` (`canburaks/spacepane-cad-source`). It is public with release 1.0.0 (observed 2026-10-12).
+- [ ] Resolve the "pending legal review" wording in the offer, before release (publication plan, section "Owner decisions", D-D). The legal review of the source-offer route (decision 027 D20) has no recorded outcome. The mirror in this workspace is not the pushed state; pushing it waits for the owner.
+- [ ] Confirm the final bundle identifier, the team and the seller name agree with the copyright line above. The copyright is entered; the comparison with the seller name is not recorded.
 - [ ] Recheck Apple's current requirements pages on the day of submission; this worksheet is dated 2026-10-10.
 
 ## 9. Store metadata locales for the 14 app languages
+
+Decision taken 2026-10-12 (owner rule: only reviewed languages ship): the store page is English (U.S.) and English (U.K.) at launch, and build 2 ships English only. The table is the mapping for later; the other 13 translations stay in the repository as drafts.
 
 Metadata locales are the languages the store page text can be provided in. They are independent of what the app ships, but the listing must not advertise a language the app does not ship (guideline 2.3). The publication plan (D-B) recommends shipping English plus only the languages that get a recorded review; no language has one today (`tools/localization/languages.json`: drafts, native-speaker review pending).
 

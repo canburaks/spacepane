@@ -8,7 +8,29 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def shipped_languages():
+    """Languages a build may carry: the development language plus each language with a recorded review.
+
+    `languages` in the policy file stays the chosen set whose drafts live in the repository. The
+    store lists every language found at the top of the app bundle, and a nested resource bundle
+    follows the host bundle's languages, so the generated top-level `.lproj` set is the ship list.
+    """
+    policy = json.loads((ROOT / "tools/localization/languages.json").read_text())
+    development, chosen, shipped = policy["developmentLanguage"], policy["languages"], policy["shipped"]
+    reviews = policy["reviews"]
+    if len(set(shipped)) != len(shipped) or development not in shipped or not set(shipped) <= set(chosen):
+        raise ValueError("Shipped languages must be distinct, chosen languages that include the development language")
+    if not set(reviews) <= set(chosen):
+        raise ValueError("A review record names a language outside the chosen set")
+    for language in shipped:
+        record = reviews.get(language, {})
+        if language != development and not (record.get("reviewer") and record.get("date")):
+            raise ValueError(f"{language} cannot ship without a review record naming its reviewer and date")
+    return shipped
+
+
 def compile_metadata(output, role, brand):
+    shipped = set(shipped_languages())
     catalog = json.loads((ROOT / "Configuration/Metadata.xcstrings").read_text())
     item = catalog["strings"][f"metadata.{role}.name"]
     formats = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())
@@ -36,9 +58,13 @@ def compile_metadata(output, role, brand):
                 raise ValueError(f"Missing imported type description: {language}/{key}")
             values[key] = value
         localized_values[language] = values
-    # Validate every localization before publishing any generated resource.
+    if not shipped <= set(localized_values):
+        raise ValueError("A shipped language has no bundle metadata")
+    # Validate every localization, drafts included, before publishing any generated resource.
     output.mkdir(parents=True, exist_ok=True)
     for language, values in localized_values.items():
+        if language not in shipped:
+            continue
         destination = output / f"{language}.lproj"
         destination.mkdir(exist_ok=True)
         # JSON string escaping is compatible with .strings for these values.

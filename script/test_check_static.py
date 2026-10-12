@@ -933,7 +933,7 @@ class RunnerTests(unittest.TestCase):
     def test_steps_run_in_the_documented_order(self):
         self.assertEqual([step.name for step in check_static.build_steps()], [
             "manifests", "appearance samples", "localization tests", "benchmark tests", "benchmark runners", "image benchmark tests", "package link inventory", "release archive tests", "host matrix", "host matrix tests",
-            "cad source offer", "cad source offer tests", "cad worker protocol tests", "cad build tests", "localization",
+            "cad source offer", "cad source offer tests", "cad worker protocol tests", "cad build tests", "review samples", "review sample tests", "localization",
             "shell syntax", "decision numbers", "wall-clock tests", "ownership tool", "chrome inks", "dataless guard",
             "swift syntax"])
 

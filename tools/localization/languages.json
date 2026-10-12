@@ -1,5 +1,7 @@
 {
   "developmentLanguage": "en",
   "languages": ["en", "tr", "de", "fr", "zh-Hans", "ja", "hi", "ku-Latn", "ru", "id", "bn", "ha", "pt", "es"],
+  "shipped": ["en"],
+  "reviews": {},
   "reviewStatus": "Draft translations; native-speaker and installed-host validation pending."
 }

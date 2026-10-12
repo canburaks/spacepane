@@ -62,6 +62,7 @@ MANIFESTS = {
     "cad-service": manifest(),
 }
 BUNDLE_ROLES = ("app", "preview", "thumbnail", "cad-service")
+LOCALIZED_ROLES = ("app", "preview", "thumbnail")
 
 
 class FakeTools:
@@ -106,6 +107,8 @@ class Fixture:
             "helper-service": service / "Contents/Helpers/CADWorker",
         }
         versions = {"CFBundleShortVersionString": "1.0.0", "CFBundleVersion": "1"}
+        self.shipped = ["en"]
+        self.languages = {role: ["en"] for role in LOCALIZED_ROLES}
         self.infos = {
             "app": {**versions, "CFBundleIdentifier": BASE, "CFBundlePackageType": "APPL",
                     "LSApplicationCategoryType": "public.app-category.utilities", "ITSAppUsesNonExemptEncryption": False,
@@ -125,6 +128,8 @@ class Fixture:
             "cad-service": {**versions, "CFBundleIdentifier": BASE + ".cad-import",
                             "CADAllowedClientIdentifier": BASE + ".preview", "CADAllowedClientTeamIdentifier": TEAM},
         }
+        for role in LOCALIZED_ROLES:
+            self.infos[role]["CFBundleLocalizations"] = ["en"]
         self.entitlements = {
             "app": {SANDBOX: True, USER_SELECTED: True, GROUPS: [GROUP]},
             "preview": {SANDBOX: True, GROUPS: [GROUP]},
@@ -151,6 +156,11 @@ class Fixture:
             macho(path / f"Contents/MacOS/{role}-binary")
             if self.manifests.get(role) is not None:
                 (path / "Contents/Resources" / archive_check.PRIVACY_MANIFEST).write_bytes(plistlib.dumps(self.manifests[role]))
+        for role, languages in self.languages.items():
+            for language in languages:
+                localized = self.paths[role] / "Contents/Resources" / f"{language}.lproj"
+                localized.mkdir(parents=True, exist_ok=True)
+                (localized / "InfoPlist.strings").write_text('"CFBundleName" = "Example";\n')
         (self.app / "Contents/Resources/AppIcon.icns").write_bytes(b"icns")
         macho(self.paths["helper-app"])
         macho(self.paths["helper-service"])
@@ -173,7 +183,7 @@ class ArchiveCase(unittest.TestCase):
             fixture.write()
             if after:
                 after(fixture)
-            return archive_check.inspect_archive(fixture.archive, fixture.tools)
+            return archive_check.inspect_archive(fixture.archive, fixture.tools, shipped=fixture.shipped)
 
     def assertFailure(self, report, *fragments):
         self.assertTrue(any(all(fragment in failure for fragment in fragments) for failure in report.failures),
@@ -223,6 +233,64 @@ class ValidArchiveTests(ArchiveCase):
         report = self.run_check(edit)
         self.assertFailure(report, "PrevPreviewExtension.appex", "com.apple.application-identifier")
         self.assertFailure(report, "PrevThumbnailExtension.appex", "com.apple.developer.team-identifier")
+
+
+class LanguageTests(ArchiveCase):
+    """The store lists every language at the top of the app bundle, so the archive carries the ship list only."""
+
+    def test_a_draft_language_in_the_companion_is_refused(self):
+        def edit(fixture):
+            fixture.languages["app"] = ["en", "de"]
+        self.assertFailure(self.run_check(edit), "SpacePane.app", "de", "ship list")
+
+    def test_a_draft_language_in_an_extension_is_refused(self):
+        def edit(fixture):
+            fixture.languages["thumbnail"] = ["en", "tr"]
+        self.assertFailure(self.run_check(edit), "PrevThumbnailExtension.appex", "tr", "ship list")
+
+    def test_a_shipped_language_must_be_present_in_every_localized_bundle(self):
+        def edit(fixture):
+            fixture.shipped = ["en", "de"]
+            for role in LOCALIZED_ROLES:
+                fixture.infos[role]["CFBundleLocalizations"] = ["en", "de"]
+            fixture.languages["app"] = fixture.languages["thumbnail"] = ["en", "de"]
+        self.assertFailure(self.run_check(edit), "PrevPreviewExtension.appex", "de", "ship list")
+
+    def test_two_shipped_languages_pass_when_every_bundle_carries_both(self):
+        def edit(fixture):
+            fixture.shipped = ["en", "de"]
+            for role in LOCALIZED_ROLES:
+                fixture.infos[role]["CFBundleLocalizations"] = ["en", "de"]
+                fixture.languages[role] = ["en", "de"]
+        self.assertClean(self.run_check(edit))
+
+    def test_the_declared_localizations_must_equal_the_ship_list(self):
+        def edit(fixture):
+            fixture.infos["preview"]["CFBundleLocalizations"] = ["en", "fr"]
+        self.assertFailure(self.run_check(edit), "PrevPreviewExtension.appex", "CFBundleLocalizations")
+
+    def test_a_missing_declaration_is_reported(self):
+        def edit(fixture):
+            del fixture.infos["app"]["CFBundleLocalizations"]
+        self.assertFailure(self.run_check(edit), "SpacePane.app", "CFBundleLocalizations")
+
+    def test_the_private_cad_service_has_no_languages_of_its_own(self):
+        def after(fixture):
+            (fixture.paths["cad-service"] / "Contents/Resources/de.lproj").mkdir(parents=True)
+        self.assertFailure(self.run_check(after=after), "CADImportService.xpc", "de")
+
+    def test_draft_translations_inside_a_nested_resource_bundle_are_a_note_not_a_failure(self):
+        def after(fixture):
+            nested = fixture.app / "Contents/Resources/PreviewCore_PreviewRenderers.bundle/Contents/Resources"
+            for language in ("en", "de", "tr"):
+                (nested / f"{language}.lproj").mkdir(parents=True)
+        report = self.run_check(after=after)
+        self.assertClean(report)
+        self.assertTrue(any("PreviewCore_PreviewRenderers.bundle" in note and "de, tr" in note for note in report.notes),
+                        report.notes)
+
+    def test_the_repository_ship_list_is_read_when_none_is_supplied(self):
+        self.assertEqual(archive_check.shipped_languages(), ["en"])
 
 
 class LayoutTests(ArchiveCase):

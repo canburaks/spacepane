@@ -1,14 +1,19 @@
 # SpacePane 1.0 publishing roadmap
 
-> **Snapshot, not current guidance.** This is the 2026-10-06 roadmap, recovered on 2026-10-10 from a stash in the former `prev` repository (it was never committed there) and filed here as history. Where it conflicts with the [TestFlight runbook](testflight.md) or the [publication plan](../plans/2026-10-10-app-store-publication-plan.md), those documents win. The text below the rule is unchanged except for this header.
+> **Historical snapshot from 2026-10-06. Superseded** by two plans in `docs/plans/`: the [2026-10-10 publication plan](../plans/2026-10-10-app-store-publication-plan.md) and the [2026-10-12 review readiness plan](../plans/2026-10-12-review-readiness-plan.md). Do not plan from this file. Statements below that the plans or later observations contradict are marked "superseded" and left in place as history.
+
+> **Snapshot, not current guidance.** This is the 2026-10-06 roadmap, recovered on 2026-10-10 from a stash in the former `prev` repository (it was never committed there) and filed here as history. Where it conflicts with the [TestFlight runbook](testflight.md) or the [publication plan](../plans/2026-10-10-app-store-publication-plan.md), those documents win. The text below the rule is unchanged except for one table row ("Support email"), which now carries both the 2026-10-06 statement and its correction.
 >
 > Points that are superseded:
 >
-> - **Support address.** The roadmap makes `support@spacepane.com` deliverable (decision 0.5). The owner's active address is `info@spacepane.com` (2026-10-10); the website and listing move to it.
+> - **Support address and mail.** The roadmap makes `support@spacepane.com` deliverable (decision 0.5) and says the domain has no MX record, so mail bounces. Superseded. The contact address is `info@spacepane.com` everywhere on the website (observed 2026-10-12). The domain now has MX records (Hostinger), SPF and DMARC. Whether the mailbox answers is still unconfirmed; the review readiness plan, Phase 0, asks the owner to send a test message.
+> - **Counts of 2026-10-06.** "11 color schemes" is superseded: the source has twelve since 2026-10-11 (Aurora), build 1 has eleven. "14 languages" described the bundled drafts: no language has a recorded review, so build 2 ships English only.
+> - **TestFlight.** Phase 4 step 3 offers external testing with a public link. Superseded by the owner's decision of 2026-10-12: internal TestFlight testing only, no external testers and no public link.
+> - **Account state.** Build 1.0.0 (1) was uploaded on 2026-10-10 and is "Ready to Submit" with zero installs; it will not be submitted. As of 2026-10-12 the Paid Apps Agreement is unsigned (status "New") and the trader status is still "Set Up".
 > - **Account steps.** The owner reports that the App Store Connect app record and an API key now exist (phase 1, steps 3 and 4). Agreements, tax, banking and trader status are not confirmed.
 > - **Price.** Decision 0.2 proposes a base price. The owner has set roughly USD 9.99 in App Store Connect with local pricing adopted (2026-10-10); App Store Connect holds the effective prices.
 > - **Languages.** Decision 0.3 assumes the owner can review Turkish. The publication plan records that no language has a review record yet and that only reviewed languages ship (D-B).
-> - **Minimum macOS.** Decision 0.4 suggests a macOS 15 virtual machine. The owner reports that no macOS 15 machine or virtual machine is available, so the question is open (D-I).
+> - **Minimum macOS.** Decision 0.4 suggests a macOS 15 virtual machine. Superseded: on 2026-10-12 the owner created a macOS 15.2 (24C101) virtual machine with VirtualBuddy and reports that the app works on macOS 15 (the owner's report; no session has recorded an observation). The review readiness plan records the virtual machine as decision R-3; the run itself is still to be recorded (D-I, D21).
 > - **Upload route.** Phase 2.9 and phase 4 upload from Organizer. The runbook uses `./script/build_and_run.sh --archive`, `--export` and `--upload` with an App Store Connect API key, which worked as far as export on 2026-10-10 (see the [dry-run record](../validation/2026-10-10-testflight-dry-run.md)).
 > - **Age rating.** Phase 1, step 6 says to answer "None" everywhere. Apple replaced the questionnaire in 2026; see the [publishing guide](app-store-publishing-guide.md#age-rating).
 > - **OCCT route.** Step 2.1 leaves the publication place open. The route now recorded is the public repository `canburaks/spacepane-cad-source`, still pending legal review (`Native/CADWorker/SOURCE-OFFER.md`).
@@ -33,7 +38,7 @@ can be done in the repository.
 | Features | 76 formats, Safety Lens, content thumbnails, 11 color schemes, live reload, conflicts scan |
 | Package tests | 2,452 Swift tests, integration checks and 648 adversarial cases pass |
 | Website | Live at spacepane.com; `/privacy` and `/support` resolve, and the old `.html` links redirect |
-| Support email | **Broken:** `support@spacepane.com` is published, but spacepane.com has no MX record, so mail bounces |
+| Support email | *On 2026-10-06:* **Broken:** `support@spacepane.com` is published, but spacepane.com has no MX record, so mail bounces. *Superseded (2026-10-12):* the site shows `info@spacepane.com`; the domain has MX, SPF and DMARC records; delivery is unconfirmed |
 | OCCT licence (STEP/IGES) | **Open** release gate |
 | Finder evidence | Only the early formats were seen in Finder; no new format, mode or thumbnail has been |
 | Signed-host checks | **Not run** for live reload, sandboxed certificate/profile inspection, the conflicts scan and CAD on the new identity |

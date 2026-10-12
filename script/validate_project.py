@@ -10,7 +10,7 @@ import tempfile
 import xml.etree.ElementTree as ET
 from xml.parsers.expat import ExpatError
 
-from build_metadata import compile_metadata
+from build_metadata import compile_metadata, shipped_languages
 from check_release_archive import PRIVACY_MANIFEST, privacy_manifest_problems
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -283,17 +283,25 @@ def validate():
                 check(settings["PRODUCT_BUNDLE_IDENTIFIER"] == service_info["CADAllowedClientIdentifier"],
                       "CAD service's accepted peer identity must match the preview target")
         metadata_languages = set(json.loads((ROOT / "Configuration/Metadata.xcstrings").read_text())["strings"]["metadata.app.name"]["localizations"])
+        policy = json.loads((ROOT / "tools/localization/languages.json").read_text())
+        check(metadata_languages == set(policy["languages"]), "Bundle metadata must be translated for exactly the chosen languages")
+        shipped = shipped_languages()
         metadata_phases = [objects[phase] for phase in target["buildPhases"]
                            if objects[phase].get("name") == "Compile localized branding metadata"]
         expected_outputs = {f"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/{language}.lproj/InfoPlist.strings"
-                            for language in metadata_languages}
+                            for language in shipped}
         if is_service:
             check(not metadata_phases, "Private CAD service does not compile app-facing branding metadata")
             check({objects[group]["path"] for group in target["fileSystemSynchronizedGroups"]} == {"Native/CADImportService"},
                   "CAD service must compile its own listener sources")
         else:
             check(len(metadata_phases) == 1 and set(metadata_phases[0]["outputPaths"]) == expected_outputs,
-                  f"{target_name} must declare every localized metadata output for script sandbox access")
+                  f"{target_name} must declare exactly the shipped languages' metadata outputs for script sandbox access")
+            check("$(SRCROOT)/tools/localization/languages.json" in metadata_phases[0]["inputPaths"],
+                  f"{target_name} must read the language ship list as a declared script input")
+            info_plist = plistlib.loads((ROOT / settings["INFOPLIST_FILE"]).read_bytes())
+            check(info_plist.get("CFBundleLocalizations") == shipped,
+                  f"{target_name} must declare the shipped languages in CFBundleLocalizations")
         for group_id in target["fileSystemSynchronizedGroups"]:
             check((ROOT / objects[group_id]["path"]).is_dir(), "Missing synchronized source folder")
         for dependency_id in target["packageProductDependencies"]:
@@ -319,6 +327,8 @@ def validate():
         strings = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewRenderers/Resources/Localizable.xcstrings").read_text())["strings"]
         for role in ["app", "preview", "thumbnail"]:
             compile_metadata(Path(directory) / role, role, 'Renamed "Example"')
+            check({item.name for item in (Path(directory) / role).iterdir()} == {f"{language}.lproj" for language in shipped},
+                  "Generated bundle metadata must cover the shipped languages and nothing else")
             metadata = json.loads(subprocess.check_output(["/usr/bin/plutil", "-convert", "json", "-o", "-", str(Path(directory) / role / "en.lproj/InfoPlist.strings")]))
             check('Renamed "Example"' in metadata["CFBundleDisplayName"], "Generated branding must preserve the configured name")
             for declaration in imported:
