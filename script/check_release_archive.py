@@ -3,6 +3,11 @@
 
 usage: check_release_archive.py PATH.xcarchive
 
+The archive is checked against PREV_INCLUDE_CAD (script/cad_mode.py reads it from Configuration/Base.xcconfig,
+then Local.xcconfig, then the environment; decision 028). With NO, version 1.0's value, the archive must carry no
+CAD at all: no XPC service, no CADWorker, no Helpers directory, no OCCT-Notices folder, and no Mach-O file but the
+three main executables. With YES it must carry the CAD service and both CAD worker copies, as before.
+
 These checks mirror upload validation and App Review requirements that can be read locally: store
 metadata keys, the compiled icon, the languages each bundle carries against the ship list, quarantine
 attributes, architectures, nested code signatures with the hardened-runtime flag and one signing
@@ -27,6 +32,11 @@ import subprocess
 import sys
 from typing import Any, Dict, Iterator, List, NamedTuple, Optional, Set, Tuple
 from xml.parsers.expat import ExpatError
+
+# cad_mode.py sits beside this file; the path is added here because the module may run from another directory or
+# be imported by a test that isolates `sys.path`.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import cad_mode  # noqa: E402
 
 EXPECTED_ARCHITECTURES = {"arm64"}
 
@@ -280,8 +290,13 @@ def check_app_info(report: Report, info: Dict[str, Any], app: Path) -> None:
                  "Compiled app icon (CFBundleIconName/CFBundleIconFile and .icns) is missing")
 
 
-def find_bundles(report: Report, app: Path, app_info: Dict[str, Any]) -> List[Bundle]:
-    """The app, its Quick Look extensions by role and the CAD service, reporting any other layout."""
+def configured_include_cad() -> bool:
+    """PREV_INCLUDE_CAD as the repository and the environment set it (script/cad_mode.py)."""
+    return cad_mode.include_cad()
+
+
+def find_bundles(report: Report, app: Path, app_info: Dict[str, Any], include_cad: bool = True) -> List[Bundle]:
+    """The app, its Quick Look extensions by role and, with CAD, the CAD service, reporting any other layout."""
     bundles = [Bundle("app", app, app_info, app.name)]
     found: Dict[str, List[Bundle]] = {"preview": [], "thumbnail": []}
     for appex in sorted(app.glob("Contents/PlugIns/*.appex")):
@@ -300,6 +315,12 @@ def find_bundles(report: Report, app: Path, app_info: Dict[str, Any]) -> List[Bu
         report.check(len(found[role]) == 1, f"Expected exactly one {role} extension, found {len(found[role])}")
         bundles.extend(found[role][:1])
     services = sorted(app.rglob("*.xpc"))
+    if not include_cad:
+        # Version 1.0 ships no service of any kind: a bundle in any folder is a failure, not a layout to accept.
+        for service in services:
+            report.fail(f"{service.relative_to(app)} is an XPC service; the build without CAD (PREV_INCLUDE_CAD = NO) "
+                        "carries none (decision 028)")
+        return bundles
     parent = found["preview"][0].path / "Contents/XPCServices" if found["preview"] else None
     inside = [service for service in services if service.parent == parent]
     report.check(len(services) == 1 and len(inside) == 1,
@@ -511,6 +532,33 @@ def check_helpers(report: Report, tools: Any, app: Path, bundles: List[Bundle]) 
     return signings
 
 
+def check_no_cad_residue(report: Report, app: Path, bundles: List[Bundle]) -> None:
+    """Version 1.0 carries no OCCT bytes: no worker, no Helpers folder, no OCCT notices, no stray Mach-O file.
+
+    The XPC service ban is in find_bundles; the Mach-O rule is that only the main executable each of the app and
+    the two extensions declares in CFBundleExecutable may be a Mach-O file."""
+    for helper in sorted(app.rglob("CADWorker")):
+        report.fail(f"{helper.relative_to(app)} is a CADWorker; the build without CAD (PREV_INCLUDE_CAD = NO) carries none")
+    for folder in sorted(path for path in app.rglob("Helpers") if path.is_dir()):
+        report.fail(f"{folder.relative_to(app)} is a Helpers directory; the build without CAD (PREV_INCLUDE_CAD = NO) carries none")
+    for symbols in sorted((app.parents[2] / "dSYMs").glob("CAD*")):
+        report.fail(f"{symbols.name} in the archive's dSYMs belongs to the CAD service; the build without CAD "
+                    "(PREV_INCLUDE_CAD = NO) ships no such product")
+    for notices in sorted(app.rglob("OCCT-Notices")):
+        report.fail(f"{notices.relative_to(app)} is an OCCT-Notices folder; the build without CAD (PREV_INCLUDE_CAD = NO) "
+                    "carries no OCCT notices")
+
+
+def main_executables(bundles: List[Bundle]) -> Set[Path]:
+    """The declared main executable of each bundle, whether or not the file exists."""
+    executables: Set[Path] = set()
+    for bundle in bundles:
+        name = bundle.info.get("CFBundleExecutable")
+        if isinstance(name, str) and name:
+            executables.add(bundle.path / "Contents/MacOS" / name)
+    return executables
+
+
 def check_privacy_manifests(report: Report, bundles: List[Bundle]) -> int:
     present = 0
     for bundle in bundles:
@@ -529,7 +577,10 @@ def check_privacy_manifests(report: Report, bundles: List[Bundle]) -> int:
     return present
 
 
-def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = None) -> Report:
+def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = None,
+                    include_cad: Optional[bool] = None) -> Report:
+    """Check an archive. `shipped` and `include_cad` default to the repository's configuration; tests name them."""
+    include_cad = configured_include_cad() if include_cad is None else include_cad
     report = Report()
     applications = sorted((archive / "Products/Applications").glob("*.app"))
     report.check(len(applications) == 1, "Archive must contain exactly one application")
@@ -544,7 +595,7 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
         report.fail(f"{app.name} has no readable Contents/Info.plist")
         return report
     check_app_info(report, info, app)
-    bundles = find_bundles(report, app, info)
+    bundles = find_bundles(report, app, info, include_cad)
     check_info_plists(report, bundles)
     check_extension_attributes(report, bundles)
     check_languages(report, bundles, shipped if shipped is not None else shipped_languages())
@@ -552,6 +603,13 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
     report.check("com.apple.quarantine" not in tools.quarantine(app),
                  "Remove com.apple.quarantine attributes; App Store Connect rejects them")
     machos = [path for path in app.rglob("*") if path.is_file() and not path.is_symlink() and is_macho(path)]
+    if not include_cad:
+        check_no_cad_residue(report, app, bundles)
+        allowed = main_executables(bundles)
+        for path in machos:
+            report.check(path in allowed,
+                         f"{path.relative_to(app)} is a Mach-O file other than the main executable of the app or an "
+                         "extension; the build without CAD (PREV_INCLUDE_CAD = NO) carries only those three")
     for path in machos:
         architectures = tools.architectures(path)
         report.check(architectures == EXPECTED_ARCHITECTURES,
@@ -560,7 +618,7 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
     report.check(valid, "codesign --verify --deep --strict failed: " + message)
 
     signings = check_entitlements_and_signatures(report, tools, bundles)
-    helper_signings = check_helpers(report, tools, app, bundles)
+    helper_signings = check_helpers(report, tools, app, bundles) if include_cad else {}
     check_signing_teams(report, {**signings, **helper_signings})
     check_cad_service(report, bundles, signings)
     manifests = check_privacy_manifests(report, bundles)
@@ -569,18 +627,21 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
         report.note("Embedded frameworks are scanned for required-reason APIs on their own; confirm each has a privacy "
                     f"manifest or that the app's covers it: {[framework.name for framework in frameworks]}")
 
-    report.check(any(app.rglob("OCCT-Notices/LICENSE_LGPL_21.txt")), "OCCT license notices are not bundled")
+    if include_cad:
+        report.check(any(app.rglob("OCCT-Notices/LICENSE_LGPL_21.txt")), "OCCT license notices are not bundled")
     report.check((app / "Contents/Resources/ColorSchemes-Notices/NOTICE.md").is_file(),
                  "The color scheme palette notice is not bundled")
     report.check(any((archive / "dSYMs").glob("*.dSYM")), "Archive has no dSYMs for crash symbolication")
     report.summary = (f"Release archive checks passed for {app.name} {info.get('CFBundleShortVersionString')} "
                       f"({info.get('CFBundleVersion')}): {len(machos)} Mach-O files, {len(bundles)} sandboxed bundles, "
-                      f"{len(helper_signings)} helpers, {manifests} privacy manifests. Run Validate App in Organizer next.")
+                      f"{len(helper_signings)} helpers, {manifests} privacy manifests"
+                      + ("" if include_cad else "; no CAD service, helper or OCCT notices (PREV_INCLUDE_CAD is NO)")
+                      + ". Run Validate App in Organizer next.")
     return report
 
 
-def main(archive: Path, tools: Optional[Any] = None) -> int:
-    report = inspect_archive(archive, tools if tools is not None else SystemTools())
+def main(archive: Path, tools: Optional[Any] = None, include_cad: Optional[bool] = None) -> int:
+    report = inspect_archive(archive, tools if tools is not None else SystemTools(), include_cad=include_cad)
     for note in report.notes:
         print("note:", note)
     if report.failures:

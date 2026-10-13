@@ -1175,46 +1175,6 @@
 		</dict>
 		<dict>
 			<key>UTTypeIdentifier</key>
-			<string>org.webmeister.spacepane.type.iges</string>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>format.cad.iges.name</string>
-			<key>UTTypeReferenceURL</key>
-			<string>https://occt3d.com/dev/doc/overview/html/occt_user_guides__iges.html</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>igs</string>
-					<string>iges</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.webmeister.spacepane.type.step</string>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>format.cad.step.name</string>
-			<key>UTTypeReferenceURL</key>
-			<string>https://www.iso.org/standard/63141.html</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>stp</string>
-					<string>step</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeIdentifier</key>
 			<string>org.webmeister.spacepane.type.3mf</string>
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -1513,8 +1473,6 @@
 				<string>com.apple.disk-image-udif</string>
 				<string>org.bittorrent.torrent</string>
 				<string>public.midi-audio</string>
-				<string>org.webmeister.spacepane.type.iges</string>
-				<string>org.webmeister.spacepane.type.step</string>
 				<string>public.standard-tesselated-geometry-format</string>
 				<string>public.geometry-definition-format</string>
 				<string>public.polygon-file-format</string>

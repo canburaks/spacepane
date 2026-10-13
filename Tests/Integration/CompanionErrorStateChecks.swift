@@ -151,9 +151,9 @@ enum CompanionErrorStateChecks {
         try check(flushed && loaded.state == .loaded && loaded.snapshot == .defaults
                   && settings.snapshot == .defaults && !settings.recoveredSettings,
                   "Explicit recovery must write current-schema defaults and clear the recovery problem")
-        try check(!settings.isEnabled(.iges) && !settings.isEnabled(.step)
+        try check(settings.snapshot.formatOverrides.isEmpty
                   && settings.isEnabled(.json) && !manager.canUndo && settings.undoNotice == nil,
-                  "Recovery must retain opt-in CAD defaults and must not register invented prior choices for Undo")
+                  "Recovery must restore the catalog defaults and must not register invented prior choices for Undo")
         try check(announcements.count == 1 && !announcements[0].isEmpty,
                   "Explicit recovery must announce its result once")
         let savedBytes = try Data(contentsOf: url)

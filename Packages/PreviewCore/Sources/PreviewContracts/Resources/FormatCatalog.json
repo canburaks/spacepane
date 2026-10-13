@@ -2577,64 +2577,6 @@
       "descriptionKey": "format.audio.midi.description"
     },
     {
-      "id": "cad.iges",
-      "contentTypes": [
-        "org.webmeister.spacepane.type.iges"
-      ],
-      "extensions": [
-        "igs",
-        "iges"
-      ],
-      "group": "media",
-      "presentation": "geometry",
-      "primaryView": "geometry",
-      "thumbnail": "generic",
-      "defaultEnabled": false,
-      "nameKey": "format.cad.iges.name",
-      "descriptionKey": "format.cad.iges.description",
-      "importedContentTypes": [
-        {
-          "identifier": "org.webmeister.spacepane.type.iges",
-          "conformsTo": "public.data",
-          "extensions": [
-            "igs",
-            "iges"
-          ],
-          "descriptionKey": "format.cad.iges.name",
-          "referenceURL": "https://occt3d.com/dev/doc/overview/html/occt_user_guides__iges.html"
-        }
-      ]
-    },
-    {
-      "id": "cad.step",
-      "contentTypes": [
-        "org.webmeister.spacepane.type.step"
-      ],
-      "extensions": [
-        "stp",
-        "step"
-      ],
-      "group": "media",
-      "presentation": "geometry",
-      "primaryView": "geometry",
-      "thumbnail": "generic",
-      "defaultEnabled": false,
-      "nameKey": "format.cad.step.name",
-      "descriptionKey": "format.cad.step.description",
-      "importedContentTypes": [
-        {
-          "identifier": "org.webmeister.spacepane.type.step",
-          "conformsTo": "public.data",
-          "extensions": [
-            "stp",
-            "step"
-          ],
-          "descriptionKey": "format.cad.step.name",
-          "referenceURL": "https://www.iso.org/standard/63141.html"
-        }
-      ]
-    },
-    {
       "id": "model.stl",
       "contentTypes": [
         "public.standard-tesselated-geometry-format"

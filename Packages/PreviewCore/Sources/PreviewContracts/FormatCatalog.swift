@@ -149,34 +149,49 @@ public struct FormatCatalog: Sendable {
     private static let rootContentTypes: Set<UTType> = [.data, .item, .content]
 
     public static let standard: FormatCatalog = {
-        struct Resource: Decodable { let formats: [Entry] }
-        struct Entry: Decodable {
-            let id: String
-            let contentTypes: [String]
-            let extensions: [String]
-            let group: FormatGroup
-            let presentation: PresentationCapability
-            let primaryView: PrimaryView
-            let thumbnail: ThumbnailPolicy
-            let nameKey: String
-            let descriptionKey: String
-            let importedContentTypes: [ImportedContentType]?
-            let optionalContentTypes: [String]?
-            let filenameAliases: [String]?
-            let filenamePrefixes: [String]?
-            let defaultEnabled: Bool?
-        }
-        struct ImportedContentType: Decodable {
-            let identifier: String
-            let conformsTo: String
-        }
+        struct Resource: Decodable { let formats: [CatalogEntry] }
         guard let url = ContractResources.bundle.url(forResource: "FormatCatalog", withExtension: "json"),
               let bytes = try? Data(contentsOf: url),
               let resource = try? JSONDecoder().decode(Resource.self, from: bytes) else {
             preconditionFailure("Invalid bundled format catalog")
         }
+        return Self.catalog(from: resource.formats)
+    }()
+
+    /// This catalog plus the entries of `data`: a JSON array of descriptor objects in the shape of the bundled
+    /// catalog's `formats`. Version 1.0 keeps the two CAD descriptors outside the product catalog
+    /// (`Configuration/CADFormatCatalogEntries.json`); the CAD tests and checks add them back with this.
+    public func appending(entriesJSON data: Data) throws -> FormatCatalog {
+        let extra = Self.catalog(from: try JSONDecoder().decode([CatalogEntry].self, from: data))
+        return FormatCatalog(descriptors: descriptors + extra.descriptors,
+                             unresolvedContentTypes: unresolvedContentTypes + extra.unresolvedContentTypes)
+    }
+
+    private struct CatalogEntry: Decodable {
+        let id: String
+        let contentTypes: [String]
+        let extensions: [String]
+        let group: FormatGroup
+        let presentation: PresentationCapability
+        let primaryView: PrimaryView
+        let thumbnail: ThumbnailPolicy
+        let nameKey: String
+        let descriptionKey: String
+        let importedContentTypes: [ImportedContentType]?
+        let optionalContentTypes: [String]?
+        let filenameAliases: [String]?
+        let filenamePrefixes: [String]?
+        let defaultEnabled: Bool?
+    }
+
+    private struct ImportedContentType: Decodable {
+        let identifier: String
+        let conformsTo: String
+    }
+
+    private static func catalog(from entries: [CatalogEntry]) -> FormatCatalog {
         var unresolved: [UnresolvedContentType] = []
-        let descriptors = resource.formats.map { entry -> FormatDescriptor in
+        let descriptors = entries.map { entry -> FormatDescriptor in
             let formatID = FormatID(rawValue: entry.id)
             let types = entry.contentTypes.compactMap { identifier -> UTType? in
                 if let type = UTType(identifier) { return type }
@@ -201,5 +216,5 @@ public struct FormatCatalog: Sendable {
                 defaultEnabled: entry.defaultEnabled ?? true, primaryView: entry.primaryView)
         }
         return FormatCatalog(descriptors: descriptors, unresolvedContentTypes: unresolved)
-    }()
+    }
 }

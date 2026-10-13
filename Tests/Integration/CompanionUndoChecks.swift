@@ -102,6 +102,9 @@ enum CompanionUndoChecks {
 
     private static func everyActionUndoesAndRedoesExactly(_ root: URL) async throws {
         let (settings, manager, _) = await makeSettings(root, "every-action")
+        // Every shipped type is on by default, so Enable All has something to change only after one is switched off.
+        settings.setEnabled(false, for: .json)
+        manager.removeAllActions()
         try roundTrip("Enable All", settings, manager, name: PreviewStrings.text(.enableAll)) {
             settings.setAllEnabled(true)
         }
@@ -140,13 +143,13 @@ enum CompanionUndoChecks {
     private static func anUnrelatedEditSurvivesAnUndo(_ root: URL) async throws {
         let (settings, manager, _) = await makeSettings(root, "unrelated")
         // An appearance edit between Disable All and its Undo survives: Disable All never owned it.
-        settings.setEnabled(true, for: .step)
+        settings.setEnabled(false, for: .yaml)
         settings.setAllEnabled(false)
         settings.setTheme(.dark)
         manager.undo()
         try check(settings.snapshot.theme == .dark, "An appearance edit made after Disable All must survive its Undo")
-        try check(settings.snapshot.defaultEnabled && settings.isEnabled(.step) && settings.isEnabled(.json),
-                  "Undoing Disable All must bring back the default and the CAD opt-in that Disable All cleared")
+        try check(settings.snapshot.defaultEnabled && !settings.isEnabled(.yaml) && settings.isEnabled(.json),
+                  "Undoing Disable All must bring back the default and the per-type choice that Disable All cleared")
         manager.removeAllActions()
         // And the other way round: a file-type choice made after Reset Appearance survives its Undo.
         settings.setTheme(.highContrast)
@@ -235,14 +238,14 @@ enum CompanionUndoChecks {
 
     private static func theSavedFileFollowsUndoAndRedo(_ root: URL) async throws {
         let (settings, manager, store) = await makeSettings(root, "persisted")
-        settings.setEnabled(true, for: .step)
+        settings.setEnabled(false, for: .yaml)
         settings.setAllEnabled(false)
         try await eventually("Disable All did not save") { settings.saveState == .saved }
         manager.undo()
         try await eventually("Undo did not save") { settings.saveState == .saved }
         var loaded = await store.load()
-        try check(loaded.state == .loaded && loaded.snapshot == settings.snapshot && loaded.snapshot.isEnabled(.step),
-                  "The file written after Undo must equal the snapshot, with the CAD opt-in back")
+        try check(loaded.state == .loaded && loaded.snapshot == settings.snapshot && !loaded.snapshot.isEnabled(.yaml),
+                  "The file written after Undo must equal the snapshot, with the per-type choice back")
         manager.redo()
         try await eventually("Redo did not save") { settings.saveState == .saved }
         loaded = await store.load()

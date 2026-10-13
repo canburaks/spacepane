@@ -1,3 +1,8 @@
 {
-  "keys": {}
+  "keys": {
+    "format.cad.iges.description": "Kept for the IGES descriptor in Configuration/CADFormatCatalogEntries.json: version 1.0 ships without the IGES and STEP previews, and the translations are needed again when they return.",
+    "format.cad.iges.name": "Kept for the IGES descriptor in Configuration/CADFormatCatalogEntries.json: version 1.0 ships without the IGES and STEP previews, and the translations are needed again when they return.",
+    "format.cad.step.description": "Kept for the STEP descriptor in Configuration/CADFormatCatalogEntries.json: version 1.0 ships without the IGES and STEP previews, and the translations are needed again when they return.",
+    "format.cad.step.name": "Kept for the STEP descriptor in Configuration/CADFormatCatalogEntries.json: version 1.0 ships without the IGES and STEP previews, and the translations are needed again when they return."
+  }
 }

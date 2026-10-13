@@ -4,13 +4,24 @@ import PreviewContracts
 import PreviewCore
 import PreviewFileAccess
 import PreviewFormats
+#if PREV_INCLUDE_CAD
 import PreviewCADFormats
+#endif
 import PreviewPreferences
 import PreviewRenderers
 
 @MainActor
 final class PreviewViewController: NSViewController, @MainActor QLPreviewingController {
-    private let pipeline = PreviewPipeline(registrations: StandardFormatAdapters.registrations + CADFormatAdapters.xpcRegistrations)
+    private let pipeline = PreviewPipeline(registrations: PreviewViewController.adapterRegistrations)
+    /// The standard adapters. Version 1.0 ships without the STEP and IGES previews: the CAD adapters, which reach
+    /// their importer through the embedded XPC service, are registered only in a build with `PREV_INCLUDE_CAD`.
+    private static var adapterRegistrations: [AdapterRegistration] {
+        #if PREV_INCLUDE_CAD
+        StandardFormatAdapters.registrations + CADFormatAdapters.xpcRegistrations
+        #else
+        StandardFormatAdapters.registrations
+        #endif
+    }
     private var activeRequest: PreviewHostSession<PreparedPreview>?
     /// The shown file and the settings that governed it, kept while the view is hidden so a view that
     /// appears again can resume live reload. Cleared by every new request.

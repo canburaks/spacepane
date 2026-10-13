@@ -44,9 +44,9 @@ private enum Failure: Error { case arguments, outcome }
                     throw Failure.outcome
                 }
             case .unavailable(let failure): state = "unavailable.\(failure)"
-            case .disabledByUser(let id):
-                guard [.iges, .step].contains(id), id.rawValue == entry.formatID else { throw Failure.outcome }
-                state = "disabledByDefault"
+            case .disabledByUser:
+                // Version 1.0 has no format that is off by default, so the default preferences never disable one.
+                throw Failure.outcome
             case .geometryReady(let presentation):
                 // Mesh formats read in process: a mutated file may still be a valid, bounded mesh.
                 guard presentation.formatID.rawValue == entry.formatID,

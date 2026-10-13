@@ -3,7 +3,6 @@ import UniformTypeIdentifiers
 import PreviewContracts
 import PreviewCore
 import PreviewFormats
-import PreviewCADFormats
 
 private struct Manifest: Decodable {
     let fixtures: [Fixture]
@@ -20,13 +19,14 @@ private enum Failure: Error { case invalidArguments, unexpectedOutcome }
 
 @main struct HostFixtureChecks {
     static func main() async throws {
-        guard CommandLine.arguments.count == 3 else { throw Failure.invalidArguments }
+        guard CommandLine.arguments.count == 2 else { throw Failure.invalidArguments }
         let directory = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
         let manifest = try JSONDecoder().decode(Manifest.self,
             from: Data(contentsOf: directory.appendingPathComponent("manifest.json")))
-        let pipeline = PreviewPipeline(registrations: StandardFormatAdapters.registrations + CADFormatAdapters.registrations(workerURL: URL(fileURLWithPath: CommandLine.arguments[2])))
-        var preferences = PreviewPreferencesSnapshot.defaults
-        preferences.setEnabled(true, for: .iges); preferences.setEnabled(true, for: .step)
+        // Version 1.0 ships without the STEP and IGES previews, so the fixture set holds no CAD file and the
+        // standard registrations are the whole product.
+        let pipeline = PreviewPipeline(registrations: StandardFormatAdapters.registrations)
+        let preferences = PreviewPreferencesSnapshot.defaults
         var results: [Result] = []
         for fixture in manifest.fixtures {
             let url = directory.appendingPathComponent(fixture.path)
