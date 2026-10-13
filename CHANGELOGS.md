@@ -2,6 +2,34 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-13 — Research: new file types and features after the STEP and IGES cut
+
+Research only, at the owner's request. No code, catalog, plan box or store record changed; nothing was committed or pushed.
+
+- Research: eleven parallel agents each wrote one report under `docs/market/expansion-research/` (science and geo data, engineering and makers, creative media, developer and AI artifacts, insight and platform features, the trust lens, office and business documents, hobby and personal files, mined demand signals, a digest of the repository's earlier research, and a competitor refresh). Two further agents verified them: 69 load-bearing facts against primary sources (52 confirmed, 8 partly, 3 refuted, 6 not verifiable) and 87 candidates against existing Quick Look tools (21 taken, 18 partly, 6 legacy only, 42 open, none above medium confidence).
+- Synthesis: [docs/market/2026-10-13-new-file-types-and-features.md](docs/market/2026-10-13-new-file-types-and-features.md). It ranks the candidates in three tiers, recommends leading with "what will this file do" (scripts, auto-run configuration, agent bundles and extensions, packages, AI model files, credential exports) plus a print check on the existing mesh types, and lists the contract changes, routing traps and owner decisions the candidates raise. Every item is a proposal.
+- Findings that bear on shipped types: Apple's own extensions declare STL, OBJ and PLY on macOS 27.2 (type declarations read on the development Mac; Finder routing not observed).
+- Limits: Apple's iTunes Search API returned HTTP 403 from about 20:52, so no App Store-wide description scan ran and the competitor refresh is partial; nothing was observed in Finder; the domain reports predate verification and are not corrected, so the verification files take precedence. Two agents read local files outside the repository, read-only (disk-image trailers in Downloads, one local agent transcript).
+- Not changed: the competitor landscape, the App Store listing research and decision 010 are out of date in ways the synthesis lists; they were left as they are.
+
+## 2026-10-13 — Version 1.0.0 (3) submitted for review
+
+- Release: the owner added version 1.0.0 with build 3 for review and submitted it. App Store Connect shows "macOS Submission — Waiting for Review", one item ("macOS App 1.0.0", 1.0.0 (3), App Version), date submitted Oct 13, 2026 at 6:09 PM, submitted by the account holder.
+- The owner entered the store record that afternoon. Read back in the browser after the submission: status "Waiting for Review"; build 1.0.0 (3); six screenshots; the description from `docs/release/app-store-listing.md` (74 file types, no STEP, IGES or Open CASCADE paragraph); keywords `viewer,code,syntax,highlight,file,plugin,yaml,csv,toml,plist,xml,jupyter,zip,rar,folder,epub,stl,obj`; the review notes for build 3 (2,562 bytes) with `SpacePane-Review-Samples.zip` attached; App Privacy published ("Data Not Collected"; the first attempt to add for review was refused until it was published). The release option is "Automatically release this version", not the manual release this plan recommended.
+- Which six screenshots were uploaded was not read file by file; the first three are "Press Space", "Look inside" and "A database at a glance". `07-models.png` and `08-file-types.png` in the repository are not valid for this build, and `01` and `06` show the file name `winch-gear.step`.
+- Not established at submission: any install or Finder observation of build 3 (TestFlight showed no installation of it); whether the Digital Services Act declaration, "In Review" earlier that day, has cleared. The review notes say "Tested on macOS 27.2 and on macOS 15.2"; that rests on development-signed builds and on the owner's report, not on build 3.
+- Records: `AGENTS.md`, `PLAN.md` and the readiness plan state the submission. App Review's messages are to be recorded here verbatim when they arrive.
+
+## 2026-10-13 — Build 1.0.0 (3) uploaded
+
+- Release: the owner ran `--archive`, `--export` and `--upload` at about 13:53 to 13:58 Europe/Istanbul from `main` at `fd5a4dc` (the merge of pull request 2), with the API key values in the shell only.
+  - Export: "EXPORT SUCCEEDED" for build 3. The app, the preview extension and the thumbnail extension read back as signed by "Apple Distribution: Can Burak Sofyalioglu (Z743N6D8DS)"; the script printed "This build carries no CAD helper (PREV_INCLUDE_CAD is NO): no CADWorker, no CADImportService.xpc."
+  - Upload: "Upload succeeded." and "Uploaded package is processing." No warning; the dSYM warning of builds 1 and 2 named the CAD helper, which this build does not contain.
+  - The uploaded build's archive is `.build/archive/Release.xcarchive` (created 2026-10-13T10:53:40Z, 3 dSYMs). The archive step kept the earlier local build 3 archives beside it.
+- Repositories: pull request 2 of this repository and pull request 3 of `spacepane-web` were merged on the owner's instruction before the upload. The website deployed within a minute: the home page shows 74 file types with no STEP or IGES wording, `/open-source` says version 1.0 does not include those previews, and the support, privacy and open-source URLs return 200.
+- App Store Connect, read in the browser after the owner signed in: build 3 is "Ready to Submit" in the Internal group (uploaded Oct 13, 2026 at 2:00 PM, expires in 90 days, no installs yet). Its Build Metadata page reads: Binary State "Validated"; Bundle Short Version String 1.0.0; Bundle Version String 3; Minimum macOS Version 15.0; Supported Architectures arm64; Includes Symbols "Yes"; App Uses Non-Exempt Encryption "No"; **Localizations "English"**; entitlements listed for exactly three executables (the app, the preview extension, the thumbnail extension), each with the sandbox and the one App Group, the app also with user-selected read-write. This settles the question left open on 2026-10-12: draft translations inside the nested resource bundle do not make App Store Connect list their languages. Builds 2 and 1 also show "Ready to Submit"; build 1 shows one installation.
+- Not established: any install of build 3.
+
 ## 2026-10-13 — Version 1.0 without STEP and IGES: build 3
 
 Owner decision, recorded as [decision 028](docs/decisions/028-no-cad-in-version-1.md): version 1.0 ships without the STEP and IGES previews. Open Cascade answered the owner's question about the LGPL source-offer route without confirming or rejecting it and pointed to its paid static-linking exception; no licence was bought and no legal review took place. Four parallel agents on disjoint files and the lead. Nothing was uploaded or pushed.
