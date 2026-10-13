@@ -5,6 +5,8 @@ you can supply. The pipeline is `.github/workflows/testflight.yml` over `script/
 modes run on a Mac. Decision 027 D27 makes a TestFlight round a release gate: it is the only way to test the
 store-signed CAD peer requirement and the cleanest way to reach macOS 15.
 
+**Amended 2026-10-13 ([decision 028](../decisions/028-no-cad-in-version-1.md)): version 1.0 ships without STEP and IGES.** Build 1.0.0 (2), uploaded on 2026-10-12 with CAD, is for the owner's internal TestFlight testing only and must not be submitted. The submission build is build 3, built with `PREV_INCLUDE_CAD = NO`, which has no CAD helper or service. The CAD parts of this runbook (the store-signed CAD peer requirement, the CADWorker entitlement readback, Q-171) do not gate 1.0; they are kept for the version that brings CAD back. The store-signed XPC check on build 2 is still available to the owner as an early look at that path, and it is not a 1.0 release gate.
+
 ## What the pipeline does
 
 | Level | Needs | Produces | Proves |
@@ -73,7 +75,7 @@ On a Mac the same steps are `./script/build_and_run.sh --archive`, `--export` an
 The same modes run on a Mac that holds the Apple Distribution and Mac installer certificates and the app's
 distribution profile. Set the identities in `Configuration/Local.xcconfig` (ignored by git), raise
 `CURRENT_PROJECT_VERSION` above any build App Store Connect has seen (build 2 was used by the 2026-10-10 dry
-run; build 1.0.0 (1) was uploaded on 2026-10-10 and is not attached to the version), and give the shell the API key:
+run and was uploaded on 2026-10-12 with CAD for internal testing only; build 1.0.0 (1) was uploaded on 2026-10-10 and is not attached to the version; the submission build is build 3), and give the shell the API key:
 
 ```sh
 export PREV_ASC_KEY_PATH="$HOME/.appstoreconnect/private_keys/AuthKey_XXXXXXXXXX.p8"   # the .p8 file; example path
@@ -107,7 +109,7 @@ per the Mac validation protocol in the platform review, at least:
 - Install from TestFlight on the current macOS and on macOS 15 (the deployment target). The owner reports (2026-10-12) that the app works on macOS 15 and a macOS 15.2 virtual machine exists; no session has recorded an observation, so the run still has to be recorded.
 - Finder: panel, pane and Gallery previews for the host matrix formats; thumbnails; the Contents rail,
   alert bars and code cards; VoiceOver on the preview and the companion.
-- The CAD path under store signing (D27): turn STEP on, preview a model, record `pgrep -lf CADImportService`
+- The CAD path under store signing (D27; build 2 only, not applicable to the 1.0 submission build, decision 028): turn STEP on, preview a model, record `pgrep -lf CADImportService`
   and the worker's spawn and exit. Corrected 2026-10-10: a TestFlight build is signed with the "TestFlight Beta
   Distribution" certificate (leaf OID `1.2.840.113635.100.6.1.25.1`), not the Mac App Store certificate
   (`1.2.840.113635.100.6.1.9`), so the Mac App Store branch of the peer requirement is not what a TestFlight
@@ -127,9 +129,10 @@ per the Mac validation protocol in the platform review, at least:
 External testers are not planned (owner decision, 2026-10-12: internal TestFlight only). The items below stay open
 for the store release.
 
-- Q-171: the OCCT source-offer obligation. Internal testing stays inside the team; before the store, either
-  publish the offer and the packaged sources or apply the approved CAD-exclusion fallback. The source mirror is
-  public (release 1.0.0); the legal review of the source-offer route (decision 027 D20) has no recorded outcome.
+- Q-171: the OCCT source-offer obligation. Closed for 1.0 on 2026-10-13: the owner chose the CAD-exclusion
+  fallback ([decision 028](../decisions/028-no-cad-in-version-1.md)), so build 3 has no OCCT. The source mirror
+  stays public (release 1.0.0) and is not changed. No legal review took place and no licence was bought; the
+  question returns only if CAD does.
 - Q-172: native-speaker review of the 13 translations, localized store copy, the live support and privacy
   pages and the support mailbox.
 - Screenshots after the interface settles (Q-181).

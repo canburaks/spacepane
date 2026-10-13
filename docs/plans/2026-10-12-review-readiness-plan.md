@@ -30,7 +30,7 @@ Work in Phase 1 cannot start on the first three until they are made. Each has a 
 | ID | Decision | Recommendation | Why |
 |---|---|---|---|
 | R-1 | Languages in 1.0 (D-B, D22) | **Applied 2026-10-12 under the owner's standing rule that only reviewed languages ship:** English only, because no review is recorded. Add a language in a point release when its review is recorded. | Zero reviews exist. It is the rule already written in `AGENTS.md`. Thirteen draft languages on the store page are thirteen promises a reviewer or customer can test. |
-| R-2 | STEP and IGES in 1.0 (D-D, D20) | Name a cut-over date now. If counsel has cleared the source-offer route by then, ship CAD with final notice wording; if not, 1.0 ships without the helper and CAD returns in 1.1. | The notice text cannot honestly be made final while the route is unreviewed, and the bundled text is what a reader sees. App Review does not judge LGPL compliance; this is a publishing risk, not a review risk. |
+| R-2 | STEP and IGES in 1.0 (D-D, D20) | **Decided (owner, 2026-10-13): they do not ship in 1.0** ([decision 028](../decisions/028-no-cad-in-version-1.md)). Open Cascade answered the owner's question without confirming or rejecting the source-offer route and pointed to its paid exception. The earlier recommendation was: Name a cut-over date now. If counsel has cleared the source-offer route by then, ship CAD with final notice wording; if not, 1.0 ships without the helper and CAD returns in 1.1. | The notice text cannot honestly be made final while the route is unreviewed, and the bundled text is what a reader sees. App Review does not judge LGPL compliance; this is a publishing risk, not a review risk. |
 | R-3 | Minimum macOS (D-I, D21) | **Decided (owner, 2026-10-12): a macOS 15.2 (24C101) virtual machine was created with VirtualBuddy.** It is inside the 15.0 to 15.3 window that D21 names. **Owner, 2026-10-12: treat the app as working on macOS 15.** No session observed the run and the host matrix has no macOS 15 row; the review notes state it on the owner's word. | Raising the minimum to the only tested system (27.2) would exclude most customers; shipping 15.0 unrun is an unmeasured launch risk. |
 | R-4 | Release option | Manual release. | App Store Connect is currently set to automatic. Manual lets the website link, the mirror tag and the release happen together. |
 | R-5 | Category | Keep Utilities primary, Developer Tools secondary; close listing decision 5. | Build and store record already agree. |
@@ -181,9 +181,19 @@ Not done, and why:
 - **The YAML outline's limits.** Sequences of mappings (`- name: x`), anchors, block scalars, flow collections and multi-document files still fall back to source, which covers many real Kubernetes manifests. The store claim "YAML … as outlines" is true for plain nested mappings; decide in Phase 5 whether to qualify it. A sensitive key with a nested block (`auth:`, `credentials:`) conceals the rest of the file, so the outline ends there; bounding it safely needs a real YAML tokenizer and is later work.
 - **Two known test issues** remain as recorded: right-to-left tab stops and the narrow-host line-number layout.
 
+Later the same day:
+
+- The owner merged the app and website pull requests, signed the Paid Apps Agreement (Active, with bank and tax forms Active) and declared trader status (In Review at Apple).
+- The owner uploaded build 1.0.0 (2). Export and upload succeeded; the only warning is the missing `CADWorker` dSYM. App Store Connect showed the build as "Processing" ten minutes later; its result and its language list are still to be read.
+- An email to Open Cascade asking whether the source-offer route is acceptable for the Mac App Store was drafted for the owner to send; R-2 waits for the answer.
+
+2026-10-13:
+
+- Open Cascade replied. The owner decided R-2: no STEP or IGES in 1.0. Build 2 stays an internal test build; build 3, built with `PREV_INCLUDE_CAD = NO`, is the submission build. Store copy, review notes, samples, the website and screenshot 07 follow (decision 028).
+
 Next, in order:
 
-1. Owner: commit the two working trees (app and website), sign the Paid Apps Agreement, declare trader status, decide R-2.
-2. On instruction: upload build 2, enable it for the internal group, and read which languages App Store Connect lists for it (expected: English only).
+1. Finish and verify the build without CAD, upload it as build 3 on instruction, install it through TestFlight and read which languages App Store Connect lists for it (expected: English only).
+2. Retake screenshot 07 with a mesh model; re-paste the description and keywords in App Store Connect.
 3. Phase 4 observations on the installed build, then Phase 5 trims the listing to what was seen, then Phase 6 and 7.
 

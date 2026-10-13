@@ -4,6 +4,8 @@ Status: the owner chose this set for the store on 2026-10-12. The nine images ar
 made on 2026-10-11 from the local development-signed Release build. They are not verified on a store-signed
 build and have not been uploaded. A second set in the website's dark style with the Aurora scheme was made by
 another session under `.build/store-screenshots/website-theater/`; it was not chosen.
+**Amended 2026-10-13 ([decision 028](../../decisions/028-no-cad-in-version-1.md)): version 1.0 ships without STEP and IGES.** The made image `07-models.png` shows a STEP model and says STEP and IGES are off until switched on, so it cannot be used; it is retaken with a mesh model (for example the generated STL) and without that line. `08-file-types.png` reads "76 of 76 enabled" (observed in the image on 2026-10-13) and the build 3 catalog has 74 types, so it is retaken from build 3. The listing's screenshot plan carries the same open item. The two app preview videos under `app-preview/` were not inspected on 2026-10-13; check them for a STEP or IGES scene and for a type count before use. Everything below is history of what was made and planned on 2026-10-10 and 2026-10-11 unless marked.
+
 The sections under "Earlier plan" were written on 2026-10-10 and are kept for their rules; where they differ
 from the next section, the next section is what was done.
 
@@ -22,15 +24,15 @@ install before submission.
 | `04-database.png` | A database at a glance. Read-only. | Quick Look panel, `stations.sqlite`, Table view |
 | `05-archives.png` | Look inside. Nothing is extracted. | Quick Look panel, `release-1.4.zip`, Tree view |
 | `06-markdown.png` | Markdown, ready to read. | Quick Look panel, `README.md`, Rendered view, zoomed |
-| `07-models.png` | Models you can turn. | Quick Look panel, `winch-gear.step`; the line under the headline says STEP and IGES are off until switched on |
-| `08-file-types.png` | A switch for every file type. | The companion's File Types page |
+| `07-models.png` | Models you can turn. | Quick Look panel, `winch-gear.step`; the line under the headline says STEP and IGES are off until switched on. **Not usable in 1.0 (decision 028): retake with a mesh model.** |
+| `08-file-types.png` | A switch for every file type. | The companion's File Types page, showing "76 of 76 enabled". **Retake from build 3 (74 types).** |
 | `09-theme.png` | Your colors. Your type. | The companion's Theme page |
 
 How they are made, so they can be retaken:
 
 1. `python3 script/generate_store_demo_files.py` writes the synthetic "Harbor" files to
    `.build/store-screenshots/Harbor`. Nothing in them is real; the secret-looking values are fake and are there
-   so concealment shows. `winch-gear.step` is generated AP214 text (a gear outline with a hexagonal bore).
+   so concealment shows. `winch-gear.step` is generated AP214 text (a gear outline with a hexagonal bore); it is not used in 1.0.
 2. `script/store-screenshots/capture.sh` stages a clean Finder window, opens Quick Look on each file, picks the
    view with the panel's own controls, and captures each window by its window number with `screencapture`.
    It needs a Retina display mode, Screen Recording and Accessibility permission, and about two minutes with
@@ -45,9 +47,9 @@ tile is chosen with a real mouse click, because the tiles ignore an accessibilit
 
 Open before these are submitted:
 
-- App Store Connect holds no screenshots (0 of 10, observed 2026-10-12). Build 1 has eleven color schemes and build 2 has twelve (Aurora, added 2026-10-11), so the Theme image (`09-theme.png`) is retaken from the validated build with the twelve tiles.
+- App Store Connect holds no screenshots (0 of 10, observed 2026-10-12). Build 1 has eleven color schemes and builds 2 and 3 have twelve (Aurora, added 2026-10-11), so the Theme image (`09-theme.png`) is retaken from the validated build with the twelve tiles.
 - Retake from the internal TestFlight install, or confirm each Finder scene there (provenance gate 1 below). The CAD
-  scene in particular has only been seen on the development-signed build.
+  scene in particular was seen only on the development-signed build, and it is dropped for 1.0 (decision 028): `07-models.png` is retaken with a mesh model, and that retake is open.
 - Resolved 2026-10-11: Quick Look's "Open with" button named this Mac's default apps for notebooks and SQLite
   files, which are other vendors' products. The owner asked for them to go. The demo generator now gives those
   two files a per-file "Open with" binding to Xcode (the extended attribute Finder's Get Info writes), so the
@@ -69,7 +71,7 @@ Apple's constraints (App Store Connect reference, read 2026-10-10; recheck the l
 Provenance gates (from `AGENTS.md`, `docs/validation/host-matrix.json` and the publication plan, decision D-J):
 
 1. **Shots are taken only from the validated store-signed build**: the TestFlight install of the exact build that will be submitted, installed in `/Applications`, with `pluginkit -mAD | grep -i webmeister` showing exactly one preview and one thumbnail extension (development builds registered from build folders compete with the store build for Finder routing).
-2. **Finder shots need a recorded observation first.** `host-matrix.json` currently records Finder preview as observed for 4 of 76 types (`text.extensionless`, `data.json`, `data.json-lines`, `text.jupyter-notebook`) and Finder thumbnails for 0 of 76, all on development-signed builds. Before a Finder shot is allowed, the type must be observed to show SpacePane's preview in Finder on the store build, and `host-matrix.json` updated. If it is not, use the companion substitute named in the row, or drop the shot. Where Quick Look panel and Finder column preview are different surfaces, the shot says which one it shows.
+2. **Finder shots need a recorded observation first.** `host-matrix.json` currently records Finder preview as observed for 4 of 74 types (`text.extensionless`, `data.json`, `data.json-lines`, `text.jupyter-notebook`; it said 4 of 76 until 2026-10-13) and Finder thumbnails for 0 of 74, all on development-signed builds. Before a Finder shot is allowed, the type must be observed to show SpacePane's preview in Finder on the store build, and `host-matrix.json` updated. If it is not, use the companion substitute named in the row, or drop the shot. Where Quick Look panel and Finder column preview are different surfaces, the shot says which one it shows.
 3. **No thumbnail shot** (icon view, gallery or Finder list icons) unless thumbnails are observed on the store build for the types shown. None has been observed.
 4. Use only synthetic files from `python3 script/generate_host_fixtures.py` (it prints a new directory; the only secret in them is the fake string `synthetic-host-matrix-secret`) or the app's bundled appearance samples. Copy the files into a folder named `Demo Files` on a clean demo user account or a tidied desktop. No private files, real names, real paths, real mail, iCloud folders or other apps' windows. The supplied private CAD model never appears (`AGENTS.md`).
 5. Fresh settings (decision D-A: discard old group-container settings before the validation round), English interface, a single window of the app per shot, menu bar and Dock showing no personal items.
@@ -78,6 +80,8 @@ Provenance gates (from `AGENTS.md`, `docs/validation/host-matrix.json` and the p
 8. Screenshots are English only for now; localized sets follow the language decision (D-B). Do not reuse English captures for a locale with different UI text.
 
 ## Shot list (8)
+
+*Marked 2026-10-13: rows 4 and 6 name STEP and IGES; version 1.0 has no CAD ([decision 028](../../decisions/028-no-cad-in-version-1.md)), so row 6 is dropped and row 4 shows no STEP or IGES rows.*
 
 | # | Scene | Window | Sample file | Caption (characters) | Size | Must be verified before the shot is allowed |
 |---|---|---|---|---|---|---|

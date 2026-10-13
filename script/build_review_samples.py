@@ -153,8 +153,6 @@ SAMPLES: Tuple[Sample, ...] = (
     Sample("29-model.obj", "host", "103-model.obj", "3D model you can turn"),
     Sample("30-model.ply", "host", "105-ascii.ply", "3D model you can turn"),
     Sample("31-model.3mf", "host", "108-model.3mf", "3D model you can turn"),
-    Sample("32-winch-gear.step", "demo", "winch-gear.step", "3D CAD model; switch on STEP first"),
-    Sample("33-box.iges", "host", "23-box.iges", "3D CAD model; switch on IGES first"),
     Sample("Makefile", "authored", "MAKEFILE_SAMPLE", "No extension: shown as text, highlighted"),
 )
 
@@ -167,9 +165,7 @@ HOW TO TRY
    click "Open System Settings" and switch on SpacePane Preview and
    SpacePane Thumbnails. (macOS 15: System Settings > General > Login
    Items & Extensions > Quick Look.)
-2. For the CAD files only: open SpacePane > File Types and switch on
-   STEP and IGES first. They are off by default.
-3. Unzip this folder, select a file in Finder and press Space.
+2. Unzip this folder, select a file in Finder and press Space.
 
 macOS decides which app previews a type; if another app already does,
 Quick Look may use it. An info symbol shows when SpacePane made the
@@ -204,7 +200,7 @@ class Sources:
         # Not main(): it also binds demo files to Xcode with an extended attribute, which a sample archive must not.
         for write in (generate_store_demo_files.write_settings, generate_store_demo_files.write_readme,
                       generate_store_demo_files.write_notebook, generate_store_demo_files.write_database,
-                      generate_store_demo_files.write_archive, generate_store_demo_files.write_step):
+                      generate_store_demo_files.write_archive):
             write(self.demo_directory)
 
     def close(self) -> None:
