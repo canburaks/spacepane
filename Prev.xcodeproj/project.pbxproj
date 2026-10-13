@@ -476,21 +476,22 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist",
+				"$(PREV_CAD_BUNDLE_INPUTS)",
 			);
 			inputPaths = (
 				"$(SRCROOT)/script/embed_cad_worker.py",
+				"$(SRCROOT)/script/embed_notices.py",
 				"$(SRCROOT)/Configuration/CADWorker.entitlements",
 			);
 			name = "Embed CAD worker";
 			outputFileListPaths = (
-				"$(SRCROOT)/.build/cad/bundle-outputs.xcfilelist",
+				"$(PREV_CAD_BUNDLE_OUTPUTS)",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\n";
+			shellScript = "if [ \"${PREV_INCLUDE_CAD}\" = YES ]; then\n  /usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\nelse\n  /usr/bin/python3 \"${SRCROOT}/script/embed_notices.py\"\nfi\n";
 		};
 		CAD200000000000000000002 /* Embed CAD worker */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -499,21 +500,22 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist",
+				"$(PREV_CAD_BUNDLE_INPUTS)",
 			);
 			inputPaths = (
 				"$(SRCROOT)/script/embed_cad_worker.py",
+				"$(SRCROOT)/script/embed_notices.py",
 				"$(SRCROOT)/Configuration/CADWorker.entitlements",
 			);
 			name = "Embed CAD worker";
 			outputFileListPaths = (
-				"$(SRCROOT)/.build/cad/bundle-outputs.xcfilelist",
+				"$(PREV_CAD_BUNDLE_OUTPUTS)",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\n";
+			shellScript = "if [ \"${PREV_INCLUDE_CAD}\" = YES ]; then\n  /usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\nelse\n  /usr/bin/python3 \"${SRCROOT}/script/embed_notices.py\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -583,6 +585,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "$(PREV_CAD_EXCLUDED_SOURCE_NAMES)";
 				INFOPLIST_FILE = "Configuration/Preview-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -594,6 +597,7 @@
 				PRODUCT_MODULE_NAME = PrevPreviewExtension;
 				PRODUCT_NAME = PrevPreviewExtension;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION)";
 			};
 			name = Debug;
 		};
@@ -624,6 +628,7 @@
 				PRODUCT_MODULE_NAME = Prev;
 				PRODUCT_NAME = "$(PREV_EXECUTABLE_NAME)";
 				SKIP_INSTALL = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION)";
 			};
 			name = Debug;
 		};
@@ -660,6 +665,7 @@
 				PRODUCT_MODULE_NAME = Prev;
 				PRODUCT_NAME = "$(PREV_EXECUTABLE_NAME)";
 				SKIP_INSTALL = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION)";
 			};
 			name = Release;
 		};
@@ -703,6 +709,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Configuration/CADImportService.entitlements;
+				DEBUG_INFORMATION_FORMAT = "$(PREV_CAD_SERVICE_DEBUG_FORMAT)";
 				INFOPLIST_FILE = "Configuration/CADImportService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -719,6 +726,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "$(PREV_CAD_EXCLUDED_SOURCE_NAMES)";
 				INFOPLIST_FILE = "Configuration/Preview-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -730,6 +738,7 @@
 				PRODUCT_MODULE_NAME = PrevPreviewExtension;
 				PRODUCT_NAME = PrevPreviewExtension;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION)";
 			};
 			name = Release;
 		};

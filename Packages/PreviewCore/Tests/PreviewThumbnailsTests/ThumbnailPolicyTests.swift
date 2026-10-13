@@ -1,6 +1,7 @@
 import Foundation
 import Testing
 import PreviewContracts
+import PreviewTestSupport
 import PreviewPreferences
 @testable import PreviewThumbnails
 
@@ -57,17 +58,23 @@ struct ThumbnailPolicyTests {
         for id in content {
             #expect(try #require(catalog.descriptor(for: id)).thumbnail == .content, "\(id.rawValue)")
         }
-        let generic: [FormatID] = [.environment, .zip, .tar, .gzip, .xip, .folder, .midi, .iges, .step]
+        let generic: [FormatID] = [.environment, .zip, .tar, .gzip, .xip, .folder, .midi]
         for id in generic {
             #expect(try #require(catalog.descriptor(for: id)).thumbnail == .generic, "\(id.rawValue)")
         }
         #expect(try #require(catalog.descriptor(for: .extensionlessText)).thumbnail == .none)
     }
 
-    @Test func environmentFilesAndCADStayGenericWhateverTheSwitch() throws {
-        let sensitive: [FormatID] = [.environment, .iges, .step]
-        for id in sensitive {
-            #expect(ThumbnailPolicyEvaluator.resolve(.enabled(id), catalog: catalog) == .fallback(.genericPolicy))
+    @Test func environmentFilesStayGenericWhateverTheSwitch() {
+        #expect(ThumbnailPolicyEvaluator.resolve(.enabled(.environment), catalog: catalog) == .fallback(.genericPolicy))
+    }
+
+    /// Version 1.0 does not ship the CAD formats; the descriptors kept for their return still draw only a generic glyph.
+    @Test func keptCADDescriptorsStayGenericWhateverTheSwitch() throws {
+        let cad = try CADCatalogFixture.catalog()
+        for id in [FormatID.iges, .step] {
+            #expect(try #require(cad.descriptor(for: id)).thumbnail == .generic)
+            #expect(ThumbnailPolicyEvaluator.resolve(.enabled(id), catalog: cad) == .fallback(.genericPolicy))
         }
     }
 }

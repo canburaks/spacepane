@@ -12,9 +12,14 @@ private enum CheckFailure: Error { case arguments, outcome }
     static func run() async throws {
         guard CommandLine.arguments.count >= 3 else { throw CheckFailure.arguments }
         let worker = URL(fileURLWithPath: CommandLine.arguments[1])
-        let pipeline = PreviewPipeline(registrations: CADFormatAdapters.registrations(workerURL: worker))
+        // Version 1.0 keeps the two CAD descriptors out of the product catalog; this manual check of the CAD
+        // module adds them back from the file the build validator also reads (this source sits in Tests/Integration).
+        let entries = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
+            .deletingLastPathComponent().appendingPathComponent("Configuration/CADFormatCatalogEntries.json")
+        let catalog = try FormatCatalog.standard.appending(entriesJSON: Data(contentsOf: entries))
+        let pipeline = PreviewPipeline(catalog: catalog, registrations: CADFormatAdapters.registrations(workerURL: worker))
         var preferences = PreviewPreferencesSnapshot.defaults
-        preferences.setEnabled(true, for: .iges); preferences.setEnabled(true, for: .step)
+        preferences.setEnabled(true, for: .iges, catalog: catalog); preferences.setEnabled(true, for: .step, catalog: catalog)
         for argument in CommandLine.arguments.dropFirst(2) {
             let url = URL(fileURLWithPath: argument)
             let begin = ContinuousClock.now

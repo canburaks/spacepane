@@ -4,11 +4,13 @@ Prepared 2026-10-07 (Europe/Istanbul). For the first native macOS release and su
 
 **Corrections of 2026-10-10.** Publication preparation started on 2026-10-10, after this guide was written. Seven statements were checked against Apple's pages, the repository and this Mac and are corrected where they appear below; each carries a "Corrected 2026-10-10" label. In short: four privacy manifests now exist; Apple sets no minimum Xcode or SDK for macOS uploads; Apple now recommends `group.` App Group identifiers for new code, but the team-prefixed form stays valid and stays here; the age-rating questionnaire was replaced in 2026; App Store Connect offers 50 metadata locales, without Kurmanji or Hausa; the API key should be a Team key with the Admin role; and a TestFlight build is signed with the TestFlight certificate, not the Mac App Store one. The [publication plan](../plans/2026-10-10-app-store-publication-plan.md) sequences the remaining work.
 
+**Amended 2026-10-13: version 1.0 ships without STEP and IGES** ([decision 028](../decisions/028-no-cad-in-version-1.md)). The submission build is build 3, built with the build setting `PREV_INCLUDE_CAD = NO`; build 1.0.0 (2), uploaded on 2026-10-12 with CAD, is for the owner's internal TestFlight testing only and must not be submitted. Everything below that concerns CAD (the license gate, client authentication after re-signing, the CAD service and workers, the "Both default-off switches" checks, STEP and IGES samples) is research kept for the version that brings CAD back and does not gate 1.0; the type count is 74, not 76. Statements marked "(1.0: not applicable)" below were checked on that date; the rest of the guide was not rewritten.
+
 SpacePane already has an App ID, a chosen name and pricing plans, according to the owner. Since 2026-10-10 the owner also reports that the App Store Connect app record and an App Store Connect API key exist, and that a price of roughly USD 9.99 is set in App Store Connect with local pricing adopted (owner statements; Apple's account was not inspected). Start from those existing records. The remaining work is to make the exact distribution build reliable, reconcile its public claims with observed Finder behavior, complete App Store Connect disclosures, and give App Review a reproducible way to test it.
 
-**The repository does not yet establish submission readiness.** The highest-priority gates are the CAD dependency's distribution license, CAD client authentication after Apple re-signing, current-build Finder validation on macOS 15 and the current stable OS, reviewed shipping languages, and Organizer/App Store Connect distribution validation. A successful local archive closes none of those by itself.
+**The repository does not yet establish submission readiness.** The highest-priority gates were the CAD dependency's distribution license and CAD client authentication after Apple re-signing (both not applicable to 1.0 since 2026-10-13, decision 028), and remain current-build Finder validation on macOS 15 and the current stable OS, reviewed shipping languages, and Organizer/App Store Connect distribution validation. A successful local archive closes none of those by itself.
 
-Active support contact: **info@spacepane.com**, confirmed by the owner. The guide does not create identifiers, change prices, submit a build or publish the app. Apple account settings were not inspected when this guide was written. Update 2026-10-12: build 1.0.0 (1) was uploaded on 2026-10-10 and is processed and "Ready to Submit", with zero installs; it is not attached to the version and will not be submitted, and build 2 is being prepared. Nothing has been submitted for review. The account state read on 2026-10-12 is in [the listing record](app-store-listing.md#what-app-store-connect-holds) ([dry-run record](../validation/2026-10-10-testflight-dry-run.md)). Use the [historical research](../initial/08-app-store-publishing-research.md) for reported failures and outcomes, and the [submission worksheet](app-store-submission.md) for review notes.
+Active support contact: **info@spacepane.com**, confirmed by the owner. The guide does not create identifiers, change prices, submit a build or publish the app. Apple account settings were not inspected when this guide was written. Update 2026-10-12: build 1.0.0 (1) was uploaded on 2026-10-10 and is processed and "Ready to Submit", with zero installs; it is not attached to the version and will not be submitted, build 2 (uploaded 2026-10-12, with CAD) is for internal TestFlight testing only, and the submission build is build 3 without CAD. Nothing has been submitted for review. The account state read on 2026-10-12 is in [the listing record](app-store-listing.md#what-app-store-connect-holds) ([dry-run record](../validation/2026-10-10-testflight-dry-run.md)). Use the [historical research](../initial/08-app-store-publishing-research.md) for reported failures and outcomes, and the [submission worksheet](app-store-submission.md) for review notes.
 
 ## Contents
 
@@ -34,9 +36,9 @@ The following separates owner confirmation, checked-in configuration and older v
 | App ID, name, pricing plans | Owner says these exist. | Reconcile existing records with the archive; do not recreate them. |
 | Production identity | PLAN M6 records `org.webmeister.spacepane` and App Group `Z743N6D8DS.org.webmeister.spacepane.shared`, adopted on October 6. Committed Base.xcconfig deliberately retains compile-only placeholders; ignored local configuration supplies signing values. | Verify effective Release build settings and the existing Apple records, including nested targets. |
 | Product baseline | macOS 15+, currently `ARCHS = arm64`, version 1.0.0/build 1 in Base.xcconfig. | Advertise Apple silicon only unless a separately validated universal build is approved. Increment the upload build number. |
-| File coverage | The integrated catalog contains 76 logical types and 309 suffixes. Earlier 22-format Finder tests are narrower than this catalog. | Establish a current-build, per-format claim matrix. Do not market 76 verified Finder integrations from parser counts. |
-| CAD | Opt-in IGES/STEP geometry exists; licensing and broader platform gates remain open. | Resolve the license route and test Apple-delivered XPC authentication before advertising CAD. |
-| Languages | Fourteen language resource sets exist; native-speaker and installed-host validation remain open. Decision 2026-10-12 (owner rule: only reviewed languages ship): no language has a recorded review, so build 2 ships English only and the other 13 stay in the repository as drafts. | Approve an explicit shipping-language list and make resources, metadata and advertising agree. |
+| File coverage | The integrated catalog contained 76 logical types and 309 suffixes until 2026-10-13; it now contains 74 (the two CAD entries left it for 1.0, decision 028), and the suffix count is not recounted here. Earlier 22-format Finder tests are narrower than this catalog. | Establish a current-build, per-format claim matrix. Do not market 74 verified Finder integrations from parser counts. |
+| CAD | Opt-in IGES/STEP geometry exists in the repository's sources but is not in the 1.0 product (decision 028, 2026-10-13). | (1.0: not applicable.) If CAD returns: resolve the license route and test Apple-delivered XPC authentication before advertising it. |
+| Languages | Fourteen language resource sets exist; native-speaker and installed-host validation remain open. Decision 2026-10-12 (owner rule: only reviewed languages ship): no language has a recorded review, so version 1.0 ships English only and the other 13 stay in the repository as drafts. | Approve an explicit shipping-language list and make resources, metadata and advertising agree. |
 | Website | On October 7, `/support.html` and `/privacy.html` redirected to `/support` and `/privacy` and returned HTTP 200. Both rendered pages still displayed `support@spacepane.com`. *Superseded 2026-10-12:* the support, privacy and open-source pages are live and show `info@spacepane.com` everywhere; the domain has MX, SPF and DMARC records. | Test mail delivery: whether the mailbox answers is unconfirmed. A working page does not prove mailbox delivery. |
 | Upload readiness | An earlier archive passed local checks. On 2026-10-10 `--archive` and `--export` passed with the production identities and Xcode 27.0 ([dry-run record](../validation/2026-10-10-testflight-dry-run.md)). *Updated 2026-10-12:* build 1.0.0 (1) was uploaded on 2026-10-10 and App Store Connect processed it; the processing result was not recorded verbatim in the repository. It is not attached to the version and will not be submitted. | Repeat on build 2 and retain distribution logs and Apple's messages verbatim. |
 
@@ -44,8 +46,8 @@ Sources of repository truth: [PLAN](../../PLAN.md), [change history](../../CHANG
 
 ### Recommended order
 
-1. Resolve release scope and CAD licensing; inspect the CAD authentication design.
-2. Produce a distribution candidate, test Apple-delivered CAD authentication, and close minimum-OS, Finder, privacy and accessibility defects.
+1. Resolve release scope (done 2026-10-13: no CAD in 1.0, decision 028; CAD licensing and the CAD authentication design are not applicable to 1.0).
+2. Produce a distribution candidate (build 3), and close minimum-OS, Finder, privacy and accessibility defects.
 3. Review shipping translations and correct public support/privacy information.
 4. Finish product-page assets and factual disclosures against that candidate.
 5. Run TestFlight, prepare review fixtures, submit for review, then release deliberately.
@@ -113,8 +115,8 @@ Verify the effective main ID, preview ID, thumbnail ID, CAD service ID and group
 | Companion | Sandboxed; shared preferences writer; user-selected read/write grant supports explicit theme export. Actual preview source reads remain read-only. |
 | Preview extension | Sandboxed; App Group reader; owns host-granted file lifetime; must not require companion to run. |
 | Thumbnail extension | Sandboxed; stricter budgets and safe thumbnail policy; no CAD importer or interactive/audio renderer. |
-| CAD XPC service | Independently sandboxed, embedded in the preview extension; authenticated clients and connection-owned cancellation. |
-| Two CADWorker executables | One in the companion and one in the service; inherited sandbox. Current policy permits exactly sandbox and inherit entitlements. Each signing identifier is its owning bundle ID plus `.CADWorker`. |
+| CAD XPC service (1.0: absent, `PREV_INCLUDE_CAD = NO`) | Independently sandboxed, embedded in the preview extension; authenticated clients and connection-owned cancellation. |
+| Two CADWorker executables (1.0: absent) | One in the companion and one in the service; inherited sandbox. Current policy permits exactly sandbox and inherit entitlements. Each signing identifier is its owning bundle ID plus `.CADWorker`. |
 
 App Sandbox for a child tool and for an XPC service are different configurations. Do not copy the companion's entire entitlement set onto an inherited helper or remove sandboxing to solve an upload error. Inspect the final signed entitlements, not only source `.entitlements` files. [Apple: embedding a command-line tool](https://developer.apple.com/documentation/xcode/embedding-a-helper-tool-in-a-sandboxed-app), [resolved DTS case](https://developer.apple.com/forums/thread/679940).
 
@@ -122,13 +124,15 @@ SpacePane's local checker verifies architectures, signatures, sandbox/network/te
 
 ## 5. Resolve the CAD distribution gates
 
+*(1.0: not applicable. The owner decided on 2026-10-13 to ship 1.0 without STEP and IGES; see [decision 028](../decisions/028-no-cad-in-version-1.md). This section is kept for the version that brings CAD back.)*
+
 ### License clearance before distribution
 
 The pinned OCCT 7.9.3 library is statically linked into the worker. The repository explicitly leaves release blocked on an approved route for corresponding source, modified build manifests, scripts and applicable relinking materials, or a separately approved licensing route. Local `.o` files and copied notices do not close the distribution obligation. The upstream header exception is not a blanket static-linking exemption. [Repository audit](../dependencies/occt.md), [pinned upstream exception](https://github.com/Open-Cascade-SAS/OCCT/blob/a016080bf6738d6aeae020badee4e888ad1540a5/OCCT_LGPL_EXCEPTION.txt)
 
 Before distributing a beta or production binary containing this dependency, have the chosen licensing route reviewed for the actual Store channel, retain the required materials and document how recipients obtain them. Apple accepting a binary does not settle third-party license compliance. Turning CAD off by default does not remove a library already shipped inside the bundle. If clearance requires a release-scope change, get that product decision explicitly and remove the dependency from the artifact as well as the claim; do not treat metadata-only CAD as satisfying the requested 3D feature.
 
-A CAD-free artifact would require implementation and build/validation changes: the current archive workflow always builds CAD, and the checker expects the service and two workers. It is not an available release switch.
+A CAD-free artifact would require implementation and build/validation changes: when this guide was written the archive workflow always built CAD, and the checker expected the service and two workers. *Updated 2026-10-13:* the build setting `PREV_INCLUDE_CAD` (`Configuration/Base.xcconfig`, NO for 1.0) is that switch, and the release-archive checker enforces it (decision 028).
 
 ### Verify client authentication after Apple re-signing
 
@@ -293,7 +297,7 @@ The reviewer should be able to install the app, enable its extensions, open a su
 
 Use the [updated Notes template](app-store-submission.md#notes-for-app-review) and replace every bracketed field. If a fixture routes to another provider during your test, choose a verified representative and record the limitation; do not tell the reviewer to delete competing software or run terminal repairs.
 
-Explain that macOS hosts preview/thumbnail extensions on demand, including while the companion is closed. CAD imports use an embedded helper and do not require downloads, Homebrew or administrator installation. Explain the independent default-off CAD controls and the limits of changing type choices while a preview/thumbnail is already cached.
+Explain that macOS hosts preview/thumbnail extensions on demand, including while the companion is closed. CAD imports use an embedded helper and do not require downloads, Homebrew or administrator installation. (1.0: omit the CAD sentences, decision 028.) Explain the independent default-off CAD controls and the limits of changing type choices while a preview/thumbnail is already cached.
 
 For a testable policy uncertainty, such as the deliberate extensionless-text declaration, provide the exact declaration, bounded behavior and reason in the review correspondence. A support answer or another app's approval is not preapproval of SpacePane. Keep the current app functional while seeking clarification.
 
@@ -376,8 +380,8 @@ These are proposed release gates. None is marked complete by this research.
 
 ### Product and artifact
 
-- [ ] CAD licensing and corresponding-source/relinking route are approved before distributing the dependency.
-- [ ] If CAD ships, accepted-client authentication passes on Apple-delivered code and rejects unauthorized clients.
+- [ ] CAD licensing and corresponding-source/relinking route are approved before distributing the dependency. (1.0: not applicable, no dependency is distributed; decision 028.)
+- [ ] If CAD ships (not in 1.0), accepted-client authentication passes on Apple-delivered code and rejects unauthorized clients.
 - [ ] Final source checks/tests/compiler checks and archive checker pass, with recorded scope.
 - [ ] Organizer validation, upload processing and final nested signature/entitlement inspection pass.
 - [ ] The delivered candidate passes real Finder preview/thumbnail checks on macOS 15 and the current stable OS.

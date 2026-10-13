@@ -128,9 +128,9 @@ struct CADXPCServiceTests {
     }
 
     @Test func missingXPCConfigurationDoesNotFallBackToDirectWorker() async {
-        let pipeline = PreviewPipeline(registrations: CADFormatAdapters.registrations(serviceName: ""), reader: XPCEmptyReader())
+        let pipeline = PreviewPipeline(catalog: cadCatalog, registrations: CADFormatAdapters.registrations(serviceName: ""), reader: XPCEmptyReader())
         var preferences = PreviewPreferencesSnapshot.defaults
-        preferences.setEnabled(true, for: .iges)
+        preferences.setEnabled(true, for: .iges, catalog: cadCatalog)
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/unused/model.igs"), preferences: preferences)
             == .unavailable(.cadImporterUnavailable))
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/unused/model.step")) == .disabledByUser(.step))

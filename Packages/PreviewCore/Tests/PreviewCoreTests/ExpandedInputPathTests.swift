@@ -3,7 +3,6 @@ import Testing
 import UniformTypeIdentifiers
 import PreviewContracts
 import PreviewFormats
-import PreviewCADFormats
 @testable import PreviewCore
 
 @Suite("Expanded input boundaries")
@@ -35,7 +34,7 @@ struct ExpandedInputPathTests {
     }
     @Test func everyCatalogRegistrationHonorsDisableAllIncludingFolders() async throws {
         let catalog = FormatCatalog.standard
-        #expect(Set((StandardFormatAdapters.registrations + CADFormatAdapters.registrations).map(\.formatID)) == Set(catalog.descriptors.map(\.id)))
+        #expect(Set(StandardFormatAdapters.registrations.map(\.formatID)) == Set(catalog.descriptors.map(\.id)))
         let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }

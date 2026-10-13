@@ -260,6 +260,15 @@ def midi() -> bytes:
     return b'MThd' + struct.pack('>IHHH', 6, 0, 1, 96) + b'MTrk' + struct.pack('>I', len(track)) + track
 
 
+def cad_samples(add) -> None:
+    """The IGES and STEP samples, kept for when those formats return to the catalog (not called in version 1.0).
+
+    Analytic boxes authored for this repository; see Native/CADWorker/Tests/Fixtures/README.md.
+    """
+    for format_id, suffix in (('cad.iges', 'iges'), ('cad.step', 'step')):
+        add(format_id, 'example.' + suffix, {'example.' + suffix: (ROOT / 'Native/CADWorker/Tests/Fixtures' / ('box.' + suffix)).read_bytes()})
+
+
 def samples() -> list[dict]:
     built = []
 
@@ -278,9 +287,9 @@ def samples() -> list[dict]:
     add('archive.xip', 'example.xip', {'example.xip': xip_archive()})
     add('container.folder', 'Example Folder', {'Example Folder/' + name.split('/', 1)[1]: payload for name, payload in ARCHIVE_ENTRIES})
     add('audio.midi', 'example.mid', {'example.mid': midi()})
-    for format_id, suffix in (('cad.iges', 'iges'), ('cad.step', 'step')):
-        # Analytic boxes authored for this repository; see Native/CADWorker/Tests/Fixtures/README.md.
-        add(format_id, 'example.' + suffix, {'example.' + suffix: (ROOT / 'Native/CADWorker/Tests/Fixtures' / ('box.' + suffix)).read_bytes()})
+    # Version 1.0 ships without the IGES and STEP previews (cad.iges, cad.step), so the catalog has no CAD
+    # entry and no sample is required for one: this check demands exactly one sample per catalog format.
+    # When the formats return, call `cad_samples(add)` here, below the MIDI sample.
     # [workstream samples] Add your formats' samples below your own marker; keep helpers in
     # functions named after your family so additions never touch another family's lines.
     # [archives]

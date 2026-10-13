@@ -30,21 +30,21 @@ import PreviewCore
         #expect(throws: PreviewFailure.malformedDocument) { try CADMeshDecoder.decode(nan, context: context) }
     }
     @Test func disabledCADNeverReadsOrConstructsImporter() async {
-        let pipeline = PreviewPipeline(registrations: CADFormatAdapters.registrations(workerURL: URL(fileURLWithPath: "/missing/helper")), reader: ForbiddenReader())
+        let pipeline = PreviewPipeline(catalog: cadCatalog, registrations: CADFormatAdapters.registrations(workerURL: URL(fileURLWithPath: "/missing/helper")), reader: ForbiddenReader())
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/missing/private.igs")) == .disabledByUser(.iges))
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/missing/private.step")) == .disabledByUser(.step))
     }
     @Test func missingWorkerHasSpecificFailureAndExplicitEnablementWorks() async {
         var preferences = PreviewPreferencesSnapshot.defaults
-        preferences.setEnabled(true, for: .iges)
-        let pipeline = PreviewPipeline(registrations: CADFormatAdapters.registrations(workerURL: URL(fileURLWithPath: "/missing/helper")), reader: EmptyReader())
+        preferences.setEnabled(true, for: .iges, catalog: cadCatalog)
+        let pipeline = PreviewPipeline(catalog: cadCatalog, registrations: CADFormatAdapters.registrations(workerURL: URL(fileURLWithPath: "/missing/helper")), reader: EmptyReader())
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/missing/private.igs"), preferences: preferences) == .unavailable(.cadImporterUnavailable))
     }
     @Test func formatBudgetIsSelectedOnlyForCADAndExplicitBudgetWins() async {
         let registration = AdapterRegistration(formatID: .iges, defaultBudget: GeometryLimits.requestBudget) { BudgetMeshAdapter() }
-        let pipeline = PreviewPipeline(registrations: [registration], reader: EmptyReader())
+        let pipeline = PreviewPipeline(catalog: cadCatalog, registrations: [registration], reader: EmptyReader())
         var preferences = PreviewPreferencesSnapshot.defaults
-        preferences.setEnabled(true, for: .iges)
+        preferences.setEnabled(true, for: .iges, catalog: cadCatalog)
         let url = URL(fileURLWithPath: "/missing/test.igs")
         guard case .geometryReady = await pipeline.preview(url: url, preferences: preferences) else {
             Issue.record("CAD request did not receive its opt-in budget"); return
@@ -53,8 +53,8 @@ import PreviewCore
     }
     @Test func centralPipelineEnforcesOutputBudgetForAnyGeometryAdapter() async {
         let registration = AdapterRegistration(formatID: .iges, defaultBudget: GeometryLimits.requestBudget) { BudgetMeshAdapter(enforcesBudget: false) }
-        let pipeline = PreviewPipeline(registrations: [registration], reader: EmptyReader())
-        var preferences = PreviewPreferencesSnapshot.defaults; preferences.setEnabled(true, for: .iges)
+        let pipeline = PreviewPipeline(catalog: cadCatalog, registrations: [registration], reader: EmptyReader())
+        var preferences = PreviewPreferencesSnapshot.defaults; preferences.setEnabled(true, for: .iges, catalog: cadCatalog)
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/missing/test.igs"), preferences: preferences,
             budget: PreviewBudget(maxOutputUTF8Bytes: 1)) == .unavailable(.outputTooLarge))
     }

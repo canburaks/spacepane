@@ -1,6 +1,6 @@
 # SpacePane — App Store Connect worksheet for 1.0.0 (draft)
 
-Status: draft answers, written 2026-10-10 from the repository and annotated on 2026-10-12 with what App Store Connect was observed to hold that day. Several answers are now entered there (marked "Entered" below); screenshots, the build selection, review notes and the attachment are not. [../app-store-listing.md](../app-store-listing.md#what-app-store-connect-holds) records the full list. App Store Connect's forms change; the owner confirms every answer against the live form on the day of entry. Where this worksheet and App Store Connect differ, App Store Connect is the record. The review notes, the archive and upload steps and the sample-file zip are in [../app-store-submission.md](../app-store-submission.md) and are not repeated here. Listing text is in [../app-store-listing.md](../app-store-listing.md) ([listing.en.md](listing.en.md) is a pointer to it); screenshots in [screenshots.md](screenshots.md).
+Status: draft answers, written 2026-10-10 from the repository and annotated on 2026-10-12 with what App Store Connect was observed to hold that day. Amended 2026-10-13: version 1.0 ships without STEP and IGES ([decision 028](../../decisions/028-no-cad-in-version-1.md)), so the submission build is build 3 without CAD, build 2 (which has CAD) is for internal TestFlight testing only, and the description and keywords stored in App Store Connect are out of date and are re-pasted from [../app-store-listing.md](../app-store-listing.md). Several answers are now entered there (marked "Entered" below); screenshots, the build selection, review notes and the attachment are not. [../app-store-listing.md](../app-store-listing.md#what-app-store-connect-holds) records the full list. App Store Connect's forms change; the owner confirms every answer against the live form on the day of entry. Where this worksheet and App Store Connect differ, App Store Connect is the record. The review notes, the archive and upload steps and the sample-file zip are in [../app-store-submission.md](../app-store-submission.md) and are not repeated here. Listing text is in [../app-store-listing.md](../app-store-listing.md) ([listing.en.md](listing.en.md) is a pointer to it); screenshots in [screenshots.md](screenshots.md).
 
 "Basis" names the file that supports an answer, so the owner can recheck it.
 
@@ -15,7 +15,7 @@ Status: draft answers, written 2026-10-10 from the repository and annotated on 2
 | Primary language | English (U.S.) unless the owner prefers another English variant | Development language is `en` (`tools/localization/languages.json`). |
 | Primary category | Utilities. Entered (observed 2026-10-12). | `PREV_APP_CATEGORY = public.app-category.utilities`, `Configuration/Branding.xcconfig`. |
 | Secondary category | Developer Tools. Entered (observed 2026-10-12). | Owner decision recorded in the publication plan. |
-| Content rights | Entered (observed 2026-10-12): "does not contain third-party content". Reasoning: the app does not contain, show or access third-party content. The files it previews are the user's own. | Owner confirms. Bundled third-party material is software and data under licence, not content: five MIT-licensed colour palettes (`ThirdPartyNotices/ColorSchemes/NOTICE.md`) and the pinned OCCT kernel in the 3D helper (`ThirdPartyNotices/OCCT/`, `docs/dependencies/occt.md`). If the owner prefers to answer "Yes", the rights are documented in those notices. |
+| Content rights | Entered (observed 2026-10-12): "does not contain third-party content". Reasoning: the app does not contain, show or access third-party content. The files it previews are the user's own. | Owner confirms. Bundled third-party material is software and data under licence, not content: five MIT-licensed colour palettes (`ThirdPartyNotices/ColorSchemes/NOTICE.md`) and, in builds that include the CAD helper (build 2; not the 1.0 submission build, decision 028), the pinned OCCT kernel (`ThirdPartyNotices/OCCT/`, `docs/dependencies/occt.md`). If the owner prefers to answer "Yes", the rights are documented in those notices. |
 | Copyright | `2026 Can Burak Sofyalioglu`. Entered (observed 2026-10-12). | `PREV_COPYRIGHT` is "Copyright © 2026 Can Burak Sofyalioglu. All rights reserved." in `Configuration/Branding.xcconfig`; the App Store field takes the year and rights holder only. Owner confirms the rights holder is the seller named on the developer account (the bundle prefix `org.webmeister` suggests another organization may exist). |
 | License agreement | Apple's standard end user licence agreement | Default; no custom EULA is drafted. |
 | Tax category | App Store software. Entered (observed 2026-10-12). | Per the publication plan. Set under the app's pricing and availability. |
@@ -44,8 +44,8 @@ Open inconsistency, for the lead and the website stream, not changed here: `Conf
 | Review contact last name | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
 | Review contact phone | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
 | Review contact email | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
-| Review notes | Not in App Store Connect yet (observed 2026-10-12). Paste the block "Notes for App Review" from [../app-store-submission.md](../app-store-submission.md). Another stream is revising it (extension enablement path, `public.data`, the `com.quicklookpro.*` aliases, the optional 3D previews and the source offer); use the revised block, not a copy made before it lands. |
-| Attachment | Not in App Store Connect yet (observed 2026-10-12). `SpacePane-Review-Samples.zip` from `python3 script/generate_host_fixtures.py`; the review readiness plan (Phase 1 item 6) adds a script target that builds it. |
+| Review notes | Not in App Store Connect yet (observed 2026-10-12). Paste the block "Notes for App Review" from [../app-store-submission.md](../app-store-submission.md). The block was revised on 2026-10-13: it names build 3 and one mesh sample (`28-binary.stl`) and has no STEP, IGES, Open CASCADE or source-offer text (decision 028). Use the current block, not a copy made earlier. |
+| Attachment | Not in App Store Connect yet (observed 2026-10-12). `SpacePane-Review-Samples.zip`, built by `python3 script/build_review_samples.py` (no STEP or IGES file in it since 2026-10-13). |
 | Release option | **Manual release** (recommended; owner decision R-4 of the review readiness plan). App Store Connect reads "Automatically release" on 2026-10-12, so it has to be changed. It lets the owner check the approved build and the website link before customers can download. Alternatives are release immediately after approval or on a set date; none is needed for 1.0.0. |
 
 ## 4. Age rating (2026 questionnaire)
@@ -79,7 +79,7 @@ Open checks: (a) read the entitlements of the signed archive, not only the sourc
 
 Info.plist: `ITSAppUsesNonExemptEncryption` is `false` in `Configuration/App-Info.plist` (the app target only; the extensions' plists do not set it). That answers "No" to Apple's encryption question without a per-build prompt.
 
-**The open check the owner must close before relying on it:** that no reader in the product decrypts content or implements encryption of its own. What a search of the shipped sources (`Packages/`, `Apps/`, `Extensions/`, `Native/CADWorker/`) found on 2026-10-10:
+**The open check the owner must close before relying on it:** that no reader in the product decrypts content or implements encryption of its own. What a search of the shipped sources (`Packages/`, `Apps/`, `Extensions/`, `Native/CADWorker/`) found on 2026-10-10 (the CAD helper's sources stay in the repository but are not in the 1.0 product, decision 028):
 
 | Finding | Where | What it does |
 |---|---|---|
@@ -112,19 +112,19 @@ If App Store Connect shows the encryption question for the uploaded build anyway
 
 The Account Holder must do these; none can be done from the repository. Order is not significant, but the Paid Apps Agreement and the trader declaration block a paid release.
 
-- [ ] Accept any pending agreements shown in App Store Connect (banner or Business section). Observed 2026-10-12: the Free Apps Agreement is active; the Paid Apps Agreement is not (next item).
-- [ ] Sign the **Paid Apps Agreement**; add tax forms and banking details for the seller. Paid Apps Agreement: status New on 2026-10-12, unsigned.
-- [ ] **Digital Services Act trader status.** Declare whether the seller is a trader. A trader's name, address, phone number and email are shown on the product page in the EU storefronts, so the owner needs contact details they accept being public. A non-trader declares that instead. If no declaration is made, the app is not offered in the EU. Trader status: still "Set Up" on 2026-10-12.
+- [x] Accept any pending agreements shown in App Store Connect (banner or Business section). Observed on the owner's screenshot of the Business page, 2026-10-12 evening: the Free Apps Agreement and the Paid Apps Agreement are both Active.
+- [x] Sign the **Paid Apps Agreement**; add tax forms and banking details for the seller. Signed by the owner on 2026-10-12: the agreement is Active (2026-10-12 to 2027-10-04), one bank account is Active with USD as both bank and royalty currency, and the two U.S. tax forms (certificate of foreign status, W-8BEN) are Active.
+- [ ] **Digital Services Act trader status.** Declared by the owner on 2026-10-12 as a trader; the Compliance row shows "In Review" for 27 countries or regions, so the box stays open until Apple finishes. Declare whether the seller is a trader. A trader's name, address, phone number and email are shown on the product page in the EU storefronts, so the owner needs contact details they accept being public. A non-trader declares that instead. If no declaration is made, the app is not offered in the EU. Trader status: still "Set Up" on 2026-10-12.
 - [ ] Consider the **App Store Small Business Program** (enrol before the first sales if wanted). Not observed.
 - [ ] Confirm the support mailbox `info@spacepane.com` exists and answers. Mail records exist (MX at Hostinger, SPF, DMARC); delivery is unconfirmed as of 2026-10-12.
-- [x] Publish the CAD source repository named in `Native/CADWorker/SOURCE-OFFER.md` (`canburaks/spacepane-cad-source`). It is public with release 1.0.0 (observed 2026-10-12).
-- [ ] Resolve the "pending legal review" wording in the offer, before release (publication plan, section "Owner decisions", D-D). The legal review of the source-offer route (decision 027 D20) has no recorded outcome. The mirror in this workspace is not the pushed state; pushing it waits for the owner.
+- [x] Publish the CAD source repository named in `Native/CADWorker/SOURCE-OFFER.md` (`canburaks/spacepane-cad-source`). It is public with release 1.0.0 (observed 2026-10-12). Not needed for 1.0 since 2026-10-13: the repository stays as it is and nothing new is pushed to it ([decision 028](../../decisions/028-no-cad-in-version-1.md)).
+- [ ] ~~Resolve the "pending legal review" wording in the offer, before release (publication plan, section "Owner decisions", D-D).~~ Not applicable for 1.0 (2026-10-13): 1.0 ships without STEP and IGES, so no release relies on the offer; see [decision 028](../../decisions/028-no-cad-in-version-1.md), which closes decision 027 D20 for 1.0. The question returns only if CAD does ("Bringing CAD back" in that record). No legal review took place and no licence was bought.
 - [ ] Confirm the final bundle identifier, the team and the seller name agree with the copyright line above. The copyright is entered; the comparison with the seller name is not recorded.
 - [ ] Recheck Apple's current requirements pages on the day of submission; this worksheet is dated 2026-10-10.
 
 ## 9. Store metadata locales for the 14 app languages
 
-Decision taken 2026-10-12 (owner rule: only reviewed languages ship): the store page is English (U.S.) and English (U.K.) at launch, and build 2 ships English only. The table is the mapping for later; the other 13 translations stay in the repository as drafts.
+Decision taken 2026-10-12 (owner rule: only reviewed languages ship): the store page is English (U.S.) and English (U.K.) at launch, and version 1.0 ships English only. The table is the mapping for later; the other 13 translations stay in the repository as drafts.
 
 Metadata locales are the languages the store page text can be provided in. They are independent of what the app ships, but the listing must not advertise a language the app does not ship (guideline 2.3). The publication plan (D-B) recommends shipping English plus only the languages that get a recorded review; no language has one today (`tools/localization/languages.json`: drafts, native-speaker review pending).
 
@@ -154,6 +154,6 @@ Do these on the store build before entering the matching fields:
 1. The extension names in the listing, `SpacePane Preview` and `SpacePane Thumbnails`, match what System Settings shows.
 2. The General page's "Open System Settings" button opens the right pane on the macOS versions tested; record the pane path for each version.
 3. Both URLs in section 2 load, the privacy page says "no network access" in line with section 5, and the support page shows the contact address.
-4. The description's list of types still equals `FormatCatalog.json` (76 types, 26 + 26 + 16 + 1 + 7).
+4. The description's list of types still equals `FormatCatalog.json` (74 types, 26 + 26 + 16 + 1 + 5; it was 76 with 7 in the media group until `cad.iges` and `cad.step` left the catalog on 2026-10-13).
 5. Every screenshot gate in [screenshots.md](screenshots.md) has its observation recorded in `docs/validation/host-matrix.json`.
 6. The signed archive's entitlements contain no network key (output of `script/check_release_archive.py`).

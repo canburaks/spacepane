@@ -89,12 +89,12 @@ class ArchiveTests(unittest.TestCase):
             self.assertEqual(info.compress_type, zipfile.ZIP_STORED, info.filename)
             self.assertEqual(info.external_attr >> 16, 0o40755 if info.is_dir() else 0o100644, info.filename)
 
-    def test_every_sample_name_is_ascii_and_the_cad_files_are_present(self):
+    def test_every_sample_name_is_ascii_and_no_cad_file_is_present(self):
         for sample in samples.SAMPLES:
             self.assertTrue(sample.name.isascii(), sample.name)
             self.assertTrue(sample.expect.isascii() and len(sample.expect) <= 58, sample.name)
-        self.assertIn("32-winch-gear.step", self.files)
-        self.assertIn("33-box.iges", self.files)
+        self.assertTrue(all(not name.lower().endswith((".step", ".stp", ".iges", ".igs")) for name in self.files))
+        self.assertIn("28-binary.stl", self.files)
         self.assertIn("Makefile", self.files)
 
     def test_the_makefile_has_no_extension_and_tab_indented_recipes(self):
@@ -153,9 +153,9 @@ class ArchiveTests(unittest.TestCase):
     def test_the_cross_check_reports_a_missing_section_and_a_sample_the_readme_skips(self):
         with self.assertRaises(samples.ArchiveError):
             samples.cross_check(self.files, "# Worksheet\n", 1)
-        readme = self.files["README.txt"].decode("ascii").replace("33-box.iges", "33-box-renamed")
+        readme = self.files["README.txt"].decode("ascii").replace("31-model.3mf", "31-model-renamed")
         problems = samples.cross_check({**self.files, "README.txt": readme.encode("ascii")}, SYNTHETIC_SUBMISSION, 1)
-        self.assertTrue(any("does not describe 33-box.iges" in problem for problem in problems), problems)
+        self.assertTrue(any("does not describe 31-model.3mf" in problem for problem in problems), problems)
 
     def test_the_readme_is_plain_ascii_under_80_columns_and_60_lines(self):
         text = self.files["README.txt"].decode("ascii")
@@ -167,11 +167,11 @@ class ArchiveTests(unittest.TestCase):
         self.assertTrue(samples.readme_problems(text + "x" * 80 + "\n"))
         self.assertTrue(samples.readme_problems("line\n" * 60))
 
-    def test_the_readme_has_three_steps_and_names_the_cad_switch_and_the_fake_secret_file(self):
+    def test_the_readme_has_two_steps_and_no_cad_switch_and_names_the_fake_secret_file(self):
         text = self.files["README.txt"].decode("ascii")
-        self.assertEqual(re.findall(r"(?m)^([123])\. ", text), ["1", "2", "3"])
-        self.assertIn("File Types", text)
-        self.assertIn("STEP and IGES", text)
+        self.assertEqual(re.findall(r"(?m)^([123])\. ", text), ["1", "2"])
+        self.assertNotIn("STEP", text)
+        self.assertNotIn("IGES", text)
         self.assertIn("01-settings.json", text.split("FILE ")[0])
         for sample in samples.SAMPLES:
             self.assertIn(sample.name, text)
@@ -182,9 +182,10 @@ class ArchiveTests(unittest.TestCase):
         self.assertIsNone(samples.PLACEHOLDER.search(notes), notes)
         self.assertNotIn("support@spacepane.com", SUBMISSION)
         self.assertIn("info@spacepane.com", notes)
-        for fact in ("1.0.0 (build 2)", "macOS 27.2", "macOS 15", "public.data", "com.quicklookpro", "Developer Mode",
-                     "https://github.com/canburaks/spacepane-cad-source", "off by default"):
+        for fact in ("1.0.0 (build 3)", "macOS 27.2", "macOS 15", "public.data", "com.quicklookpro", "Developer Mode"):
             self.assertIn(fact, notes)
+        for stale in ("STEP", "IGES", "CAD", "Open CASCADE", "LGPL", "spacepane-cad-source"):
+            self.assertNotIn(stale, notes)
 
     def test_the_output_is_ignored_by_git(self):
         try:
@@ -246,7 +247,7 @@ class NameExtractionTests(unittest.TestCase):
         self.assertEqual(samples.referenced_names(text), ["01-settings.json", "14-folder", "Makefile", "README.txt"])
 
     def test_a_sentence_ending_full_stop_is_not_part_of_the_name(self):
-        self.assertEqual(samples.referenced_names("Select 33-box.iges."), ["33-box.iges"])
+        self.assertEqual(samples.referenced_names("Select 31-model.3mf."), ["31-model.3mf"])
 
     def test_the_notes_block_is_read_without_its_quote_marks(self):
         notes = samples.pasted_notes(samples.notes_section(SYNTHETIC_SUBMISSION))
