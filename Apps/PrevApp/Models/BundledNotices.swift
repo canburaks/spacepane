@@ -17,6 +17,9 @@ struct BundledNotices: Sendable {
 
     private let locations: [Folder: URL]
 
+    /// A fixed set of locations, for checks that must not depend on the bundle they run in.
+    init(locations: [Folder: URL]) { self.locations = locations }
+
     init(bundle: Bundle = .main) {
         var found: [Folder: URL] = [:]
         for folder in Folder.allCases {

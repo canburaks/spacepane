@@ -194,17 +194,12 @@ struct ContentThumbnailServiceTests {
         let urls = [
             try fixture.file("archive.zip", Data([0x50, 0x4B, 0x05, 0x06])), try fixture.file("bundle.tar", Data(count: 1_024)),
             try fixture.file("stream.gz", Data([0x1F, 0x8B])), try fixture.file("secrets.env", "TOKEN=\(syntheticSecret)\n"),
-            try fixture.file("tune.mid", Data("MThd".utf8)), try fixture.file("part.step", "ISO-10303-21;\n"),
-            try fixture.file("part.igs", "IGES\n"), folder
+            try fixture.file("tune.mid", Data("MThd".utf8)), folder
         ]
-        let ids: [FormatID] = [.zip, .tar, .gzip, .xip, .environment, .midi, .iges, .step, .folder]
+        let ids: [FormatID] = [.zip, .tar, .gzip, .xip, .environment, .midi, .folder]
         let factories = Counter(), parses = Counter(), reads = Counter()
-        // CAD types are opt-in; enabling them proves the thumbnail policy, not the default, keeps them generic.
-        var snapshot = PreviewPreferencesSnapshot.defaults
-        snapshot.setEnabled(true, for: .iges)
-        snapshot.setEnabled(true, for: .step)
         let service = makeService(registrations: spyRegistrations(replacing: ids, factories: factories, parses: parses),
-                                  snapshot: snapshot, reader: SpyReader(reads: reads))
+                                  snapshot: .defaults, reader: SpyReader(reads: reads))
         for url in urls {
             let reason = await service.outcome(for: url, geometry: standardGeometry).reason
             #expect(reason == .genericPolicy, "\(url.lastPathComponent): \(String(describing: reason))")
@@ -219,6 +214,17 @@ struct ContentThumbnailServiceTests {
         #expect(await makeService().outcome(for: bare, geometry: standardGeometry).reason == .genericPolicy)
         let photo = try fixture.file("photo.png", syntheticImage(width: 8, height: 8))
         #expect(await makeService().outcome(for: photo, geometry: standardGeometry).reason == .unsupportedType)
+    }
+
+    /// Version 1.0 ships without the STEP and IGES previews: such a file is an unsupported type, with no thumbnail.
+    @Test func stepAndIgesFilesAreUnsupportedTypesInVersionOne() async throws {
+        let fixture = try Fixture()
+        defer { fixture.remove() }
+        for (name, text) in [("part.step", "ISO-10303-21;\n"), ("part.stp", "ISO-10303-21;\n"),
+                             ("part.igs", "IGES\n"), ("part.iges", "IGES\n")] {
+            let url = try fixture.file(name, text)
+            #expect(await makeService().outcome(for: url, geometry: standardGeometry).reason == .unsupportedType, "\(name)")
+        }
     }
 
     // MARK: Privacy

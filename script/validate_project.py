@@ -10,10 +10,32 @@ import tempfile
 import xml.etree.ElementTree as ET
 from xml.parsers.expat import ExpatError
 
+from build_cad_worker import NOTICE_FOLDERS
 from build_metadata import compile_metadata, shipped_languages
+from cad_mode import include_cad as configured_include_cad
 from check_release_archive import PRIVACY_MANIFEST, privacy_manifest_problems
 
 ROOT = Path(__file__).resolve().parents[1]
+# The two catalog entries version 1.0 leaves out (decision 028); Configuration/CADFormatCatalogEntries.json keeps them
+# verbatim for the day PREV_INCLUDE_CAD is YES again.
+CAD_FORMAT_IDS = {"cad.iges", "cad.step"}
+PARKED_CAD_ENTRIES = "Configuration/CADFormatCatalogEntries.json"
+# What the project's CAD settings resolve to for each value of PREV_INCLUDE_CAD.
+CAD_SETTINGS = {
+    "YES": {"PREV_CAD_SWIFT_CONDITION": "PREV_INCLUDE_CAD", "PREV_CAD_EXCLUDED_SOURCE_NAMES": "",
+            "PREV_CAD_SERVICE_DEBUG_FORMAT": "dwarf-with-dsym",
+            "PREV_CAD_BUNDLE_INPUTS": "$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist",
+            "PREV_CAD_BUNDLE_OUTPUTS": "$(SRCROOT)/.build/cad/bundle-outputs.xcfilelist"},
+    "NO": {"PREV_CAD_SWIFT_CONDITION": "", "PREV_CAD_EXCLUDED_SOURCE_NAMES": "CADImportService.xpc",
+           "PREV_CAD_SERVICE_DEBUG_FORMAT": "dwarf",
+           "PREV_CAD_BUNDLE_INPUTS": "$(SRCROOT)/script/notices-inputs.xcfilelist",
+           "PREV_CAD_BUNDLE_OUTPUTS": "$(SRCROOT)/script/notices-outputs.xcfilelist"},
+}
+CAD_EMBED_SCRIPT = ('if [ "${PREV_INCLUDE_CAD}" = YES ]; then\n  /usr/bin/python3 "${SRCROOT}/script/embed_cad_worker.py"\n'
+                    'else\n  /usr/bin/python3 "${SRCROOT}/script/embed_notices.py"\nfi')
+# Targets that compile the CAD registration under the PREV_INCLUDE_CAD condition, and the one that would embed the service.
+CAD_CONDITION_TARGETS = {"Prev", "PrevPreviewExtension"}
+CAD_SERVICE_PRODUCT = "CADImportService.xpc"
 # Identifier namespaces of other installed products whose file types this app also accepts.
 THIRD_PARTY_ALIAS_PREFIXES = ("com.quicklookpro.",)
 # Each bundle's privacy manifest sits in a folder the project synchronizes into that target, so the build copies it
@@ -46,6 +68,98 @@ def xcconfig(path):
             key, value = line.split("=", 1)
             values[key.strip()] = value.strip()
     return values
+
+
+def resolve_setting(values, name):
+    """Expand `$(NAME)` references, innermost first, so `$(A_$(MODE))` selects by value as Xcode does."""
+    text = values.get(name, "")
+    for _ in range(20):
+        # References to settings the xcconfig does not define (SRCROOT, TARGET_BUILD_DIR) stay as written.
+        match = next((item for item in re.finditer(r"\$\(([A-Za-z0-9_]+)\)", text) if item[1] in values), None)
+        if not match:
+            return text.strip()
+        text = text[:match.start()] + values[match[1]] + text[match.end():]
+    raise ValueError(f"{name} does not resolve")
+
+
+def validate_cad_catalog(root, formats, include_cad):
+    """The catalog carries the CAD entries exactly when PREV_INCLUDE_CAD is YES; the other mode keeps them parked."""
+    present = [item for item in formats if item["id"].startswith("cad.")]
+    parked_path = root / PARKED_CAD_ENTRIES
+    parked = json.loads(parked_path.read_text()) if parked_path.is_file() else None
+    if include_cad:
+        check({item["id"] for item in present} == CAD_FORMAT_IDS and len(present) == len(CAD_FORMAT_IDS),
+              "PREV_INCLUDE_CAD is YES: the format catalog must contain exactly the cad.iges and cad.step entries "
+              f"(found {sorted(item['id'] for item in present)}); restore them from {PARKED_CAD_ENTRIES}")
+        check(parked is None or sorted(parked, key=lambda item: item["id"]) == sorted(present, key=lambda item: item["id"]),
+              f"The catalog's CAD entries differ from {PARKED_CAD_ENTRIES}")
+        return present
+    check(not present, "PREV_INCLUDE_CAD is NO: the format catalog must have no cad.* entry, found "
+                       f"{sorted(item['id'] for item in present)}; they belong in {PARKED_CAD_ENTRIES}")
+    check(parked_path.is_file(), f"{PARKED_CAD_ENTRIES} must keep the removed cad.iges and cad.step entries")
+    check(isinstance(parked, list) and all(isinstance(item, dict) for item in parked)
+          and sorted(item.get("id") for item in parked) == sorted(CAD_FORMAT_IDS),
+          f"{PARKED_CAD_ENTRIES} must be an array holding exactly the cad.iges and cad.step descriptors")
+    return parked
+
+
+def validate_cad_wiring(root, objects, targets, include_cad):
+    """The Xcode project and the configuration drop or keep the CAD product, helper and notices as the setting says."""
+    mode = "YES" if include_cad else "NO"
+    base = xcconfig(root / "Configuration/Base.xcconfig")
+    check(base.get("PREV_INCLUDE_CAD") in ("YES", "NO"), "Configuration/Base.xcconfig must set PREV_INCLUDE_CAD to YES or NO")
+    check("SWIFT_ACTIVE_COMPILATION_CONDITIONS" not in base,
+          "The compilation condition belongs to the companion and the preview extension only; do not set it in the xcconfig")
+    values = {**base, "PREV_INCLUDE_CAD": mode}
+    for name, expected in CAD_SETTINGS[mode].items():
+        check(resolve_setting(values, name) == expected, f"{name} must resolve to {expected!r} when PREV_INCLUDE_CAD is {mode}")
+    # Only the companion and the preview extension get the Swift condition; only the preview extension would embed the service.
+    for name, target in targets.items():
+        for configuration in objects[target["buildConfigurationList"]]["buildConfigurations"]:
+            settings = objects[configuration]["buildSettings"]
+            conditions = settings.get("SWIFT_ACTIVE_COMPILATION_CONDITIONS")
+            check((conditions == "$(inherited) $(PREV_CAD_SWIFT_CONDITION)") == (name in CAD_CONDITION_TARGETS),
+                  f"{name} must {'add' if name in CAD_CONDITION_TARGETS else 'not add'} the PREV_INCLUDE_CAD compilation condition")
+            check("PREV_INCLUDE_CAD" not in (conditions or "").replace("PREV_CAD_SWIFT_CONDITION", ""),
+                  f"{name} must not name PREV_INCLUDE_CAD in its compilation conditions; the xcconfig selects it")
+            if name == "CADImportService" and objects[configuration]["name"] == "Release":
+                check(settings.get("DEBUG_INFORMATION_FORMAT") == "$(PREV_CAD_SERVICE_DEBUG_FORMAT)",
+                      "The CAD service's release build must take its debug format from PREV_CAD_SERVICE_DEBUG_FORMAT, "
+                      "so the build without CAD leaves no dSYM for it in the archive")
+            check((settings.get("EXCLUDED_SOURCE_FILE_NAMES") == "$(PREV_CAD_EXCLUDED_SOURCE_NAMES)") == (name == "PrevPreviewExtension"),
+                  f"Only PrevPreviewExtension excludes the CAD service from its copy phase through PREV_CAD_EXCLUDED_SOURCE_NAMES ({name})")
+    for item in objects.values():
+        if item["isa"] == "PBXBuildFile" and item.get("fileRef") and objects[item["fileRef"]].get("path") == CAD_SERVICE_PRODUCT:
+            check(resolve_setting(values, "PREV_CAD_EXCLUDED_SOURCE_NAMES") == ("" if include_cad else CAD_SERVICE_PRODUCT),
+                  f"The extension's copy phase must {'embed' if include_cad else 'exclude'} {CAD_SERVICE_PRODUCT}")
+    # The file lists the no-CAD phase reads and writes name the colour-scheme notice and nothing else, so a clean
+    # checkout needs no .build/cad, and they follow the folder's contents.
+    check((root / "script/embed_notices.py").is_file(), "script/embed_notices.py is missing")
+    colour = [pair for pair in NOTICE_FOLDERS if pair[0] == "ColorSchemes"]
+    check(len(colour) == 1, "script/build_cad_worker.py NOTICE_FOLDERS must still name the ColorSchemes pair")
+    folder, name = colour[0]
+    files = sorted(path.name for path in (root / "ThirdPartyNotices" / folder).iterdir() if path.is_file())
+    check("NOTICE.md" in files, "ThirdPartyNotices/ColorSchemes/NOTICE.md is the notice every build must carry")
+    check("ColorSchemes-Notices" in (root / "script/embed_notices.py").read_text() and name == "ColorSchemes-Notices",
+          "script/embed_notices.py must copy ColorSchemes into ColorSchemes-Notices")
+    resources = "$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/" + name
+    inputs = sorted((root / "script/notices-inputs.xcfilelist").read_text().split())
+    outputs = sorted((root / "script/notices-outputs.xcfilelist").read_text().split())
+    check(inputs == sorted(f"$(SRCROOT)/ThirdPartyNotices/{folder}/{file}" for file in files),
+          "script/notices-inputs.xcfilelist must list every file of ThirdPartyNotices/ColorSchemes and nothing else")
+    check(outputs == sorted([resources] + [f"{resources}/{file}" for file in files]),
+          "script/notices-outputs.xcfilelist must list the ColorSchemes-Notices folder and each file in it, and nothing else")
+    for target_name in ("Prev", "CADImportService"):
+        phases = [objects[phase] for phase in targets[target_name]["buildPhases"] if objects[phase].get("name") == "Embed CAD worker"]
+        check(len(phases) == 1, f"{target_name} needs its Embed CAD worker phase")
+        phase = phases[0]
+        check(phase["inputFileListPaths"] == ["$(PREV_CAD_BUNDLE_INPUTS)"] and phase["outputFileListPaths"] == ["$(PREV_CAD_BUNDLE_OUTPUTS)"],
+              f"{target_name}: the embed phase must read its file lists through PREV_CAD_BUNDLE_INPUTS and PREV_CAD_BUNDLE_OUTPUTS")
+        check(phase["shellScript"].strip() == CAD_EMBED_SCRIPT,
+              f"{target_name}: the embed phase must run embed_cad_worker.py for YES and embed_notices.py for NO")
+        check(phase["inputPaths"] == ["$(SRCROOT)/script/embed_cad_worker.py", "$(SRCROOT)/script/embed_notices.py",
+                                      "$(SRCROOT)/Configuration/CADWorker.entitlements"],
+              f"{target_name}: the embed phase must declare both scripts and the helper entitlements as inputs")
 
 
 def validate_cad_graph(objects, targets):
@@ -91,12 +205,8 @@ def validate_cad_graph(objects, targets):
         check(len(worker_phases) == expected_worker_count, "CAD helper belongs only in companion and sandboxed service")
         for phase in worker_phases:
             check(phase["isa"] == "PBXShellScriptBuildPhase", "CAD helper must use its audited embedding script")
-            check(phase["inputFileListPaths"] == ["$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist"], "CAD helper inputs must be explicit")
-            check(phase["outputFileListPaths"] == ["$(SRCROOT)/.build/cad/bundle-outputs.xcfilelist"], "CAD helper outputs must be explicit")
-            check(phase["inputPaths"] == ["$(SRCROOT)/script/embed_cad_worker.py", "$(SRCROOT)/Configuration/CADWorker.entitlements"],
-                  "CAD helper script and inherited entitlements must be declared inputs")
-            check(phase["shellScript"].strip() == '/usr/bin/python3 "${SRCROOT}/script/embed_cad_worker.py"',
-                  "CAD helper must use the owned embedding script")
+            # The file lists, the inputs and the script are checked per mode by validate_cad_wiring.
+            check(phase["inputFileListPaths"] and phase["outputFileListPaths"], "CAD helper inputs and outputs must be explicit")
         copies = [phase for phase in phases if phase["isa"] == "PBXCopyFilesBuildPhase"]
         service_copies = [(phase, build_file) for phase in copies for build_file in phase["files"]
                           if objects[build_file].get("fileRef") == service_product]
@@ -141,7 +251,9 @@ def validate_privacy_manifests(root, objects, targets):
 def validate():
     catalog = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())
     formats = catalog["formats"]
+    include_cad = configured_include_cad()
     check(formats, "Format catalog cannot be empty")
+    cad_entries = validate_cad_catalog(ROOT, formats, include_cad)
     check(len({item["id"] for item in formats}) == len(formats), "Duplicate format IDs")
     types = [content_type for item in formats for content_type in item["contentTypes"]]
     owners = {}
@@ -212,6 +324,13 @@ def validate():
         check(len(declared) == len(set(declared)) and set(declared) == set(expected_types), f"{filename} content types drifted from FormatCatalog.json")
         check(extension["NSExtensionPointIdentifier"] == f"com.apple.quicklook.{point}", f"Incorrect {point} extension point")
         check(extension["NSExtensionPrincipalClass"] == f"$(PRODUCT_MODULE_NAME).{principal}", f"Incorrect {point} principal class")
+        if not include_cad:
+            # Version 1.0 declares no STEP or IGES type: the Info.plists are generated from the catalog without them.
+            parked_types = {content_type for item in cad_entries for content_type in item["contentTypes"]}
+            check(not parked_types.intersection(declared), f"{filename} declares STEP or IGES content types although PREV_INCLUDE_CAD is NO")
+            check(not {item["identifier"] for entry in cad_entries for item in entry.get("importedContentTypes", [])}
+                  .intersection(item["UTTypeIdentifier"] for item in info.get("UTImportedTypeDeclarations", [])),
+                  f"{filename} imports STEP or IGES type declarations although PREV_INCLUDE_CAD is NO")
         check(not info.get("UTExportedTypeDeclarations"), "Do not export ownership of system content types")
         check(info.get("UTImportedTypeDeclarations", []) == imported, f"{filename} imported type declarations drifted from the catalog")
         check(info["PreviewDisplayName"] == "$(PREV_DISPLAY_NAME)", "Branding must resolve through build configuration")
@@ -259,6 +378,7 @@ def validate():
                             "PrevThumbnailExtension": "app-extension", "CADImportService": "xpc-service"}
     check(set(targets) == set(target_product_types), "Expected companion, preview, thumbnail and private CAD service targets")
     validate_cad_graph(objects, targets)
+    validate_cad_wiring(ROOT, objects, targets, include_cad)
     validate_privacy_manifests(ROOT, objects, targets)
     for target_name, target in targets.items():
         is_app = target_name == "Prev"
@@ -335,14 +455,15 @@ def validate():
                 key = declaration["UTTypeDescription"]
                 expected = strings[key]["localizations"]["en"]["stringUnit"]["value"]
                 check(metadata.get(key) == expected, f"{role} imported type description must use the owning localized catalog name")
-    print(f"Validated {len(targets)} Xcode targets, {len(embedded)} embedded extensions, sandboxed CAD service graph, "
+    print(f"Validated {len(targets)} Xcode targets, {len(embedded)} embedded extensions, sandboxed CAD service graph "
+          f"(PREV_INCLUDE_CAD is {'YES' if include_cad else 'NO: not embedded'}), "
           f"{len(PRIVACY_MANIFESTS)} privacy manifests, {len(formats)} catalog formats and localized branding metadata.")
 
 
 def main():
     try:
         validate()
-    except (ValueError, KeyError, OSError, subprocess.CalledProcessError) as error:
+    except (ValueError, KeyError, OSError, subprocess.CalledProcessError, json.JSONDecodeError) as error:
         print(f"Project validation failed: {error}", file=sys.stderr)
         raise SystemExit(1)
 

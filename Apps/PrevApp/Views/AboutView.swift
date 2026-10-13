@@ -6,7 +6,7 @@ struct AboutView: View {
     let configuration: HostedConfiguration
     @Environment(\.locale) private var locale
     @Environment(\.openURL) private var openURL
-    private let notices = BundledNotices()
+    private let acknowledgements = AboutAcknowledgements(notices: BundledNotices())
 
     var body: some View {
         // The identity card below names the app once; the page is titled like the other pages.
@@ -24,13 +24,16 @@ struct AboutView: View {
             helpSection
             SettingsSection(PreviewStrings.text(.aboutAcknowledgementsTitle)) {
                 SettingsCard {
-                    bodyText(PreviewStrings.text(.aboutAcknowledgementsBody))
-                    bodyText(PreviewStrings.text(.aboutAcknowledgementsOpenCascade))
-                    if let url = configuration.links.openSource { linkRow(Resource(kind: .openSource, url: url)) }
-                    // The notice folders exist only in a staged build; a run without them shows no button.
-                    if let url = notices.url(for: .openCascade) { AboutNoticeRow(folder: .openCascade, url: url) }
+                    // Open CASCADE is acknowledged only by a build that carries it (see `AboutAcknowledgements`).
+                    if let url = acknowledgements.openCascadeNotices {
+                        bodyText(PreviewStrings.text(.aboutAcknowledgementsBody))
+                        bodyText(PreviewStrings.text(.aboutAcknowledgementsOpenCascade))
+                        if let source = configuration.links.openSource { linkRow(Resource(kind: .openSource, url: source)) }
+                        AboutNoticeRow(folder: .openCascade, url: url)
+                    }
                     bodyText(PreviewStrings.text(.schemeAcknowledgements))
-                    if let url = notices.url(for: .colorSchemes) { AboutNoticeRow(folder: .colorSchemes, url: url) }
+                    // The notice folders exist only in a staged build; a run without them shows no button.
+                    if let url = acknowledgements.colorSchemeNotices { AboutNoticeRow(folder: .colorSchemes, url: url) }
                 }
             }
         }

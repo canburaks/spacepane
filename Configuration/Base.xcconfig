@@ -24,10 +24,44 @@ ENABLE_APP_SANDBOX = YES
 ENABLE_HARDENED_RUNTIME = YES
 ENABLE_USER_SCRIPT_SANDBOXING = YES
 GENERATE_INFOPLIST_FILE = NO
-CURRENT_PROJECT_VERSION = 2
+CURRENT_PROJECT_VERSION = 3
 MARKETING_VERSION = 1.0.0
 DEVELOPMENT_LANGUAGE = en
 CODE_SIGN_ENTITLEMENTS = Configuration/$(PREVIEW_METADATA_ROLE).entitlements
+
+// Whether the product carries the IGES and STEP 3D previews (decision 028). Version 1.0 ships without them: their
+// importer links Open CASCADE Technology under the LGPL, and that licence question is not cleared. NO leaves the
+// CAD helper (CADWorker), the CAD import service (CADImportService.xpc) and the OCCT notices out of every bundle,
+// builds without the pinned OCCT kernel, and leaves the PREV_INCLUDE_CAD Swift compilation condition off, so the
+// format adapters are never registered. YES restores the previous product; it also needs the two catalog entries
+// back (Configuration/CADFormatCatalogEntries.json) and the helper prepared by script/build_cad_worker.py.
+// script/validate_project.py and script/check_release_archive.py enforce this setting in both directions. A value
+// in the ignored Local.xcconfig, or PREV_INCLUDE_CAD=YES on the xcodebuild command line, overrides this one.
+PREV_INCLUDE_CAD = NO
+
+// Derived from PREV_INCLUDE_CAD with the nested-variable selection; do not set these by hand.
+// The Swift compilation condition: the companion and the preview extension add it to their own conditions.
+PREV_CAD_SWIFT_CONDITION_YES = PREV_INCLUDE_CAD
+PREV_CAD_SWIFT_CONDITION_NO =
+PREV_CAD_SWIFT_CONDITION = $(PREV_CAD_SWIFT_CONDITION_$(PREV_INCLUDE_CAD))
+// The preview extension's copy phase embeds the CAD service unless this names it as excluded.
+PREV_CAD_EXCLUDED_SOURCE_NAMES_YES =
+PREV_CAD_EXCLUDED_SOURCE_NAMES_NO = CADImportService.xpc
+PREV_CAD_EXCLUDED_SOURCE_NAMES = $(PREV_CAD_EXCLUDED_SOURCE_NAMES_$(PREV_INCLUDE_CAD))
+// The CAD service is still compiled while the setting is NO (the preview extension depends on its target), but it
+// is never embedded. Without debug symbols its build leaves no dSYM in the archive for a product that does not ship.
+PREV_CAD_SERVICE_DEBUG_FORMAT_YES = dwarf-with-dsym
+PREV_CAD_SERVICE_DEBUG_FORMAT_NO = dwarf
+PREV_CAD_SERVICE_DEBUG_FORMAT = $(PREV_CAD_SERVICE_DEBUG_FORMAT_$(PREV_INCLUDE_CAD))
+// File lists of the "Embed CAD worker" script phase. YES: the lists script/build_cad_worker.py writes (helper and
+// both notice folders). NO: committed lists that name the colour-scheme notice only, so a clean checkout builds
+// without .build/cad.
+PREV_CAD_BUNDLE_INPUTS_YES = $(SRCROOT)/.build/cad/bundle-inputs.xcfilelist
+PREV_CAD_BUNDLE_INPUTS_NO = $(SRCROOT)/script/notices-inputs.xcfilelist
+PREV_CAD_BUNDLE_INPUTS = $(PREV_CAD_BUNDLE_INPUTS_$(PREV_INCLUDE_CAD))
+PREV_CAD_BUNDLE_OUTPUTS_YES = $(SRCROOT)/.build/cad/bundle-outputs.xcfilelist
+PREV_CAD_BUNDLE_OUTPUTS_NO = $(SRCROOT)/script/notices-outputs.xcfilelist
+PREV_CAD_BUNDLE_OUTPUTS = $(PREV_CAD_BUNDLE_OUTPUTS_$(PREV_INCLUDE_CAD))
 
 // Local identity/signing choices are never committed. No global Xcode switch is needed.
 #include? "Local.xcconfig"

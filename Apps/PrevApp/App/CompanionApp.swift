@@ -1,16 +1,29 @@
 import SwiftUI
+import PreviewContracts
 import PreviewCore
 import PreviewFormats
+#if PREV_INCLUDE_CAD
 import PreviewCADFormats
+#endif
 import PreviewRenderers
 
 @main
 struct CompanionApp: App {
     private let configuration = HostedConfiguration()
-    private let pipeline = PreviewPipeline(registrations: StandardFormatAdapters.registrations + CADFormatAdapters.registrations)
+    private let pipeline = PreviewPipeline(registrations: Self.adapterRegistrations)
     @CompanionState private var settings: CompanionSettings
     @CompanionState private var preferences: CompanionPreferences
     @CompanionState private var route: CompanionRoute
+
+    /// The standard adapters. Version 1.0 ships without the STEP and IGES previews: the CAD adapters are registered
+    /// only in a build with `PREV_INCLUDE_CAD` (which also needs the two CAD catalog entries back in the catalog).
+    private static var adapterRegistrations: [AdapterRegistration] {
+        #if PREV_INCLUDE_CAD
+        StandardFormatAdapters.registrations + CADFormatAdapters.registrations
+        #else
+        StandardFormatAdapters.registrations
+        #endif
+    }
 
     init() {
         let savedPreferences = CompanionPreferences()

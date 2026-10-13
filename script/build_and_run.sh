@@ -20,14 +20,16 @@ usage: ./script/build_and_run.sh [mode]
   --check-static    Portable static gate, no Xcode needed: manifests, samples, localization, shell syntax,
                     decision numbers, wall-clock test names, ownership tool and Swift syntax (tree-sitter)
   --test            Run SwiftPM tests and isolated companion model checks (CLT supported)
-  --test-cad        Prepare the pinned native CAD worker and run its geometry/process checks
+  --test-cad        Prepare the pinned native CAD worker and run its geometry/process checks (an explicit developer
+                    command: it works while PREV_INCLUDE_CAD is NO, and nothing else builds the worker then)
   --check-compiler  Build shared package and typecheck all host/extension Swift sources
   --build-companion Link/stage a CLT-only companion prototype in dist/PrevPrototype.app
   --run-companion   Build and launch that prototype (private settings; no extensions)
   --build-unsigned  Compile the actual Xcode app/extension targets without installing
   --archive         Archive the signed Release app for Apple silicon and check it for upload problems
-  --archive-unsigned Archive the Release app without signing: proves the project, the CAD helper and the
-                    archive composition on a host without certificates (the hosted runner's dry run)
+  --archive-unsigned Archive the Release app without signing: proves the project, the CAD helper (when
+                    PREV_INCLUDE_CAD is YES) and the archive composition on a host without certificates
+                    (the hosted runner's dry run)
   --export          Export the signed archive for App Store Connect into .build/export and read back the
                     helper identities that survive the distribution re-signing
   --upload          Export the signed archive again with the upload destination: App Store Connect receives
@@ -45,6 +47,10 @@ Xcode installation if the system selection is Command Line Tools. The script
 does not change that selection. Signed launch requires Configuration/Local.xcconfig
 with your team and identifiers; copy Local.xcconfig.example as a starting point.
 PREVIEW_BUILD_CONFIGURATION selects Debug (default) or Release.
+
+PREV_INCLUDE_CAD (Configuration/Base.xcconfig, overridden by Local.xcconfig or the environment) says whether the
+product carries the IGES and STEP previews. NO (version 1.0, decision 028) builds without the CAD helper, the CAD
+service and the OCCT notices and never prepares the OCCT kernel; YES restores them and needs script/build_cad_worker.py.
 HELP
 }
 
@@ -55,6 +61,12 @@ run_static_gate() {
   [[ -x "$python" ]] || python="$(command -v python3 || true)"
   if [[ -z "$python" ]]; then echo "python3 was not found." >&2; return 1; fi
   "$python" "$ROOT_DIR/script/check_static.py"
+}
+
+# YES or NO from PREV_INCLUDE_CAD, read in one place (script/cad_mode.py). It is passed to xcodebuild so that Xcode
+# and these scripts agree even when the environment, not a file, chose the value.
+include_cad() {
+  /usr/bin/python3 "$ROOT_DIR/script/cad_mode.py"
 }
 
 if [[ $# -gt 1 ]]; then usage >&2; exit 2; fi
@@ -115,6 +127,7 @@ case "$MODE" in
     BIN_DIR="$(/usr/bin/xcrun swift build "${SWIFT_PACKAGE_ARGS[@]}" --show-bin-path)"
     SDK_PATH="$(/usr/bin/xcrun --sdk macosx --show-sdk-path)"
     ARCHITECTURE="$(uname -m)"
+    CAD_MODE="$(include_cad)"
     for SOURCE_DIR in Apps/PrevApp Extensions/PrevPreviewExtension Extensions/PrevThumbnailExtension Native/CADImportService; do
       SOURCES=()
       while IFS= read -r SOURCE; do SOURCES+=("$SOURCE"); done < <(find "$ROOT_DIR/$SOURCE_DIR" -type f -name '*.swift' | sort)
@@ -123,13 +136,18 @@ case "$MODE" in
       while IFS= read -r FLAG; do [[ -z "$FLAG" ]] || FLAGS+=("$FLAG"); done < <(/usr/bin/python3 "$ROOT_DIR/script/package_link.py" "$BIN_DIR")
       if [[ "$SOURCE_DIR" != Native/CADImportService ]]; then FLAGS+=(-parse-as-library); fi
       if [[ "$SOURCE_DIR" != Apps/* ]]; then FLAGS+=(-application-extension); fi
+      # The companion and the preview extension register the CAD adapters under this condition.
+      if [[ "$CAD_MODE" == YES && ( "$SOURCE_DIR" == Apps/PrevApp || "$SOURCE_DIR" == Extensions/PrevPreviewExtension ) ]]; then FLAGS+=(-D PREV_INCLUDE_CAD); fi
       /usr/bin/xcrun swiftc "${FLAGS[@]}" "${SOURCES[@]}"
       echo "Typechecked $SOURCE_DIR (does not validate Xcode resource linking/signing/Finder)."
     done
     exit 0
     ;;
   --build-companion|--run-companion)
-    /usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture "$(uname -m)"
+    # stage_companion.py reads the same setting: it adds the helper and compiles the CAD registration only for YES.
+    if [[ "$(include_cad)" == YES ]]; then
+      /usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture "$(uname -m)"
+    fi
     if [[ "$MODE" == --run-companion ]]; then pkill -u "$(id -u)" -x PrevPrototype >/dev/null 2>&1 || true; fi
     /usr/bin/xcrun swift build "${SWIFT_PACKAGE_ARGS[@]}"
     BIN_DIR="$(/usr/bin/xcrun swift build "${SWIFT_PACKAGE_ARGS[@]}" --show-bin-path)"
@@ -165,7 +183,8 @@ fi
 ARCHIVE_PATH="$ROOT_DIR/.build/archive/Release.xcarchive"
 ARCHIVE_SETTINGS="$ROOT_DIR/.build/archive/build-settings.json"
 # Release 1.0 ships for Apple silicon only (Base.xcconfig ARCHS); archive that slice on any host.
-ARCHIVE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration Release -destination "generic/platform=macOS" -derivedDataPath "$ROOT_DIR/.build/xcode-archive" ARCHS=arm64)
+CAD_MODE="$(include_cad)"
+ARCHIVE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration Release -destination "generic/platform=macOS" -derivedDataPath "$ROOT_DIR/.build/xcode-archive" ARCHS=arm64 PREV_INCLUDE_CAD="$CAD_MODE")
 
 # Writes the export options for App Store Connect. $1 is the destination: export (a signed package and app
 # under .build/export for inspection) or upload (App Store Connect receives the build; TestFlight processes it).
@@ -196,16 +215,33 @@ PLIST
 }
 
 if [[ "$MODE" == --archive || "$MODE" == --archive-unsigned ]]; then
-  /usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture arm64
+  # With NO nothing here needs the OCCT kernel, the pinned archive or the generated file lists.
+  if [[ "$CAD_MODE" == YES ]]; then
+    /usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture arm64
+  fi
   mkdir -p "$ROOT_DIR/.build/archive"
   UNSIGNED_ARGS=()
   if [[ "$MODE" == --archive ]]; then
     /usr/bin/xcrun xcodebuild "${ARCHIVE_ARGS[@]}" -showBuildSettings -json > "$ARCHIVE_SETTINGS"
     /usr/bin/python3 "$ROOT_DIR/script/validate_signing.py" "$ARCHIVE_SETTINGS"
   else
-    # No identity is needed to prove that the project archives: the helper is embedded unsigned and the
+    # No identity is needed to prove that the project archives: a helper (YES only) is embedded unsigned and the
     # archive is never uploaded. The signing-dependent checks are skipped, not weakened.
     UNSIGNED_ARGS=(CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=)
+  fi
+  # A signed archive is the only local copy of a build's debug symbols, and an uploaded build cannot be archived
+  # again. Set the previous one aside under its version and build number instead of deleting it; an unsigned
+  # archive is a throwaway proof and is replaced.
+  if [[ -f "$ARCHIVE_PATH/Info.plist" ]]; then
+    PREVIOUS_IDENTITY="$(/usr/bin/plutil -extract ApplicationProperties.SigningIdentity raw "$ARCHIVE_PATH/Info.plist" 2>/dev/null || true)"
+    if [[ -n "$PREVIOUS_IDENTITY" ]]; then
+      PREVIOUS_VERSION="$(/usr/bin/plutil -extract ApplicationProperties.CFBundleShortVersionString raw "$ARCHIVE_PATH/Info.plist")"
+      PREVIOUS_BUILD="$(/usr/bin/plutil -extract ApplicationProperties.CFBundleVersion raw "$ARCHIVE_PATH/Info.plist")"
+      KEPT_ARCHIVE="$ROOT_DIR/.build/archive/SpacePane-$PREVIOUS_VERSION-build$PREVIOUS_BUILD.xcarchive"
+      if [[ -e "$KEPT_ARCHIVE" ]]; then KEPT_ARCHIVE="${KEPT_ARCHIVE%.xcarchive}-$(/bin/date +%Y%m%d-%H%M%S).xcarchive"; fi
+      /bin/mv "$ARCHIVE_PATH" "$KEPT_ARCHIVE"
+      echo "Kept the previous signed archive: $KEPT_ARCHIVE"
+    fi
   fi
   rm -rf "$ARCHIVE_PATH"
   /usr/bin/xcrun xcodebuild "${ARCHIVE_ARGS[@]}" ${ASC_ARGS[@]+"${ASC_ARGS[@]}"} ${UNSIGNED_ARGS[@]+"${UNSIGNED_ARGS[@]}"} -archivePath "$ARCHIVE_PATH" archive
@@ -238,7 +274,11 @@ if [[ "$MODE" == --archive || "$MODE" == --archive-unsigned ]]; then
     for PLIST in "$ARCHIVED_APP"/Contents/Info.plist "$ARCHIVED_APP"/Contents/PlugIns/*.appex/Contents/Info.plist; do
       printf '%s: %s (%s) minimum %s\n' "$(/usr/bin/plutil -extract CFBundleIdentifier raw -o - "$PLIST")" "$(/usr/bin/plutil -extract CFBundleShortVersionString raw -o - "$PLIST")" "$(/usr/bin/plutil -extract CFBundleVersion raw -o - "$PLIST")" "$(/usr/bin/plutil -extract LSMinimumSystemVersion raw -o - "$PLIST" 2>/dev/null || true)"
     done
-    echo "Unsigned archive completed: the project, the CAD helper and the archive composition build on this host. Nothing about signing, provisioning or upload was validated."
+    if [[ "$CAD_MODE" == YES ]]; then
+      echo "Unsigned archive completed: the project, the CAD helper and the archive composition build on this host. Nothing about signing, provisioning or upload was validated."
+    else
+      echo "Unsigned archive completed: the project and the archive composition build on this host; PREV_INCLUDE_CAD is NO, so the archive carries no CAD helper, service or OCCT notices. Nothing about signing, provisioning or upload was validated."
+    fi
   fi
   exit 0
 fi
@@ -287,18 +327,29 @@ if [[ "$MODE" == --export || "$MODE" == --upload ]]; then
     /usr/bin/codesign --verify --strict "$BUNDLE"
     /usr/bin/codesign -d --verbose=2 "$BUNDLE" 2>&1 | grep -E "^(Identifier|TeamIdentifier|Authority)=" | head -n 4
   done
+  WORKERS_FOUND=0
   for WORKER in "$EXPORTED_APP"/Contents/Helpers/CADWorker "$EXPORTED_APP"/Contents/PlugIns/*.appex/Contents/XPCServices/*.xpc/Contents/Helpers/CADWorker; do
     [[ -f "$WORKER" ]] || continue
+    WORKERS_FOUND=$((WORKERS_FOUND + 1))
     /usr/bin/codesign -d --verbose=2 --entitlements - "$WORKER" 2>&1 | grep -E "^(Identifier|TeamIdentifier)=|app-sandbox|inherit" | head -n 6
   done
+  if [[ "$CAD_MODE" == YES ]]; then
+    [[ "$WORKERS_FOUND" -eq 2 ]] || { echo "Expected the CAD worker in the companion and the CAD service, found $WORKERS_FOUND." >&2; exit 1; }
+  else
+    # Version 1.0 (decision 028): the export must carry no CAD helper at all, so finding one is the failure.
+    [[ "$WORKERS_FOUND" -eq 0 ]] || { echo "PREV_INCLUDE_CAD is NO but the export carries $WORKERS_FOUND CAD worker(s)." >&2; exit 1; }
+    echo "This build carries no CAD helper (PREV_INCLUDE_CAD is NO): no CADWorker, no CADImportService.xpc."
+  fi
   echo "Export: $ROOT_DIR/.build/export (Validate App in Organizer, or --upload for TestFlight)."
   exit 0
 fi
-/usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture "$(uname -m)"
+if [[ "$CAD_MODE" == YES ]]; then
+  /usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture "$(uname -m)"
+fi
 mkdir -p "$DERIVED_DIR"
-# Only the host CAD worker is prepared above. Xcode 27 rejects `-arch` combined with a destination,
+# Only the host CAD worker (YES only) is prepared above. Xcode 27 rejects `-arch` combined with a destination,
 # so the destination names the host architecture and ARCHS keeps Release builds single-architecture.
-XCODE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration "$CONFIGURATION" -destination "platform=macOS,arch=$(uname -m)" -derivedDataPath "$DERIVED_DIR" ARCHS="$(uname -m)")
+XCODE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration "$CONFIGURATION" -destination "platform=macOS,arch=$(uname -m)" -derivedDataPath "$DERIVED_DIR" ARCHS="$(uname -m)" PREV_INCLUDE_CAD="$CAD_MODE")
 if [[ "$MODE" == --build-unsigned ]]; then
   /usr/bin/xcrun xcodebuild "${XCODE_ARGS[@]}" CODE_SIGNING_ALLOWED=NO build
   echo "Unsigned build completed; no extension installation or Finder routing was validated."

@@ -17,6 +17,8 @@ sources = [
     ROOT / "Apps/PrevApp/Models/AppearanceSampleLibrary.swift",
     ROOT / "Apps/PrevApp/Models/AppearanceSampleSession.swift",
     ROOT / "Apps/PrevApp/Models/FormatFilenameSummary.swift",
+    ROOT / "Apps/PrevApp/Models/BundledNotices.swift",
+    ROOT / "Apps/PrevApp/Models/AboutAcknowledgements.swift",
     ROOT / "Apps/PrevApp/Models/FileTypeEnablementSummary.swift",
     ROOT / "Apps/PrevApp/Models/CompanionRoute.swift",
     ROOT / "Apps/PrevApp/Views/Components/CompanionSymbol.swift",

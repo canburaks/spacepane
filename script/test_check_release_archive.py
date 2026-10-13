@@ -11,6 +11,8 @@ broken manifest or a folder the project does not synchronize fails here without 
 """
 import contextlib
 import io
+import json
+import os
 import plistlib
 import re
 import subprocess
@@ -24,6 +26,7 @@ SCRIPT_DIRECTORY = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIRECTORY.parent
 sys.path.insert(0, str(SCRIPT_DIRECTORY))
 
+import cad_mode  # noqa: E402
 import check_release_archive as archive_check  # noqa: E402
 import validate_project  # noqa: E402
 from check_release_archive import Signing  # noqa: E402
@@ -94,9 +97,15 @@ class FakeTools:
 
 
 class Fixture:
-    """A complete synthetic archive that passes every check; a test changes one thing and expects one problem."""
+    """A complete synthetic archive that passes every check; a test changes one thing and expects one problem.
 
-    def __init__(self, root):
+    `include_cad` False builds the version 1.0 archive (decision 028): the three main bundles, no CAD service, no
+    CADWorker, no OCCT notices. The preview extension's Info.plist keeps its CADImportServiceIdentifier key, as the
+    real one does: the key is inert without the service."""
+
+    def __init__(self, root, include_cad=True):
+        self.include_cad = include_cad
+        self.roles = BUNDLE_ROLES if include_cad else BUNDLE_ROLES[:3]
         self.archive = root / "Release.xcarchive"
         self.app = self.archive / "Products/Applications/SpacePane.app"
         preview = self.app / "Contents/PlugIns/PrevPreviewExtension.appex"
@@ -130,6 +139,8 @@ class Fixture:
         }
         for role in LOCALIZED_ROLES:
             self.infos[role]["CFBundleLocalizations"] = ["en"]
+        for role in BUNDLE_ROLES:
+            self.infos[role]["CFBundleExecutable"] = f"{role}-binary"
         self.entitlements = {
             "app": {SANDBOX: True, USER_SELECTED: True, GROUPS: [GROUP]},
             "preview": {SANDBOX: True, GROUPS: [GROUP]},
@@ -149,7 +160,7 @@ class Fixture:
         self.tools = FakeTools(self)
 
     def write(self):
-        for role in BUNDLE_ROLES:
+        for role in self.roles:
             path = self.paths[role]
             (path / "Contents/Resources").mkdir(parents=True, exist_ok=True)
             (path / "Contents/Info.plist").write_bytes(plistlib.dumps(self.infos[role]))
@@ -162,11 +173,12 @@ class Fixture:
                 localized.mkdir(parents=True, exist_ok=True)
                 (localized / "InfoPlist.strings").write_text('"CFBundleName" = "Example";\n')
         (self.app / "Contents/Resources/AppIcon.icns").write_bytes(b"icns")
-        macho(self.paths["helper-app"])
-        macho(self.paths["helper-service"])
-        notices = self.app / "Contents/Resources/OCCT-Notices"
-        notices.mkdir(parents=True, exist_ok=True)
-        (notices / "LICENSE_LGPL_21.txt").write_text("notice")
+        if self.include_cad:
+            macho(self.paths["helper-app"])
+            macho(self.paths["helper-service"])
+            notices = self.app / "Contents/Resources/OCCT-Notices"
+            notices.mkdir(parents=True, exist_ok=True)
+            (notices / "LICENSE_LGPL_21.txt").write_text("notice")
         palettes = self.app / "Contents/Resources/ColorSchemes-Notices"
         palettes.mkdir(parents=True, exist_ok=True)
         (palettes / "NOTICE.md").write_text("notice")
@@ -174,16 +186,22 @@ class Fixture:
 
 
 class ArchiveCase(unittest.TestCase):
-    def run_check(self, edit=None, after=None):
-        """Build the fixture, let `edit` change its tables, write the tree, let `after` change the tree, and check it."""
+    # The CAD behaviour of the archive and of the check; NoCADArchiveCase turns it off for version 1.0.
+    INCLUDE_CAD = True
+
+    def run_check(self, edit=None, after=None, check_cad=None):
+        """Build the fixture, let `edit` change its tables, write the tree, let `after` change the tree, and check it.
+
+        The check runs in the fixture's own mode unless `check_cad` names the other one."""
         with tempfile.TemporaryDirectory() as directory:
-            fixture = Fixture(Path(directory))
+            fixture = Fixture(Path(directory), include_cad=self.INCLUDE_CAD)
             if edit:
                 edit(fixture)
             fixture.write()
             if after:
                 after(fixture)
-            return archive_check.inspect_archive(fixture.archive, fixture.tools, shipped=fixture.shipped)
+            return archive_check.inspect_archive(fixture.archive, fixture.tools, shipped=fixture.shipped,
+                                                 include_cad=self.INCLUDE_CAD if check_cad is None else check_cad)
 
     def assertFailure(self, report, *fragments):
         self.assertTrue(any(all(fragment in failure for fragment in fragments) for failure in report.failures),
@@ -296,7 +314,8 @@ class LanguageTests(ArchiveCase):
 class LayoutTests(ArchiveCase):
     def test_no_application_is_reported_before_anything_else(self):
         with tempfile.TemporaryDirectory() as directory:
-            report = archive_check.inspect_archive(Path(directory) / "Empty.xcarchive", FakeTools(Fixture(Path(directory))))
+            report = archive_check.inspect_archive(Path(directory) / "Empty.xcarchive", FakeTools(Fixture(Path(directory))),
+                                                   include_cad=True)
         self.assertEqual(report.failures, ["Archive must contain exactly one application"])
 
     def test_two_applications_are_refused(self):
@@ -343,6 +362,157 @@ class LayoutTests(ArchiveCase):
             macho(fixture.paths["thumbnail"] / "Contents/Helpers/CADWorker")
         self.assertFailure(self.run_check(after=after), "CAD worker in the companion and the CAD service only",
                            "PrevThumbnailExtension.appex/Contents/Helpers/CADWorker")
+
+
+class NoCADArchiveCase(ArchiveCase):
+    INCLUDE_CAD = False
+
+
+class NoCADArchiveTests(NoCADArchiveCase):
+    """Version 1.0 ships without STEP and IGES (decision 028): no OCCT bytes, in any form, anywhere in the app."""
+
+    def test_a_clean_archive_without_cad_passes_and_says_so(self):
+        report = self.run_check()
+        self.assertClean(report)
+        self.assertIn("3 Mach-O files", report.summary)
+        self.assertIn("3 sandboxed bundles", report.summary)
+        self.assertIn("0 helpers", report.summary)
+        self.assertIn("3 privacy manifests", report.summary)
+        self.assertIn("PREV_INCLUDE_CAD is NO", report.summary)
+        self.assertEqual([item for item in report.notes if "CAD peer requirement" in item], [])
+
+    def test_the_color_scheme_notice_is_still_required(self):
+        report = self.run_check(after=lambda fixture: (fixture.app / "Contents/Resources/ColorSchemes-Notices/NOTICE.md").unlink())
+        self.assertFailure(report, "color scheme palette notice")
+        self.assertEqual(len(report.failures), 1, report.failures)
+
+    def test_an_xpc_service_is_refused_wherever_it_sits(self):
+        locations = {"preview": "Contents/XPCServices/CADImportService.xpc",
+                     "app": "Contents/XPCServices/Other.xpc", "thumbnail": "Contents/Resources/Nested/Third.xpc"}
+        for role, relative in locations.items():
+            with self.subTest(role=role):
+                def after(fixture):
+                    (fixture.paths[role] / relative / "Contents").mkdir(parents=True)
+                report = self.run_check(after=after)
+                self.assertFailure(report, "XPC service", relative)
+
+    def test_a_file_named_cad_worker_is_refused_wherever_it_sits(self):
+        for relative in ("Contents/Helpers/CADWorker", "Contents/Resources/CADWorker", "Contents/MacOS/CADWorker"):
+            with self.subTest(relative=relative):
+                report = self.run_check(after=lambda fixture: macho(fixture.app / relative))
+                self.assertFailure(report, "CADWorker", relative)
+
+    def test_a_non_executable_file_named_cad_worker_is_refused_too(self):
+        def after(fixture):
+            (fixture.app / "Contents/Resources").joinpath("CADWorker").write_text("not a Mach-O file")
+        self.assertFailure(self.run_check(after=after), "CADWorker", "Contents/Resources/CADWorker")
+
+    def test_a_helpers_directory_is_refused_even_when_empty(self):
+        for owner in ("app", "preview"):
+            with self.subTest(owner=owner):
+                report = self.run_check(after=lambda fixture: (fixture.paths[owner] / "Contents/Helpers").mkdir())
+                self.assertFailure(report, "Helpers directory", "Contents/Helpers")
+
+    def test_symbols_of_the_cad_service_are_refused(self):
+        def after(fixture):
+            (fixture.archive / "dSYMs/CADImportService.xpc.dSYM").mkdir()
+        self.assertFailure(self.run_check(after=after), "CADImportService.xpc.dSYM", "belongs to the CAD service")
+
+    def test_the_occt_notices_folder_is_refused(self):
+        def after(fixture):
+            notices = fixture.app / "Contents/Resources/OCCT-Notices"
+            notices.mkdir()
+            (notices / "NOTICE.txt").write_text("notice")
+        self.assertFailure(self.run_check(after=after), "OCCT-Notices")
+
+    def test_an_empty_occt_notices_folder_is_refused(self):
+        self.assertFailure(self.run_check(after=lambda fixture: (fixture.app / "Contents/Resources/OCCT-Notices").mkdir()),
+                           "OCCT-Notices")
+
+    def test_a_mach_o_file_other_than_the_three_main_executables_is_refused(self):
+        for relative in ("Contents/Resources/tool", "Contents/Frameworks/Extra.framework/Versions/A/Extra",
+                         "Contents/PlugIns/PrevThumbnailExtension.appex/Contents/Resources/helper"):
+            with self.subTest(relative=relative):
+                report = self.run_check(after=lambda fixture: macho(fixture.app / relative))
+                self.assertFailure(report, "Mach-O", relative)
+
+    def test_a_second_executable_beside_a_main_one_is_refused(self):
+        report = self.run_check(after=lambda fixture: macho(fixture.paths["preview"] / "Contents/MacOS/second-binary"))
+        self.assertFailure(report, "Mach-O", "second-binary")
+
+    def test_an_executable_that_is_not_the_declared_main_one_is_refused(self):
+        def edit(fixture):
+            fixture.infos["thumbnail"]["CFBundleExecutable"] = "declared-binary"
+        self.assertFailure(self.run_check(edit), "Mach-O", "thumbnail-binary")
+
+    def test_privacy_manifests_follow_the_bundles_that_exist(self):
+        report = self.run_check(lambda fixture: fixture.manifests.update({"thumbnail": None}))
+        self.assertFailure(report, "PrevThumbnailExtension.appex", "no Contents/Resources/PrivacyInfo.xcprivacy")
+        self.assertEqual(len(report.failures), 1, report.failures)
+
+    def test_the_other_checks_still_apply(self):
+        report = self.run_check(lambda fixture: fixture.entitlements["preview"].update({"com.apple.security.network.client": True}))
+        self.assertFailure(report, "PrevPreviewExtension.appex declares network access")
+
+    def test_the_preview_info_plists_inert_service_key_does_not_fail_the_check(self):
+        report = self.run_check(lambda fixture: fixture.infos["preview"].update({"CADImportServiceIdentifier": BASE + ".cad-import"}))
+        self.assertClean(report)
+
+    def test_the_archive_with_cad_is_refused_as_a_whole(self):
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = Fixture(Path(directory), include_cad=True)
+            fixture.write()
+            report = archive_check.inspect_archive(fixture.archive, fixture.tools, shipped=fixture.shipped, include_cad=False)
+        self.assertFailure(report, "XPC service", "CADImportService.xpc")
+        self.assertFailure(report, "CADWorker")
+        self.assertFailure(report, "Helpers directory")
+        self.assertFailure(report, "OCCT-Notices")
+        self.assertFailure(report, "Mach-O")
+
+    def test_an_archive_without_cad_is_refused_when_the_setting_is_yes(self):
+        report = self.run_check(check_cad=True)
+        self.assertFailure(report, "CAD import service once")
+        self.assertFailure(report, "CAD worker in the companion and the CAD service only")
+        self.assertFailure(report, "OCCT license notices")
+
+
+class ConfiguredModeTests(unittest.TestCase):
+    """The mode comes from the repository's configuration unless the caller names it."""
+
+    def archive_summary(self, fixture_cad, environment):
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = Fixture(Path(directory), include_cad=fixture_cad)
+            fixture.write()
+            with mock.patch.dict(os.environ, environment, clear=False):
+                return archive_check.inspect_archive(fixture.archive, fixture.tools, shipped=fixture.shipped)
+
+    def test_the_repository_configuration_is_version_1_0_without_cad(self):
+        with mock.patch.dict(os.environ):
+            os.environ.pop("PREV_INCLUDE_CAD", None)
+            self.assertFalse(archive_check.configured_include_cad())
+            self.assertFalse(cad_mode.include_cad())
+
+    def test_the_default_follows_the_configuration_and_the_environment_overrides_it(self):
+        self.assertEqual(self.archive_summary(False, {"PREV_INCLUDE_CAD": "NO"}).failures, [])
+        self.assertEqual(self.archive_summary(True, {"PREV_INCLUDE_CAD": "YES"}).failures, [])
+        self.assertTrue(self.archive_summary(True, {"PREV_INCLUDE_CAD": "NO"}).failures)
+        self.assertTrue(self.archive_summary(False, {"PREV_INCLUDE_CAD": "YES"}).failures)
+
+    def test_the_helper_reads_base_then_local_and_rejects_other_values(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            (folder / "Base.xcconfig").write_text("// PREV_INCLUDE_CAD = YES\nPREV_INCLUDE_CAD = NO  // note\n")
+            self.assertFalse(cad_mode.include_cad({}, folder))
+            (folder / "Local.xcconfig").write_text("PREV_INCLUDE_CAD = YES\n")
+            self.assertTrue(cad_mode.include_cad({}, folder))
+            self.assertFalse(cad_mode.include_cad({"PREV_INCLUDE_CAD": "NO"}, folder))
+            (folder / "Local.xcconfig").write_text("PREV_INCLUDE_CAD = MAYBE\n")
+            with self.assertRaisesRegex(ValueError, "must be YES or NO"):
+                cad_mode.include_cad({}, folder)
+            (folder / "Base.xcconfig").write_text("OTHER = 1\n")
+            (folder / "Local.xcconfig").unlink()
+            with self.assertRaisesRegex(ValueError, "is not set"):
+                cad_mode.include_cad({}, folder)
 
 
 class InfoPlistTests(ArchiveCase):
@@ -595,7 +765,7 @@ class MainTests(ArchiveCase):
             fixture.write()
             out, err = io.StringIO(), io.StringIO()
             with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
-                status = archive_check.main(fixture.archive, fixture.tools)
+                status = archive_check.main(fixture.archive, fixture.tools, include_cad=True)
         return status, out.getvalue(), err.getvalue()
 
     def test_a_passing_archive_prints_the_summary_and_notes(self):
@@ -823,6 +993,112 @@ class ProjectValidatorTests(unittest.TestCase):
                 self.assertTrue(covering, f"{relative} is not inside a synchronized folder of {target}: {folders[target]}")
         self.assertNotIn("membershipExceptions", (ROOT / "Prev.xcodeproj/project.pbxproj").read_text(encoding="utf-8"),
                          "the project now has membership exceptions; validate_project.py checks them with the plist form")
+
+
+class CADModeProjectTests(unittest.TestCase):
+    """validate_project's PREV_INCLUDE_CAD checks: the catalog, the parked entries and the project wiring, in both modes."""
+
+    ENTRIES = [{"id": "cad.iges", "contentTypes": ["x.iges"]}, {"id": "cad.step", "contentTypes": ["x.step"]}]
+    OTHER = {"id": "text.plain", "contentTypes": ["public.plain-text"]}
+
+    def root_with(self, directory, parked):
+        root = Path(directory)
+        if parked is not None:
+            (root / "Configuration").mkdir()
+            (root / validate_project.PARKED_CAD_ENTRIES).write_text(json.dumps(parked))
+        return root
+
+    def catalog(self, directory, formats, parked, include_cad):
+        return validate_project.validate_cad_catalog(self.root_with(directory, parked), formats, include_cad)
+
+    def test_without_cad_the_catalog_has_no_cad_entry_and_the_two_are_parked(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.assertEqual(self.catalog(directory, [self.OTHER], self.ENTRIES, False), self.ENTRIES)
+
+    def test_without_cad_a_catalog_entry_that_starts_with_cad_is_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "no cad.\\* entry"):
+                self.catalog(directory, [self.OTHER, self.ENTRIES[0]], self.ENTRIES, False)
+
+    def test_without_cad_the_parked_file_must_exist_and_hold_exactly_the_two_descriptors(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "must keep the removed"):
+                self.catalog(directory, [self.OTHER], None, False)
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "exactly the cad.iges and cad.step"):
+                self.catalog(directory, [self.OTHER], self.ENTRIES[:1], False)
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "exactly the cad.iges and cad.step"):
+                self.catalog(directory, [self.OTHER], self.ENTRIES + [{"id": "cad.stl"}], False)
+
+    def test_with_cad_the_catalog_has_exactly_the_two_entries_and_they_equal_the_parked_ones(self):
+        with tempfile.TemporaryDirectory() as directory:
+            self.assertEqual(self.catalog(directory, [self.OTHER] + self.ENTRIES, self.ENTRIES, True), self.ENTRIES)
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "exactly the cad.iges and cad.step"):
+                self.catalog(directory, [self.OTHER], self.ENTRIES, True)
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "exactly the cad.iges and cad.step"):
+                self.catalog(directory, [self.OTHER, self.ENTRIES[0]], self.ENTRIES, True)
+        with tempfile.TemporaryDirectory() as directory:
+            changed = [{**self.ENTRIES[0], "contentTypes": ["x.changed"]}, self.ENTRIES[1]]
+            with self.assertRaisesRegex(ValueError, "differ from"):
+                self.catalog(directory, [self.OTHER] + changed, self.ENTRIES, True)
+
+    def test_nested_settings_resolve_by_value_and_unknown_references_stay_written(self):
+        values = {"MODE": "NO", "A_NO": "$(SRCROOT)/a", "A_YES": "", "A": "$(A_$(MODE))"}
+        self.assertEqual(validate_project.resolve_setting(values, "A"), "$(SRCROOT)/a")
+        self.assertEqual(validate_project.resolve_setting({**values, "MODE": "YES"}, "A"), "")
+
+    def test_this_repositorys_real_catalog_and_parked_entries_agree_with_the_configured_mode(self):
+        catalog = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())
+        validate_project.validate_cad_catalog(ROOT, catalog["formats"], cad_mode.include_cad())
+
+    def project_objects(self):
+        project = json.loads(subprocess.check_output(["/usr/bin/plutil", "-convert", "json", "-o", "-",
+                                                      str(ROOT / "Prev.xcodeproj/project.pbxproj")]))
+        objects = project["objects"]
+        return objects, {item["name"]: item for item in objects.values() if item["isa"] == "PBXNativeTarget"}
+
+    def test_this_repositorys_project_is_wired_for_both_modes(self):
+        objects, targets = self.project_objects()
+        for include_cad in (False, True):
+            with self.subTest(include_cad=include_cad):
+                validate_project.validate_cad_wiring(ROOT, objects, targets, include_cad)
+
+    def test_the_no_cad_file_lists_follow_the_notice_folder(self):
+        objects, targets = self.project_objects()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for relative in ("Configuration/Base.xcconfig", "script/embed_notices.py", "script/notices-inputs.xcfilelist",
+                             "script/notices-outputs.xcfilelist", "ThirdPartyNotices/ColorSchemes/NOTICE.md"):
+                (root / relative).parent.mkdir(parents=True, exist_ok=True)
+                (root / relative).write_bytes((ROOT / relative).read_bytes())
+            validate_project.validate_cad_wiring(root, objects, targets, False)
+            (root / "ThirdPartyNotices/ColorSchemes/EXTRA.md").write_text("more")
+            with self.assertRaisesRegex(ValueError, "notices-inputs.xcfilelist must list every file"):
+                validate_project.validate_cad_wiring(root, objects, targets, False)
+
+    def test_a_condition_that_leaks_to_another_target_or_to_the_xcconfig_is_refused(self):
+        objects, targets = self.project_objects()
+        thumbnail = objects[objects[targets["PrevThumbnailExtension"]["buildConfigurationList"]]["buildConfigurations"][0]]
+        thumbnail["buildSettings"]["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = "$(inherited) $(PREV_CAD_SWIFT_CONDITION)"
+        with self.assertRaisesRegex(ValueError, "PrevThumbnailExtension must not add"):
+            validate_project.validate_cad_wiring(ROOT, objects, targets, False)
+
+    def test_a_missing_exclusion_would_embed_the_service_in_the_no_cad_build(self):
+        objects, targets = self.project_objects()
+        preview = objects[objects[targets["PrevPreviewExtension"]["buildConfigurationList"]]["buildConfigurations"][1]]
+        del preview["buildSettings"]["EXCLUDED_SOURCE_FILE_NAMES"]
+        with self.assertRaisesRegex(ValueError, "excludes the CAD service"):
+            validate_project.validate_cad_wiring(ROOT, objects, targets, False)
+
+    def test_the_embed_phase_cannot_go_back_to_requiring_the_prepared_helper(self):
+        objects, targets = self.project_objects()
+        phase = [objects[item] for item in targets["Prev"]["buildPhases"] if objects[item].get("name") == "Embed CAD worker"][0]
+        phase["inputFileListPaths"] = ["$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist"]
+        with self.assertRaisesRegex(ValueError, "through PREV_CAD_BUNDLE_INPUTS"):
+            validate_project.validate_cad_wiring(ROOT, objects, targets, False)
 
 
 if __name__ == "__main__":
