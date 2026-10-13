@@ -18,6 +18,7 @@
 > - **Age rating.** Phase 1, step 6 says to answer "None" everywhere. Apple replaced the questionnaire in 2026; see the [publishing guide](app-store-publishing-guide.md#age-rating).
 > - **OCCT route.** Step 2.1 leaves the publication place open. The route now recorded is the public repository `canburaks/spacepane-cad-source`, still pending legal review (`Native/CADWorker/SOURCE-OFFER.md`).
 > - **Store-signed CAD client.** The roadmap does not mention it. A TestFlight-delivered app carries the TestFlight certificate marker, not the Mac App Store marker, so the CAD peer requirement needs a third branch before TestFlight can work (fixed in source 2026-10-10; unproven until a TestFlight install; see the runbook).
+> - **STEP and IGES (decision 0.1, steps 2.1, 2.2 and 2.9, the "76 formats" count and the OCCT row).** Superseded by the owner's decision of 2026-10-13: version 1.0 ships without STEP and IGES ([decision 028](../decisions/028-no-cad-in-version-1.md)), so there is no OCCT release gate for 1.0, no compliance package to publish, and the catalog holds 74 types. Build 2 contains CAD and is for internal TestFlight testing only; the submission build is build 3. The "still pending legal review" wording above stays as history: no legal review took place.
 > - **Schedule.** The "3 to 5 weeks" estimate dates from 2026-10-06 and has not been re-estimated.
 
 ---
