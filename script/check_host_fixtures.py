@@ -32,7 +32,7 @@ def main():
                '-o', str(output), str(ROOT / 'Tests/Integration/HostFixtureChecks.swift'),
                *[str(path) for path in package_objects(args.package_bin)]]
     subprocess.run(command, check=True)
-    subprocess.run([str(output.resolve()), str(args.fixture_directory.resolve()), str(ROOT / '.build/cad' / ('worker-' + os.uname().machine) / 'CADWorker')], check=True, timeout=90)
+    subprocess.run([str(output.resolve()), str(args.fixture_directory.resolve())], check=True, timeout=90)
     after = {str(path.relative_to(args.fixture_directory)): hashlib.sha256(path.read_bytes()).hexdigest()
              for path in args.fixture_directory.rglob('*') if path.is_file()}
     if before != after:

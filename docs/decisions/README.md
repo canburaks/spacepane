@@ -10,7 +10,7 @@ One record per accepted or proposed decision, numbered in order of creation. The
 | 004 | [JSON Lines and group controls](004-json-lines-and-group-controls.md) | accepted |
 | 005 | [Single window](005-single-window-tabs.md) | accepted, amended by 010 |
 | 006 | [Direct file drop](006-direct-file-drop.md) | accepted |
-| 006 | [Opt-in CAD previews](006-opt-in-cad-previews.md) | accepted |
+| 006 | [Opt-in CAD previews](006-opt-in-cad-previews.md) | accepted, amended by 028 (1.0 ships without these formats) |
 | 007 | [Binary inputs and safe presentations](007-binary-inputs-and-safe-presentations.md) | accepted |
 | 008 | [Languages and appearance transfer](008-languages-and-appearance-transfer.md) | accepted |
 | 009 | [First expansion formats](009-first-expansion-formats.md) | accepted |
@@ -32,3 +32,4 @@ One record per accepted or proposed decision, numbered in order of creation. The
 | 025 | [Competitor parity program](025-competitor-parity-program.md) | accepted, implemented |
 | 026 | [World-class UX program](026-world-class-ux-program.md) | proposed, amended by 027 |
 | 027 | [Best-in-class quality program](027-best-in-class-quality-program.md) | proposed, in progress |
+| 028 | [No CAD in version 1.0](028-no-cad-in-version-1.md) | decided 2026-10-13; amends 006 (opt-in CAD previews), closes 027 D20 for 1.0 |

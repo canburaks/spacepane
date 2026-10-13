@@ -37,7 +37,7 @@ struct Q153ClassificationControlTests {
     @Test func aliasesAndDisabledChoicesBypassFailingPolicyAndMetadata() async {
         let probe = Q153ReadProbe(dataless: .preflight, entryFails: true), types = Q153ContentTypes(.posix(EDEADLK), probe: probe)
         let counts = Q153ClassificationCounts(), pipeline = q153ClassificationPipeline(probe: probe, types: types, counts: counts, catalog: .standard)
-        for (name, id) in [("document.JSON", FormatID.json), ("archive.ZIP", .zip), ("model.igs", .iges)] {
+        for (name, id) in [("document.JSON", FormatID.json), ("archive.ZIP", .zip), ("tune.MID", .midi)] {
             let url = URL(fileURLWithPath: "/unused/" + name)
             var enabled = PreviewPreferencesSnapshot.defaults; enabled.setEnabled(true, for: id)
             #expect(await pipeline.inspect(url: url, preferences: enabled) == .enabled(id))

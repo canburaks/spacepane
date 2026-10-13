@@ -1,5 +1,7 @@
 # Opt-in IGES and STEP previews
 
+> Amended 2026-10-13 by [decision 028](028-no-cad-in-version-1.md): version 1.0 ships without these formats; the sources below stay in the repository for a later version.
+
 Date: 2026-10-04. Status: implemented; host and release evidence is recorded separately.
 
 ## Product and performance decision

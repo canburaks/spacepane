@@ -4,7 +4,6 @@ import Testing
 import PreviewContracts
 import PreviewCore
 import PreviewFormats
-import PreviewCADFormats
 
 private let jsonLinesID = FormatID(rawValue: "data.json-lines")
 
@@ -200,5 +199,5 @@ func JSONLinesRejectsUTF16Source(littleEndian: Bool) async throws {
 }
 
 @Test func JSONLinesStandardBindingsMatchTheSharedCatalog() {
-    #expect(Set((StandardFormatAdapters.registrations + CADFormatAdapters.registrations).map(\.formatID)) == Set(FormatCatalog.standard.descriptors.map(\.id)))
+    #expect(Set(StandardFormatAdapters.registrations.map(\.formatID)) == Set(FormatCatalog.standard.descriptors.map(\.id)))
 }

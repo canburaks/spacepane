@@ -22,6 +22,7 @@ struct CompanionModelChecks {
         try await sameValueResetRepairsCorruption(root)
         try await sameValueResetRetriesFailedSave(root)
         try filenameSummariesPreserveCatalogIdentity()
+        try aboutAcknowledgementsFollowTheBundledNoticeFolders()
         try enablementSummariesCountEveryMember()
         try groupStatusUsesAllMembersWhileSearching()
         try routesFollowDeveloperMode()
@@ -63,15 +64,38 @@ struct CompanionModelChecks {
                   "An exact filename shown in the UI must remain searchable")
     }
 
+    private static func aboutAcknowledgementsFollowTheBundledNoticeFolders() throws {
+        let occt = URL(fileURLWithPath: "/unused/OCCT-Notices"), schemes = URL(fileURLWithPath: "/unused/ColorSchemes-Notices")
+        let withBoth = AboutAcknowledgements(notices: BundledNotices(locations: [.openCascade: occt, .colorSchemes: schemes]))
+        try check(withBoth.includesOpenCascade && withBoth.openCascadeNotices == occt && withBoth.colorSchemeNotices == schemes,
+                  "A build that carries Open CASCADE must acknowledge it and offer its notices")
+        // Version 1.0 carries no Open CASCADE: its card shows the color-scheme notice only.
+        let versionOne = AboutAcknowledgements(notices: BundledNotices(locations: [.colorSchemes: schemes]))
+        try check(!versionOne.includesOpenCascade && versionOne.openCascadeNotices == nil && versionOne.colorSchemeNotices == schemes,
+                  "A build without Open CASCADE must not mention it or link to its source")
+        let bare = AboutAcknowledgements(notices: BundledNotices(locations: [:]))
+        try check(!bare.includesOpenCascade && bare.colorSchemeNotices == nil, "A run without notice folders offers no row")
+        let unstaged = AboutAcknowledgements(notices: BundledNotices(bundle: Bundle(for: BundleAnchor.self)))
+        try check(!unstaged.includesOpenCascade, "A development run has no OCCT-Notices folder")
+    }
+
+    private final class BundleAnchor {}
+
     private static func enablementSummariesCountEveryMember() throws {
         let descriptors = FormatCatalog.standard.descriptors
         let optIn = descriptors.filter { !$0.defaultEnabled }.map(\.id)
-        try check(Set(optIn) == Set([FormatID.iges, .step]), "Only the two CAD types are off by default")
+        try check(optIn.isEmpty, "Version 1.0 has no format that is off by default (the STEP and IGES previews are not shipped)")
+        try check(descriptors.count == 74 && !descriptors.contains { $0.id.rawValue.hasPrefix("cad.") },
+                  "The shipped catalog has 74 formats and no CAD format")
 
         var snapshot = PreviewPreferencesSnapshot.defaults
         var summary = FileTypeEnablementSummary(descriptors, isEnabled: { snapshot.isEnabled($0) })
-        try check(summary.total == descriptors.count && summary.enabled == descriptors.count - 2 && summary.state == .some,
-                  "The default snapshot must leave exactly the CAD types off, which is a mixed state")
+        try check(summary.total == descriptors.count && summary.enabled == descriptors.count && summary.state == .all,
+                  "The default snapshot must leave every shipped type on")
+        snapshot.setEnabled(false, for: .json)
+        summary = FileTypeEnablementSummary(descriptors, isEnabled: { snapshot.isEnabled($0) })
+        try check(summary.enabled == descriptors.count - 1 && summary.state == .some,
+                  "One type switched off must be a mixed state")
 
         snapshot.setAllEnabled(true)
         summary = FileTypeEnablementSummary(descriptors, isEnabled: { snapshot.isEnabled($0) })
@@ -173,7 +197,7 @@ struct CompanionModelChecks {
             try await eventually("Sample did not finish: \(descriptor.id.rawValue)") { !session.isLoading }
             try check(session.selected == descriptor.id && session.itemName?.isEmpty == false,
                       "The finished sample must be the selected one: \(descriptor.id.rawValue)")
-            // An app-authored sample is shown even for an opt-in type that is off by default.
+            // An app-authored sample is shown even for a type the person has switched off.
             try check(session.outcome != .disabledByUser(descriptor.id), "Samples must not depend on file-type choices")
             guard descriptor.presentation == .text else { continue } // CAD import needs the native helper.
             guard case .ready(let presentation) = session.outcome else {

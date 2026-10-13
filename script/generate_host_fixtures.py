@@ -39,6 +39,12 @@ def xip() -> bytes:
     return struct.pack('>4sHHQQI', b'xar!', 28, 1, len(packed), len(toc), 0) + packed + pbzx
 
 
+def add_cad_fixtures(add) -> None:
+    """The IGES and STEP fixtures, kept for when those formats return to the catalog (not called in version 1.0)."""
+    for format_id, extension in [('cad.iges', 'iges'), ('cad.step', 'step')]:
+        add(format_id, '23-box.' + extension, (ROOT / 'Native/CADWorker/Tests/Fixtures' / ('box.' + extension)).read_bytes())
+
+
 def generate() -> Path:
     parent = ROOT / '.build/host-validation'
     parent.mkdir(parents=True, exist_ok=True)
@@ -90,8 +96,8 @@ def generate() -> Path:
     track = bytes.fromhex('00 ff 51 03 07 a1 20 00 b0 07 00 87 40 ff 2f 00')
     add('audio.midi', '22-silent.mid', b'MThd' + struct.pack('>IHHH', 6, 0, 1, 96)
         + b'MTrk' + struct.pack('>I', len(track)) + track)
-    for format_id, extension in [('cad.iges', 'iges'), ('cad.step', 'step')]:
-        add(format_id, '23-box.' + extension, (ROOT / 'Native/CADWorker/Tests/Fixtures' / ('box.' + extension)).read_bytes())
+    # Version 1.0 ships without the IGES and STEP previews, so the catalog lists no CAD format and the set below
+    # holds exactly one fixture per catalog format. When they return, call `add_cad_fixtures(add)` here.
     add('data.csv', '24-table.csv', f'name,password,count\nPreview fixture,{SECRET},42\n"Quoted, value",{SECRET},7\n')
     add('data.tsv', '25-table.tsv', f'name\tpassword\tcount\nPreview fixture\t{SECRET}\t42\n')
     add('text.subrip', '26-captions.srt', '1\n00:00:01,000 --> 00:00:04,000\nPreview fixture\n\n'

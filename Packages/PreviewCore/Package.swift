@@ -40,9 +40,9 @@ let package = Package(
         .target(name: "PreviewTestSupport", dependencies: ["PreviewContracts"], path: "Tests/PreviewTestSupport", swiftSettings: sharedSettings),
         .testTarget(name: "PreviewFileAccessTests", dependencies: ["PreviewFileAccess", "PreviewContracts"], swiftSettings: sharedSettings),
         .testTarget(name: "PreviewCoreTests", dependencies: ["PreviewTestSupport", "PreviewCore", "PreviewFormats", "PreviewCADFormats", "PreviewContracts"], swiftSettings: sharedSettings),
-        .testTarget(name: "PreviewCADFormatsTests", dependencies: ["PreviewCADFormats", "PreviewCore", "PreviewContracts"], swiftSettings: sharedSettings),
+        .testTarget(name: "PreviewCADFormatsTests", dependencies: ["PreviewTestSupport", "PreviewCADFormats", "PreviewCore", "PreviewContracts"], swiftSettings: sharedSettings),
         .testTarget(name: "PreviewFormatsTests", dependencies: ["PreviewTestSupport", "PreviewFormats", "PreviewContracts"], swiftSettings: sharedSettings),
-        .testTarget(name: "PreviewPreferencesTests", dependencies: ["PreviewPreferences", "PreviewContracts"], swiftSettings: sharedSettings),
+        .testTarget(name: "PreviewPreferencesTests", dependencies: ["PreviewTestSupport", "PreviewPreferences", "PreviewContracts"], swiftSettings: sharedSettings),
         .testTarget(name: "PreviewRenderersTests", dependencies: ["PreviewRenderers", "PreviewContracts", "PreviewCore", "PreviewFormats", "PreviewThumbnails", "PreviewTestSupport"], swiftSettings: sharedSettings),
         .testTarget(name: "PreviewThumbnailsTests", dependencies: ["PreviewTestSupport", "PreviewThumbnails", "PreviewFormats", "PreviewCore", "PreviewPreferences", "PreviewContracts"], swiftSettings: sharedSettings),
         .testTarget(name: "PreviewDiagramsTests", dependencies: ["PreviewTestSupport", "PreviewCore", "PreviewFormats", "PreviewRenderers", "PreviewContracts"], swiftSettings: sharedSettings)

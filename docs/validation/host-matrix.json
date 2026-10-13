@@ -1095,40 +1095,6 @@
       }
     },
     {
-      "id": "cad.iges",
-      "surfaces": {
-        "finderPreview": {
-          "outcome": "notObserved"
-        },
-        "finderThumbnail": {
-          "outcome": "notObserved"
-        },
-        "quickLookPanel": {
-          "outcome": "provider",
-          "host": "mac-2026-10-04",
-          "record": "docs/validation/cad-previews-2026-10-04.md",
-          "note": "Opt-in switched on for the test. A synthetic box and a private 720-face model rendered; orbit gestures and keyboard were not verified."
-        }
-      }
-    },
-    {
-      "id": "cad.step",
-      "surfaces": {
-        "finderPreview": {
-          "outcome": "notObserved"
-        },
-        "finderThumbnail": {
-          "outcome": "notObserved"
-        },
-        "quickLookPanel": {
-          "outcome": "provider",
-          "host": "mac-2026-10-04",
-          "record": "docs/validation/cad-previews-2026-10-04.md",
-          "note": "Opt-in switched on for the test. A synthetic box rendered with 6 faces and 12 triangles; orbit gestures and keyboard were not verified."
-        }
-      }
-    },
-    {
       "id": "model.stl",
       "surfaces": {
         "finderPreview": {
