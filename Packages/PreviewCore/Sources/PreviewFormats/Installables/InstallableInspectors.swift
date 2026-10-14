@@ -8,8 +8,13 @@ import PreviewContracts
 enum InstallableInspectors {
     static func findings(layout: InstallableLayout, capture: InstallableCapture,
                          context: RequestContext) throws -> [PreviewFinding] {
-        guard !layout.has("PKG-INFO"),
-              let npm = try NPMPackageInspector.findings(layout: layout, capture: capture, context: context) else { return [] }
-        return PreviewFindings.normalized(npm + (capture.native.finding.map { [$0] } ?? []))
+        let recognized: [PreviewFinding]?
+        if layout.has("PKG-INFO") {
+            recognized = try PythonSourceInspector.findings(layout: layout, capture: capture, context: context)
+        } else {
+            recognized = try NPMPackageInspector.findings(layout: layout, capture: capture, context: context)
+        }
+        guard let recognized else { return [] }
+        return PreviewFindings.normalized(recognized + (capture.native.finding.map { [$0] } ?? []))
     }
 }
