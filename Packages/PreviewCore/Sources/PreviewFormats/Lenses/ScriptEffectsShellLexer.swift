@@ -22,6 +22,12 @@ struct ShellLexer {
     private(set) var line: Int
     private var checkpointCountdown = ShellLexer.checkpointInterval
     private var aborted = false
+    private var pending: [PendingHeredoc] = []
+
+    private struct PendingHeredoc {
+        var delimiter: [UInt8]
+        var stripsTabs: Bool
+    }
 
     init(bytes: UnsafeBufferPointer<UInt8>, line: Int = 1, isFish: Bool, allowsHeredocs: Bool, context: RequestContext) {
         self.bytes = bytes
@@ -73,6 +79,8 @@ struct ShellLexer {
                     && (list.commands.last.map { $0.next != .sequence } ?? false)
                 try consumeBreak()
                 if !continues { Self.commit(&command, to: &list, as: .sequence) }
+                // The bodies of here-documents opened on this line start on the next one.
+                if !pending.isEmpty { try readHeredocBodies(into: &list) }
                 if depth == 0, !continues { return }
             case 0x23: // #
                 skipComment()
@@ -84,6 +92,8 @@ struct ShellLexer {
                 if peek(1) == 0x26 {
                     position += 2
                     Self.commit(&command, to: &list, as: .and)
+                } else if peek(1) == 0x3E {
+                    try parseRedirect(into: &command, depth: depth)
                 } else {
                     position += 1
                     Self.commit(&command, to: &list, as: .sequence)
@@ -108,7 +118,11 @@ struct ShellLexer {
                 Self.commit(&command, to: &list, as: .sequence)
                 if groups > 0 { groups -= 1 } else if closer == 0x29 { return }
             case 0x3C, 0x3E: // < >
-                try appendWord(to: &command, in: &list, depth: depth)
+                if peek(1) == 0x28 {
+                    try appendWord(to: &command, in: &list, depth: depth)
+                } else {
+                    try parseRedirect(into: &command, depth: depth)
+                }
             case 0x5C: // a backslash before a line break continues the line
                 if ScriptBytes.breakLength(in: bytes, at: position + 1) > 0 {
                     position += 1
@@ -137,7 +151,89 @@ struct ShellLexer {
             if position == start { position += 1 }
             return
         }
+        // In `2>file` the number names a descriptor and is not an argument.
+        if !word.text.isEmpty, word.substitutions.isEmpty, position < end, bytes[position] == 0x3E || bytes[position] == 0x3C,
+           word.text.utf8.allSatisfy({ $0 >= 0x30 && $0 <= 0x39 }) {
+            return
+        }
         command.words.append(word)
+    }
+
+    // MARK: Redirections and here-documents
+
+    private mutating func parseRedirect(into command: inout ScriptCommand, depth: Int) throws {
+        var kind = ScriptRedirectKind.output
+        var length = 1
+        switch bytes[position] {
+        case 0x26: // &> and &>>
+            if peek(2) == 0x3E { kind = .append; length = 3 } else { length = 2 }
+        case 0x3E:
+            switch peek(1) {
+            case 0x3E: kind = .append; length = 2
+            case 0x26: kind = .other; length = 2
+            case 0x7C: length = 2
+            default: break
+            }
+        default:
+            kind = .input
+            switch peek(1) {
+            case 0x3C:
+                if peek(2) == 0x3C { kind = .hereString; length = 3 }
+                else if peek(2) == 0x2D { kind = .hereDocument; length = 3 }
+                else { kind = .hereDocument; length = 2 }
+            case 0x26, 0x3E: kind = .other; length = 2
+            default: break
+            }
+        }
+        let stripsTabs = kind == .hereDocument && length == 3
+        position += length
+        while position < end, bytes[position] == 0x20 || bytes[position] == 0x09 { position += 1 }
+        guard position < end, let target = try parseWord(depth: depth) else { return }
+        var redirect = ScriptRedirect(kind: kind, target: target)
+        if kind == .hereDocument {
+            // A delimiter that starts with a digit is arithmetic (`1 << 2`), not a here-document.
+            let delimiter = Array(target.text.utf8)
+            if allowsHeredocs, let first = delimiter.first, first < 0x30 || first > 0x39 {
+                pending.append(PendingHeredoc(delimiter: delimiter, stripsTabs: stripsTabs))
+            } else {
+                redirect.kind = .other
+            }
+        }
+        command.redirects.append(redirect)
+    }
+
+    /// Reads the bodies of the here-documents opened on the line that just ended and attaches them, in
+    /// order, to the redirections that still lack one.
+    private mutating func readHeredocBodies(into list: inout ScriptCommandList) throws {
+        var bodies: [(Range<Int>, Int)] = []
+        for heredoc in pending {
+            let bodyStart = position
+            let bodyLine = line
+            var bodyEnd = end
+            readLines: while position < end {
+                let lineStart = position
+                var lineEnd = position
+                while lineEnd < end, ScriptBytes.breakLength(in: bytes, at: lineEnd) == 0 { lineEnd += 1 }
+                var content = lineStart
+                if heredoc.stripsTabs { while content < lineEnd, bytes[content] == 0x09 { content += 1 } }
+                position = lineEnd
+                let terminated = lineEnd - content == heredoc.delimiter.count && heredoc.delimiter.elementsEqual(bytes[content..<lineEnd])
+                if position < end { try consumeBreak() }
+                if terminated { bodyEnd = lineStart; break readLines }
+            }
+            bodies.append((bodyStart..<max(bodyStart, bodyEnd), bodyLine))
+        }
+        pending.removeAll(keepingCapacity: true)
+        var next = 0
+        for commandIndex in list.commands.indices {
+            for redirectIndex in list.commands[commandIndex].redirects.indices where next < bodies.count {
+                let redirect = list.commands[commandIndex].redirects[redirectIndex]
+                guard redirect.kind == .hereDocument, redirect.body == nil else { continue }
+                list.commands[commandIndex].redirects[redirectIndex].body = bodies[next].0
+                list.commands[commandIndex].redirects[redirectIndex].bodyLine = bodies[next].1
+                next += 1
+            }
+        }
     }
 
     // MARK: Words
