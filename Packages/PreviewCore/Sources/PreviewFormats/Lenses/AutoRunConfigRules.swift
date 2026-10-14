@@ -65,6 +65,8 @@ enum AutoRunRules {
         for container in containers {
             for server in root.member(container)?.value.members ?? [] where server.value.members != nil {
                 let node = server.value
+                // Claude Desktop, Cursor and VS Code skip a server marked `"disabled": true`; it neither starts nor connects.
+                if node.member("disabled")?.value.bool == true { continue }
                 var runs = false
                 if let command = node.member("command"), command.value.hasContent {
                     tally.add(.autorunLocalServers, line: command.line)
