@@ -424,6 +424,7 @@ public enum PreviewStrings {
         case meshPrintOpenEdges = "mesh.printCheck.openEdges"
         case meshPrintNonManifoldEdges = "mesh.printCheck.nonManifoldEdges"
         case meshPrintEstimate = "mesh.printCheck.estimate"
+        case meshPrintEstimateIfMillimetres = "mesh.printCheck.estimateIfMillimetres"
         case cadHeaderSchemaAndSystem = "cad.header.schemaAndSystem"
         case cadHeaderSchema = "cad.header.schema"
         case cadHeaderSystem = "cad.header.system"

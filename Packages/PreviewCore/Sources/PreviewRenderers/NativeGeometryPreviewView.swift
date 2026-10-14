@@ -493,7 +493,7 @@ struct GeometryPrintCheck {
     /// Zero when the surface has no gap or when nothing could be measured; the line is shown only above zero.
     let openEdgeCount: Int
     let nonManifoldEdgeCount: Int
-    /// Present when the volume is known and the unit allows an estimate (see `GeometryPrintEstimate`).
+    /// Present when the volume is known; conditional on millimetres when the unit is undeclared (`GeometryPrintEstimate`).
     let estimate: GeometryPrintEstimate?
 
     init?(presentation: GeometryPresentation) {
@@ -524,8 +524,14 @@ struct GeometryPrintCheck {
                 GeometrySummaryUnits.symbol(of: UnitLength.meters, locale: locale),
                 GeometryNumberText.measure(GeometryPrintEstimate.filamentDiameterMillimetres, locale: locale),
                 GeometrySummaryUnits.symbol(of: UnitLength.millimeters, locale: locale)]
-            lines.append(PreviewStrings.format(.meshPrintEstimate, arguments: arguments,
-                                               locale: locale, languagePreferences: preferences))
+            // A model whose file states no unit is estimated "if the units are millimetres", never as a fact.
+            if estimate.isConditionalOnMillimetres {
+                lines.append(PreviewStrings.format(.meshPrintEstimateIfMillimetres, arguments: arguments,
+                                                   locale: locale, languagePreferences: preferences))
+            } else {
+                lines.append(PreviewStrings.format(.meshPrintEstimate, arguments: arguments,
+                                                   locale: locale, languagePreferences: preferences))
+            }
         }
         return lines
     }
