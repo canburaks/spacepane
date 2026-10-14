@@ -1045,6 +1045,22 @@ public enum PreviewStrings {
         // (end of sl3-models)
         // ----
         // [sl3-pickle] Decision 030: pickle and PyTorch summary labels. Workstream sl3-pickle adds its keys below this line.
+        case picklePickleProtocol = "preview.pickle.pickleProtocol"
+        case pickleScanned = "preview.pickle.pickles"
+        case picklePersistentIDs = "preview.pickle.persistentIDs"
+        case pickleStorages = "preview.pickle.storages"
+        case pickleStorageBytes = "preview.pickle.storageBytes"
+        case pickleChecksumErrors = "preview.pickle.checksumErrors"
+        case pickleImports = "preview.pickle.imports"
+        case pickleImportCount = "preview.pickle.count"
+        case pickleImportKind = "preview.pickle.kind"
+        case pickleChecked = "preview.pickle.checked"
+        case picklePartial = "preview.pickle.partial"
+        case pickleKindCode = "preview.pickle.kind.code"
+        case pickleKindNetworkOrFiles = "preview.pickle.kind.networkOrFiles"
+        case pickleKindUncommon = "preview.pickle.kind.uncommon"
+        case pickleKindExpected = "preview.pickle.kind.expected"
+        case pickleCheckedImportsOnly = "preview.pickle.checked.importsOnly"
         // (end of sl3-pickle)
         // ----
         // [sl3-addons] Decision 030: MCP bundle and extension summary labels. Workstream sl3-addons adds its keys below this line.
