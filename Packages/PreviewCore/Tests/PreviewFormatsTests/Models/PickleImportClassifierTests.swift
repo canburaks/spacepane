@@ -91,7 +91,7 @@ struct PickleImportClassifierTests {
         #expect(tally.distinctCount(.networkOrFiles) == 1)
         #expect(tally.distinctCount(.uncommon) == 3)
         #expect(tally.distinctCount(.expected) == 1)
-        #expect(tally.entries["os.system"]?.count == 2)
+        #expect(tally.count(of: "os.system") == 2)
         #expect(tally.sorted.map(\.name) == ["os.system", "posix.system", "socket.socket", "extension code 7",
                                              "sklearn.tree.DecisionTreeClassifier", "unresolved name", "collections.OrderedDict"])
         #expect(!tally.overflowed)
@@ -110,5 +110,14 @@ struct PickleImportClassifierTests {
         #expect(PickleImportTally.display("os.system") == "os.system")
         #expect(PickleImportTally.display("evil\u{202E}name\n") == "evil\u{FFFD}name\u{FFFD}")
         #expect(PickleImportTally.display(String(repeating: "a", count: 1_000)).count == PickleImportTally.maximumNameCharacters)
+    }
+
+    @Test func aLongNameNeverHidesBehindAHarmlessOneThatSharesItsFirstCharacters() {
+        var tally = PickleImportTally()
+        let prefix = String(repeating: "x", count: PickleImportTally.maximumNameCharacters)
+        tally.record(module: prefix, name: "Harmless")
+        tally.record(module: prefix + ".os", name: "system")
+        #expect(tally.distinctCount(.uncommon) == 1 && tally.distinctCount(.code) == 1)
+        #expect(tally.sorted.first?.entry.kind == .code)
     }
 }
