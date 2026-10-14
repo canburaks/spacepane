@@ -502,6 +502,10 @@
 "help.keyboard.body" = "⌘1 a ⌘4 alternam entre as páginas. ⌘, abre Geral. ⌘Z desfaz a última redefinição, alteração em massa, importação de tema ou exclusão de perfil; ⇧⌘Z refaz.";
 "help.keyboard.title" = "Atalhos de teclado";
 "listing.risk.hiddenCharacters" = "Caracteres ocultos no nome";
+"mesh.printCheck.estimate" = "Se impresso maciço em PLA: cerca de %1$@ %2$@ e %3$@ %4$@ de filamento de %5$@ %6$@. Os fatiadores costumam imprimir com menos preenchimento, então este é um limite superior.";
+"mesh.printCheck.estimateIfMillimetres" = "Se as unidades forem milímetros e a peça for impressa maciça em PLA: cerca de %1$@ %2$@ e %3$@ %4$@ de filamento de %5$@ %6$@. Os fatiadores costumam imprimir com menos preenchimento, então este é um limite superior.";
+"mesh.printCheck.nonManifoldEdges" = "%#@count@";
+"mesh.printCheck.openEdges" = "%#@count@";
 "midi.duration" = "Duração";
 "midi.noAutoplay" = "A reprodução começa somente quando você pressiona Reproduzir.";
 "midi.pause" = "Pausar";

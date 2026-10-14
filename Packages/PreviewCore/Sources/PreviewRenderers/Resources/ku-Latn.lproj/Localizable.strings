@@ -502,6 +502,10 @@
 "help.keyboard.body" = "⌘1 heta ⌘4 di navbera rûpelan de diguherin. ⌘, “Giştî” vedike. ⌘Z vegerandina dawî, guhertina komî, têxistina temayê an jêbirina profîlê betal dike; ⇧⌘Z dîsa dike.";
 "help.keyboard.title" = "Kurtebirên klavyeyê";
 "listing.risk.hiddenCharacters" = "Tîpên veşartî di nav de";
+"mesh.printCheck.estimate" = "Heke bi PLA ve ji hundir ve tije were çapkirin: nêzîkî %1$@ %2$@ û %3$@ %4$@ fîlamenta %5$@ %6$@. Slicer bi gelemperî bi dagirtina kêmtir çap dikin, ji ber vê yekê ev sînorê jorîn e.";
+"mesh.printCheck.estimateIfMillimetres" = "Heke yekeyên pîvanê milîmetre bin û bi PLA ve ji hundir ve tije were çapkirin: nêzîkî %1$@ %2$@ û %3$@ %4$@ fîlamenta %5$@ %6$@. Slicer bi gelemperî bi dagirtina kêmtir çap dikin, ji ber vê yekê ev sînorê jorîn e.";
+"mesh.printCheck.nonManifoldEdges" = "%#@count@";
+"mesh.printCheck.openEdges" = "%#@count@";
 "midi.duration" = "Dem";
 "midi.noAutoplay" = "Lêdan tenê dema ku Bilîze bikirtînî dest pê dike.";
 "midi.pause" = "Rawestîne";

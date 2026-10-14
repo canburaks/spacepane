@@ -502,6 +502,10 @@
 "help.keyboard.body" = "⌘1 à ⌘4 changent de page. ⌘, ouvre Général. ⌘Z annule la dernière réinitialisation, modification groupée, importation de thème ou suppression de profil ; ⇧⌘Z la rétablit.";
 "help.keyboard.title" = "Raccourcis clavier";
 "listing.risk.hiddenCharacters" = "Caractères masqués dans le nom";
+"mesh.printCheck.estimate" = "Imprimé plein en PLA : environ %1$@ %2$@ et %3$@ %4$@ de filament de %5$@ %6$@. Les logiciels de tranchage impriment souvent avec moins de remplissage ; c’est donc une limite haute.";
+"mesh.printCheck.estimateIfMillimetres" = "Si les unités sont des millimètres et que la pièce est imprimée pleine en PLA : environ %1$@ %2$@ et %3$@ %4$@ de filament de %5$@ %6$@. Les logiciels de tranchage impriment souvent avec moins de remplissage ; c’est donc une limite haute.";
+"mesh.printCheck.nonManifoldEdges" = "%#@count@";
+"mesh.printCheck.openEdges" = "%#@count@";
 "midi.duration" = "Durée";
 "midi.noAutoplay" = "La lecture démarre uniquement lorsque vous appuyez sur Lire.";
 "midi.pause" = "Pause";

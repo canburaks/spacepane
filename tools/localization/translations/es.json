@@ -631,6 +631,16 @@
     "help.keyboard.body": "⌘1 a ⌘4 cambian de página. ⌘, abre General. ⌘Z deshace el último restablecimiento, cambio masivo, importación de tema o eliminación de perfil; ⇧⌘Z lo rehace.",
     "help.keyboard.title": "Atajos de teclado",
     "listing.risk.hiddenCharacters": "Caracteres ocultos en el nombre",
+    "mesh.printCheck.estimate": "Si se imprime macizo en PLA: unos %1$@ %2$@ y %3$@ %4$@ de filamento de %5$@ %6$@. Los laminadores suelen imprimir con menos relleno, así que es un límite superior.",
+    "mesh.printCheck.estimateIfMillimetres": "Si las unidades son milímetros y se imprime macizo en PLA: unos %1$@ %2$@ y %3$@ %4$@ de filamento de %5$@ %6$@. Los laminadores suelen imprimir con menos relleno, así que es un límite superior.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "%2$@ arista compartida por más de dos caras",
+      "other": "%2$@ aristas compartidas por más de dos caras"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ arista abierta (un hueco en la superficie)",
+      "other": "%2$@ aristas abiertas (huecos en la superficie)"
+    },
     "midi.duration": "Duración",
     "midi.noAutoplay": "La reproducción comienza solo cuando pulsas Reproducir.",
     "midi.pause": "Pausar",

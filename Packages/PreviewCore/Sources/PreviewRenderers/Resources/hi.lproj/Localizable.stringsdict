@@ -530,6 +530,38 @@
 			<string>%2$@ संभावित गोपनीय मान छिपाए गए। चयन और कॉपी में छिपाया हुआ पाठ इस्तेमाल होता है।</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>दो से अधिक फलकों द्वारा साझा किया गया %2$@ किनारा</string>
+			<key>other</key>
+			<string>दो से अधिक फलकों द्वारा साझा किए गए %2$@ किनारे</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ खुला किनारा (सतह में एक अंतराल)</string>
+			<key>other</key>
+			<string>%2$@ खुले किनारे (सतह में अंतराल)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

@@ -530,6 +530,38 @@
 			<string>An ɓoye sirrika %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa.</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ gefen da fuskoki fiye da biyu ke rabawa</string>
+			<key>other</key>
+			<string>%2$@ gefuna da fuskoki fiye da biyu ke rabawa</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ gefen buɗe (gibi a saman)</string>
+			<key>other</key>
+			<string>%2$@ gefuna buɗaɗɗu (giɓi a saman)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

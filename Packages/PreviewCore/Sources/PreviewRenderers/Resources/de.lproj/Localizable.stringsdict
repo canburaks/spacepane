@@ -530,6 +530,38 @@
 			<string>%2$@ mögliche Geheimnisse ausgeblendet. Auswahl und Kopieren verwenden den unkenntlich gemachten Text.</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ Kante, die von mehr als zwei Flächen geteilt wird</string>
+			<key>other</key>
+			<string>%2$@ Kanten, die von mehr als zwei Flächen geteilt werden</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ offene Kante (eine Lücke in der Oberfläche)</string>
+			<key>other</key>
+			<string>%2$@ offene Kanten (Lücken in der Oberfläche)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
