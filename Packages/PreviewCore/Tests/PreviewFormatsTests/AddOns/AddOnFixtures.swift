@@ -1,5 +1,7 @@
 import Foundation
 import zlib
+import PreviewContracts
+@testable import PreviewFormats
 
 /// Synthetic packages for the MCP bundle, editor extension and browser extension tests. Everything is
 /// built from bytes in test code: no sample is read from disk, produced by a tool or run.
@@ -17,6 +19,14 @@ enum AddOnFixtures {
             self.deflated = deflated
         }
         init(_ path: String, text: String, deflated: Bool = false) { self.init(path, Data(text.utf8), deflated: deflated) }
+    }
+
+    /// Container-scan limits with a generous clock, as the adapters are registered.
+    static var context: RequestContext { RequestContext(budget: PreviewBudget(maxInputBytes: 16_777_216, maxMilliseconds: 30_000)) }
+
+    /// The findings of a document as kind and count.
+    static func counts(_ document: ParsedTextDocument) -> [PreviewFindingKind: Int] {
+        Dictionary(uniqueKeysWithValues: document.findings.map { ($0.kind, $0.count) })
     }
 
     // MARK: JSON
