@@ -35,11 +35,14 @@ enum PackageSummary {
 
     /// Writes the document. Images are encoded picture content, never text, so they bypass concealment
     /// and are attached only by adapters that extract pictures which are themselves document content.
-    static func document(_ root: SummaryValue, context: RequestContext, images: [PreviewImage] = []) throws -> ParsedTextDocument {
+    /// `findings` are typed facts about the package (decision 029); they carry no text from it.
+    static func document(_ root: SummaryValue, context: RequestContext, images: [PreviewImage] = [],
+                         findings: [PreviewFinding] = []) throws -> ParsedTextDocument {
         var writer = SummaryWriter(context: context)
         let written = try writer.document(root)
         return ParsedTextDocument(text: written.text, sensitiveRanges: written.sensitiveRanges,
-                                  usesStructuredPrivacy: true, syntax: .json, images: images, origin: written.origin)
+                                  usesStructuredPrivacy: true, syntax: .json, images: images, findings: findings,
+                                  origin: written.origin)
     }
 
     static func isoDate(_ date: Date) -> String { date.formatted(.iso8601) }
