@@ -66,6 +66,22 @@
 			<string>Bu önizleme en fazla %2$@ öğeli belgeleri okur, bu belgede ise daha fazlası var. Bu dosya türü için tasarlanmış bir uygulamada açın.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>İçinde makine koduyla derlenmiş %2$@ program veya kütüphane var.</string>
+			<key>other</key>
+			<string>İçinde makine koduyla derlenmiş %2$@ program veya kütüphane var.</string>
+		</dict>
+	</dict>
 	<key>finding.autorun.agentHooks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -210,6 +226,54 @@
 			<string>%2$@ ortam değişkeni MCP sunucularına aktarılıyor.</string>
 		</dict>
 	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ayar parola veya anahtar istiyor.</string>
+			<key>other</key>
+			<string>%2$@ ayar parola veya anahtar istiyor.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ayar, sunucuya Ev, Belgeler, İndirilenler veya Masaüstü klasörünüze erişim veriyor.</string>
+			<key>other</key>
+			<string>%2$@ ayar, sunucuya Ev, Belgeler, İndirilenler veya Masaüstü klasörünüze erişim veriyor.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ araç açıklaması, yapay zekâya başka dosyaları okumasını veya sizden bir şey saklamasını söylüyor.</string>
+			<key>other</key>
+			<string>%2$@ araç açıklaması, yapay zekâya başka dosyaları okumasını veya sizden bir şey saklamasını söylüyor.</string>
+		</dict>
+	</dict>
 	<key>finding.certificate.expired</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -306,6 +370,70 @@
 			<string>%2$@ parola yöneticisi girişi burada okunabilir biçimde kaydedilmiş. Artık gerekmediğinde bu dışa aktarılan dosyayı silin.</string>
 		</dict>
 	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Kendisiyle birlikte %2$@ başka uzantı daha kuruyor.</string>
+			<key>other</key>
+			<string>Kendisiyle birlikte %2$@ başka uzantı daha kuruyor.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ hassas tarayıcı izni istiyor.</string>
+			<key>other</key>
+			<string>%2$@ hassas tarayıcı izni istiyor.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ bağımlılık, kayıt defteri yerine bir Git deposundan veya web adresinden geliyor.</string>
+			<key>other</key>
+			<string>%2$@ bağımlılık, kayıt defteri yerine Git depolarından veya web adreslerinden geliyor.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ yerde, Python her başladığında Python kodu çalıştırılıyor.</string>
+			<key>other</key>
+			<string>%2$@ yerde, Python her başladığında Python kodu çalıştırılıyor.</string>
+		</dict>
+	</dict>
 	<key>finding.launch.watchPaths</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -336,6 +464,54 @@
 			<string>Listelenen %2$@ ad gizli karakterler içeriyor.</string>
 			<key>other</key>
 			<string>Listelenen %2$@ ad gizli karakterler içeriyor.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ içe aktarma, bu dosya yüklenirken ağın veya dosyaların kullanılmasına izin veriyor.</string>
+			<key>other</key>
+			<string>%2$@ içe aktarma, bu dosya yüklenirken ağın veya dosyaların kullanılmasına izin veriyor.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ içe aktarma, bu dosya yüklenirken komut veya kod çalıştırılmasına izin veriyor.</string>
+			<key>other</key>
+			<string>%2$@ içe aktarma, bu dosya yüklenirken komut veya kod çalıştırılmasına izin veriyor.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ içe aktarma, sıradan model verisi değil.</string>
+			<key>other</key>
+			<string>%2$@ içe aktarma, sıradan model verisi değil.</string>
 		</dict>
 	</dict>
 	<key>finding.profile.expiresSoon</key>

@@ -16,7 +16,7 @@ enum NPMPackageInspector {
 
     /// The scripts npm runs when a package is installed or prepared: the names `AutoRunRules` counts in a
     /// standalone package.json, so the tarball and its manifest agree.
-    static let lifecycleScripts = ["preinstall", "install", "postinstall", "prepare", "preprepare", "postprepare"]
+    static let lifecycleScripts = AutoRunRules.installScripts
 
     struct Manifest {
         /// Non-empty lifecycle scripts by name; npm treats an empty script as absent.
