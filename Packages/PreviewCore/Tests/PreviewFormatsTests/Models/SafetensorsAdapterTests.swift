@@ -140,6 +140,24 @@ struct SafetensorsAdapterTests {
         #expect(document.findings.isEmpty)
     }
 
+    @Test func tensorNamesMadeOfControlCharactersAreListedInPartNotRefused() throws {
+        let hostile = String(repeating: "\u{1}", count: 200)
+        let specs = SafetensorsFixtures.laidOut((0..<2_000).map { ("\(hostile)\($0)", "U8", [UInt64(4)]) })
+        let (summary, document) = try SafetensorsTestSupport.parse(SafetensorsFixtures.file(specs))
+        let listed = (summary["tensors"] as? [[String: Any]])?.count ?? 0
+        #expect(listed > 0 && listed < 2_000)
+        #expect(summary["partial"] as? Bool == true && summary["parameters"] as? Int == 8_000)
+        #expect(document.text.utf8.count < PreviewBudget.standard.maxOutputUTF8Bytes)
+    }
+
+    @Test func aThousandDistinctDtypeNamesAreCappedInTheDtypeTable() throws {
+        let specs = (0..<1_000).map { SafetensorsFixtures.Tensor(name: "t\($0)", dtype: "X\($0)", shape: [1], begin: 0, end: 0) }
+        let json = SafetensorsFixtures.headerJSON(specs)
+        let (summary, _) = try SafetensorsTestSupport.parse(SafetensorsFixtures.file(json: json))
+        #expect((summary["dtypes"] as? [String: Int])?.count == PackageSummary.maximumListItems)
+        #expect(summary["tensorCount"] as? Int == 1_000)
+    }
+
     @Test func metadataKeepsSixtyFourEntriesInFileOrderWithClippedValues() throws {
         let metadata = (0..<100).map { ("key\($0)", $0 == 0 ? String(repeating: "x", count: 5_000) : "v\($0)") }
         let (summary, document) = try SafetensorsTestSupport.parse(SafetensorsFixtures.file([], metadata: metadata))
