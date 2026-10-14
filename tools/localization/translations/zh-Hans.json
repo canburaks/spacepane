@@ -258,12 +258,57 @@
     "finding.archive.macMetadata": "__MACOSX 中的 Mac 资源条目：%lld。",
     "finding.archive.nested": "此归档内部的归档（未打开）：%lld。",
     "finding.archive.unsafePath": "会被写到目标文件夹之外的条目：%lld。",
+    "finding.autorun.agentHooks": {
+      "other": "有 %2$@ 条命令会在 AI 智能体执行操作时自动运行（钩子）。"
+    },
+    "finding.autorun.agentPermissions": {
+      "other": "有 %2$@ 项设置允许 AI 智能体不先询问就执行操作。"
+    },
+    "finding.autorun.containerCommands": {
+      "other": "有 %2$@ 条开发容器命令会在容器内自动运行。"
+    },
+    "finding.autorun.folderOpenTask": {
+      "other": "有 %2$@ 个任务会在用代码编辑器打开文件夹时自动运行。"
+    },
+    "finding.autorun.hostCommand": {
+      "other": "有 %2$@ 条开发容器命令会在容器启动前于这台 Mac 上运行。"
+    },
+    "finding.autorun.installScripts": {
+      "other": "有 %2$@ 个软件包脚本会在安装期间自动运行。"
+    },
+    "finding.autorun.localServers": {
+      "other": "有 %2$@ 个 MCP 服务器会在这台 Mac 上启动程序。"
+    },
+    "finding.autorun.remoteServers": {
+      "other": "有 %2$@ 个 MCP 服务器会连接到互联网上的服务。"
+    },
+    "finding.autorun.serverEnvironment": {
+      "other": "有 %2$@ 个环境变量会传递给 MCP 服务器。"
+    },
     "finding.banner.label": "此文件中需要检查的事项",
+    "finding.certificate.expired": {
+      "other": "有 %2$@ 个证书已过期。"
+    },
+    "finding.certificate.expiresSoon": {
+      "other": "有一个证书将在 %2$@ 天后过期。"
+    },
+    "finding.certificate.notYetValid": {
+      "other": "有 %2$@ 个证书尚未生效。"
+    },
+    "finding.certificate.weakKey": {
+      "other": "有 %2$@ 个证书使用了较短的 RSA 密钥。"
+    },
     "finding.detail.cells": "单元格：%@",
     "finding.detail.cellsMore": "单元格：%1$@，另有 %2$lld 个",
     "finding.detail.decodedText": "暗藏的文本（以纯文本显示）：%@",
     "finding.detail.lines": "行：%@",
     "finding.detail.linesMore": "行：%1$@，另有 %2$lld 行",
+    "finding.export.readableCodeSecrets": {
+      "other": "有 %2$@ 个一次性验证码密钥以可读形式保存在此处。"
+    },
+    "finding.export.readableLogins": {
+      "other": "有 %2$@ 个密码管理器登录项以可读形式保存在此处。不再需要时，请删除此导出文件。"
+    },
     "finding.hidden.agentInstructions": "这看起来像 AI 编程工具的指令文件，其中的隐藏文本可能会左右这些工具。",
     "finding.hidden.bidirectionalControls": "可能让代码的显示与实际运行不一致的方向控制字符：%lld。",
     "finding.hidden.markdownComments": "大多数 Markdown 查看器会隐藏的 HTML 注释：%lld。",
@@ -272,6 +317,16 @@
     "finding.hidden.unicodeTags": "携带隐藏文本的不可见标签字符：%lld。",
     "finding.hidden.variationSelectors": "可能被用来藏匿数据的异常变体选择符：%lld。",
     "finding.hidden.zeroWidth": "不可见的零宽字符：%lld。",
+    "finding.launch.atLoad": "该程序会在登录时或启动时运行。",
+    "finding.launch.hiddenLocation": "该程序位于临时、共享或隐藏的文件夹中。",
+    "finding.launch.inlineScript": "该任务会运行写在此文件内的 shell 或脚本代码。",
+    "finding.launch.interval": "该程序每隔 %@ 运行一次。",
+    "finding.launch.job": "这是一个 launchd 任务：macOS 会启动它指定的程序。",
+    "finding.launch.keepAlive": "每当该程序停止，macOS 都会重新启动它。",
+    "finding.launch.schedule": "该程序按日历计划运行。",
+    "finding.launch.watchPaths": {
+      "other": "有 %2$@ 个被监视的路径，一旦发生变化就会启动该程序。"
+    },
     "finding.listing.hiddenCharacters": {
       "other": "%2$@ 个列出的名称包含隐藏字符。"
     },
@@ -282,12 +337,43 @@
     "finding.notebook.notExecuted": "没有代码单元格运行过，因此此笔记本没有已保存的结果。",
     "finding.notebook.outOfOrder": "单元格未按顺序运行：%@。",
     "finding.notebook.unexecutedCells": "从未运行的代码单元格：%lld。",
+    "finding.profile.expired": "此描述文件已过期。",
+    "finding.profile.expiresSoon": {
+      "other": "此描述文件将在 %2$@ 天后过期。"
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google 云端硬盘",
     "finding.provider.iCloudDrive": "iCloud 云盘",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "云存储文件夹",
+    "finding.script.asksForPassword": {
+      "other": "有 %2$@ 处会要求输入密码。"
+    },
+    "finding.script.decodeAndRun": {
+      "other": "有 %2$@ 处会解码编码文本并运行。"
+    },
+    "finding.script.disablesProtection": {
+      "other": "有 %2$@ 条命令会关闭安全保护。"
+    },
+    "finding.script.downloadAndRun": {
+      "other": "有 %2$@ 处会从互联网下载代码并运行。"
+    },
+    "finding.script.elevates": {
+      "other": "有 %2$@ 条命令会以管理员权限运行。"
+    },
+    "finding.script.persistence": {
+      "other": "有 %2$@ 条命令会设置在登录时或按计划运行的程序。"
+    },
+    "finding.script.readsSecrets": {
+      "other": "有 %2$@ 条命令会读取已保存的密码、密钥或浏览器数据。"
+    },
+    "finding.script.removesQuarantine": {
+      "other": "有 %2$@ 条命令会移除文件上的 macOS 隔离标记。"
+    },
+    "finding.script.uploadsFiles": {
+      "other": "有 %2$@ 条命令会将文件或数据发送到互联网。"
+    },
     "finding.secret.apiKey": "已隐藏的 API 密钥：%lld。",
     "finding.secret.authorizationHeader": "已隐藏的授权凭据：%lld。",
     "finding.secret.cloudAccessKey": "已隐藏的云访问密钥：%lld。",
@@ -305,6 +391,11 @@
     "finding.summary.concealed": {
       "other": "%2$@ 项可能的敏感信息已隐藏。选择和复制使用隐藏后的文本。"
     },
+    "findings.report.copied": "已拷贝发现报告",
+    "findings.report.copy": "拷贝发现报告",
+    "findings.report.copyHint": "拷贝这些发现的列表，不包含文件中的任何文本。",
+    "findings.report.footer": "此列表不包含文件中的任何文本。",
+    "findings.report.heading": "发现：%@",
     "format.archive.7z.description": "根据头部（包括已压缩的头部）生成有界的 7z 条目列表。绝不解码文件数据；头部已加密的压缩包不会列出。",
     "format.archive.7z.name": "7-Zip 压缩包",
     "format.archive.bzip2.description": "对 bzip2 数据流进行有界解压：TAR.BZ2 列表和受支持的文本。其他内容将报告为二进制。",

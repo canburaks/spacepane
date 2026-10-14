@@ -262,12 +262,72 @@
     "finding.archive.macMetadata": "__MACOSX içindeki Mac kaynak girdileri: %lld.",
     "finding.archive.nested": "Bu arşivin içindeki arşivler, açılmadı: %lld.",
     "finding.archive.unsafePath": "Hedef klasörün dışına yazılacak girdiler: %lld.",
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ komut, bir yapay zekâ ajanı işlem yaptığında kendiliğinden çalışıyor (bir hook).",
+      "other": "%2$@ komut, bir yapay zekâ ajanı işlem yaptığında kendiliğinden çalışıyor (hook’lar)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ ayar, bir yapay zekâ ajanının önce sormadan işlem yapmasına izin veriyor.",
+      "other": "%2$@ ayar, bir yapay zekâ ajanının önce sormadan işlem yapmasına izin veriyor."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcının içinde kendiliğinden çalışıyor.",
+      "other": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcının içinde kendiliğinden çalışıyor."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ görev, klasör kod düzenleyicide açıldığında kendiliğinden çalışıyor.",
+      "other": "%2$@ görev, klasör kod düzenleyicide açıldığında kendiliğinden çalışıyor."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcı başlamadan önce bu Mac’te çalışıyor.",
+      "other": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcı başlamadan önce bu Mac’te çalışıyor."
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ paket betiği, kurulum sırasında kendiliğinden çalışıyor.",
+      "other": "%2$@ paket betiği, kurulum sırasında kendiliğinden çalışıyor."
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ MCP sunucusu bu Mac’te bir program başlatıyor.",
+      "other": "%2$@ MCP sunucusu bu Mac’te program başlatıyor."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ MCP sunucusu internetteki bir hizmete bağlanıyor.",
+      "other": "%2$@ MCP sunucusu internetteki hizmetlere bağlanıyor."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ ortam değişkeni MCP sunucularına aktarılıyor.",
+      "other": "%2$@ ortam değişkeni MCP sunucularına aktarılıyor."
+    },
     "finding.banner.label": "Bu dosyada kontrol edilmesi gerekenler",
+    "finding.certificate.expired": {
+      "one": "%2$@ sertifikanın süresi dolmuş.",
+      "other": "%2$@ sertifikanın süresi dolmuş."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Bir sertifikanın süresi %2$@ gün içinde doluyor.",
+      "other": "Bir sertifikanın süresi %2$@ gün içinde doluyor."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ sertifika henüz geçerli değil.",
+      "other": "%2$@ sertifika henüz geçerli değil."
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ sertifika kısa bir RSA anahtarı kullanıyor.",
+      "other": "%2$@ sertifika kısa RSA anahtarları kullanıyor."
+    },
     "finding.detail.cells": "Hücreler: %@",
     "finding.detail.cellsMore": "Hücreler: %1$@ ve %2$lld hücre daha",
     "finding.detail.decodedText": "Gizli metin, düz metin olarak gösteriliyor: %@",
     "finding.detail.lines": "Satırlar: %@",
     "finding.detail.linesMore": "Satırlar: %1$@ ve %2$lld satır daha",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ tek seferlik kod sırrı burada okunabilir biçimde kaydedilmiş.",
+      "other": "%2$@ tek seferlik kod sırrı burada okunabilir biçimde kaydedilmiş."
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ parola yöneticisi girişi burada okunabilir biçimde kaydedilmiş. Artık gerekmediğinde bu dışa aktarılan dosyayı silin.",
+      "other": "%2$@ parola yöneticisi girişi burada okunabilir biçimde kaydedilmiş. Artık gerekmediğinde bu dışa aktarılan dosyayı silin."
+    },
     "finding.hidden.agentInstructions": "Bu, gizli metnin yönlendirebileceği yapay zekâ kodlama araçları için bir talimat dosyasına benziyor.",
     "finding.hidden.bidirectionalControls": "Kodun çalıştığından farklı okunmasına yol açabilen yön değiştirme karakterleri: %lld.",
     "finding.hidden.markdownComments": "Çoğu Markdown görüntüleyicisinin gizlediği HTML yorumları: %lld.",
@@ -276,6 +336,17 @@
     "finding.hidden.unicodeTags": "Gizli metin taşıyan görünmez etiket karakterleri: %lld.",
     "finding.hidden.variationSelectors": "Veri gizleyebilen beklenmedik varyasyon seçiciler: %lld.",
     "finding.hidden.zeroWidth": "Görünmez sıfır genişlikli karakterler: %lld.",
+    "finding.launch.atLoad": "Program, oturum açıldığında veya başlangıçta çalışır.",
+    "finding.launch.hiddenLocation": "Program geçici, paylaşılan veya gizli bir klasörde.",
+    "finding.launch.inlineScript": "İş, bu dosyanın içine yazılmış kabuk veya betik kodunu çalıştırır.",
+    "finding.launch.interval": "Program her %@ çalışır.",
+    "finding.launch.job": "Bu bir launchd işi: macOS, adı geçen programı başlatır.",
+    "finding.launch.keepAlive": "macOS, program her durduğunda onu yeniden başlatır.",
+    "finding.launch.schedule": "Program bir takvim zamanlamasına göre çalışır.",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ izlenen yol, değiştiğinde programı başlatıyor.",
+      "other": "%2$@ izlenen yol, değiştiğinde programı başlatıyor."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "Listelenen %2$@ ad gizli karakterler içeriyor.",
       "other": "Listelenen %2$@ ad gizli karakterler içeriyor."
@@ -287,12 +358,53 @@
     "finding.notebook.notExecuted": "Hiçbir kod hücresi çalıştırılmamış, bu yüzden not defterinde kayıtlı sonuç yok.",
     "finding.notebook.outOfOrder": "Hücreler sırayla çalıştırılmadı: %@.",
     "finding.notebook.unexecutedCells": "Hiç çalıştırılmamış kod hücreleri: %lld.",
+    "finding.profile.expired": "Bu provizyon profilinin süresi dolmuş.",
+    "finding.profile.expiresSoon": {
+      "one": "Bu provizyon profilinin süresi %2$@ gün içinde doluyor.",
+      "other": "Bu provizyon profilinin süresi %2$@ gün içinde doluyor."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "bir bulut depolama klasörü",
+    "finding.script.asksForPassword": {
+      "one": "%2$@ yerde parola isteniyor.",
+      "other": "%2$@ yerde parola isteniyor."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "%2$@ yerde kodlanmış metin çözülüp çalıştırılıyor.",
+      "other": "%2$@ yerde kodlanmış metin çözülüp çalıştırılıyor."
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ komut bir güvenlik korumasını kapatıyor.",
+      "other": "%2$@ komut güvenlik korumalarını kapatıyor."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "%2$@ yerde internetten kod indirilip çalıştırılıyor.",
+      "other": "%2$@ yerde internetten kod indirilip çalıştırılıyor."
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ komut yönetici haklarıyla çalışıyor.",
+      "other": "%2$@ komut yönetici haklarıyla çalışıyor."
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ komut, oturum açıldığında veya zamanlanmış olarak çalışacak bir program kuruyor.",
+      "other": "%2$@ komut, oturum açıldığında veya zamanlanmış olarak çalışacak programlar kuruyor."
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ komut kayıtlı parolaları, anahtarları veya tarayıcı verilerini okuyor.",
+      "other": "%2$@ komut kayıtlı parolaları, anahtarları veya tarayıcı verilerini okuyor."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ komut, dosyalardaki macOS karantina işaretini kaldırıyor.",
+      "other": "%2$@ komut, dosyalardaki macOS karantina işaretini kaldırıyor."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ komut dosyaları veya verileri internete gönderiyor.",
+      "other": "%2$@ komut dosyaları veya verileri internete gönderiyor."
+    },
     "finding.secret.apiKey": "Gizlenen API anahtarları: %lld.",
     "finding.secret.authorizationHeader": "Gizlenen yetkilendirme kimlik bilgileri: %lld.",
     "finding.secret.cloudAccessKey": "Gizlenen bulut erişim anahtarları: %lld.",
@@ -312,6 +424,11 @@
       "one": "%2$@ olası sır gizlendi. Seçim ve kopyalama, gizlenmiş metni kullanır.",
       "other": "%2$@ olası sır gizlendi. Seçim ve kopyalama, gizlenmiş metni kullanır."
     },
+    "findings.report.copied": "Bulgu raporu kopyalandı",
+    "findings.report.copy": "Bulgu Raporunu Kopyala",
+    "findings.report.copyHint": "Bu bulguların bir listesini kopyalar. Dosyadan hiçbir metin eklenmez.",
+    "findings.report.footer": "Bu liste dosyadan hiçbir metin içermez.",
+    "findings.report.heading": "Bulgular: %@",
     "format.archive.7z.description": "Sıkıştırılmış üst bilgiler dahil, üst bilgiden 7z girdilerinin sınırlı listeleri. Dosya verileri hiçbir zaman çözülmez; üst bilgisi şifreli arşivler listelenmez.",
     "format.archive.7z.name": "7-Zip Arşivleri",
     "format.archive.bzip2.description": "bzip2 akışlarının sınırlı açılması: TAR.BZ2 listeleri ve desteklenen metin. Diğer içerik ikili olarak bildirilir.",
