@@ -23,6 +23,12 @@ struct ShellLexer {
     private var checkpointCountdown = ShellLexer.checkpointInterval
     private var aborted = false
     private var pending: [PendingHeredoc] = []
+    /// Inside `[[ ... ]]`, where parentheses and bars belong to a pattern.
+    private var inTest = false
+    /// Open `case` statements, and whether the next words are a clause's patterns, which name nothing to run.
+    private var caseDepth = 0
+    private var inCasePatterns = false
+    private var patternWords = 0
 
     private struct PendingHeredoc {
         var delimiter: [UInt8]
@@ -62,7 +68,15 @@ struct ShellLexer {
         var command = ScriptCommand()
         var groups = 0
         while position < end, !aborted {
+            if inCasePatterns {
+                try skipCasePattern()
+                continue
+            }
             let byte = bytes[position]
+            if inTest, byte == 0x28 || byte == 0x29 || byte == 0x7C || byte == 0x26 || byte == 0x3C || byte == 0x3E {
+                try appendWord(to: &command, in: &list, depth: depth)
+                continue
+            }
             switch byte {
             case 0x20, 0x09, 0x0B, 0x0C:
                 position += 1
@@ -78,6 +92,7 @@ struct ShellLexer {
                 let continues = command.words.isEmpty && command.redirects.isEmpty
                     && (list.commands.last.map { $0.next != .sequence } ?? false)
                 try consumeBreak()
+                inTest = false
                 if !continues { Self.commit(&command, to: &list, as: .sequence) }
                 // The bodies of here-documents opened on this line start on the next one.
                 if !pending.isEmpty { try readHeredocBodies(into: &list) }
@@ -86,8 +101,15 @@ struct ShellLexer {
                 skipComment()
             case 0x3B: // ; ;; ;&
                 position += 1
-                if position < end, bytes[position] == 0x3B || bytes[position] == 0x26 { position += 1 }
+                var endsClause = false
+                if position < end, bytes[position] == 0x3B || bytes[position] == 0x26 {
+                    position += 1
+                    // The end of a clause: the next words are the patterns of another.
+                    if caseDepth > 0 { (inCasePatterns, patternWords, endsClause) = (true, 0, true) }
+                }
                 Self.commit(&command, to: &list, as: .sequence)
+                // A clause is a command list of its own, numbered by the line it starts on.
+                if endsClause, depth == 0 { return }
             case 0x26: // & &&
                 if peek(1) == 0x26 {
                     position += 2
@@ -108,6 +130,11 @@ struct ShellLexer {
                     try appendWord(to: &command, in: &list, depth: depth)
                 } else if command.words.isEmpty, peek(1) == 0x28 {
                     try skipParenthesized(prefix: 2, nesting: 2)
+                } else if position > 0, bytes[position - 1] == 0x3D, !command.words.isEmpty {
+                    try parseArrayLiteral(into: &command, depth: depth)
+                } else if command.words.count == 1, closesImmediately() {
+                    // `name() { ...; }` defines a function; its name is not a command.
+                    command = ScriptCommand()
                 } else {
                     position += 1
                     groups += 1
@@ -157,6 +184,98 @@ struct ShellLexer {
             return
         }
         command.words.append(word)
+        noteStructure(of: word, in: &command)
+    }
+
+    /// `[[` opens a test whose patterns are not commands; `case X in` and `esac` frame clauses whose
+    /// patterns are not commands either.
+    private mutating func noteStructure(of word: ScriptWord, in command: inout ScriptCommand) {
+        guard !isFish else { return }
+        let leading = command.words.dropLast()
+        if word.text == "[[", leading.allSatisfy({ ScriptInvocation.isShellKeyword($0.text) }) { inTest = true }
+        if word.text == "]]" { inTest = false }
+        if leading.isEmpty, word.text == "esac" { caseDepth = max(0, caseDepth - 1) }
+        if word.text == "in", command.words.count == 3, command.words[0].text == "case" {
+            command = ScriptCommand()
+            caseDepth += 1
+            (inCasePatterns, patternWords) = (true, 0)
+        }
+    }
+
+    /// Skips one token of a case clause's patterns: `(a|b)`, `*.sh)`, or the closing `esac`.
+    private mutating func skipCasePattern() throws {
+        let byte = bytes[position]
+        switch byte {
+        case 0x20, 0x09, 0x0B, 0x0C, 0x28, 0x7C:
+            position += 1
+        case 0x29:
+            position += 1
+            inCasePatterns = false
+        case ScriptBytes.cutMarker:
+            inCasePatterns = false
+        case 0x23:
+            skipComment()
+        default:
+            if ScriptBytes.breakLength(in: bytes, at: position) > 0 {
+                try consumeBreak()
+                return
+            }
+            let start = position
+            if let word = try parseWord(depth: 0), word.text == "esac" {
+                inCasePatterns = false
+                caseDepth = max(0, caseDepth - 1)
+            } else if position == start {
+                position += 1
+            }
+            patternWords += 1
+            // A case that never closes must not swallow the rest of the script.
+            if patternWords > 64 { inCasePatterns = false }
+        }
+    }
+
+    /// `name=(a b c)`: the elements are data, not commands. They are folded into the assignment word.
+    private mutating func parseArrayLiteral(into command: inout ScriptCommand, depth: Int) throws {
+        position += 1
+        var assignment = command.words.removeLast()
+        var elements = 0
+        arrayLoop: while position < end, elements < 4_096 {
+            let byte = bytes[position]
+            switch byte {
+            case ScriptBytes.cutMarker:
+                break arrayLoop
+            case 0x29:
+                position += 1
+                break arrayLoop
+            case 0x20, 0x09, 0x0B, 0x0C:
+                position += 1
+            case 0x23:
+                skipComment()
+            default:
+                if ScriptBytes.breakLength(in: bytes, at: position) > 0 {
+                    try consumeBreak()
+                    continue
+                }
+                let start = position
+                if let element = try parseWord(depth: depth) {
+                    if assignment.text.utf8.count < ScriptWordBuilder.limit { assignment.text += " " + element.text }
+                    assignment.substitutions += element.substitutions
+                    assignment.isWholeSubstitution = false
+                    elements += 1
+                } else if position == start {
+                    position += 1
+                }
+            }
+        }
+        command.words.append(assignment)
+    }
+
+    /// Whether the text after a `(` is `)`, as in a function definition `name() {`; consumes both if so.
+    private mutating func closesImmediately() -> Bool {
+        var index = position + 1
+        while index < end, bytes[index] == 0x20 || bytes[index] == 0x09 { index += 1 }
+        guard index < end, bytes[index] == 0x29 else { return false }
+        position = index + 1
+        return true
     }
 
     // MARK: Redirections and here-documents
@@ -243,6 +362,11 @@ struct ShellLexer {
         let start = position
         wordLoop: while position < end {
             let byte = bytes[position]
+            if inTest, byte == 0x28 || byte == 0x29 || byte == 0x7C || byte == 0x26 || byte == 0x3C || byte == 0x3E {
+                builder.literal(byte, unquoted: true)
+                position += 1
+                continue
+            }
             switch byte {
             case 0x20, 0x09, 0x0B, 0x0C, ScriptBytes.cutMarker, 0x3B, 0x26, 0x7C, 0x29:
                 break wordLoop
