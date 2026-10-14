@@ -68,10 +68,12 @@ enum PickleStream {
     // MARK: Running the walker
 
     static func walk(_ bytes: [UInt8], isWindow: Bool = false, opcodeBudget: Int = PickleWalker.maximumOpcodes,
+                     retainedTextLimit: Int = PickleWalker.maximumRetainedText,
                      context: RequestContext = RequestContext(budget: .standard)) throws -> (outcome: PickleWalkOutcome, tally: PickleImportTally) {
         var remaining = opcodeBudget
         return try bytes.withUnsafeBufferPointer { buffer in
-            var walker = PickleWalker(bytes: buffer, start: 0, isWindow: isWindow, tally: PickleImportTally())
+            var walker = PickleWalker(bytes: buffer, start: 0, isWindow: isWindow, tally: PickleImportTally(),
+                                      retainedTextLimit: retainedTextLimit)
             let outcome = try walker.run(opcodeBudget: &remaining, context: context)
             return (outcome, walker.tally)
         }

@@ -52,6 +52,7 @@ struct PickleWalker {
 
     private var reader: PickleReader
     private let isWindow: Bool
+    private let retainedTextLimit: Int
     private var items = ContiguousArray<Symbol>()
     private var marks = ContiguousArray<Int>()
     private var memo: [Int: Symbol] = [:]
@@ -61,10 +62,13 @@ struct PickleWalker {
 
     /// - Parameters:
     ///   - isWindow: the bytes are the beginning of a larger file, so running out is not a broken stream.
-    init(bytes: UnsafeBufferPointer<UInt8>, start: Int, isWindow: Bool, tally: PickleImportTally) {
+    ///   - retainedTextLimit: a smaller total than the standard cap, for tests of the cap.
+    init(bytes: UnsafeBufferPointer<UInt8>, start: Int, isWindow: Bool, tally: PickleImportTally,
+         retainedTextLimit: Int = PickleWalker.maximumRetainedText) {
         reader = PickleReader(bytes: bytes, position: start)
         self.isWindow = isWindow
         self.tally = tally
+        self.retainedTextLimit = retainedTextLimit
     }
 
     /// Walks one pickle. `opcodeBudget` is what is left of the scan's opcode cap and is reduced by what this walk used.
@@ -291,7 +295,7 @@ struct PickleWalker {
         guard items.count < Self.maximumStack else { throw PickleBreak.limit }
         // A duplicated or recalled string is a second holder of the same text.
         if counted, case let .text(text) = symbol {
-            if retainedText + text.utf8.count <= Self.maximumRetainedText {
+            if retainedText + text.utf8.count <= retainedTextLimit {
                 retainedText += text.utf8.count
                 items.append(symbol)
                 return
@@ -327,7 +331,7 @@ struct PickleWalker {
     /// A string kept on the stack, if it is short enough and the retained total allows it.
     private mutating func retain(_ text: String) -> Symbol {
         let size = text.utf8.count
-        guard size <= PickleText.maximumBytes, retainedText + size <= Self.maximumRetainedText else { return .other }
+        guard size <= PickleText.maximumBytes, retainedText + size <= retainedTextLimit else { return .other }
         retainedText += size
         return .text(text)
     }
@@ -346,7 +350,7 @@ struct PickleWalker {
         }
         var stored = items[items.count - 1]
         if case let .text(text) = stored {
-            if retainedText + text.utf8.count <= Self.maximumRetainedText { retainedText += text.utf8.count } else { stored = .other }
+            if retainedText + text.utf8.count <= retainedTextLimit { retainedText += text.utf8.count } else { stored = .other }
         }
         memo[index] = stored
     }
