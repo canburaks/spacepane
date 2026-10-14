@@ -24,19 +24,23 @@ public struct CertificateAdapter: BinaryFormatAdapter {
         let bytes = [UInt8](input.data)
         guard !bytes.isEmpty else { throw PreviewFailure.malformedDocument }
         let scan = try PEMScanner.scan(bytes, maximumBlocks: Self.maximumBlocks, context: context)
+        // One reading of the clock decides every `expired` flag and every validity finding of this file.
+        let current = now()
         var fields = SummaryFields()
         if scan.blocks.isEmpty {
             // No armor: the file must be exactly one DER certificate.
-            guard bytes.count <= Self.maximumCertificateBytes, let details = CertificateInspector.details(der: input.data, now: now()) else {
+            guard bytes.count <= Self.maximumCertificateBytes, let details = CertificateInspector.details(der: input.data, now: current) else {
                 throw PreviewFailure.malformedDocument
             }
             fields.text("encoding", "DER")
             fields.number("certificateCount", 1)
             fields.add("certificates", .array([details.summaryValue()]))
-            return try PackageSummary.document(fields.value, context: context)
+            return try ValidityFindings.document(fields.value, findings: ValidityFindings.certificates([details], now: current),
+                                                 context: context)
         }
 
         var certificates: [SummaryValue] = []
+        var inspected: [CertificateDetails] = []
         var unreadable = 0
         var privateKeyKinds: [String] = []
         var otherBlocks = 0
@@ -51,8 +55,9 @@ public struct CertificateAdapter: BinaryFormatAdapter {
                 guard certificates.count < Self.maximumCertificates else { continue }
                 if block.isTerminated,
                    let der = PEMScanner.decodeBase64(bytes[block.body], maximumDecodedBytes: Self.maximumCertificateBytes),
-                   let details = CertificateInspector.details(der: der, now: now()) {
+                   let details = CertificateInspector.details(der: der, now: current) {
                     certificates.append(details.summaryValue())
+                    inspected.append(details)
                 } else {
                     unreadable += 1
                 }
@@ -71,7 +76,81 @@ public struct CertificateAdapter: BinaryFormatAdapter {
         }
         if otherBlocks > 0 { fields.number("otherBlocks", otherBlocks) }
         fields.flag("partial", scan.truncated || certificateBlocks > certificates.count + unreadable)
-        return try PackageSummary.document(fields.value, context: context)
+        return try ValidityFindings.document(fields.value, findings: ValidityFindings.certificates(inspected, now: current),
+                                             context: context)
+    }
+}
+
+/// Validity findings of certificates and provisioning profiles (decision 029), judged against the adapter's
+/// injected clock. They are whole-file facts: no lines, no source values, only kinds, counts and whole days.
+enum ValidityFindings {
+    /// How close an end date that has not passed must be, in whole days, to be reported as ending soon. The
+    /// one threshold of the certificate and profile adapters; the boundary day itself counts as soon.
+    static let expiresSoonDays = 30
+    /// RSA keys with a modulus shorter than this are weak. Security reports the modulus size in bits.
+    static let minimumRSAKeyBits = 2_048
+
+    private static let secondsPerDay: TimeInterval = 86_400
+
+    /// Where a validity end stands against the clock.
+    enum Standing: Equatable {
+        case valid
+        /// Not yet passed and within `expiresSoonDays`: whole days left, rounded up, at least one.
+        case endsSoon(days: Int)
+        case expired
+
+        /// An end date is still valid through that very second, so it is expired only once the clock is past it.
+        init(end: Date, now: Date) {
+            let remaining = end.timeIntervalSince(now)
+            if remaining < 0 {
+                self = .expired
+            } else if remaining <= TimeInterval(ValidityFindings.expiresSoonDays) * ValidityFindings.secondsPerDay {
+                self = .endsSoon(days: max(1, Int((remaining / ValidityFindings.secondsPerDay).rounded(.up))))
+            } else {
+                self = .valid
+            }
+        }
+    }
+
+    /// The findings for every inspected certificate, one per kind with the number of certificates it
+    /// applies to, in the order of the kind declarations. Expiry is judged on the end date, not before
+    /// the start: a certificate can be both not yet valid and ending soon. A certificate whose dates the
+    /// system parser did not give, or whose RSA key it did not size, adds nothing.
+    static func certificates(_ certificates: [CertificateDetails], now: Date) -> [PreviewFinding] {
+        var expired = 0
+        var notYetValid = 0
+        var weakKeys = 0
+        var endingSoon = 0
+        var soonestDays: Int?
+        for certificate in certificates {
+            if let end = certificate.notAfter {
+                switch Standing(end: end, now: now) {
+                case .expired: expired += 1
+                case .endsSoon(let days):
+                    endingSoon += 1
+                    soonestDays = min(soonestDays ?? days, days)
+                case .valid: break
+                }
+            }
+            if let start = certificate.notBefore, start > now { notYetValid += 1 }
+            if certificate.hasWeakRSAKey { weakKeys += 1 }
+        }
+        var findings: [PreviewFinding] = []
+        if expired > 0 { findings.append(PreviewFinding(kind: .certificateExpired, count: expired)) }
+        if endingSoon > 0, let soonestDays {
+            findings.append(PreviewFinding(kind: .certificateExpiresSoon, count: endingSoon, detail: .days(soonestDays)))
+        }
+        if notYetValid > 0 { findings.append(PreviewFinding(kind: .certificateNotYetValid, count: notYetValid)) }
+        if weakKeys > 0 { findings.append(PreviewFinding(kind: .certificateWeakKey, count: weakKeys)) }
+        return findings
+    }
+
+    /// The summary document with its findings. `PackageSummary.document` is shared and carries none, so this
+    /// writes the same document (structured privacy, JSON syntax, app-made summary origin, no images) through
+    /// `SummaryWriter`, which accepts them.
+    static func document(_ root: SummaryValue, findings: [PreviewFinding], context: RequestContext) throws -> ParsedTextDocument {
+        var writer = SummaryWriter(context: context)
+        return try writer.document(root, findings: findings)
     }
 }
 
@@ -88,6 +167,13 @@ struct CertificateDetails: Equatable {
     var alternativeNames: [String] = []
     var sha256: String
     var sha1: String
+
+    /// RSA with a modulus shorter than `ValidityFindings.minimumRSAKeyBits`. Unknown is not weak: a key the
+    /// system parser declined to size, and every other algorithm, never qualify.
+    var hasWeakRSAKey: Bool {
+        guard publicKeyAlgorithm == CertificateInspector.rsaAlgorithmName, let publicKeyBits else { return false }
+        return publicKeyBits < ValidityFindings.minimumRSAKeyBits
+    }
 
     func summaryValue() -> SummaryValue {
         var fields = SummaryFields()
@@ -115,8 +201,11 @@ enum CertificateInspector {
         "2.5.4.9": "street", "2.5.4.10": "O", "2.5.4.11": "OU", "2.5.4.12": "title", "2.5.4.17": "postalCode",
         "1.2.840.113549.1.9.1": "emailAddress", "0.9.2342.19200300.100.1.25": "DC", "0.9.2342.19200300.100.1.1": "UID"
     ]
+    /// The name reported for `rsaEncryption` keys, which the weak-key finding matches. RSA-PSS keys are named
+    /// apart because Security does not size them.
+    static let rsaAlgorithmName = "RSA"
     private static let publicKeyAlgorithms: [String: (name: String, bits: Int?)] = [
-        "1.2.840.113549.1.1.1": ("RSA", nil), "1.2.840.113549.1.1.10": ("RSA-PSS", nil),
+        "1.2.840.113549.1.1.1": (rsaAlgorithmName, nil), "1.2.840.113549.1.1.10": ("RSA-PSS", nil),
         "1.2.840.10045.2.1": ("EC", nil), "1.2.840.10040.4.1": ("DSA", nil),
         "1.3.101.112": ("Ed25519", 256), "1.3.101.113": ("Ed448", 456),
         "1.3.101.110": ("X25519", 255), "1.3.101.111": ("X448", 448)
