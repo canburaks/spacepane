@@ -210,6 +210,23 @@ struct GGUFAdapterTests {
         #expect(viaBytes.text == viaSource.text)
     }
 
+    @Test func tensorNamesMadeOfControlCharactersAreListedInPartNotRefused() throws {
+        let hostile = String(repeating: "\u{1}", count: 200)
+        let specs = (0..<2_000).map { ("\(hostile)\($0)", [UInt64(32)], UInt32(0)) }
+        let (summary, document) = try GGUFTestSupport.parse(GGUFFixtures.build(tensors: GGUFFixtures.laidOut(specs)))
+        let listed = (summary["tensors"] as? [[String: Any]])?.count ?? 0
+        #expect(listed > 0 && listed < 2_000)
+        #expect(summary["partial"] as? Bool == true && summary["parameters"] as? Int == 64_000)
+        #expect(document.text.utf8.count < PreviewBudget.standard.maxOutputUTF8Bytes)
+    }
+
+    @Test func aThousandDistinctUnknownTypesAreCappedInTheTypeTable() throws {
+        let tensors = (0..<1_000).map { GGUFFixtures.Tensor(name: "t\($0)", dimensions: [1], type: UInt32(100 + $0), offset: UInt64($0) * 32) }
+        let (summary, _) = try GGUFTestSupport.parse(GGUFFixtures.build(tensors: tensors, dataBytes: 0))
+        #expect((summary["tensorTypes"] as? [String: Int])?.count == PackageSummary.maximumListItems)
+        #expect(summary["tensorCount"] as? Int == 1_000 && summary["parameters"] as? Int == 1_000)
+    }
+
     @Test func customAlignmentMovesTheDataSection() throws {
         let tensors = GGUFFixtures.laidOut([("a", [64], 0), ("b", [64], 0)], alignment: 64)
         let built = GGUFFixtures.build(metadata: [("general.alignment", .u32(64))], tensors: tensors, alignment: 64)

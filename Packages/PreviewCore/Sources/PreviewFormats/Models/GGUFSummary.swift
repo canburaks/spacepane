@@ -18,7 +18,8 @@ extension GGUFAdapter {
             }
             if !layout.typeCounts.isEmpty {
                 let ordered = layout.typeCounts.sorted { $0.value != $1.value ? $0.value > $1.value : $0.key < $1.key }
-                fields.add("tensorTypes", .object(ordered.map { (GGUFTypeTable.label($0.key), SummaryValue.integer($0.value)) }))
+                let shown = ordered.prefix(PackageSummary.maximumListItems)
+                fields.add("tensorTypes", .object(shown.map { (GGUFTypeTable.label($0.key), SummaryValue.integer($0.value)) }))
             }
         }
         for (field, suffix) in zip(["contextLength", "blockCount", "embeddingLength", "headCount", "headCountKV",
@@ -49,9 +50,11 @@ extension GGUFAdapter {
             if !entry.isScanned { try hidden.scan(value, context: context) }
         }
         if !other.isEmpty { fields.add("otherMetadata", .object(other)) }
-        fields.flag("partial", isPartial || table.listed.count < preamble.tensorCount)
-        if !table.listed.isEmpty {
-            fields.add("tensors", .array(table.listed.map { tensor in
+        var listing = ModelListingBudget(context: context)
+        let shown = table.listed.prefix { listing.admit($0.name, GGUFTypeTable.label($0.typeCode)) }
+        fields.flag("partial", isPartial || shown.count < preamble.tensorCount)
+        if !shown.isEmpty {
+            fields.add("tensors", .array(shown.map { tensor in
                 .object([
                     ("name", .string(tensor.name)), ("type", .string(GGUFTypeTable.label(tensor.typeCode))),
                     ("shape", .string(tensor.shape.map(String.init).joined(separator: " × "))),

@@ -11,7 +11,8 @@ extension SafetensorsAdapter {
         fields.number("parameters", Int64(clamping: analysis.parameters))
         if !analysis.dtypeCounts.isEmpty {
             let ordered = analysis.dtypeCounts.sorted { $0.value != $1.value ? $0.value > $1.value : $0.key < $1.key }
-            let shown = ordered.map { (PackageSummary.clipped($0.key, limit: 64), SummaryValue.integer($0.value)) }
+            let shown = ordered.prefix(PackageSummary.maximumListItems)
+                .map { (PackageSummary.clipped($0.key, limit: 64), SummaryValue.integer($0.value)) }
             for (name, _) in shown { try hidden.scan(name, context: context) }
             fields.add("dtypes", .object(shown))
         }
@@ -39,7 +40,8 @@ extension SafetensorsAdapter {
         if !metadata.isEmpty { fields.add("metadata", .object(metadata)) }
 
         let capacity = PackageSummary.listingCapacity(context)
-        let listed = header.tensors.prefix(capacity)
+        var listing = ModelListingBudget(context: context)
+        let listed = header.tensors.prefix(capacity).prefix { listing.admit($0.name, $0.dtype) }
         fields.flag("partial", header.tensors.count > listed.count)
         var entries: [SummaryValue] = []
         for (index, tensor) in listed.enumerated() {
