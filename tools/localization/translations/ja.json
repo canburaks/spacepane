@@ -258,12 +258,57 @@
     "finding.archive.macMetadata": "__MACOSX 内の Mac リソース項目: %lld。",
     "finding.archive.nested": "このアーカイブ内の別のアーカイブ（開いていません）: %lld。",
     "finding.archive.unsafePath": "出力先フォルダの外に書き込まれる項目: %lld。",
+    "finding.autorun.agentHooks": {
+      "other": "%2$@ 件のコマンドが、AI エージェントが動作すると自動的に実行されます（フック）。"
+    },
+    "finding.autorun.agentPermissions": {
+      "other": "%2$@ 件の設定により、AI エージェントが事前の確認なしに動作できます。"
+    },
+    "finding.autorun.containerCommands": {
+      "other": "%2$@ 件の開発コンテナのコマンドが、コンテナ内で自動的に実行されます。"
+    },
+    "finding.autorun.folderOpenTask": {
+      "other": "%2$@ 件のタスクが、フォルダをコードエディタで開くと自動的に実行されます。"
+    },
+    "finding.autorun.hostCommand": {
+      "other": "%2$@ 件の開発コンテナのコマンドが、コンテナの起動前にこの Mac 上で実行されます。"
+    },
+    "finding.autorun.installScripts": {
+      "other": "%2$@ 件のパッケージスクリプトが、インストール中に自動的に実行されます。"
+    },
+    "finding.autorun.localServers": {
+      "other": "%2$@ 件の MCP サーバがこの Mac でプログラムを起動します。"
+    },
+    "finding.autorun.remoteServers": {
+      "other": "%2$@ 件の MCP サーバが、インターネット上のサービスに接続します。"
+    },
+    "finding.autorun.serverEnvironment": {
+      "other": "%2$@ 件の環境変数が、MCP サーバに渡されます。"
+    },
     "finding.banner.label": "このファイルで確認が必要な項目",
+    "finding.certificate.expired": {
+      "other": "%2$@ 件の証明書が期限切れです。"
+    },
+    "finding.certificate.expiresSoon": {
+      "other": "証明書が %2$@ 日後に期限切れになります。"
+    },
+    "finding.certificate.notYetValid": {
+      "other": "%2$@ 件の証明書はまだ有効ではありません。"
+    },
+    "finding.certificate.weakKey": {
+      "other": "%2$@ 件の証明書が短い RSA キーを使用しています。"
+    },
     "finding.detail.cells": "セル: %@",
     "finding.detail.cellsMore": "セル: %1$@ ほか %2$lld セル",
     "finding.detail.decodedText": "隠しテキスト（プレーンテキストで表示）: %@",
     "finding.detail.lines": "行: %@",
     "finding.detail.linesMore": "行: %1$@ ほか %2$lld 行",
+    "finding.export.readableCodeSecrets": {
+      "other": "%2$@ 件のワンタイムコードの秘密情報が、読める形でここに保存されています。"
+    },
+    "finding.export.readableLogins": {
+      "other": "%2$@ 件のパスワードマネージャのログイン情報が、読める形でここに保存されています。不要になったら、この書き出しファイルを削除してください。"
+    },
     "finding.hidden.agentInstructions": "AI コーディングツール向けの指示ファイルのようです。隠しテキストでツールの動作を操作される可能性があります。",
     "finding.hidden.bidirectionalControls": "コードの見え方と実行内容を食い違わせる可能性がある、方向を変える文字: %lld。",
     "finding.hidden.markdownComments": "ほとんどの Markdown ビューアで表示されない HTML コメント: %lld。",
@@ -272,6 +317,16 @@
     "finding.hidden.unicodeTags": "隠しテキストを運ぶ見えないタグ文字: %lld。",
     "finding.hidden.variationSelectors": "データを隠せる、想定外の異体字セレクタ: %lld。",
     "finding.hidden.zeroWidth": "見えないゼロ幅文字: %lld。",
+    "finding.launch.atLoad": "プログラムはログイン時または起動時に開始されます。",
+    "finding.launch.hiddenLocation": "プログラムは一時的、共有、または非表示のフォルダにあります。",
+    "finding.launch.inlineScript": "このジョブは、このファイル内に書かれたシェルまたはスクリプトのコードを実行します。",
+    "finding.launch.interval": "プログラムは %@ ごとに実行されます。",
+    "finding.launch.job": "これは launchd のジョブです。macOS が指定されたプログラムを起動します。",
+    "finding.launch.keepAlive": "プログラムが停止するたびに、macOS が再起動します。",
+    "finding.launch.schedule": "プログラムはカレンダーのスケジュールで実行されます。",
+    "finding.launch.watchPaths": {
+      "other": "%2$@ 件の監視パスが、変更されるとプログラムを起動します。"
+    },
     "finding.listing.hiddenCharacters": {
       "other": "一覧の %2$@ 件の名前に隠れた文字が含まれています。"
     },
@@ -282,12 +337,43 @@
     "finding.notebook.notExecuted": "実行されたコードセルがないため、このノートブックには保存された結果がありません。",
     "finding.notebook.outOfOrder": "セルが順番どおりに実行されていません: %@。",
     "finding.notebook.unexecutedCells": "一度も実行されていないコードセル: %lld。",
+    "finding.profile.expired": "このプロビジョニングプロファイルは期限切れです。",
+    "finding.profile.expiresSoon": {
+      "other": "このプロビジョニングプロファイルは %2$@ 日後に期限切れになります。"
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google ドライブ",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "クラウドストレージフォルダ",
+    "finding.script.asksForPassword": {
+      "other": "%2$@ 件の箇所で、パスワードを求めます。"
+    },
+    "finding.script.decodeAndRun": {
+      "other": "%2$@ 件の箇所でエンコード済みテキストをデコードして実行します。"
+    },
+    "finding.script.disablesProtection": {
+      "other": "%2$@ 件のコマンドが、セキュリティ保護をオフにします。"
+    },
+    "finding.script.downloadAndRun": {
+      "other": "%2$@ 件の箇所で、インターネットからコードをダウンロードして実行します。"
+    },
+    "finding.script.elevates": {
+      "other": "%2$@ 件のコマンドが、管理者権限で実行されます。"
+    },
+    "finding.script.persistence": {
+      "other": "%2$@ 件のコマンドが、ログイン時またはスケジュールで実行されるプログラムを設定します。"
+    },
+    "finding.script.readsSecrets": {
+      "other": "%2$@ 件のコマンドが、保存されたパスワード、キー、ブラウザのデータを読み取ります。"
+    },
+    "finding.script.removesQuarantine": {
+      "other": "%2$@ 件のコマンドが、ファイルから macOS の隔離マークを削除します。"
+    },
+    "finding.script.uploadsFiles": {
+      "other": "%2$@ 件のコマンドが、ファイルやデータをインターネットに送信します。"
+    },
     "finding.secret.apiKey": "隠された API キー: %lld。",
     "finding.secret.authorizationHeader": "隠された認証情報: %lld。",
     "finding.secret.cloudAccessKey": "隠されたクラウドアクセスキー: %lld。",
@@ -305,6 +391,11 @@
     "finding.summary.concealed": {
       "other": "機密情報の可能性がある %2$@ 件を非表示にしました。選択とコピーには機密情報を隠したテキストを使用します。"
     },
+    "findings.report.copied": "確認項目のレポートをコピーしました",
+    "findings.report.copy": "確認項目のレポートをコピー",
+    "findings.report.copyHint": "これらの確認項目の一覧をコピーします。ファイルのテキストは含まれません。",
+    "findings.report.footer": "この一覧にはファイルのテキストは含まれていません。",
+    "findings.report.heading": "確認項目: %@",
     "format.archive.7z.description": "圧縮されたヘッダを含め、ヘッダから 7z の項目を上限付きで一覧表示します。ファイルのデータはデコードしません。ヘッダが暗号化されたアーカイブは一覧表示されません。",
     "format.archive.7z.name": "7-Zip アーカイブ",
     "format.archive.bzip2.description": "bzip2 ストリームを上限付きで解凍します。TAR.BZ2 の一覧と対応するテキストを表示し、それ以外の内容はバイナリとして報告します。",

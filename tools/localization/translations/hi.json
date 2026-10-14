@@ -262,12 +262,72 @@
     "finding.archive.macMetadata": "__MACOSX में Mac रिसोर्स प्रविष्टियाँ: %lld।",
     "finding.archive.nested": "इस संग्रह के अंदर के संग्रह, खोले नहीं गए: %lld।",
     "finding.archive.unsafePath": "गंतव्य फ़ोल्डर के बाहर लिखी जाने वाली प्रविष्टियाँ: %lld।",
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ कमांड AI एजेंट के कुछ करने पर अपने आप चलता है (एक हुक)।",
+      "other": "%2$@ कमांड AI एजेंट के कुछ करने पर अपने आप चलते हैं (हुक)।"
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ सेटिंग AI एजेंट को पहले पूछे बिना कार्रवाई करने देती है।",
+      "other": "%2$@ सेटिंग AI एजेंट को पहले पूछे बिना कार्रवाई करने देती हैं।"
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ डेव कंटेनर कमांड कंटेनर के अंदर अपने आप चलता है।",
+      "other": "%2$@ डेव कंटेनर कमांड कंटेनर के अंदर अपने आप चलते हैं।"
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ टास्क फ़ोल्डर को कोड एडिटर में खोलने पर अपने आप चलता है।",
+      "other": "%2$@ टास्क फ़ोल्डर को कोड एडिटर में खोलने पर अपने आप चलते हैं।"
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ डेव कंटेनर कमांड कंटेनर शुरू होने से पहले इस Mac पर चलता है।",
+      "other": "%2$@ डेव कंटेनर कमांड कंटेनर शुरू होने से पहले इस Mac पर चलते हैं।"
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ पैकेज स्क्रिप्ट इंस्टॉलेशन के दौरान अपने आप चलती है।",
+      "other": "%2$@ पैकेज स्क्रिप्ट इंस्टॉलेशन के दौरान अपने आप चलती हैं।"
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ MCP सर्वर इस Mac पर एक प्रोग्राम शुरू करता है।",
+      "other": "%2$@ MCP सर्वर इस Mac पर प्रोग्राम शुरू करते हैं।"
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ MCP सर्वर इंटरनेट की किसी सेवा से जुड़ता है।",
+      "other": "%2$@ MCP सर्वर इंटरनेट की सेवाओं से जुड़ते हैं।"
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ एनवायरनमेंट वैरिएबल MCP सर्वरों को दिया जाता है।",
+      "other": "%2$@ एनवायरनमेंट वैरिएबल MCP सर्वरों को दिए जाते हैं।"
+    },
     "finding.banner.label": "इस फ़ाइल में जाँचने योग्य बातें",
+    "finding.certificate.expired": {
+      "one": "%2$@ प्रमाणपत्र की अवधि समाप्त हो चुकी है।",
+      "other": "%2$@ प्रमाणपत्रों की अवधि समाप्त हो चुकी है।"
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "एक प्रमाणपत्र %2$@ दिन में समाप्त हो जाएगा।",
+      "other": "एक प्रमाणपत्र %2$@ दिन में समाप्त हो जाएगा।"
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ प्रमाणपत्र अभी मान्य नहीं है।",
+      "other": "%2$@ प्रमाणपत्र अभी मान्य नहीं हैं।"
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ प्रमाणपत्र छोटी RSA कुंजी इस्तेमाल करता है।",
+      "other": "%2$@ प्रमाणपत्र छोटी RSA कुंजियाँ इस्तेमाल करते हैं।"
+    },
     "finding.detail.cells": "सेल: %@",
     "finding.detail.cellsMore": "सेल: %1$@ और %2$lld अन्य",
     "finding.detail.decodedText": "छिपा हुआ टेक्स्ट, सादे टेक्स्ट के रूप में दिखाया गया: %@",
     "finding.detail.lines": "पंक्तियाँ: %@",
     "finding.detail.linesMore": "पंक्तियाँ: %1$@ और %2$lld अन्य",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ वन-टाइम कोड का गोपनीय मान यहाँ पढ़े जा सकने वाले रूप में सहेजा गया है।",
+      "other": "%2$@ वन-टाइम कोड के गोपनीय मान यहाँ पढ़े जा सकने वाले रूप में सहेजे गए हैं।"
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ पासवर्ड मैनेजर लॉगिन यहाँ पढ़े जा सकने वाले रूप में सहेजा गया है। ज़रूरत न रहने पर इस एक्सपोर्ट को हटा दें।",
+      "other": "%2$@ पासवर्ड मैनेजर लॉगिन यहाँ पढ़े जा सकने वाले रूप में सहेजे गए हैं। ज़रूरत न रहने पर इस एक्सपोर्ट को हटा दें।"
+    },
     "finding.hidden.agentInstructions": "यह AI कोडिंग टूल के लिए निर्देश फ़ाइल जैसी लगती है, जहाँ छिपा टेक्स्ट उन्हें प्रभावित कर सकता है।",
     "finding.hidden.bidirectionalControls": "दिशा बदलने वाले अक्षर, जिनसे कोड वैसा नहीं पढ़ा जाता जैसा वह चलता है: %lld।",
     "finding.hidden.markdownComments": "HTML टिप्पणियाँ, जिन्हें अधिकतर Markdown व्यूअर छिपा देते हैं: %lld।",
@@ -276,6 +336,17 @@
     "finding.hidden.unicodeTags": "छिपा टेक्स्ट ले जाने वाले अदृश्य टैग अक्षर: %lld।",
     "finding.hidden.variationSelectors": "अप्रत्याशित वैरिएशन सिलेक्टर, जो डेटा छिपा सकते हैं: %lld।",
     "finding.hidden.zeroWidth": "अदृश्य शून्य-चौड़ाई वाले अक्षर: %lld।",
+    "finding.launch.atLoad": "प्रोग्राम लॉगिन पर या स्टार्टअप पर शुरू होता है।",
+    "finding.launch.hiddenLocation": "प्रोग्राम किसी अस्थायी, साझा या छिपे फ़ोल्डर में है।",
+    "finding.launch.inlineScript": "यह जॉब इसी फ़ाइल के अंदर लिखा शेल या स्क्रिप्ट कोड चलाता है।",
+    "finding.launch.interval": "प्रोग्राम हर %@ चलता है।",
+    "finding.launch.job": "यह launchd जॉब है: macOS इसमें बताए गए प्रोग्राम को शुरू करता है।",
+    "finding.launch.keepAlive": "प्रोग्राम के रुकने पर macOS उसे हर बार फिर से शुरू करता है।",
+    "finding.launch.schedule": "प्रोग्राम कैलेंडर समय-सारणी पर चलता है।",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ निगरानी वाला पाथ बदलने पर प्रोग्राम शुरू करता है।",
+      "other": "%2$@ निगरानी वाले पाथ बदलने पर प्रोग्राम शुरू करते हैं।"
+    },
     "finding.listing.hiddenCharacters": {
       "one": "सूची के %2$@ नाम में छिपे वर्ण हैं।",
       "other": "सूची के %2$@ नामों में छिपे वर्ण हैं।"
@@ -287,12 +358,53 @@
     "finding.notebook.notExecuted": "कोई कोड सेल नहीं चला है, इसलिए नोटबुक में कोई सहेजा गया परिणाम नहीं है।",
     "finding.notebook.outOfOrder": "सेल क्रम से नहीं चलाए गए: %@।",
     "finding.notebook.unexecutedCells": "कभी न चलाए गए कोड सेल: %lld।",
+    "finding.profile.expired": "यह प्रोविज़निंग प्रोफ़ाइल समाप्त हो चुकी है।",
+    "finding.profile.expiresSoon": {
+      "one": "यह प्रोविज़निंग प्रोफ़ाइल %2$@ दिन में समाप्त हो जाएगी।",
+      "other": "यह प्रोविज़निंग प्रोफ़ाइल %2$@ दिन में समाप्त हो जाएगी।"
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "एक क्लाउड स्टोरेज फ़ोल्डर",
+    "finding.script.asksForPassword": {
+      "one": "%2$@ जगह पासवर्ड माँगती है।",
+      "other": "%2$@ जगहें पासवर्ड माँगती हैं।"
+    },
+    "finding.script.decodeAndRun": {
+      "one": "%2$@ जगह एन्कोड किए गए टेक्स्ट को डिकोड करके चलाती है।",
+      "other": "%2$@ जगहें एन्कोड किए गए टेक्स्ट को डिकोड करके चलाती हैं।"
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ कमांड एक सुरक्षा सुविधा बंद करता है।",
+      "other": "%2$@ कमांड सुरक्षा सुविधाएँ बंद करते हैं।"
+    },
+    "finding.script.downloadAndRun": {
+      "one": "%2$@ जगह इंटरनेट से कोड डाउनलोड करके उसे चलाती है।",
+      "other": "%2$@ जगहें इंटरनेट से कोड डाउनलोड करके उसे चलाती हैं।"
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ कमांड एडमिनिस्ट्रेटर अधिकारों के साथ चलता है।",
+      "other": "%2$@ कमांड एडमिनिस्ट्रेटर अधिकारों के साथ चलते हैं।"
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ कमांड ऐसा प्रोग्राम सेट करता है जो लॉगिन पर या तय समय-सारणी पर चलता है।",
+      "other": "%2$@ कमांड ऐसे प्रोग्राम सेट करते हैं जो लॉगिन पर या तय समय-सारणी पर चलते हैं।"
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ कमांड सहेजे गए पासवर्ड, कुंजियाँ या ब्राउज़र का डेटा पढ़ता है।",
+      "other": "%2$@ कमांड सहेजे गए पासवर्ड, कुंजियाँ या ब्राउज़र का डेटा पढ़ते हैं।"
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ कमांड फ़ाइलों से macOS का क्वारंटीन चिह्न हटाता है।",
+      "other": "%2$@ कमांड फ़ाइलों से macOS का क्वारंटीन चिह्न हटाते हैं।"
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ कमांड फ़ाइलें या डेटा इंटरनेट पर भेजता है।",
+      "other": "%2$@ कमांड फ़ाइलें या डेटा इंटरनेट पर भेजते हैं।"
+    },
     "finding.secret.apiKey": "छिपाई गई API कुंजियाँ: %lld।",
     "finding.secret.authorizationHeader": "छिपाए गए प्राधिकरण क्रेडेंशियल: %lld।",
     "finding.secret.cloudAccessKey": "छिपाई गई क्लाउड एक्सेस कुंजियाँ: %lld।",
@@ -312,6 +424,11 @@
       "one": "%2$@ संभावित गोपनीय मान छिपाया गया। चयन और कॉपी में छिपाया हुआ पाठ इस्तेमाल होता है।",
       "other": "%2$@ संभावित गोपनीय मान छिपाए गए। चयन और कॉपी में छिपाया हुआ पाठ इस्तेमाल होता है।"
     },
+    "findings.report.copied": "निष्कर्ष रिपोर्ट कॉपी की गई",
+    "findings.report.copy": "निष्कर्ष रिपोर्ट कॉपी करें",
+    "findings.report.copyHint": "इन निष्कर्षों की सूची कॉपी करता है। फ़ाइल का कोई टेक्स्ट शामिल नहीं होता।",
+    "findings.report.footer": "इस सूची में फ़ाइल का कोई टेक्स्ट नहीं है।",
+    "findings.report.heading": "निष्कर्ष: %@",
     "format.archive.7z.description": "संपीड़ित हेडर सहित, हेडर से 7z प्रविष्टियों की सीमित सूची। फ़ाइल डेटा कभी डीकोड नहीं किया जाता; एन्क्रिप्टेड हेडर वाले संग्रह सूचीबद्ध नहीं होते।",
     "format.archive.7z.name": "7-Zip संग्रह",
     "format.archive.bzip2.description": "bzip2 स्ट्रीम का सीमित डीकंप्रेशन: TAR.BZ2 सूचियाँ और समर्थित पाठ। अन्य सामग्री को बाइनरी बताया जाता है।",

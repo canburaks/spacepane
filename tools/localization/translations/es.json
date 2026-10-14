@@ -262,12 +262,87 @@
     "finding.archive.macMetadata": "Entradas de recursos de Mac en __MACOSX: %lld.",
     "finding.archive.nested": "Archivos comprimidos dentro de este archivo comprimido, sin abrir: %lld.",
     "finding.archive.unsafePath": "Entradas que se escribirían fuera de la carpeta de destino: %lld.",
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ comando se ejecuta solo cuando actúa un agente de IA (un hook).",
+      "many": "%2$@ comandos se ejecutan solos cuando actúa un agente de IA (hooks).",
+      "other": "%2$@ comandos se ejecutan solos cuando actúa un agente de IA (hooks)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ ajuste permite a un agente de IA actuar sin preguntar antes.",
+      "many": "%2$@ ajustes permiten a un agente de IA actuar sin preguntar antes.",
+      "other": "%2$@ ajustes permiten a un agente de IA actuar sin preguntar antes."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ comando de contenedor de desarrollo se ejecuta solo dentro del contenedor.",
+      "many": "%2$@ comandos de contenedor de desarrollo se ejecutan solos dentro del contenedor.",
+      "other": "%2$@ comandos de contenedor de desarrollo se ejecutan solos dentro del contenedor."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ tarea se ejecuta sola al abrir la carpeta en el editor de código.",
+      "many": "%2$@ tareas se ejecutan solas al abrir la carpeta en el editor de código.",
+      "other": "%2$@ tareas se ejecutan solas al abrir la carpeta en el editor de código."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ comando de contenedor de desarrollo se ejecuta en este Mac antes de que arranque el contenedor.",
+      "many": "%2$@ comandos de contenedor de desarrollo se ejecutan en este Mac antes de que arranque el contenedor.",
+      "other": "%2$@ comandos de contenedor de desarrollo se ejecutan en este Mac antes de que arranque el contenedor."
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ script de paquete se ejecuta solo durante la instalación.",
+      "many": "%2$@ scripts de paquete se ejecutan solos durante la instalación.",
+      "other": "%2$@ scripts de paquete se ejecutan solos durante la instalación."
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ servidor MCP inicia un programa en este Mac.",
+      "many": "%2$@ servidores MCP inician programas en este Mac.",
+      "other": "%2$@ servidores MCP inician programas en este Mac."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ servidor MCP se conecta a un servicio de internet.",
+      "many": "%2$@ servidores MCP se conectan a servicios de internet.",
+      "other": "%2$@ servidores MCP se conectan a servicios de internet."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ variable de entorno se pasa a los servidores MCP.",
+      "many": "%2$@ variables de entorno se pasan a los servidores MCP.",
+      "other": "%2$@ variables de entorno se pasan a los servidores MCP."
+    },
     "finding.banner.label": "Puntos que revisar en este archivo",
+    "finding.certificate.expired": {
+      "one": "%2$@ certificado ha caducado.",
+      "many": "%2$@ certificados han caducado.",
+      "other": "%2$@ certificados han caducado."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Un certificado caduca en %2$@ día.",
+      "many": "Un certificado caduca en %2$@ días.",
+      "other": "Un certificado caduca en %2$@ días."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ certificado aún no es válido.",
+      "many": "%2$@ certificados aún no son válidos.",
+      "other": "%2$@ certificados aún no son válidos."
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ certificado usa una clave RSA corta.",
+      "many": "%2$@ certificados usan claves RSA cortas.",
+      "other": "%2$@ certificados usan claves RSA cortas."
+    },
     "finding.detail.cells": "Celdas: %@",
     "finding.detail.cellsMore": "Celdas: %1$@ y %2$lld más",
     "finding.detail.decodedText": "Texto escondido, mostrado como texto sin formato: %@",
     "finding.detail.lines": "Líneas: %@",
     "finding.detail.linesMore": "Líneas: %1$@ y %2$lld más",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ secreto de código de un solo uso está guardado aquí en forma legible.",
+      "many": "%2$@ secretos de códigos de un solo uso están guardados aquí en forma legible.",
+      "other": "%2$@ secretos de códigos de un solo uso están guardados aquí en forma legible."
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ inicio de sesión del gestor de contraseñas está guardado aquí en forma legible. Elimina esta exportación cuando ya no la necesites.",
+      "many": "%2$@ inicios de sesión del gestor de contraseñas están guardados aquí en forma legible. Elimina esta exportación cuando ya no la necesites.",
+      "other": "%2$@ inicios de sesión del gestor de contraseñas están guardados aquí en forma legible. Elimina esta exportación cuando ya no la necesites."
+    },
     "finding.hidden.agentInstructions": "Parece un archivo de instrucciones para herramientas de programación con IA, donde el texto escondido puede dirigirlas.",
     "finding.hidden.bidirectionalControls": "Caracteres que cambian la dirección del texto y hacen que el código se lea distinto de como se ejecuta: %lld.",
     "finding.hidden.markdownComments": "Comentarios HTML que la mayoría de los visores de Markdown esconden: %lld.",
@@ -276,6 +351,18 @@
     "finding.hidden.unicodeTags": "Caracteres de etiqueta invisibles que contienen texto escondido: %lld.",
     "finding.hidden.variationSelectors": "Selectores de variación inesperados, que pueden esconder datos: %lld.",
     "finding.hidden.zeroWidth": "Caracteres invisibles de ancho cero: %lld.",
+    "finding.launch.atLoad": "El programa se inicia al iniciar sesión o al arrancar el Mac.",
+    "finding.launch.hiddenLocation": "El programa está en una carpeta temporal, compartida u oculta.",
+    "finding.launch.inlineScript": "La tarea ejecuta código de shell o de script escrito dentro de este archivo.",
+    "finding.launch.interval": "El programa se ejecuta cada %@.",
+    "finding.launch.job": "Esto es una tarea de launchd: macOS inicia el programa que nombra.",
+    "finding.launch.keepAlive": "macOS reinicia el programa cada vez que se detiene.",
+    "finding.launch.schedule": "El programa se ejecuta según un calendario.",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ ruta vigilada inicia el programa cuando cambia.",
+      "many": "%2$@ rutas vigiladas inician el programa cuando cambian.",
+      "other": "%2$@ rutas vigiladas inician el programa cuando cambian."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "%2$@ nombre de la lista contiene caracteres ocultos.",
       "many": "%2$@ nombres de la lista contienen caracteres ocultos.",
@@ -288,12 +375,63 @@
     "finding.notebook.notExecuted": "Ninguna celda de código se ha ejecutado, así que el cuaderno no tiene resultados guardados.",
     "finding.notebook.outOfOrder": "Celdas ejecutadas fuera de orden: %@.",
     "finding.notebook.unexecutedCells": "Celdas de código que nunca se ejecutaron: %lld.",
+    "finding.profile.expired": "Este perfil de aprovisionamiento ha caducado.",
+    "finding.profile.expiresSoon": {
+      "one": "Este perfil de aprovisionamiento caduca en %2$@ día.",
+      "many": "Este perfil de aprovisionamiento caduca en %2$@ días.",
+      "other": "Este perfil de aprovisionamiento caduca en %2$@ días."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "una carpeta de almacenamiento en la nube",
+    "finding.script.asksForPassword": {
+      "one": "Se pide una contraseña en %2$@ lugar.",
+      "many": "Se pide una contraseña en %2$@ lugares.",
+      "other": "Se pide una contraseña en %2$@ lugares."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "Se decodifica texto codificado y se ejecuta en %2$@ lugar.",
+      "many": "Se decodifica texto codificado y se ejecuta en %2$@ lugares.",
+      "other": "Se decodifica texto codificado y se ejecuta en %2$@ lugares."
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ comando desactiva una protección de seguridad.",
+      "many": "%2$@ comandos desactivan protecciones de seguridad.",
+      "other": "%2$@ comandos desactivan protecciones de seguridad."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "Se descarga código de internet y se ejecuta en %2$@ lugar.",
+      "many": "Se descarga código de internet y se ejecuta en %2$@ lugares.",
+      "other": "Se descarga código de internet y se ejecuta en %2$@ lugares."
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ comando se ejecuta con permisos de administrador.",
+      "many": "%2$@ comandos se ejecutan con permisos de administrador.",
+      "other": "%2$@ comandos se ejecutan con permisos de administrador."
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ comando configura un programa para que se ejecute al iniciar sesión o según un horario.",
+      "many": "%2$@ comandos configuran programas para que se ejecuten al iniciar sesión o según un horario.",
+      "other": "%2$@ comandos configuran programas para que se ejecuten al iniciar sesión o según un horario."
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ comando lee contraseñas, claves o datos del navegador guardados.",
+      "many": "%2$@ comandos leen contraseñas, claves o datos del navegador guardados.",
+      "other": "%2$@ comandos leen contraseñas, claves o datos del navegador guardados."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ comando quita la marca de cuarentena de macOS de los archivos.",
+      "many": "%2$@ comandos quitan la marca de cuarentena de macOS de los archivos.",
+      "other": "%2$@ comandos quitan la marca de cuarentena de macOS de los archivos."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ comando envía archivos o datos a internet.",
+      "many": "%2$@ comandos envían archivos o datos a internet.",
+      "other": "%2$@ comandos envían archivos o datos a internet."
+    },
     "finding.secret.apiKey": "Claves de API ocultas: %lld.",
     "finding.secret.authorizationHeader": "Credenciales de autorización ocultas: %lld.",
     "finding.secret.cloudAccessKey": "Claves de acceso a la nube ocultas: %lld.",
@@ -315,6 +453,11 @@
       "many": "%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos.",
       "other": "%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos."
     },
+    "findings.report.copied": "Informe de hallazgos copiado",
+    "findings.report.copy": "Copiar informe de hallazgos",
+    "findings.report.copyHint": "Copia una lista de estos hallazgos. No se incluye texto del archivo.",
+    "findings.report.footer": "Esta lista no contiene texto del archivo.",
+    "findings.report.heading": "Hallazgos: %@",
     "format.archive.7z.description": "Listas acotadas de entradas 7z leídas de la cabecera, incluso comprimida. Los datos de los archivos nunca se decodifican; los archivos con cabeceras cifradas no se listan.",
     "format.archive.7z.name": "Archivos 7-Zip",
     "format.archive.bzip2.description": "Descompresión acotada de flujos bzip2: listas TAR.BZ2 y texto compatible. El resto del contenido se indica como binario.",

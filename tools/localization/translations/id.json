@@ -258,12 +258,57 @@
     "finding.archive.macMetadata": "Entri resource Mac di __MACOSX: %lld.",
     "finding.archive.nested": "Arsip di dalam arsip ini, tidak dibuka: %lld.",
     "finding.archive.unsafePath": "Entri yang akan ditulis di luar folder tujuan: %lld.",
+    "finding.autorun.agentHooks": {
+      "other": "%2$@ perintah berjalan sendiri saat agen AI bertindak (hook)."
+    },
+    "finding.autorun.agentPermissions": {
+      "other": "%2$@ pengaturan memungkinkan agen AI bertindak tanpa bertanya dulu."
+    },
+    "finding.autorun.containerCommands": {
+      "other": "%2$@ perintah kontainer pengembangan berjalan sendiri di dalam kontainer."
+    },
+    "finding.autorun.folderOpenTask": {
+      "other": "%2$@ tugas berjalan sendiri saat folder dibuka di editor kode."
+    },
+    "finding.autorun.hostCommand": {
+      "other": "%2$@ perintah kontainer pengembangan berjalan di Mac ini sebelum kontainer dimulai."
+    },
+    "finding.autorun.installScripts": {
+      "other": "%2$@ skrip paket berjalan sendiri saat penginstalan."
+    },
+    "finding.autorun.localServers": {
+      "other": "%2$@ server MCP memulai program di Mac ini."
+    },
+    "finding.autorun.remoteServers": {
+      "other": "%2$@ server MCP terhubung ke layanan di internet."
+    },
+    "finding.autorun.serverEnvironment": {
+      "other": "%2$@ variabel lingkungan diteruskan ke server MCP."
+    },
     "finding.banner.label": "Hal yang perlu diperiksa di berkas ini",
+    "finding.certificate.expired": {
+      "other": "%2$@ sertifikat telah kedaluwarsa."
+    },
+    "finding.certificate.expiresSoon": {
+      "other": "Sebuah sertifikat kedaluwarsa dalam %2$@ hari."
+    },
+    "finding.certificate.notYetValid": {
+      "other": "%2$@ sertifikat belum berlaku."
+    },
+    "finding.certificate.weakKey": {
+      "other": "%2$@ sertifikat menggunakan kunci RSA yang pendek."
+    },
     "finding.detail.cells": "Sel: %@",
     "finding.detail.cellsMore": "Sel: %1$@ dan %2$lld lainnya",
     "finding.detail.decodedText": "Teks tersembunyi, ditampilkan sebagai teks biasa: %@",
     "finding.detail.lines": "Baris: %@",
     "finding.detail.linesMore": "Baris: %1$@ dan %2$lld lainnya",
+    "finding.export.readableCodeSecrets": {
+      "other": "%2$@ rahasia kode sekali pakai disimpan di sini dalam bentuk yang dapat dibaca."
+    },
+    "finding.export.readableLogins": {
+      "other": "%2$@ login pengelola kata sandi disimpan di sini dalam bentuk yang dapat dibaca. Hapus ekspor ini jika sudah tidak diperlukan."
+    },
     "finding.hidden.agentInstructions": "Ini tampak seperti berkas instruksi untuk alat pemrograman AI, yang bisa diarahkan oleh teks tersembunyi.",
     "finding.hidden.bidirectionalControls": "Karakter pengubah arah yang membuat kode terbaca berbeda dari yang dijalankan: %lld.",
     "finding.hidden.markdownComments": "Komentar HTML yang disembunyikan oleh sebagian besar penampil Markdown: %lld.",
@@ -272,6 +317,16 @@
     "finding.hidden.unicodeTags": "Karakter tag tak terlihat yang membawa teks tersembunyi: %lld.",
     "finding.hidden.variationSelectors": "Pemilih variasi yang tidak lazim dan dapat menyembunyikan data: %lld.",
     "finding.hidden.zeroWidth": "Karakter lebar nol yang tak terlihat: %lld.",
+    "finding.launch.atLoad": "Program dimulai saat login atau saat startup.",
+    "finding.launch.hiddenLocation": "Program berada di folder sementara, bersama, atau tersembunyi.",
+    "finding.launch.inlineScript": "Tugas ini menjalankan kode shell atau skrip yang ditulis di dalam berkas ini.",
+    "finding.launch.interval": "Program berjalan setiap %@.",
+    "finding.launch.job": "Ini adalah tugas launchd: macOS memulai program yang disebutkan di dalamnya.",
+    "finding.launch.keepAlive": "macOS memulai ulang program setiap kali berhenti.",
+    "finding.launch.schedule": "Program berjalan sesuai jadwal kalender.",
+    "finding.launch.watchPaths": {
+      "other": "%2$@ jalur yang dipantau memulai program saat berubah."
+    },
     "finding.listing.hiddenCharacters": {
       "other": "%2$@ nama dalam daftar mengandung karakter tersembunyi."
     },
@@ -282,12 +337,43 @@
     "finding.notebook.notExecuted": "Tidak ada sel kode yang dijalankan, sehingga notebook tidak memiliki hasil tersimpan.",
     "finding.notebook.outOfOrder": "Sel dijalankan tidak berurutan: %@.",
     "finding.notebook.unexecutedCells": "Sel kode yang tidak pernah dijalankan: %lld.",
+    "finding.profile.expired": "Profil provisioning ini sudah kedaluwarsa.",
+    "finding.profile.expiresSoon": {
+      "other": "Profil provisioning ini kedaluwarsa dalam %2$@ hari."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "folder penyimpanan cloud",
+    "finding.script.asksForPassword": {
+      "other": "%2$@ tempat meminta kata sandi."
+    },
+    "finding.script.decodeAndRun": {
+      "other": "%2$@ tempat mendekode teks yang dikodekan lalu menjalankannya."
+    },
+    "finding.script.disablesProtection": {
+      "other": "%2$@ perintah menonaktifkan perlindungan keamanan."
+    },
+    "finding.script.downloadAndRun": {
+      "other": "%2$@ tempat mengunduh kode dari internet lalu menjalankannya."
+    },
+    "finding.script.elevates": {
+      "other": "%2$@ perintah berjalan dengan hak administrator."
+    },
+    "finding.script.persistence": {
+      "other": "%2$@ perintah menyiapkan program yang berjalan saat login atau sesuai jadwal."
+    },
+    "finding.script.readsSecrets": {
+      "other": "%2$@ perintah membaca kata sandi, kunci, atau data peramban yang tersimpan."
+    },
+    "finding.script.removesQuarantine": {
+      "other": "%2$@ perintah menghapus tanda karantina macOS dari berkas."
+    },
+    "finding.script.uploadsFiles": {
+      "other": "%2$@ perintah mengirim berkas atau data ke internet."
+    },
     "finding.secret.apiKey": "Kunci API yang disamarkan: %lld.",
     "finding.secret.authorizationHeader": "Kredensial otorisasi yang disamarkan: %lld.",
     "finding.secret.cloudAccessKey": "Kunci akses cloud yang disamarkan: %lld.",
@@ -305,6 +391,11 @@
     "finding.summary.concealed": {
       "other": "%2$@ kemungkinan rahasia disembunyikan. Pemilihan dan penyalinan menggunakan teks yang sudah disamarkan."
     },
+    "findings.report.copied": "Laporan temuan disalin",
+    "findings.report.copy": "Salin Laporan Temuan",
+    "findings.report.copyHint": "Menyalin daftar temuan ini. Tidak ada teks dari berkas yang disertakan.",
+    "findings.report.footer": "Daftar ini tidak berisi teks dari berkas.",
+    "findings.report.heading": "Temuan: %@",
     "format.archive.7z.description": "Daftar entri 7z yang dibatasi dari header, termasuk header terkompresi. Data file tidak pernah didekode; arsip dengan header terenkripsi tidak didaftar.",
     "format.archive.7z.name": "Arsip 7-Zip",
     "format.archive.bzip2.description": "Dekompresi aliran bzip2 yang dibatasi: daftar TAR.BZ2 dan teks yang didukung. Konten lain dilaporkan sebagai biner.",

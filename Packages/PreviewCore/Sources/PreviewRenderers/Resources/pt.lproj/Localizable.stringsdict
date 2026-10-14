@@ -66,6 +66,294 @@
 			<string>Esta pré-visualização lê documentos com até %2$@ itens, e este tem mais. Abra-o em um app feito para este tipo de arquivo.</string>
 		</dict>
 	</dict>
+	<key>finding.autorun.agentHooks</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos são executados sozinhos quando um agente de IA age (hooks).</string>
+			<key>one</key>
+			<string>%2$@ comando é executado sozinho quando um agente de IA age (um hook).</string>
+			<key>other</key>
+			<string>%2$@ comandos são executados sozinhos quando um agente de IA age (hooks).</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentPermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ configurações permitem que um agente de IA aja sem perguntar antes.</string>
+			<key>one</key>
+			<string>%2$@ configuração permite que um agente de IA aja sem perguntar antes.</string>
+			<key>other</key>
+			<string>%2$@ configurações permitem que um agente de IA aja sem perguntar antes.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.containerCommands</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos de contêiner de desenvolvimento são executados sozinhos dentro do contêiner.</string>
+			<key>one</key>
+			<string>%2$@ comando de contêiner de desenvolvimento é executado sozinho dentro do contêiner.</string>
+			<key>other</key>
+			<string>%2$@ comandos de contêiner de desenvolvimento são executados sozinhos dentro do contêiner.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.folderOpenTask</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ tarefas são executadas sozinhas quando a pasta é aberta no editor de código.</string>
+			<key>one</key>
+			<string>%2$@ tarefa é executada sozinha quando a pasta é aberta no editor de código.</string>
+			<key>other</key>
+			<string>%2$@ tarefas são executadas sozinhas quando a pasta é aberta no editor de código.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.hostCommand</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos de contêiner de desenvolvimento são executados neste Mac antes de o contêiner iniciar.</string>
+			<key>one</key>
+			<string>%2$@ comando de contêiner de desenvolvimento é executado neste Mac antes de o contêiner iniciar.</string>
+			<key>other</key>
+			<string>%2$@ comandos de contêiner de desenvolvimento são executados neste Mac antes de o contêiner iniciar.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.installScripts</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ scripts de pacote são executados sozinhos durante a instalação.</string>
+			<key>one</key>
+			<string>%2$@ script de pacote é executado sozinho durante a instalação.</string>
+			<key>other</key>
+			<string>%2$@ scripts de pacote são executados sozinhos durante a instalação.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.localServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ servidores MCP iniciam programas neste Mac.</string>
+			<key>one</key>
+			<string>%2$@ servidor MCP inicia um programa neste Mac.</string>
+			<key>other</key>
+			<string>%2$@ servidores MCP iniciam programas neste Mac.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.remoteServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ servidores MCP se conectam a serviços na internet.</string>
+			<key>one</key>
+			<string>%2$@ servidor MCP se conecta a um serviço na internet.</string>
+			<key>other</key>
+			<string>%2$@ servidores MCP se conectam a serviços na internet.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.serverEnvironment</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ variáveis de ambiente são repassadas aos servidores MCP.</string>
+			<key>one</key>
+			<string>%2$@ variável de ambiente é repassada aos servidores MCP.</string>
+			<key>other</key>
+			<string>%2$@ variáveis de ambiente são repassadas aos servidores MCP.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expired</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ certificados expiraram.</string>
+			<key>one</key>
+			<string>%2$@ certificado expirou.</string>
+			<key>other</key>
+			<string>%2$@ certificados expiraram.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Um certificado expira em %2$@ dias.</string>
+			<key>one</key>
+			<string>Um certificado expira em %2$@ dia.</string>
+			<key>other</key>
+			<string>Um certificado expira em %2$@ dias.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.notYetValid</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ certificados ainda não são válidos.</string>
+			<key>one</key>
+			<string>%2$@ certificado ainda não é válido.</string>
+			<key>other</key>
+			<string>%2$@ certificados ainda não são válidos.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.weakKey</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ certificados usam chaves RSA curtas.</string>
+			<key>one</key>
+			<string>%2$@ certificado usa uma chave RSA curta.</string>
+			<key>other</key>
+			<string>%2$@ certificados usam chaves RSA curtas.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableCodeSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ segredos de códigos de uso único estão salvos aqui em forma legível.</string>
+			<key>one</key>
+			<string>%2$@ segredo de código de uso único está salvo aqui em forma legível.</string>
+			<key>other</key>
+			<string>%2$@ segredos de códigos de uso único estão salvos aqui em forma legível.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableLogins</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ logins de gerenciador de senhas estão salvos aqui em forma legível. Exclua esta exportação quando não precisar mais dela.</string>
+			<key>one</key>
+			<string>%2$@ login de gerenciador de senhas está salvo aqui em forma legível. Exclua esta exportação quando não precisar mais dela.</string>
+			<key>other</key>
+			<string>%2$@ logins de gerenciador de senhas estão salvos aqui em forma legível. Exclua esta exportação quando não precisar mais dela.</string>
+		</dict>
+	</dict>
+	<key>finding.launch.watchPaths</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ caminhos monitorados iniciam o programa quando mudam.</string>
+			<key>one</key>
+			<string>%2$@ caminho monitorado inicia o programa quando muda.</string>
+			<key>other</key>
+			<string>%2$@ caminhos monitorados iniciam o programa quando mudam.</string>
+		</dict>
+	</dict>
 	<key>finding.listing.hiddenCharacters</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -82,6 +370,186 @@
 			<string>%2$@ nome listado contém caracteres ocultos.</string>
 			<key>other</key>
 			<string>%2$@ nomes listados contêm caracteres ocultos.</string>
+		</dict>
+	</dict>
+	<key>finding.profile.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Este perfil de provisionamento expira em %2$@ dias.</string>
+			<key>one</key>
+			<string>Este perfil de provisionamento expira em %2$@ dia.</string>
+			<key>other</key>
+			<string>Este perfil de provisionamento expira em %2$@ dias.</string>
+		</dict>
+	</dict>
+	<key>finding.script.asksForPassword</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Uma senha é solicitada em %2$@ lugares.</string>
+			<key>one</key>
+			<string>Uma senha é solicitada em %2$@ lugar.</string>
+			<key>other</key>
+			<string>Uma senha é solicitada em %2$@ lugares.</string>
+		</dict>
+	</dict>
+	<key>finding.script.decodeAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Texto codificado é decodificado e executado em %2$@ lugares.</string>
+			<key>one</key>
+			<string>Texto codificado é decodificado e executado em %2$@ lugar.</string>
+			<key>other</key>
+			<string>Texto codificado é decodificado e executado em %2$@ lugares.</string>
+		</dict>
+	</dict>
+	<key>finding.script.disablesProtection</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos desativam proteções de segurança.</string>
+			<key>one</key>
+			<string>%2$@ comando desativa uma proteção de segurança.</string>
+			<key>other</key>
+			<string>%2$@ comandos desativam proteções de segurança.</string>
+		</dict>
+	</dict>
+	<key>finding.script.downloadAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Código é baixado da internet e executado em %2$@ lugares.</string>
+			<key>one</key>
+			<string>Código é baixado da internet e executado em %2$@ lugar.</string>
+			<key>other</key>
+			<string>Código é baixado da internet e executado em %2$@ lugares.</string>
+		</dict>
+	</dict>
+	<key>finding.script.elevates</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos são executados com permissões de administrador.</string>
+			<key>one</key>
+			<string>%2$@ comando é executado com permissões de administrador.</string>
+			<key>other</key>
+			<string>%2$@ comandos são executados com permissões de administrador.</string>
+		</dict>
+	</dict>
+	<key>finding.script.persistence</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos configuram programas para serem executados no login ou em um agendamento.</string>
+			<key>one</key>
+			<string>%2$@ comando configura um programa para ser executado no login ou em um agendamento.</string>
+			<key>other</key>
+			<string>%2$@ comandos configuram programas para serem executados no login ou em um agendamento.</string>
+		</dict>
+	</dict>
+	<key>finding.script.readsSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos leem senhas, chaves ou dados de navegador salvos.</string>
+			<key>one</key>
+			<string>%2$@ comando lê senhas, chaves ou dados de navegador salvos.</string>
+			<key>other</key>
+			<string>%2$@ comandos leem senhas, chaves ou dados de navegador salvos.</string>
+		</dict>
+	</dict>
+	<key>finding.script.removesQuarantine</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos removem a marca de quarentena do macOS de arquivos.</string>
+			<key>one</key>
+			<string>%2$@ comando remove a marca de quarentena do macOS de arquivos.</string>
+			<key>other</key>
+			<string>%2$@ comandos removem a marca de quarentena do macOS de arquivos.</string>
+		</dict>
+	</dict>
+	<key>finding.script.uploadsFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ comandos enviam arquivos ou dados para a internet.</string>
+			<key>one</key>
+			<string>%2$@ comando envia arquivos ou dados para a internet.</string>
+			<key>other</key>
+			<string>%2$@ comandos enviam arquivos ou dados para a internet.</string>
 		</dict>
 	</dict>
 	<key>finding.summary</key>
