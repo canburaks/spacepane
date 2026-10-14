@@ -57,6 +57,11 @@ enum InstallFixtures {
         document.findings.first { $0.kind == kind }
     }
 
+    /// A ZIP archive of stored or deflated members with exact sizes and CRCs, from the shared data fixtures.
+    static func zip(_ members: [(path: String, data: Data)], deflate: Bool = true) -> Data {
+        DataTest.zip(members.map { (name: $0.path, data: [UInt8]($0.data), deflate: deflate) })
+    }
+
     /// A package.json whose `scripts` and dependency tables are given as ready-made JSON text.
     static func manifest(scripts: String? = nil, dependencies: String? = nil, optionalDependencies: String? = nil,
                          extra: String? = nil) -> String {
