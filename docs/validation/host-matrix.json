@@ -635,6 +635,48 @@
       }
     },
     {
+      "id": "ml.gguf",
+      "surfaces": {
+        "finderPreview": {
+          "outcome": "notObserved"
+        },
+        "finderThumbnail": {
+          "outcome": "notObserved"
+        },
+        "quickLookPanel": {
+          "outcome": "notObserved"
+        }
+      }
+    },
+    {
+      "id": "ml.safetensors",
+      "surfaces": {
+        "finderPreview": {
+          "outcome": "notObserved"
+        },
+        "finderThumbnail": {
+          "outcome": "notObserved"
+        },
+        "quickLookPanel": {
+          "outcome": "notObserved"
+        }
+      }
+    },
+    {
+      "id": "ml.pickle",
+      "surfaces": {
+        "finderPreview": {
+          "outcome": "notObserved"
+        },
+        "finderThumbnail": {
+          "outcome": "notObserved"
+        },
+        "quickLookPanel": {
+          "outcome": "notObserved"
+        }
+      }
+    },
+    {
       "id": "data.har",
       "surfaces": {
         "finderPreview": {
@@ -1065,6 +1107,62 @@
     },
     {
       "id": "data.torrent",
+      "surfaces": {
+        "finderPreview": {
+          "outcome": "notObserved"
+        },
+        "finderThumbnail": {
+          "outcome": "notObserved"
+        },
+        "quickLookPanel": {
+          "outcome": "notObserved"
+        }
+      }
+    },
+    {
+      "id": "package.mcp-bundle",
+      "surfaces": {
+        "finderPreview": {
+          "outcome": "notObserved"
+        },
+        "finderThumbnail": {
+          "outcome": "notObserved"
+        },
+        "quickLookPanel": {
+          "outcome": "notObserved"
+        }
+      }
+    },
+    {
+      "id": "package.editor-extension",
+      "surfaces": {
+        "finderPreview": {
+          "outcome": "notObserved"
+        },
+        "finderThumbnail": {
+          "outcome": "notObserved"
+        },
+        "quickLookPanel": {
+          "outcome": "notObserved"
+        }
+      }
+    },
+    {
+      "id": "package.browser-extension",
+      "surfaces": {
+        "finderPreview": {
+          "outcome": "notObserved"
+        },
+        "finderThumbnail": {
+          "outcome": "notObserved"
+        },
+        "quickLookPanel": {
+          "outcome": "notObserved"
+        }
+      }
+    },
+    {
+      "id": "package.python-wheel",
       "surfaces": {
         "finderPreview": {
           "outcome": "notObserved"

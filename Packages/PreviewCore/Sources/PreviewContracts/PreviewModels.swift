@@ -367,6 +367,16 @@ public struct AdapterRegistration: Sendable {
     public let sourcePolicy: SourceReadPolicy
     public let defaultBudget: PreviewBudget?
     public let emptyInputPolicy: EmptyInputPolicy
+    /// Lenses that read this format's displayed text after concealment (decision 029). Empty by default.
+    public private(set) var lenses: [any PreviewTextLens] = []
+
+    /// The same registration with `lenses` appended, for the composition boundary.
+    public func adding(lenses added: [any PreviewTextLens]) -> AdapterRegistration {
+        var copy = self
+        copy.lenses += added
+        return copy
+    }
+
     public init(formatID: FormatID, defaultBudget: PreviewBudget,
                 geometryAdapter: @escaping @Sendable () -> any GeometryFormatAdapter) {
         self.formatID = formatID
@@ -445,7 +455,9 @@ public enum SecretFieldPolicy {
 
     private static let credentialWords: Set<String> = [
         "password", "passwd", "pwd", "pass", "passphrase", "secret", "token", "auth",
-        "authorization", "credential", "credentials", "cookie", "session", "dsn", "mnemonic", "tokens"
+        "authorization", "credential", "credentials", "cookie", "session", "dsn", "mnemonic", "tokens",
+        // One-time-code seeds (decision 029): `login_totp`, `totp`, `otpauth` hold the secret that makes every code.
+        "totp", "hotp", "otp", "otpauth"
     ]
     private static let compoundCredentialNames: Set<String> = [
         "apikey", "accesskey", "privatekey", "secretkey", "clientsecret", "signingkey", "encryptionkey",

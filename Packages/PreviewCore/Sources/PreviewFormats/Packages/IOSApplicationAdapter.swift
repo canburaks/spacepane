@@ -32,8 +32,12 @@ public struct IOSApplicationAdapter: BinaryFormatAdapter, RandomAccessFormatAdap
             context: context)
 
         var fields = BundleInfoSummary.fields(info)
-        if let profile = try optional({ try profileFields(archive: archive, appRoot: appRoot, source: source, context: context) }) {
-            fields.add("provisioning", profile)
+        var findings: [PreviewFinding] = []
+        if let embedded = try optional({ try embeddedProfile(archive: archive, appRoot: appRoot, source: source, context: context) }) {
+            // The embedded profile's validity is the app's: an expired one stops the app from launching.
+            let current = now()
+            findings = ProvisioningProfileSummary.findings(embedded, now: current)
+            fields.add("provisioning", ProvisioningProfileSummary.fields(embedded, now: current).value)
         }
         let icon = try optional { try iconImage(archive: archive, appRoot: appRoot, info: info, source: source, context: context) }
         let capacity = PackageSummary.listingCapacity(context)
@@ -41,7 +45,7 @@ public struct IOSApplicationAdapter: BinaryFormatAdapter, RandomAccessFormatAdap
             ContainerEntry(path: $0.path, kind: $0.kind, size: $0.uncompressedSize, modified: $0.modified, isEncrypted: $0.isEncrypted)
         }
         fields.listing(format: archive.isZip64 ? "ZIP64" : "ZIP", entries: Array(entries), partial: archive.entries.count > capacity)
-        return try PackageSummary.document(fields.value, context: context, images: icon.map { [$0] } ?? [])
+        return try PackageSummary.document(fields.value, context: context, images: icon.map { [$0] } ?? [], findings: findings)
     }
 
     /// The first `Payload/<name>.app/Info.plist`, by path order so the choice is deterministic.
@@ -53,12 +57,11 @@ public struct IOSApplicationAdapter: BinaryFormatAdapter, RandomAccessFormatAdap
         }.min { $0.path < $1.path }
     }
 
-    private func profileFields(archive: ZIPArchive, appRoot: String, source: any PreviewByteSource,
-                               context: RequestContext) throws -> SummaryValue? {
+    private func embeddedProfile(archive: ZIPArchive, appRoot: String, source: any PreviewByteSource,
+                                 context: RequestContext) throws -> [String: Any]? {
         guard let entry = archive.entry(at: appRoot + "embedded.mobileprovision") else { return nil }
         let data = try ZIPArchiveReader.readMember(entry, from: source, maximumBytes: Self.maximumProfileBytes, context: context)
-        let profile = try ProvisioningProfileSummary.profile(from: data, context: context)
-        return ProvisioningProfileSummary.fields(profile, now: now()).value
+        return try ProvisioningProfileSummary.profile(from: data, context: context)
     }
 
     private func iconImage(archive: ZIPArchive, appRoot: String, info: [String: Any], source: any PreviewByteSource,

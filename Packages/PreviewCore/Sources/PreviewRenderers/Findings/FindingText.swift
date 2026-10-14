@@ -87,7 +87,83 @@ enum FindingText {
         case .hiddenMarkdownComments:
             return PreviewStrings.format(.findingHiddenMarkdownComments, arguments: [count], locale: locale)
         case .hiddenAgentInstructions: return PreviewStrings.text(.findingHiddenAgentInstructions)
+        // Decision 029. Counted findings are plural keys; the count is formatted for the locale.
+        case .scriptDownloadAndRun: return PreviewStrings.count(.findingScriptDownloadAndRun, finding.count, locale: locale)
+        case .scriptDecodeAndRun: return PreviewStrings.count(.findingScriptDecodeAndRun, finding.count, locale: locale)
+        case .scriptRemovesQuarantine: return PreviewStrings.count(.findingScriptRemovesQuarantine, finding.count, locale: locale)
+        case .scriptDisablesProtection: return PreviewStrings.count(.findingScriptDisablesProtection, finding.count, locale: locale)
+        case .scriptAsksForPassword: return PreviewStrings.count(.findingScriptAsksForPassword, finding.count, locale: locale)
+        case .scriptReadsSecrets: return PreviewStrings.count(.findingScriptReadsSecrets, finding.count, locale: locale)
+        case .scriptPersistence: return PreviewStrings.count(.findingScriptPersistence, finding.count, locale: locale)
+        case .scriptElevates: return PreviewStrings.count(.findingScriptElevates, finding.count, locale: locale)
+        case .scriptUploadsFiles: return PreviewStrings.count(.findingScriptUploadsFiles, finding.count, locale: locale)
+        case .autorunFolderOpenTask: return PreviewStrings.count(.findingAutorunFolderOpenTask, finding.count, locale: locale)
+        case .autorunHostCommand: return PreviewStrings.count(.findingAutorunHostCommand, finding.count, locale: locale)
+        case .autorunAgentHooks: return PreviewStrings.count(.findingAutorunAgentHooks, finding.count, locale: locale)
+        case .autorunAgentPermissions: return PreviewStrings.count(.findingAutorunAgentPermissions, finding.count, locale: locale)
+        case .autorunLocalServers: return PreviewStrings.count(.findingAutorunLocalServers, finding.count, locale: locale)
+        case .autorunInstallScripts: return PreviewStrings.count(.findingAutorunInstallScripts, finding.count, locale: locale)
+        case .autorunRemoteServers: return PreviewStrings.count(.findingAutorunRemoteServers, finding.count, locale: locale)
+        case .autorunServerEnvironment: return PreviewStrings.count(.findingAutorunServerEnvironment, finding.count, locale: locale)
+        case .autorunContainerCommands: return PreviewStrings.count(.findingAutorunContainerCommands, finding.count, locale: locale)
+        case .exportReadableLogins: return PreviewStrings.count(.findingExportReadableLogins, finding.count, locale: locale)
+        case .exportReadableCodeSecrets: return PreviewStrings.count(.findingExportReadableCodeSecrets, finding.count, locale: locale)
+        case .launchWatchPaths: return PreviewStrings.count(.findingLaunchWatchPaths, finding.count, locale: locale)
+        case .certificateExpired: return PreviewStrings.count(.findingCertificateExpired, finding.count, locale: locale)
+        case .certificateNotYetValid: return PreviewStrings.count(.findingCertificateNotYetValid, finding.count, locale: locale)
+        case .certificateWeakKey: return PreviewStrings.count(.findingCertificateWeakKey, finding.count, locale: locale)
+        case .launchHiddenLocation: return PreviewStrings.text(.findingLaunchHiddenLocation)
+        case .launchInlineScript: return PreviewStrings.text(.findingLaunchInlineScript)
+        case .launchAtLoad: return PreviewStrings.text(.findingLaunchAtLoad)
+        case .launchKeepAlive: return PreviewStrings.text(.findingLaunchKeepAlive)
+        case .launchJob: return PreviewStrings.text(.findingLaunchJob)
+        case .launchSchedule: return PreviewStrings.text(.findingLaunchSchedule)
+        case .profileExpired: return PreviewStrings.text(.findingProfileExpired)
+        case .launchInterval:
+            return PreviewStrings.format(.findingLaunchInterval, arguments: [interval(finding.detail, locale: locale)], locale: locale)
+        case .certificateExpiresSoon:
+            return PreviewStrings.count(.findingCertificateExpiresSoon, days(finding.detail), locale: locale)
+        case .profileExpiresSoon:
+            return PreviewStrings.count(.findingProfileExpiresSoon, days(finding.detail), locale: locale)
+        case .artifactNativeCode: return PreviewStrings.count(.findingArtifactNativeCode, finding.count, locale: locale)
+        case .artifactMismatchedContent: return PreviewStrings.text(.findingArtifactMismatchedContent)
+        case .modelIncomplete: return PreviewStrings.text(.findingModelIncomplete)
+        case .modelInconsistentLayout: return PreviewStrings.text(.findingModelInconsistentLayout)
+        case .pickleRunsCode: return PreviewStrings.count(.findingPickleRunsCode, finding.count, locale: locale)
+        case .pickleNetworkOrFiles: return PreviewStrings.count(.findingPickleNetworkOrFiles, finding.count, locale: locale)
+        case .pickleUncommonImports: return PreviewStrings.count(.findingPickleUncommonImports, finding.count, locale: locale)
+        case .pickleBrokenStream: return PreviewStrings.text(.findingPickleBrokenStream)
+        case .installNativeBuild: return PreviewStrings.text(.findingInstallNativeBuild)
+        case .installStartupCode: return PreviewStrings.count(.findingInstallStartupCode, finding.count, locale: locale)
+        case .installBuildScript: return PreviewStrings.text(.findingInstallBuildScript)
+        case .installRemoteDependencies:
+            return PreviewStrings.count(.findingInstallRemoteDependencies, finding.count, locale: locale)
+        case .bundleRunsProgram: return PreviewStrings.text(.findingBundleRunsProgram)
+        case .bundleAsksForSecrets: return PreviewStrings.count(.findingBundleAsksForSecrets, finding.count, locale: locale)
+        case .bundleBroadFolderAccess: return PreviewStrings.count(.findingBundleBroadFolderAccess, finding.count, locale: locale)
+        case .bundleToolTextTargetsAssistant:
+            return PreviewStrings.count(.findingBundleToolTextTargetsAssistant, finding.count, locale: locale)
+        case .extensionStartsAutomatically: return PreviewStrings.text(.findingExtensionStartsAutomatically)
+        case .extensionInstallsOthers: return PreviewStrings.count(.findingExtensionInstallsOthers, finding.count, locale: locale)
+        case .extensionAllSites: return PreviewStrings.text(.findingExtensionAllSites)
+        case .extensionSensitivePermissions:
+            return PreviewStrings.count(.findingExtensionSensitivePermissions, finding.count, locale: locale)
+        case .extensionSelfHostedUpdates: return PreviewStrings.text(.findingExtensionSelfHostedUpdates)
+        case .extensionRelaxedScriptPolicy: return PreviewStrings.text(.findingExtensionRelaxedScriptPolicy)
         }
+    }
+
+    /// Days left from a `.days` detail; a missing detail reads as one day, the smallest a producer reports.
+    private static func days(_ detail: PreviewFindingDetail) -> Int {
+        if case .days(let value) = detail { return max(1, value) }
+        return 1
+    }
+
+    /// A declared repeat interval as a localized duration, for example "5 minutes" or "1 hour, 30 minutes".
+    private static func interval(_ detail: PreviewFindingDetail, locale: Locale) -> String {
+        guard case .seconds(let seconds) = detail, seconds > 0 else { return "" }
+        return Duration.seconds(seconds).formatted(
+            .units(allowed: [.days, .hours, .minutes, .seconds], width: .wide).locale(locale))
     }
 
     /// Secondary line: where the finding occurs, or the decoded hidden text. `nil` when there is nothing to add.

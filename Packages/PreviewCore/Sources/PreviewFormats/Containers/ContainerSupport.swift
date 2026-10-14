@@ -280,7 +280,8 @@ struct ListingBudget {
 /// written without them, so a listing that fit before assessment never starts failing.
 func listingDocument(format: String, entries: [ContainerEntry], context: RequestContext,
                      partial: Bool = false, extra: [(String, SummaryValue)] = [],
-                     assessRisks: Bool = false, assessNameRisks: Bool = false) throws -> ParsedTextDocument {
+                     assessRisks: Bool = false, assessNameRisks: Bool = false,
+                     findings added: [PreviewFinding] = []) throws -> ParsedTextDocument {
     let report: ArchiveRiskReport?
     if assessRisks { report = try ArchiveRiskAnalyzer.analyze(entries, context: context) }
     else if assessNameRisks { report = try ListingNameRiskAnalyzer.analyze(entries, context: context) }
@@ -293,7 +294,7 @@ func listingDocument(format: String, entries: [ContainerEntry], context: Request
         return try writer.document(.object([
             ("archiveFormat", .string(format)), ("listedEntries", .integer(entries.count)),
             ("partial", .boolean(partial)), ("entries", .array(summaries))
-        ] + extra), findings: report?.findings ?? [])
+        ] + extra), findings: (report?.findings ?? []) + added)
     }
     guard let report, report.annotatesEntries else { return try write(annotated: false) }
     do { return try write(annotated: true) }

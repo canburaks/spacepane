@@ -2,6 +2,65 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-14 — Safety Lens 3: model files, add-ons and packages
+
+Owner request ("Continue development"). [Decision 030](docs/decisions/030-safety-lens-3-models-add-ons-and-packages.md) with implementation notes. Branch `safety-lens-3`: five workstreams in their own worktrees, then the lead's integration. Nothing was pushed.
+
+- Implementation, features:
+  - GGUF summaries from the header: name, architecture, parameter count, file type and bits per weight, tensor types, context length, layers, heads, experts, vocabulary, tokenizer, license, provenance, tags, chat template, a bounded tensor list. Versions 2 and 3 in either byte order; a partial summary when the read budget ends inside a large vocabulary.
+  - safetensors summaries from the JSON header: tensors, parameters, data types, format, shard position, LoRA rank, GPTQ or AWQ packing, the metadata map with sensitive keys concealed.
+  - Pickle and PyTorch scan (`.pt`, `.pth`, `.ckpt`, `.pickle`, `.joblib`): an opcode walker for protocols 0 to 5 that lists every import loading would perform, classified as able to run code, reaching the network or files, uncommon or expected. Nothing is unpickled. PyTorch ZIPs with damaged checksums are still scanned; compressed joblib files are decompressed within bounds; 7z, GGUF and safetensors content under these names is reported as mismatched. A `.pth` Python path file is shown as text, and its `import` lines are reported as code that runs at every Python start.
+  - MCP bundle cards (`.mcpb`, `.dxt`): server type, command, arguments, environment variable names (never values), tools, prompts and settings; findings for running a program, sensitive settings, whole-folder access and tool text that addresses the assistant.
+  - Editor extension cards (`.vsix`) and browser extension cards (`.xpi`, `.crx`): identity, activation, bundled extensions, permissions, host access, update address and script policy, with findings for startup activation, all-site access, sensitive permissions, self-hosted updates and `unsafe-eval`. Script members are scanned for invisible characters within bounds.
+  - Install-time findings inside `.tgz`, `.tar.gz`, `.tar.bz2` and `.tar.xz` listings: an npm package's install scripts and what they would run, an implicit native build from `binding.gyp`, Git and URL dependencies, native binaries; a Python source package's setup script.
+  - Python wheel summaries (`.whl`): metadata, requirements, commands, files that Python runs at start, installed scripts and native modules.
+  - Native code is counted the same way everywhere (`NativeCodeSignature`), and a shared rule finds `.pth` lines that run code (`PythonStartupLines`).
+- Implementation, integration (lead): seven catalog entries with imported type declarations (`.crx` imports Chrome's `org.chromium.extension`), manifests regenerated (319 preview and 315 thumbnail content types, 61 imported declarations); registrations; the `.pth` lens row; four summary label sets; MCP bundles, extensions and wheels open in Summary like the other packages; the npm lifecycle list is shared with the `package.json` lens; appearance samples and Finder host fixtures for every new format; host-matrix rows (not observed); 150 new strings applied in 14 languages (drafts).
+- Tests: about 400 new adapter, lens and label tests from the workstreams; `Sl3PipelineTests` for routing, the enable switch, concealment and findings end to end. The two 50,000-line script-lens bound tests now get a 30-second deadline, because they failed under parallel load with the standard 2 seconds; they check bounded work, not speed. Format-count checks moved from 74 to 81.
+- Validation: `--test` passes (4,445 tests in 498 suites with 2 known issues; 74 serial tests; 696 adversarial cases across 87 formats). Nothing was observed in Quick Look or Finder yet.
+- Website: seven formats and their names joined the catalog and the strings; run `npm run data:sync` in `spacepane-web` when this branch reaches `main`.
+
+## 2026-10-14 — Safety Lens 3 contract: model files, add-ons and packages
+
+Owner request ("Continue development"). [Decision 030](docs/decisions/030-safety-lens-3-models-add-ons-and-packages.md). Branch `safety-lens-3`, from `safety-lens-2`. Nothing was pushed.
+
+- Implementation, contract (lead): format IDs for GGUF, safetensors, pickle and PyTorch files, MCP bundles, editor and browser extensions and Python wheels; 22 finding kinds in the `artifact`, `model`, `pickle`, `install`, `bundle` and `extension` groups with default severities and wording; their string keys; a marker per workstream in `PreviewStrings.swift`; `listingDocument` accepts extra findings; five workstreams in `tools/ownership.json`.
+- Documentation: decision 030, its index row and a PLAN section.
+- Validation: the package builds. The new string keys have no resources yet, so the localization checks fail until the strings workstream is applied.
+
+## 2026-10-14 — Safety Lens 2 observed in the Quick Look panel; routing fixes
+
+Owner request ("continue"). [Validation record](docs/validation/safety-lens-2-panel-2026-10-14.md). A development-signed Debug build of `safety-lens-2` was registered from `.build/xcode` and observed through `qlmanage -p`; Finder itself was not observed.
+
+- Validation: the commented `.vscode/tasks.json` showed "1 finding to review." and a launch agent "5 findings to review.", both with Copy Findings Report. A routing survey of the 31 App Review samples and five script fixtures found that types claimed only through a parent type went to Apple's previewer, and exactly claimed types reached SpacePane, except CSV and the STL, OBJ and PLY meshes, which Apple's own previewers keep on macOS 27.2.
+- Implementation, fixes found by observing:
+  - The source-code format claims 31 of Apple's exact source and script types (shells, AppleScript, Swift, Python, the C family, Objective-C, JavaScript, Java, Ruby, Perl, PHP and others); `.swift`, `.py`, `.sh`, `.zsh`, `.command` and AppleScript then reached SpacePane. HTML, CSS, `.ts` and types exported by other apps stay unclaimed.
+  - A warning other than the secret-inventory kinds now leads the collapsed findings banner; before, a script with three warnings read "1 likely secret hidden."
+  - The script lens closes a quote that concealment cut at the end of its line, so commands after a concealed password prompt are read.
+- Not established: Finder, thumbnails, VoiceOver, other macOS versions. CSV exports and STL, OBJ and PLY print checks reach users only in the companion on macOS 27.2.
+- Website: catalog content types and filename aliases changed on this branch; run `npm run data:sync` in `spacepane-web` when it reaches `main`.
+
+## 2026-10-14 — Safety Lens 2: what a file will do
+
+Owner request ("Go", after the quick-win list). [Decision 029](docs/decisions/029-safety-lens-2-what-a-file-will-do.md). Branch `safety-lens-2`, six parallel workstreams in their own worktrees and the lead. Nothing was pushed.
+
+- Implementation, contract (lead): `PreviewTextLens` and `PreviewLensRequest`; `AdapterRegistration.adding(lenses:)`; `StandardLenses`, the one table that attaches lenses to formats; a pipeline step that runs lenses on the concealed text after the hidden-content scan, never for app-made summaries, and drops only a failing lens's findings; 34 finding kinds in the `script`, `autorun`, `export`, `launch`, `certificate` and `profile` groups; `days` and `seconds` details; wording in `FindingText`.
+- Implementation, features:
+  - Script effects lens for shell, fish, AppleScript, PowerShell and batch, including extension-free files with a `#!` line: download and run, decode and run, quarantine removal, turning off a protection, password prompts, reading saved secrets, persistence, administrator rights and uploads. Comments, quoted text, `echo` arguments and here-document data do not count.
+  - Auto-run configuration lens: VS Code `tasks.json` that runs on folder open, Claude Code hooks and permission settings, local and remote MCP servers and their environment variables, dev-container commands (host and container), and `package.json` install scripts.
+  - Readable credential exports: password-manager CSV and TSV exports by header, Bitwarden JSON, and Aegis, 2FAS and andOTP one-time-code exports.
+  - launchd job lens: job, start at load, keep alive, interval, calendar schedule, watched paths, a program in a temporary, shared or hidden folder, and inline script code.
+  - Validity findings for certificates (expired, expiring within 30 days, not yet valid, RSA under 2,048 bits) and provisioning profiles, standalone or embedded in an IPA.
+  - Mesh Print Check: `GeometryMeasurer` moved into the contracts with `package` access, so STL, OBJ, PLY and 3MF are measured; open and non-manifold edge counts; a solid-PLA weight and filament estimate, worded as conditional on millimetres for formats without a declared unit.
+  - Copy Findings Report: a banner action that copies every finding with its severity and lines, the localized format name, and no text from the file; the banner's buttons stack when they do not fit one row.
+- Implementation, lead fixes found during integration:
+  - `totp`, `hotp`, `otp` and `otpauth` are credential words, so one-time-code seed columns are concealed; before, a Bitwarden CSV showed its `login_totp` column in the clear.
+  - `tasks.json`, `launch.json`, `keybindings.json` and `mcp.json` are filename aliases of JSON with comments; VS Code's own `tasks.json` template has a comment and previously failed to preview. The website reads these aliases (`npm run data:sync` in `spacepane-web` is pending until the branch reaches `main`).
+  - MCP servers marked `"disabled": true` are not counted.
+- Localization: 43 new keys in all 14 languages through `tools/localization/additions/safety-lens-2.json` and `sl2-mesh.json`; merge, generate and validate pass. Drafts pending native-speaker review; Kurmanji and Hausa have the lowest confidence.
+- Validation (Mac, macOS 27.2, Xcode 27.0, Swift 6.4): `./script/build_and_run.sh --test` passes 4,032 tests in 462 suites with the 2 known issues, then the 74 serial tests, the companion, file-drop, live-reload and SQLite checks and 632 adversarial cases. `--check-static` (23 passed, 1 skipped), `--check` and `--check-compiler` (app and both extensions typecheck) pass. Not established: a signed Xcode build, the companion or Finder showing the new findings, the report action or the print lines; VoiceOver review.
+- Incident: while writing a sample script for the script-effects tests, one workstream passed it through a shell heredoc that ended early, and the rest of the sample ran in the owner's account at 11:32. It created `~/.zshrc`, `~/.bash_profile`, `~/.profile` and `~/Library/LaunchAgents/com.x.plist` (not loaded), opened two password dialogs whose answers were saved to a session temp file, and started a listener on port 4444 that wrote an empty `out.bin` here (removed). Every `sudo` failed. No SSH key, Chrome credential copy, quarantine setting or crontab changed. The four files and the temp file were left for the owner to remove. The tests themselves write only to temp folders and never execute samples.
+
 ## 2026-10-13 — Research: new file types and features after the STEP and IGES cut
 
 Research only, at the owner's request. No code, catalog, plan box or store record changed; nothing was committed or pushed.

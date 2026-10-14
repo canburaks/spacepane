@@ -475,6 +475,11 @@ def samples() -> list[dict]:
     add('model.obj', 'example.obj', {'example.obj': mesh_samples.obj_text(mesh_vertices, mesh_quads)})
     add('model.ply', 'example.ply', {'example.ply': mesh_samples.ply_binary(mesh_vertices, mesh_quads)})
     add('model.3mf', 'example.3mf', {'example.3mf': mesh_samples.threemf(mesh_vertices, mesh_triangles)})
+    # [safety-lens-3] Model files, add-ons and installable packages (decision 030); each family module builds its own.
+    import addon_fixtures, install_fixtures, ml_fixtures, pickle_fixtures
+    for family in (ml_fixtures, pickle_fixtures, addon_fixtures, install_fixtures):
+        for format_id, name, data in family.appearance_samples():
+            add(format_id, name, {name: data})
     order =[entry['id'] for entry in json.loads(CATALOG.read_text())['formats']]
     built.sort(key=lambda sample: order.index(sample['formatID']))
     return built

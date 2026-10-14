@@ -60,16 +60,26 @@ public struct GeometryMeasurements: Equatable, Sendable {
     public let bodyCount: Int
     /// Whether the millimetre values rest on a declared unit, an assumption or nothing.
     public let unitProvenance: GeometryUnitProvenance
+    /// Open (boundary) edges: welded edges that exactly one triangle uses, so the surface has a gap there.
+    /// Zero for a watertight surface (Mesh Print Check, decision 029). A count of the displayed tessellation.
+    public let openEdgeCount: Int
+    /// Edges that more than two triangles share, which no solid's surface can have (decision 029). They make a
+    /// slicer's idea of inside and outside ambiguous; bodies that touch along a face or an edge produce them too.
+    public let nonManifoldEdgeCount: Int
 
     /// Fails for non-finite or negative values so a malformed measurement can never be displayed.
     public init?(surfaceAreaSquareMillimetres: Double, volumeCubicMillimetres: Double?, bodyCount: Int,
-                 unitProvenance: GeometryUnitProvenance = .undeclared) {
+                 unitProvenance: GeometryUnitProvenance = .undeclared,
+                 openEdgeCount: Int = 0, nonManifoldEdgeCount: Int = 0) {
         guard surfaceAreaSquareMillimetres.isFinite, surfaceAreaSquareMillimetres >= 0, bodyCount >= 1,
-              volumeCubicMillimetres.map({ $0.isFinite && $0 >= 0 }) ?? true else { return nil }
+              volumeCubicMillimetres.map({ $0.isFinite && $0 >= 0 }) ?? true,
+              openEdgeCount >= 0, nonManifoldEdgeCount >= 0 else { return nil }
         self.surfaceAreaSquareMillimetres = surfaceAreaSquareMillimetres
         self.volumeCubicMillimetres = volumeCubicMillimetres
         self.bodyCount = bodyCount
         self.unitProvenance = unitProvenance
+        self.openEdgeCount = openEdgeCount
+        self.nonManifoldEdgeCount = nonManifoldEdgeCount
     }
 
     /// The same values with another unit provenance. They were validated when this value was made, so the
@@ -83,6 +93,8 @@ public struct GeometryMeasurements: Equatable, Sendable {
         volumeCubicMillimetres = source.volumeCubicMillimetres
         bodyCount = source.bodyCount
         self.unitProvenance = unitProvenance
+        openEdgeCount = source.openEdgeCount
+        nonManifoldEdgeCount = source.nonManifoldEdgeCount
     }
 }
 

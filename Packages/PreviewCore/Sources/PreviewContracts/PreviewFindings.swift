@@ -92,19 +92,110 @@ public enum PreviewFindingKind: String, CaseIterable, Sendable {
     case hiddenMarkdownComments = "hidden.markdownComments"
     case hiddenAgentInstructions = "hidden.agentInstructions"
 
+    // MARK: Script effects — PreviewFormats/Lenses (decision 029)
+    case scriptDownloadAndRun = "script.downloadAndRun"
+    case scriptDecodeAndRun = "script.decodeAndRun"
+    case scriptRemovesQuarantine = "script.removesQuarantine"
+    case scriptDisablesProtection = "script.disablesProtection"
+    case scriptAsksForPassword = "script.asksForPassword"
+    case scriptReadsSecrets = "script.readsSecrets"
+    case scriptPersistence = "script.persistence"
+    case scriptElevates = "script.elevates"
+    case scriptUploadsFiles = "script.uploadsFiles"
+
+    // MARK: Auto-run configuration — PreviewFormats/Lenses (decision 029)
+    case autorunFolderOpenTask = "autorun.folderOpenTask"
+    case autorunHostCommand = "autorun.hostCommand"
+    case autorunAgentHooks = "autorun.agentHooks"
+    case autorunAgentPermissions = "autorun.agentPermissions"
+    case autorunLocalServers = "autorun.localServers"
+    case autorunInstallScripts = "autorun.installScripts"
+    case autorunRemoteServers = "autorun.remoteServers"
+    case autorunServerEnvironment = "autorun.serverEnvironment"
+    case autorunContainerCommands = "autorun.containerCommands"
+
+    // MARK: Readable credential exports — PreviewFormats/Lenses (decision 029)
+    case exportReadableLogins = "export.readableLogins"
+    case exportReadableCodeSecrets = "export.readableCodeSecrets"
+
+    // MARK: launchd jobs — PreviewFormats/Lenses (decision 029)
+    case launchHiddenLocation = "launch.hiddenLocation"
+    case launchInlineScript = "launch.inlineScript"
+    case launchAtLoad = "launch.atLoad"
+    case launchKeepAlive = "launch.keepAlive"
+    case launchJob = "launch.job"
+    case launchInterval = "launch.interval"
+    case launchSchedule = "launch.schedule"
+    case launchWatchPaths = "launch.watchPaths"
+
+    // MARK: Certificate and profile validity — PreviewFormats/Packages (decision 029)
+    case certificateExpired = "certificate.expired"
+    case certificateExpiresSoon = "certificate.expiresSoon"
+    case certificateNotYetValid = "certificate.notYetValid"
+    case certificateWeakKey = "certificate.weakKey"
+    case profileExpired = "profile.expired"
+    case profileExpiresSoon = "profile.expiresSoon"
+
+    // MARK: Models, add-ons and packages — decision 030. Shared by several adapters.
+    case artifactNativeCode = "artifact.nativeCode"
+    case artifactMismatchedContent = "artifact.mismatchedContent"
+
+    // MARK: Model files — PreviewFormats/Models (decision 030)
+    case modelIncomplete = "model.incomplete"
+    case modelInconsistentLayout = "model.inconsistentLayout"
+
+    // MARK: Pickle imports — PreviewFormats/Models (decision 030)
+    case pickleRunsCode = "pickle.runsCode"
+    case pickleNetworkOrFiles = "pickle.networkOrFiles"
+    case pickleUncommonImports = "pickle.uncommonImports"
+    case pickleBrokenStream = "pickle.brokenStream"
+
+    // MARK: Install-time behaviour — PreviewFormats/Installables (decision 030)
+    case installNativeBuild = "install.nativeBuild"
+    case installStartupCode = "install.startupCode"
+    case installBuildScript = "install.buildScript"
+    case installRemoteDependencies = "install.remoteDependencies"
+
+    // MARK: MCP bundles — PreviewFormats/AddOns (decision 030)
+    case bundleRunsProgram = "bundle.runsProgram"
+    case bundleAsksForSecrets = "bundle.asksForSecrets"
+    case bundleBroadFolderAccess = "bundle.broadFolderAccess"
+    case bundleToolTextTargetsAssistant = "bundle.toolTextTargetsAssistant"
+
+    // MARK: Editor and browser extensions — PreviewFormats/AddOns (decision 030)
+    case extensionStartsAutomatically = "extension.startsAutomatically"
+    case extensionInstallsOthers = "extension.installsOthers"
+    case extensionAllSites = "extension.allSites"
+    case extensionSensitivePermissions = "extension.sensitivePermissions"
+    case extensionSelfHostedUpdates = "extension.selfHostedUpdates"
+    case extensionRelaxedScriptPolicy = "extension.relaxedScriptPolicy"
+
     public var defaultSeverity: PreviewFindingSeverity {
         switch self {
         case .archiveUnsafePath, .archiveLinkEscape, .archiveExecutables, .archiveDisguisedName,
-             .archiveDirectionalName, .secretSyncedFolder, .hiddenBidirectionalControls, .hiddenUnicodeTags:
+             .archiveDirectionalName, .secretSyncedFolder, .hiddenBidirectionalControls, .hiddenUnicodeTags,
+             .scriptDownloadAndRun, .scriptDecodeAndRun, .scriptRemovesQuarantine, .scriptDisablesProtection,
+             .scriptAsksForPassword, .scriptReadsSecrets, .autorunFolderOpenTask, .autorunHostCommand,
+             .exportReadableLogins, .exportReadableCodeSecrets, .launchHiddenLocation, .launchInlineScript,
+             .certificateExpired, .profileExpired, .pickleRunsCode, .installStartupCode:
             .warning
         case .notebookOutOfOrder, .notebookExecutionGaps, .notebookUnexecutedCells, .notebookErrorOutputs,
              .archiveLinks, .archiveEncrypted, .archiveNested, .archiveHighCompression, .archiveLargeExpansion,
              .archiveCaseCollisions, .listingHiddenCharacters, .hiddenZeroWidth, .hiddenVariationSelectors, .hiddenMixedScripts,
-             .hiddenMarkdownComments, .hiddenAgentInstructions:
+             .hiddenMarkdownComments, .hiddenAgentInstructions, .scriptPersistence, .scriptElevates, .scriptUploadsFiles,
+             .autorunAgentHooks, .autorunAgentPermissions, .autorunLocalServers, .autorunInstallScripts,
+             .launchAtLoad, .launchKeepAlive, .certificateExpiresSoon, .certificateNotYetValid, .certificateWeakKey,
+             .profileExpiresSoon, .artifactNativeCode, .artifactMismatchedContent, .modelIncomplete,
+             .modelInconsistentLayout, .pickleNetworkOrFiles, .pickleBrokenStream, .installNativeBuild,
+             .installRemoteDependencies, .bundleBroadFolderAccess, .bundleToolTextTargetsAssistant, .extensionAllSites,
+             .extensionSensitivePermissions, .extensionSelfHostedUpdates, .extensionRelaxedScriptPolicy:
             .caution
         case .notebookNotExecuted, .notebookMayNotReproduce, .archiveHiddenEntries, .archiveMacMetadata,
              .secretPrivateKey, .secretCloudAccessKey, .secretCodeHostingToken, .secretAPIKey, .secretWebToken,
-             .secretAuthorizationHeader, .secretSensitiveField, .hiddenPrivateUse:
+             .secretAuthorizationHeader, .secretSensitiveField, .hiddenPrivateUse, .autorunRemoteServers,
+             .autorunServerEnvironment, .autorunContainerCommands, .launchJob, .launchInterval, .launchSchedule,
+             .launchWatchPaths, .pickleUncommonImports, .installBuildScript, .bundleRunsProgram, .bundleAsksForSecrets,
+             .extensionStartsAutomatically, .extensionInstallsOthers:
             .info
         }
     }
@@ -130,6 +221,11 @@ public enum PreviewFindingDetail: Equatable, Sendable {
     case syncProvider(PreviewSyncProvider)
     /// Privacy-filtered, bounded text decoded from invisible characters. Display only as inert text.
     case decodedText(String)
+    /// Whole days until a date the file states (a certificate's or profile's end of validity), counted
+    /// from the adapter's injected clock and rounded up, so at least one while the date is still ahead.
+    case days(Int)
+    /// A repeat interval in seconds that the file declares (a launchd `StartInterval`).
+    case seconds(Int)
 
     var bounded: Self {
         switch self {
@@ -139,6 +235,8 @@ public enum PreviewFindingDetail: Equatable, Sendable {
         case .compressionRatio(let ratio): .compressionRatio(max(0, ratio))
         case .expandedBytes(let bytes): .expandedBytes(max(0, bytes))
         case .decodedText(let text): .decodedText(String(text.prefix(PreviewFinding.maximumDecodedCharacters)))
+        case .days(let days): .days(max(0, days))
+        case .seconds(let seconds): .seconds(max(0, seconds))
         case .none, .syncProvider: self
         }
     }
@@ -154,6 +252,8 @@ public enum PreviewFindingDetail: Equatable, Sendable {
         case let (.expandedBytes(a), .expandedBytes(b)): a == b
         case let (.syncProvider(a), .syncProvider(b)): a == b
         case let (.decodedText(a), .decodedText(b)): a.utf8.elementsEqual(b.utf8)
+        case let (.days(a), .days(b)): a == b
+        case let (.seconds(a), .seconds(b)): a == b
         default: false
         }
     }

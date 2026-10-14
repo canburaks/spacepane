@@ -26,6 +26,21 @@ struct Q50FindingsCollapseTests {
         }
     }
 
+    /// Decision 029: a warning about what the file does leads the collapsed banner even when secrets were concealed.
+    @Test func aWarningOutranksTheConcealmentNotice() {
+        let banner = NativeFindingsBanner(frame: NSRect(x: 0, y: 0, width: 700, height: 0))
+        let findings = [PreviewFinding(kind: .scriptDownloadAndRun, count: 1, lines: [4]),
+                        PreviewFinding(kind: .secretSensitiveField, count: 1, lines: [7])]
+        banner.display(findings, concealedValueCount: 1, offersConcealedCopy: true,
+                       palette: chromeTestPalette(), locale: english)
+        #expect(banner.summaryLabel.stringValue == PreviewStrings.count(.findingSummary, 2, locale: english))
+        #expect(banner.summarySymbolName == "exclamationmark.triangle.fill")
+        // A synced-folder warning is about the secrets themselves, so the concealment notice still leads.
+        banner.display([PreviewFinding(kind: .secretSyncedFolder, count: 1, detail: .syncProvider(.dropbox))],
+                       concealedValueCount: 1, offersConcealedCopy: true, palette: chromeTestPalette(), locale: english)
+        #expect(banner.summarySymbolName == "eye.slash")
+    }
+
     @Test func genericSummaryCountsRecordsRatherThanTheirOccurrences() {
         let banner = NativeFindingsBanner(frame: .zero)
         let findings = [PreviewFinding(kind: .hiddenZeroWidth, count: 200),

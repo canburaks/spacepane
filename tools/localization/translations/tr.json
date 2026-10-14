@@ -262,12 +262,102 @@
     "finding.archive.macMetadata": "__MACOSX içindeki Mac kaynak girdileri: %lld.",
     "finding.archive.nested": "Bu arşivin içindeki arşivler, açılmadı: %lld.",
     "finding.archive.unsafePath": "Hedef klasörün dışına yazılacak girdiler: %lld.",
+    "finding.artifact.mismatchedContent": "İçeriğin biçimi, dosya adının belirttiği biçimden farklı.",
+    "finding.artifact.nativeCode": {
+      "one": "İçinde makine koduyla derlenmiş %2$@ program veya kütüphane var.",
+      "other": "İçinde makine koduyla derlenmiş %2$@ program veya kütüphane var."
+    },
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ komut, bir yapay zekâ ajanı işlem yaptığında kendiliğinden çalışıyor (bir hook).",
+      "other": "%2$@ komut, bir yapay zekâ ajanı işlem yaptığında kendiliğinden çalışıyor (hook’lar)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ ayar, bir yapay zekâ ajanının önce sormadan işlem yapmasına izin veriyor.",
+      "other": "%2$@ ayar, bir yapay zekâ ajanının önce sormadan işlem yapmasına izin veriyor."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcının içinde kendiliğinden çalışıyor.",
+      "other": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcının içinde kendiliğinden çalışıyor."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ görev, klasör kod düzenleyicide açıldığında kendiliğinden çalışıyor.",
+      "other": "%2$@ görev, klasör kod düzenleyicide açıldığında kendiliğinden çalışıyor."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcı başlamadan önce bu Mac’te çalışıyor.",
+      "other": "%2$@ geliştirme kapsayıcısı komutu, kapsayıcı başlamadan önce bu Mac’te çalışıyor."
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ paket betiği, kurulum sırasında kendiliğinden çalışıyor.",
+      "other": "%2$@ paket betiği, kurulum sırasında kendiliğinden çalışıyor."
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ MCP sunucusu bu Mac’te bir program başlatıyor.",
+      "other": "%2$@ MCP sunucusu bu Mac’te program başlatıyor."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ MCP sunucusu internetteki bir hizmete bağlanıyor.",
+      "other": "%2$@ MCP sunucusu internetteki hizmetlere bağlanıyor."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ ortam değişkeni MCP sunucularına aktarılıyor.",
+      "other": "%2$@ ortam değişkeni MCP sunucularına aktarılıyor."
+    },
     "finding.banner.label": "Bu dosyada kontrol edilmesi gerekenler",
+    "finding.bundle.asksForSecrets": {
+      "one": "%2$@ ayar parola veya anahtar istiyor.",
+      "other": "%2$@ ayar parola veya anahtar istiyor."
+    },
+    "finding.bundle.broadFolderAccess": {
+      "one": "%2$@ ayar, sunucuya Ev, Belgeler, İndirilenler veya Masaüstü klasörünüze erişim veriyor.",
+      "other": "%2$@ ayar, sunucuya Ev, Belgeler, İndirilenler veya Masaüstü klasörünüze erişim veriyor."
+    },
+    "finding.bundle.runsProgram": "Bir yapay zekâ uygulaması sunucusunu başlattığında bu Mac’te bir program çalıştırır.",
+    "finding.bundle.toolTextTargetsAssistant": {
+      "one": "%2$@ araç açıklaması, yapay zekâya başka dosyaları okumasını veya sizden bir şey saklamasını söylüyor.",
+      "other": "%2$@ araç açıklaması, yapay zekâya başka dosyaları okumasını veya sizden bir şey saklamasını söylüyor."
+    },
+    "finding.certificate.expired": {
+      "one": "%2$@ sertifikanın süresi dolmuş.",
+      "other": "%2$@ sertifikanın süresi dolmuş."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Bir sertifikanın süresi %2$@ gün içinde doluyor.",
+      "other": "Bir sertifikanın süresi %2$@ gün içinde doluyor."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ sertifika henüz geçerli değil.",
+      "other": "%2$@ sertifika henüz geçerli değil."
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ sertifika kısa bir RSA anahtarı kullanıyor.",
+      "other": "%2$@ sertifika kısa RSA anahtarları kullanıyor."
+    },
     "finding.detail.cells": "Hücreler: %@",
     "finding.detail.cellsMore": "Hücreler: %1$@ ve %2$lld hücre daha",
     "finding.detail.decodedText": "Gizli metin, düz metin olarak gösteriliyor: %@",
     "finding.detail.lines": "Satırlar: %@",
     "finding.detail.linesMore": "Satırlar: %1$@ ve %2$lld satır daha",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ tek seferlik kod sırrı burada okunabilir biçimde kaydedilmiş.",
+      "other": "%2$@ tek seferlik kod sırrı burada okunabilir biçimde kaydedilmiş."
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ parola yöneticisi girişi burada okunabilir biçimde kaydedilmiş. Artık gerekmediğinde bu dışa aktarılan dosyayı silin.",
+      "other": "%2$@ parola yöneticisi girişi burada okunabilir biçimde kaydedilmiş. Artık gerekmediğinde bu dışa aktarılan dosyayı silin."
+    },
+    "finding.extension.allSites": "Ziyaret ettiğiniz her web sitesini okuyabilir ve değiştirebilir.",
+    "finding.extension.installsOthers": {
+      "one": "Kendisiyle birlikte %2$@ başka uzantı daha kuruyor.",
+      "other": "Kendisiyle birlikte %2$@ başka uzantı daha kuruyor."
+    },
+    "finding.extension.relaxedScriptPolicy": "Güvenlik ilkesi, metnin kod olarak çalıştırılmasına izin veriyor.",
+    "finding.extension.selfHostedUpdates": "Tarayıcının mağazası yerine kendi sunucusundan güncellenir.",
+    "finding.extension.sensitivePermissions": {
+      "one": "%2$@ hassas tarayıcı izni istiyor.",
+      "other": "%2$@ hassas tarayıcı izni istiyor."
+    },
+    "finding.extension.startsAutomatically": "Kod düzenleyici her açıldığında başlar.",
     "finding.hidden.agentInstructions": "Bu, gizli metnin yönlendirebileceği yapay zekâ kodlama araçları için bir talimat dosyasına benziyor.",
     "finding.hidden.bidirectionalControls": "Kodun çalıştığından farklı okunmasına yol açabilen yön değiştirme karakterleri: %lld.",
     "finding.hidden.markdownComments": "Çoğu Markdown görüntüleyicisinin gizlediği HTML yorumları: %lld.",
@@ -276,10 +366,33 @@
     "finding.hidden.unicodeTags": "Gizli metin taşıyan görünmez etiket karakterleri: %lld.",
     "finding.hidden.variationSelectors": "Veri gizleyebilen beklenmedik varyasyon seçiciler: %lld.",
     "finding.hidden.zeroWidth": "Görünmez sıfır genişlikli karakterler: %lld.",
+    "finding.install.buildScript": "Bu kaynak paketini derlemek veya kurmak, kendi kurulum betiğini çalıştırır.",
+    "finding.install.nativeBuild": "Bu paketi kurmak, kurulum betikleri olmasa bile bir derleme dosyasından makine kodu derler.",
+    "finding.install.remoteDependencies": {
+      "one": "%2$@ bağımlılık, kayıt defteri yerine bir Git deposundan veya web adresinden geliyor.",
+      "other": "%2$@ bağımlılık, kayıt defteri yerine Git depolarından veya web adreslerinden geliyor."
+    },
+    "finding.install.startupCode": {
+      "one": "%2$@ yerde, Python her başladığında Python kodu çalıştırılıyor.",
+      "other": "%2$@ yerde, Python her başladığında Python kodu çalıştırılıyor."
+    },
+    "finding.launch.atLoad": "Program, oturum açıldığında veya başlangıçta çalışır.",
+    "finding.launch.hiddenLocation": "Program geçici, paylaşılan veya gizli bir klasörde.",
+    "finding.launch.inlineScript": "İş, bu dosyanın içine yazılmış kabuk veya betik kodunu çalıştırır.",
+    "finding.launch.interval": "Program her %@ çalışır.",
+    "finding.launch.job": "Bu bir launchd işi: macOS, adı geçen programı başlatır.",
+    "finding.launch.keepAlive": "macOS, program her durduğunda onu yeniden başlatır.",
+    "finding.launch.schedule": "Program bir takvim zamanlamasına göre çalışır.",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ izlenen yol, değiştiğinde programı başlatıyor.",
+      "other": "%2$@ izlenen yol, değiştiğinde programı başlatıyor."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "Listelenen %2$@ ad gizli karakterler içeriyor.",
       "other": "Listelenen %2$@ ad gizli karakterler içeriyor."
     },
+    "finding.model.incomplete": "Dosya, üst bilgisinde yazandan kısa; indirme tamamlanmamış olabilir.",
+    "finding.model.inconsistentLayout": "Üst bilgideki tensör aralıkları üst üste biniyor veya boşluk bırakıyor; biçim bunu yasaklıyor.",
     "finding.more": "Diğer bulgular: %lld",
     "finding.notebook.errorOutputs": "Hata kaydeden hücreler: %lld.",
     "finding.notebook.executionGaps": "Çalıştırma numaraları değer atlıyor, yani hücreler yeniden çalıştırılmış veya kaldırılmış. Boşluk sayısı: %lld.",
@@ -287,12 +400,66 @@
     "finding.notebook.notExecuted": "Hiçbir kod hücresi çalıştırılmamış, bu yüzden not defterinde kayıtlı sonuç yok.",
     "finding.notebook.outOfOrder": "Hücreler sırayla çalıştırılmadı: %@.",
     "finding.notebook.unexecutedCells": "Hiç çalıştırılmamış kod hücreleri: %lld.",
+    "finding.pickle.brokenStream": "Veri, içe aktarmalardan sonra kesiliyor. Bazı tarama araçları okumayı bu noktada bırakıyor.",
+    "finding.pickle.networkOrFiles": {
+      "one": "%2$@ içe aktarma, bu dosya yüklenirken ağın veya dosyaların kullanılmasına izin veriyor.",
+      "other": "%2$@ içe aktarma, bu dosya yüklenirken ağın veya dosyaların kullanılmasına izin veriyor."
+    },
+    "finding.pickle.runsCode": {
+      "one": "%2$@ içe aktarma, bu dosya yüklenirken komut veya kod çalıştırılmasına izin veriyor.",
+      "other": "%2$@ içe aktarma, bu dosya yüklenirken komut veya kod çalıştırılmasına izin veriyor."
+    },
+    "finding.pickle.uncommonImports": {
+      "one": "%2$@ içe aktarma, sıradan model verisi değil.",
+      "other": "%2$@ içe aktarma, sıradan model verisi değil."
+    },
+    "finding.profile.expired": "Bu provizyon profilinin süresi dolmuş.",
+    "finding.profile.expiresSoon": {
+      "one": "Bu provizyon profilinin süresi %2$@ gün içinde doluyor.",
+      "other": "Bu provizyon profilinin süresi %2$@ gün içinde doluyor."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "bir bulut depolama klasörü",
+    "finding.script.asksForPassword": {
+      "one": "%2$@ yerde parola isteniyor.",
+      "other": "%2$@ yerde parola isteniyor."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "%2$@ yerde kodlanmış metin çözülüp çalıştırılıyor.",
+      "other": "%2$@ yerde kodlanmış metin çözülüp çalıştırılıyor."
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ komut bir güvenlik korumasını kapatıyor.",
+      "other": "%2$@ komut güvenlik korumalarını kapatıyor."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "%2$@ yerde internetten kod indirilip çalıştırılıyor.",
+      "other": "%2$@ yerde internetten kod indirilip çalıştırılıyor."
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ komut yönetici haklarıyla çalışıyor.",
+      "other": "%2$@ komut yönetici haklarıyla çalışıyor."
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ komut, oturum açıldığında veya zamanlanmış olarak çalışacak bir program kuruyor.",
+      "other": "%2$@ komut, oturum açıldığında veya zamanlanmış olarak çalışacak programlar kuruyor."
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ komut kayıtlı parolaları, anahtarları veya tarayıcı verilerini okuyor.",
+      "other": "%2$@ komut kayıtlı parolaları, anahtarları veya tarayıcı verilerini okuyor."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ komut, dosyalardaki macOS karantina işaretini kaldırıyor.",
+      "other": "%2$@ komut, dosyalardaki macOS karantina işaretini kaldırıyor."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ komut dosyaları veya verileri internete gönderiyor.",
+      "other": "%2$@ komut dosyaları veya verileri internete gönderiyor."
+    },
     "finding.secret.apiKey": "Gizlenen API anahtarları: %lld.",
     "finding.secret.authorizationHeader": "Gizlenen yetkilendirme kimlik bilgileri: %lld.",
     "finding.secret.cloudAccessKey": "Gizlenen bulut erişim anahtarları: %lld.",
@@ -312,6 +479,11 @@
       "one": "%2$@ olası sır gizlendi. Seçim ve kopyalama, gizlenmiş metni kullanır.",
       "other": "%2$@ olası sır gizlendi. Seçim ve kopyalama, gizlenmiş metni kullanır."
     },
+    "findings.report.copied": "Bulgu raporu kopyalandı",
+    "findings.report.copy": "Bulgu Raporunu Kopyala",
+    "findings.report.copyHint": "Bu bulguların bir listesini kopyalar. Dosyadan hiçbir metin eklenmez.",
+    "findings.report.footer": "Bu liste dosyadan hiçbir metin içermez.",
+    "findings.report.heading": "Bulgular: %@",
     "format.archive.7z.description": "Sıkıştırılmış üst bilgiler dahil, üst bilgiden 7z girdilerinin sınırlı listeleri. Dosya verileri hiçbir zaman çözülmez; üst bilgisi şifreli arşivler listelenmez.",
     "format.archive.7z.name": "7-Zip Arşivleri",
     "format.archive.bzip2.description": "bzip2 akışlarının sınırlı açılması: TAR.BZ2 listeleri ve desteklenen metin. Diğer içerik ikili olarak bildirilir.",
@@ -402,6 +574,12 @@
     "format.document.fictionbook.name": "FictionBook (FB2)",
     "format.document.web-archive.description": "Kaydedilmiş MHTML sayfalarının metni; sayfalar asla işlenmez veya yüklenmez.",
     "format.document.web-archive.name": "Web arşivleri (MHTML)",
+    "format.ml.gguf.description": "Üst bilgiden mimari, boyut, nicemleme, bağlam uzunluğu, lisans ve sohbet şablonu. Model ağırlıkları hiçbir zaman okunmaz.",
+    "format.ml.gguf.name": "GGUF Modelleri",
+    "format.ml.pickle.description": "Dosya yüklenirse nelerin içe aktarılacağı, dosya yüklenmeden denetlenir. Bulgusu olmayan bir dosya yine de güvenli olmayabilir.",
+    "format.ml.pickle.name": "PyTorch ve Pickle Dosyaları",
+    "format.ml.safetensors.description": "Üst bilgiden tensörler, parametre sayısı, veri türleri ve üst veriler; LoRA ve parça ayrıntılarıyla. Model ağırlıkları hiçbir zaman okunmaz.",
+    "format.ml.safetensors.name": "Safetensors Modelleri",
     "format.model.3mf.description": "Yapı yerleşimi ve birimler dahil 3B baskı modellerinin yerel 3B önizlemesi. Renkler, malzemeler ve dilimleyici ayarları gösterilmez.",
     "format.model.3mf.name": "3MF 3B Modelleri",
     "format.model.obj.description": "Çokgen geometrinin yerel 3B önizlemesi. Malzemeler, dokular ve bağlı dosyalar hiçbir zaman okunmaz.",
@@ -414,10 +592,18 @@
     "format.package.android.name": "Android Uygulamaları (APK, AAB)",
     "format.package.application.description": "Kimlik, sürüm, mimariler, imza özeti ve boyut. Hiçbir şey çalıştırılmaz ve imza doğrulanmaz.",
     "format.package.application.name": "Uygulama Paketleri",
+    "format.package.browser-extension.description": "Manifestten izinler, site erişimi, güncelleme adresi ve içerik güvenliği ilkesi. Hiçbir şey kurulmaz veya çalıştırılmaz.",
+    "format.package.browser-extension.name": "Tarayıcı Uzantıları (XPI, CRX)",
+    "format.package.editor-extension.description": "Yayıncı, sürüm, ne zaman başladığı, pakete dahil makine kodu ve gizli karakterler. Hiçbir şey kurulmaz veya çalıştırılmaz.",
+    "format.package.editor-extension.name": "Düzenleyici Uzantıları (VSIX)",
     "format.package.installer.description": "İçerik, tanımlayıcılar, sürümler ve betik adları. Betikler ve yükler hiçbir zaman okunmaz.",
     "format.package.installer.name": "Yükleyici Paketleri",
     "format.package.ios-app.description": "Info.plist, provizyon profili, simge ve dosya listesi. Hiçbir şey çıkarılmaz veya çalıştırılmaz.",
     "format.package.ios-app.name": "iOS Uygulamaları (IPA)",
+    "format.package.mcp-bundle.description": "Sunucunun programı, araçları, ayarları ve klasör erişimi, manifestten okunur. Hiçbir şey kurulmaz veya çalıştırılmaz.",
+    "format.package.mcp-bundle.name": "MCP Paketleri",
+    "format.package.python-wheel.description": "Ad, sürüm, gereksinimler, komutlar ve Python başladığında çalışan dosyalar. Hiçbir şey kurulmaz veya çalıştırılmaz.",
+    "format.package.python-wheel.name": "Python Wheel’ler",
     "format.security.certificate.description": "Sertifika ayrıntıları ve parmak izleri. Özel anahtarlar gizlenir ve güven değerlendirilmez.",
     "format.security.certificate.name": "Sertifikalar",
     "format.text.asciidoc.description": "Çevrimdışı AsciiDoc başlıkları, listeleri, blokları ve uyarıları ile güvenli kaynak; include satırları asla izlenmez.",
@@ -485,6 +671,16 @@
     "help.keyboard.body": "⌘1 – ⌘4 sayfalar arasında geçiş yapar. ⌘, Genel sayfasını açar. ⌘Z son sıfırlamayı, toplu değişikliği, tema içe aktarmayı veya profil silmeyi geri alır; ⇧⌘Z yeniden uygular.",
     "help.keyboard.title": "Klavye kısayolları",
     "listing.risk.hiddenCharacters": "Adda gizli karakterler",
+    "mesh.printCheck.estimate": "PLA ile dolu basılırsa: yaklaşık %1$@ %2$@ ve %3$@ %4$@ uzunluğunda %5$@ %6$@ filament. Dilimleyiciler genellikle daha az dolgu ile bastığı için bu bir üst sınırdır.",
+    "mesh.printCheck.estimateIfMillimetres": "Birimler milimetre ise ve PLA ile dolu basılırsa: yaklaşık %1$@ %2$@ ve %3$@ %4$@ uzunluğunda %5$@ %6$@ filament. Dilimleyiciler genellikle daha az dolgu ile bastığı için bu bir üst sınırdır.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "İkiden fazla yüzün paylaştığı kenar sayısı: %2$@",
+      "other": "İkiden fazla yüzün paylaştığı kenar sayısı: %2$@"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ açık kenar (yüzeyde bir boşluk)",
+      "other": "%2$@ açık kenar (yüzeyde boşluklar)"
+    },
     "midi.duration": "Süre",
     "midi.noAutoplay": "Oynatma yalnızca Oynat'a bastığınızda başlar.",
     "midi.pause": "Duraklat",
@@ -516,6 +712,38 @@
     "notebook.output.numbered": "Çıktı [%lld]",
     "notebook.output.stderr": "Hata akışı",
     "notebook.truncated": "Önizleme kısaltıldı. Gösterilen hücre: %2$lld içinden %1$lld.",
+    "preview.addon.activationEvents": "Etkinleşme olayları",
+    "preview.addon.addonID": "Eklenti kimliği",
+    "preview.addon.arguments": "Bağımsız değişkenler",
+    "preview.addon.author": "Yazar",
+    "preview.addon.background": "Arka plan dosyaları",
+    "preview.addon.browser": "Tarayıcı",
+    "preview.addon.categories": "Kategoriler",
+    "preview.addon.command": "Komut",
+    "preview.addon.commands": "Komut sayısı",
+    "preview.addon.contentScriptMatches": "İçerik betiği siteleri",
+    "preview.addon.description": "Açıklama",
+    "preview.addon.engine": "VS Code sürümü",
+    "preview.addon.entry": "Giriş dosyası",
+    "preview.addon.entryPoint": "Giriş noktası",
+    "preview.addon.environment": "Ortam değişkeni adları",
+    "preview.addon.extensionDependencies": "Uzantı bağımlılıkları",
+    "preview.addon.extensionPack": "Uzantı paketi",
+    "preview.addon.hostPermissions": "Site izinleri",
+    "preview.addon.license": "Lisans",
+    "preview.addon.manifestVersion": "Manifest sürümü",
+    "preview.addon.optionalPermissions": "İsteğe bağlı izinler",
+    "preview.addon.prompts": "İstemler",
+    "preview.addon.publisher": "Yayıncı",
+    "preview.addon.required": "Gerekli",
+    "preview.addon.runtimes": "Çalışma zamanları",
+    "preview.addon.sensitive": "Hassas",
+    "preview.addon.serverType": "Sunucu türü",
+    "preview.addon.settings": "Ayarlar",
+    "preview.addon.tools": "Araçlar",
+    "preview.addon.untrustedWorkspaces": "Güvenilmeyen çalışma alanları",
+    "preview.addon.updateURL": "Güncelleme adresi",
+    "preview.addon.webEntry": "Web giriş dosyası",
     "preview.archive.entryEncrypted": "Şifreli",
     "preview.archive.entryModified": "Değiştirilme",
     "preview.archive.locked": "Kilitli",
@@ -719,6 +947,18 @@
       "other": "%2$@ olası gizli bilgi gizlendi."
     },
     "preview.info.onThisMac": "Bu Mac’te işlendi",
+    "preview.install.commands": "Kurulan komutlar",
+    "preview.install.dependencies": "Bağımlılıklar",
+    "preview.install.generator": "Oluşturan araç",
+    "preview.install.installedScripts": "Kurulan betikler",
+    "preview.install.license": "Lisans",
+    "preview.install.nativeModules": "Yerel modüller",
+    "preview.install.pureLibrary": "Saf Python kitaplığı",
+    "preview.install.requiresPython": "Gereken Python",
+    "preview.install.startupFiles": "Kurulan yol dosyaları (.pth)",
+    "preview.install.summary": "Özet",
+    "preview.install.tags": "Uyumluluk etiketleri",
+    "preview.install.wheelVersion": "Wheel biçimi sürümü",
     "preview.interaction.close": "Kapat",
     "preview.interaction.copied": "Panoya kopyalandı",
     "preview.interaction.copy": "Kopyala",
@@ -819,6 +1059,44 @@
     "preview.mode.summary": "Özet",
     "preview.mode.table": "Tablo",
     "preview.mode.tree": "Ağaç",
+    "preview.model.adapterKind": "Adaptör",
+    "preview.model.alignment": "Hizalama (bayt)",
+    "preview.model.architecture": "Mimari",
+    "preview.model.author": "Yazar",
+    "preview.model.baseModels": "Temel modeller",
+    "preview.model.bitsPerWeight": "Ağırlık başına bit",
+    "preview.model.blockCount": "Katman sayısı",
+    "preview.model.chatTemplate": "Sohbet şablonu",
+    "preview.model.chatTemplateBytes": "Sohbet şablonu boyutu (bayt)",
+    "preview.model.contextLength": "Bağlam uzunluğu",
+    "preview.model.dataBytes": "Tensör verisi boyutu (bayt)",
+    "preview.model.dtypes": "Veri türleri",
+    "preview.model.embeddingLength": "Gömme boyutu",
+    "preview.model.expertCount": "Uzmanlar",
+    "preview.model.expertUsedCount": "Belirteç başına kullanılan uzmanlar",
+    "preview.model.fileType": "Dosya türü",
+    "preview.model.ggufVersion": "GGUF sürümü",
+    "preview.model.headCount": "Dikkat başları",
+    "preview.model.headCountKV": "Anahtar/değer başları",
+    "preview.model.headerBytes": "Üstbilgi boyutu (bayt)",
+    "preview.model.languages": "Diller",
+    "preview.model.license": "Lisans",
+    "preview.model.loraRank": "LoRA derecesi",
+    "preview.model.metadataCount": "Üst veri girdileri",
+    "preview.model.organization": "Kuruluş",
+    "preview.model.otherMetadata": "Diğer üst veriler",
+    "preview.model.parameters": "Parametreler",
+    "preview.model.quantization": "Nicemleme",
+    "preview.model.quantizedBy": "Nicemleyen",
+    "preview.model.shardCount": "Kümedeki parça sayısı",
+    "preview.model.shardIndex": "Parça",
+    "preview.model.sizeLabel": "Boyut etiketi",
+    "preview.model.tags": "Etiketler",
+    "preview.model.tensorCount": "Tensör sayısı",
+    "preview.model.tensorTypes": "Tensör türleri",
+    "preview.model.tensors": "Tensörler",
+    "preview.model.tokenizer": "Belirteçleyici",
+    "preview.model.vocabularySize": "Sözcük dağarcığı boyutu",
     "preview.outline.duplicateKey": "Yinelenen anahtar",
     "preview.outline.key": "Anahtar",
     "preview.outline.value": "Değer",
@@ -933,6 +1211,22 @@
     "preview.package.versionCode": "Sürüm kodu",
     "preview.package.versionName": "Sürüm adı",
     "preview.package.webSeeds": "Web kaynakları",
+    "preview.pickle.checked": "Denetlenen",
+    "preview.pickle.checked.importsOnly": "Yalnızca içe aktarmalar. Dosya hiç yüklenmedi.",
+    "preview.pickle.checksumErrors": "Sağlama toplamı uyuşmazlıkları",
+    "preview.pickle.count": "Geçiş sayısı",
+    "preview.pickle.imports": "İçe aktarmalar",
+    "preview.pickle.kind": "Tür",
+    "preview.pickle.kind.code": "Kod çalıştırabilir",
+    "preview.pickle.kind.expected": "Model verisi için beklenen",
+    "preview.pickle.kind.networkOrFiles": "Ağ veya dosyalar",
+    "preview.pickle.kind.uncommon": "Alışılmadık",
+    "preview.pickle.partial": "Kısmen denetlendi",
+    "preview.pickle.persistentIDs": "Kalıcı kimlikler",
+    "preview.pickle.pickleProtocol": "Pickle protokolü",
+    "preview.pickle.pickles": "Taranan pickle sayısı",
+    "preview.pickle.storageBytes": "Tensör deposu baytları",
+    "preview.pickle.storages": "Tensör depoları",
     "preview.privacyNotice": "Olası gizli bilgiler gizlenir. Seçme ve kopyalama işlemleri gizlenmiş içeriği kullanır.",
     "preview.profile.shownRows": {
       "one": "Profil, okunan ilk %2$@ satırı kullanır.",

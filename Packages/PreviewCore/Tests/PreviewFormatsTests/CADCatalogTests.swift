@@ -53,9 +53,10 @@ func CADAliasesKeepIndependentIdentityAheadOfTextFallback(suffix: String) throws
 
 // MARK: - Version 1.0 truth
 
-@Test func theProductCatalogHasSeventyFourFormatsAndNoCADFormat() {
+@Test func theProductCatalogHasEightyOneFormatsAndNoCADFormat() {
     let descriptors = FormatCatalog.standard.descriptors
-    #expect(descriptors.count == 74)
+    // 74 in build 3, plus the seven formats of decision 030.
+    #expect(descriptors.count == 81)
     #expect(!descriptors.contains { $0.id.rawValue.hasPrefix("cad.") })
     #expect(FormatCatalog.standard.descriptor(for: .iges) == nil)
     #expect(FormatCatalog.standard.descriptor(for: .step) == nil)

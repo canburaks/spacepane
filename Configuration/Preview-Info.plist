@@ -829,6 +829,85 @@
 		</dict>
 		<dict>
 			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.gguf</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.ml.gguf.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://github.com/ggml-org/ggml/blob/master/docs/gguf.md</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gguf</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.safetensors</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.ml.safetensors.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://huggingface.co/docs/safetensors/index</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>safetensors</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.pytorch</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.ml.pickle.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://pytorch.org/docs/stable/notes/serialization.html</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pt</string>
+					<string>pth</string>
+					<string>ckpt</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.pickle</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.ml.pickle.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://docs.python.org/3/library/pickle.html</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pickle</string>
+					<string>joblib</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
 			<string>org.webmeister.spacepane.type.har</string>
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -1175,6 +1254,102 @@
 		</dict>
 		<dict>
 			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.mcp-bundle</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.package.mcp-bundle.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://github.com/modelcontextprotocol/mcpb</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>mcpb</string>
+					<string>dxt</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.vsix</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.package.editor-extension.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://code.visualstudio.com/api/working-with-extensions/publishing-extension</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>vsix</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.xpi</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.package.browser-extension.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://extensionworkshop.com/documentation/publish/package-your-extension/</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>xpi</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.chromium.extension</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.package.browser-extension.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://developer.chrome.com/docs/extensions/how-to/distribute/host-on-linux</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>crx</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>org.webmeister.spacepane.type.python-wheel</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>format.package.python-wheel.name</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://packaging.python.org/en/latest/specifications/binary-distribution-format/</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>whl</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeIdentifier</key>
 			<string>org.webmeister.spacepane.type.3mf</string>
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -1212,6 +1387,38 @@
 				<string>com.quicklookpro.file.jsonl</string>
 				<string>com.quicklookpro.file.ndjson</string>
 				<string>public.source-code</string>
+				<string>public.shell-script</string>
+				<string>public.zsh-script</string>
+				<string>public.bash-script</string>
+				<string>public.csh-script</string>
+				<string>public.ksh-script</string>
+				<string>public.tcsh-script</string>
+				<string>com.apple.terminal.shell-script</string>
+				<string>com.apple.applescript.text</string>
+				<string>com.apple.metal</string>
+				<string>com.apple.rez-source</string>
+				<string>com.netscape.javascript-source</string>
+				<string>com.sun.java-source</string>
+				<string>public.ada-source</string>
+				<string>public.assembly-source</string>
+				<string>public.c-header</string>
+				<string>public.c-plus-plus-header</string>
+				<string>public.c-plus-plus-source</string>
+				<string>public.c-source</string>
+				<string>public.fortran-90-source</string>
+				<string>public.fortran-95-source</string>
+				<string>public.fortran-source</string>
+				<string>public.make-source</string>
+				<string>public.nasm-assembly-source</string>
+				<string>public.objective-c-plus-plus-source</string>
+				<string>public.objective-c-source</string>
+				<string>public.pascal-source</string>
+				<string>public.perl-script</string>
+				<string>public.php-script</string>
+				<string>public.protobuf-source</string>
+				<string>public.python-script</string>
+				<string>public.ruby-script</string>
+				<string>public.swift-source</string>
 				<string>org.webmeister.spacepane.type.source-code</string>
 				<string>com.quicklookpro.file.ada</string>
 				<string>com.quicklookpro.file.adb</string>
@@ -1433,6 +1640,10 @@
 				<string>org.webmeister.spacepane.type.arrow</string>
 				<string>org.webmeister.spacepane.type.numpy</string>
 				<string>org.webmeister.spacepane.type.numpy-archive</string>
+				<string>org.webmeister.spacepane.type.gguf</string>
+				<string>org.webmeister.spacepane.type.safetensors</string>
+				<string>org.webmeister.spacepane.type.pytorch</string>
+				<string>org.webmeister.spacepane.type.pickle</string>
 				<string>org.webmeister.spacepane.type.har</string>
 				<string>org.webmeister.spacepane.type.geojson</string>
 				<string>public.geojson</string>
@@ -1472,6 +1683,11 @@
 				<string>com.apple.installer-package-archive</string>
 				<string>com.apple.disk-image-udif</string>
 				<string>org.bittorrent.torrent</string>
+				<string>org.webmeister.spacepane.type.mcp-bundle</string>
+				<string>org.webmeister.spacepane.type.vsix</string>
+				<string>org.webmeister.spacepane.type.xpi</string>
+				<string>org.chromium.extension</string>
+				<string>org.webmeister.spacepane.type.python-wheel</string>
 				<string>public.midi-audio</string>
 				<string>public.standard-tesselated-geometry-format</string>
 				<string>public.geometry-definition-format</string>
