@@ -123,6 +123,26 @@ struct EditorExtensionAdapterTests {
         #expect(found.isEmpty)
     }
 
+    // MARK: Budgets
+
+    @Test func aLargePackageStaysInsideTheInputBudgetAndStillGetsScanned() throws {
+        var state: UInt64 = 7
+        func noise(_ count: Int) -> Data {
+            Data((0..<count).map { _ -> UInt8 in
+                state = state &* 6_364_136_223_846_793_005 &+ 1_442_695_040_888_963_407
+                return UInt8(truncatingIfNeeded: state >> 33)
+            })
+        }
+        let bundle = Self.zeroWidth + String(repeating: "var a = 1;\n", count: 250_000)
+        var files = [Member("extension/out/extension.js", text: bundle, deflated: true)]
+        files += (0..<AddOnLimits.contentProbes + 8).map { Member("extension/data/blob\($0).dat", noise(8_192), deflated: true) }
+        files += (0..<2_500).map { Member("extension/lib/l\($0).js", text: "let a = \($0);\n", deflated: $0.isMultiple(of: 2)) }
+        let data = Self.vsix(files: files)
+        let (summary, document) = try Self.summary(data)
+        #expect(summary["partial"] as? Bool == true && PackageTestSupport.entries(summary).count == PackageSummary.listingCapacity(AddOnFixtures.context))
+        #expect(AddOnFixtures.counts(document) == [.hiddenZeroWidth: 1])
+    }
+
     // MARK: Privacy and malformed input
 
     @Test func credentialLookingDescriptionsAreConcealed() throws {

@@ -78,6 +78,21 @@ struct AddOnArchiveTests {
         #expect(read > 0 && read <= 100_000 + 2 * 65_536, "read \(read) payload bytes")
     }
 
+    @Test func aContentProbeOfALargeDeflatedMemberReadsOnlyAFewKilobytes() throws {
+        var state: UInt64 = 42
+        let noise = Data((0..<1_000_000).map { _ -> UInt8 in
+            state = state &* 6_364_136_223_846_793_005 &+ 1_442_695_040_888_963_407
+            return UInt8(truncatingIfNeeded: state >> 33)
+        })
+        let (archive, source) = try open([Member("server/blob", noise, deflated: true)])
+        let entry = try #require(archive.archive.entry(at: "server/blob"))
+        let opened = source.reads.count
+        #expect(try archive.nativeMembers().isEmpty)
+        let payload = entry.payloadOffset..<(entry.payloadOffset + entry.compressedSize)
+        let read = source.reads.dropFirst(opened).filter { $0.overlaps(payload) }.reduce(0) { $0 + $1.count }
+        #expect(read > 0 && read <= 4_096, "read \(read) bytes")
+    }
+
     @Test func aHighlyCompressedMemberYieldsItsPrefixFromAFewBytes() throws {
         let zeros = Data(repeating: 0, count: 4_000_000)
         let (archive, _) = try open([Member("zeros.js", zeros, deflated: true)])
