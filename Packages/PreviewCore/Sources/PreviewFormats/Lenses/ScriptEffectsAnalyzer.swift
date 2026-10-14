@@ -50,7 +50,10 @@ final class ScriptEffectsAnalyzer {
         case .powerShell:
             var lexer = PowerShellLexer(bytes: bytes, context: context)
             while let list = try lexer.nextList() { try analyze(list, dialect: .powerShell) }
-        case .batch, .appleScript:
+        case .batch:
+            var lexer = BatchLexer(bytes: bytes, context: context)
+            while let list = try lexer.nextList() { try analyze(list, dialect: .batch) }
+        case .appleScript:
             break
         }
     }
