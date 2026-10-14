@@ -47,7 +47,10 @@ final class ScriptEffectsAnalyzer {
         case .shell, .fish:
             var lexer = ShellLexer(bytes: bytes, isFish: dialect == .fish, allowsHeredocs: true, context: context)
             while let list = try lexer.nextList() { try analyze(list, dialect: dialect) }
-        case .powerShell, .batch, .appleScript:
+        case .powerShell:
+            var lexer = PowerShellLexer(bytes: bytes, context: context)
+            while let list = try lexer.nextList() { try analyze(list, dialect: .powerShell) }
+        case .batch, .appleScript:
             break
         }
     }
