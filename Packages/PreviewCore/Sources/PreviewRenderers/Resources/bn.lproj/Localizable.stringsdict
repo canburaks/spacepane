@@ -530,6 +530,38 @@
 			<string>%2$@টি সম্ভাব্য গোপন মান লুকানো হয়েছে। নির্বাচন ও কপি করার সময় গোপন মান লুকানো পাঠ ব্যবহার করা হয়।</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>দুইয়ের বেশি তলের সাথে ভাগ করা %2$@টি প্রান্ত</string>
+			<key>other</key>
+			<string>দুইয়ের বেশি তলের সাথে ভাগ করা %2$@টি প্রান্ত</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি খোলা প্রান্ত (পৃষ্ঠে একটি ফাঁক)</string>
+			<key>other</key>
+			<string>%2$@টি খোলা প্রান্ত (পৃষ্ঠে ফাঁক)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

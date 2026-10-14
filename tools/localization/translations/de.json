@@ -602,6 +602,16 @@
     "help.keyboard.body": "⌘1 bis ⌘4 wechseln die Seiten. ⌘, öffnet „Allgemein“. ⌘Z macht das letzte Zurücksetzen, die letzte Sammeländerung, den letzten Designimport oder das Löschen eines Profils rückgängig; ⇧⌘Z stellt es wieder her.",
     "help.keyboard.title": "Tastaturkurzbefehle",
     "listing.risk.hiddenCharacters": "Verborgene Zeichen im Namen",
+    "mesh.printCheck.estimate": "Massiv aus PLA gedruckt: etwa %1$@ %2$@ und %3$@ %4$@ Filament mit %5$@ %6$@ Durchmesser. Slicer drucken meist mit weniger Füllung, daher ist dies eine Obergrenze.",
+    "mesh.printCheck.estimateIfMillimetres": "Wenn die Einheit Millimeter ist und massiv aus PLA gedruckt wird: etwa %1$@ %2$@ und %3$@ %4$@ Filament mit %5$@ %6$@ Durchmesser. Slicer drucken meist mit weniger Füllung, daher ist dies eine Obergrenze.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "%2$@ Kante, die von mehr als zwei Flächen geteilt wird",
+      "other": "%2$@ Kanten, die von mehr als zwei Flächen geteilt werden"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ offene Kante (eine Lücke in der Oberfläche)",
+      "other": "%2$@ offene Kanten (Lücken in der Oberfläche)"
+    },
     "midi.duration": "Dauer",
     "midi.noAutoplay": "Die Wiedergabe startet erst, wenn Sie „Wiedergabe“ drücken.",
     "midi.pause": "Pause",

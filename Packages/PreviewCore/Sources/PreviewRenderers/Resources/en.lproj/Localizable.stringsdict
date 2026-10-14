@@ -530,6 +530,38 @@
 			<string>%2$@ likely secrets hidden. Selection and copying use the concealed text.</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ edge shared by more than two faces</string>
+			<key>other</key>
+			<string>%2$@ edges shared by more than two faces</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ open edge (a gap in the surface)</string>
+			<key>other</key>
+			<string>%2$@ open edges (gaps in the surface)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

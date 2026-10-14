@@ -569,6 +569,14 @@
     "help.keyboard.body": "⌘1〜⌘4 でページを切り替えます。⌘, で「一般」を開きます。⌘Z で直前のリセット、一括変更、テーマの読み込み、プロファイルの削除を取り消し、⇧⌘Z でやり直します。",
     "help.keyboard.title": "キーボードショートカット",
     "listing.risk.hiddenCharacters": "名前に隠れた文字",
+    "mesh.printCheck.estimate": "PLA で中実のまま印刷した場合：約 %1$@ %2$@、%5$@ %6$@ のフィラメントを %3$@ %4$@ 使用します。スライサーは通常、より少ない充填で印刷するため、これは上限値です。",
+    "mesh.printCheck.estimateIfMillimetres": "単位がミリメートルで、PLA で中実のまま印刷した場合：約 %1$@ %2$@、%5$@ %6$@ のフィラメントを %3$@ %4$@ 使用します。スライサーは通常、より少ない充填で印刷するため、これは上限値です。",
+    "mesh.printCheck.nonManifoldEdges": {
+      "other": "二つを超える面が共有する辺が %2$@ 本あります"
+    },
+    "mesh.printCheck.openEdges": {
+      "other": "開放エッジが %2$@ 本あります（表面に隙間があります）"
+    },
     "midi.duration": "再生時間",
     "midi.noAutoplay": "「再生」を押した場合にのみ再生を開始します。",
     "midi.pause": "一時停止",

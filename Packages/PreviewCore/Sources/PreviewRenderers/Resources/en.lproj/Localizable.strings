@@ -502,6 +502,10 @@
 "help.keyboard.body" = "⌘1 to ⌘4 switch pages. ⌘, opens General. ⌘Z undoes the last reset, bulk change, theme import or profile deletion; ⇧⌘Z redoes it.";
 "help.keyboard.title" = "Keyboard shortcuts";
 "listing.risk.hiddenCharacters" = "Hidden characters in name";
+"mesh.printCheck.estimate" = "If printed solid in PLA: about %1$@ %2$@ and %3$@ %4$@ of %5$@ %6$@ filament. Slicers usually print with less infill, so this is an upper bound.";
+"mesh.printCheck.estimateIfMillimetres" = "If the units are millimetres and it is printed solid in PLA: about %1$@ %2$@ and %3$@ %4$@ of %5$@ %6$@ filament. Slicers usually print with less infill, so this is an upper bound.";
+"mesh.printCheck.nonManifoldEdges" = "%#@count@";
+"mesh.printCheck.openEdges" = "%#@count@";
 "midi.duration" = "Duration";
 "midi.noAutoplay" = "Playback starts only when you press Play.";
 "midi.pause" = "Pause";

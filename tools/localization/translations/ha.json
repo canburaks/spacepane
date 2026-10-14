@@ -602,6 +602,16 @@
     "help.keyboard.body": "⌘1 zuwa ⌘4 suna sauya shafuka. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa.",
     "help.keyboard.title": "Gajerun hanyoyin madannai",
     "listing.risk.hiddenCharacters": "Haruffan da aka ɓoye a suna",
+    "mesh.printCheck.estimate": "Idan aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.",
+    "mesh.printCheck.estimateIfMillimetres": "Idan an auna da milimita kuma aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "%2$@ gefen da fuskoki fiye da biyu ke rabawa",
+      "other": "%2$@ gefuna da fuskoki fiye da biyu ke rabawa"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ gefen buɗe (gibi a saman)",
+      "other": "%2$@ gefuna buɗaɗɗu (giɓi a saman)"
+    },
     "midi.duration": "Tsawon lokaci",
     "midi.noAutoplay": "Kunnawa yana farawa ne kawai bayan ka danna Kunna.",
     "midi.pause": "Dakata",

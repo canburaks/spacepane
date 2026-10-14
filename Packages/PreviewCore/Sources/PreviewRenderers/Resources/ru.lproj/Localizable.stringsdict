@@ -662,6 +662,46 @@
 			<string>Скрыто %2$@ возможного секретного значения. Выделение и копирование используют текст со скрытыми значениями.</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ ребра, общих для более чем двух граней</string>
+			<key>many</key>
+			<string>%2$@ рёбер, общих для более чем двух граней</string>
+			<key>one</key>
+			<string>%2$@ ребро, общее для более чем двух граней</string>
+			<key>other</key>
+			<string>%2$@ ребра, общих для более чем двух граней</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ открытых ребра (разрывы в поверхности)</string>
+			<key>many</key>
+			<string>%2$@ открытых рёбер (разрывы в поверхности)</string>
+			<key>one</key>
+			<string>%2$@ открытое ребро (разрыв в поверхности)</string>
+			<key>other</key>
+			<string>%2$@ открытого ребра (разрывы в поверхности)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

@@ -588,6 +588,38 @@
 			<string>%2$@ secrets potentiels masqués. La sélection et la copie utilisent le texte masqué.</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ arête partagée par plus de deux faces</string>
+			<key>other</key>
+			<string>%2$@ arêtes partagées par plus de deux faces</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ arête ouverte (un trou dans la surface)</string>
+			<key>other</key>
+			<string>%2$@ arêtes ouvertes (des trous dans la surface)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

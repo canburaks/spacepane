@@ -602,6 +602,16 @@
     "help.keyboard.body": "⌘1 – ⌘4 sayfalar arasında geçiş yapar. ⌘, Genel sayfasını açar. ⌘Z son sıfırlamayı, toplu değişikliği, tema içe aktarmayı veya profil silmeyi geri alır; ⇧⌘Z yeniden uygular.",
     "help.keyboard.title": "Klavye kısayolları",
     "listing.risk.hiddenCharacters": "Adda gizli karakterler",
+    "mesh.printCheck.estimate": "PLA ile dolu basılırsa: yaklaşık %1$@ %2$@ ve %3$@ %4$@ uzunluğunda %5$@ %6$@ filament. Dilimleyiciler genellikle daha az dolgu ile bastığı için bu bir üst sınırdır.",
+    "mesh.printCheck.estimateIfMillimetres": "Birimler milimetre ise ve PLA ile dolu basılırsa: yaklaşık %1$@ %2$@ ve %3$@ %4$@ uzunluğunda %5$@ %6$@ filament. Dilimleyiciler genellikle daha az dolgu ile bastığı için bu bir üst sınırdır.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "İkiden fazla yüzün paylaştığı kenar sayısı: %2$@",
+      "other": "İkiden fazla yüzün paylaştığı kenar sayısı: %2$@"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ açık kenar (yüzeyde bir boşluk)",
+      "other": "%2$@ açık kenar (yüzeyde boşluklar)"
+    },
     "midi.duration": "Süre",
     "midi.noAutoplay": "Oynatma yalnızca Oynat'a bastığınızda başlar.",
     "midi.pause": "Duraklat",

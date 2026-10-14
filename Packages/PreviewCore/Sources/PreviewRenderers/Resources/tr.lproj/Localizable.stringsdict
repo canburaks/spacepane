@@ -530,6 +530,38 @@
 			<string>%2$@ olası sır gizlendi. Seçim ve kopyalama, gizlenmiş metni kullanır.</string>
 		</dict>
 	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>İkiden fazla yüzün paylaştığı kenar sayısı: %2$@</string>
+			<key>other</key>
+			<string>İkiden fazla yüzün paylaştığı kenar sayısı: %2$@</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ açık kenar (yüzeyde bir boşluk)</string>
+			<key>other</key>
+			<string>%2$@ açık kenar (yüzeyde boşluklar)</string>
+		</dict>
+	</dict>
 	<key>preview.count.lines</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
