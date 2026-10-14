@@ -65,6 +65,9 @@ final class NativeFindingsBanner: NSView {
         controls.orientation = .horizontal
         controls.alignment = .centerY
         controls.spacing = PreviewChrome.rowGap
+        // The row never sets the banner's minimum width: `layout()` stacks the buttons when they do not fit.
+        controls.setClippingResistancePriority(.defaultLow, for: .horizontal)
+        stack.setClippingResistancePriority(.defaultLow, for: .horizontal)
         for button in [detailsButton, copyButton, reportButton] {
             button.target = self
             button.bezelStyle = .push
@@ -191,6 +194,7 @@ final class NativeFindingsBanner: NSView {
 
     override func layout() {
         super.layout()
+        updateControlsOrientation()
         // The document keeps its natural height. Only its viewport yields to the host's cap.
         let width = max(20 + PreviewChrome.rowGap + 1, detailScrollView.contentSize.width)
         for constraint in rowWidths { constraint.constant = width }
@@ -201,6 +205,20 @@ final class NativeFindingsBanner: NSView {
         let naturalHeight = detailStack.fittingSize.height
         detailStack.setFrameSize(NSSize(width: width, height: naturalHeight))
         if preferredDetailHeight?.constant != naturalHeight { preferredDetailHeight?.constant = naturalHeight }
+    }
+
+    /// The action buttons share one row while they fit the banner's width and stack when they do not, so a narrow
+    /// preview or a longer translation never widens the banner past its host or cuts a title short.
+    private func updateControlsOrientation() {
+        guard bounds.width > 0 else { return }
+        let buttons = controls.arrangedSubviews.filter { !$0.isHidden }
+        let rowWidth = buttons.reduce(0) { $0 + $1.intrinsicContentSize.width }
+            + controls.spacing * CGFloat(max(0, buttons.count - 1))
+        let orientation: NSUserInterfaceLayoutOrientation = rowWidth <= bounds.width - 2 * PreviewChrome.inset ? .horizontal : .vertical
+        guard controls.orientation != orientation else { return }
+        controls.orientation = orientation
+        controls.alignment = orientation == .horizontal ? .centerY : .leading
+        needsLayout = true
     }
 
     @objc private func toggleDetails() {
