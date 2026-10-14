@@ -62,6 +62,37 @@ enum InstallFixtures {
         DataTest.zip(members.map { (name: $0.path, data: [UInt8]($0.data), deflate: deflate) })
     }
 
+    // MARK: Wheels
+
+    static let defaultMetadata = """
+    Metadata-Version: 2.1
+    Name: example
+    Version: 1.0
+    Summary: A tiny example
+    Requires-Python: >=3.8
+    Requires-Dist: requests (>=2.0)
+    License-Expression: MIT
+
+    A long description that is not part of the headers.
+
+    """
+    static let defaultWheelFile = "Wheel-Version: 1.0\nGenerator: bdist_wheel (0.43.0)\nRoot-Is-Purelib: true\nTag: py3-none-any\n"
+    static let defaultEntryPoints = "[console_scripts]\nexample = example.cli:main\n"
+
+    /// The members of a benign pure-Python wheel; `extra` members follow them.
+    static func wheelMembers(metadata: String? = defaultMetadata, wheel: String? = defaultWheelFile,
+                             entryPoints: String? = defaultEntryPoints, folder: String = "example-1.0",
+                             extra: [(path: String, data: Data)] = []) -> [(path: String, data: Data)] {
+        var members: [(path: String, data: Data)] = [("example/__init__.py", Data("VALUE = 1\n".utf8))]
+        if let metadata { members.append(("\(folder).dist-info/METADATA", Data(metadata.utf8))) }
+        if let wheel { members.append(("\(folder).dist-info/WHEEL", Data(wheel.utf8))) }
+        members.append(("\(folder).dist-info/RECORD", Data("example/__init__.py,,\n".utf8)))
+        if let entryPoints { members.append(("\(folder).dist-info/entry_points.txt", Data(entryPoints.utf8))) }
+        return members + extra
+    }
+
+    static func wheelFile(_ text: String, at path: String) -> (path: String, data: Data) { (path, Data(text.utf8)) }
+
     /// A package.json whose `scripts` and dependency tables are given as ready-made JSON text.
     static func manifest(scripts: String? = nil, dependencies: String? = nil, optionalDependencies: String? = nil,
                          extra: String? = nil) -> String {
