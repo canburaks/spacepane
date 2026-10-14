@@ -409,6 +409,29 @@ public enum PreviewStrings {
         case findingCertificateWeakKey = "finding.certificate.weakKey"
         case findingProfileExpired = "finding.profile.expired"
         case findingProfileExpiresSoon = "finding.profile.expiresSoon"
+        // [safety-lens-3] Decision 030: what model files, add-ons and packages would do.
+        case findingArtifactNativeCode = "finding.artifact.nativeCode"
+        case findingArtifactMismatchedContent = "finding.artifact.mismatchedContent"
+        case findingModelIncomplete = "finding.model.incomplete"
+        case findingModelInconsistentLayout = "finding.model.inconsistentLayout"
+        case findingPickleRunsCode = "finding.pickle.runsCode"
+        case findingPickleNetworkOrFiles = "finding.pickle.networkOrFiles"
+        case findingPickleUncommonImports = "finding.pickle.uncommonImports"
+        case findingPickleBrokenStream = "finding.pickle.brokenStream"
+        case findingInstallNativeBuild = "finding.install.nativeBuild"
+        case findingInstallStartupCode = "finding.install.startupCode"
+        case findingInstallBuildScript = "finding.install.buildScript"
+        case findingInstallRemoteDependencies = "finding.install.remoteDependencies"
+        case findingBundleRunsProgram = "finding.bundle.runsProgram"
+        case findingBundleAsksForSecrets = "finding.bundle.asksForSecrets"
+        case findingBundleBroadFolderAccess = "finding.bundle.broadFolderAccess"
+        case findingBundleToolTextTargetsAssistant = "finding.bundle.toolTextTargetsAssistant"
+        case findingExtensionStartsAutomatically = "finding.extension.startsAutomatically"
+        case findingExtensionInstallsOthers = "finding.extension.installsOthers"
+        case findingExtensionAllSites = "finding.extension.allSites"
+        case findingExtensionSensitivePermissions = "finding.extension.sensitivePermissions"
+        case findingExtensionSelfHostedUpdates = "finding.extension.selfHostedUpdates"
+        case findingExtensionRelaxedScriptPolicy = "finding.extension.relaxedScriptPolicy"
         // [sl2-report] Copy Findings Report (decision 029). Workstream sl2-report adds its keys below this line.
         case findingsReportCopy = "findings.report.copy"
         case findingsReportCopyHint = "findings.report.copyHint"
@@ -1018,6 +1041,17 @@ public enum PreviewStrings {
         case aboutNoticesColorSchemesTitle = "about.notices.colorSchemes.title"
         case aboutNoticesOpenHint = "about.notices.open.hint"
         case aboutNoticesOpenFailed = "about.notices.open.failed"
+        // [sl3-models] Decision 030: GGUF and safetensors summary labels. Workstream sl3-models adds its keys below this line.
+        // (end of sl3-models)
+        // ----
+        // [sl3-pickle] Decision 030: pickle and PyTorch summary labels. Workstream sl3-pickle adds its keys below this line.
+        // (end of sl3-pickle)
+        // ----
+        // [sl3-addons] Decision 030: MCP bundle and extension summary labels. Workstream sl3-addons adds its keys below this line.
+        // (end of sl3-addons)
+        // ----
+        // [sl3-install] Decision 030: Python wheel summary labels. Workstream sl3-install adds its keys below this line.
+        // (end of sl3-install)
     }
 
     public static func text(_ key: Key, languagePreferences: [String]? = nil) -> String {

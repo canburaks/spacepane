@@ -2,6 +2,14 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-14 — Safety Lens 3 contract: model files, add-ons and packages
+
+Owner request ("Continue development"). [Decision 030](docs/decisions/030-safety-lens-3-models-add-ons-and-packages.md). Branch `safety-lens-3`, from `safety-lens-2`. Nothing was pushed.
+
+- Implementation, contract (lead): format IDs for GGUF, safetensors, pickle and PyTorch files, MCP bundles, editor and browser extensions and Python wheels; 22 finding kinds in the `artifact`, `model`, `pickle`, `install`, `bundle` and `extension` groups with default severities and wording; their string keys; a marker per workstream in `PreviewStrings.swift`; `listingDocument` accepts extra findings; five workstreams in `tools/ownership.json`.
+- Documentation: decision 030, its index row and a PLAN section.
+- Validation: the package builds. The new string keys have no resources yet, so the localization checks fail until the strings workstream is applied.
+
 ## 2026-10-14 — Safety Lens 2 observed in the Quick Look panel; routing fixes
 
 Owner request ("continue"). [Validation record](docs/validation/safety-lens-2-panel-2026-10-14.md). A development-signed Debug build of `safety-lens-2` was registered from `.build/xcode` and observed through `qlmanage -p`; Finder itself was not observed.
