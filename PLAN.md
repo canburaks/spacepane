@@ -238,18 +238,19 @@ Started 2026-10-05 at the user's request, following [the unique-feature research
 Started at the owner's request after [the 2026-10-13 research](docs/market/2026-10-13-new-file-types-and-features.md). [Decision 029](docs/decisions/029-safety-lens-2-what-a-file-will-do.md) records the contract and the rules. Branch `safety-lens-2`; one workstream per feature, each in its own worktree.
 
 - [x] Contract: `PreviewTextLens`, `AdapterRegistration.adding(lenses:)`, the `StandardLenses` table, the pipeline step, 34 finding kinds with wording, `days` and `seconds` details, string keys; lens-runner tests.
-- [ ] Script effects lens for shell, AppleScript, PowerShell and batch scripts.
-- [ ] Auto-run configuration lens: VS Code tasks, Claude Code hooks and permissions, MCP servers, dev containers, package install scripts.
-- [ ] Readable credential exports: password-manager CSV and JSON, one-time-code exports.
-- [ ] launchd job lens.
-- [ ] Certificate and provisioning-profile validity findings.
-- [ ] Mesh Print Check: shared measurer for STL, OBJ, PLY and 3MF; size, open and non-manifold edges, solid PLA estimate.
-- [ ] Copy Findings Report in the findings banner.
-- [ ] Translations of the new keys in all 14 languages (drafts), resources regenerated and validated.
-- [ ] Integrate: `--check`, `--test`, `--check-static` and the Xcode host builds on the integrated branch.
+- [x] Script effects lens for shell, AppleScript, PowerShell and batch scripts.
+- [x] Auto-run configuration lens: VS Code tasks, Claude Code hooks and permissions, MCP servers, dev containers, package install scripts. VS Code's commented editor files now route to JSON with comments.
+- [x] Readable credential exports: password-manager CSV and JSON, one-time-code exports. One-time-code seed fields are now concealed.
+- [x] launchd job lens.
+- [x] Certificate and provisioning-profile validity findings, including an IPA's embedded profile.
+- [x] Mesh Print Check: shared measurer for STL, OBJ, PLY and 3MF; open and non-manifold edges; solid PLA estimate, worded as conditional on millimetres for undeclared units.
+- [x] Copy Findings Report in the findings banner.
+- [x] Translations of the new keys in all 14 languages (drafts), resources regenerated and validated.
+- [x] Integrate: `--check`, `--test` (4,032 tests in 462 suites, 2 known issues; 74 serial tests; 632 adversarial cases), `--check-static` and `--check-compiler` host typechecks pass on the integrated branch. No signed Xcode build or Finder run yet.
 - [ ] Observe the new findings, the report action and the print lines in the signed companion and in Finder's Quick Look panel and preview pane.
 - [ ] VoiceOver and keyboard review of the report action; native-speaker review of the new strings.
 - [ ] Before marketing, recheck uniqueness with a paced App Store scan and word claims as "no other Quick Look app we found".
+- [ ] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main`: the JSON-with-comments filename aliases changed.
 
 ### World-class UX/UI program — 2026-10-06
 
