@@ -92,7 +92,9 @@ struct AddOnArchive {
         var finished = false
         while !finished, output.count < wanted, consumed < entry.compressedSize {
             try context.checkpoint()
-            let take = min(65_536, entry.compressedSize - consumed)
+            // The first chunk is as small as can still produce a short prefix (deflate never yields
+            // fewer than about half a byte per input byte); later chunks are larger.
+            let take = min(consumed == 0 ? max(4_096, wanted) : 65_536, entry.compressedSize - consumed)
             let chunk = try source.read(offset: Int64(entry.payloadOffset + consumed), count: take, context: context)
             consumed += take
             chunk.withUnsafeBytes { raw in
