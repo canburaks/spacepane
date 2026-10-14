@@ -115,6 +115,17 @@ final class NativeFindingsBanner: NSView {
 
     required init?(coder: NSCoder) { nil }
 
+    /// Whether a finding is a warning about something other than concealed secrets, so it leads the summary.
+    static func outranksConcealment(_ finding: PreviewFinding) -> Bool {
+        finding.severity == .warning && !secretKinds.contains(finding.kind)
+    }
+
+    /// The secret-inventory kinds, which the concealment notice already speaks for.
+    static let secretKinds: Set<PreviewFindingKind> = [
+        .secretPrivateKey, .secretCloudAccessKey, .secretCodeHostingToken, .secretAPIKey, .secretWebToken,
+        .secretAuthorizationHeader, .secretSensitiveField, .secretSyncedFolder
+    ]
+
     func display(_ findings: [PreviewFinding], concealedValueCount: Int = 0,
                  offersConcealedCopy offersCopy: Bool, palette: NativeTextPalette, locale: Locale) {
         let concealed = max(0, concealedValueCount)
@@ -124,12 +135,15 @@ final class NativeFindingsBanner: NSView {
             return
         }
         rendered = (findings, concealed, offersCopy, locale)
-        summaryLabel.stringValue = concealed > 0
+        // A warning about the file outranks the concealment notice (decision 029): a script that downloads and
+        // runs code must not read "1 likely secret hidden" while collapsed. Cautions keep the Q50 summary.
+        let leadsWithConcealment = concealed > 0 && !findings.contains(where: Self.outranksConcealment)
+        summaryLabel.stringValue = leadsWithConcealment
             ? PreviewStrings.count(.findingSummaryConcealed, concealed, locale: locale)
             : PreviewStrings.count(.findingSummary, findings.count, locale: locale)
         summaryLabel.setAccessibilityLabel(summaryLabel.stringValue)
         let first = findings.first
-        let summarySymbol = concealed > 0 ? FindingsSymbol.concealed : first.map(FindingsSymbol.name) ?? FindingsSymbol.neutral
+        let summarySymbol = leadsWithConcealment ? FindingsSymbol.concealed : first.map(FindingsSymbol.name) ?? FindingsSymbol.neutral
         summaryIcon.image = NSImage(systemSymbolName: summarySymbol, accessibilityDescription: nil)
         summaryIcon.identifier = NSUserInterfaceItemIdentifier(summarySymbol)
         offersConcealedCopy = offersCopy
