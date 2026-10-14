@@ -233,12 +233,18 @@ struct PickleWalkerTests {
         #expect(try S.walk([UInt8](repeating: 0x28, count: PickleWalker.maximumMarks + 1)).outcome.ending == .limited)
     }
 
-    @Test func retainedStringsAreBoundedInTotal() throws {
-        // 5,000 strings of 4 KB would hold 20 MB; the walk stays within its cap and still completes.
+    @Test func retainedStringsAreBoundedInTotalAndLaterNamesBecomeUnresolvable() throws {
+        // With room for about ten 4 KB strings, the strings after them are not kept; the walk still completes.
         let chunk = S.binUnicode(String(repeating: "a", count: 4_000))
-        let stream = Array((0..<5_000).map { _ in chunk }.joined()) + [UInt8](repeating: 0x30, count: 4_999) + S.stop
-        let patient = RequestContext(budget: PreviewBudget(maxMilliseconds: 30_000))
-        #expect(try S.walk(stream, context: patient).outcome.ending == .complete)
+        let filler = Array((0..<30).map { _ in chunk }.joined())
+        let ordinary = S.join(S.proto2, filler, [UInt8](repeating: 0x30, count: 30), S.shortUnicode("os"), S.shortUnicode("system"), S.stackGlobal, S.stop)
+        let (outcome, tally) = try S.walk(ordinary, retainedTextLimit: 40_000)
+        #expect(outcome.ending == .complete)
+        // Released strings free their room: the module and name after the filler are still resolved.
+        #expect(S.kinds(tally) == ["os.system": .code])
+        // Held strings do not: with the filler still on the stack the name cannot be kept.
+        let held = S.join(S.proto2, filler, S.shortUnicode("os"), S.shortUnicode("system"), S.stackGlobal, S.stop)
+        #expect(S.kinds(try S.walk(held, retainedTextLimit: 40_000).tally) == ["unresolved name": .uncommon])
     }
 
     @Test func checkpointsRunEveryFewThousandOpcodes() throws {
