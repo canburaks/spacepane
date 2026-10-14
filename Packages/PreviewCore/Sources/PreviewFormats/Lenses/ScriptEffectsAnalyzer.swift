@@ -54,7 +54,7 @@ final class ScriptEffectsAnalyzer {
             var lexer = BatchLexer(bytes: bytes, context: context)
             while let list = try lexer.nextList() { try analyze(list, dialect: .batch) }
         case .appleScript:
-            break
+            try analyzeAppleScript(bytes, startLine: 1, depth: 0)
         }
     }
 
