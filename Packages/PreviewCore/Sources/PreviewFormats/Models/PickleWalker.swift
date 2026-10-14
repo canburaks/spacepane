@@ -35,13 +35,13 @@ struct PickleWalkOutcome: Sendable {
 /// is enough to resolve the module and the name of `STACK_GLOBAL`, and records every import it meets.
 ///
 /// Caps: 2,000,000 opcodes over all walks of one scan, 100,000 stack items, 100,000 memo entries, 10,000
-/// open marks, strings of up to 4 KiB and 4 MiB of retained strings in all.
+/// open marks, strings of up to 4 KiB and 16 MiB of retained strings in all.
 struct PickleWalker {
     static let maximumOpcodes = 2_000_000
     static let maximumStack = 100_000
     static let maximumMemo = 100_000
     static let maximumMarks = 10_000
-    static let maximumRetainedText = 4_194_304
+    static let maximumRetainedText = 16_777_216
     /// The cancellation and deadline check interval, in opcodes.
     static let checkpointInterval = 4_096
 

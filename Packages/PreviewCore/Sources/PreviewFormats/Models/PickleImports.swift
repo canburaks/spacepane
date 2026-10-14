@@ -27,7 +27,7 @@ enum PickleImportClassifier {
         "os", "posix", "nt", "subprocess", "pty", "runpy", "importlib", "ctypes", "code", "codeop", "commands",
         "popen2", "multiprocessing", "marshal",
         // Well-known gadgets that run a string or a file as code.
-        "timeit", "cProfile", "profile", "pdb", "bdb", "pip"
+        "timeit", "cProfile", "profile", "pdb", "bdb", "pip", "pydoc", "lib2to3"
     ]
     /// The modules a dotted attribute path can reach code through (`posixpath.os.system`). Only these are
     /// judged as the start of a tail, so a package that merely has a submodule called `code` is not.
@@ -40,19 +40,20 @@ enum PickleImportClassifier {
     private static let builtinFiles: Set<String> = ["open", "file"]
     private static let typeCode: Set<String> = ["FunctionType", "CodeType", "LambdaType"]
     /// Modules that load another pickle: loading the file would load that one too.
-    private static let loaderModules: Set<String> = ["pickle", "_pickle", "cPickle", "dill", "cloudpickle", "joblib"]
-    private static let loaderNames: Set<String> = ["load", "loads"]
+    private static let loaderModules: Set<String> = ["pickle", "_pickle", "cPickle", "dill", "cloudpickle", "joblib", "numpy", "pandas"]
+    private static let loaderNames: Set<String> = ["load", "loads", "read_pickle"]
     private static let codeNames: Set<String> = [
         "platform.popen", "torch.load", "torch.storage._load_from_bytes", "torch.utils.collect_env.run",
-        "torch.hub.load", "numpy.testing._private.utils.runstring", "operator.attrgetter", "operator.methodcaller"
+        "torch.hub.load", "numpy.testing._private.utils.runstring", "operator.attrgetter", "operator.methodcaller",
+        "_operator.attrgetter", "_operator.methodcaller"
     ]
-    private static let codePrefixes = ["torch.jit.", "asyncio.subprocess."]
+    private static let codePrefixes = ["torch.jit.", "asyncio.subprocess.", "numpy.f2py."]
 
     private static let networkModules: Set<String> = [
         "socket", "ssl", "urllib", "urllib2", "urllib3", "http", "httplib", "requests", "httpx", "aiohttp", "ftplib",
         "smtplib", "telnetlib", "webbrowser", "shutil", "pathlib", "tempfile", "glob", "zipfile", "tarfile"
     ]
-    private static let fileNames: Set<String> = ["io.open", "io.open_code", "io.FileIO", "codecs.open"]
+    private static let fileNames: Set<String> = ["io.open", "io.open_code", "io.FileIO", "_io.open", "_io.open_code", "_io.FileIO", "codecs.open"]
 
     private static let expectedNames: Set<String> = [
         "collections.OrderedDict",
@@ -103,7 +104,7 @@ enum PickleImportClassifier {
         if codeModules.contains(root) { return true }
         if builtinModules.contains(root), parts.count > 1 { return builtinCode.contains(parts[1]) }
         if root == "types", parts.count > 1 { return typeCode.contains(parts[1]) }
-        if loaderModules.contains(root), let last = parts.last, parts.count > 1 { return loaderNames.contains(last) }
+        if loaderModules.contains(root), let last = parts.last, parts.count > 1, loaderNames.contains(last) { return true }
         return codeNames.contains(joined) || codePrefixes.contains { joined.hasPrefix($0) }
     }
 
