@@ -229,7 +229,7 @@ final class NativeFindingsBanner: NSView {
     @objc private func copyConcealedText() { if offersConcealedCopy { onCopyConcealedText?() } }
     @objc private func copyFindingsReportPressed() {
         guard offersFindingsReport else { return }
-        if let onCopyFindingsReport { onCopyFindingsReport() } else { (superview as? NativePreviewView)?.copyFindingsReport() }
+        onCopyFindingsReport?()
     }
 
     private func updateDisclosure() {
