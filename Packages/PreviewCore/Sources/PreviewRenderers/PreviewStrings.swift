@@ -1083,6 +1083,18 @@ public enum PreviewStrings {
         // (end of sl3-addons)
         // ----
         // [sl3-install] Decision 030: Python wheel summary labels. Workstream sl3-install adds its keys below this line.
+        case installSummary = "preview.install.summary"
+        case installRequiresPython = "preview.install.requiresPython"
+        case installDependencies = "preview.install.dependencies"
+        case installLicense = "preview.install.license"
+        case installWheelVersion = "preview.install.wheelVersion"
+        case installGenerator = "preview.install.generator"
+        case installPureLibrary = "preview.install.pureLibrary"
+        case installTags = "preview.install.tags"
+        case installCommands = "preview.install.commands"
+        case installStartupFiles = "preview.install.startupFiles"
+        case installInstalledScripts = "preview.install.installedScripts"
+        case installNativeModules = "preview.install.nativeModules"
         // (end of sl3-install)
     }
 

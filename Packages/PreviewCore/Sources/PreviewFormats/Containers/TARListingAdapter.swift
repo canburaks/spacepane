@@ -92,11 +92,16 @@ public struct TARListingAdapter: BinaryFormatAdapter, RandomAccessFormatAdapter 
         return try listingDocument(format: "TAR", entries: entries, context: context, partial: partial, assessRisks: true)
     }
 
+    /// Lists a TAR that is already decoded in memory: a plain `.tar` read whole, or the payload of a gzip,
+    /// bzip2 or xz stream. Because every member is in memory, it also keeps a bounded part of them for the
+    /// install-time inspectors of decision 030 (`InstallableCapture`: npm tarballs and Python source
+    /// distributions). The random-access listing above reads headers only, so it carries no such findings.
     func parseDecoded(_ data: Data, context: RequestContext) throws -> ParsedTextDocument {
         let limits = ContainerLimits(context: context)
         guard data.count <= limits.maxDecodedBytes else { throw PreviewFailure.inputTooLarge }
         var cursor = BinaryCursor(data)
         var entries: [ContainerEntry] = []
+        var capture = InstallableCapture()
         var metadataBytes = 0
         var longName: String?
         var longLink: String?
@@ -150,14 +155,16 @@ public struct TARListingAdapter: BinaryFormatAdapter, RandomAccessFormatAdapter 
             metadataBytes += path.utf8.count
             guard metadataBytes <= limits.maxMetadataBytes else { throw PreviewFailure.outputTooLarge }
             guard entries.count < ArchiveListing.maxEntries(context) else { throw PreviewFailure.tooManyNodes }
-            entries.append(try entry(path: path, type: rawType, size: size, header: header, linkTarget: target,
-                                     modified: tarModified(header, fields: fields)))
+            let listed = try entry(path: path, type: rawType, size: size, header: header, linkTarget: target,
+                                   modified: tarModified(header, fields: fields))
+            entries.append(listed)
             // Scanned/skipped payloads count towards the decoded budget too.
-            _ = try cursor.read(size)
+            capture.observe(listed, payload: try cursor.read(size))
             try skipPadding(size, cursor: &cursor)
         }
         guard ended, longName == nil, localPAX.isEmpty else { throw PreviewFailure.malformedDocument }
-        return try listingDocument(format: "TAR", entries: entries, context: context, assessRisks: true)
+        return try listingDocument(format: "TAR", entries: entries, context: context, assessRisks: true,
+                                   findings: try capture.findings(for: entries, context: context))
     }
 
     /// One listed member. The mode and a link's target are facts for the risk analyzer: the target comes
