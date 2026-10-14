@@ -127,10 +127,29 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         self.theme = theme
         self.locale = locale
         localizeControls()
-        summaryLabel.stringValue = Self.summaryLines(for: presentation.mesh, locale: locale).joined(separator: "\n")
-        viewport.setAccessibilityValue(summaryLabel.stringValue)
+        refreshSummary()
         updateAppearance()
         onCommandAvailabilityChanged?()
+    }
+
+    /// Writes the summary lines of the shown model: the model's own summary, then (for the print formats) the Mesh Print
+    /// Check, whose width, depth and height follow the axis that is up now, so the up-axis button rewrites them.
+    private func refreshSummary() {
+        guard let presentation else { return }
+        summaryLabel.stringValue = Self.summaryLines(for: presentation, upAxis: camera.upAxis, locale: locale)
+            .joined(separator: "\n")
+        viewport.setAccessibilityValue(failure == nil ? summaryLabel.stringValue : failureLabel.stringValue)
+    }
+
+    /// Every line the view shows for a model: `summaryLines(for:)` and, for the STL, OBJ, PLY and 3MF formats, the
+    /// lines of the Mesh Print Check (`GeometryPrintCheck`). CAD models keep their summary as it was.
+    static func summaryLines(for presentation: GeometryPresentation, upAxis: GeometryUpAxis, locale: Locale,
+                             languagePreferences: [String]? = nil) -> [String] {
+        var lines = summaryLines(for: presentation.mesh, locale: locale, languagePreferences: languagePreferences)
+        if let check = GeometryPrintCheck(presentation: presentation, upAxis: upAxis) {
+            lines += check.lines(locale: locale, languagePreferences: languagePreferences)
+        }
+        return lines
     }
 
     /// The model summary, then optional approximate measurements, then optional file-header facts.
@@ -141,16 +160,9 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
     /// stopped at the contract's cap reads "100,000+". `languagePreferences` exists for tests; hosts use the
     /// process language.
     static func summaryLines(for mesh: PreviewMesh, locale: Locale, languagePreferences: [String]? = nil) -> [String] {
-        func countText(_ value: Int) -> String {
-            value.formatted(.number.locale(locale))
-        }
-        func lengthText(_ value: Double) -> String {
-            value.formatted(.number.locale(locale).precision(.fractionLength(0...3)))
-        }
-        // Four significant digits: the values approximate the tessellation, so more digits would overstate them.
-        func measureText(_ value: Double) -> String {
-            value.formatted(.number.locale(locale).precision(.significantDigits(1...4)))
-        }
+        func countText(_ value: Int) -> String { GeometryNumberText.count(value, locale: locale) }
+        func lengthText(_ value: Double) -> String { GeometryNumberText.length(value, locale: locale) }
+        func measureText(_ value: Double) -> String { GeometryNumberText.measure(value, locale: locale) }
         let preferences = languagePreferences
         let units = GeometrySummaryUnits(mesh.unitProvenance)
         let millimetresPerUnit = units?.millimetresPerUnit ?? 1
@@ -263,6 +275,7 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         case .toggleUpAxis:
             camera.setUpAxis(camera.upAxis.toggled, viewport: renderingSize)
             updateUpAxisControl()
+            refreshSummary()
         }
         updateBackend()
         if let spoken = spokenResult(of: action) { announcer?.announce(spoken, from: viewport) }
@@ -450,7 +463,7 @@ struct GeometrySummaryUnits {
     /// measurement of a single unit is formatted as provided (never converted to the locale's own units) and the
     /// number is taken away; what is left is the symbol the way the language writes it. A formatter that gives
     /// nothing back falls back to the unit's own technical symbol, so a unit is never shown as an empty string.
-    private static func symbol<UnitType: Unit>(of unit: UnitType, locale: Locale) -> String {
+    static func symbol<UnitType: Unit>(of unit: UnitType, locale: Locale) -> String {
         let formatter = MeasurementFormatter()
         formatter.locale = locale
         formatter.unitStyle = .short
@@ -460,6 +473,89 @@ struct GeometrySummaryUnits {
         let text = formatter.string(from: Measurement(value: 1, unit: unit))
         let symbol = text.replacingOccurrences(of: number, with: "").trimmingCharacters(in: .whitespacesAndNewlines)
         return symbol.isEmpty ? unit.symbol : symbol
+    }
+}
+
+/// The number formats of the geometry summary, one definition for every line, so a size and a measurement read alike.
+private enum GeometryNumberText {
+    static func count(_ value: Int, locale: Locale) -> String {
+        value.formatted(.number.locale(locale))
+    }
+    /// Up to three fraction digits, for extents.
+    static func length(_ value: Double, locale: Locale) -> String {
+        value.formatted(.number.locale(locale).precision(.fractionLength(0...3)))
+    }
+    /// Four significant digits: the values approximate the tessellation, so more digits would overstate them.
+    static func measure(_ value: Double, locale: Locale) -> String {
+        value.formatted(.number.locale(locale).precision(.significantDigits(1...4)))
+    }
+}
+
+/// The Mesh Print Check of a model (decision 029) as numbers, before any wording, so tests read it without a localized
+/// resource. It belongs to the four triangle-mesh formats that people print from; a CAD model has none. Everything
+/// comes from the mesh the reader built: the bounds, and the measurements of the displayed tessellation. Nothing is
+/// a certified dimension, and the estimate is an upper bound for a part printed solid.
+struct GeometryPrintCheck {
+    /// The formats that show the check.
+    static let formats: Set<FormatID> = [.meshSTL, .meshOBJ, .meshPLY, .mesh3MF]
+
+    /// The model's extents in `units` (plain numbers when the file declares none). Slicers read X as the width and Y as
+    /// the depth of a part that stands on Z; a model that stands on Y has its depth along Z.
+    let width: Double, depth: Double, height: Double
+    /// The unit the extents are shown in; `nil` when the model's unit is undeclared.
+    let units: GeometrySummaryUnits?
+    /// Zero when the surface has no gap or when nothing could be measured; the line is shown only above zero.
+    let openEdgeCount: Int
+    let nonManifoldEdgeCount: Int
+    /// Present only when the volume is known and the unit is declared or assumed millimetres.
+    let estimate: GeometryPrintEstimate?
+
+    init?(presentation: GeometryPresentation, upAxis: GeometryUpAxis) {
+        guard Self.formats.contains(presentation.formatID) else { return nil }
+        let mesh = presentation.mesh
+        let units = GeometrySummaryUnits(mesh.unitProvenance)
+        let extents = (mesh.bounds.maximum - mesh.bounds.minimum) / (units?.millimetresPerUnit ?? 1)
+        width = extents.x
+        switch upAxis {
+        case .z: depth = extents.y; height = extents.z
+        case .y: depth = extents.z; height = extents.y
+        }
+        self.units = units
+        openEdgeCount = mesh.measurements?.openEdgeCount ?? 0
+        nonManifoldEdgeCount = mesh.measurements?.nonManifoldEdgeCount ?? 0
+        estimate = mesh.measurements.flatMap { GeometryPrintEstimate($0) }
+    }
+
+    /// The size line, then the open-edge and non-manifold lines when they are above zero, then the estimate when there
+    /// is one. Each line is a complete localized template; counts go through the plural machinery.
+    func lines(locale: Locale, languagePreferences: [String]? = nil) -> [String] {
+        let preferences = languagePreferences
+        let sizes = [width, depth, height].map { GeometryNumberText.length($0, locale: locale) }
+        var lines: [String]
+        if let units {
+            lines = [PreviewStrings.format(.meshPrintSize, arguments: sizes + [units.lengthSymbol(locale: locale)],
+                                           locale: locale, languagePreferences: preferences)]
+        } else {
+            lines = [PreviewStrings.format(.meshPrintSizeUnitless, arguments: sizes, locale: locale, languagePreferences: preferences)]
+        }
+        if openEdgeCount > 0 {
+            lines.append(PreviewStrings.count(.meshPrintOpenEdges, openEdgeCount, locale: locale, languagePreferences: preferences))
+        }
+        if nonManifoldEdgeCount > 0 {
+            lines.append(PreviewStrings.count(.meshPrintNonManifoldEdges, nonManifoldEdgeCount,
+                                              locale: locale, languagePreferences: preferences))
+        }
+        if let estimate {
+            let mass = GeometryNumberText.measure(estimate.massGrams, locale: locale)
+            let filament = GeometryNumberText.measure(estimate.filamentLengthMetres, locale: locale)
+            let diameter = GeometryNumberText.measure(GeometryPrintEstimate.filamentDiameterMillimetres, locale: locale)
+            lines.append(PreviewStrings.format(.meshPrintEstimate, arguments: [
+                mass, GeometrySummaryUnits.symbol(of: UnitMass.grams, locale: locale),
+                filament, GeometrySummaryUnits.symbol(of: UnitLength.meters, locale: locale),
+                diameter, GeometrySummaryUnits.symbol(of: UnitLength.millimeters, locale: locale)],
+                locale: locale, languagePreferences: preferences))
+        }
+        return lines
     }
 }
 
