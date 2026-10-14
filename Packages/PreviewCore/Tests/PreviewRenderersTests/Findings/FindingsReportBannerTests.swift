@@ -329,6 +329,25 @@ struct FindingsReportBannerTests {
         }
     }
 
+    @Test func theButtonsShareARowWhenTheyFitAndStackInsteadOfWideningTheBanner() throws {
+        let findings = [PreviewFinding(kind: .hiddenZeroWidth, count: 1, lines: [1])]
+        for (width, shouldFit) in [(CGFloat(900), true), (CGFloat(260), false)] {
+            let (host, _) = harness(width: width, height: 400)
+            defer { host.release() }
+            show(presentation(findings, redactions: 1, format: .markdown), in: host)
+            let banner = host.view.findingsBanner
+            let row = try #require(banner.findingsReportActionButton.superview as? NSStackView)
+            let buttons = [banner.detailsButton, banner.copyActionButton, banner.findingsReportActionButton]
+            #expect(buttons.allSatisfy { !$0.isHidden })
+            #expect(row.orientation == (shouldFit ? .horizontal : .vertical), "width \(width)")
+            // The banner follows its host's width, and no button is pushed past either edge.
+            #expect(banner.frame.width == host.view.bounds.width, "width \(width)")
+            let frames = buttons.map { banner.convert($0.bounds, from: $0) }
+            #expect(frames.allSatisfy { $0.minX >= 0 && $0.maxX <= banner.bounds.width }, "width \(width)")
+            #expect(Set(frames.map { $0.midY.rounded() }).count == (shouldFit ? 1 : 3), "width \(width)")
+        }
+    }
+
     @Test func theActionSitsOutsideTheScrollingDetailsSoACollapsedBannerStillOffersIt() {
         // The button sits in the always-visible controls row, outside the scrolling details.
         let (host, _) = harness(width: 420, height: 400)
