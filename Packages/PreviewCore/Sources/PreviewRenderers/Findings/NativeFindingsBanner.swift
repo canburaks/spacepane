@@ -3,9 +3,16 @@ import PreviewContracts
 
 /// One summary owns the count and copying policy. Details stay inside a native scroll view;
 /// the host supplies the expanded height cap, without resizing its window or re-reading a file.
+///
+/// Two copy actions share the controls row. Copy Concealed Text is offered when the presentation concealed
+/// anything; Copy Findings Report (decision 029) whenever the banner lists a finding. Both leave the writing,
+/// the confirmation chip and the announcement to the hosting preview.
 @MainActor
 final class NativeFindingsBanner: NSView {
     var onCopyConcealedText: (() -> Void)?
+    /// Copy Findings Report. Left unset, the action asks the preview that hosts the banner (`copyFindingsReport`
+    /// in `FindingsReportCopying.swift`), so the action works wherever the banner sits in a preview.
+    var onCopyFindingsReport: (() -> Void)?
     var onExpansionChanged: ((Bool) -> Void)?
     /// Only native disclosure presses notify the host to publish an accessibility layout change.
     var onDisclosureActivated: (() -> Void)?
@@ -15,6 +22,7 @@ final class NativeFindingsBanner: NSView {
     private let summaryIcon = NSImageView()
     private let detailStack = FindingsDetailStack()
     private let copyButton = NSButton(title: "", target: nil, action: nil)
+    private let reportButton = NSButton(title: "", target: nil, action: nil)
     private var collapsedHeight: NSLayoutConstraint?
     private var preferredDetailHeight: NSLayoutConstraint?
     private var rowWidths: [NSLayoutConstraint] = []
@@ -30,7 +38,10 @@ final class NativeFindingsBanner: NSView {
     private(set) var orderedDetailKinds: [PreviewFindingKind] = []
     private(set) var isExpanded = false
     private(set) var offersConcealedCopy = false
+    /// Whether Copy Findings Report is on offer: true exactly while at least one finding is listed.
+    private(set) var offersFindingsReport = false
     var copyActionButton: NSButton { copyButton }
+    var findingsReportActionButton: NSButton { reportButton }
     var hasContent: Bool { rendered.map { !$0.findings.isEmpty || $0.concealed > 0 || $0.offersCopy } ?? false }
     var summarySymbolName: String? { summaryIcon.identifier?.rawValue }
 
@@ -54,7 +65,10 @@ final class NativeFindingsBanner: NSView {
         controls.orientation = .horizontal
         controls.alignment = .centerY
         controls.spacing = PreviewChrome.rowGap
-        for button in [detailsButton, copyButton] {
+        // The row never sets the banner's minimum width: `layout()` stacks the buttons when they do not fit.
+        controls.setClippingResistancePriority(.defaultLow, for: .horizontal)
+        stack.setClippingResistancePriority(.defaultLow, for: .horizontal)
+        for button in [detailsButton, copyButton, reportButton] {
             button.target = self
             button.bezelStyle = .push
             button.controlSize = .small
@@ -62,6 +76,7 @@ final class NativeFindingsBanner: NSView {
         }
         detailsButton.action = #selector(toggleDetails)
         copyButton.action = #selector(copyConcealedText)
+        reportButton.action = #selector(copyFindingsReportPressed)
         stack.addArrangedSubview(controls)
         detailScrollView.hasVerticalScroller = true
         detailScrollView.hasHorizontalScroller = false
@@ -100,6 +115,17 @@ final class NativeFindingsBanner: NSView {
 
     required init?(coder: NSCoder) { nil }
 
+    /// Whether a finding is a warning about something other than concealed secrets, so it leads the summary.
+    static func outranksConcealment(_ finding: PreviewFinding) -> Bool {
+        finding.severity == .warning && !secretKinds.contains(finding.kind)
+    }
+
+    /// The secret-inventory kinds, which the concealment notice already speaks for.
+    static let secretKinds: Set<PreviewFindingKind> = [
+        .secretPrivateKey, .secretCloudAccessKey, .secretCodeHostingToken, .secretAPIKey, .secretWebToken,
+        .secretAuthorizationHeader, .secretSensitiveField, .secretSyncedFolder
+    ]
+
     func display(_ findings: [PreviewFinding], concealedValueCount: Int = 0,
                  offersConcealedCopy offersCopy: Bool, palette: NativeTextPalette, locale: Locale) {
         let concealed = max(0, concealedValueCount)
@@ -109,12 +135,15 @@ final class NativeFindingsBanner: NSView {
             return
         }
         rendered = (findings, concealed, offersCopy, locale)
-        summaryLabel.stringValue = concealed > 0
+        // A warning about the file outranks the concealment notice (decision 029): a script that downloads and
+        // runs code must not read "1 likely secret hidden" while collapsed. Cautions keep the Q50 summary.
+        let leadsWithConcealment = concealed > 0 && !findings.contains(where: Self.outranksConcealment)
+        summaryLabel.stringValue = leadsWithConcealment
             ? PreviewStrings.count(.findingSummaryConcealed, concealed, locale: locale)
             : PreviewStrings.count(.findingSummary, findings.count, locale: locale)
         summaryLabel.setAccessibilityLabel(summaryLabel.stringValue)
         let first = findings.first
-        let summarySymbol = concealed > 0 ? FindingsSymbol.concealed : first.map(FindingsSymbol.name) ?? FindingsSymbol.neutral
+        let summarySymbol = leadsWithConcealment ? FindingsSymbol.concealed : first.map(FindingsSymbol.name) ?? FindingsSymbol.neutral
         summaryIcon.image = NSImage(systemSymbolName: summarySymbol, accessibilityDescription: nil)
         summaryIcon.identifier = NSUserInterfaceItemIdentifier(summarySymbol)
         offersConcealedCopy = offersCopy
@@ -122,9 +151,17 @@ final class NativeFindingsBanner: NSView {
         copyButton.title = PreviewStrings.text(.findingActionCopyConcealed)
         copyButton.toolTip = PreviewStrings.text(.findingActionCopyConcealedHelp)
         copyButton.setAccessibilityHelp(PreviewStrings.text(.findingActionCopyConcealedHelp))
+        offersFindingsReport = !findings.isEmpty
+        reportButton.isHidden = findings.isEmpty
+        let reportTitle = PreviewStrings.text(.findingsReportCopy)
+        reportButton.title = reportTitle
+        reportButton.setAccessibilityLabel(reportTitle)
+        reportButton.toolTip = PreviewStrings.text(.findingsReportCopyHint)
+        reportButton.setAccessibilityHelp(PreviewStrings.text(.findingsReportCopyHint))
         removeRows()
-        // The cloud-folder caution comes first. Every other producer order remains unchanged.
-        let ordered = findings.filter { $0.kind == .secretSyncedFolder } + findings.filter { $0.kind != .secretSyncedFolder }
+        // The cloud-folder caution comes first. Every other producer order remains unchanged. The copied report
+        // lists findings in this same order.
+        let ordered = FindingsReport.inBannerOrder(findings)
         for finding in ordered { addRow(finding, locale: locale) }
         orderedDetailKinds = ordered.map(\.kind)
         detailsButton.isHidden = findings.isEmpty
@@ -160,7 +197,9 @@ final class NativeFindingsBanner: NSView {
         summaryLabel.stringValue = ""
         summaryLabel.setAccessibilityLabel(nil)
         offersConcealedCopy = false
+        offersFindingsReport = false
         copyButton.isHidden = true
+        reportButton.isHidden = true
         detailsButton.isHidden = true
         controls.isHidden = true
         isHidden = true
@@ -169,6 +208,7 @@ final class NativeFindingsBanner: NSView {
 
     override func layout() {
         super.layout()
+        updateControlsOrientation()
         // The document keeps its natural height. Only its viewport yields to the host's cap.
         let width = max(20 + PreviewChrome.rowGap + 1, detailScrollView.contentSize.width)
         for constraint in rowWidths { constraint.constant = width }
@@ -181,12 +221,30 @@ final class NativeFindingsBanner: NSView {
         if preferredDetailHeight?.constant != naturalHeight { preferredDetailHeight?.constant = naturalHeight }
     }
 
+    /// The action buttons share one row while they fit the banner's width and stack when they do not, so a narrow
+    /// preview or a longer translation never widens the banner past its host or cuts a title short.
+    private func updateControlsOrientation() {
+        guard bounds.width > 0 else { return }
+        let buttons = controls.arrangedSubviews.filter { !$0.isHidden }
+        let rowWidth = buttons.reduce(0) { $0 + $1.intrinsicContentSize.width }
+            + controls.spacing * CGFloat(max(0, buttons.count - 1))
+        let orientation: NSUserInterfaceLayoutOrientation = rowWidth <= bounds.width - 2 * PreviewChrome.inset ? .horizontal : .vertical
+        guard controls.orientation != orientation else { return }
+        controls.orientation = orientation
+        controls.alignment = orientation == .horizontal ? .centerY : .leading
+        needsLayout = true
+    }
+
     @objc private func toggleDetails() {
         guard !orderedDetailKinds.isEmpty else { return }
         setExpanded(!isExpanded)
         onDisclosureActivated?()
     }
     @objc private func copyConcealedText() { if offersConcealedCopy { onCopyConcealedText?() } }
+    @objc private func copyFindingsReportPressed() {
+        guard offersFindingsReport else { return }
+        onCopyFindingsReport?()
+    }
 
     private func updateDisclosure() {
         let title = PreviewStrings.text(isExpanded ? .findingActionHideDetails : .findingActionShowDetails)

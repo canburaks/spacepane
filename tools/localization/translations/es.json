@@ -262,12 +262,123 @@
     "finding.archive.macMetadata": "Entradas de recursos de Mac en __MACOSX: %lld.",
     "finding.archive.nested": "Archivos comprimidos dentro de este archivo comprimido, sin abrir: %lld.",
     "finding.archive.unsafePath": "Entradas que se escribirían fuera de la carpeta de destino: %lld.",
+    "finding.artifact.mismatchedContent": "El contenido tiene un formato distinto del que indica el nombre del archivo.",
+    "finding.artifact.nativeCode": {
+      "one": "Contiene %2$@ programa o biblioteca en código nativo.",
+      "many": "Contiene %2$@ programas o bibliotecas en código nativo.",
+      "other": "Contiene %2$@ programas o bibliotecas en código nativo."
+    },
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ comando se ejecuta solo cuando actúa un agente de IA (un hook).",
+      "many": "%2$@ comandos se ejecutan solos cuando actúa un agente de IA (hooks).",
+      "other": "%2$@ comandos se ejecutan solos cuando actúa un agente de IA (hooks)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ ajuste permite a un agente de IA actuar sin preguntar antes.",
+      "many": "%2$@ ajustes permiten a un agente de IA actuar sin preguntar antes.",
+      "other": "%2$@ ajustes permiten a un agente de IA actuar sin preguntar antes."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ comando de contenedor de desarrollo se ejecuta solo dentro del contenedor.",
+      "many": "%2$@ comandos de contenedor de desarrollo se ejecutan solos dentro del contenedor.",
+      "other": "%2$@ comandos de contenedor de desarrollo se ejecutan solos dentro del contenedor."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ tarea se ejecuta sola al abrir la carpeta en el editor de código.",
+      "many": "%2$@ tareas se ejecutan solas al abrir la carpeta en el editor de código.",
+      "other": "%2$@ tareas se ejecutan solas al abrir la carpeta en el editor de código."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ comando de contenedor de desarrollo se ejecuta en este Mac antes de que arranque el contenedor.",
+      "many": "%2$@ comandos de contenedor de desarrollo se ejecutan en este Mac antes de que arranque el contenedor.",
+      "other": "%2$@ comandos de contenedor de desarrollo se ejecutan en este Mac antes de que arranque el contenedor."
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ script de paquete se ejecuta solo durante la instalación.",
+      "many": "%2$@ scripts de paquete se ejecutan solos durante la instalación.",
+      "other": "%2$@ scripts de paquete se ejecutan solos durante la instalación."
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ servidor MCP inicia un programa en este Mac.",
+      "many": "%2$@ servidores MCP inician programas en este Mac.",
+      "other": "%2$@ servidores MCP inician programas en este Mac."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ servidor MCP se conecta a un servicio de internet.",
+      "many": "%2$@ servidores MCP se conectan a servicios de internet.",
+      "other": "%2$@ servidores MCP se conectan a servicios de internet."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ variable de entorno se pasa a los servidores MCP.",
+      "many": "%2$@ variables de entorno se pasan a los servidores MCP.",
+      "other": "%2$@ variables de entorno se pasan a los servidores MCP."
+    },
     "finding.banner.label": "Puntos que revisar en este archivo",
+    "finding.bundle.asksForSecrets": {
+      "one": "%2$@ ajuste pide una contraseña o clave.",
+      "many": "%2$@ ajustes piden contraseñas o claves.",
+      "other": "%2$@ ajustes piden contraseñas o claves."
+    },
+    "finding.bundle.broadFolderAccess": {
+      "one": "%2$@ ajuste da al servidor acceso a tu carpeta de inicio, Documentos, Descargas o Escritorio.",
+      "many": "%2$@ ajustes dan al servidor acceso a tu carpeta de inicio, Documentos, Descargas o Escritorio.",
+      "other": "%2$@ ajustes dan al servidor acceso a tu carpeta de inicio, Documentos, Descargas o Escritorio."
+    },
+    "finding.bundle.runsProgram": "Ejecuta un programa en este Mac cuando una app de IA inicia su servidor.",
+    "finding.bundle.toolTextTargetsAssistant": {
+      "one": "%2$@ descripción de herramienta indica a la IA que lea otros archivos o que te oculte algo.",
+      "many": "%2$@ descripciones de herramienta indican a la IA que lea otros archivos o que te oculte algo.",
+      "other": "%2$@ descripciones de herramienta indican a la IA que lea otros archivos o que te oculte algo."
+    },
+    "finding.certificate.expired": {
+      "one": "%2$@ certificado ha caducado.",
+      "many": "%2$@ certificados han caducado.",
+      "other": "%2$@ certificados han caducado."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Un certificado caduca en %2$@ día.",
+      "many": "Un certificado caduca en %2$@ días.",
+      "other": "Un certificado caduca en %2$@ días."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ certificado aún no es válido.",
+      "many": "%2$@ certificados aún no son válidos.",
+      "other": "%2$@ certificados aún no son válidos."
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ certificado usa una clave RSA corta.",
+      "many": "%2$@ certificados usan claves RSA cortas.",
+      "other": "%2$@ certificados usan claves RSA cortas."
+    },
     "finding.detail.cells": "Celdas: %@",
     "finding.detail.cellsMore": "Celdas: %1$@ y %2$lld más",
     "finding.detail.decodedText": "Texto escondido, mostrado como texto sin formato: %@",
     "finding.detail.lines": "Líneas: %@",
     "finding.detail.linesMore": "Líneas: %1$@ y %2$lld más",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ secreto de código de un solo uso está guardado aquí en forma legible.",
+      "many": "%2$@ secretos de códigos de un solo uso están guardados aquí en forma legible.",
+      "other": "%2$@ secretos de códigos de un solo uso están guardados aquí en forma legible."
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ inicio de sesión del gestor de contraseñas está guardado aquí en forma legible. Elimina esta exportación cuando ya no la necesites.",
+      "many": "%2$@ inicios de sesión del gestor de contraseñas están guardados aquí en forma legible. Elimina esta exportación cuando ya no la necesites.",
+      "other": "%2$@ inicios de sesión del gestor de contraseñas están guardados aquí en forma legible. Elimina esta exportación cuando ya no la necesites."
+    },
+    "finding.extension.allSites": "Puede leer y modificar todos los sitios web que visitas.",
+    "finding.extension.installsOthers": {
+      "one": "Instala %2$@ extensión adicional con ella.",
+      "many": "Instala %2$@ extensiones adicionales con ella.",
+      "other": "Instala %2$@ extensiones adicionales con ella."
+    },
+    "finding.extension.relaxedScriptPolicy": "Su política de seguridad permite ejecutar texto como código.",
+    "finding.extension.selfHostedUpdates": "Se actualiza desde su propio servidor, en lugar de la tienda del navegador.",
+    "finding.extension.sensitivePermissions": {
+      "one": "Solicita %2$@ permiso sensible del navegador.",
+      "many": "Solicita %2$@ permisos sensibles del navegador.",
+      "other": "Solicita %2$@ permisos sensibles del navegador."
+    },
+    "finding.extension.startsAutomatically": "Arranca cada vez que se abre el editor de código.",
     "finding.hidden.agentInstructions": "Parece un archivo de instrucciones para herramientas de programación con IA, donde el texto escondido puede dirigirlas.",
     "finding.hidden.bidirectionalControls": "Caracteres que cambian la dirección del texto y hacen que el código se lea distinto de como se ejecuta: %lld.",
     "finding.hidden.markdownComments": "Comentarios HTML que la mayoría de los visores de Markdown esconden: %lld.",
@@ -276,11 +387,37 @@
     "finding.hidden.unicodeTags": "Caracteres de etiqueta invisibles que contienen texto escondido: %lld.",
     "finding.hidden.variationSelectors": "Selectores de variación inesperados, que pueden esconder datos: %lld.",
     "finding.hidden.zeroWidth": "Caracteres invisibles de ancho cero: %lld.",
+    "finding.install.buildScript": "Compilar o instalar este paquete de código fuente ejecuta su script de configuración.",
+    "finding.install.nativeBuild": "Instalar este paquete compila código nativo a partir de un archivo de compilación, incluso sin scripts de instalación.",
+    "finding.install.remoteDependencies": {
+      "one": "%2$@ dependencia procede de un repositorio Git o de una dirección web en lugar del registro.",
+      "many": "%2$@ dependencias proceden de repositorios Git o de direcciones web en lugar del registro.",
+      "other": "%2$@ dependencias proceden de repositorios Git o de direcciones web en lugar del registro."
+    },
+    "finding.install.startupCode": {
+      "one": "Se ejecuta código Python cada vez que se inicia Python, en %2$@ lugar.",
+      "many": "Se ejecuta código Python cada vez que se inicia Python, en %2$@ lugares.",
+      "other": "Se ejecuta código Python cada vez que se inicia Python, en %2$@ lugares."
+    },
+    "finding.launch.atLoad": "El programa se inicia al iniciar sesión o al arrancar el Mac.",
+    "finding.launch.hiddenLocation": "El programa está en una carpeta temporal, compartida u oculta.",
+    "finding.launch.inlineScript": "La tarea ejecuta código de shell o de script escrito dentro de este archivo.",
+    "finding.launch.interval": "El programa se ejecuta cada %@.",
+    "finding.launch.job": "Esto es una tarea de launchd: macOS inicia el programa que nombra.",
+    "finding.launch.keepAlive": "macOS reinicia el programa cada vez que se detiene.",
+    "finding.launch.schedule": "El programa se ejecuta según un calendario.",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ ruta vigilada inicia el programa cuando cambia.",
+      "many": "%2$@ rutas vigiladas inician el programa cuando cambian.",
+      "other": "%2$@ rutas vigiladas inician el programa cuando cambian."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "%2$@ nombre de la lista contiene caracteres ocultos.",
       "many": "%2$@ nombres de la lista contienen caracteres ocultos.",
       "other": "%2$@ nombres de la lista contienen caracteres ocultos."
     },
+    "finding.model.incomplete": "El archivo es más corto de lo que indica su cabecera, posiblemente por una descarga incompleta.",
+    "finding.model.inconsistentLayout": "Los intervalos de tensor de la cabecera se solapan o dejan huecos, algo que el formato prohíbe.",
     "finding.more": "Más resultados: %lld",
     "finding.notebook.errorOutputs": "Celdas que guardaron un error: %lld.",
     "finding.notebook.executionGaps": "Los números de ejecución saltan valores, así que se volvieron a ejecutar o se eliminaron celdas. Saltos: %lld.",
@@ -288,12 +425,79 @@
     "finding.notebook.notExecuted": "Ninguna celda de código se ha ejecutado, así que el cuaderno no tiene resultados guardados.",
     "finding.notebook.outOfOrder": "Celdas ejecutadas fuera de orden: %@.",
     "finding.notebook.unexecutedCells": "Celdas de código que nunca se ejecutaron: %lld.",
+    "finding.pickle.brokenStream": "Los datos se interrumpen después de las importaciones. Algunos escáneres dejan de leer en ese punto.",
+    "finding.pickle.networkOrFiles": {
+      "one": "%2$@ importación permite usar la red o archivos al cargar este archivo.",
+      "many": "%2$@ importaciones permiten usar la red o archivos al cargar este archivo.",
+      "other": "%2$@ importaciones permiten usar la red o archivos al cargar este archivo."
+    },
+    "finding.pickle.runsCode": {
+      "one": "%2$@ importación permite ejecutar comandos o código al cargar este archivo.",
+      "many": "%2$@ importaciones permiten ejecutar comandos o código al cargar este archivo.",
+      "other": "%2$@ importaciones permiten ejecutar comandos o código al cargar este archivo."
+    },
+    "finding.pickle.uncommonImports": {
+      "one": "%2$@ importación no es un dato de modelo habitual.",
+      "many": "%2$@ importaciones no son datos de modelo habituales.",
+      "other": "%2$@ importaciones no son datos de modelo habituales."
+    },
+    "finding.profile.expired": "Este perfil de aprovisionamiento ha caducado.",
+    "finding.profile.expiresSoon": {
+      "one": "Este perfil de aprovisionamiento caduca en %2$@ día.",
+      "many": "Este perfil de aprovisionamiento caduca en %2$@ días.",
+      "other": "Este perfil de aprovisionamiento caduca en %2$@ días."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "una carpeta de almacenamiento en la nube",
+    "finding.script.asksForPassword": {
+      "one": "Se pide una contraseña en %2$@ lugar.",
+      "many": "Se pide una contraseña en %2$@ lugares.",
+      "other": "Se pide una contraseña en %2$@ lugares."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "Se decodifica texto codificado y se ejecuta en %2$@ lugar.",
+      "many": "Se decodifica texto codificado y se ejecuta en %2$@ lugares.",
+      "other": "Se decodifica texto codificado y se ejecuta en %2$@ lugares."
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ comando desactiva una protección de seguridad.",
+      "many": "%2$@ comandos desactivan protecciones de seguridad.",
+      "other": "%2$@ comandos desactivan protecciones de seguridad."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "Se descarga código de internet y se ejecuta en %2$@ lugar.",
+      "many": "Se descarga código de internet y se ejecuta en %2$@ lugares.",
+      "other": "Se descarga código de internet y se ejecuta en %2$@ lugares."
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ comando se ejecuta con permisos de administrador.",
+      "many": "%2$@ comandos se ejecutan con permisos de administrador.",
+      "other": "%2$@ comandos se ejecutan con permisos de administrador."
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ comando configura un programa para que se ejecute al iniciar sesión o según un horario.",
+      "many": "%2$@ comandos configuran programas para que se ejecuten al iniciar sesión o según un horario.",
+      "other": "%2$@ comandos configuran programas para que se ejecuten al iniciar sesión o según un horario."
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ comando lee contraseñas, claves o datos del navegador guardados.",
+      "many": "%2$@ comandos leen contraseñas, claves o datos del navegador guardados.",
+      "other": "%2$@ comandos leen contraseñas, claves o datos del navegador guardados."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ comando quita la marca de cuarentena de macOS de los archivos.",
+      "many": "%2$@ comandos quitan la marca de cuarentena de macOS de los archivos.",
+      "other": "%2$@ comandos quitan la marca de cuarentena de macOS de los archivos."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ comando envía archivos o datos a internet.",
+      "many": "%2$@ comandos envían archivos o datos a internet.",
+      "other": "%2$@ comandos envían archivos o datos a internet."
+    },
     "finding.secret.apiKey": "Claves de API ocultas: %lld.",
     "finding.secret.authorizationHeader": "Credenciales de autorización ocultas: %lld.",
     "finding.secret.cloudAccessKey": "Claves de acceso a la nube ocultas: %lld.",
@@ -315,6 +519,11 @@
       "many": "%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos.",
       "other": "%2$@ posibles secretos ocultos. La selección y la copia usan el texto con los valores ocultos."
     },
+    "findings.report.copied": "Informe de hallazgos copiado",
+    "findings.report.copy": "Copiar informe de hallazgos",
+    "findings.report.copyHint": "Copia una lista de estos hallazgos. No se incluye texto del archivo.",
+    "findings.report.footer": "Esta lista no contiene texto del archivo.",
+    "findings.report.heading": "Hallazgos: %@",
     "format.archive.7z.description": "Listas acotadas de entradas 7z leídas de la cabecera, incluso comprimida. Los datos de los archivos nunca se decodifican; los archivos con cabeceras cifradas no se listan.",
     "format.archive.7z.name": "Archivos 7-Zip",
     "format.archive.bzip2.description": "Descompresión acotada de flujos bzip2: listas TAR.BZ2 y texto compatible. El resto del contenido se indica como binario.",
@@ -405,6 +614,12 @@
     "format.document.fictionbook.name": "Libros FictionBook (FB2)",
     "format.document.web-archive.description": "Texto de páginas MHTML guardadas; las páginas nunca se muestran ni se cargan.",
     "format.document.web-archive.name": "Archivos web (MHTML)",
+    "format.ml.gguf.description": "Arquitectura, tamaño, cuantización, longitud de contexto, licencia y plantilla de chat, leídos de la cabecera. Los pesos del modelo nunca se leen.",
+    "format.ml.gguf.name": "Modelos GGUF",
+    "format.ml.pickle.description": "Lo que importaría la carga del archivo, comprobado sin cargarlo. Un archivo sin hallazgos aún puede no ser seguro.",
+    "format.ml.pickle.name": "Archivos de PyTorch y Pickle",
+    "format.ml.safetensors.description": "Tensores, número de parámetros, tipos de datos y metadatos leídos de la cabecera, con detalles de LoRA y shards. Los pesos del modelo nunca se leen.",
+    "format.ml.safetensors.name": "Modelos Safetensors",
     "format.model.3mf.description": "Vista previa 3D local de modelos de impresión 3D, con la disposición en la bandeja y las unidades. No se muestran colores, materiales ni ajustes del laminador.",
     "format.model.3mf.name": "Modelos 3D 3MF",
     "format.model.obj.description": "Vista previa 3D local de geometría poligonal. Nunca se leen materiales, texturas ni archivos vinculados.",
@@ -417,10 +632,18 @@
     "format.package.android.name": "Apps de Android (APK, AAB)",
     "format.package.application.description": "Identidad, versión, arquitecturas, resumen de la firma y tamaño. No se ejecuta nada y la firma no se valida.",
     "format.package.application.name": "Paquetes de aplicaciones",
+    "format.package.browser-extension.description": "Permisos, acceso a sitios, dirección de actualización y política de seguridad de contenido, leídos del manifiesto. No se instala ni se ejecuta nada.",
+    "format.package.browser-extension.name": "Extensiones de navegador (XPI, CRX)",
+    "format.package.editor-extension.description": "Publicador, versión, cuándo se inicia, código nativo incluido y caracteres ocultos. No se instala ni se ejecuta nada.",
+    "format.package.editor-extension.name": "Extensiones de editor (VSIX)",
     "format.package.installer.description": "Contenido, identificadores, versiones y nombres de scripts. Los scripts y los payloads nunca se leen.",
     "format.package.installer.name": "Paquetes de instalación",
     "format.package.ios-app.description": "Info.plist, perfil de aprovisionamiento, icono y lista de archivos. No se extrae ni se ejecuta nada.",
     "format.package.ios-app.name": "Apps de iOS (IPA)",
+    "format.package.mcp-bundle.description": "Programa, herramientas, ajustes y acceso a carpetas del servidor, leídos del manifiesto. No se instala ni se ejecuta nada.",
+    "format.package.mcp-bundle.name": "Paquetes MCP",
+    "format.package.python-wheel.description": "Nombre, versión, requisitos, comandos y archivos que se ejecutan cuando Python se inicia. No se instala ni se ejecuta nada.",
+    "format.package.python-wheel.name": "Wheels de Python",
     "format.security.certificate.description": "Detalles y huellas de certificados. Las claves privadas permanecen ocultas y no se evalúa la confianza.",
     "format.security.certificate.name": "Certificados",
     "format.text.asciidoc.description": "Encabezados, listas, bloques y avisos de AsciiDoc sin conexión, más código fuente seguro; los include nunca se siguen.",
@@ -488,6 +711,16 @@
     "help.keyboard.body": "⌘1 a ⌘4 cambian de página. ⌘, abre General. ⌘Z deshace el último restablecimiento, cambio masivo, importación de tema o eliminación de perfil; ⇧⌘Z lo rehace.",
     "help.keyboard.title": "Atajos de teclado",
     "listing.risk.hiddenCharacters": "Caracteres ocultos en el nombre",
+    "mesh.printCheck.estimate": "Si se imprime macizo en PLA: unos %1$@ %2$@ y %3$@ %4$@ de filamento de %5$@ %6$@. Los laminadores suelen imprimir con menos relleno, así que es un límite superior.",
+    "mesh.printCheck.estimateIfMillimetres": "Si las unidades son milímetros y se imprime macizo en PLA: unos %1$@ %2$@ y %3$@ %4$@ de filamento de %5$@ %6$@. Los laminadores suelen imprimir con menos relleno, así que es un límite superior.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "%2$@ arista compartida por más de dos caras",
+      "other": "%2$@ aristas compartidas por más de dos caras"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ arista abierta (un hueco en la superficie)",
+      "other": "%2$@ aristas abiertas (huecos en la superficie)"
+    },
     "midi.duration": "Duración",
     "midi.noAutoplay": "La reproducción comienza solo cuando pulsas Reproducir.",
     "midi.pause": "Pausar",
@@ -519,6 +752,38 @@
     "notebook.output.numbered": "Salida [%lld]",
     "notebook.output.stderr": "Flujo de error",
     "notebook.truncated": "Vista previa abreviada. Celdas mostradas: %1$lld de %2$lld.",
+    "preview.addon.activationEvents": "Eventos de activación",
+    "preview.addon.addonID": "ID del complemento",
+    "preview.addon.arguments": "Argumentos",
+    "preview.addon.author": "Autor",
+    "preview.addon.background": "Archivos en segundo plano",
+    "preview.addon.browser": "Navegador",
+    "preview.addon.categories": "Categorías",
+    "preview.addon.command": "Comando",
+    "preview.addon.commands": "Número de comandos",
+    "preview.addon.contentScriptMatches": "Sitios de los scripts de contenido",
+    "preview.addon.description": "Descripción",
+    "preview.addon.engine": "Versión de VS Code",
+    "preview.addon.entry": "Archivo de entrada",
+    "preview.addon.entryPoint": "Punto de entrada",
+    "preview.addon.environment": "Nombres de variables de entorno",
+    "preview.addon.extensionDependencies": "Dependencias de extensiones",
+    "preview.addon.extensionPack": "Paquete de extensiones",
+    "preview.addon.hostPermissions": "Permisos de host",
+    "preview.addon.license": "Licencia",
+    "preview.addon.manifestVersion": "Versión del manifiesto",
+    "preview.addon.optionalPermissions": "Permisos opcionales",
+    "preview.addon.prompts": "Prompts",
+    "preview.addon.publisher": "Editor",
+    "preview.addon.required": "Obligatorio",
+    "preview.addon.runtimes": "Entornos de ejecución",
+    "preview.addon.sensitive": "Confidencial",
+    "preview.addon.serverType": "Tipo de servidor",
+    "preview.addon.settings": "Ajustes",
+    "preview.addon.tools": "Herramientas",
+    "preview.addon.untrustedWorkspaces": "Áreas de trabajo no confiables",
+    "preview.addon.updateURL": "Dirección de actualización",
+    "preview.addon.webEntry": "Archivo de entrada web",
     "preview.archive.entryEncrypted": "Cifrado",
     "preview.archive.entryModified": "Modificado",
     "preview.archive.locked": "Bloqueado",
@@ -723,6 +988,18 @@
       "other": "Posibles secretos ocultos: %2$@."
     },
     "preview.info.onThisMac": "Procesado en este Mac",
+    "preview.install.commands": "Comandos instalados",
+    "preview.install.dependencies": "Dependencias",
+    "preview.install.generator": "Creado con",
+    "preview.install.installedScripts": "Scripts instalados",
+    "preview.install.license": "Licencia",
+    "preview.install.nativeModules": "Módulos nativos",
+    "preview.install.pureLibrary": "Biblioteca Python pura",
+    "preview.install.requiresPython": "Python requerido",
+    "preview.install.startupFiles": "Archivos de ruta instalados (.pth)",
+    "preview.install.summary": "Resumen",
+    "preview.install.tags": "Etiquetas de compatibilidad",
+    "preview.install.wheelVersion": "Versión del formato wheel",
     "preview.interaction.close": "Cerrar",
     "preview.interaction.copied": "Copiado en el portapapeles",
     "preview.interaction.copy": "Copiar",
@@ -823,6 +1100,44 @@
     "preview.mode.summary": "Resumen",
     "preview.mode.table": "Tabla",
     "preview.mode.tree": "Árbol",
+    "preview.model.adapterKind": "Adaptador",
+    "preview.model.alignment": "Alineación (bytes)",
+    "preview.model.architecture": "Arquitectura",
+    "preview.model.author": "Autor",
+    "preview.model.baseModels": "Modelos base",
+    "preview.model.bitsPerWeight": "Bits por peso",
+    "preview.model.blockCount": "Número de capas",
+    "preview.model.chatTemplate": "Plantilla de chat",
+    "preview.model.chatTemplateBytes": "Tamaño de la plantilla de chat (bytes)",
+    "preview.model.contextLength": "Longitud de contexto",
+    "preview.model.dataBytes": "Tamaño de los datos de tensores (bytes)",
+    "preview.model.dtypes": "Tipos de datos",
+    "preview.model.embeddingLength": "Tamaño del embedding",
+    "preview.model.expertCount": "Expertos",
+    "preview.model.expertUsedCount": "Expertos usados por token",
+    "preview.model.fileType": "Tipo de archivo",
+    "preview.model.ggufVersion": "Versión de GGUF",
+    "preview.model.headCount": "Cabezas de atención",
+    "preview.model.headCountKV": "Cabezas de clave/valor",
+    "preview.model.headerBytes": "Tamaño del encabezado (bytes)",
+    "preview.model.languages": "Idiomas",
+    "preview.model.license": "Licencia",
+    "preview.model.loraRank": "Rango de LoRA",
+    "preview.model.metadataCount": "Entradas de metadatos",
+    "preview.model.organization": "Organización",
+    "preview.model.otherMetadata": "Otros metadatos",
+    "preview.model.parameters": "Parámetros",
+    "preview.model.quantization": "Cuantización",
+    "preview.model.quantizedBy": "Cuantizado por",
+    "preview.model.shardCount": "Fragmentos del conjunto",
+    "preview.model.shardIndex": "Fragmento",
+    "preview.model.sizeLabel": "Etiqueta de tamaño",
+    "preview.model.tags": "Etiquetas",
+    "preview.model.tensorCount": "Número de tensores",
+    "preview.model.tensorTypes": "Tipos de tensores",
+    "preview.model.tensors": "Tensores",
+    "preview.model.tokenizer": "Tokenizador",
+    "preview.model.vocabularySize": "Tamaño del vocabulario",
     "preview.outline.duplicateKey": "Clave duplicada",
     "preview.outline.key": "Clave",
     "preview.outline.value": "Valor",
@@ -937,6 +1252,22 @@
     "preview.package.versionCode": "Código de versión",
     "preview.package.versionName": "Nombre de versión",
     "preview.package.webSeeds": "Web seeds",
+    "preview.pickle.checked": "Comprobado",
+    "preview.pickle.checked.importsOnly": "Solo importaciones. El archivo nunca se cargó.",
+    "preview.pickle.checksumErrors": "Sumas de verificación que no coinciden",
+    "preview.pickle.count": "Apariciones",
+    "preview.pickle.imports": "Importaciones",
+    "preview.pickle.kind": "Tipo",
+    "preview.pickle.kind.code": "Puede ejecutar código",
+    "preview.pickle.kind.expected": "Esperado en datos de modelo",
+    "preview.pickle.kind.networkOrFiles": "Red o archivos",
+    "preview.pickle.kind.uncommon": "Poco habitual",
+    "preview.pickle.partial": "Comprobado parcialmente",
+    "preview.pickle.persistentIDs": "ID persistentes",
+    "preview.pickle.pickleProtocol": "Protocolo pickle",
+    "preview.pickle.pickles": "Pickles analizados",
+    "preview.pickle.storageBytes": "Bytes de almacenamiento de tensores",
+    "preview.pickle.storages": "Almacenamientos de tensores",
     "preview.privacyNotice": "Los posibles secretos se ocultan. La selección y la copia usan el contenido con los secretos ocultos.",
     "preview.profile.shownRows": {
       "one": "El perfil usa las primeras filas leídas: %2$@.",

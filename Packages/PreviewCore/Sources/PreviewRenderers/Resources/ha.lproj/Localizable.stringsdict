@@ -66,6 +66,390 @@
 			<string>Wannan dubawa tana karanta takardu masu abubuwa har %2$@, amma wannan takardar tana da fiye da haka. Buɗe fayil ɗin a cikin manhajar da aka ƙera don irin wannan fayil.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>A ciki akwai shiri ko ɗakin karatu na native guda %2$@.</string>
+			<key>other</key>
+			<string>A ciki akwai shirye-shirye ko ɗakunan karatu na native guda %2$@.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentHooks</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarni %2$@ yana gudana da kansa lokacin da wakilin AI ya yi aiki (hook).</string>
+			<key>other</key>
+			<string>Umarni %2$@ suna gudana da kansu lokacin da wakilin AI ya yi aiki (hooks).</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentPermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Saiti %2$@ yana ba wa wakilin AI damar yin aiki ba tare da tambaya tukuna ba.</string>
+			<key>other</key>
+			<string>Saituna %2$@ suna ba wa wakilin AI damar yin aiki ba tare da tambaya tukuna ba.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.containerCommands</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarnin dev container %2$@ yana gudana da kansa a cikin container.</string>
+			<key>other</key>
+			<string>Umarnin dev container %2$@ suna gudana da kansu a cikin container.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.folderOpenTask</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Aiki %2$@ yana gudana da kansa idan an buɗe babban fayil a manhajar gyaran lamba.</string>
+			<key>other</key>
+			<string>Ayyuka %2$@ suna gudana da kansu idan an buɗe babban fayil a manhajar gyaran lamba.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.hostCommand</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarnin dev container %2$@ yana gudana a wannan Mac kafin container ya fara.</string>
+			<key>other</key>
+			<string>Umarnin dev container %2$@ suna gudana a wannan Mac kafin container ya fara.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.installScripts</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Script na kunshi %2$@ yana gudana da kansa yayin shigarwa.</string>
+			<key>other</key>
+			<string>Script na kunshi %2$@ suna gudana da kansu yayin shigarwa.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.localServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>MCP server %2$@ yana fara shiri a wannan Mac.</string>
+			<key>other</key>
+			<string>MCP server %2$@ suna fara shirye-shirye a wannan Mac.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.remoteServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>MCP server %2$@ yana haɗuwa da wani sabis a intanet.</string>
+			<key>other</key>
+			<string>MCP server %2$@ suna haɗuwa da sabis a intanet.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.serverEnvironment</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>An ba da environment variable %2$@ ga MCP server.</string>
+			<key>other</key>
+			<string>An ba da environment variable %2$@ ga MCP server.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Saiti %2$@ yana neman kalmar sirri ko makulli.</string>
+			<key>other</key>
+			<string>Saituna %2$@ suna neman kalmomin sirri ko makullai.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Saiti %2$@ yana ba server damar shiga babban fayil ɗin Home, Documents, Downloads ko Desktop naku.</string>
+			<key>other</key>
+			<string>Saituna %2$@ suna ba server damar shiga manyan fayilolin Home, Documents, Downloads ko Desktop naku.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bayanin kayan aiki %2$@ yana umartar AI ya karanta wasu fayiloli ko ya ɓoye wani abu daga gare ku.</string>
+			<key>other</key>
+			<string>Bayanan kayan aiki %2$@ suna umartar AI ya karanta wasu fayiloli ko ya ɓoye wani abu daga gare ku.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expired</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Takardar shaida %2$@ ta ƙare aiki.</string>
+			<key>other</key>
+			<string>Takaddun shaida %2$@ sun ƙare aiki.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Takardar shaida za ta ƙare aiki a cikin kwana %2$@.</string>
+			<key>other</key>
+			<string>Takardar shaida za ta ƙare aiki a cikin kwana %2$@.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.notYetValid</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Takardar shaida %2$@ ba ta fara aiki ba tukuna.</string>
+			<key>other</key>
+			<string>Takaddun shaida %2$@ ba su fara aiki ba tukuna.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.weakKey</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Takardar shaida %2$@ tana amfani da gajeren makullin RSA.</string>
+			<key>other</key>
+			<string>Takaddun shaida %2$@ suna amfani da gajerun makullan RSA.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableCodeSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>An adana sirri %2$@ na lambar amfani sau ɗaya a nan a siffar da za a iya karantawa.</string>
+			<key>other</key>
+			<string>An adana sirrika %2$@ na lambobin amfani sau ɗaya a nan a siffar da za a iya karantawa.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableLogins</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>An adana bayanin shiga %2$@ na manajan kalmomin sirri a nan a siffar da za a iya karantawa. Share wannan fayil ɗin export idan ba a buƙatarsa kuma.</string>
+			<key>other</key>
+			<string>An adana bayanan shiga %2$@ na manajan kalmomin sirri a nan a siffar da za a iya karantawa. Share wannan fayil ɗin export idan ba a buƙatarsa kuma.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Yana shigar da wani extension guda %2$@ tare da shi.</string>
+			<key>other</key>
+			<string>Yana shigar da wasu extension guda %2$@ tare da shi.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Yana neman izini %2$@ na burauza mai muhimmanci.</string>
+			<key>other</key>
+			<string>Yana neman izini %2$@ na burauza masu muhimmanci.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Dependency %2$@ yana zuwa daga Git repository ko adireshin yanar gizo, ba daga registry ba.</string>
+			<key>other</key>
+			<string>Dependencies %2$@ suna zuwa daga Git repository ko adireshin yanar gizo, ba daga registry ba.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Wuri %2$@ yana gudanar da lambar Python duk lokacin da Python ya fara.</string>
+			<key>other</key>
+			<string>Wurare %2$@ suna gudanar da lambar Python duk lokacin da Python ya fara.</string>
+		</dict>
+	</dict>
+	<key>finding.launch.watchPaths</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Hanya %2$@ da ake sa ido a kanta tana fara shirin idan ta canja.</string>
+			<key>other</key>
+			<string>Hanyoyi %2$@ da ake sa ido a kansu suna fara shirin idan sun canja.</string>
+		</dict>
+	</dict>
 	<key>finding.listing.hiddenCharacters</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -80,6 +464,214 @@
 			<string>Suna %2$@ da aka jera yana ɗauke da haruffan da aka ɓoye.</string>
 			<key>other</key>
 			<string>Sunaye %2$@ da aka jera suna ɗauke da haruffan da aka ɓoye.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Import %2$@ yana ba da damar amfani da hanyar sadarwa ko fayiloli idan an ɗora wannan fayil.</string>
+			<key>other</key>
+			<string>Import %2$@ suna ba da damar amfani da hanyar sadarwa ko fayiloli idan an ɗora wannan fayil.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Import %2$@ yana ba da damar gudanar da umarni ko lamba idan an ɗora wannan fayil.</string>
+			<key>other</key>
+			<string>Import %2$@ suna ba da damar gudanar da umarni ko lamba idan an ɗora wannan fayil.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Import %2$@ ba bayanan samfuri na yau da kullum ba ne.</string>
+			<key>other</key>
+			<string>Import %2$@ ba bayanan samfuri na yau da kullum ba ne.</string>
+		</dict>
+	</dict>
+	<key>finding.profile.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Wannan bayanin provisioning zai ƙare aiki a cikin kwana %2$@.</string>
+			<key>other</key>
+			<string>Wannan bayanin provisioning zai ƙare aiki a cikin kwana %2$@.</string>
+		</dict>
+	</dict>
+	<key>finding.script.asksForPassword</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Wuri %2$@ yana neman kalmar sirri.</string>
+			<key>other</key>
+			<string>Wurare %2$@ suna neman kalmar sirri.</string>
+		</dict>
+	</dict>
+	<key>finding.script.decodeAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Wuri %2$@ yana decoding rubutun da aka yi wa encoding, sannan yana gudanar da shi.</string>
+			<key>other</key>
+			<string>Wurare %2$@ suna decoding rubutun da aka yi wa encoding, sannan suna gudanar da shi.</string>
+		</dict>
+	</dict>
+	<key>finding.script.disablesProtection</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarni %2$@ yana kashe wata kariyar tsaro.</string>
+			<key>other</key>
+			<string>Umarni %2$@ suna kashe kariyar tsaro.</string>
+		</dict>
+	</dict>
+	<key>finding.script.downloadAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Wuri %2$@ yana sauke lamba daga intanet kuma yana gudanar da ita.</string>
+			<key>other</key>
+			<string>Wurare %2$@ suna sauke lamba daga intanet kuma suna gudanar da ita.</string>
+		</dict>
+	</dict>
+	<key>finding.script.elevates</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarni %2$@ yana gudana da izinin mai gudanarwa.</string>
+			<key>other</key>
+			<string>Umarni %2$@ suna gudana da izinin mai gudanarwa.</string>
+		</dict>
+	</dict>
+	<key>finding.script.persistence</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarni %2$@ yana saita shirin da zai gudana lokacin shiga ko bisa jadawali.</string>
+			<key>other</key>
+			<string>Umarni %2$@ suna saita shirye-shiryen da za su gudana lokacin shiga ko bisa jadawali.</string>
+		</dict>
+	</dict>
+	<key>finding.script.readsSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarni %2$@ yana karanta kalmomin sirri, makullai ko bayanan burauza da aka adana.</string>
+			<key>other</key>
+			<string>Umarni %2$@ suna karanta kalmomin sirri, makullai ko bayanan burauza da aka adana.</string>
+		</dict>
+	</dict>
+	<key>finding.script.removesQuarantine</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarni %2$@ yana cire alamar keɓewa (quarantine) ta macOS daga fayiloli.</string>
+			<key>other</key>
+			<string>Umarni %2$@ suna cire alamar keɓewa (quarantine) ta macOS daga fayiloli.</string>
+		</dict>
+	</dict>
+	<key>finding.script.uploadsFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Umarni %2$@ yana aika fayiloli ko bayanai zuwa intanet.</string>
+			<key>other</key>
+			<string>Umarni %2$@ suna aika fayiloli ko bayanai zuwa intanet.</string>
 		</dict>
 	</dict>
 	<key>finding.summary</key>
@@ -112,6 +704,38 @@
 			<string>An ɓoye sirri %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa.</string>
 			<key>other</key>
 			<string>An ɓoye sirrika %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa.</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ gefen da fuskoki fiye da biyu ke rabawa</string>
+			<key>other</key>
+			<string>%2$@ gefuna da fuskoki fiye da biyu ke rabawa</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ gefen buɗe (gibi a saman)</string>
+			<key>other</key>
+			<string>%2$@ gefuna buɗaɗɗu (giɓi a saman)</string>
 		</dict>
 	</dict>
 	<key>preview.count.lines</key>

@@ -85,8 +85,8 @@ struct CompanionModelChecks {
         let descriptors = FormatCatalog.standard.descriptors
         let optIn = descriptors.filter { !$0.defaultEnabled }.map(\.id)
         try check(optIn.isEmpty, "Version 1.0 has no format that is off by default (the STEP and IGES previews are not shipped)")
-        try check(descriptors.count == 74 && !descriptors.contains { $0.id.rawValue.hasPrefix("cad.") },
-                  "The shipped catalog has 74 formats and no CAD format")
+        try check(descriptors.count == 81 && !descriptors.contains { $0.id.rawValue.hasPrefix("cad.") },
+                  "The shipped catalog has 81 formats and no CAD format")
 
         var snapshot = PreviewPreferencesSnapshot.defaults
         var summary = FileTypeEnablementSummary(descriptors, isEnabled: { snapshot.isEnabled($0) })

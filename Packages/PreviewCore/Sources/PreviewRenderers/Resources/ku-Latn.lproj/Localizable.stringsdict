@@ -66,6 +66,390 @@
 			<string>Ev pêşdîtin belgeyên heta %2$@ hêman dixwîne, û di vê belgeyê de ji wê bêtir hene. Pelê di sepanekê de veke ku ji bo vê cureya pelê hatiye çêkirin.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Di hundirê wê de %2$@ bername an pirtûkxaneya bi koda makîneyê heye.</string>
+			<key>other</key>
+			<string>Di hundirê wê de %2$@ bername an pirtûkxaneya bi koda makîneyê hene.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentHooks</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ferman dema ajanekî AI çalakî dike, bi xwe dixebite (hook).</string>
+			<key>other</key>
+			<string>%2$@ ferman dema ajanekî AI çalakî dike, bi xwe dixebitin (hook).</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentPermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ mîheng dihêle ku ajanekî AI bêyî ku pêşî bipirse çalakî bike.</string>
+			<key>other</key>
+			<string>%2$@ mîheng dihêlin ku ajanekî AI bêyî ku pêşî bipirse çalakî bike.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.containerCommands</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ fermana konteynera pêşkeftinê di hundirê konteynerê de bi xwe dixebite.</string>
+			<key>other</key>
+			<string>%2$@ fermanên konteynera pêşkeftinê di hundirê konteynerê de bi xwe dixebitin.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.folderOpenTask</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ peywir dema peldank di edîtora kodê de tê vekirin, bi xwe dixebite.</string>
+			<key>other</key>
+			<string>%2$@ peywir dema peldank di edîtora kodê de tê vekirin, bi xwe dixebitin.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.hostCommand</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ fermana konteynera pêşkeftinê berî destpêkirina konteynerê li ser vê Mac’ê dixebite.</string>
+			<key>other</key>
+			<string>%2$@ fermanên konteynera pêşkeftinê berî destpêkirina konteynerê li ser vê Mac’ê dixebitin.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.installScripts</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ skrîpta pakêtê di dema sazkirinê de bi xwe dixebite.</string>
+			<key>other</key>
+			<string>%2$@ skrîptên pakêtê di dema sazkirinê de bi xwe dixebitin.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.localServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ servera MCP bernameyekê li ser vê Mac’ê dixebitîne.</string>
+			<key>other</key>
+			<string>%2$@ serverên MCP bernameyan li ser vê Mac’ê dixebitînin.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.remoteServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ servera MCP xwe bi karûbarekî li ser înternetê ve girê dide.</string>
+			<key>other</key>
+			<string>%2$@ serverên MCP xwe bi karûbaran li ser înternetê ve girê didin.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.serverEnvironment</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ guherbara hawîrdorê ji serverên MCP re tê şandin.</string>
+			<key>other</key>
+			<string>%2$@ guherbarên hawîrdorê ji serverên MCP re têne şandin.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ mîheng şîfre an mifteyekê dixwaze.</string>
+			<key>other</key>
+			<string>%2$@ mîheng şîfre an mifte dixwazin.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ mîheng peldanka te ya Home, Documents, Downloads an Desktop dide serverê.</string>
+			<key>other</key>
+			<string>%2$@ mîheng peldankên te yên Home, Documents, Downloads an Desktop didin serverê.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ danasîna amûrê ji AI re dibêje pelên din bixwîne an tiştek ji te veşêre.</string>
+			<key>other</key>
+			<string>%2$@ danasînên amûrê ji AI re dibêjin pelên din bixwîne an tiştek ji te veşêre.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expired</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ sertîfîka, dema wê qediyaye.</string>
+			<key>other</key>
+			<string>%2$@ sertîfîka, dema wan qediyaye.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Sertîfîkayek di %2$@ rojê de diqede.</string>
+			<key>other</key>
+			<string>Sertîfîkayek di %2$@ rojan de diqede.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.notYetValid</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ sertîfîka hê ne derbasdar e.</string>
+			<key>other</key>
+			<string>%2$@ sertîfîka hê ne derbasdar in.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.weakKey</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ sertîfîka mifteyeke RSA ya kurt bi kar tîne.</string>
+			<key>other</key>
+			<string>%2$@ sertîfîka mifteyên RSA yên kurt bi kar tînin.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableCodeSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ sira koda yekcarî li vir bi awayekî ku tê xwendin hatiye tomarkirin.</string>
+			<key>other</key>
+			<string>%2$@ sirên koda yekcarî li vir bi awayekî ku tê xwendin hatine tomarkirin.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableLogins</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ têketina rêveberê şîfreyan li vir bi awayekî ku tê xwendin hatiye tomarkirin. Gava êdî hewce nebe, vê hinardeyê jê bibe.</string>
+			<key>other</key>
+			<string>%2$@ têketinên rêveberê şîfreyan li vir bi awayekî ku tê xwendin hatine tomarkirin. Gava êdî hewce nebe, vê hinardeyê jê bibe.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bi xwe re %2$@ pêveka din saz dike.</string>
+			<key>other</key>
+			<string>Bi xwe re %2$@ pêveka din saz dike.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ destûra hesas a gerokê dixwaze.</string>
+			<key>other</key>
+			<string>%2$@ destûra hesas a gerokê dixwaze.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ girêdayî li şûna tomargehê ji depoyeke Git an navnîşaneke webê tê.</string>
+			<key>other</key>
+			<string>%2$@ girêdayî li şûna tomargehê ji depoyên Git an navnîşanên webê tên.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ cih her dema Python dest pê dike koda Python dixebitîne.</string>
+			<key>other</key>
+			<string>%2$@ cih her dema Python dest pê dike koda Python dixebitînin.</string>
+		</dict>
+	</dict>
+	<key>finding.launch.watchPaths</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ rêça çavdêrîkirî dema diguhere bernameyê dixebitîne.</string>
+			<key>other</key>
+			<string>%2$@ rêçên çavdêrîkirî dema diguherin bernameyê dixebitînin.</string>
+		</dict>
+	</dict>
 	<key>finding.listing.hiddenCharacters</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -80,6 +464,214 @@
 			<string>%2$@ navê lîstekirî tîpên veşartî dihewîne.</string>
 			<key>other</key>
 			<string>%2$@ navên lîstekirî tîpên veşartî dihewînin.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ import dihêle ku dema ev pel tê barkirin tor an pel bêne bikaranîn.</string>
+			<key>other</key>
+			<string>%2$@ import dihêlin ku dema ev pel tê barkirin tor an pel bêne bikaranîn.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ import dihêle ku dema ev pel tê barkirin ferman an kod bêne xebitandin.</string>
+			<key>other</key>
+			<string>%2$@ import dihêlin ku dema ev pel tê barkirin ferman an kod bêne xebitandin.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ import ne daneyeke modelê ya asayî ye.</string>
+			<key>other</key>
+			<string>%2$@ import ne daneyên modelê yên asayî ne.</string>
+		</dict>
+	</dict>
+	<key>finding.profile.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Ev profîla provisioning di %2$@ rojê de diqede.</string>
+			<key>other</key>
+			<string>Ev profîla provisioning di %2$@ rojan de diqede.</string>
+		</dict>
+	</dict>
+	<key>finding.script.asksForPassword</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ cih şîfre dixwaze.</string>
+			<key>other</key>
+			<string>%2$@ cih şîfre dixwazin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.decodeAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ cih nivîsa kodkirî dekod dike û dixebitîne.</string>
+			<key>other</key>
+			<string>%2$@ cih nivîsa kodkirî dekod dikin û dixebitînin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.disablesProtection</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ferman parastineke ewlehiyê neçalak dike.</string>
+			<key>other</key>
+			<string>%2$@ ferman parastinên ewlehiyê neçalak dikin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.downloadAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ cih kodê ji înternetê dadikêşe û dixebitîne.</string>
+			<key>other</key>
+			<string>%2$@ cih kodê ji înternetê dadikêşin û dixebitînin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.elevates</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ferman bi mafên rêveber dixebite.</string>
+			<key>other</key>
+			<string>%2$@ ferman bi mafên rêveber dixebitin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.persistence</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ferman bernameyekê saz dike ku di têketinê de an di demên diyarkirî de dixebite.</string>
+			<key>other</key>
+			<string>%2$@ ferman bernameyan saz dikin ku di têketinê de an di demên diyarkirî de dixebitin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.readsSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ferman şîfre, mifte an daneyên gerokê yên tomarkirî dixwîne.</string>
+			<key>other</key>
+			<string>%2$@ ferman şîfre, mifte an daneyên gerokê yên tomarkirî dixwînin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.removesQuarantine</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ferman nîşana karantînayê ya macOS ji pelan radike.</string>
+			<key>other</key>
+			<string>%2$@ ferman nîşana karantînayê ya macOS ji pelan radikin.</string>
+		</dict>
+	</dict>
+	<key>finding.script.uploadsFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ ferman pel an dane ji înternetê re dişîne.</string>
+			<key>other</key>
+			<string>%2$@ ferman pel an dane ji înternetê re dişînin.</string>
 		</dict>
 	</dict>
 	<key>finding.summary</key>
@@ -112,6 +704,38 @@
 			<string>%2$@ sira muhtemel hat veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin.</string>
 			<key>other</key>
 			<string>%2$@ sirên muhtemel hatin veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin.</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ qerax bi zêdetirî ji du rûyan re hevpar e</string>
+			<key>other</key>
+			<string>%2$@ qerax bi zêdetirî ji du rûyan re hevpar in</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ qeraxa vekirî (valahiyek di rûyê de)</string>
+			<key>other</key>
+			<string>%2$@ qeraxên vekirî (valahî di rûyê de)</string>
 		</dict>
 	</dict>
 	<key>preview.count.lines</key>

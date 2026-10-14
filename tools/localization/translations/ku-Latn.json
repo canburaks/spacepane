@@ -262,12 +262,102 @@
     "finding.archive.macMetadata": "Hêmanên çavkaniya Mac di __MACOSX de: %lld.",
     "finding.archive.nested": "Arşîvên di hundirê vî arşîvî de, nehatine vekirin: %lld.",
     "finding.archive.unsafePath": "Hêmanên ku dê li derveyî peldanka armancê werin nivîsandin: %lld.",
+    "finding.artifact.mismatchedContent": "Forma naverokê ji ya ku navê pelê dibêje cuda ye.",
+    "finding.artifact.nativeCode": {
+      "one": "Di hundirê wê de %2$@ bername an pirtûkxaneya bi koda makîneyê heye.",
+      "other": "Di hundirê wê de %2$@ bername an pirtûkxaneya bi koda makîneyê hene."
+    },
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ ferman dema ajanekî AI çalakî dike, bi xwe dixebite (hook).",
+      "other": "%2$@ ferman dema ajanekî AI çalakî dike, bi xwe dixebitin (hook)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ mîheng dihêle ku ajanekî AI bêyî ku pêşî bipirse çalakî bike.",
+      "other": "%2$@ mîheng dihêlin ku ajanekî AI bêyî ku pêşî bipirse çalakî bike."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ fermana konteynera pêşkeftinê di hundirê konteynerê de bi xwe dixebite.",
+      "other": "%2$@ fermanên konteynera pêşkeftinê di hundirê konteynerê de bi xwe dixebitin."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ peywir dema peldank di edîtora kodê de tê vekirin, bi xwe dixebite.",
+      "other": "%2$@ peywir dema peldank di edîtora kodê de tê vekirin, bi xwe dixebitin."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ fermana konteynera pêşkeftinê berî destpêkirina konteynerê li ser vê Mac’ê dixebite.",
+      "other": "%2$@ fermanên konteynera pêşkeftinê berî destpêkirina konteynerê li ser vê Mac’ê dixebitin."
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ skrîpta pakêtê di dema sazkirinê de bi xwe dixebite.",
+      "other": "%2$@ skrîptên pakêtê di dema sazkirinê de bi xwe dixebitin."
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ servera MCP bernameyekê li ser vê Mac’ê dixebitîne.",
+      "other": "%2$@ serverên MCP bernameyan li ser vê Mac’ê dixebitînin."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ servera MCP xwe bi karûbarekî li ser înternetê ve girê dide.",
+      "other": "%2$@ serverên MCP xwe bi karûbaran li ser înternetê ve girê didin."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ guherbara hawîrdorê ji serverên MCP re tê şandin.",
+      "other": "%2$@ guherbarên hawîrdorê ji serverên MCP re têne şandin."
+    },
     "finding.banner.label": "Tiştên ku di vê pelê de divê werin kontrolkirin",
+    "finding.bundle.asksForSecrets": {
+      "one": "%2$@ mîheng şîfre an mifteyekê dixwaze.",
+      "other": "%2$@ mîheng şîfre an mifte dixwazin."
+    },
+    "finding.bundle.broadFolderAccess": {
+      "one": "%2$@ mîheng peldanka te ya Home, Documents, Downloads an Desktop dide serverê.",
+      "other": "%2$@ mîheng peldankên te yên Home, Documents, Downloads an Desktop didin serverê."
+    },
+    "finding.bundle.runsProgram": "Gava sepanek AI serverê wê çalak dike, li ser vê Mac’ê bernameyekê dixebitîne.",
+    "finding.bundle.toolTextTargetsAssistant": {
+      "one": "%2$@ danasîna amûrê ji AI re dibêje pelên din bixwîne an tiştek ji te veşêre.",
+      "other": "%2$@ danasînên amûrê ji AI re dibêjin pelên din bixwîne an tiştek ji te veşêre."
+    },
+    "finding.certificate.expired": {
+      "one": "%2$@ sertîfîka, dema wê qediyaye.",
+      "other": "%2$@ sertîfîka, dema wan qediyaye."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Sertîfîkayek di %2$@ rojê de diqede.",
+      "other": "Sertîfîkayek di %2$@ rojan de diqede."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ sertîfîka hê ne derbasdar e.",
+      "other": "%2$@ sertîfîka hê ne derbasdar in."
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ sertîfîka mifteyeke RSA ya kurt bi kar tîne.",
+      "other": "%2$@ sertîfîka mifteyên RSA yên kurt bi kar tînin."
+    },
     "finding.detail.cells": "Şane: %@",
     "finding.detail.cellsMore": "Şane: %1$@ û %2$lld yên din",
     "finding.detail.decodedText": "Nivîsa veşartî, wekî nivîsa sade tê nîşandan: %@",
     "finding.detail.lines": "Rêz: %@",
     "finding.detail.linesMore": "Rêz: %1$@ û %2$lld yên din",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ sira koda yekcarî li vir bi awayekî ku tê xwendin hatiye tomarkirin.",
+      "other": "%2$@ sirên koda yekcarî li vir bi awayekî ku tê xwendin hatine tomarkirin."
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ têketina rêveberê şîfreyan li vir bi awayekî ku tê xwendin hatiye tomarkirin. Gava êdî hewce nebe, vê hinardeyê jê bibe.",
+      "other": "%2$@ têketinên rêveberê şîfreyan li vir bi awayekî ku tê xwendin hatine tomarkirin. Gava êdî hewce nebe, vê hinardeyê jê bibe."
+    },
+    "finding.extension.allSites": "Dikare her malperê ku tu serdan dikî bixwîne û biguherîne.",
+    "finding.extension.installsOthers": {
+      "one": "Bi xwe re %2$@ pêveka din saz dike.",
+      "other": "Bi xwe re %2$@ pêveka din saz dike."
+    },
+    "finding.extension.relaxedScriptPolicy": "Polîtîkaya wê ya ewlehiyê dihêle ku nivîs wekî kod bê xebitandin.",
+    "finding.extension.selfHostedUpdates": "Li şûna firoşgeha gerokê, ji serverê xwe yê taybet nûve dibe.",
+    "finding.extension.sensitivePermissions": {
+      "one": "%2$@ destûra hesas a gerokê dixwaze.",
+      "other": "%2$@ destûra hesas a gerokê dixwaze."
+    },
+    "finding.extension.startsAutomatically": "Her dema edîtora kodê tê vekirin dest pê dike.",
     "finding.hidden.agentInstructions": "Ev mîna pelek rêwerzan ji bo amûrên kodkirinê yên AI xuya dike, ku nivîsa veşartî dikare wan rêve bibe.",
     "finding.hidden.bidirectionalControls": "Tîpên guherîna alî yên ku dikarin bikin ku kod ji ya ku dixebite cuda were xwendin: %lld.",
     "finding.hidden.markdownComments": "Şîroveyên HTML yên ku piraniya dîmenderên Markdown vedişêrin: %lld.",
@@ -276,10 +366,33 @@
     "finding.hidden.unicodeTags": "Tîpên tag ên nedîtbar ên ku nivîsa veşartî digirin: %lld.",
     "finding.hidden.variationSelectors": "Hilbijêrên varyasyonê yên neçaverêkirî ku dikarin dane veşêrin: %lld.",
     "finding.hidden.zeroWidth": "Tîpên nedîtbar ên bi firehiya sifir: %lld.",
+    "finding.install.buildScript": "Avakirin an sazkirina vî pakêta çavkaniyê skrîpta wê ya sazkirinê dixebitîne.",
+    "finding.install.nativeBuild": "Sazkirina vî pakêtî, tevî ku skrîptên sazkirinê tune bin jî, koda makîneyê ji pelekî avakirinê kompîle dike.",
+    "finding.install.remoteDependencies": {
+      "one": "%2$@ girêdayî li şûna tomargehê ji depoyeke Git an navnîşaneke webê tê.",
+      "other": "%2$@ girêdayî li şûna tomargehê ji depoyên Git an navnîşanên webê tên."
+    },
+    "finding.install.startupCode": {
+      "one": "%2$@ cih her dema Python dest pê dike koda Python dixebitîne.",
+      "other": "%2$@ cih her dema Python dest pê dike koda Python dixebitînin."
+    },
+    "finding.launch.atLoad": "Bername di têketinê de an di destpêkirina pergalê de dest pê dike.",
+    "finding.launch.hiddenLocation": "Bername di peldankeke demkî, parvekirî an veşartî de ye.",
+    "finding.launch.inlineScript": "Kar koda shell an skrîptê ya ku di hundirê vê pelê de hatiye nivîsandin dixebitîne.",
+    "finding.launch.interval": "Bername her %@ carekê dixebite.",
+    "finding.launch.job": "Ev karekî launchd e: macOS bernameya ku tê de hatiye navkirin dixebitîne.",
+    "finding.launch.keepAlive": "Her carê ku bername raweste, macOS wê dîsa dixebitîne.",
+    "finding.launch.schedule": "Bername li gorî planeke salnameyê dixebite.",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ rêça çavdêrîkirî dema diguhere bernameyê dixebitîne.",
+      "other": "%2$@ rêçên çavdêrîkirî dema diguherin bernameyê dixebitînin."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "%2$@ navê lîstekirî tîpên veşartî dihewîne.",
       "other": "%2$@ navên lîstekirî tîpên veşartî dihewînin."
     },
+    "finding.model.incomplete": "Pel ji ya ku sernivîsa wê dibêje kurttir e, dibe ku daxistin ne temam be.",
+    "finding.model.inconsistentLayout": "Navberên tensorê yên di sernivîsê de li hev diketin an valahî dihêlin, û ev form destûr nade.",
     "finding.more": "Encamên din: %lld",
     "finding.notebook.errorOutputs": "Şaneyên ku şaşiyek tomar kirine: %lld.",
     "finding.notebook.executionGaps": "Hejmarên xebitandinê hin nirxan derbas dikin, ji ber vê yekê şane ji nû ve hatine xebitandin an jêbirin. Valahî: %lld.",
@@ -287,12 +400,66 @@
     "finding.notebook.notExecuted": "Tu şaneya kodê nehatiye xebitandin, ji ber vê yekê di defterê de tu encamên tomarkirî tune ne.",
     "finding.notebook.outOfOrder": "Şane ne bi rêzê hatin xebitandin: %@.",
     "finding.notebook.unexecutedCells": "Şaneyên kodê yên qet nehatine xebitandin: %lld.",
+    "finding.pickle.brokenStream": "Dane piştî importan têne birîn. Hin skaner li wê derê dev ji xwendinê berdidin.",
+    "finding.pickle.networkOrFiles": {
+      "one": "%2$@ import dihêle ku dema ev pel tê barkirin tor an pel bêne bikaranîn.",
+      "other": "%2$@ import dihêlin ku dema ev pel tê barkirin tor an pel bêne bikaranîn."
+    },
+    "finding.pickle.runsCode": {
+      "one": "%2$@ import dihêle ku dema ev pel tê barkirin ferman an kod bêne xebitandin.",
+      "other": "%2$@ import dihêlin ku dema ev pel tê barkirin ferman an kod bêne xebitandin."
+    },
+    "finding.pickle.uncommonImports": {
+      "one": "%2$@ import ne daneyeke modelê ya asayî ye.",
+      "other": "%2$@ import ne daneyên modelê yên asayî ne."
+    },
+    "finding.profile.expired": "Dema vê profîla provisioning qediyaye.",
+    "finding.profile.expiresSoon": {
+      "one": "Ev profîla provisioning di %2$@ rojê de diqede.",
+      "other": "Ev profîla provisioning di %2$@ rojan de diqede."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "peldanka hilanîna cloudê",
+    "finding.script.asksForPassword": {
+      "one": "%2$@ cih şîfre dixwaze.",
+      "other": "%2$@ cih şîfre dixwazin."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "%2$@ cih nivîsa kodkirî dekod dike û dixebitîne.",
+      "other": "%2$@ cih nivîsa kodkirî dekod dikin û dixebitînin."
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ ferman parastineke ewlehiyê neçalak dike.",
+      "other": "%2$@ ferman parastinên ewlehiyê neçalak dikin."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "%2$@ cih kodê ji înternetê dadikêşe û dixebitîne.",
+      "other": "%2$@ cih kodê ji înternetê dadikêşin û dixebitînin."
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ ferman bi mafên rêveber dixebite.",
+      "other": "%2$@ ferman bi mafên rêveber dixebitin."
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ ferman bernameyekê saz dike ku di têketinê de an di demên diyarkirî de dixebite.",
+      "other": "%2$@ ferman bernameyan saz dikin ku di têketinê de an di demên diyarkirî de dixebitin."
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ ferman şîfre, mifte an daneyên gerokê yên tomarkirî dixwîne.",
+      "other": "%2$@ ferman şîfre, mifte an daneyên gerokê yên tomarkirî dixwînin."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ ferman nîşana karantînayê ya macOS ji pelan radike.",
+      "other": "%2$@ ferman nîşana karantînayê ya macOS ji pelan radikin."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ ferman pel an dane ji înternetê re dişîne.",
+      "other": "%2$@ ferman pel an dane ji înternetê re dişînin."
+    },
     "finding.secret.apiKey": "Mifteyên API yên hatine veşartin: %lld.",
     "finding.secret.authorizationHeader": "Agahiyên destûrdayînê yên hatine veşartin: %lld.",
     "finding.secret.cloudAccessKey": "Mifteyên gihîştina cloudê yên hatine veşartin: %lld.",
@@ -312,6 +479,11 @@
       "one": "%2$@ sira muhtemel hat veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin.",
       "other": "%2$@ sirên muhtemel hatin veşartin. Hilbijartin û kopîkirin nivîsa veşartî bikar tînin."
     },
+    "findings.report.copied": "Raporta dîtinan hat kopîkirin",
+    "findings.report.copy": "Raporta dîtinan kopî bike",
+    "findings.report.copyHint": "Lîsteyeke van dîtinan kopî dike. Nivîsek ji pelê nayê tevlîkirin.",
+    "findings.report.footer": "Ev lîste tu nivîsê ji pelê nahewîne.",
+    "findings.report.heading": "Dîtin: %@",
     "format.archive.7z.description": "Lîsteyên sînorkirî yên tomarên 7z ji sernivîsê, bi sernivîsên pêçandî jî. Daneyên pelan qet nayên vekirin; arşîvên bi sernivîsên şîfrekirî nayên lîstekirin.",
     "format.archive.7z.name": "Arşîvên 7-Zip",
     "format.archive.bzip2.description": "Vekirina sînorkirî ya herikên bzip2: lîsteyên TAR.BZ2 û nivîsa piştgirîkirî. Naveroka din wekî binary tê ragihandin.",
@@ -402,6 +574,12 @@
     "format.document.fictionbook.name": "Pirtûkên FictionBook (FB2)",
     "format.document.web-archive.description": "Nivîsa rûpelên MHTML yên tomarkirî; rûpel tu carî nayên teşekirin an barkirin.",
     "format.document.web-archive.name": "Arşîvên malperê (MHTML)",
+    "format.ml.gguf.description": "Mîmarî, mezinahî, quantization, dirêjahiya kontekstê, lîsans û şablona sohbetê ji sernivîsê. Giraniyên modelê tu carî nayên xwendin.",
+    "format.ml.gguf.name": "Modelên GGUF",
+    "format.ml.pickle.description": "Barkirina pelê dê çi import bike, bêyî ku pel were barkirin tê kontrolkirin. Pelek ku tiştek tê de nehatibe dîtin jî dibe ku ne ewle be.",
+    "format.ml.pickle.name": "Pelên PyTorch û Pickle",
+    "format.ml.safetensors.description": "Tensor, hejmara parametreyan, cureyên daneyan û metadata ji sernivîsê, bi hûrguliyên LoRA û shard re. Giraniyên modelê tu carî nayên xwendin.",
+    "format.ml.safetensors.name": "Modelên Safetensors",
     "format.model.3mf.description": "Pêşdîtina 3D ya herêmî ji bo modelên çapa 3D, bi cihkirina platformê û yekeyan. Reng, materyal û mîhengên slicerê nayên nîşandan.",
     "format.model.3mf.name": "Modelên 3D yên 3MF",
     "format.model.obj.description": "Pêşdîtina 3D ya herêmî ji bo geometriya pirgoşe. Materyal, tekstûr û pelên girêdayî qet nayên xwendin.",
@@ -414,10 +592,18 @@
     "format.package.android.name": "Sepanên Android (APK, AAB)",
     "format.package.application.description": "Nasname, guherto, mîmarî, kurteya îmzeyê û mezinahî. Tiştek nayê xebitandin û îmze nayê piştrastkirin.",
     "format.package.application.name": "Bundleyên sepanan",
+    "format.package.browser-extension.description": "Destûr, gihîştina malperan, navnîşana nûvekirinê û polîtîkaya ewlehiya naverokê ji manîfestoyê. Tiştek nayê sazkirin an xebitandin.",
+    "format.package.browser-extension.name": "Pêvekên gerokê (XPI, CRX)",
+    "format.package.editor-extension.description": "Weşanger, guherto, kengê dest pê dike, koda makîneyê ya tê de û tîpên veşartî. Tiştek nayê sazkirin an xebitandin.",
+    "format.package.editor-extension.name": "Pêvekên edîtorê (VSIX)",
     "format.package.installer.description": "Naverok, nasname, guherto û navên skrîptan. Skrîpt û payload tu carî nayên xwendin.",
     "format.package.installer.name": "Pakêtên sazkirinê",
     "format.package.ios-app.description": "Info.plist, profîla provisioning, îkon û lîsteya pelan. Tiştek nayê derxistin an xebitandin.",
     "format.package.ios-app.name": "Sepanên iOS (IPA)",
+    "format.package.mcp-bundle.description": "Bername, amûr, mîheng û gihîştina peldankan a serverê ji manîfestoyê. Tiştek nayê sazkirin an xebitandin.",
+    "format.package.mcp-bundle.name": "Bundleyên MCP",
+    "format.package.python-wheel.description": "Nav, guherto, pêdivî, ferman û pelên ku dema Python dest pê dike dixebitin. Tiştek nayê sazkirin an xebitandin.",
+    "format.package.python-wheel.name": "Pakêtên Python Wheel",
     "format.security.certificate.description": "Hûrguliyên sertîfîkayan û şopan. Mifteyên taybet veşartî ne û pêbawerî nayê nirxandin.",
     "format.security.certificate.name": "Sertîfîka",
     "format.text.asciidoc.description": "Sernivîs, lîste, blok û nîşeyên AsciiDoc ên negirêdayî û çavkaniya ewle; include tu car nayên şopandin.",
@@ -485,6 +671,16 @@
     "help.keyboard.body": "⌘1 heta ⌘4 di navbera rûpelan de diguherin. ⌘, “Giştî” vedike. ⌘Z vegerandina dawî, guhertina komî, têxistina temayê an jêbirina profîlê betal dike; ⇧⌘Z dîsa dike.",
     "help.keyboard.title": "Kurtebirên klavyeyê",
     "listing.risk.hiddenCharacters": "Tîpên veşartî di nav de",
+    "mesh.printCheck.estimate": "Heke bi PLA ve ji hundir ve tije were çapkirin: nêzîkî %1$@ %2$@ û %3$@ %4$@ fîlamenta %5$@ %6$@. Slicer bi gelemperî bi dagirtina kêmtir çap dikin, ji ber vê yekê ev sînorê jorîn e.",
+    "mesh.printCheck.estimateIfMillimetres": "Heke yekeyên pîvanê milîmetre bin û bi PLA ve ji hundir ve tije were çapkirin: nêzîkî %1$@ %2$@ û %3$@ %4$@ fîlamenta %5$@ %6$@. Slicer bi gelemperî bi dagirtina kêmtir çap dikin, ji ber vê yekê ev sînorê jorîn e.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "%2$@ qerax bi zêdetirî ji du rûyan re hevpar e",
+      "other": "%2$@ qerax bi zêdetirî ji du rûyan re hevpar in"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ qeraxa vekirî (valahiyek di rûyê de)",
+      "other": "%2$@ qeraxên vekirî (valahî di rûyê de)"
+    },
     "midi.duration": "Dem",
     "midi.noAutoplay": "Lêdan tenê dema ku Bilîze bikirtînî dest pê dike.",
     "midi.pause": "Rawestîne",
@@ -516,6 +712,38 @@
     "notebook.output.numbered": "Derketin [%lld]",
     "notebook.output.stderr": "Herikîna şaşiyê",
     "notebook.truncated": "Pêşdîtin hate kurtkirin. Şaneyên nîşandayî: %1$lld ji %2$lld.",
+    "preview.addon.activationEvents": "Bûyerên çalakkirinê",
+    "preview.addon.addonID": "Nasnameya pêvekê",
+    "preview.addon.arguments": "Argûman",
+    "preview.addon.author": "Nivîskar",
+    "preview.addon.background": "Pelên paşxanê",
+    "preview.addon.browser": "Gerok",
+    "preview.addon.categories": "Kategorî",
+    "preview.addon.command": "Ferman",
+    "preview.addon.commands": "Hejmara fermanan",
+    "preview.addon.contentScriptMatches": "Malperên skrîptên naverokê",
+    "preview.addon.description": "Ravekirin",
+    "preview.addon.engine": "Guhertoya VS Code",
+    "preview.addon.entry": "Pelê destpêkê",
+    "preview.addon.entryPoint": "Xala destpêkê",
+    "preview.addon.environment": "Navên guherbarên jîngehê",
+    "preview.addon.extensionDependencies": "Girêdanên pêvekan",
+    "preview.addon.extensionPack": "Pakêta pêvekan",
+    "preview.addon.hostPermissions": "Destûrên mêvandar",
+    "preview.addon.license": "Lîsans",
+    "preview.addon.manifestVersion": "Guhertoya manîfestoyê",
+    "preview.addon.optionalPermissions": "Destûrên bijarte",
+    "preview.addon.prompts": "Prompt",
+    "preview.addon.publisher": "Weşanger",
+    "preview.addon.required": "Pêwîst",
+    "preview.addon.runtimes": "Runtime",
+    "preview.addon.sensitive": "Hesas",
+    "preview.addon.serverType": "Cureya serverê",
+    "preview.addon.settings": "Mîheng",
+    "preview.addon.tools": "Amûr",
+    "preview.addon.untrustedWorkspaces": "Cihên xebatê yên nepêbawer",
+    "preview.addon.updateURL": "Navnîşana nûvekirinê",
+    "preview.addon.webEntry": "Pelê destpêkê yê webê",
     "preview.archive.entryEncrypted": "Şîfrekirî",
     "preview.archive.entryModified": "Hate guhertin",
     "preview.archive.locked": "Girtî",
@@ -719,6 +947,18 @@
       "other": "Agahiyên gengaz ên veşartî hatin veşartin: %2$@."
     },
     "preview.info.onThisMac": "Li ser vê Macê hatiye pêvajokirin",
+    "preview.install.commands": "Fermanên tên sazkirin",
+    "preview.install.dependencies": "Girêdayîbûn",
+    "preview.install.generator": "Bi vê hatiye çêkirin",
+    "preview.install.installedScripts": "Skrîptên tên sazkirin",
+    "preview.install.license": "Lîsans",
+    "preview.install.nativeModules": "Modulên xwecihî",
+    "preview.install.pureLibrary": "Pirtûkxaneya Python a paqij",
+    "preview.install.requiresPython": "Python pêwîst",
+    "preview.install.startupFiles": "Pelên rêyê yên tên sazkirin (.pth)",
+    "preview.install.summary": "Kurte",
+    "preview.install.tags": "Nîşaneyên lihevhatinê",
+    "preview.install.wheelVersion": "Guhertoya formata Wheel",
     "preview.interaction.close": "Bigire",
     "preview.interaction.copied": "Li clipboardê hat kopîkirin",
     "preview.interaction.copy": "Kopî bike",
@@ -819,6 +1059,44 @@
     "preview.mode.summary": "Kurte",
     "preview.mode.table": "Tablo",
     "preview.mode.tree": "Dar",
+    "preview.model.adapterKind": "Adapter",
+    "preview.model.alignment": "Rêzkirin (bayt)",
+    "preview.model.architecture": "Mîmarî",
+    "preview.model.author": "Nivîskar",
+    "preview.model.baseModels": "Modelên bingehîn",
+    "preview.model.bitsPerWeight": "Bit ji bo her giranî",
+    "preview.model.blockCount": "Hejmara tebeqeyan",
+    "preview.model.chatTemplate": "Şablona sohbetê",
+    "preview.model.chatTemplateBytes": "Mezinahiya şablona sohbetê (bayt)",
+    "preview.model.contextLength": "Dirêjahiya kontekstê",
+    "preview.model.dataBytes": "Mezinahiya daneyên tensoran (bayt)",
+    "preview.model.dtypes": "Cureyên daneyê",
+    "preview.model.embeddingLength": "Mezinahiya embeddingê",
+    "preview.model.expertCount": "Pisporan",
+    "preview.model.expertUsedCount": "Pisporên ku ji bo her tokenê tên bikaranîn",
+    "preview.model.fileType": "Cureya pelê",
+    "preview.model.ggufVersion": "Guhertoya GGUF",
+    "preview.model.headCount": "Serên baldariyê",
+    "preview.model.headCountKV": "Serên mifte/nirxê",
+    "preview.model.headerBytes": "Mezinahiya sernavê (bayt)",
+    "preview.model.languages": "Ziman",
+    "preview.model.license": "Lîsans",
+    "preview.model.loraRank": "Rêza LoRA",
+    "preview.model.metadataCount": "Qeydên metadata",
+    "preview.model.organization": "Rêxistin",
+    "preview.model.otherMetadata": "Metadataya din",
+    "preview.model.parameters": "Parametre",
+    "preview.model.quantization": "Quantîzasyon",
+    "preview.model.quantizedBy": "Quantîzekirî ji aliyê",
+    "preview.model.shardCount": "Perçeyên di komê de",
+    "preview.model.shardIndex": "Perçe",
+    "preview.model.sizeLabel": "Etîketa mezinahiyê",
+    "preview.model.tags": "Etîket",
+    "preview.model.tensorCount": "Hejmara tensoran",
+    "preview.model.tensorTypes": "Cureyên tensoran",
+    "preview.model.tensors": "Tensor",
+    "preview.model.tokenizer": "Tokenizer",
+    "preview.model.vocabularySize": "Mezinahiya ferhengê",
     "preview.outline.duplicateKey": "Mifteya dubare",
     "preview.outline.key": "Mifte",
     "preview.outline.value": "Nirx",
@@ -933,6 +1211,22 @@
     "preview.package.versionCode": "Koda guhertoyê",
     "preview.package.versionName": "Navê guhertoyê",
     "preview.package.webSeeds": "Web seed",
+    "preview.pickle.checked": "Hat kontrolkirin",
+    "preview.pickle.checked.importsOnly": "Tenê import. Pel qet nehat barkirin.",
+    "preview.pickle.checksumErrors": "Nelihevhatina checksum",
+    "preview.pickle.count": "Hejmara dubarebûnê",
+    "preview.pickle.imports": "Import",
+    "preview.pickle.kind": "Cure",
+    "preview.pickle.kind.code": "Dikare kodê bixebitîne",
+    "preview.pickle.kind.expected": "Ji bo daneyên modelê hêvîkirî",
+    "preview.pickle.kind.networkOrFiles": "Tor an pel",
+    "preview.pickle.kind.uncommon": "Neasayî",
+    "preview.pickle.partial": "Bi qismî hat kontrolkirin",
+    "preview.pickle.persistentIDs": "ID-yên domdar",
+    "preview.pickle.pickleProtocol": "Protokola pickle",
+    "preview.pickle.pickles": "Pickleyên hatine skankirin",
+    "preview.pickle.storageBytes": "Bayta depoyên tensoran",
+    "preview.pickle.storages": "Depoyên tensoran",
     "preview.privacyNotice": "Agahiyên ku dibe ku veşartî bin tên veşartin. Hilbijartin û kopîkirin naveroka veşartî bi kar tînin.",
     "preview.profile.shownRows": {
       "one": "Profîl %2$@ rêzên destpêkê yên hatine xwendin bi kar tîne.",

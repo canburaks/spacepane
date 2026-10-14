@@ -17,7 +17,10 @@ public struct ProvisioningProfileAdapter: BinaryFormatAdapter {
     public func parse(_ input: FileBytes, context: RequestContext) throws -> ParsedTextDocument {
         try context.checkpoint()
         let profile = try ProvisioningProfileSummary.profile(from: input.data, context: context)
-        return try PackageSummary.document(ProvisioningProfileSummary.fields(profile, now: now()).value, context: context)
+        // One reading of the clock decides the `expired` flag and the validity findings alike.
+        let current = now()
+        return try ValidityFindings.document(ProvisioningProfileSummary.fields(profile, now: current).value,
+                                             findings: ProvisioningProfileSummary.findings(profile, now: current), context: context)
     }
 }
 
@@ -73,6 +76,18 @@ enum ProvisioningProfileSummary {
         // The message signature is neither verified nor trusted.
         fields.flag("signatureVerified", false)
         return fields
+    }
+
+    /// The profile's own validity, from `ExpirationDate` alone: expired once the clock is past it, ending
+    /// soon within `ValidityFindings.expiresSoonDays`. Certificates embedded in the profile are not judged,
+    /// and a missing or non-date value adds nothing. The iOS archive adapter shares `fields` but not this.
+    static func findings(_ profile: [String: Any], now: Date) -> [PreviewFinding] {
+        guard let expires = PlistAccess.date(profile, "ExpirationDate") else { return [] }
+        switch ValidityFindings.Standing(end: expires, now: now) {
+        case .expired: return [PreviewFinding(kind: .profileExpired, count: 1)]
+        case .endsSoon(let days): return [PreviewFinding(kind: .profileExpiresSoon, count: 1, detail: .days(days))]
+        case .valid: return []
+        }
     }
 
     /// Raw values mapped to localized labels by the renderer.

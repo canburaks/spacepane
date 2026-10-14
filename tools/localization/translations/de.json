@@ -262,12 +262,102 @@
     "finding.archive.macMetadata": "Mac-Ressourceneinträge in __MACOSX: %lld.",
     "finding.archive.nested": "Archive in diesem Archiv, nicht geöffnet: %lld.",
     "finding.archive.unsafePath": "Einträge, die außerhalb des Zielordners geschrieben würden: %lld.",
+    "finding.artifact.mismatchedContent": "Der Inhalt hat ein anderes Format, als der Dateiname angibt.",
+    "finding.artifact.nativeCode": {
+      "one": "Enthält %2$@ native Programmdatei oder Bibliothek.",
+      "other": "Enthält %2$@ native Programmdateien oder Bibliotheken."
+    },
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ Befehl läuft von selbst, wenn ein KI-Agent handelt (ein Hook).",
+      "other": "%2$@ Befehle laufen von selbst, wenn ein KI-Agent handelt (Hooks)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ Einstellung erlaubt einem KI-Agenten, ohne vorherige Nachfrage zu handeln.",
+      "other": "%2$@ Einstellungen erlauben einem KI-Agenten, ohne vorherige Nachfrage zu handeln."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ Dev-Container-Befehl läuft von selbst im Container.",
+      "other": "%2$@ Dev-Container-Befehle laufen von selbst im Container."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ Aufgabe läuft von selbst, wenn der Ordner im Code-Editor geöffnet wird.",
+      "other": "%2$@ Aufgaben laufen von selbst, wenn der Ordner im Code-Editor geöffnet wird."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ Dev-Container-Befehl läuft auf diesem Mac, bevor der Container startet.",
+      "other": "%2$@ Dev-Container-Befehle laufen auf diesem Mac, bevor der Container startet."
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ Paketskript läuft bei der Installation von selbst.",
+      "other": "%2$@ Paketskripte laufen bei der Installation von selbst."
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ MCP-Server startet ein Programm auf diesem Mac.",
+      "other": "%2$@ MCP-Server starten Programme auf diesem Mac."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ MCP-Server verbindet sich mit einem Dienst im Internet.",
+      "other": "%2$@ MCP-Server verbinden sich mit Diensten im Internet."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ Umgebungsvariable wird an MCP-Server weitergegeben.",
+      "other": "%2$@ Umgebungsvariablen werden an MCP-Server weitergegeben."
+    },
     "finding.banner.label": "Zu prüfende Punkte in dieser Datei",
+    "finding.bundle.asksForSecrets": {
+      "one": "%2$@ Einstellung fragt nach einem Passwort oder Schlüssel.",
+      "other": "%2$@ Einstellungen fragen nach Passwörtern oder Schlüsseln."
+    },
+    "finding.bundle.broadFolderAccess": {
+      "one": "%2$@ Einstellung gibt dem Server Zugriff auf Ihren Benutzerordner oder auf „Dokumente“, „Downloads“ oder „Schreibtisch“.",
+      "other": "%2$@ Einstellungen geben dem Server Zugriff auf Ihren Benutzerordner oder auf „Dokumente“, „Downloads“ oder „Schreibtisch“."
+    },
+    "finding.bundle.runsProgram": "Führt ein Programm auf diesem Mac aus, wenn eine KI-App den Server startet.",
+    "finding.bundle.toolTextTargetsAssistant": {
+      "one": "%2$@ Werkzeugbeschreibung weist die KI an, andere Dateien zu lesen oder Ihnen etwas zu verschweigen.",
+      "other": "%2$@ Werkzeugbeschreibungen weisen die KI an, andere Dateien zu lesen oder Ihnen etwas zu verschweigen."
+    },
+    "finding.certificate.expired": {
+      "one": "%2$@ Zertifikat ist abgelaufen.",
+      "other": "%2$@ Zertifikate sind abgelaufen."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Ein Zertifikat läuft in %2$@ Tag ab.",
+      "other": "Ein Zertifikat läuft in %2$@ Tagen ab."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ Zertifikat ist noch nicht gültig.",
+      "other": "%2$@ Zertifikate sind noch nicht gültig."
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ Zertifikat verwendet einen kurzen RSA-Schlüssel.",
+      "other": "%2$@ Zertifikate verwenden kurze RSA-Schlüssel."
+    },
     "finding.detail.cells": "Zellen: %@",
     "finding.detail.cellsMore": "Zellen: %1$@ und %2$lld weitere",
     "finding.detail.decodedText": "Versteckter Text, als reiner Text angezeigt: %@",
     "finding.detail.lines": "Zeilen: %@",
     "finding.detail.linesMore": "Zeilen: %1$@ und %2$lld weitere",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ Geheimnis für Einmalcodes ist hier in lesbarer Form gespeichert.",
+      "other": "%2$@ Geheimnisse für Einmalcodes sind hier in lesbarer Form gespeichert."
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ Passwortmanager-Login ist hier in lesbarer Form gespeichert. Löschen Sie diesen Export, wenn Sie ihn nicht mehr brauchen.",
+      "other": "%2$@ Passwortmanager-Logins sind hier in lesbarer Form gespeichert. Löschen Sie diesen Export, wenn Sie ihn nicht mehr brauchen."
+    },
+    "finding.extension.allSites": "Kann jede von Ihnen besuchte Website lesen und ändern.",
+    "finding.extension.installsOthers": {
+      "one": "Installiert %2$@ weitere Erweiterung mit.",
+      "other": "Installiert %2$@ weitere Erweiterungen mit."
+    },
+    "finding.extension.relaxedScriptPolicy": "Die Sicherheitsrichtlinie erlaubt es, Text als Code auszuführen.",
+    "finding.extension.selfHostedUpdates": "Aktualisiert sich von einem eigenen Server statt aus dem Store des Browsers.",
+    "finding.extension.sensitivePermissions": {
+      "one": "Fordert %2$@ sensible Browserberechtigung an.",
+      "other": "Fordert %2$@ sensible Browserberechtigungen an."
+    },
+    "finding.extension.startsAutomatically": "Startet bei jedem Öffnen des Code-Editors.",
     "finding.hidden.agentInstructions": "Dies scheint eine Anweisungsdatei für KI-Coding-Tools zu sein; versteckter Text kann sie steuern.",
     "finding.hidden.bidirectionalControls": "Richtungsändernde Zeichen, durch die Code anders gelesen wird, als er ausgeführt wird: %lld.",
     "finding.hidden.markdownComments": "HTML-Kommentare, die die meisten Markdown-Ansichten ausblenden: %lld.",
@@ -276,10 +366,33 @@
     "finding.hidden.unicodeTags": "Unsichtbare Tag-Zeichen, die versteckten Text enthalten: %lld.",
     "finding.hidden.variationSelectors": "Unerwartete Variationsselektoren, die Daten verstecken können: %lld.",
     "finding.hidden.zeroWidth": "Unsichtbare Zeichen mit Breite null: %lld.",
+    "finding.install.buildScript": "Beim Erstellen oder Installieren dieses Quellpakets wird sein Setup-Skript ausgeführt.",
+    "finding.install.nativeBuild": "Die Installation dieses Pakets kompiliert nativen Code aus einer Build-Datei, auch ohne Installationsskripte.",
+    "finding.install.remoteDependencies": {
+      "one": "%2$@ Abhängigkeit stammt aus einem Git-Repository oder von einer Webadresse statt aus der Registry.",
+      "other": "%2$@ Abhängigkeiten stammen aus Git-Repositorys oder von Webadressen statt aus der Registry."
+    },
+    "finding.install.startupCode": {
+      "one": "%2$@ Stelle führt bei jedem Start von Python Python-Code aus.",
+      "other": "%2$@ Stellen führen bei jedem Start von Python Python-Code aus."
+    },
+    "finding.launch.atLoad": "Das Programm startet bei der Anmeldung oder beim Hochfahren.",
+    "finding.launch.hiddenLocation": "Das Programm liegt in einem temporären, freigegebenen oder versteckten Ordner.",
+    "finding.launch.inlineScript": "Der Job führt Shell- oder Skriptcode aus, der in dieser Datei steht.",
+    "finding.launch.interval": "Das Programm läuft im Abstand von %@.",
+    "finding.launch.job": "Das ist ein launchd-Job: macOS startet das darin genannte Programm.",
+    "finding.launch.keepAlive": "macOS startet das Programm neu, sobald es beendet wird.",
+    "finding.launch.schedule": "Das Programm läuft nach einem Kalenderzeitplan.",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ überwachter Pfad startet das Programm, wenn er sich ändert.",
+      "other": "%2$@ überwachte Pfade starten das Programm, wenn sie sich ändern."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "%2$@ aufgeführter Name enthält verborgene Zeichen.",
       "other": "%2$@ aufgeführte Namen enthalten verborgene Zeichen."
     },
+    "finding.model.incomplete": "Die Datei ist kürzer, als ihr Header angibt; vielleicht ist der Download unvollständig.",
+    "finding.model.inconsistentLayout": "Die Tensorbereiche im Header überlappen sich oder lassen Lücken, was das Format verbietet.",
     "finding.more": "Weitere Befunde: %lld",
     "finding.notebook.errorOutputs": "Zellen mit gespeichertem Fehler: %lld.",
     "finding.notebook.executionGaps": "Die Ausführungsnummern überspringen Werte, daher wurden Zellen erneut ausgeführt oder entfernt. Lücken: %lld.",
@@ -287,12 +400,66 @@
     "finding.notebook.notExecuted": "Keine Codezelle wurde ausgeführt, daher enthält das Notebook keine gespeicherten Ergebnisse.",
     "finding.notebook.outOfOrder": "Zellen wurden nicht der Reihe nach ausgeführt: %@.",
     "finding.notebook.unexecutedCells": "Codezellen, die nie ausgeführt wurden: %lld.",
+    "finding.pickle.brokenStream": "Die Daten brechen nach den Importen ab. Manche Scanner hören an dieser Stelle auf zu lesen.",
+    "finding.pickle.networkOrFiles": {
+      "one": "%2$@ Import erlaubt es, beim Laden dieser Datei das Netzwerk oder Dateien zu nutzen.",
+      "other": "%2$@ Importe erlauben es, beim Laden dieser Datei das Netzwerk oder Dateien zu nutzen."
+    },
+    "finding.pickle.runsCode": {
+      "one": "%2$@ Import erlaubt es, beim Laden dieser Datei Befehle oder Code auszuführen.",
+      "other": "%2$@ Importe erlauben es, beim Laden dieser Datei Befehle oder Code auszuführen."
+    },
+    "finding.pickle.uncommonImports": {
+      "one": "%2$@ Import gehört nicht zu gewöhnlichen Modelldaten.",
+      "other": "%2$@ Importe gehören nicht zu gewöhnlichen Modelldaten."
+    },
+    "finding.profile.expired": "Dieses Provisioning-Profil ist abgelaufen.",
+    "finding.profile.expiresSoon": {
+      "one": "Dieses Provisioning-Profil läuft in %2$@ Tag ab.",
+      "other": "Dieses Provisioning-Profil läuft in %2$@ Tagen ab."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "einem Cloud-Speicherordner",
+    "finding.script.asksForPassword": {
+      "one": "%2$@ Stelle fragt nach einem Passwort.",
+      "other": "%2$@ Stellen fragen nach einem Passwort."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "%2$@ Stelle dekodiert kodierten Text und führt ihn aus.",
+      "other": "%2$@ Stellen dekodieren kodierten Text und führen ihn aus."
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ Befehl schaltet einen Sicherheitsschutz aus.",
+      "other": "%2$@ Befehle schalten Sicherheitsschutzfunktionen aus."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "%2$@ Stelle lädt Code aus dem Internet herunter und führt ihn aus.",
+      "other": "%2$@ Stellen laden Code aus dem Internet herunter und führen ihn aus."
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ Befehl läuft mit Administratorrechten.",
+      "other": "%2$@ Befehle laufen mit Administratorrechten."
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ Befehl richtet ein Programm ein, das bei der Anmeldung oder nach einem Zeitplan läuft.",
+      "other": "%2$@ Befehle richten Programme ein, die bei der Anmeldung oder nach einem Zeitplan laufen."
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ Befehl liest gespeicherte Passwörter, Schlüssel oder Browserdaten.",
+      "other": "%2$@ Befehle lesen gespeicherte Passwörter, Schlüssel oder Browserdaten."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ Befehl entfernt die macOS-Quarantänemarkierung von Dateien.",
+      "other": "%2$@ Befehle entfernen die macOS-Quarantänemarkierung von Dateien."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ Befehl sendet Dateien oder Daten ins Internet.",
+      "other": "%2$@ Befehle senden Dateien oder Daten ins Internet."
+    },
     "finding.secret.apiKey": "Verborgene API-Schlüssel: %lld.",
     "finding.secret.authorizationHeader": "Verborgene Autorisierungsdaten: %lld.",
     "finding.secret.cloudAccessKey": "Verborgene Cloud-Zugangsschlüssel: %lld.",
@@ -312,6 +479,11 @@
       "one": "%2$@ mögliches Geheimnis ausgeblendet. Auswahl und Kopieren verwenden den unkenntlich gemachten Text.",
       "other": "%2$@ mögliche Geheimnisse ausgeblendet. Auswahl und Kopieren verwenden den unkenntlich gemachten Text."
     },
+    "findings.report.copied": "Befundbericht kopiert",
+    "findings.report.copy": "Befundbericht kopieren",
+    "findings.report.copyHint": "Kopiert eine Liste dieser Befunde. Es ist kein Text aus der Datei enthalten.",
+    "findings.report.footer": "Diese Liste enthält keinen Text aus der Datei.",
+    "findings.report.heading": "Befunde: %@",
     "format.archive.7z.description": "Begrenzte 7z-Eintragslisten aus dem Header, auch bei komprimierten Headern. Dateidaten werden nie dekodiert; Archive mit verschlüsselten Headern werden nicht aufgelistet.",
     "format.archive.7z.name": "7-Zip-Archive",
     "format.archive.bzip2.description": "Begrenzte Dekomprimierung von bzip2-Datenströmen: TAR.BZ2-Listen und unterstützter Text. Anderer Inhalt wird als binär gemeldet.",
@@ -402,6 +574,12 @@
     "format.document.fictionbook.name": "FictionBook-Bücher (FB2)",
     "format.document.web-archive.description": "Text gespeicherter MHTML-Seiten; Seiten werden nie gerendert oder geladen.",
     "format.document.web-archive.name": "Webarchive (MHTML)",
+    "format.ml.gguf.description": "Architektur, Größe, Quantisierung, Kontextlänge, Lizenz und Chat-Vorlage aus dem Header. Modellgewichte werden nie gelesen.",
+    "format.ml.gguf.name": "GGUF-Modelle",
+    "format.ml.pickle.description": "Was das Laden der Datei importieren würde, geprüft ohne sie zu laden. Auch eine Datei ohne Befunde kann unsicher sein.",
+    "format.ml.pickle.name": "PyTorch- und Pickle-Dateien",
+    "format.ml.safetensors.description": "Tensoren, Parameteranzahl, Datentypen und Metadaten aus dem Header, mit LoRA- und Shard-Details. Modellgewichte werden nie gelesen.",
+    "format.ml.safetensors.name": "Safetensors-Modelle",
     "format.model.3mf.description": "Lokale 3D-Vorschau von 3D-Druckmodellen mit Bauanordnung und Einheiten. Farben, Materialien und Slicer-Einstellungen werden nicht angezeigt.",
     "format.model.3mf.name": "3MF-3D-Modelle",
     "format.model.obj.description": "Lokale 3D-Vorschau von Polygongeometrie. Materialien, Texturen und verknüpfte Dateien werden nie gelesen.",
@@ -414,10 +592,18 @@
     "format.package.android.name": "Android-Apps (APK, AAB)",
     "format.package.application.description": "Identität, Version, Architekturen, Signaturübersicht und Größe. Nichts wird ausgeführt, und die Signatur wird nicht validiert.",
     "format.package.application.name": "App-Bundles",
+    "format.package.browser-extension.description": "Berechtigungen, Website-Zugriff, Update-Adresse und Content-Security-Policy aus dem Manifest. Nichts wird installiert oder ausgeführt.",
+    "format.package.browser-extension.name": "Browser-Erweiterungen (XPI, CRX)",
+    "format.package.editor-extension.description": "Herausgeber, Version, Startzeitpunkt, enthaltener nativer Code und unsichtbare Zeichen. Nichts wird installiert oder ausgeführt.",
+    "format.package.editor-extension.name": "Editor-Erweiterungen (VSIX)",
     "format.package.installer.description": "Inhalt, Kennungen, Versionen und Skriptnamen. Skripte und Payloads werden nie gelesen.",
     "format.package.installer.name": "Installationspakete",
     "format.package.ios-app.description": "Info.plist, Provisioning-Profil, Symbol und Dateiliste. Nichts wird entpackt oder ausgeführt.",
     "format.package.ios-app.name": "iOS-Apps (IPA)",
+    "format.package.mcp-bundle.description": "Programm, Werkzeuge, Einstellungen und Ordnerzugriff des Servers aus dem Manifest. Nichts wird installiert oder ausgeführt.",
+    "format.package.mcp-bundle.name": "MCP-Bundles",
+    "format.package.python-wheel.description": "Name, Version, Anforderungen, Befehle und Dateien, die beim Start von Python ausgeführt werden. Nichts wird installiert oder ausgeführt.",
+    "format.package.python-wheel.name": "Python-Wheel-Pakete",
     "format.security.certificate.description": "Zertifikatsdetails und Fingerabdrücke. Private Schlüssel bleiben verborgen, und das Vertrauen wird nicht bewertet.",
     "format.security.certificate.name": "Zertifikate",
     "format.text.asciidoc.description": "Offline dargestellte AsciiDoc-Überschriften, Listen, Blöcke und Hinweisboxen sowie sichere Quelle; Includes werden nie verfolgt.",
@@ -485,6 +671,16 @@
     "help.keyboard.body": "⌘1 bis ⌘4 wechseln die Seiten. ⌘, öffnet „Allgemein“. ⌘Z macht das letzte Zurücksetzen, die letzte Sammeländerung, den letzten Designimport oder das Löschen eines Profils rückgängig; ⇧⌘Z stellt es wieder her.",
     "help.keyboard.title": "Tastaturkurzbefehle",
     "listing.risk.hiddenCharacters": "Verborgene Zeichen im Namen",
+    "mesh.printCheck.estimate": "Massiv aus PLA gedruckt: etwa %1$@ %2$@ und %3$@ %4$@ Filament mit %5$@ %6$@ Durchmesser. Slicer drucken meist mit weniger Füllung, daher ist dies eine Obergrenze.",
+    "mesh.printCheck.estimateIfMillimetres": "Wenn die Einheit Millimeter ist und massiv aus PLA gedruckt wird: etwa %1$@ %2$@ und %3$@ %4$@ Filament mit %5$@ %6$@ Durchmesser. Slicer drucken meist mit weniger Füllung, daher ist dies eine Obergrenze.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "%2$@ Kante, die von mehr als zwei Flächen geteilt wird",
+      "other": "%2$@ Kanten, die von mehr als zwei Flächen geteilt werden"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ offene Kante (eine Lücke in der Oberfläche)",
+      "other": "%2$@ offene Kanten (Lücken in der Oberfläche)"
+    },
     "midi.duration": "Dauer",
     "midi.noAutoplay": "Die Wiedergabe startet erst, wenn Sie „Wiedergabe“ drücken.",
     "midi.pause": "Pause",
@@ -516,6 +712,38 @@
     "notebook.output.numbered": "Ausgabe [%lld]",
     "notebook.output.stderr": "Fehlerausgabe",
     "notebook.truncated": "Vorschau gekürzt. Angezeigte Zellen: %1$lld von %2$lld.",
+    "preview.addon.activationEvents": "Aktivierungsereignisse",
+    "preview.addon.addonID": "Add-on-ID",
+    "preview.addon.arguments": "Argumente",
+    "preview.addon.author": "Autor",
+    "preview.addon.background": "Hintergrunddateien",
+    "preview.addon.browser": "Browser",
+    "preview.addon.categories": "Kategorien",
+    "preview.addon.command": "Befehl",
+    "preview.addon.commands": "Anzahl der Befehle",
+    "preview.addon.contentScriptMatches": "Seiten der Inhaltsskripte",
+    "preview.addon.description": "Beschreibung",
+    "preview.addon.engine": "VS-Code-Version",
+    "preview.addon.entry": "Einstiegsdatei",
+    "preview.addon.entryPoint": "Einstiegspunkt",
+    "preview.addon.environment": "Namen der Umgebungsvariablen",
+    "preview.addon.extensionDependencies": "Erweiterungsabhängigkeiten",
+    "preview.addon.extensionPack": "Erweiterungspaket",
+    "preview.addon.hostPermissions": "Website-Berechtigungen",
+    "preview.addon.license": "Lizenz",
+    "preview.addon.manifestVersion": "Manifest-Version",
+    "preview.addon.optionalPermissions": "Optionale Berechtigungen",
+    "preview.addon.prompts": "Prompts",
+    "preview.addon.publisher": "Herausgeber",
+    "preview.addon.required": "Erforderlich",
+    "preview.addon.runtimes": "Laufzeitumgebungen",
+    "preview.addon.sensitive": "Vertraulich",
+    "preview.addon.serverType": "Servertyp",
+    "preview.addon.settings": "Einstellungen",
+    "preview.addon.tools": "Werkzeuge",
+    "preview.addon.untrustedWorkspaces": "Nicht vertrauenswürdige Arbeitsbereiche",
+    "preview.addon.updateURL": "Aktualisierungsadresse",
+    "preview.addon.webEntry": "Web-Einstiegsdatei",
     "preview.archive.entryEncrypted": "Verschlüsselt",
     "preview.archive.entryModified": "Geändert",
     "preview.archive.locked": "Gesperrt",
@@ -719,6 +947,18 @@
       "other": "Verborgene mögliche Geheimnisse: %2$@."
     },
     "preview.info.onThisMac": "Auf diesem Mac verarbeitet",
+    "preview.install.commands": "Installierte Befehle",
+    "preview.install.dependencies": "Abhängigkeiten",
+    "preview.install.generator": "Erstellt mit",
+    "preview.install.installedScripts": "Installierte Skripte",
+    "preview.install.license": "Lizenz",
+    "preview.install.nativeModules": "Native Module",
+    "preview.install.pureLibrary": "Reine Python-Bibliothek",
+    "preview.install.requiresPython": "Benötigtes Python",
+    "preview.install.startupFiles": "Installierte Pfaddateien (.pth)",
+    "preview.install.summary": "Zusammenfassung",
+    "preview.install.tags": "Kompatibilitäts-Tags",
+    "preview.install.wheelVersion": "Version des Wheel-Formats",
     "preview.interaction.close": "Schließen",
     "preview.interaction.copied": "In die Zwischenablage kopiert",
     "preview.interaction.copy": "Kopieren",
@@ -819,6 +1059,44 @@
     "preview.mode.summary": "Übersicht",
     "preview.mode.table": "Tabelle",
     "preview.mode.tree": "Baum",
+    "preview.model.adapterKind": "Adapter",
+    "preview.model.alignment": "Ausrichtung (Bytes)",
+    "preview.model.architecture": "Architektur",
+    "preview.model.author": "Autor",
+    "preview.model.baseModels": "Basismodelle",
+    "preview.model.bitsPerWeight": "Bit pro Gewicht",
+    "preview.model.blockCount": "Anzahl der Schichten",
+    "preview.model.chatTemplate": "Chat-Vorlage",
+    "preview.model.chatTemplateBytes": "Größe der Chat-Vorlage (Bytes)",
+    "preview.model.contextLength": "Kontextlänge",
+    "preview.model.dataBytes": "Größe der Tensordaten (Bytes)",
+    "preview.model.dtypes": "Datentypen",
+    "preview.model.embeddingLength": "Einbettungsgröße",
+    "preview.model.expertCount": "Experten",
+    "preview.model.expertUsedCount": "Experten pro Token",
+    "preview.model.fileType": "Dateityp",
+    "preview.model.ggufVersion": "GGUF-Version",
+    "preview.model.headCount": "Attention-Köpfe",
+    "preview.model.headCountKV": "Key/Value-Köpfe",
+    "preview.model.headerBytes": "Größe des Headers (Bytes)",
+    "preview.model.languages": "Sprachen",
+    "preview.model.license": "Lizenz",
+    "preview.model.loraRank": "LoRA-Rang",
+    "preview.model.metadataCount": "Metadaten-Einträge",
+    "preview.model.organization": "Organisation",
+    "preview.model.otherMetadata": "Weitere Metadaten",
+    "preview.model.parameters": "Parameter",
+    "preview.model.quantization": "Quantisierung",
+    "preview.model.quantizedBy": "Quantisiert von",
+    "preview.model.shardCount": "Teildateien im Satz",
+    "preview.model.shardIndex": "Teildatei",
+    "preview.model.sizeLabel": "Größenangabe",
+    "preview.model.tags": "Tags",
+    "preview.model.tensorCount": "Anzahl der Tensoren",
+    "preview.model.tensorTypes": "Tensortypen",
+    "preview.model.tensors": "Tensoren",
+    "preview.model.tokenizer": "Tokenizer",
+    "preview.model.vocabularySize": "Vokabulargröße",
     "preview.outline.duplicateKey": "Doppelter Schlüssel",
     "preview.outline.key": "Schlüssel",
     "preview.outline.value": "Wert",
@@ -933,6 +1211,22 @@
     "preview.package.versionCode": "Versionscode",
     "preview.package.versionName": "Versionsname",
     "preview.package.webSeeds": "Web-Seeds",
+    "preview.pickle.checked": "Geprüft",
+    "preview.pickle.checked.importsOnly": "Nur Importe. Die Datei wurde nie geladen.",
+    "preview.pickle.checksumErrors": "Abweichende Prüfsummen",
+    "preview.pickle.count": "Vorkommen",
+    "preview.pickle.imports": "Importe",
+    "preview.pickle.kind": "Art",
+    "preview.pickle.kind.code": "Kann Code ausführen",
+    "preview.pickle.kind.expected": "Für Modelldaten üblich",
+    "preview.pickle.kind.networkOrFiles": "Netzwerk oder Dateien",
+    "preview.pickle.kind.uncommon": "Ungewöhnlich",
+    "preview.pickle.partial": "Teilweise geprüft",
+    "preview.pickle.persistentIDs": "Persistente IDs",
+    "preview.pickle.pickleProtocol": "Pickle-Protokoll",
+    "preview.pickle.pickles": "Gescannte Pickles",
+    "preview.pickle.storageBytes": "Tensor-Speicher in Bytes",
+    "preview.pickle.storages": "Tensor-Speicher",
     "preview.privacyNotice": "Wahrscheinliche Geheimnisse sind verborgen. Auswahl und Kopieren verwenden den verborgenen Inhalt.",
     "preview.profile.shownRows": {
       "one": "Profilbasis — zuerst gelesene Zeilen: %2$@.",

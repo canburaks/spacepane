@@ -262,12 +262,102 @@
     "finding.archive.macMetadata": "Abubuwan albarkatun Mac a cikin __MACOSX: %lld.",
     "finding.archive.nested": "Kundin fayil da ke cikin wannan kundin fayil, ba a buɗe ba: %lld.",
     "finding.archive.unsafePath": "Abubuwan da za a rubuta a wajen babban fayil ɗin makoma: %lld.",
+    "finding.artifact.mismatchedContent": "Tsarin abubuwan da ke ciki ya bambanta da wanda sunan fayil ya nuna.",
+    "finding.artifact.nativeCode": {
+      "one": "A ciki akwai shiri ko ɗakin karatu na native guda %2$@.",
+      "other": "A ciki akwai shirye-shirye ko ɗakunan karatu na native guda %2$@."
+    },
+    "finding.autorun.agentHooks": {
+      "one": "Umarni %2$@ yana gudana da kansa lokacin da wakilin AI ya yi aiki (hook).",
+      "other": "Umarni %2$@ suna gudana da kansu lokacin da wakilin AI ya yi aiki (hooks)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "Saiti %2$@ yana ba wa wakilin AI damar yin aiki ba tare da tambaya tukuna ba.",
+      "other": "Saituna %2$@ suna ba wa wakilin AI damar yin aiki ba tare da tambaya tukuna ba."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "Umarnin dev container %2$@ yana gudana da kansa a cikin container.",
+      "other": "Umarnin dev container %2$@ suna gudana da kansu a cikin container."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "Aiki %2$@ yana gudana da kansa idan an buɗe babban fayil a manhajar gyaran lamba.",
+      "other": "Ayyuka %2$@ suna gudana da kansu idan an buɗe babban fayil a manhajar gyaran lamba."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "Umarnin dev container %2$@ yana gudana a wannan Mac kafin container ya fara.",
+      "other": "Umarnin dev container %2$@ suna gudana a wannan Mac kafin container ya fara."
+    },
+    "finding.autorun.installScripts": {
+      "one": "Script na kunshi %2$@ yana gudana da kansa yayin shigarwa.",
+      "other": "Script na kunshi %2$@ suna gudana da kansu yayin shigarwa."
+    },
+    "finding.autorun.localServers": {
+      "one": "MCP server %2$@ yana fara shiri a wannan Mac.",
+      "other": "MCP server %2$@ suna fara shirye-shirye a wannan Mac."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "MCP server %2$@ yana haɗuwa da wani sabis a intanet.",
+      "other": "MCP server %2$@ suna haɗuwa da sabis a intanet."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "An ba da environment variable %2$@ ga MCP server.",
+      "other": "An ba da environment variable %2$@ ga MCP server."
+    },
     "finding.banner.label": "Abubuwan da za a duba a wannan fayil",
+    "finding.bundle.asksForSecrets": {
+      "one": "Saiti %2$@ yana neman kalmar sirri ko makulli.",
+      "other": "Saituna %2$@ suna neman kalmomin sirri ko makullai."
+    },
+    "finding.bundle.broadFolderAccess": {
+      "one": "Saiti %2$@ yana ba server damar shiga babban fayil ɗin Home, Documents, Downloads ko Desktop naku.",
+      "other": "Saituna %2$@ suna ba server damar shiga manyan fayilolin Home, Documents, Downloads ko Desktop naku."
+    },
+    "finding.bundle.runsProgram": "Yana gudanar da shiri a wannan Mac idan manhajar AI ta fara server ɗinsa.",
+    "finding.bundle.toolTextTargetsAssistant": {
+      "one": "Bayanin kayan aiki %2$@ yana umartar AI ya karanta wasu fayiloli ko ya ɓoye wani abu daga gare ku.",
+      "other": "Bayanan kayan aiki %2$@ suna umartar AI ya karanta wasu fayiloli ko ya ɓoye wani abu daga gare ku."
+    },
+    "finding.certificate.expired": {
+      "one": "Takardar shaida %2$@ ta ƙare aiki.",
+      "other": "Takaddun shaida %2$@ sun ƙare aiki."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Takardar shaida za ta ƙare aiki a cikin kwana %2$@.",
+      "other": "Takardar shaida za ta ƙare aiki a cikin kwana %2$@."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "Takardar shaida %2$@ ba ta fara aiki ba tukuna.",
+      "other": "Takaddun shaida %2$@ ba su fara aiki ba tukuna."
+    },
+    "finding.certificate.weakKey": {
+      "one": "Takardar shaida %2$@ tana amfani da gajeren makullin RSA.",
+      "other": "Takaddun shaida %2$@ suna amfani da gajerun makullan RSA."
+    },
     "finding.detail.cells": "Sel: %@",
     "finding.detail.cellsMore": "Sel: %1$@ da ƙarin %2$lld",
     "finding.detail.decodedText": "Boyayyen rubutu, ana nuna shi a matsayin rubutu a sarari: %@",
     "finding.detail.lines": "Layuka: %@",
     "finding.detail.linesMore": "Layuka: %1$@ da ƙarin %2$lld",
+    "finding.export.readableCodeSecrets": {
+      "one": "An adana sirri %2$@ na lambar amfani sau ɗaya a nan a siffar da za a iya karantawa.",
+      "other": "An adana sirrika %2$@ na lambobin amfani sau ɗaya a nan a siffar da za a iya karantawa."
+    },
+    "finding.export.readableLogins": {
+      "one": "An adana bayanin shiga %2$@ na manajan kalmomin sirri a nan a siffar da za a iya karantawa. Share wannan fayil ɗin export idan ba a buƙatarsa kuma.",
+      "other": "An adana bayanan shiga %2$@ na manajan kalmomin sirri a nan a siffar da za a iya karantawa. Share wannan fayil ɗin export idan ba a buƙatarsa kuma."
+    },
+    "finding.extension.allSites": "Yana iya karantawa da canza kowane shafin yanar gizo da kuka ziyarta.",
+    "finding.extension.installsOthers": {
+      "one": "Yana shigar da wani extension guda %2$@ tare da shi.",
+      "other": "Yana shigar da wasu extension guda %2$@ tare da shi."
+    },
+    "finding.extension.relaxedScriptPolicy": "Manufofin tsaronta suna ba da damar gudanar da rubutu a matsayin lamba.",
+    "finding.extension.selfHostedUpdates": "Yana sabunta kansa daga server ɗinsa, ba daga shagon burauza ba.",
+    "finding.extension.sensitivePermissions": {
+      "one": "Yana neman izini %2$@ na burauza mai muhimmanci.",
+      "other": "Yana neman izini %2$@ na burauza masu muhimmanci."
+    },
+    "finding.extension.startsAutomatically": "Yana farawa duk lokacin da aka buɗe manhajar gyaran lamba.",
     "finding.hidden.agentInstructions": "Wannan yana kama da fayil na umarni ga kayan aikin coding na AI, inda boyayyen rubutu zai iya jagorantar su.",
     "finding.hidden.bidirectionalControls": "Haruffa masu canza alkibla waɗanda ke sa a karanta code daban da yadda yake aiki: %lld.",
     "finding.hidden.markdownComments": "Sharhin HTML da yawancin masu duba Markdown ke ɓoyewa: %lld.",
@@ -276,10 +366,33 @@
     "finding.hidden.unicodeTags": "Haruffan tag marasa ganuwa masu ɗauke da rubutu a ɓoye: %lld.",
     "finding.hidden.variationSelectors": "Variation selectors da ba a zata ba, waɗanda za su iya ɓoye bayanai: %lld.",
     "finding.hidden.zeroWidth": "Haruffan zero-width marasa ganuwa: %lld.",
+    "finding.install.buildScript": "Gina ko shigar da wannan kunshin tushe yana gudanar da script ɗinsa na saiti.",
+    "finding.install.nativeBuild": "Shigar da wannan kunshi yana compile lambar native daga fayil ɗin build, ko da babu script na shigarwa.",
+    "finding.install.remoteDependencies": {
+      "one": "Dependency %2$@ yana zuwa daga Git repository ko adireshin yanar gizo, ba daga registry ba.",
+      "other": "Dependencies %2$@ suna zuwa daga Git repository ko adireshin yanar gizo, ba daga registry ba."
+    },
+    "finding.install.startupCode": {
+      "one": "Wuri %2$@ yana gudanar da lambar Python duk lokacin da Python ya fara.",
+      "other": "Wurare %2$@ suna gudanar da lambar Python duk lokacin da Python ya fara."
+    },
+    "finding.launch.atLoad": "Shirin yana farawa lokacin shiga ko lokacin kunna naʼura.",
+    "finding.launch.hiddenLocation": "Shirin yana cikin babban fayil na wucin gadi, wanda aka raba, ko wanda aka ɓoye.",
+    "finding.launch.inlineScript": "Aikin yana gudanar da lambar shell ko ta script da aka rubuta a cikin wannan fayil.",
+    "finding.launch.interval": "Shirin yana gudana a kowane %@.",
+    "finding.launch.job": "Wannan aikin launchd ne: macOS yana fara shirin da aka ambata a cikinsa.",
+    "finding.launch.keepAlive": "macOS yana sake fara shirin duk lokacin da ya tsaya.",
+    "finding.launch.schedule": "Shirin yana gudana bisa jadawalin kalanda.",
+    "finding.launch.watchPaths": {
+      "one": "Hanya %2$@ da ake sa ido a kanta tana fara shirin idan ta canja.",
+      "other": "Hanyoyi %2$@ da ake sa ido a kansu suna fara shirin idan sun canja."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "Suna %2$@ da aka jera yana ɗauke da haruffan da aka ɓoye.",
       "other": "Sunaye %2$@ da aka jera suna ɗauke da haruffan da aka ɓoye."
     },
+    "finding.model.incomplete": "Fayil ɗin ya fi abin da kan fayil ɗin ya ce ƙanƙanta, wataƙila ba a kammala saukewa ba.",
+    "finding.model.inconsistentLayout": "Kewayen tensor a kan fayil ɗin sun haɗu da juna ko suna bar giɓi, abin da tsarin ya hana.",
     "finding.more": "Ƙarin abubuwan da aka gano: %lld",
     "finding.notebook.errorOutputs": "Sel da suka adana kuskure: %lld.",
     "finding.notebook.executionGaps": "Lambobin gudanarwa suna tsallake wasu ƙimomi, don haka an sake gudanar da sel ko an cire su. Giɓi: %lld.",
@@ -287,12 +400,66 @@
     "finding.notebook.notExecuted": "Babu sel na code da aka gudanar, don haka littafin rubutun ba shi da sakamakon da aka adana.",
     "finding.notebook.outOfOrder": "An gudanar da sel ba bisa tsari ba: %@.",
     "finding.notebook.unexecutedCells": "Sel na code da ba a taɓa gudanarwa ba: %lld.",
+    "finding.pickle.brokenStream": "Bayanan sun yanke bayan import ɗinsu. Wasu naʼurorin duba suna daina karantawa a wannan wuri.",
+    "finding.pickle.networkOrFiles": {
+      "one": "Import %2$@ yana ba da damar amfani da hanyar sadarwa ko fayiloli idan an ɗora wannan fayil.",
+      "other": "Import %2$@ suna ba da damar amfani da hanyar sadarwa ko fayiloli idan an ɗora wannan fayil."
+    },
+    "finding.pickle.runsCode": {
+      "one": "Import %2$@ yana ba da damar gudanar da umarni ko lamba idan an ɗora wannan fayil.",
+      "other": "Import %2$@ suna ba da damar gudanar da umarni ko lamba idan an ɗora wannan fayil."
+    },
+    "finding.pickle.uncommonImports": {
+      "one": "Import %2$@ ba bayanan samfuri na yau da kullum ba ne.",
+      "other": "Import %2$@ ba bayanan samfuri na yau da kullum ba ne."
+    },
+    "finding.profile.expired": "Wannan bayanin provisioning ya ƙare aiki.",
+    "finding.profile.expiresSoon": {
+      "one": "Wannan bayanin provisioning zai ƙare aiki a cikin kwana %2$@.",
+      "other": "Wannan bayanin provisioning zai ƙare aiki a cikin kwana %2$@."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "babban fayil na ajiyar cloud",
+    "finding.script.asksForPassword": {
+      "one": "Wuri %2$@ yana neman kalmar sirri.",
+      "other": "Wurare %2$@ suna neman kalmar sirri."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "Wuri %2$@ yana decoding rubutun da aka yi wa encoding, sannan yana gudanar da shi.",
+      "other": "Wurare %2$@ suna decoding rubutun da aka yi wa encoding, sannan suna gudanar da shi."
+    },
+    "finding.script.disablesProtection": {
+      "one": "Umarni %2$@ yana kashe wata kariyar tsaro.",
+      "other": "Umarni %2$@ suna kashe kariyar tsaro."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "Wuri %2$@ yana sauke lamba daga intanet kuma yana gudanar da ita.",
+      "other": "Wurare %2$@ suna sauke lamba daga intanet kuma suna gudanar da ita."
+    },
+    "finding.script.elevates": {
+      "one": "Umarni %2$@ yana gudana da izinin mai gudanarwa.",
+      "other": "Umarni %2$@ suna gudana da izinin mai gudanarwa."
+    },
+    "finding.script.persistence": {
+      "one": "Umarni %2$@ yana saita shirin da zai gudana lokacin shiga ko bisa jadawali.",
+      "other": "Umarni %2$@ suna saita shirye-shiryen da za su gudana lokacin shiga ko bisa jadawali."
+    },
+    "finding.script.readsSecrets": {
+      "one": "Umarni %2$@ yana karanta kalmomin sirri, makullai ko bayanan burauza da aka adana.",
+      "other": "Umarni %2$@ suna karanta kalmomin sirri, makullai ko bayanan burauza da aka adana."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "Umarni %2$@ yana cire alamar keɓewa (quarantine) ta macOS daga fayiloli.",
+      "other": "Umarni %2$@ suna cire alamar keɓewa (quarantine) ta macOS daga fayiloli."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "Umarni %2$@ yana aika fayiloli ko bayanai zuwa intanet.",
+      "other": "Umarni %2$@ suna aika fayiloli ko bayanai zuwa intanet."
+    },
     "finding.secret.apiKey": "Makullan API da aka ɓoye: %lld.",
     "finding.secret.authorizationHeader": "Bayanan tantance izini da aka ɓoye: %lld.",
     "finding.secret.cloudAccessKey": "Makullan shiga na cloud da aka ɓoye: %lld.",
@@ -312,6 +479,11 @@
       "one": "An ɓoye sirri %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa.",
       "other": "An ɓoye sirrika %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa."
     },
+    "findings.report.copied": "An kwafi rahoton abubuwan da aka gano",
+    "findings.report.copy": "Kwafi rahoton abubuwan da aka gano",
+    "findings.report.copyHint": "Yana kwafar jerin waɗannan abubuwan da aka gano. Ba a haɗa rubutu daga fayil ba.",
+    "findings.report.footer": "Wannan jeri ba ya ƙunshi rubutu daga fayil.",
+    "findings.report.heading": "Abubuwan da aka gano: %@",
     "format.archive.7z.description": "Jerin shigarwar 7z mai iyaka daga kan fayil, har da wanda aka matse. Ba a taɓa buɗe bayanan fayiloli ba; ba a jera taskokin da kan fayilolinsu aka ɓoye ba.",
     "format.archive.7z.name": "Kundin 7-Zip",
     "format.archive.bzip2.description": "Buɗe rafukan bzip2 mai iyaka: jerin TAR.BZ2 da rubutun da ake goyon baya. Ana bayyana sauran abubuwan a matsayin binary.",
@@ -402,6 +574,12 @@
     "format.document.fictionbook.name": "Littattafan FictionBook (FB2)",
     "format.document.web-archive.description": "Rubutun shafukan MHTML da aka ajiye; ba a taɓa nuna shafukan ko loda su ba.",
     "format.document.web-archive.name": "Maʼajiyar yanar gizo (MHTML)",
+    "format.ml.gguf.description": "Tsarin gine-gine, girma, quantization, tsawon context, lasisi da chat template daga kan fayil. Ba a taɓa karanta nauyin samfurin ba.",
+    "format.ml.gguf.name": "Samfuran GGUF",
+    "format.ml.pickle.description": "Abin da lodin fayil ɗin zai shigo da shi, ana dubawa ba tare da ɗora shi ba. Fayil maras abubuwan da aka gano zai iya zama maras tsaro.",
+    "format.ml.pickle.name": "Fayilolin PyTorch da Pickle",
+    "format.ml.safetensors.description": "Tensor, adadin parameter, nauʼin bayanai da metadata daga kan fayil, tare da bayanan LoRA da shard. Ba a taɓa karanta nauyin samfurin ba.",
+    "format.ml.safetensors.name": "Samfuran Safetensors",
     "format.model.3mf.description": "Duban 3D na cikin naʼura na samfuran bugun 3D, har da tsarin shimfiɗawa da maʼauni. Ba a nuna launuka, kayan ƙira da saitunan slicer ba.",
     "format.model.3mf.name": "Samfuran 3MF 3D",
     "format.model.obj.description": "Duban 3D na cikin naʼura na siffa mai kusurwoyi masu yawa. Ba a taɓa karanta kayan ƙira, tsarin saman da fayilolin da aka haɗa ba.",
@@ -414,10 +592,18 @@
     "format.package.android.name": "Aikace-aikacen Android (APK, AAB)",
     "format.package.application.description": "Shaida, sigar, tsarin gine-gine, taƙaitaccen sa hannu da girma. Ba a gudanar da komai ba, kuma ba a tabbatar da sa hannu ba.",
     "format.package.application.name": "Bundle na aikace-aikace",
+    "format.package.browser-extension.description": "Izini, damar shiga shafuka, adireshin sabuntawa da manufofin tsaron abun ciki daga manifest. Ba a shigar ko gudanar da komai ba.",
+    "format.package.browser-extension.name": "Extension na burauza (XPI, CRX)",
+    "format.package.editor-extension.description": "Mai wallafawa, sigar, lokacin farawa, lambar native da aka haɗa, da haruffan da aka ɓoye. Ba a shigar ko gudanar da komai ba.",
+    "format.package.editor-extension.name": "Extension na manhajar gyara (VSIX)",
     "format.package.installer.description": "Abun ciki, masu gano, sigogi da sunayen rubutun. Ba a taɓa karanta rubutun da payload ba.",
     "format.package.installer.name": "Kunshin masu shigarwa",
     "format.package.ios-app.description": "Info.plist, bayanin provisioning, gunki da jerin fayiloli. Ba a cire ko gudanar da komai ba.",
     "format.package.ios-app.name": "Aikace-aikacen iOS (IPA)",
+    "format.package.mcp-bundle.description": "Shirin server, kayan aiki, saituna da damar shiga manyan fayiloli daga manifest. Ba a shigar ko gudanar da komai ba.",
+    "format.package.mcp-bundle.name": "Bundle na MCP",
+    "format.package.python-wheel.description": "Suna, sigar, buƙatu, umarni da fayilolin da ke gudana idan Python ya fara. Ba a shigar ko gudanar da komai ba.",
+    "format.package.python-wheel.name": "Kunshin Python Wheel",
     "format.security.certificate.description": "Bayanan takaddun shaida da zanen yatsa. An ɓoye maɓallan sirri, kuma ba a tantance amincewa ba.",
     "format.security.certificate.name": "Takaddun shaida",
     "format.text.asciidoc.description": "Taken AsciiDoc, jeri, tubalan da akwatunan gargaɗi ba tare da intanet ba, tare da amintaccen tushe; ba a taɓa bin include ba.",
@@ -485,6 +671,16 @@
     "help.keyboard.body": "⌘1 zuwa ⌘4 suna sauya shafuka. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa.",
     "help.keyboard.title": "Gajerun hanyoyin madannai",
     "listing.risk.hiddenCharacters": "Haruffan da aka ɓoye a suna",
+    "mesh.printCheck.estimate": "Idan aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.",
+    "mesh.printCheck.estimateIfMillimetres": "Idan an auna da milimita kuma aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.",
+    "mesh.printCheck.nonManifoldEdges": {
+      "one": "%2$@ gefen da fuskoki fiye da biyu ke rabawa",
+      "other": "%2$@ gefuna da fuskoki fiye da biyu ke rabawa"
+    },
+    "mesh.printCheck.openEdges": {
+      "one": "%2$@ gefen buɗe (gibi a saman)",
+      "other": "%2$@ gefuna buɗaɗɗu (giɓi a saman)"
+    },
     "midi.duration": "Tsawon lokaci",
     "midi.noAutoplay": "Kunnawa yana farawa ne kawai bayan ka danna Kunna.",
     "midi.pause": "Dakata",
@@ -516,6 +712,38 @@
     "notebook.output.numbered": "Fitarwa [%lld]",
     "notebook.output.stderr": "Kwararar kuskure",
     "notebook.truncated": "An taƙaita samfoti. Sel da aka nuna: %1$lld cikin %2$lld.",
+    "preview.addon.activationEvents": "Abubuwan kunnawa",
+    "preview.addon.addonID": "ID na kari",
+    "preview.addon.arguments": "Hujjoji",
+    "preview.addon.author": "Marubuci",
+    "preview.addon.background": "Fayilolin bango",
+    "preview.addon.browser": "Mai bincike",
+    "preview.addon.categories": "Rukunoni",
+    "preview.addon.command": "Umarni",
+    "preview.addon.commands": "Adadin umarni",
+    "preview.addon.contentScriptMatches": "Shafukan rubutun abun ciki",
+    "preview.addon.description": "Bayani",
+    "preview.addon.engine": "Sigar VS Code",
+    "preview.addon.entry": "Fayil na shigarwa",
+    "preview.addon.entryPoint": "Wurin shigarwa",
+    "preview.addon.environment": "Sunayen masu canjin muhalli",
+    "preview.addon.extensionDependencies": "Dogaron kari",
+    "preview.addon.extensionPack": "Fakitin kari",
+    "preview.addon.hostPermissions": "Izinin shafuka",
+    "preview.addon.license": "Lasisi",
+    "preview.addon.manifestVersion": "Sigar manifest",
+    "preview.addon.optionalPermissions": "Izini na zaɓi",
+    "preview.addon.prompts": "Prompts",
+    "preview.addon.publisher": "Mawallafi",
+    "preview.addon.required": "Wajibi",
+    "preview.addon.runtimes": "Runtime",
+    "preview.addon.sensitive": "Na sirri",
+    "preview.addon.serverType": "Nauʼin sabar",
+    "preview.addon.settings": "Saituna",
+    "preview.addon.tools": "Kayan aiki",
+    "preview.addon.untrustedWorkspaces": "Wuraren aiki marasa amana",
+    "preview.addon.updateURL": "Adireshin sabuntawa",
+    "preview.addon.webEntry": "Fayil na shigarwa na yanar gizo",
     "preview.archive.entryEncrypted": "An ɓoye",
     "preview.archive.entryModified": "An canza",
     "preview.archive.locked": "A kulle",
@@ -719,6 +947,18 @@
       "other": "Bayanan da ake zaton sirri da aka ɓoye: %2$@."
     },
     "preview.info.onThisMac": "An sarrafa a wannan Mac",
+    "preview.install.commands": "Umarnin da ake shigarwa",
+    "preview.install.dependencies": "Abubuwan dogaro",
+    "preview.install.generator": "An gina da",
+    "preview.install.installedScripts": "Rubutattun umarni da ake shigarwa",
+    "preview.install.license": "Lasisi",
+    "preview.install.nativeModules": "Moduloli na asali",
+    "preview.install.pureLibrary": "Ɗakin karatu na Python zalla",
+    "preview.install.requiresPython": "Ana buƙatar Python",
+    "preview.install.startupFiles": "Fayilolin hanya da ake shigarwa (.pth)",
+    "preview.install.summary": "Taƙaitawa",
+    "preview.install.tags": "Alamun dacewa",
+    "preview.install.wheelVersion": "Sigar tsarin wheel",
     "preview.interaction.close": "Rufe",
     "preview.interaction.copied": "An kwafa zuwa allon kwafi",
     "preview.interaction.copy": "Kwafi",
@@ -819,6 +1059,44 @@
     "preview.mode.summary": "Taƙaitawa",
     "preview.mode.table": "Tebur",
     "preview.mode.tree": "Bishiya",
+    "preview.model.adapterKind": "Adapta",
+    "preview.model.alignment": "Daidaitawa (bytes)",
+    "preview.model.architecture": "Tsarin gine-gine",
+    "preview.model.author": "Marubuci",
+    "preview.model.baseModels": "Samfuran tushe",
+    "preview.model.bitsPerWeight": "Bit ga kowane nauyi",
+    "preview.model.blockCount": "Adadin yadudduka",
+    "preview.model.chatTemplate": "Samfurin tattaunawa",
+    "preview.model.chatTemplateBytes": "Girman samfurin tattaunawa (bytes)",
+    "preview.model.contextLength": "Tsawon mahallin rubutu",
+    "preview.model.dataBytes": "Girman bayanan tensor (bytes)",
+    "preview.model.dtypes": "Nauʼikan bayanai",
+    "preview.model.embeddingLength": "Girman embedding",
+    "preview.model.expertCount": "Ƙwararru",
+    "preview.model.expertUsedCount": "Ƙwararrun da ake amfani da su ga kowane token",
+    "preview.model.fileType": "Nauʼin fayil",
+    "preview.model.ggufVersion": "Sigar GGUF",
+    "preview.model.headCount": "Kawunan hankali",
+    "preview.model.headCountKV": "Kawunan mabuɗi/ƙima",
+    "preview.model.headerBytes": "Girman kan fayil (bytes)",
+    "preview.model.languages": "Harsuna",
+    "preview.model.license": "Lasisi",
+    "preview.model.loraRank": "Matsayin LoRA",
+    "preview.model.metadataCount": "Shigarwar metadata",
+    "preview.model.organization": "Ƙungiya",
+    "preview.model.otherMetadata": "Sauran metadata",
+    "preview.model.parameters": "Parameters",
+    "preview.model.quantization": "Quantization",
+    "preview.model.quantizedBy": "Wanda ya yi quantization",
+    "preview.model.shardCount": "Ɓangarori a cikin saitin",
+    "preview.model.shardIndex": "Ɓangare",
+    "preview.model.sizeLabel": "Alamar girma",
+    "preview.model.tags": "Alamomi",
+    "preview.model.tensorCount": "Adadin tensors",
+    "preview.model.tensorTypes": "Nauʼikan tensor",
+    "preview.model.tensors": "Tensors",
+    "preview.model.tokenizer": "Tokenizer",
+    "preview.model.vocabularySize": "Girman ƙamus",
     "preview.outline.duplicateKey": "Maɓalli mai maimaituwa",
     "preview.outline.key": "Maɓalli",
     "preview.outline.value": "Ƙima",
@@ -933,6 +1211,22 @@
     "preview.package.versionCode": "Lambar sigar",
     "preview.package.versionName": "Sunan sigar",
     "preview.package.webSeeds": "Web seeds",
+    "preview.pickle.checked": "Abin da aka duba",
+    "preview.pickle.checked.importsOnly": "Import kawai. Ba a taɓa ɗora fayil ɗin ba.",
+    "preview.pickle.checksumErrors": "Checksum da ba su dace ba",
+    "preview.pickle.count": "Yawan bayyana",
+    "preview.pickle.imports": "Import",
+    "preview.pickle.kind": "Nauʼi",
+    "preview.pickle.kind.code": "Yana iya gudanar da lamba",
+    "preview.pickle.kind.expected": "Ana tsammani ga bayanan samfuri",
+    "preview.pickle.kind.networkOrFiles": "Hanyar sadarwa ko fayiloli",
+    "preview.pickle.kind.uncommon": "Ba na yau da kullum ba",
+    "preview.pickle.partial": "An duba wani sashe kawai",
+    "preview.pickle.persistentIDs": "ID na dindindin",
+    "preview.pickle.pickleProtocol": "Ƙaʼidar pickle",
+    "preview.pickle.pickles": "Pickle da aka duba",
+    "preview.pickle.storageBytes": "Bytes na ajiyar tensor",
+    "preview.pickle.storages": "Wuraren ajiyar tensor",
     "preview.privacyNotice": "Ana ɓoye bayanan da ake zaton sirri ne. Zaɓawa da kwafi suna amfani da bayanan da aka ɓoye.",
     "preview.profile.shownRows": {
       "one": "Bayanin ya yi amfani da layukan farko %2$@ da aka karanta.",

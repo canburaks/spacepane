@@ -11,7 +11,10 @@ public struct TextAdapter: FormatAdapter, TextInputPolicyProviding {
 }
 
 public enum StandardFormatAdapters {
-    public static let registrations: [AdapterRegistration] = [
+    /// Every standard registration, with the lenses of decision 029 attached by `StandardLenses`.
+    public static let registrations: [AdapterRegistration] = StandardLenses.attach(to: unlensed)
+
+    private static let unlensed: [AdapterRegistration] = [
         AdapterRegistration(formatID: .plainText) { TextAdapter() },
         AdapterRegistration(formatID: .extensionlessText, binaryAdapter: { ExtensionlessTextAdapter() }),
         AdapterRegistration(formatID: .json) { JSONSourceAdapter() },
@@ -54,4 +57,8 @@ public enum StandardFormatAdapters {
         + DocumentFormatAdapters.registrations
         // [mesh]
         + MeshFormatAdapters.registrations
+        // [safety-lens-3] Decision 030: model files, add-ons and installable packages.
+        + ModelFormatAdapters.registrations
+        + AddOnFormatAdapters.registrations
+        + InstallableFormatAdapters.registrations
 }

@@ -82,6 +82,486 @@
 			<string>Этот предпросмотр читает документы не более чем из %2$@ элемента, а в этом документе их больше. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Внутри %2$@ нативные программы или библиотеки.</string>
+			<key>many</key>
+			<string>Внутри %2$@ нативных программ или библиотек.</string>
+			<key>one</key>
+			<string>Внутри %2$@ нативная программа или библиотека.</string>
+			<key>other</key>
+			<string>Внутри %2$@ нативной программы или библиотеки.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentHooks</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды запускаются сами, когда действует ИИ-агент (хуки).</string>
+			<key>many</key>
+			<string>%2$@ команд запускаются сами, когда действует ИИ-агент (хуки).</string>
+			<key>one</key>
+			<string>%2$@ команда запускается сама, когда действует ИИ-агент (хук).</string>
+			<key>other</key>
+			<string>%2$@ команды запускаются сами, когда действует ИИ-агент (хуки).</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentPermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ настройки позволяют ИИ-агенту действовать без предварительного вопроса.</string>
+			<key>many</key>
+			<string>%2$@ настроек позволяют ИИ-агенту действовать без предварительного вопроса.</string>
+			<key>one</key>
+			<string>%2$@ настройка позволяет ИИ-агенту действовать без предварительного вопроса.</string>
+			<key>other</key>
+			<string>%2$@ настройки позволяют ИИ-агенту действовать без предварительного вопроса.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.containerCommands</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды контейнера разработки запускаются сами внутри контейнера.</string>
+			<key>many</key>
+			<string>%2$@ команд контейнера разработки запускаются сами внутри контейнера.</string>
+			<key>one</key>
+			<string>%2$@ команда контейнера разработки запускается сама внутри контейнера.</string>
+			<key>other</key>
+			<string>%2$@ команды контейнера разработки запускаются сами внутри контейнера.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.folderOpenTask</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ задачи запускаются сами при открытии папки в редакторе кода.</string>
+			<key>many</key>
+			<string>%2$@ задач запускаются сами при открытии папки в редакторе кода.</string>
+			<key>one</key>
+			<string>%2$@ задача запускается сама при открытии папки в редакторе кода.</string>
+			<key>other</key>
+			<string>%2$@ задачи запускаются сами при открытии папки в редакторе кода.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.hostCommand</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды контейнера разработки выполняются на этом Mac до запуска контейнера.</string>
+			<key>many</key>
+			<string>%2$@ команд контейнера разработки выполняются на этом Mac до запуска контейнера.</string>
+			<key>one</key>
+			<string>%2$@ команда контейнера разработки выполняется на этом Mac до запуска контейнера.</string>
+			<key>other</key>
+			<string>%2$@ команды контейнера разработки выполняются на этом Mac до запуска контейнера.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.installScripts</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ скрипта пакета запускаются сами во время установки.</string>
+			<key>many</key>
+			<string>%2$@ скриптов пакета запускаются сами во время установки.</string>
+			<key>one</key>
+			<string>%2$@ скрипт пакета запускается сам во время установки.</string>
+			<key>other</key>
+			<string>%2$@ скрипта пакета запускаются сами во время установки.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.localServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ MCP-сервера запускают программы на этом Mac.</string>
+			<key>many</key>
+			<string>%2$@ MCP-серверов запускают программы на этом Mac.</string>
+			<key>one</key>
+			<string>%2$@ MCP-сервер запускает программу на этом Mac.</string>
+			<key>other</key>
+			<string>%2$@ MCP-сервера запускают программы на этом Mac.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.remoteServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ MCP-сервера подключаются к сервисам в интернете.</string>
+			<key>many</key>
+			<string>%2$@ MCP-серверов подключаются к сервисам в интернете.</string>
+			<key>one</key>
+			<string>%2$@ MCP-сервер подключается к сервису в интернете.</string>
+			<key>other</key>
+			<string>%2$@ MCP-сервера подключаются к сервисам в интернете.</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.serverEnvironment</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ переменные окружения передаются MCP-серверам.</string>
+			<key>many</key>
+			<string>%2$@ переменных окружения передаются MCP-серверам.</string>
+			<key>one</key>
+			<string>%2$@ переменная окружения передаётся MCP-серверам.</string>
+			<key>other</key>
+			<string>%2$@ переменные окружения передаются MCP-серверам.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ настройки запрашивают пароли или ключи.</string>
+			<key>many</key>
+			<string>%2$@ настроек запрашивают пароли или ключи.</string>
+			<key>one</key>
+			<string>%2$@ настройка запрашивает пароль или ключ.</string>
+			<key>other</key>
+			<string>%2$@ настройки запрашивают пароли или ключи.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ настройки дают серверу доступ к вашей домашней папке либо к папкам «Документы», «Загрузки» или «Рабочий стол».</string>
+			<key>many</key>
+			<string>%2$@ настроек дают серверу доступ к вашей домашней папке либо к папкам «Документы», «Загрузки» или «Рабочий стол».</string>
+			<key>one</key>
+			<string>%2$@ настройка даёт серверу доступ к вашей домашней папке либо к папке «Документы», «Загрузки» или «Рабочий стол».</string>
+			<key>other</key>
+			<string>%2$@ настройки дают серверу доступ к вашей домашней папке либо к папкам «Документы», «Загрузки» или «Рабочий стол».</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ описания инструментов велят ИИ читать другие файлы или что-то от вас скрывать.</string>
+			<key>many</key>
+			<string>%2$@ описаний инструментов велят ИИ читать другие файлы или что-то от вас скрывать.</string>
+			<key>one</key>
+			<string>%2$@ описание инструмента велит ИИ читать другие файлы или что-то от вас скрывать.</string>
+			<key>other</key>
+			<string>%2$@ описания инструментов велят ИИ читать другие файлы или что-то от вас скрывать.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expired</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ сертификата просрочены.</string>
+			<key>many</key>
+			<string>%2$@ сертификатов просрочены.</string>
+			<key>one</key>
+			<string>%2$@ сертификат просрочен.</string>
+			<key>other</key>
+			<string>%2$@ сертификата просрочены.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Срок действия сертификата истекает через %2$@ дня.</string>
+			<key>many</key>
+			<string>Срок действия сертификата истекает через %2$@ дней.</string>
+			<key>one</key>
+			<string>Срок действия сертификата истекает через %2$@ день.</string>
+			<key>other</key>
+			<string>Срок действия сертификата истекает через %2$@ дня.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.notYetValid</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ сертификата ещё не действуют.</string>
+			<key>many</key>
+			<string>%2$@ сертификатов ещё не действуют.</string>
+			<key>one</key>
+			<string>%2$@ сертификат ещё не действует.</string>
+			<key>other</key>
+			<string>%2$@ сертификата ещё не действуют.</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.weakKey</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ сертификата используют короткие ключи RSA.</string>
+			<key>many</key>
+			<string>%2$@ сертификатов используют короткие ключи RSA.</string>
+			<key>one</key>
+			<string>%2$@ сертификат использует короткий ключ RSA.</string>
+			<key>other</key>
+			<string>%2$@ сертификата используют короткие ключи RSA.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableCodeSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ секрета одноразовых кодов сохранены здесь в читаемом виде.</string>
+			<key>many</key>
+			<string>%2$@ секретов одноразовых кодов сохранены здесь в читаемом виде.</string>
+			<key>one</key>
+			<string>%2$@ секрет одноразового кода сохранён здесь в читаемом виде.</string>
+			<key>other</key>
+			<string>%2$@ секрета одноразовых кодов сохранены здесь в читаемом виде.</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableLogins</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ логина из менеджера паролей сохранены здесь в читаемом виде. Удалите этот экспорт, когда он вам больше не понадобится.</string>
+			<key>many</key>
+			<string>%2$@ логинов из менеджера паролей сохранены здесь в читаемом виде. Удалите этот экспорт, когда он вам больше не понадобится.</string>
+			<key>one</key>
+			<string>%2$@ логин из менеджера паролей сохранён здесь в читаемом виде. Удалите этот экспорт, когда он вам больше не понадобится.</string>
+			<key>other</key>
+			<string>%2$@ логина из менеджера паролей сохранены здесь в читаемом виде. Удалите этот экспорт, когда он вам больше не понадобится.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Вместе с ним устанавливаются %2$@ других расширения.</string>
+			<key>many</key>
+			<string>Вместе с ним устанавливаются %2$@ других расширений.</string>
+			<key>one</key>
+			<string>Вместе с ним устанавливается %2$@ другое расширение.</string>
+			<key>other</key>
+			<string>Вместе с ним устанавливаются %2$@ других расширения.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Запрашивает %2$@ чувствительных разрешения браузера.</string>
+			<key>many</key>
+			<string>Запрашивает %2$@ чувствительных разрешений браузера.</string>
+			<key>one</key>
+			<string>Запрашивает %2$@ чувствительное разрешение браузера.</string>
+			<key>other</key>
+			<string>Запрашивает %2$@ чувствительного разрешения браузера.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ зависимости берутся из репозиториев Git или веб-адресов, а не из реестра.</string>
+			<key>many</key>
+			<string>%2$@ зависимостей берутся из репозиториев Git или веб-адресов, а не из реестра.</string>
+			<key>one</key>
+			<string>%2$@ зависимость берётся из репозитория Git или веб-адреса, а не из реестра.</string>
+			<key>other</key>
+			<string>%2$@ зависимости берутся из репозиториев Git или веб-адресов, а не из реестра.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>В %2$@ местах при каждом запуске Python выполняется код Python.</string>
+			<key>many</key>
+			<string>В %2$@ местах при каждом запуске Python выполняется код Python.</string>
+			<key>one</key>
+			<string>В %2$@ месте при каждом запуске Python выполняется код Python.</string>
+			<key>other</key>
+			<string>В %2$@ места при каждом запуске Python выполняется код Python.</string>
+		</dict>
+	</dict>
+	<key>finding.launch.watchPaths</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ отслеживаемых пути запускают программу при изменении.</string>
+			<key>many</key>
+			<string>%2$@ отслеживаемых путей запускают программу при изменении.</string>
+			<key>one</key>
+			<string>%2$@ отслеживаемый путь запускает программу при изменении.</string>
+			<key>other</key>
+			<string>%2$@ отслеживаемых пути запускают программу при изменении.</string>
+		</dict>
+	</dict>
 	<key>finding.listing.hiddenCharacters</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -100,6 +580,266 @@
 			<string>%2$@ имя в списке содержит скрытые символы.</string>
 			<key>other</key>
 			<string>%2$@ имени в списке содержат скрытые символы.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ импорта позволяют использовать сеть или файлы при загрузке этого файла.</string>
+			<key>many</key>
+			<string>%2$@ импортов позволяют использовать сеть или файлы при загрузке этого файла.</string>
+			<key>one</key>
+			<string>%2$@ импорт позволяет использовать сеть или файлы при загрузке этого файла.</string>
+			<key>other</key>
+			<string>%2$@ импорта позволяют использовать сеть или файлы при загрузке этого файла.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ импорта позволяют выполнить команды или код при загрузке этого файла.</string>
+			<key>many</key>
+			<string>%2$@ импортов позволяют выполнить команды или код при загрузке этого файла.</string>
+			<key>one</key>
+			<string>%2$@ импорт позволяет выполнить команды или код при загрузке этого файла.</string>
+			<key>other</key>
+			<string>%2$@ импорта позволяют выполнить команды или код при загрузке этого файла.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ импорта не относятся к обычным данным модели.</string>
+			<key>many</key>
+			<string>%2$@ импортов не относятся к обычным данным модели.</string>
+			<key>one</key>
+			<string>%2$@ импорт не относится к обычным данным модели.</string>
+			<key>other</key>
+			<string>%2$@ импорта не относятся к обычным данным модели.</string>
+		</dict>
+	</dict>
+	<key>finding.profile.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Срок действия этого профиля подготовки истекает через %2$@ дня.</string>
+			<key>many</key>
+			<string>Срок действия этого профиля подготовки истекает через %2$@ дней.</string>
+			<key>one</key>
+			<string>Срок действия этого профиля подготовки истекает через %2$@ день.</string>
+			<key>other</key>
+			<string>Срок действия этого профиля подготовки истекает через %2$@ дня.</string>
+		</dict>
+	</dict>
+	<key>finding.script.asksForPassword</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>В %2$@ местах запрашивается пароль.</string>
+			<key>many</key>
+			<string>В %2$@ местах запрашивается пароль.</string>
+			<key>one</key>
+			<string>В %2$@ месте запрашивается пароль.</string>
+			<key>other</key>
+			<string>В %2$@ места запрашивается пароль.</string>
+		</dict>
+	</dict>
+	<key>finding.script.decodeAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>В %2$@ местах закодированный текст декодируется и запускается.</string>
+			<key>many</key>
+			<string>В %2$@ местах закодированный текст декодируется и запускается.</string>
+			<key>one</key>
+			<string>В %2$@ месте закодированный текст декодируется и запускается.</string>
+			<key>other</key>
+			<string>В %2$@ места закодированный текст декодируется и запускается.</string>
+		</dict>
+	</dict>
+	<key>finding.script.disablesProtection</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды отключают средства защиты.</string>
+			<key>many</key>
+			<string>%2$@ команд отключают средства защиты.</string>
+			<key>one</key>
+			<string>%2$@ команда отключает средство защиты.</string>
+			<key>other</key>
+			<string>%2$@ команды отключают средства защиты.</string>
+		</dict>
+	</dict>
+	<key>finding.script.downloadAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>В %2$@ местах код загружается из интернета и запускается.</string>
+			<key>many</key>
+			<string>В %2$@ местах код загружается из интернета и запускается.</string>
+			<key>one</key>
+			<string>В %2$@ месте код загружается из интернета и запускается.</string>
+			<key>other</key>
+			<string>В %2$@ места код загружается из интернета и запускается.</string>
+		</dict>
+	</dict>
+	<key>finding.script.elevates</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды выполняются с правами администратора.</string>
+			<key>many</key>
+			<string>%2$@ команд выполняются с правами администратора.</string>
+			<key>one</key>
+			<string>%2$@ команда выполняется с правами администратора.</string>
+			<key>other</key>
+			<string>%2$@ команды выполняются с правами администратора.</string>
+		</dict>
+	</dict>
+	<key>finding.script.persistence</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды настраивают запуск программ при входе в систему или по расписанию.</string>
+			<key>many</key>
+			<string>%2$@ команд настраивают запуск программ при входе в систему или по расписанию.</string>
+			<key>one</key>
+			<string>%2$@ команда настраивает запуск программы при входе в систему или по расписанию.</string>
+			<key>other</key>
+			<string>%2$@ команды настраивают запуск программ при входе в систему или по расписанию.</string>
+		</dict>
+	</dict>
+	<key>finding.script.readsSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды читают сохранённые пароли, ключи или данные браузера.</string>
+			<key>many</key>
+			<string>%2$@ команд читают сохранённые пароли, ключи или данные браузера.</string>
+			<key>one</key>
+			<string>%2$@ команда читает сохранённые пароли, ключи или данные браузера.</string>
+			<key>other</key>
+			<string>%2$@ команды читают сохранённые пароли, ключи или данные браузера.</string>
+		</dict>
+	</dict>
+	<key>finding.script.removesQuarantine</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды снимают с файлов отметку карантина macOS.</string>
+			<key>many</key>
+			<string>%2$@ команд снимают с файлов отметку карантина macOS.</string>
+			<key>one</key>
+			<string>%2$@ команда снимает с файлов отметку карантина macOS.</string>
+			<key>other</key>
+			<string>%2$@ команды снимают с файлов отметку карантина macOS.</string>
+		</dict>
+	</dict>
+	<key>finding.script.uploadsFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ команды отправляют файлы или данные в интернет.</string>
+			<key>many</key>
+			<string>%2$@ команд отправляют файлы или данные в интернет.</string>
+			<key>one</key>
+			<string>%2$@ команда отправляет файлы или данные в интернет.</string>
+			<key>other</key>
+			<string>%2$@ команды отправляют файлы или данные в интернет.</string>
 		</dict>
 	</dict>
 	<key>finding.summary</key>
@@ -140,6 +880,46 @@
 			<string>Скрыто %2$@ возможное секретное значение. Выделение и копирование используют текст со скрытыми значениями.</string>
 			<key>other</key>
 			<string>Скрыто %2$@ возможного секретного значения. Выделение и копирование используют текст со скрытыми значениями.</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ ребра, общих для более чем двух граней</string>
+			<key>many</key>
+			<string>%2$@ рёбер, общих для более чем двух граней</string>
+			<key>one</key>
+			<string>%2$@ ребро, общее для более чем двух граней</string>
+			<key>other</key>
+			<string>%2$@ ребра, общих для более чем двух граней</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ открытых ребра (разрывы в поверхности)</string>
+			<key>many</key>
+			<string>%2$@ открытых рёбер (разрывы в поверхности)</string>
+			<key>one</key>
+			<string>%2$@ открытое ребро (разрыв в поверхности)</string>
+			<key>other</key>
+			<string>%2$@ открытого ребра (разрывы в поверхности)</string>
 		</dict>
 	</dict>
 	<key>preview.count.lines</key>

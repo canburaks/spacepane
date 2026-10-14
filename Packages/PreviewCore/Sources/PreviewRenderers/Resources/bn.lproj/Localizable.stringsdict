@@ -66,6 +66,390 @@
 			<string>এই প্রিভিউ সর্বোচ্চ %2$@টি আইটেম পর্যন্ত নথি পড়ে, আর এই নথিতে তার চেয়ে বেশি আছে। এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>ভেতরে %2$@টি নেটিভ প্রোগ্রাম বা লাইব্রেরি আছে।</string>
+			<key>other</key>
+			<string>ভেতরে %2$@টি নেটিভ প্রোগ্রাম বা লাইব্রেরি আছে।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentHooks</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি কমান্ড কোনো AI এজেন্ট কাজ করলে নিজে থেকেই চলে (একটি হুক)।</string>
+			<key>other</key>
+			<string>%2$@টি কমান্ড কোনো AI এজেন্ট কাজ করলে নিজে থেকেই চলে (হুক)।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.agentPermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি সেটিং AI এজেন্টকে আগে না জিজ্ঞেস করেই কাজ করতে দেয়।</string>
+			<key>other</key>
+			<string>%2$@টি সেটিং AI এজেন্টকে আগে না জিজ্ঞেস করেই কাজ করতে দেয়।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.containerCommands</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ডেভ কন্টেইনার কমান্ড কন্টেইনারের ভেতরে নিজে থেকেই চলে।</string>
+			<key>other</key>
+			<string>%2$@টি ডেভ কন্টেইনার কমান্ড কন্টেইনারের ভেতরে নিজে থেকেই চলে।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.folderOpenTask</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি টাস্ক ফোল্ডারটি কোড এডিটরে খুললে নিজে থেকেই চলে।</string>
+			<key>other</key>
+			<string>%2$@টি টাস্ক ফোল্ডারটি কোড এডিটরে খুললে নিজে থেকেই চলে।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.hostCommand</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ডেভ কন্টেইনার কমান্ড কন্টেইনার চালু হওয়ার আগে এই Mac-এ চলে।</string>
+			<key>other</key>
+			<string>%2$@টি ডেভ কন্টেইনার কমান্ড কন্টেইনার চালু হওয়ার আগে এই Mac-এ চলে।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.installScripts</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি প্যাকেজ স্ক্রিপ্ট ইনস্টলের সময় নিজে থেকেই চলে।</string>
+			<key>other</key>
+			<string>%2$@টি প্যাকেজ স্ক্রিপ্ট ইনস্টলের সময় নিজে থেকেই চলে।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.localServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি MCP সার্ভার এই Mac-এ একটি প্রোগ্রাম চালু করে।</string>
+			<key>other</key>
+			<string>%2$@টি MCP সার্ভার এই Mac-এ প্রোগ্রাম চালু করে।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.remoteServers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি MCP সার্ভার ইন্টারনেটের একটি সার্ভিসের সঙ্গে সংযুক্ত হয়।</string>
+			<key>other</key>
+			<string>%2$@টি MCP সার্ভার ইন্টারনেটের বিভিন্ন সার্ভিসের সঙ্গে সংযুক্ত হয়।</string>
+		</dict>
+	</dict>
+	<key>finding.autorun.serverEnvironment</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি এনভায়রনমেন্ট ভ্যারিয়েবল MCP সার্ভারে পাঠানো হয়।</string>
+			<key>other</key>
+			<string>%2$@টি এনভায়রনমেন্ট ভ্যারিয়েবল MCP সার্ভারে পাঠানো হয়।</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি সেটিং পাসওয়ার্ড বা কী চায়।</string>
+			<key>other</key>
+			<string>%2$@টি সেটিং পাসওয়ার্ড বা কী চায়।</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি সেটিং সার্ভারকে আপনার Home, Documents, Downloads বা Desktop ফোল্ডারে অ্যাক্সেস দেয়।</string>
+			<key>other</key>
+			<string>%2$@টি সেটিং সার্ভারকে আপনার Home, Documents, Downloads বা Desktop ফোল্ডারে অ্যাক্সেস দেয়।</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি টুলের বিবরণ AI-কে অন্য ফাইল পড়তে বা আপনার কাছ থেকে কিছু লুকাতে বলে।</string>
+			<key>other</key>
+			<string>%2$@টি টুলের বিবরণ AI-কে অন্য ফাইল পড়তে বা আপনার কাছ থেকে কিছু লুকাতে বলে।</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expired</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি সার্টিফিকেটের মেয়াদ শেষ হয়ে গেছে।</string>
+			<key>other</key>
+			<string>%2$@টি সার্টিফিকেটের মেয়াদ শেষ হয়ে গেছে।</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>একটি সার্টিফিকেটের মেয়াদ %2$@ দিনের মধ্যে শেষ হবে।</string>
+			<key>other</key>
+			<string>একটি সার্টিফিকেটের মেয়াদ %2$@ দিনের মধ্যে শেষ হবে।</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.notYetValid</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি সার্টিফিকেট এখনো বৈধ হয়নি।</string>
+			<key>other</key>
+			<string>%2$@টি সার্টিফিকেট এখনো বৈধ হয়নি।</string>
+		</dict>
+	</dict>
+	<key>finding.certificate.weakKey</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি সার্টিফিকেট ছোট RSA কী ব্যবহার করে।</string>
+			<key>other</key>
+			<string>%2$@টি সার্টিফিকেট ছোট RSA কী ব্যবহার করে।</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableCodeSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ওয়ান-টাইম কোডের গোপন মান এখানে পড়া যায় এমন আকারে সংরক্ষিত আছে।</string>
+			<key>other</key>
+			<string>%2$@টি ওয়ান-টাইম কোডের গোপন মান এখানে পড়া যায় এমন আকারে সংরক্ষিত আছে।</string>
+		</dict>
+	</dict>
+	<key>finding.export.readableLogins</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি পাসওয়ার্ড ম্যানেজারের লগইন এখানে পড়া যায় এমন আকারে সংরক্ষিত আছে। প্রয়োজন না থাকলে এই এক্সপোর্ট মুছে ফেলুন।</string>
+			<key>other</key>
+			<string>%2$@টি পাসওয়ার্ড ম্যানেজারের লগইন এখানে পড়া যায় এমন আকারে সংরক্ষিত আছে। প্রয়োজন না থাকলে এই এক্সপোর্ট মুছে ফেলুন।</string>
+		</dict>
+	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>এর সঙ্গে আরও %2$@টি এক্সটেনশন ইনস্টল হয়।</string>
+			<key>other</key>
+			<string>এর সঙ্গে আরও %2$@টি এক্সটেনশন ইনস্টল হয়।</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি স্পর্শকাতর ব্রাউজার অনুমতি চায়।</string>
+			<key>other</key>
+			<string>%2$@টি স্পর্শকাতর ব্রাউজার অনুমতি চায়।</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ডিপেন্ডেন্সি রেজিস্ট্রির বদলে Git রিপোজিটরি বা ওয়েব ঠিকানা থেকে আসে।</string>
+			<key>other</key>
+			<string>%2$@টি ডিপেন্ডেন্সি রেজিস্ট্রির বদলে Git রিপোজিটরি বা ওয়েব ঠিকানা থেকে আসে।</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>প্রতিবার Python চালু হলে %2$@টি স্থানে Python কোড চলে।</string>
+			<key>other</key>
+			<string>প্রতিবার Python চালু হলে %2$@টি স্থানে Python কোড চলে।</string>
+		</dict>
+	</dict>
+	<key>finding.launch.watchPaths</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি নজরে রাখা পাথ বদলালে প্রোগ্রামটি চালু হয়।</string>
+			<key>other</key>
+			<string>%2$@টি নজরে রাখা পাথ বদলালে প্রোগ্রামটি চালু হয়।</string>
+		</dict>
+	</dict>
 	<key>finding.listing.hiddenCharacters</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -80,6 +464,214 @@
 			<string>তালিকার %2$@টি নামে লুকানো অক্ষর রয়েছে।</string>
 			<key>other</key>
 			<string>তালিকার %2$@টি নামে লুকানো অক্ষর রয়েছে।</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ইমপোর্ট এই ফাইল লোড করার সময় নেটওয়ার্ক বা ফাইল ব্যবহার করতে দেয়।</string>
+			<key>other</key>
+			<string>%2$@টি ইমপোর্ট এই ফাইল লোড করার সময় নেটওয়ার্ক বা ফাইল ব্যবহার করতে দেয়।</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ইমপোর্ট এই ফাইল লোড করার সময় কমান্ড বা কোড চালাতে দেয়।</string>
+			<key>other</key>
+			<string>%2$@টি ইমপোর্ট এই ফাইল লোড করার সময় কমান্ড বা কোড চালাতে দেয়।</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি ইমপোর্ট সাধারণ মডেল ডেটা নয়।</string>
+			<key>other</key>
+			<string>%2$@টি ইমপোর্ট সাধারণ মডেল ডেটা নয়।</string>
+		</dict>
+	</dict>
+	<key>finding.profile.expiresSoon</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>এই প্রভিশনিং প্রোফাইলের মেয়াদ %2$@ দিনের মধ্যে শেষ হবে।</string>
+			<key>other</key>
+			<string>এই প্রভিশনিং প্রোফাইলের মেয়াদ %2$@ দিনের মধ্যে শেষ হবে।</string>
+		</dict>
+	</dict>
+	<key>finding.script.asksForPassword</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি স্থানে পাসওয়ার্ড চাওয়া হয়।</string>
+			<key>other</key>
+			<string>%2$@টি স্থানে পাসওয়ার্ড চাওয়া হয়।</string>
+		</dict>
+	</dict>
+	<key>finding.script.decodeAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি স্থানে এনকোড করা টেক্সট ডিকোড করে চালানো হয়।</string>
+			<key>other</key>
+			<string>%2$@টি স্থানে এনকোড করা টেক্সট ডিকোড করে চালানো হয়।</string>
+		</dict>
+	</dict>
+	<key>finding.script.disablesProtection</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি কমান্ড একটি নিরাপত্তা সুরক্ষা ব্যবস্থা বন্ধ করে দেয়।</string>
+			<key>other</key>
+			<string>%2$@টি কমান্ড নিরাপত্তা সুরক্ষা ব্যবস্থা বন্ধ করে দেয়।</string>
+		</dict>
+	</dict>
+	<key>finding.script.downloadAndRun</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি স্থানে ইন্টারনেট থেকে কোড ডাউনলোড করে চালানো হয়।</string>
+			<key>other</key>
+			<string>%2$@টি স্থানে ইন্টারনেট থেকে কোড ডাউনলোড করে চালানো হয়।</string>
+		</dict>
+	</dict>
+	<key>finding.script.elevates</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি কমান্ড অ্যাডমিনিস্ট্রেটরের অধিকার নিয়ে চলে।</string>
+			<key>other</key>
+			<string>%2$@টি কমান্ড অ্যাডমিনিস্ট্রেটরের অধিকার নিয়ে চলে।</string>
+		</dict>
+	</dict>
+	<key>finding.script.persistence</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি কমান্ড এমন একটি প্রোগ্রাম সেট করে, যা লগইনের সময় বা নির্ধারিত সময়ে চলে।</string>
+			<key>other</key>
+			<string>%2$@টি কমান্ড এমন প্রোগ্রাম সেট করে, যা লগইনের সময় বা নির্ধারিত সময়ে চলে।</string>
+		</dict>
+	</dict>
+	<key>finding.script.readsSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি কমান্ড সংরক্ষিত পাসওয়ার্ড, কী বা ব্রাউজার ডেটা পড়ে।</string>
+			<key>other</key>
+			<string>%2$@টি কমান্ড সংরক্ষিত পাসওয়ার্ড, কী বা ব্রাউজার ডেটা পড়ে।</string>
+		</dict>
+	</dict>
+	<key>finding.script.removesQuarantine</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি কমান্ড ফাইল থেকে macOS-এর কোয়ারেন্টিন চিহ্ন সরিয়ে দেয়।</string>
+			<key>other</key>
+			<string>%2$@টি কমান্ড ফাইল থেকে macOS-এর কোয়ারেন্টিন চিহ্ন সরিয়ে দেয়।</string>
+		</dict>
+	</dict>
+	<key>finding.script.uploadsFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি কমান্ড ইন্টারনেটে ফাইল বা ডেটা পাঠায়।</string>
+			<key>other</key>
+			<string>%2$@টি কমান্ড ইন্টারনেটে ফাইল বা ডেটা পাঠায়।</string>
 		</dict>
 	</dict>
 	<key>finding.summary</key>
@@ -112,6 +704,38 @@
 			<string>%2$@টি সম্ভাব্য গোপন মান লুকানো হয়েছে। নির্বাচন ও কপি করার সময় গোপন মান লুকানো পাঠ ব্যবহার করা হয়।</string>
 			<key>other</key>
 			<string>%2$@টি সম্ভাব্য গোপন মান লুকানো হয়েছে। নির্বাচন ও কপি করার সময় গোপন মান লুকানো পাঠ ব্যবহার করা হয়।</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.nonManifoldEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>দুইয়ের বেশি তলের সাথে ভাগ করা %2$@টি প্রান্ত</string>
+			<key>other</key>
+			<string>দুইয়ের বেশি তলের সাথে ভাগ করা %2$@টি প্রান্ত</string>
+		</dict>
+	</dict>
+	<key>mesh.printCheck.openEdges</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি খোলা প্রান্ত (পৃষ্ঠে একটি ফাঁক)</string>
+			<key>other</key>
+			<string>%2$@টি খোলা প্রান্ত (পৃষ্ঠে ফাঁক)</string>
 		</dict>
 	</dict>
 	<key>preview.count.lines</key>

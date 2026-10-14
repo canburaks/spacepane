@@ -33,3 +33,5 @@ One record per accepted or proposed decision, numbered in order of creation. The
 | 026 | [World-class UX program](026-world-class-ux-program.md) | proposed, amended by 027 |
 | 027 | [Best-in-class quality program](027-best-in-class-quality-program.md) | proposed, in progress |
 | 028 | [No CAD in version 1.0](028-no-cad-in-version-1.md) | decided 2026-10-13; amends 006 (opt-in CAD previews), closes 027 D20 for 1.0 |
+| 029 | [Safety Lens 2: what a file will do](029-safety-lens-2-what-a-file-will-do.md) | accepted 2026-10-14, in progress; extends 012 |
+| 030 | [Safety Lens 3: model files, add-ons and packages](030-safety-lens-3-models-add-ons-and-packages.md) | accepted 2026-10-14, in progress; extends 012 and 029 |

@@ -258,12 +258,81 @@
     "finding.archive.macMetadata": "__MACOSX 内の Mac リソース項目: %lld。",
     "finding.archive.nested": "このアーカイブ内の別のアーカイブ（開いていません）: %lld。",
     "finding.archive.unsafePath": "出力先フォルダの外に書き込まれる項目: %lld。",
+    "finding.artifact.mismatchedContent": "内容の形式が、ファイル名が示す形式と異なります。",
+    "finding.artifact.nativeCode": {
+      "other": "%2$@ 件のネイティブのプログラムまたはライブラリが含まれています。"
+    },
+    "finding.autorun.agentHooks": {
+      "other": "%2$@ 件のコマンドが、AI エージェントが動作すると自動的に実行されます（フック）。"
+    },
+    "finding.autorun.agentPermissions": {
+      "other": "%2$@ 件の設定により、AI エージェントが事前の確認なしに動作できます。"
+    },
+    "finding.autorun.containerCommands": {
+      "other": "%2$@ 件の開発コンテナのコマンドが、コンテナ内で自動的に実行されます。"
+    },
+    "finding.autorun.folderOpenTask": {
+      "other": "%2$@ 件のタスクが、フォルダをコードエディタで開くと自動的に実行されます。"
+    },
+    "finding.autorun.hostCommand": {
+      "other": "%2$@ 件の開発コンテナのコマンドが、コンテナの起動前にこの Mac 上で実行されます。"
+    },
+    "finding.autorun.installScripts": {
+      "other": "%2$@ 件のパッケージスクリプトが、インストール中に自動的に実行されます。"
+    },
+    "finding.autorun.localServers": {
+      "other": "%2$@ 件の MCP サーバがこの Mac でプログラムを起動します。"
+    },
+    "finding.autorun.remoteServers": {
+      "other": "%2$@ 件の MCP サーバが、インターネット上のサービスに接続します。"
+    },
+    "finding.autorun.serverEnvironment": {
+      "other": "%2$@ 件の環境変数が、MCP サーバに渡されます。"
+    },
     "finding.banner.label": "このファイルで確認が必要な項目",
+    "finding.bundle.asksForSecrets": {
+      "other": "%2$@ 件の設定で、パスワードまたはキーを求めます。"
+    },
+    "finding.bundle.broadFolderAccess": {
+      "other": "%2$@ 件の設定が、サーバにホーム、書類、ダウンロード、またはデスクトップのフォルダへのアクセスを与えます。"
+    },
+    "finding.bundle.runsProgram": "AI アプリがサーバを起動すると、この Mac 上でプログラムを実行します。",
+    "finding.bundle.toolTextTargetsAssistant": {
+      "other": "%2$@ 件のツールの説明が、AI に対して、ほかのファイルを読むこと、またはユーザに何かを伏せることを指示しています。"
+    },
+    "finding.certificate.expired": {
+      "other": "%2$@ 件の証明書が期限切れです。"
+    },
+    "finding.certificate.expiresSoon": {
+      "other": "証明書が %2$@ 日後に期限切れになります。"
+    },
+    "finding.certificate.notYetValid": {
+      "other": "%2$@ 件の証明書はまだ有効ではありません。"
+    },
+    "finding.certificate.weakKey": {
+      "other": "%2$@ 件の証明書が短い RSA キーを使用しています。"
+    },
     "finding.detail.cells": "セル: %@",
     "finding.detail.cellsMore": "セル: %1$@ ほか %2$lld セル",
     "finding.detail.decodedText": "隠しテキスト（プレーンテキストで表示）: %@",
     "finding.detail.lines": "行: %@",
     "finding.detail.linesMore": "行: %1$@ ほか %2$lld 行",
+    "finding.export.readableCodeSecrets": {
+      "other": "%2$@ 件のワンタイムコードの秘密情報が、読める形でここに保存されています。"
+    },
+    "finding.export.readableLogins": {
+      "other": "%2$@ 件のパスワードマネージャのログイン情報が、読める形でここに保存されています。不要になったら、この書き出しファイルを削除してください。"
+    },
+    "finding.extension.allSites": "アクセスするすべての Web サイトを読み取り、変更できます。",
+    "finding.extension.installsOthers": {
+      "other": "ほかの拡張機能を %2$@ 件、あわせてインストールします。"
+    },
+    "finding.extension.relaxedScriptPolicy": "セキュリティポリシーにより、テキストをコードとして実行できます。",
+    "finding.extension.selfHostedUpdates": "ブラウザのストアではなく、独自のサーバからアップデートされます。",
+    "finding.extension.sensitivePermissions": {
+      "other": "%2$@ 件の機密性の高いブラウザ権限を要求します。"
+    },
+    "finding.extension.startsAutomatically": "コードエディタを開くたびに起動します。",
     "finding.hidden.agentInstructions": "AI コーディングツール向けの指示ファイルのようです。隠しテキストでツールの動作を操作される可能性があります。",
     "finding.hidden.bidirectionalControls": "コードの見え方と実行内容を食い違わせる可能性がある、方向を変える文字: %lld。",
     "finding.hidden.markdownComments": "ほとんどの Markdown ビューアで表示されない HTML コメント: %lld。",
@@ -272,9 +341,29 @@
     "finding.hidden.unicodeTags": "隠しテキストを運ぶ見えないタグ文字: %lld。",
     "finding.hidden.variationSelectors": "データを隠せる、想定外の異体字セレクタ: %lld。",
     "finding.hidden.zeroWidth": "見えないゼロ幅文字: %lld。",
+    "finding.install.buildScript": "このソースパッケージをビルドまたはインストールすると、セットアップスクリプトが実行されます。",
+    "finding.install.nativeBuild": "このパッケージをインストールすると、インストールスクリプトがなくても、ビルドファイルからネイティブコードがコンパイルされます。",
+    "finding.install.remoteDependencies": {
+      "other": "%2$@ 件の依存関係が、レジストリではなく Git リポジトリまたは Web アドレスから取得されます。"
+    },
+    "finding.install.startupCode": {
+      "other": "%2$@ 件の箇所で、Python の起動時に毎回コードが実行されます。"
+    },
+    "finding.launch.atLoad": "プログラムはログイン時または起動時に開始されます。",
+    "finding.launch.hiddenLocation": "プログラムは一時的、共有、または非表示のフォルダにあります。",
+    "finding.launch.inlineScript": "このジョブは、このファイル内に書かれたシェルまたはスクリプトのコードを実行します。",
+    "finding.launch.interval": "プログラムは %@ ごとに実行されます。",
+    "finding.launch.job": "これは launchd のジョブです。macOS が指定されたプログラムを起動します。",
+    "finding.launch.keepAlive": "プログラムが停止するたびに、macOS が再起動します。",
+    "finding.launch.schedule": "プログラムはカレンダーのスケジュールで実行されます。",
+    "finding.launch.watchPaths": {
+      "other": "%2$@ 件の監視パスが、変更されるとプログラムを起動します。"
+    },
     "finding.listing.hiddenCharacters": {
       "other": "一覧の %2$@ 件の名前に隠れた文字が含まれています。"
     },
+    "finding.model.incomplete": "ファイルがヘッダの記載より短く、ダウンロードが不完全な可能性があります。",
+    "finding.model.inconsistentLayout": "ヘッダ内のテンソルの範囲に重なりや隙間があります。この形式では認められていません。",
     "finding.more": "そのほかの検出項目: %lld",
     "finding.notebook.errorOutputs": "エラーを保存しているセル: %lld。",
     "finding.notebook.executionGaps": "実行番号が飛んでいるため、セルが再実行または削除されています。欠番数: %lld。",
@@ -282,12 +371,53 @@
     "finding.notebook.notExecuted": "実行されたコードセルがないため、このノートブックには保存された結果がありません。",
     "finding.notebook.outOfOrder": "セルが順番どおりに実行されていません: %@。",
     "finding.notebook.unexecutedCells": "一度も実行されていないコードセル: %lld。",
+    "finding.pickle.brokenStream": "データがインポートの後で途切れています。一部のスキャナはその時点で読み取りを止めます。",
+    "finding.pickle.networkOrFiles": {
+      "other": "%2$@ 件のインポートが、このファイルの読み込み時にネットワークやファイルを使用できます。"
+    },
+    "finding.pickle.runsCode": {
+      "other": "%2$@ 件のインポートが、このファイルの読み込み時にコマンドやコードを実行できます。"
+    },
+    "finding.pickle.uncommonImports": {
+      "other": "%2$@ 件のインポートは、通常のモデルデータではありません。"
+    },
+    "finding.profile.expired": "このプロビジョニングプロファイルは期限切れです。",
+    "finding.profile.expiresSoon": {
+      "other": "このプロビジョニングプロファイルは %2$@ 日後に期限切れになります。"
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google ドライブ",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "クラウドストレージフォルダ",
+    "finding.script.asksForPassword": {
+      "other": "%2$@ 件の箇所で、パスワードを求めます。"
+    },
+    "finding.script.decodeAndRun": {
+      "other": "%2$@ 件の箇所でエンコード済みテキストをデコードして実行します。"
+    },
+    "finding.script.disablesProtection": {
+      "other": "%2$@ 件のコマンドが、セキュリティ保護をオフにします。"
+    },
+    "finding.script.downloadAndRun": {
+      "other": "%2$@ 件の箇所で、インターネットからコードをダウンロードして実行します。"
+    },
+    "finding.script.elevates": {
+      "other": "%2$@ 件のコマンドが、管理者権限で実行されます。"
+    },
+    "finding.script.persistence": {
+      "other": "%2$@ 件のコマンドが、ログイン時またはスケジュールで実行されるプログラムを設定します。"
+    },
+    "finding.script.readsSecrets": {
+      "other": "%2$@ 件のコマンドが、保存されたパスワード、キー、ブラウザのデータを読み取ります。"
+    },
+    "finding.script.removesQuarantine": {
+      "other": "%2$@ 件のコマンドが、ファイルから macOS の隔離マークを削除します。"
+    },
+    "finding.script.uploadsFiles": {
+      "other": "%2$@ 件のコマンドが、ファイルやデータをインターネットに送信します。"
+    },
     "finding.secret.apiKey": "隠された API キー: %lld。",
     "finding.secret.authorizationHeader": "隠された認証情報: %lld。",
     "finding.secret.cloudAccessKey": "隠されたクラウドアクセスキー: %lld。",
@@ -305,6 +435,11 @@
     "finding.summary.concealed": {
       "other": "機密情報の可能性がある %2$@ 件を非表示にしました。選択とコピーには機密情報を隠したテキストを使用します。"
     },
+    "findings.report.copied": "確認項目のレポートをコピーしました",
+    "findings.report.copy": "確認項目のレポートをコピー",
+    "findings.report.copyHint": "これらの確認項目の一覧をコピーします。ファイルのテキストは含まれません。",
+    "findings.report.footer": "この一覧にはファイルのテキストは含まれていません。",
+    "findings.report.heading": "確認項目: %@",
     "format.archive.7z.description": "圧縮されたヘッダを含め、ヘッダから 7z の項目を上限付きで一覧表示します。ファイルのデータはデコードしません。ヘッダが暗号化されたアーカイブは一覧表示されません。",
     "format.archive.7z.name": "7-Zip アーカイブ",
     "format.archive.bzip2.description": "bzip2 ストリームを上限付きで解凍します。TAR.BZ2 の一覧と対応するテキストを表示し、それ以外の内容はバイナリとして報告します。",
@@ -395,6 +530,12 @@
     "format.document.fictionbook.name": "FictionBook (FB2)",
     "format.document.web-archive.description": "保存された MHTML ページのテキストを表示します。ページの描画や読み込みは行いません。",
     "format.document.web-archive.name": "Web アーカイブ (MHTML)",
+    "format.ml.gguf.description": "ヘッダから、アーキテクチャ、サイズ、量子化、コンテキスト長、ライセンス、チャットテンプレートを表示します。モデルの重みは読み取りません。",
+    "format.ml.gguf.name": "GGUF モデル",
+    "format.ml.pickle.description": "ファイルを読み込んだ場合に何がインポートされるかを、読み込まずに確認します。確認項目がなくても、安全とは限りません。",
+    "format.ml.pickle.name": "PyTorch、Pickle ファイル",
+    "format.ml.safetensors.description": "ヘッダから、テンソル、パラメータ数、データ型、メタデータ、LoRA とシャードの詳細を表示します。モデルの重みは読み取りません。",
+    "format.ml.safetensors.name": "Safetensors モデル",
     "format.model.3mf.description": "ビルド配置と単位を含む3Dプリント用モデルのローカル3Dプレビュー。色、マテリアル、スライサー設定は表示されません。",
     "format.model.3mf.name": "3MF 3Dモデル",
     "format.model.obj.description": "ポリゴン形状のローカル3Dプレビュー。マテリアル、テクスチャ、リンクされたファイルは読み込まれません。",
@@ -407,10 +548,18 @@
     "format.package.android.name": "Android アプリ (APK, AAB)",
     "format.package.application.description": "ID、バージョン、アーキテクチャ、署名の概要、サイズ。何も実行せず、署名の検証も行いません。",
     "format.package.application.name": "アプリケーションバンドル",
+    "format.package.browser-extension.description": "マニフェストから、権限、サイトへのアクセス、アップデートのアドレス、コンテンツセキュリティポリシーを表示します。何もインストールや実行はしません。",
+    "format.package.browser-extension.name": "ブラウザ拡張機能 (XPI, CRX)",
+    "format.package.editor-extension.description": "公開元、バージョン、起動のタイミング、同梱されたネイティブコード、隠れた文字。何もインストールや実行はしません。",
+    "format.package.editor-extension.name": "エディタ拡張機能 (VSIX)",
     "format.package.installer.description": "内容、識別子、バージョン、スクリプト名。スクリプトとペイロードは読み取りません。",
     "format.package.installer.name": "インストーラパッケージ",
     "format.package.ios-app.description": "Info.plist、プロビジョニングプロファイル、アイコン、ファイル一覧。何も展開や実行はしません。",
     "format.package.ios-app.name": "iOS アプリ (IPA)",
+    "format.package.mcp-bundle.description": "マニフェストから、サーバのプログラム、ツール、設定、フォルダへのアクセスを表示します。何もインストールや実行はしません。",
+    "format.package.mcp-bundle.name": "MCP バンドル",
+    "format.package.python-wheel.description": "名前、バージョン、要件、コマンド、Python の起動時に実行されるファイル。何もインストールや実行はしません。",
+    "format.package.python-wheel.name": "Python Wheel",
     "format.security.certificate.description": "証明書の詳細とフィンガープリント。秘密鍵は非表示で、信頼性の評価は行いません。",
     "format.security.certificate.name": "証明書",
     "format.text.asciidoc.description": "AsciiDoc の見出し、リスト、ブロック、注意書きをオフラインで表示し、安全なソースも提供します。include は決して辿りません。",
@@ -478,6 +627,14 @@
     "help.keyboard.body": "⌘1〜⌘4 でページを切り替えます。⌘, で「一般」を開きます。⌘Z で直前のリセット、一括変更、テーマの読み込み、プロファイルの削除を取り消し、⇧⌘Z でやり直します。",
     "help.keyboard.title": "キーボードショートカット",
     "listing.risk.hiddenCharacters": "名前に隠れた文字",
+    "mesh.printCheck.estimate": "PLA で中実のまま印刷した場合：約 %1$@ %2$@、%5$@ %6$@ のフィラメントを %3$@ %4$@ 使用します。スライサーは通常、より少ない充填で印刷するため、これは上限値です。",
+    "mesh.printCheck.estimateIfMillimetres": "単位がミリメートルで、PLA で中実のまま印刷した場合：約 %1$@ %2$@、%5$@ %6$@ のフィラメントを %3$@ %4$@ 使用します。スライサーは通常、より少ない充填で印刷するため、これは上限値です。",
+    "mesh.printCheck.nonManifoldEdges": {
+      "other": "二つを超える面が共有する辺が %2$@ 本あります"
+    },
+    "mesh.printCheck.openEdges": {
+      "other": "開放エッジが %2$@ 本あります（表面に隙間があります）"
+    },
     "midi.duration": "再生時間",
     "midi.noAutoplay": "「再生」を押した場合にのみ再生を開始します。",
     "midi.pause": "一時停止",
@@ -509,6 +666,38 @@
     "notebook.output.numbered": "出力 [%lld]",
     "notebook.output.stderr": "エラーストリーム",
     "notebook.truncated": "プレビューを短縮しました。表示セル数: %2$lld 個中 %1$lld 個。",
+    "preview.addon.activationEvents": "アクティベーションイベント",
+    "preview.addon.addonID": "アドオン ID",
+    "preview.addon.arguments": "引数",
+    "preview.addon.author": "作者",
+    "preview.addon.background": "バックグラウンドファイル",
+    "preview.addon.browser": "ブラウザ",
+    "preview.addon.categories": "カテゴリ",
+    "preview.addon.command": "コマンド",
+    "preview.addon.commands": "コマンド数",
+    "preview.addon.contentScriptMatches": "コンテンツスクリプトの対象サイト",
+    "preview.addon.description": "説明",
+    "preview.addon.engine": "VS Code のバージョン",
+    "preview.addon.entry": "エントリファイル",
+    "preview.addon.entryPoint": "エントリポイント",
+    "preview.addon.environment": "環境変数の名前",
+    "preview.addon.extensionDependencies": "拡張機能の依存関係",
+    "preview.addon.extensionPack": "拡張機能パック",
+    "preview.addon.hostPermissions": "ホストの権限",
+    "preview.addon.license": "ライセンス",
+    "preview.addon.manifestVersion": "マニフェストのバージョン",
+    "preview.addon.optionalPermissions": "任意の権限",
+    "preview.addon.prompts": "プロンプト",
+    "preview.addon.publisher": "公開元",
+    "preview.addon.required": "必須",
+    "preview.addon.runtimes": "ランタイム",
+    "preview.addon.sensitive": "機密",
+    "preview.addon.serverType": "サーバーの種類",
+    "preview.addon.settings": "設定",
+    "preview.addon.tools": "ツール",
+    "preview.addon.untrustedWorkspaces": "信頼されていないワークスペース",
+    "preview.addon.updateURL": "更新アドレス",
+    "preview.addon.webEntry": "Web 用エントリファイル",
     "preview.archive.entryEncrypted": "暗号化",
     "preview.archive.entryModified": "更新日時",
     "preview.archive.locked": "ロック済み",
@@ -708,6 +897,18 @@
       "other": "機密情報の可能性がある項目を非表示：%2$@。"
     },
     "preview.info.onThisMac": "このMac上で処理",
+    "preview.install.commands": "インストールされるコマンド",
+    "preview.install.dependencies": "依存関係",
+    "preview.install.generator": "ビルドに使用したツール",
+    "preview.install.installedScripts": "インストールされるスクリプト",
+    "preview.install.license": "ライセンス",
+    "preview.install.nativeModules": "ネイティブモジュール",
+    "preview.install.pureLibrary": "純粋な Python ライブラリ",
+    "preview.install.requiresPython": "必要な Python",
+    "preview.install.startupFiles": "インストールされるパスファイル（.pth）",
+    "preview.install.summary": "概要",
+    "preview.install.tags": "互換性タグ",
+    "preview.install.wheelVersion": "Wheel 形式のバージョン",
     "preview.interaction.close": "閉じる",
     "preview.interaction.copied": "クリップボードにコピーしました",
     "preview.interaction.copy": "コピー",
@@ -808,6 +1009,44 @@
     "preview.mode.summary": "概要",
     "preview.mode.table": "表",
     "preview.mode.tree": "ツリー",
+    "preview.model.adapterKind": "アダプター",
+    "preview.model.alignment": "アラインメント（バイト）",
+    "preview.model.architecture": "アーキテクチャ",
+    "preview.model.author": "作者",
+    "preview.model.baseModels": "ベースモデル",
+    "preview.model.bitsPerWeight": "重み1つあたりのビット数",
+    "preview.model.blockCount": "層の数",
+    "preview.model.chatTemplate": "チャットテンプレート",
+    "preview.model.chatTemplateBytes": "チャットテンプレートのサイズ（バイト）",
+    "preview.model.contextLength": "コンテキスト長",
+    "preview.model.dataBytes": "テンソルデータのサイズ（バイト）",
+    "preview.model.dtypes": "データ型",
+    "preview.model.embeddingLength": "埋め込みの次元数",
+    "preview.model.expertCount": "エキスパート数",
+    "preview.model.expertUsedCount": "トークンごとに使うエキスパート数",
+    "preview.model.fileType": "ファイルの種類",
+    "preview.model.ggufVersion": "GGUF のバージョン",
+    "preview.model.headCount": "アテンションヘッド数",
+    "preview.model.headCountKV": "キー／バリューヘッド数",
+    "preview.model.headerBytes": "ヘッダーのサイズ（バイト）",
+    "preview.model.languages": "言語",
+    "preview.model.license": "ライセンス",
+    "preview.model.loraRank": "LoRA のランク",
+    "preview.model.metadataCount": "メタデータの項目数",
+    "preview.model.organization": "組織",
+    "preview.model.otherMetadata": "その他のメタデータ",
+    "preview.model.parameters": "パラメータ数",
+    "preview.model.quantization": "量子化",
+    "preview.model.quantizedBy": "量子化した人",
+    "preview.model.shardCount": "セット内のシャード数",
+    "preview.model.shardIndex": "シャード",
+    "preview.model.sizeLabel": "サイズ表記",
+    "preview.model.tags": "タグ",
+    "preview.model.tensorCount": "テンソルの数",
+    "preview.model.tensorTypes": "テンソルの種類",
+    "preview.model.tensors": "テンソル",
+    "preview.model.tokenizer": "トークナイザー",
+    "preview.model.vocabularySize": "語彙サイズ",
     "preview.outline.duplicateKey": "重複したキー",
     "preview.outline.key": "キー",
     "preview.outline.value": "値",
@@ -922,6 +1161,22 @@
     "preview.package.versionCode": "バージョンコード",
     "preview.package.versionName": "バージョン名",
     "preview.package.webSeeds": "ウェブシード",
+    "preview.pickle.checked": "確認した範囲",
+    "preview.pickle.checked.importsOnly": "インポートのみ。ファイルは一度も読み込まれていません。",
+    "preview.pickle.checksumErrors": "チェックサムの不一致",
+    "preview.pickle.count": "出現回数",
+    "preview.pickle.imports": "インポート",
+    "preview.pickle.kind": "種類",
+    "preview.pickle.kind.code": "コードを実行できる",
+    "preview.pickle.kind.expected": "モデルデータでは想定内",
+    "preview.pickle.kind.networkOrFiles": "ネットワークまたはファイル",
+    "preview.pickle.kind.uncommon": "一般的でない",
+    "preview.pickle.partial": "一部のみ確認",
+    "preview.pickle.persistentIDs": "永続 ID",
+    "preview.pickle.pickleProtocol": "Pickle プロトコル",
+    "preview.pickle.pickles": "スキャンした pickle の数",
+    "preview.pickle.storageBytes": "テンソルストレージのバイト数",
+    "preview.pickle.storages": "テンソルストレージ",
     "preview.privacyNotice": "秘密情報と思われる部分は隠されます。選択とコピーには、隠された後の内容が使われます。",
     "preview.profile.shownRows": {
       "other": "プロファイルは読み取った先頭の %2$@ 行を使用します。"

@@ -40,8 +40,14 @@ enum SafeSchemaLabels {
         // [ebooks]
         .comicBook,
         // [code]
+        // [safety-lens-3]
+        .models, .pickle, .addOns, .installables,
     ]
     static let formats: Set<FormatID> = labelSets.reduce(into: []) { $0.formUnion($1.formats) }
+    /// Packages whose summary also lists their files open in Summary, not Files (decisions 017 and 030):
+    /// identity, permissions and install-time behaviour lead.
+    static let summaryFirstListings: Set<FormatID> = SummaryLabelSet.packages.formats
+        .union(SummaryLabelSet.addOns.formats).union(SummaryLabelSet.installables.formats)
     /// Listings whose adapters assess archive risks or shared name risks.
     static let riskFormats: Set<FormatID> = [.zip, .tar, .gzip, .xip, .rar, .sevenZip, .bzip2, .xz, .folder]
 
