@@ -2,6 +2,13 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-14 — A shorter README; website synced
+
+Owner request: make the README up to date, lean and easy to understand.
+
+- Documentation: README.md rewritten for readers new to the project, in about half the words. It now states what the app does, the current status (build 3 in App Review with 74 types; `main` with 81 types and Safety Lens 2 and 3), the repository layout, the four check commands, signed development builds, adding a file type, translations and the placeholder-identifier fix. The old text said no build had been submitted and did not mention the Safety Lens. Implementation detail and dated evidence it repeated stay in AGENTS.md, PLAN.md and docs/validation.
+- Plan: the two website-sync boxes of Safety Lens 2 and 3 are checked. `npm run data:sync` ran in `spacepane-web` (6b6e8c8), and the deployed site (b12e605) lists the seven new formats and four new Safety Lens cards with a "Coming in an update" badge, leaving them out of every count.
+
 ## 2026-10-14 — Safety Lens 3: model files, add-ons and packages
 
 Owner request ("Continue development"). [Decision 030](docs/decisions/030-safety-lens-3-models-add-ons-and-packages.md) with implementation notes. Branch `safety-lens-3`: five workstreams in their own worktrees, then the lead's integration. Nothing was pushed.
