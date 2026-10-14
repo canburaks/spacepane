@@ -121,7 +121,7 @@ struct PyTorchArchiveTests {
         let result = try scan(PyTorchZip.build([.init("notes.txt", Array("hello".utf8)), .init("lib/native.so", [1])]))
         #expect(result.container == "ZIP")
         #expect(result.json["pickles"] == nil && result.json["imports"] == nil && result.json["checked"] == nil)
-        #expect(result.findings == [.artifactMismatchedContent])
+        #expect(result.findings == [.artifactNativeCode, .artifactMismatchedContent])
     }
 
     @Test func aPickleMemberThatIsNotAPickleLeavesNothingToShow() throws {
