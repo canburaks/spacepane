@@ -89,7 +89,7 @@ public struct PickleAdapter: BinaryFormatAdapter, RandomAccessFormatAdapter {
                 // is what a protocol 0 pickle saved under this name looks like.
                 var report = PickleScanReport(container: "Pickle")
                 if try PickleStreamScanner.scan(all, isWindow: false, single: false, report: &report, context: context) == .scanned,
-                   report.pickles > 0, !report.isBroken, !report.isPartial, !report.tally.entries.isEmpty {
+                   report.pickles > 0, !report.isBroken, !report.isPartial, !report.tally.isEmpty {
                     return try PickleSummary.document(report, context: context)
                 }
                 return ParsedTextDocument(text: text, decodedEncoding: .utf8)

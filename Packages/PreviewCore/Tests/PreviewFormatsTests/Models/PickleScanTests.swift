@@ -23,7 +23,7 @@ struct PickleScanTests {
         let (result, report) = try scan(bytes, isWindow: true)
         #expect(result == .scanned && report.pickles == 5 && report.persistentIDs == 1)
         #expect(!report.isBroken && !report.isPartial)
-        #expect(report.tally.distinctCount(.expected) == 3 && report.tally.entries.count == 3)
+        #expect(report.tally.distinctCount(.expected) == 3 && report.tally.sorted.count == 3)
     }
 
     @Test func rawDataThatLooksLikeAHeaderStopsTheScanQuietly() throws {

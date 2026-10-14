@@ -170,7 +170,7 @@ struct PickleWalkerTests {
     @Test func extensionCodesAreImportsByNumber() throws {
         let (_, tally) = try S.walk(S.join([0x82, 5], [0x83, 6, 0], [0x84, 7, 0, 0, 0], [0x82, 5], S.stop))
         #expect(S.kinds(tally) == ["extension code 5": .uncommon, "extension code 6": .uncommon, "extension code 7": .uncommon])
-        #expect(tally.entries["extension code 5"]?.count == 2)
+        #expect(tally.count(of: "extension code 5") == 2)
     }
 
     @Test func importNamesThatAreNotDottedNamesAreNotPlausible() throws {
@@ -191,7 +191,7 @@ struct PickleWalkerTests {
         #expect(outcome.persistentIDs == 1)
         #expect(S.names(tally) == ["collections.OrderedDict", "torch.FloatStorage", "torch._utils._rebuild_tensor_v2"])
         #expect(Set(S.kinds(tally).values) == [.expected])
-        #expect(tally.entries["collections.OrderedDict"]?.count == 2)
+        #expect(tally.count(of: "collections.OrderedDict") == 2)
     }
 
     @Test func importsBeforeAnInvalidOpcodeAreKeptWhichIsTheShapeOfAnEvasionAttempt() throws {

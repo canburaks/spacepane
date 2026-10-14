@@ -125,41 +125,67 @@ enum PickleImportClassifier {
 /// room so a flood of one class can never push out the entries of a more serious one.
 struct PickleImportTally: Sendable {
     struct Entry: Sendable { var count: Int; let kind: PickleImportKind }
+    /// A name is shown clipped, so two long names can share a label. The class is part of the key: a name
+    /// that runs code must never be counted under a harmless name that shares its first characters.
+    private struct Key: Hashable, Sendable {
+        let label: String
+        let kind: PickleImportKind
+    }
 
     static let maximumNameCharacters = 256
     private static let capacity: [PickleImportKind: Int] = [.code: 1_024, .networkOrFiles: 1_024, .uncommon: 4_096, .expected: 256]
+    private static let maximumKnownNames = 8_192
 
-    private(set) var entries: [String: Entry] = [:]
+    private var table: [Key: Entry] = [:]
+    /// Short qualified names already classified, so a name repeated thousands of times is classified once.
+    private var known: [String: PickleImportKind] = [:]
     private var distinct: [PickleImportKind: Int] = [:]
     private(set) var overflowed = false
+
+    var isEmpty: Bool { table.isEmpty }
 
     /// Distinct names of one class.
     func distinctCount(_ kind: PickleImportKind) -> Int { distinct[kind] ?? 0 }
 
+    /// How many times the shown name occurred, over all classes; nil when it never did.
+    func count(of name: String) -> Int? {
+        let counts = PickleImportKind.allCases.compactMap { table[Key(label: name, kind: $0)]?.count }
+        return counts.isEmpty ? nil : counts.reduce(0, +)
+    }
+
     /// Entries ordered for the summary: by class, then by name.
     var sorted: [(name: String, entry: Entry)] {
-        entries.map { (name: $0.key, entry: $0.value) }.sorted {
+        table.map { (name: $0.key.label, entry: $0.value) }.sorted {
             $0.entry.kind.rank != $1.entry.kind.rank ? $0.entry.kind.rank < $1.entry.kind.rank : $0.name < $1.name
         }
     }
 
     /// Records one import; `module` and `name` are the strings the stream carries, in any encoding.
     mutating func record(module: String, name: String) {
-        record(label: Self.display(module + "." + name)) { PickleImportClassifier.classify(module: module, name: name) }
+        let qualified = module + "." + name
+        let isShort = qualified.utf8.count <= Self.maximumNameCharacters
+        let kind: PickleImportKind
+        if isShort, let cached = known[qualified] {
+            kind = cached
+        } else {
+            kind = PickleImportClassifier.classify(module: module, name: name)
+            if isShort, known.count < Self.maximumKnownNames { known[qualified] = kind }
+        }
+        add(label: Self.display(qualified), kind: kind)
     }
 
     /// An import by extension code, which resolves through a registry the loading process fills.
-    mutating func recordExtension(code: UInt64) { record(label: "extension code \(code)") { .uncommon } }
+    mutating func recordExtension(code: UInt64) { add(label: "extension code \(code)", kind: .uncommon) }
 
     /// A name the stream builds while loading, which this scan cannot resolve without running it.
-    mutating func recordUnresolved() { record(label: "unresolved name") { .uncommon } }
+    mutating func recordUnresolved() { add(label: "unresolved name", kind: .uncommon) }
 
-    private mutating func record(label: String, kind: () -> PickleImportKind) {
-        if entries[label] != nil { entries[label]?.count += 1; return }
-        let kind = kind()
+    private mutating func add(label: String, kind: PickleImportKind) {
+        let key = Key(label: label, kind: kind)
+        if table[key] != nil { table[key]?.count += 1; return }
         guard distinctCount(kind) < Self.capacity[kind, default: 0] else { overflowed = true; return }
         distinct[kind, default: 0] += 1
-        entries[label] = Entry(count: 1, kind: kind)
+        table[key] = Entry(count: 1, kind: kind)
     }
 
     /// The name as the summary shows it: clipped, with controls and invisible format characters replaced,
