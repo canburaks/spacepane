@@ -124,6 +124,10 @@ struct ScriptEffectsRealisticTests {
 
 @Suite("Script effects: bounds")
 struct ScriptEffectsBoundTests {
+    /// These tests show the work is bounded, not fast: a parallel test run on a loaded Mac can take longer
+    /// than the standard two-second deadline, so they get the longest valid one.
+    static var unhurried: RequestContext { RequestContext(budget: PreviewBudget(maxMilliseconds: 30_000)) }
+
     @Test func aFiftyThousandLineScriptCompletes() throws {
         var lines: [String] = []
         lines.reserveCapacity(50_000)
@@ -137,7 +141,7 @@ struct ScriptEffectsBoundTests {
             }
         }
         lines[49_999] = "sudo true"
-        let findings = try ScriptFixture.findings(lines.joined(separator: "\n") + "\n")
+        let findings = try ScriptFixture.findings(lines.joined(separator: "\n") + "\n", context: Self.unhurried)
         #expect(findings.map(\.kind) == [.scriptElevates])
         #expect(findings.first?.lines == [50_000])
     }
@@ -145,7 +149,7 @@ struct ScriptEffectsBoundTests {
     @Test(arguments: [SourceLanguageID.shell, .powerShell, .batch, .appleScript])
     func aFiftyThousandLineScriptCompletesInEveryDialect(_ language: SourceLanguageID) throws {
         let text = String(repeating: "echo ok\n", count: 50_000)
-        #expect(try ScriptFixture.findings(text, language: language) == [])
+        #expect(try ScriptFixture.findings(text, language: language, context: Self.unhurried) == [])
     }
 
     @Test func aVeryLongBase64LineIsCheap() throws {

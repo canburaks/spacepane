@@ -125,6 +125,31 @@ enum FindingText {
             return PreviewStrings.count(.findingCertificateExpiresSoon, days(finding.detail), locale: locale)
         case .profileExpiresSoon:
             return PreviewStrings.count(.findingProfileExpiresSoon, days(finding.detail), locale: locale)
+        case .artifactNativeCode: return PreviewStrings.count(.findingArtifactNativeCode, finding.count, locale: locale)
+        case .artifactMismatchedContent: return PreviewStrings.text(.findingArtifactMismatchedContent)
+        case .modelIncomplete: return PreviewStrings.text(.findingModelIncomplete)
+        case .modelInconsistentLayout: return PreviewStrings.text(.findingModelInconsistentLayout)
+        case .pickleRunsCode: return PreviewStrings.count(.findingPickleRunsCode, finding.count, locale: locale)
+        case .pickleNetworkOrFiles: return PreviewStrings.count(.findingPickleNetworkOrFiles, finding.count, locale: locale)
+        case .pickleUncommonImports: return PreviewStrings.count(.findingPickleUncommonImports, finding.count, locale: locale)
+        case .pickleBrokenStream: return PreviewStrings.text(.findingPickleBrokenStream)
+        case .installNativeBuild: return PreviewStrings.text(.findingInstallNativeBuild)
+        case .installStartupCode: return PreviewStrings.count(.findingInstallStartupCode, finding.count, locale: locale)
+        case .installBuildScript: return PreviewStrings.text(.findingInstallBuildScript)
+        case .installRemoteDependencies:
+            return PreviewStrings.count(.findingInstallRemoteDependencies, finding.count, locale: locale)
+        case .bundleRunsProgram: return PreviewStrings.text(.findingBundleRunsProgram)
+        case .bundleAsksForSecrets: return PreviewStrings.count(.findingBundleAsksForSecrets, finding.count, locale: locale)
+        case .bundleBroadFolderAccess: return PreviewStrings.count(.findingBundleBroadFolderAccess, finding.count, locale: locale)
+        case .bundleToolTextTargetsAssistant:
+            return PreviewStrings.count(.findingBundleToolTextTargetsAssistant, finding.count, locale: locale)
+        case .extensionStartsAutomatically: return PreviewStrings.text(.findingExtensionStartsAutomatically)
+        case .extensionInstallsOthers: return PreviewStrings.count(.findingExtensionInstallsOthers, finding.count, locale: locale)
+        case .extensionAllSites: return PreviewStrings.text(.findingExtensionAllSites)
+        case .extensionSensitivePermissions:
+            return PreviewStrings.count(.findingExtensionSensitivePermissions, finding.count, locale: locale)
+        case .extensionSelfHostedUpdates: return PreviewStrings.text(.findingExtensionSelfHostedUpdates)
+        case .extensionRelaxedScriptPolicy: return PreviewStrings.text(.findingExtensionRelaxedScriptPolicy)
         }
     }
 

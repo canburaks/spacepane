@@ -136,6 +136,40 @@ public enum PreviewFindingKind: String, CaseIterable, Sendable {
     case profileExpired = "profile.expired"
     case profileExpiresSoon = "profile.expiresSoon"
 
+    // MARK: Models, add-ons and packages — decision 030. Shared by several adapters.
+    case artifactNativeCode = "artifact.nativeCode"
+    case artifactMismatchedContent = "artifact.mismatchedContent"
+
+    // MARK: Model files — PreviewFormats/Models (decision 030)
+    case modelIncomplete = "model.incomplete"
+    case modelInconsistentLayout = "model.inconsistentLayout"
+
+    // MARK: Pickle imports — PreviewFormats/Models (decision 030)
+    case pickleRunsCode = "pickle.runsCode"
+    case pickleNetworkOrFiles = "pickle.networkOrFiles"
+    case pickleUncommonImports = "pickle.uncommonImports"
+    case pickleBrokenStream = "pickle.brokenStream"
+
+    // MARK: Install-time behaviour — PreviewFormats/Installables (decision 030)
+    case installNativeBuild = "install.nativeBuild"
+    case installStartupCode = "install.startupCode"
+    case installBuildScript = "install.buildScript"
+    case installRemoteDependencies = "install.remoteDependencies"
+
+    // MARK: MCP bundles — PreviewFormats/AddOns (decision 030)
+    case bundleRunsProgram = "bundle.runsProgram"
+    case bundleAsksForSecrets = "bundle.asksForSecrets"
+    case bundleBroadFolderAccess = "bundle.broadFolderAccess"
+    case bundleToolTextTargetsAssistant = "bundle.toolTextTargetsAssistant"
+
+    // MARK: Editor and browser extensions — PreviewFormats/AddOns (decision 030)
+    case extensionStartsAutomatically = "extension.startsAutomatically"
+    case extensionInstallsOthers = "extension.installsOthers"
+    case extensionAllSites = "extension.allSites"
+    case extensionSensitivePermissions = "extension.sensitivePermissions"
+    case extensionSelfHostedUpdates = "extension.selfHostedUpdates"
+    case extensionRelaxedScriptPolicy = "extension.relaxedScriptPolicy"
+
     public var defaultSeverity: PreviewFindingSeverity {
         switch self {
         case .archiveUnsafePath, .archiveLinkEscape, .archiveExecutables, .archiveDisguisedName,
@@ -143,7 +177,7 @@ public enum PreviewFindingKind: String, CaseIterable, Sendable {
              .scriptDownloadAndRun, .scriptDecodeAndRun, .scriptRemovesQuarantine, .scriptDisablesProtection,
              .scriptAsksForPassword, .scriptReadsSecrets, .autorunFolderOpenTask, .autorunHostCommand,
              .exportReadableLogins, .exportReadableCodeSecrets, .launchHiddenLocation, .launchInlineScript,
-             .certificateExpired, .profileExpired:
+             .certificateExpired, .profileExpired, .pickleRunsCode, .installStartupCode:
             .warning
         case .notebookOutOfOrder, .notebookExecutionGaps, .notebookUnexecutedCells, .notebookErrorOutputs,
              .archiveLinks, .archiveEncrypted, .archiveNested, .archiveHighCompression, .archiveLargeExpansion,
@@ -151,13 +185,17 @@ public enum PreviewFindingKind: String, CaseIterable, Sendable {
              .hiddenMarkdownComments, .hiddenAgentInstructions, .scriptPersistence, .scriptElevates, .scriptUploadsFiles,
              .autorunAgentHooks, .autorunAgentPermissions, .autorunLocalServers, .autorunInstallScripts,
              .launchAtLoad, .launchKeepAlive, .certificateExpiresSoon, .certificateNotYetValid, .certificateWeakKey,
-             .profileExpiresSoon:
+             .profileExpiresSoon, .artifactNativeCode, .artifactMismatchedContent, .modelIncomplete,
+             .modelInconsistentLayout, .pickleNetworkOrFiles, .pickleBrokenStream, .installNativeBuild,
+             .installRemoteDependencies, .bundleBroadFolderAccess, .bundleToolTextTargetsAssistant, .extensionAllSites,
+             .extensionSensitivePermissions, .extensionSelfHostedUpdates, .extensionRelaxedScriptPolicy:
             .caution
         case .notebookNotExecuted, .notebookMayNotReproduce, .archiveHiddenEntries, .archiveMacMetadata,
              .secretPrivateKey, .secretCloudAccessKey, .secretCodeHostingToken, .secretAPIKey, .secretWebToken,
              .secretAuthorizationHeader, .secretSensitiveField, .hiddenPrivateUse, .autorunRemoteServers,
              .autorunServerEnvironment, .autorunContainerCommands, .launchJob, .launchInterval, .launchSchedule,
-             .launchWatchPaths:
+             .launchWatchPaths, .pickleUncommonImports, .installBuildScript, .bundleRunsProgram, .bundleAsksForSecrets,
+             .extensionStartsAutomatically, .extensionInstallsOthers:
             .info
         }
     }
