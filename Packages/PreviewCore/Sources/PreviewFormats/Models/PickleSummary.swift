@@ -36,11 +36,14 @@ enum PickleSummary {
             fields.flag("partial", report.isPartial || report.tally.overflowed || sorted.count > maximumListedImports)
             findings = Self.findings(report)
         }
+        // Native code in an archive is a fact about the archive, whether or not it held pickles.
+        if report.nativeMembers > 0 { findings.append(PreviewFinding(kind: .artifactNativeCode, count: report.nativeMembers)) }
         if mismatch { findings.append(PreviewFinding(kind: .artifactMismatchedContent, count: 1)) }
         return try PackageSummary.document(fields.value, context: context, findings: findings)
     }
 
-    /// One finding per class that has imports, counting distinct names, and one for a stream that broke after naming imports.
+    /// One finding per class that has imports, counting distinct names, and one for a stream that broke after naming
+    /// imports.
     static func findings(_ report: PickleScanReport) -> [PreviewFinding] {
         var findings: [PreviewFinding] = []
         let classes: [(PickleImportKind, PreviewFindingKind)] = [
@@ -50,7 +53,6 @@ enum PickleSummary {
             findings.append(PreviewFinding(kind: kind, count: report.tally.distinctCount(importClass)))
         }
         if report.isBroken { findings.append(PreviewFinding(kind: .pickleBrokenStream, count: 1)) }
-        if report.nativeMembers > 0 { findings.append(PreviewFinding(kind: .artifactNativeCode, count: report.nativeMembers)) }
         return findings
     }
 }
