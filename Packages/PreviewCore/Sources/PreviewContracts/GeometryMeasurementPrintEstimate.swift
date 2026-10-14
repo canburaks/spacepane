@@ -24,12 +24,18 @@ package struct GeometryPrintEstimate: Equatable, Sendable {
     /// Length of filament that makes up that volume, in metres.
     package let filamentLengthMetres: Double
 
-    /// `nil` unless the volume is known and positive, and the unit is declared or assumed to be millimetres. An
-    /// undeclared unit leaves the volume's cubic millimetres meaning nothing, so no mass is guessed from it.
+    /// Whether the figures hold only if the model's units are millimetres. True for a model whose unit is undeclared
+    /// (every STL, OBJ and PLY file): its cubic millimetres are an assumption, never a statement of the file, so the
+    /// estimate is worded as "if the units are millimetres" (decision 027, Q-11). False for a declared unit, and for a
+    /// 3MF that omits the attribute, where the specification's default is millimetres.
+    package let isConditionalOnMillimetres: Bool
+
+    /// `nil` unless the volume is known and positive, that is, unless the surface is closed and consistently oriented.
+    /// The unit decides only how the estimate is worded (`isConditionalOnMillimetres`), not whether there is one.
     package init?(_ measurements: GeometryMeasurements) {
-        guard let volume = measurements.volumeCubicMillimetres, volume > 0,
-              measurements.unitProvenance != .undeclared else { return nil }
+        guard let volume = measurements.volumeCubicMillimetres, volume > 0 else { return nil }
         massGrams = volume / Self.cubicMillimetresPerCubicCentimetre * Self.plaDensityGramsPerCubicCentimetre
         filamentLengthMetres = volume / Self.filamentCrossSectionSquareMillimetres / Self.millimetresPerMetre
+        isConditionalOnMillimetres = measurements.unitProvenance == .undeclared
     }
 }

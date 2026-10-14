@@ -54,30 +54,28 @@ struct MeshPrintCheckTests {
 
     // MARK: Which lines appear
 
-    @Test func aClosedUndeclaredModelShowsNoPrintCheckLine() throws {
+    @Test func aClosedUndeclaredModelGetsTheEstimateConditionalOnMillimetres() throws {
+        // STL, OBJ and PLY state no unit: the estimate is shown, worded as "if the units are millimetres".
         let model = try presentation(boxSTL(SIMD3(30, 20, 10)))
         let result = try #require(check(model))
         #expect(result.openEdgeCount == 0 && result.nonManifoldEdgeCount == 0)
-        #expect(result.estimate == nil, "An undeclared unit gives no estimate")
-        // The model summary and its measurements: the print check adds nothing for a watertight undeclared model.
-        #expect(lineCount(model) == 2)
-        #expect(result.lines(locale: english, languagePreferences: ["en"]).isEmpty)
-    }
-
-    @Test func aClosedModelInADeclaredUnitAddsTheEstimate() throws {
-        let model = try presentation(boxSTL(SIMD3(30, 20, 10)), formatID: .mesh3MF, provenance: .declared(.millimetre))
-        let result = try #require(check(model))
         let estimate = try #require(result.estimate)
-        // 30 x 20 x 10 mm = 6 cm³ of PLA at 1.24 g/cm³.
+        #expect(estimate.isConditionalOnMillimetres)
         #expect(abs(estimate.massGrams - 7.44) < 1e-4)
-        #expect(lineCount(model) == 3) // Summary, measurements, estimate.
+        #expect(lineCount(model) == 3) // Summary, measurements, conditional estimate.
+        #expect(result.lines(locale: english, languagePreferences: ["en"]).count == 1)
     }
 
-    @Test func anAssumedMillimetreUnitAlsoGetsTheEstimate() throws {
-        let model = try presentation(boxSTL(SIMD3(30, 20, 10)), formatID: .mesh3MF, provenance: .assumedMillimetres)
-        let result = try #require(check(model))
-        #expect(result.estimate != nil)
-        #expect(lineCount(model) == 3)
+    @Test func aClosedModelInADeclaredUnitKeepsThePlainEstimate() throws {
+        for provenance in [GeometryUnitProvenance.declared(.centimetre), .declared(.millimetre), .assumedMillimetres] {
+            let model = try presentation(boxSTL(SIMD3(30, 20, 10)), formatID: .mesh3MF, provenance: provenance)
+            let result = try #require(check(model))
+            let estimate = try #require(result.estimate, "\(provenance)")
+            #expect(!estimate.isConditionalOnMillimetres, "\(provenance)")
+            // 30 x 20 x 10 mm = 6 cm³ of PLA at 1.24 g/cm³, whatever the label.
+            #expect(abs(estimate.massGrams - 7.44) < 1e-4, "\(provenance)")
+            #expect(lineCount(model) == 3, "\(provenance)") // Summary, measurements, estimate.
+        }
     }
 
     @Test func openEdgesAddALineAndTheVolumeBasedEstimateGoesAway() throws {
@@ -85,6 +83,14 @@ struct MeshPrintCheckTests {
         let result = try #require(check(model))
         #expect(result.openEdgeCount == 4 && result.nonManifoldEdgeCount == 0)
         #expect(result.estimate == nil)
+        #expect(lineCount(model) == 3) // Summary, measurements (volume unavailable), open edges.
+    }
+
+    @Test func anUndeclaredModelWithoutAClosedVolumeGetsNeitherEstimate() throws {
+        let model = try presentation(boxSTL(SIMD3(30, 20, 10), omittingFace: 0))
+        let result = try #require(check(model))
+        #expect(result.estimate == nil)
+        #expect(result.openEdgeCount == 4)
         #expect(lineCount(model) == 3) // Summary, measurements (volume unavailable), open edges.
     }
 
@@ -148,7 +154,8 @@ struct MeshPrintCheckTests {
 
     @Test(arguments: ["tr", "de", "fr", "zh-Hans", "ja", "hi", "ku-Latn", "ru", "id", "bn", "ha", "pt", "es"])
     func everyLanguageCompletesEveryLine(language: String) throws {
-        // Declared unit with a known volume (estimate), then an open model with both counts, then an undeclared one.
+        // Declared unit with a known volume (plain estimate), an open model with both counts, and an undeclared closed
+        // one (conditional estimate).
         let vertices: [SIMD3<Double>] = [SIMD3(0, 0, 0), SIMD3(10, 0, 0), SIMD3(0, 10, 0), SIMD3(0, 0, 10), SIMD3(0, -10, 0)]
         let models = [try presentation(boxSTL(SIMD3(30, 20, 10)), formatID: .mesh3MF, provenance: .declared(.inch)),
                       try presentation(stl(vertices, [[0, 1, 2], [0, 1, 3], [0, 1, 4]]), formatID: .mesh3MF,

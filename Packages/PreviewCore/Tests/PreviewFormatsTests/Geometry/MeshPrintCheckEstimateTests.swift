@@ -3,8 +3,8 @@ import Testing
 import PreviewContracts
 import PreviewFormats
 
-/// The "if printed solid in PLA" estimate: shown only when the volume is known and the unit is declared or assumed
-/// millimetres, computed from the volume at 1.24 g/cm³ and 1.75 mm filament (decision 029).
+/// The "if printed solid in PLA" estimate: shown only when the volume is known, computed from the volume at 1.24 g/cm³
+/// and 1.75 mm filament, and worded as conditional on millimetres when the model's unit is undeclared (decision 029).
 @Suite("Mesh Print Check estimate")
 struct MeshPrintCheckEstimateTests {
     private func measurements(volume: Double?, _ provenance: GeometryUnitProvenance) throws -> GeometryMeasurements {
@@ -38,10 +38,24 @@ struct MeshPrintCheckEstimateTests {
         expectClose(estimate.filamentLengthMetres, 0.415_753_3, tolerance: 1e-5)
     }
 
-    @Test func noEstimateWithoutAKnownVolumeOrAKnownUnit() throws {
-        #expect(GeometryPrintEstimate(try measurements(volume: nil, .declared(.millimetre))) == nil)
-        #expect(GeometryPrintEstimate(try measurements(volume: 1_000, .undeclared)) == nil)
-        #expect(GeometryPrintEstimate(try measurements(volume: 0, .declared(.millimetre))) == nil)
+    @Test func noEstimateWithoutAKnownPositiveVolume() throws {
+        for provenance in [GeometryUnitProvenance.declared(.millimetre), .assumedMillimetres, .undeclared] {
+            #expect(GeometryPrintEstimate(try measurements(volume: nil, provenance)) == nil, "\(provenance)")
+            #expect(GeometryPrintEstimate(try measurements(volume: 0, provenance)) == nil, "\(provenance)")
+        }
+    }
+
+    @Test func anUndeclaredUnitGivesTheSameNumbersAsAConditionalEstimate() throws {
+        // 10^6 mm³ again: the figures are those of millimetres, flagged as depending on that assumption.
+        let conditional = try #require(GeometryPrintEstimate(try measurements(volume: 1_000_000, .undeclared)))
+        expectClose(conditional.massGrams, 1_240)
+        expectClose(conditional.filamentLengthMetres, 415.753_3, tolerance: 1e-5)
+        #expect(conditional.isConditionalOnMillimetres)
+        for provenance in [GeometryUnitProvenance.declared(.millimetre), .declared(.inch), .assumedMillimetres] {
+            let plain = try #require(GeometryPrintEstimate(try measurements(volume: 1_000_000, provenance)))
+            #expect(!plain.isConditionalOnMillimetres, "\(provenance)")
+            expectClose(plain.massGrams, conditional.massGrams)
+        }
     }
 
     // MARK: Through the readers
@@ -68,19 +82,31 @@ struct MeshPrintCheckEstimateTests {
         expectClose(estimate.massGrams, 16_387.064 * 1.24, tolerance: 1e-5)
     }
 
-    @Test func stlObjAndPlyGetNoEstimateBecauseTheyDeclareNoUnit() throws {
+    @Test func stlObjAndPlyGetAConditionalEstimateBecauseTheyDeclareNoUnit() throws {
         let quads = [[0, 3, 2, 1], [4, 5, 6, 7], [0, 1, 5, 4], [2, 3, 7, 6], [1, 2, 6, 5], [3, 0, 4, 7]]
         let all = [try measured(STLAdapter(), MeshFixtures.stlBinary(cube.vertices, cube.triangles)),
                    try measured(OBJAdapter(), MeshFixtures.obj(cube.vertices, faces: quads)),
                    try measured(PLYAdapter(), MeshFixtures.plyASCII(cube.vertices, faces: quads))]
         for measurements in all {
-            #expect(measurements.volumeCubicMillimetres != nil)
-            #expect(GeometryPrintEstimate(measurements) == nil)
+            // A 10 mm cube if the numbers are millimetres: 1 cm³ is 1.24 g.
+            let estimate = try #require(GeometryPrintEstimate(measurements))
+            #expect(estimate.isConditionalOnMillimetres)
+            expectClose(estimate.massGrams, 1.24, tolerance: 1e-5)
         }
     }
 
-    @Test func anOpenModelGetsNoEstimateEvenWithADeclaredUnit() throws {
-        let data = MeshFixtures.threeMF(vertices: cube.vertices, triangles: Array(cube.triangles.dropFirst(2)), unit: "millimeter")
+    @Test func aThreeMFEstimateIsNeverConditional() throws {
+        for unit in ["centimeter", "millimeter", nil] {
+            let data = MeshFixtures.threeMF(vertices: cube.vertices, triangles: cube.triangles, unit: unit)
+            let estimate = try #require(GeometryPrintEstimate(try measured(ThreeMFAdapter(), data)))
+            #expect(!estimate.isConditionalOnMillimetres, "\(unit ?? "no unit")")
+        }
+    }
+
+    @Test func anOpenModelGetsNoEstimateWhateverItsUnit() throws {
+        let triangles = Array(cube.triangles.dropFirst(2))
+        let data = MeshFixtures.threeMF(vertices: cube.vertices, triangles: triangles, unit: "millimeter")
         #expect(GeometryPrintEstimate(try measured(ThreeMFAdapter(), data)) == nil)
+        #expect(GeometryPrintEstimate(try measured(STLAdapter(), MeshFixtures.stlBinary(cube.vertices, triangles))) == nil)
     }
 }
