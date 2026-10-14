@@ -1,6 +1,6 @@
 # Review readiness plan
 
-Date: 2026-10-12. Status: **in progress. The source work of Phases 1 and 2 was done on 2026-10-12 and is uncommitted; nothing was uploaded or pushed. See the execution record at the end.** It continues the [App Store publication plan](2026-10-10-app-store-publication-plan.md) from the point that plan stopped (build 1.0.0 (1) uploaded, nothing validated on an installed store build) and replaces its Phases 3 to 7 for the remaining work. Paths are relative to this repository unless a sibling repository is named.
+Date: 2026-10-12. Status: **version 1.0.0 (3) was submitted for review by the owner on 2026-10-13 and is waiting for App Review; Phase 4 (observing the installed build) was not done first.** Earlier status: in progress. The source work of Phases 1 and 2 was done on 2026-10-12 and is uncommitted; nothing was uploaded or pushed. See the execution record at the end.** It continues the [App Store publication plan](2026-10-10-app-store-publication-plan.md) from the point that plan stopped (build 1.0.0 (1) uploaded, nothing validated on an installed store build) and replaces its Phases 3 to 7 for the remaining work. Paths are relative to this repository unless a sibling repository is named.
 
 ## Goal
 
@@ -193,7 +193,7 @@ Later the same day:
 
 Next, in order:
 
-1. Finish and verify the build without CAD, upload it as build 3 on instruction, install it through TestFlight and read which languages App Store Connect lists for it (expected: English only).
-2. Retake screenshot 07 with a mesh model; re-paste the description and keywords in App Store Connect.
+1. Done 2026-10-13: the build without CAD was verified, merged and uploaded by the owner as build 3 (upload succeeded, no warning). App Store Connect shows it "Ready to Submit", binary "Validated", localizations "English" only. Still to do: install it through TestFlight and record what Finder shows.
+2. Done by the owner 2026-10-13: description, keywords, six screenshots, build 3, review notes and attachment entered, App Privacy published, and the version submitted (waiting for review; release option automatic). Still open: install build 3 and record what Finder shows; retake screenshots 01, 06, 07 and 08 for later use; record App Review's response.
 3. Phase 4 observations on the installed build, then Phase 5 trims the listing to what was seen, then Phase 6 and 7.
 
