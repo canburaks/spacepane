@@ -1,7 +1,8 @@
 import Foundation
 import simd
 
-/// Measures the decoded tessellation: surface area, enclosed volume and connected bodies.
+/// Measures the decoded tessellation: surface area, enclosed volume, connected bodies and the edges a 3D printer
+/// cares about (open edges, and edges shared by more than two triangles).
 ///
 /// The result describes the displayed surface mesh, not the exact B-rep, so it is an approximation and
 /// carries the same chord-error as the picture (typically a fraction of a percent on curved parts).
@@ -59,11 +60,13 @@ package enum GeometryMeasurer {
             edges.append(edgeKey(a, b)); edges.append(edgeKey(b, c)); edges.append(edgeKey(c, a))
         }
         try context.checkpoint()
-        let isClosed = try hasBalancedEdges(&edges, context: context)
+        let edgeSummary = try summarizeEdges(&edges, context: context)
         let bodies = try bodyCount(indices: indices, weld: weld, components: &components, context: context)
-        let volume = isClosed ? abs(signedVolume) * scale * scale * scale : nil
+        let volume = edgeSummary.isBalanced ? abs(signedVolume) * scale * scale * scale : nil
         return GeometryMeasurements(surfaceAreaSquareMillimetres: area * scale * scale,
-                                    volumeCubicMillimetres: volume, bodyCount: bodies)
+                                    volumeCubicMillimetres: volume, bodyCount: bodies,
+                                    openEdgeCount: edgeSummary.openEdgeCount,
+                                    nonManifoldEdgeCount: edgeSummary.nonManifoldEdgeCount)
     }
 
     /// Assigns one identifier per distinct quantized position. Sorting packed `(key, vertex)` records keeps
@@ -107,23 +110,42 @@ package enum GeometryMeasurer {
         from < to ? UInt64(from) << 22 | UInt64(to) << 1 : UInt64(to) << 22 | UInt64(from) << 1 | 1
     }
 
+    /// What one sorted pass over the directed edge records says about the welded surface.
+    private struct EdgeSummary {
+        /// Every edge is traversed as often forward as backward.
+        var isBalanced = true
+        /// Welded edges that exactly one triangle uses.
+        var openEdgeCount = 0
+        /// Welded edges that more than two triangles use.
+        var nonManifoldEdgeCount = 0
+    }
+
     /// A closed, consistently oriented surface traverses every edge as often forward as backward. This is
     /// the exact "every edge used twice in opposite directions" rule for manifold edges and also accepts
-    /// bodies that touch along an edge. Open boundaries and flipped faces leave an imbalance.
-    private static func hasBalancedEdges(_ edges: inout [UInt64], context: RequestContext) throws -> Bool {
-        guard !edges.isEmpty else { return false }
+    /// bodies that touch along an edge. Open boundaries and flipped faces leave an imbalance. The same pass
+    /// counts, per undirected edge, how many triangles use it: one is an open edge, more than two is
+    /// non-manifold. A mesh without any usable edge is not balanced (it encloses nothing).
+    private static func summarizeEdges(_ edges: inout [UInt64], context: RequestContext) throws -> EdgeSummary {
+        var summary = EdgeSummary()
+        guard !edges.isEmpty else { summary.isBalanced = false; return summary }
         edges.sort()
-        var balance = 0
+        var balance = 0, uses = 0
         var group = edges[0] >> 1
+        func finishGroup() {
+            if balance != 0 { summary.isBalanced = false }
+            if uses == 1 { summary.openEdgeCount += 1 } else if uses > 2 { summary.nonManifoldEdgeCount += 1 }
+        }
         for (offset, key) in edges.enumerated() {
             if offset.isMultiple(of: checkpointInterval) { try context.checkpoint() }
             if key >> 1 != group {
-                if balance != 0 { return false }
-                group = key >> 1; balance = 0
+                finishGroup()
+                group = key >> 1; balance = 0; uses = 0
             }
             balance += key & 1 == 0 ? 1 : -1
+            uses += 1
         }
-        return balance == 0
+        finishGroup()
+        return summary
     }
 
     private static func bodyCount(indices: [UInt32], weld: [UInt32], components: inout DisjointSets,
