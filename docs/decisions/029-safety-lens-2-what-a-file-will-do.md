@@ -76,3 +76,16 @@ Every new string is a typed `PreviewStrings` key with translator context, added 
 ## Validation
 
 Each lens has positive fixtures, near-miss fixtures that must stay silent (comments, documentation, ordinary configuration), malformed-input and cancellation tests, and a pipeline test that its findings reach the presentation with correct lines. Finder-hosted rendering, VoiceOver review and native-speaker review stay open, as for decision 012.
+
+## Implementation notes — 2026-10-14
+
+Recorded at integration of branch `safety-lens-2`; each point narrows or completes a rule above.
+
+- **Where each configuration lens looks.** The auto-run lens reads `.vscode/tasks.json`; `settings.json` and `settings.local.json` in `.claude`; `.mcp.json` and `claude_desktop_config.json`; `mcp.json` in `.cursor`, `.vscode`, `.roo` or `.amazonq`; `.gemini/settings.json`; `windsurf/mcp_config.json`; `devcontainer.json` and `.devcontainer.json`; and `package.json`. The same text under any other name or folder says nothing. A server marked `"disabled": true` is not counted.
+- **VS Code's editor files allow comments.** `tasks.json`, `launch.json`, `keybindings.json` and `mcp.json` are now filename aliases of JSON with comments. VS Code's own `tasks.json` template starts with a comment, which strict JSON refused, so before this change such a file had no preview at all. The website reads these aliases; run `npm run data:sync` in `spacepane-web` when this branch reaches `main`.
+- **One-time-code seeds are concealed.** `totp`, `hotp`, `otp` and `otpauth` join the credential words, so a password-manager export's `login_totp` or `OTPAuth` column is concealed like its passwords.
+- **Credential exports.** A CSV or TSV is recognized by a header holding complete password, user and address column names; records count only when their password cell is non-empty. Keeper exports have no header row and are not recognized.
+- **Script effects.** Command words are recognized only at command positions, after comments, quoted text, `echo` arguments and here-document data are set aside. Shell download-then-run is recognized within one logical line. Ordinary developer scripts can still produce caution-level findings (`sudo`, `launchctl load`, appending to `~/.zshrc`), which is their purpose; warning-level kinds need an explicit run, decode-and-run, quarantine removal, protection change, password prompt or secret read.
+- **An IPA reports its embedded profile's validity**, through the same findings as a standalone profile. `PackageSummary.document` takes optional findings.
+- **Mesh Print Check.** `GeometryMeasurer` lives in `PreviewContracts` with `package` access. STL, OBJ and PLY keep an undeclared unit (decision 027, Q-11), so their solid-PLA estimate is worded "If the units are millimetres …"; a 3MF, which declares or implies millimetres, gets the plain wording. There is no separate size line: the first summary line already shows the extents. Edges shared by more than two faces include bodies that touch along a face.
+- **The banner's buttons stack** vertically when the three no longer fit one row. The report lists every finding in banner order and leaves out decoded hidden text.
