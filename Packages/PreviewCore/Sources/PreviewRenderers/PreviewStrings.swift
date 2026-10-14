@@ -420,6 +420,7 @@ public enum PreviewStrings {
         // CAD measurements
         case cadMeasurementsSolid = "cad.measurements.solid"
         case cadMeasurementsOpen = "cad.measurements.open"
+        // [sl2-mesh] Mesh Print Check (decision 029). Workstream sl2-mesh adds its keys below this line.
         case cadHeaderSchemaAndSystem = "cad.header.schemaAndSystem"
         case cadHeaderSchema = "cad.header.schema"
         case cadHeaderSystem = "cad.header.system"
