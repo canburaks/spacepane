@@ -71,9 +71,22 @@ struct CredentialExportDelimitedTests {
 
         two,https://two.invalid,b,••••,
         "",,,,
+        a note,https://note.invalid,c,,text
         """
         let export = try #require(finding(.exportReadableLogins, in: try findings(text, format: .csv)))
         #expect((export.count, export.lines) == (2, [1]))
+    }
+
+    @Test func onlyRecordsWithAPasswordCellCountAsLogins() throws {
+        let text = "folder,favorite,type,name,notes,fields,reprompt,login_uri,login_username,login_password,login_totp\n"
+            + ",,login,One,,,0,https://one.invalid,a,••••,\n"
+            + ",,note,A note,text,,0,,,,\n"
+            + ",,login,No password,,,0,https://two.invalid,b,,\n"
+            + ",,login,Two,,,0,https://three.invalid,c,••••,••••\n"
+        let export = try #require(finding(.exportReadableLogins, in: try findings(text, format: .csv)))
+        #expect((export.count, export.lines) == (2, [1]))
+        // A manager's file with no password in any record reports nothing.
+        #expect(try findings("name,url,username,password\nn,u,x,\nm,v,y,\n", format: .csv).isEmpty)
     }
 
     @Test func aHeaderWithoutRecordsReportsNothing() throws {
