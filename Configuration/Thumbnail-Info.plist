@@ -1209,6 +1209,7 @@
 				<string>com.quicklookpro.file.jsonl</string>
 				<string>com.quicklookpro.file.ndjson</string>
 				<string>public.source-code</string>
+				<string>public.shell-script</string>
 				<string>org.webmeister.spacepane.type.source-code</string>
 				<string>com.quicklookpro.file.ada</string>
 				<string>com.quicklookpro.file.adb</string>

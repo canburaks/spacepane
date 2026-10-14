@@ -132,6 +132,7 @@
       "id": "text.source-code",
       "contentTypes": [
         "public.source-code",
+        "public.shell-script",
         "org.webmeister.spacepane.type.source-code",
         "com.quicklookpro.file.ada",
         "com.quicklookpro.file.adb",
