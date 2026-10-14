@@ -109,3 +109,19 @@ enum AddOnPath {
         return name.contains(".") ? [path] : [path, path + ".js", path + "/index.js"]
     }
 }
+
+enum AddOnSummary {
+    /// A list of names or values from the manifest, cut to `AddOnLimits.listItems`.
+    static func shortList(_ fields: inout SummaryFields, _ key: String, _ values: [String]) {
+        fields.list(key, values, limit: AddOnLimits.listItems)
+    }
+
+    /// A list whose items are concealed one by one: an argument that follows `--api-key`, a runtime
+    /// whose name looks like a credential. An empty list is omitted.
+    static func markedList(_ fields: inout SummaryFields, _ key: String, _ items: [(text: String, sensitive: Bool)]) {
+        guard !items.isEmpty else { return }
+        fields.add(key, .array(items.prefix(AddOnLimits.listItems).map {
+            .string(PackageSummary.clipped($0.text), sensitive: $0.sensitive)
+        }))
+    }
+}
