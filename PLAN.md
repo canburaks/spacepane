@@ -233,6 +233,24 @@ Started 2026-10-05 at the user's request, following [the unique-feature research
   - more AI-agent file names.
 - [ ] Before marketing, recheck uniqueness claims, and word them as "no other Quick Look app we found".
 
+### Safety Lens 2: what a file will do — 2026-10-14
+
+Started at the owner's request after [the 2026-10-13 research](docs/market/2026-10-13-new-file-types-and-features.md). [Decision 029](docs/decisions/029-safety-lens-2-what-a-file-will-do.md) records the contract and the rules. Branch `safety-lens-2`; one workstream per feature, each in its own worktree.
+
+- [x] Contract: `PreviewTextLens`, `AdapterRegistration.adding(lenses:)`, the `StandardLenses` table, the pipeline step, 34 finding kinds with wording, `days` and `seconds` details, string keys; lens-runner tests.
+- [ ] Script effects lens for shell, AppleScript, PowerShell and batch scripts.
+- [ ] Auto-run configuration lens: VS Code tasks, Claude Code hooks and permissions, MCP servers, dev containers, package install scripts.
+- [ ] Readable credential exports: password-manager CSV and JSON, one-time-code exports.
+- [ ] launchd job lens.
+- [ ] Certificate and provisioning-profile validity findings.
+- [ ] Mesh Print Check: shared measurer for STL, OBJ, PLY and 3MF; size, open and non-manifold edges, solid PLA estimate.
+- [ ] Copy Findings Report in the findings banner.
+- [ ] Translations of the new keys in all 14 languages (drafts), resources regenerated and validated.
+- [ ] Integrate: `--check`, `--test`, `--check-static` and the Xcode host builds on the integrated branch.
+- [ ] Observe the new findings, the report action and the print lines in the signed companion and in Finder's Quick Look panel and preview pane.
+- [ ] VoiceOver and keyboard review of the report action; native-speaker review of the new strings.
+- [ ] Before marketing, recheck uniqueness with a paced App Store scan and word claims as "no other Quick Look app we found".
+
 ### World-class UX/UI program — 2026-10-06
 
 Started at the user's request: feature parity is largely done, so the same capabilities must now be presented better than any competitor's. The evidence is [the competitor UX/UI analysis](docs/market/2026-10-06-competitor-ux-ui-analysis.md) with seven cluster reports under [docs/market/ux-research/](docs/market/ux-research/); the program, its two anatomy contracts, workstreams and acceptance gates are [decision 026](docs/decisions/026-world-class-ux-program.md). Competitor observations are marketing material, not tests.
