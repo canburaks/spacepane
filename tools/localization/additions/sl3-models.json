@@ -557,9 +557,27 @@
     "pt": "Tipos de dados",
     "es": "Tipos de datos"
   },
-  "preview.model.shard": {
-    "case": "modelShard",
-    "comment": "Field label in the summary of a safetensors model file: which piece of a model split over several files this file is, for example 2 of 5. A shard is one part of a split file. The value is written by the app and reads like 2 of 5. Draft translations pending native-speaker review.",
+  "preview.model.shardCount": {
+    "case": "modelShardCount",
+    "comment": "Field label in the summary of a safetensors model file: how many files (shards) the model is split over, read from a file name such as model-00002-of-00005. The number next to it is formatted by the app. A shard is one part of a split model. Draft translations pending native-speaker review.",
+    "en": "Shards in set",
+    "tr": "Kümedeki parça sayısı",
+    "de": "Teildateien im Satz",
+    "fr": "Fragments de l’ensemble",
+    "zh-Hans": "分片总数",
+    "ja": "セット内のシャード数",
+    "hi": "सेट में शार्ड",
+    "ku-Latn": "Perçeyên di komê de",
+    "ru": "Фрагментов в наборе",
+    "id": "Pecahan dalam set",
+    "bn": "সেটে শার্ডের সংখ্যা",
+    "ha": "Ɓangarori a cikin saitin",
+    "pt": "Fragmentos no conjunto",
+    "es": "Fragmentos del conjunto"
+  },
+  "preview.model.shardIndex": {
+    "case": "modelShardIndex",
+    "comment": "Field label in the summary of a safetensors model file: which piece of a model split over several files this file is, as a number read from a file name such as model-00002-of-00005 (here 2). A shard is one part of a split model. The number next to it is formatted by the app. Draft translations pending native-speaker review.",
     "en": "Shard",
     "tr": "Parça",
     "de": "Teildatei",

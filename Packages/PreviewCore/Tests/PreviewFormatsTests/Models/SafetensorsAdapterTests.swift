@@ -36,7 +36,8 @@ struct SafetensorsAdapterTests {
         #expect(summary["dataBytes"] as? Int == 128 + 16)
         #expect(summary["metadata"] as? [String: String] == ["format": "pt"])
         #expect(summary["partial"] as? Bool == false)
-        #expect(summary["adapterKind"] == nil && summary["quantization"] == nil && summary["shard"] == nil)
+        #expect(summary["adapterKind"] == nil && summary["quantization"] == nil
+                && summary["shardIndex"] == nil && summary["shardCount"] == nil)
         let headerLength = data.prefix(8).reversed().reduce(0) { $0 << 8 | Int($1) }
         #expect(summary["headerBytes"] as? Int == headerLength)
         #expect(document.origin == .summary)
@@ -68,12 +69,13 @@ struct SafetensorsAdapterTests {
     }
 
     @Test(arguments: [
-        ("model-00002-of-00005.safetensors", "2 of 5"), ("diffusion_pytorch_model-00001-of-00002.safetensors", "1 of 2"),
-        ("MODEL-00010-of-00012.SAFETENSORS", "10 of 12"), ("model-1-of-3.safetensors", "1 of 3")
+        ("model-00002-of-00005.safetensors", 2, 5), ("diffusion_pytorch_model-00001-of-00002.safetensors", 1, 2),
+        ("MODEL-00010-of-00012.SAFETENSORS", 10, 12), ("model-1-of-3.safetensors", 1, 3)
     ])
-    func shardPositionComesFromTheFileName(name: String, expected: String) throws {
+    func shardPositionComesFromTheFileName(name: String, index: Int, count: Int) throws {
         let (summary, _) = try SafetensorsTestSupport.parse(SafetensorsFixtures.ordinary(), fileName: name)
-        #expect(summary["shard"] as? String == expected)
+        #expect(summary["shardIndex"] as? Int == index && summary["shardCount"] as? Int == count)
+        #expect(summary["shard"] == nil, "The position is two numbers, not a sentence")
     }
 
     @Test(arguments: [
@@ -82,7 +84,7 @@ struct SafetensorsAdapterTests {
     ])
     func otherNamesGiveNoShard(name: String) throws {
         let (summary, _) = try SafetensorsTestSupport.parse(SafetensorsFixtures.ordinary(), fileName: name)
-        #expect(summary["shard"] == nil)
+        #expect(summary["shardIndex"] == nil && summary["shardCount"] == nil)
     }
 
     @Test func peftLoRAIsRecognizedWithItsRank() throws {

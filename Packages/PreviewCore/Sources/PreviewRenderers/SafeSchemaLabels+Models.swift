@@ -16,7 +16,7 @@ extension SummaryLabelSet {
                         "expertUsedCount", "vocabularySize", "tokenizer", "license", "author", "organization",
                         "quantizedBy", "baseModels", "tags", "languages", "chatTemplate", "chatTemplateBytes",
                         "ggufVersion", "alignment", "tensorCount", "metadataCount", "otherMetadata", "partial", "tensors",
-                        "dtypes", "format", "shard", "adapterKind", "loraRank", "quantization", "headerBytes",
+                        "dtypes", "format", "shardIndex", "shardCount", "adapterKind", "loraRank", "quantization", "headerBytes",
                         "dataBytes", "metadata"]
             case ["tensors", "[]"]: return ["name", "type", "dtype", "shape", "parameters"]
             default: return nil
@@ -36,14 +36,15 @@ extension SummaryLabelSet {
             "chatTemplateBytes": .modelChatTemplateBytes, "ggufVersion": .modelGGUFVersion,
             "alignment": .modelAlignment, "tensorCount": .modelTensorCount, "metadataCount": .modelMetadataCount,
             "otherMetadata": .modelOtherMetadata, "tensors": .modelTensors, "dtypes": .modelDtypes,
-            "shard": .modelShard, "adapterKind": .modelAdapterKind, "loraRank": .modelLoraRank,
+            "shardIndex": .modelShardIndex, "shardCount": .modelShardCount, "adapterKind": .modelAdapterKind, "loraRank": .modelLoraRank,
             "quantization": .modelQuantization, "headerBytes": .modelHeaderBytes, "dataBytes": .modelDataBytes
         ],
         verbatimFields: ["name", "architecture", "sizeLabel", "fileType", "bitsPerWeight", "tokenizer", "license", "author",
-                         "organization", "quantizedBy", "chatTemplate", "format", "shard", "adapterKind", "quantization",
+                         "organization", "quantizedBy", "chatTemplate", "format", "adapterKind", "quantization",
                          "type", "dtype", "shape"],
         booleanFields: ["partial"],
         countFields: ["parameters", "contextLength", "blockCount", "embeddingLength", "headCount", "headCountKV",
                       "expertCount", "expertUsedCount", "vocabularySize", "chatTemplateBytes", "alignment",
-                      "tensorCount", "metadataCount", "loraRank", "headerBytes", "dataBytes"])
+                      "tensorCount", "metadataCount", "shardIndex", "shardCount", "loraRank", "headerBytes",
+                      "dataBytes"])
 }
