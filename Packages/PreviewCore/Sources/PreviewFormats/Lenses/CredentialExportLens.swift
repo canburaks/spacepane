@@ -6,9 +6,10 @@ import PreviewContracts
 /// the finding says that it is there, how many, and where it starts; it never says what they are.
 ///
 /// - **CSV and TSV.** The first record is a header; `CredentialExportHeaders` decides whether it is a
-///   password manager's. Each later record with any non-empty field counts as one login. Records are
-///   read with the shared `DelimitedRecords` grammar, so a quoted field that holds line breaks is one
-///   record. The finding points at the header line.
+///   password manager's. Each later record whose password cell is not empty counts as one login (a
+///   concealed password is the concealment token, which is not empty). Records are read with the shared
+///   `DelimitedRecords` grammar, so a quoted field that holds line breaks is one record. The finding
+///   points at the header line.
 /// - **JSON.** An unencrypted Bitwarden export (`"encrypted": false` and `items` whose `login` is an
 ///   object), an unencrypted Aegis export (`header.slots` null and `db.entries`), a 2FAS export with
 ///   `schemaVersion` and `services` that hold a `secret`, and an andOTP array of objects with a `secret`
@@ -37,16 +38,18 @@ public struct CredentialExportLens: PreviewTextLens {
         let limits = DelimitedRecords.Limits(maxRecords: context.budget.maxTextLines,
                                              maxFieldsPerRecord: context.budget.maxJSONNodes,
                                              maxFieldBytes: context.budget.maxLineUTF8Bytes)
-        var isExport = false
+        var passwordColumns: [Int]?
         var logins = 0
         do {
             _ = try DelimitedRecords.scan(bytes, dialect: dialect, limits: limits, checkpoint: { try context.checkpoint() }) { record, fields in
                 if record == 0 {
-                    isExport = CredentialExportHeaders.isCredentialExport(
-                        header: fields.map { DelimitedRecords.text(of: $0, in: bytes) })
-                    return isExport ? .proceed : .stop
+                    passwordColumns = CredentialExportHeaders.passwordColumns(
+                        inHeader: fields.map { DelimitedRecords.text(of: $0, in: bytes) })
+                    return passwordColumns == nil ? .stop : .proceed
                 }
-                if fields.contains(where: { !$0.content.isEmpty }) { logins += 1 }
+                if let passwordColumns, passwordColumns.contains(where: { $0 < fields.count && !fields[$0].content.isEmpty }) {
+                    logins += 1
+                }
                 return .proceed
             }
         } catch PreviewFailure.deadlineExceeded {
@@ -54,7 +57,7 @@ public struct CredentialExportLens: PreviewTextLens {
         } catch is PreviewFailure {
             return []
         }
-        guard isExport, logins > 0 else { return [] }
+        guard passwordColumns != nil, logins > 0 else { return [] }
         return [PreviewFinding(kind: .exportReadableLogins, count: logins, lines: [1])]
     }
 
