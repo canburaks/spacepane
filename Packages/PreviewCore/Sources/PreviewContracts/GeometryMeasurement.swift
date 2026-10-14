@@ -1,6 +1,5 @@
 import Foundation
 import simd
-import PreviewContracts
 
 /// Measures the decoded tessellation: surface area, enclosed volume and connected bodies.
 ///
@@ -12,7 +11,10 @@ import PreviewContracts
 /// (`p_normalized = (p_mm - centre) * 2 / longestExtent`). Hence `p_mm = p_normalized * longestExtent / 2 + centre`.
 /// Area and volume are computed in normalized space and multiplied by `scale²` and `scale³`, where
 /// `scale = longestExtent / 2`. The centre drops out because a closed surface's volume is translation invariant.
-enum GeometryMeasurer {
+///
+/// `package` access: the CAD importer and the STL, OBJ, PLY and 3MF readers live in different targets of this
+/// package and share this one implementation, and nothing outside the package needs it.
+package enum GeometryMeasurer {
     /// Welding cell in normalized units (2^-17, about 7.6e-6 of the half-extent). The importer tessellates
     /// faces separately but shares edge nodes, so seam vertices normally agree to the last float bit; the
     /// cell only absorbs rounding noise and is far below the tessellation's own minimum feature size.
@@ -25,7 +27,7 @@ enum GeometryMeasurer {
 
     /// Returns `nil` only when the numeric result cannot be represented; cancellation and the request
     /// deadline propagate as thrown errors. Work is linear apart from two in-place sorts.
-    static func measure(_ mesh: PreviewMesh, context: RequestContext) throws -> GeometryMeasurements? {
+    package static func measure(_ mesh: PreviewMesh, context: RequestContext) throws -> GeometryMeasurements? {
         try context.checkpoint()
         let positions = mesh.positions, indices = mesh.indices
         let extents = mesh.bounds.maximum - mesh.bounds.minimum
