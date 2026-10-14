@@ -455,7 +455,9 @@ public enum SecretFieldPolicy {
 
     private static let credentialWords: Set<String> = [
         "password", "passwd", "pwd", "pass", "passphrase", "secret", "token", "auth",
-        "authorization", "credential", "credentials", "cookie", "session", "dsn", "mnemonic", "tokens"
+        "authorization", "credential", "credentials", "cookie", "session", "dsn", "mnemonic", "tokens",
+        // One-time-code seeds (decision 029): `login_totp`, `totp`, `otpauth` hold the secret that makes every code.
+        "totp", "hotp", "otp", "otpauth"
     ]
     private static let compoundCredentialNames: Set<String> = [
         "apikey", "accesskey", "privatekey", "secretkey", "clientsecret", "signingkey", "encryptionkey",
