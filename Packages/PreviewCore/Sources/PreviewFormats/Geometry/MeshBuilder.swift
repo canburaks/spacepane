@@ -44,7 +44,8 @@ struct VertexWelder {
 /// Turns validated indexed triangles into the contract's mesh: drops degenerate triangles, centers
 /// and scales the positions to an extent of two, and computes shading normals. A corner shares its
 /// vertex's smooth normal only with neighbouring faces within the crease angle, so flat models keep
-/// their edges and curved ones shade smoothly. Output is bounded by the request's allowance.
+/// their edges and curved ones shade smoothly. Output is bounded by the request's allowance. The finished mesh
+/// carries its measurements, the same ones the CAD importer attaches.
 enum MeshBuilder {
     /// Cosine of the 45 degree crease angle.
     static let creaseCosine: Float = 0.707_106_8
@@ -187,11 +188,22 @@ enum MeshBuilder {
         guard 72 + outPositions.count * 24 + indexBytes <= allowance.outputBytes else { throw allowance.outputOverflow }
         // The face count stops at the contract's cap; the mesh says so, because a saturated number must not read as exact.
         let sourceFaces = max(1, min(source.faceCount, keptCount))
-        return try PreviewMesh(positions: outPositions, normals: outNormals, indices: outIndices,
-                               bounds: GeometryBounds(minimum: minimum, maximum: maximum),
-                               faceCount: min(sourceFaces, GeometryLimits.maximumFaces),
-                               unitProvenance: source.unitProvenance,
-                               faceCountIsCapped: sourceFaces > GeometryLimits.maximumFaces)
+        let mesh = try PreviewMesh(positions: outPositions, normals: outNormals, indices: outIndices,
+                                   bounds: GeometryBounds(minimum: minimum, maximum: maximum),
+                                   faceCount: min(sourceFaces, GeometryLimits.maximumFaces),
+                                   unitProvenance: source.unitProvenance,
+                                   faceCountIsCapped: sourceFaces > GeometryLimits.maximumFaces)
+        return try measured(mesh, context: context)
+    }
+
+    /// Attaches the shared measurements (Mesh Print Check, decision 029) in the unit provenance the reader recorded:
+    /// a 3MF's declared unit, `.assumedMillimetres` for a 3MF without one, `.undeclared` for STL, OBJ and PLY. The
+    /// measurer reads the mesh just built, checks the request's checkpoint in its loops and uses the request's
+    /// deadline, so cancellation propagates like any other stage. It returns nothing only for a mesh whose scale or
+    /// weld cannot be represented, and the preview is then shown without the facts.
+    private static func measured(_ mesh: PreviewMesh, context: RequestContext) throws -> PreviewMesh {
+        guard let measurements = try GeometryMeasurer.measure(mesh, context: context) else { return mesh }
+        return mesh.attaching(measurements: measurements.declaring(unitProvenance: mesh.unitProvenance), headerFacts: nil)
     }
 
     private static func normalized(_ vector: SIMD3<Float>) -> SIMD3<Float>? {
