@@ -951,7 +951,11 @@
         ".babelrc",
         ".devcontainer.json",
         "devcontainer.json",
-        "bun.lock"
+        "bun.lock",
+        "tasks.json",
+        "launch.json",
+        "keybindings.json",
+        "mcp.json"
       ],
       "filenamePrefixes": [
         "tsconfig.",

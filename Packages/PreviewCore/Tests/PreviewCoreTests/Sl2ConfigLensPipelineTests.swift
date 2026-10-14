@@ -66,10 +66,21 @@ struct Sl2ConfigLensPipelineTests {
     }
     """
 
+    /// VS Code's own template starts `tasks.json` with a comment; strict JSON refused it before decision 029.
+    @Test func aCommentedTasksFileIsPreviewedAndRead() async throws {
+        let commented = "// See https://go.microsoft.com/fwlink/?LinkId=733558\n" + tasks
+        try await withTree([".vscode/tasks.json": data(commented)]) { root in
+            let result = try await presentation(root, ".vscode/tasks.json")
+            #expect(result.formatID == .jsonWithComments)
+            #expect(finding(.autorunFolderOpenTask, in: result)?.lines == [10])
+        }
+    }
+
     @Test func aFolderOpenTaskInDotVSCodeIsReportedAtItsLine() async throws {
         try await withTree([".vscode/tasks.json": data(tasks), "src/tasks.json": data(tasks), "tasks.json": data(tasks)]) { root in
             let result = try await presentation(root, ".vscode/tasks.json")
-            #expect(result.formatID == .json)
+            // VS Code's editor files allow comments, so the catalog routes them to JSON with comments.
+            #expect(result.formatID == .jsonWithComments)
             let task = try #require(finding(.autorunFolderOpenTask, in: result))
             #expect((task.count, task.lines) == (1, [try line(of: "\"runOn\"", in: result)]))
             #expect(task.lines == [9])
