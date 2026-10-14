@@ -234,10 +234,11 @@ struct PickleWalkerTests {
     }
 
     @Test func retainedStringsAreBoundedInTotal() throws {
-        // 1,200 strings of 4 KB would hold 4.8 MB; the walk stays within its cap and still completes.
+        // 5,000 strings of 4 KB would hold 20 MB; the walk stays within its cap and still completes.
         let chunk = S.binUnicode(String(repeating: "a", count: 4_000))
-        let stream = Array((0..<1_200).map { _ in chunk }.joined()) + [UInt8](repeating: 0x30, count: 1_199) + S.stop
-        #expect(try S.walk(stream).outcome.ending == .complete)
+        let stream = Array((0..<5_000).map { _ in chunk }.joined()) + [UInt8](repeating: 0x30, count: 4_999) + S.stop
+        let patient = RequestContext(budget: PreviewBudget(maxMilliseconds: 30_000))
+        #expect(try S.walk(stream, context: patient).outcome.ending == .complete)
     }
 
     @Test func checkpointsRunEveryFewThousandOpcodes() throws {

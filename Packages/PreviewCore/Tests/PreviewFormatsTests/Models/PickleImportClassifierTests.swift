@@ -41,7 +41,9 @@ struct PickleImportClassifierTests {
         ("torch", "load"), ("torch.storage", "_load_from_bytes"), ("torch.utils.collect_env", "run"),
         ("torch.jit", "load"), ("torch.jit._script", "RecursiveScriptModule"),
         ("numpy.testing._private.utils", "runstring"), ("operator", "attrgetter"), ("operator", "methodcaller"),
-        ("timeit", "timeit"), ("posixpath", "os.system"), ("builtins", "str.__class__.os.system")
+        ("timeit", "timeit"), ("pydoc", "locate"), ("lib2to3.pgen2.pgen", "generate_grammar"), ("_operator", "attrgetter"),
+        ("numpy.f2py.crackfortran", "getlincoef"), ("numpy", "load"), ("pandas", "read_pickle"), ("joblib.numpy_pickle", "load"),
+        ("posixpath", "os.system"), ("builtins", "str.__class__.os.system")
     ])
     func importsThatRunCodeAreCode(module: String, name: String) {
         #expect(kind(module, name) == .code, "\(module).\(name)")
@@ -53,7 +55,7 @@ struct PickleImportClassifierTests {
         ("requests", "get"), ("httpx", "get"), ("aiohttp", "ClientSession"), ("ftplib", "FTP"), ("smtplib", "SMTP"),
         ("telnetlib", "Telnet"), ("webbrowser", "open"), ("shutil", "rmtree"), ("pathlib", "PosixPath"),
         ("tempfile", "mkstemp"), ("glob", "glob"), ("zipfile", "ZipFile"), ("tarfile", "open"),
-        ("builtins", "open"), ("__builtin__", "open"), ("io", "open"), ("io", "FileIO"), ("codecs", "open")
+        ("builtins", "open"), ("__builtin__", "open"), ("io", "open"), ("io", "FileIO"), ("_io", "FileIO"), ("codecs", "open")
     ])
     func importsThatReachTheNetworkOrFilesAreFlaggedAsSuch(module: String, name: String) {
         #expect(kind(module, name) == .networkOrFiles, "\(module).\(name)")
