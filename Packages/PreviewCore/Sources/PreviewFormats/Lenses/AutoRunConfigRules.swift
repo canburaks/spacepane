@@ -106,7 +106,8 @@ enum AutoRunRules {
 
     // MARK: package.json
 
-    private static let installScripts = ["preinstall", "install", "postinstall", "prepare", "preprepare", "postprepare"]
+    /// The lifecycle scripts npm runs on install or prepare; the npm tarball inspector counts the same names.
+    static let installScripts = ["preinstall", "install", "postinstall", "prepare", "preprepare", "postprepare"]
 
     /// Scripts the package manager runs when the package is installed or prepared.
     static func packageScripts(_ root: LensJSONNode, into tally: inout AutoRunTally) {

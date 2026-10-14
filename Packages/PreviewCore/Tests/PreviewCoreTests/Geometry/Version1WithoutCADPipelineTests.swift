@@ -37,7 +37,7 @@ struct Version1WithoutCADPipelineTests {
 
     @Test func standardRegistrationsRegisterNoCADFormat() {
         let registered = StandardFormatAdapters.registrations.map(\.formatID.rawValue)
-        #expect(registered.count == 74)
+        #expect(registered.count == 81)
         #expect(!registered.contains { $0.hasPrefix("cad.") })
     }
 

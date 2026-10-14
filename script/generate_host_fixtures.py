@@ -260,6 +260,12 @@ def generate() -> Path:
     add('model.ply', '107-big-endian.ply', mesh_samples.ply_binary(mesh_vertices, mesh_quads, big_endian=True, comment=f'password={SECRET}'))
     add('model.3mf', '108-model.3mf', mesh_samples.threemf(mesh_vertices, mesh_triangles, title=f'password={SECRET}'))
     add('model.3mf', '109-composed.3mf', mesh_samples.threemf(mesh_vertices, mesh_triangles, unit='inch', composed=True, title=f'password={SECRET}'))
+    # [safety-lens-3] Model files, add-ons and installable packages (decision 030); each family module builds its own.
+    import addon_fixtures, install_fixtures, ml_fixtures, pickle_fixtures
+    fixtures = [item for family in (ml_fixtures, pickle_fixtures, addon_fixtures, install_fixtures)
+                for item in family.host_fixtures(SECRET)]
+    for number, (format_id, name, data) in enumerate(fixtures, start=111):
+        add(format_id, f'{number}-{name}', data)
     catalog =json.loads((ROOT / 'Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json').read_text())
     expected = {entry['id'] for entry in catalog['formats']}
     actual = {entry['formatID'] for entry in records}

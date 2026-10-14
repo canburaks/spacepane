@@ -28,7 +28,8 @@
     "Apps/PrevApp/Resources/**",
     "Packages/PreviewCore/Sources/PreviewRenderers/HostedConfiguration.swift",
     "Packages/PreviewCore/Sources/PreviewRenderers/RendererResources.swift",
-    "Packages/PreviewCore/Sources/PreviewRenderers/NativeGeometryPreviewView.swift"
+    "Packages/PreviewCore/Sources/PreviewRenderers/NativeGeometryPreviewView.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Models/ModelFormatAdapters.swift"
   ],
   "ux-chrome": [
     "Packages/PreviewCore/Sources/PreviewRenderers/NativePreviewView.swift",
@@ -327,5 +328,43 @@
   ],
   "sl2-strings": [
     "tools/localization/additions/safety-lens-2.json"
+  ],
+  "sl3-models": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Models/GGUF*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Models/Safetensors*.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/SafeSchemaLabels+Models.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Models/GGUF*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Models/Safetensors*.swift",
+    "tools/localization/additions/sl3-models.json",
+    "script/ml_fixtures.py"
+  ],
+  "sl3-pickle": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Models/Pickle*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Models/PyTorch*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/PythonPathFile*.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/SafeSchemaLabels+Pickle.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Models/Pickle*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Models/PyTorch*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/PythonPathFile*.swift",
+    "tools/localization/additions/sl3-pickle.json",
+    "script/pickle_fixtures.py"
+  ],
+  "sl3-addons": [
+    "Packages/PreviewCore/Sources/PreviewFormats/AddOns/**",
+    "Packages/PreviewCore/Sources/PreviewRenderers/SafeSchemaLabels+AddOns.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/AddOns/**",
+    "tools/localization/additions/sl3-addons.json",
+    "script/addon_fixtures.py"
+  ],
+  "sl3-install": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Installables/**",
+    "Packages/PreviewCore/Sources/PreviewFormats/Containers/TARListingAdapter.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/SafeSchemaLabels+Installables.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Installables/**",
+    "tools/localization/additions/sl3-install.json",
+    "script/install_fixtures.py"
+  ],
+  "sl3-strings": [
+    "tools/localization/additions/safety-lens-3.json"
   ]
 }

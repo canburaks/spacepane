@@ -66,6 +66,24 @@
 			<string>Cet aperçu lit les documents de %2$@ éléments au plus, et celui-ci en contient davantage. Ouvrez-le dans une application conçue pour ce type de fichier.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Contient %2$@ programmes ou bibliothèques en code natif.</string>
+			<key>one</key>
+			<string>Contient %2$@ programme ou bibliothèque en code natif.</string>
+			<key>other</key>
+			<string>Contient %2$@ programmes ou bibliothèques en code natif.</string>
+		</dict>
+	</dict>
 	<key>finding.autorun.agentHooks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -228,6 +246,60 @@
 			<string>%2$@ variables d’environnement sont transmises aux serveurs MCP.</string>
 		</dict>
 	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ réglages demandent des mots de passe ou des clés.</string>
+			<key>one</key>
+			<string>%2$@ réglage demande un mot de passe ou une clé.</string>
+			<key>other</key>
+			<string>%2$@ réglages demandent des mots de passe ou des clés.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ réglages donnent au serveur accès à votre dossier personnel ou à Documents, Téléchargements ou Bureau.</string>
+			<key>one</key>
+			<string>%2$@ réglage donne au serveur accès à votre dossier personnel ou à Documents, Téléchargements ou Bureau.</string>
+			<key>other</key>
+			<string>%2$@ réglages donnent au serveur accès à votre dossier personnel ou à Documents, Téléchargements ou Bureau.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ descriptions d’outil demandent à l’IA de lire d’autres fichiers ou de vous cacher quelque chose.</string>
+			<key>one</key>
+			<string>%2$@ description d’outil demande à l’IA de lire d’autres fichiers ou de vous cacher quelque chose.</string>
+			<key>other</key>
+			<string>%2$@ descriptions d’outil demandent à l’IA de lire d’autres fichiers ou de vous cacher quelque chose.</string>
+		</dict>
+	</dict>
 	<key>finding.certificate.expired</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -336,6 +408,78 @@
 			<string>%2$@ identifiants de gestionnaire de mots de passe sont enregistrés ici en clair. Supprimez cet export quand vous n’en avez plus besoin.</string>
 		</dict>
 	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Installe %2$@ autres extensions avec elle.</string>
+			<key>one</key>
+			<string>Installe %2$@ autre extension avec elle.</string>
+			<key>other</key>
+			<string>Installe %2$@ autres extensions avec elle.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Demande %2$@ autorisations sensibles du navigateur.</string>
+			<key>one</key>
+			<string>Demande %2$@ autorisation sensible du navigateur.</string>
+			<key>other</key>
+			<string>Demande %2$@ autorisations sensibles du navigateur.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ dépendances proviennent de dépôts Git ou d’adresses web au lieu du registre.</string>
+			<key>one</key>
+			<string>%2$@ dépendance provient d’un dépôt Git ou d’une adresse web au lieu du registre.</string>
+			<key>other</key>
+			<string>%2$@ dépendances proviennent de dépôts Git ou d’adresses web au lieu du registre.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>Du code Python est exécuté à chaque démarrage de Python à %2$@ endroits.</string>
+			<key>one</key>
+			<string>Du code Python est exécuté à chaque démarrage de Python à %2$@ endroit.</string>
+			<key>other</key>
+			<string>Du code Python est exécuté à chaque démarrage de Python à %2$@ endroits.</string>
+		</dict>
+	</dict>
 	<key>finding.launch.watchPaths</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -370,6 +514,60 @@
 			<string>%2$@ nom répertorié contient des caractères masqués.</string>
 			<key>other</key>
 			<string>%2$@ noms répertoriés contiennent des caractères masqués.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ importations permettent d’accéder au réseau ou à des fichiers au chargement.</string>
+			<key>one</key>
+			<string>%2$@ importation permet d’accéder au réseau ou à des fichiers au chargement.</string>
+			<key>other</key>
+			<string>%2$@ importations permettent d’accéder au réseau ou à des fichiers au chargement.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ importations permettent d’exécuter des commandes ou du code au chargement.</string>
+			<key>one</key>
+			<string>%2$@ importation permet d’exécuter des commandes ou du code au chargement.</string>
+			<key>other</key>
+			<string>%2$@ importations permettent d’exécuter des commandes ou du code au chargement.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>many</key>
+			<string>%2$@ importations ne sont pas des données de modèle usuelles.</string>
+			<key>one</key>
+			<string>%2$@ importation n’est pas une donnée de modèle usuelle.</string>
+			<key>other</key>
+			<string>%2$@ importations ne sont pas des données de modèle usuelles.</string>
 		</dict>
 	</dict>
 	<key>finding.profile.expiresSoon</key>

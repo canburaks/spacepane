@@ -258,6 +258,10 @@
     "finding.archive.macMetadata": "Entri resource Mac di __MACOSX: %lld.",
     "finding.archive.nested": "Arsip di dalam arsip ini, tidak dibuka: %lld.",
     "finding.archive.unsafePath": "Entri yang akan ditulis di luar folder tujuan: %lld.",
+    "finding.artifact.mismatchedContent": "Format kontennya berbeda dari yang ditunjukkan nama berkas.",
+    "finding.artifact.nativeCode": {
+      "other": "Di dalamnya ada %2$@ program atau pustaka native."
+    },
     "finding.autorun.agentHooks": {
       "other": "%2$@ perintah berjalan sendiri saat agen AI bertindak (hook)."
     },
@@ -286,6 +290,16 @@
       "other": "%2$@ variabel lingkungan diteruskan ke server MCP."
     },
     "finding.banner.label": "Hal yang perlu diperiksa di berkas ini",
+    "finding.bundle.asksForSecrets": {
+      "other": "%2$@ pengaturan meminta kata sandi atau kunci."
+    },
+    "finding.bundle.broadFolderAccess": {
+      "other": "%2$@ pengaturan memberi server akses ke folder Rumah, Dokumen, Unduhan, atau Desktop Anda."
+    },
+    "finding.bundle.runsProgram": "Menjalankan program di Mac ini saat aplikasi AI memulai servernya.",
+    "finding.bundle.toolTextTargetsAssistant": {
+      "other": "%2$@ deskripsi alat menyuruh AI membaca berkas lain atau menyembunyikan sesuatu dari Anda."
+    },
     "finding.certificate.expired": {
       "other": "%2$@ sertifikat telah kedaluwarsa."
     },
@@ -309,6 +323,16 @@
     "finding.export.readableLogins": {
       "other": "%2$@ login pengelola kata sandi disimpan di sini dalam bentuk yang dapat dibaca. Hapus ekspor ini jika sudah tidak diperlukan."
     },
+    "finding.extension.allSites": "Dapat membaca dan mengubah setiap situs web yang Anda kunjungi.",
+    "finding.extension.installsOthers": {
+      "other": "Menginstal %2$@ ekstensi lain bersamanya."
+    },
+    "finding.extension.relaxedScriptPolicy": "Kebijakan keamanannya mengizinkan teks dijalankan sebagai kode.",
+    "finding.extension.selfHostedUpdates": "Diperbarui dari servernya sendiri, bukan dari toko peramban.",
+    "finding.extension.sensitivePermissions": {
+      "other": "Meminta %2$@ izin peramban yang sensitif."
+    },
+    "finding.extension.startsAutomatically": "Dimulai setiap kali editor kode dibuka.",
     "finding.hidden.agentInstructions": "Ini tampak seperti berkas instruksi untuk alat pemrograman AI, yang bisa diarahkan oleh teks tersembunyi.",
     "finding.hidden.bidirectionalControls": "Karakter pengubah arah yang membuat kode terbaca berbeda dari yang dijalankan: %lld.",
     "finding.hidden.markdownComments": "Komentar HTML yang disembunyikan oleh sebagian besar penampil Markdown: %lld.",
@@ -317,6 +341,14 @@
     "finding.hidden.unicodeTags": "Karakter tag tak terlihat yang membawa teks tersembunyi: %lld.",
     "finding.hidden.variationSelectors": "Pemilih variasi yang tidak lazim dan dapat menyembunyikan data: %lld.",
     "finding.hidden.zeroWidth": "Karakter lebar nol yang tak terlihat: %lld.",
+    "finding.install.buildScript": "Membangun atau menginstal paket sumber ini menjalankan skrip penyiapannya.",
+    "finding.install.nativeBuild": "Menginstal paket ini mengompilasi kode native dari berkas build, meskipun tanpa skrip penginstalan.",
+    "finding.install.remoteDependencies": {
+      "other": "%2$@ dependensi berasal dari repositori Git atau alamat web, bukan dari registri."
+    },
+    "finding.install.startupCode": {
+      "other": "%2$@ tempat menjalankan kode Python setiap kali Python dimulai."
+    },
     "finding.launch.atLoad": "Program dimulai saat login atau saat startup.",
     "finding.launch.hiddenLocation": "Program berada di folder sementara, bersama, atau tersembunyi.",
     "finding.launch.inlineScript": "Tugas ini menjalankan kode shell atau skrip yang ditulis di dalam berkas ini.",
@@ -330,6 +362,8 @@
     "finding.listing.hiddenCharacters": {
       "other": "%2$@ nama dalam daftar mengandung karakter tersembunyi."
     },
+    "finding.model.incomplete": "Berkas lebih pendek daripada yang tertulis di headernya, mungkin unduhan tidak lengkap.",
+    "finding.model.inconsistentLayout": "Rentang tensor di header tumpang tindih atau menyisakan celah, dan format ini melarangnya.",
     "finding.more": "Temuan lainnya: %lld",
     "finding.notebook.errorOutputs": "Sel yang menyimpan galat: %lld.",
     "finding.notebook.executionGaps": "Nomor eksekusi melewati beberapa nilai, sehingga sel dijalankan ulang atau dihapus. Nomor yang terlewat: %lld.",
@@ -337,6 +371,16 @@
     "finding.notebook.notExecuted": "Tidak ada sel kode yang dijalankan, sehingga notebook tidak memiliki hasil tersimpan.",
     "finding.notebook.outOfOrder": "Sel dijalankan tidak berurutan: %@.",
     "finding.notebook.unexecutedCells": "Sel kode yang tidak pernah dijalankan: %lld.",
+    "finding.pickle.brokenStream": "Data terputus setelah impor. Beberapa pemindai berhenti membaca pada titik itu.",
+    "finding.pickle.networkOrFiles": {
+      "other": "%2$@ impor memungkinkan penggunaan jaringan atau berkas saat berkas ini dimuat."
+    },
+    "finding.pickle.runsCode": {
+      "other": "%2$@ impor memungkinkan perintah atau kode berjalan saat berkas ini dimuat."
+    },
+    "finding.pickle.uncommonImports": {
+      "other": "%2$@ impor bukan data model biasa."
+    },
     "finding.profile.expired": "Profil provisioning ini sudah kedaluwarsa.",
     "finding.profile.expiresSoon": {
       "other": "Profil provisioning ini kedaluwarsa dalam %2$@ hari."
@@ -486,6 +530,12 @@
     "format.document.fictionbook.name": "Buku FictionBook (FB2)",
     "format.document.web-archive.description": "Teks halaman MHTML yang disimpan; halaman tidak pernah dirender atau dimuat.",
     "format.document.web-archive.name": "Arsip web (MHTML)",
+    "format.ml.gguf.description": "Arsitektur, ukuran, kuantisasi, panjang konteks, lisensi, dan templat obrolan dari header. Bobot model tidak pernah dibaca.",
+    "format.ml.gguf.name": "Model GGUF",
+    "format.ml.pickle.description": "Apa yang akan diimpor saat berkas dimuat, diperiksa tanpa memuatnya. Berkas tanpa temuan masih bisa tidak aman.",
+    "format.ml.pickle.name": "Berkas PyTorch dan Pickle",
+    "format.ml.safetensors.description": "Tensor, jumlah parameter, tipe data, dan metadata dari header, beserta detail LoRA dan shard. Bobot model tidak pernah dibaca.",
+    "format.ml.safetensors.name": "Model Safetensors",
     "format.model.3mf.description": "Pratinjau 3D lokal untuk model pencetakan 3D, termasuk tata letak dan satuan. Warna, material, dan pengaturan slicer tidak ditampilkan.",
     "format.model.3mf.name": "Model 3D 3MF",
     "format.model.obj.description": "Pratinjau 3D lokal untuk geometri poligon. Material, tekstur, dan file tertaut tidak pernah dibaca.",
@@ -498,10 +548,18 @@
     "format.package.android.name": "Aplikasi Android (APK, AAB)",
     "format.package.application.description": "Identitas, versi, arsitektur, ringkasan tanda tangan, dan ukuran. Tidak ada yang dijalankan, dan tanda tangan tidak divalidasi.",
     "format.package.application.name": "Bundel Aplikasi",
+    "format.package.browser-extension.description": "Izin, akses situs, alamat pembaruan, dan kebijakan keamanan konten dari manifes. Tidak ada yang diinstal atau dijalankan.",
+    "format.package.browser-extension.name": "Ekstensi Peramban (XPI, CRX)",
+    "format.package.editor-extension.description": "Penerbit, versi, kapan dimulai, kode native yang disertakan, dan karakter tersembunyi. Tidak ada yang diinstal atau dijalankan.",
+    "format.package.editor-extension.name": "Ekstensi Editor (VSIX)",
     "format.package.installer.description": "Isi, pengenal, versi, dan nama skrip. Skrip dan payload tidak pernah dibaca.",
     "format.package.installer.name": "Paket Penginstal",
     "format.package.ios-app.description": "Info.plist, profil provisioning, ikon, dan daftar berkas. Tidak ada yang diekstrak atau dijalankan.",
     "format.package.ios-app.name": "Aplikasi iOS (IPA)",
+    "format.package.mcp-bundle.description": "Program, alat, pengaturan, dan akses folder server dari manifes. Tidak ada yang diinstal atau dijalankan.",
+    "format.package.mcp-bundle.name": "Bundel MCP",
+    "format.package.python-wheel.description": "Nama, versi, persyaratan, perintah, dan berkas yang berjalan saat Python dimulai. Tidak ada yang diinstal atau dijalankan.",
+    "format.package.python-wheel.name": "Paket Python Wheel",
     "format.security.certificate.description": "Detail sertifikat dan sidik jari. Kunci privat disembunyikan, dan kepercayaan tidak dievaluasi.",
     "format.security.certificate.name": "Sertifikat",
     "format.text.asciidoc.description": "Judul, daftar, blok, dan kotak peringatan AsciiDoc secara luring plus sumber aman; include tidak pernah diikuti.",
@@ -608,6 +666,38 @@
     "notebook.output.numbered": "Keluaran [%lld]",
     "notebook.output.stderr": "Aliran galat",
     "notebook.truncated": "Pratinjau dipersingkat. Sel yang ditampilkan: %1$lld dari %2$lld.",
+    "preview.addon.activationEvents": "Peristiwa aktivasi",
+    "preview.addon.addonID": "ID pengaya",
+    "preview.addon.arguments": "Argumen",
+    "preview.addon.author": "Penulis",
+    "preview.addon.background": "Berkas latar belakang",
+    "preview.addon.browser": "Peramban",
+    "preview.addon.categories": "Kategori",
+    "preview.addon.command": "Perintah",
+    "preview.addon.commands": "Jumlah perintah",
+    "preview.addon.contentScriptMatches": "Situs skrip konten",
+    "preview.addon.description": "Deskripsi",
+    "preview.addon.engine": "Versi VS Code",
+    "preview.addon.entry": "Berkas masuk",
+    "preview.addon.entryPoint": "Titik masuk",
+    "preview.addon.environment": "Nama variabel lingkungan",
+    "preview.addon.extensionDependencies": "Dependensi ekstensi",
+    "preview.addon.extensionPack": "Paket ekstensi",
+    "preview.addon.hostPermissions": "Izin host",
+    "preview.addon.license": "Lisensi",
+    "preview.addon.manifestVersion": "Versi manifes",
+    "preview.addon.optionalPermissions": "Izin opsional",
+    "preview.addon.prompts": "Prompt",
+    "preview.addon.publisher": "Penerbit",
+    "preview.addon.required": "Wajib",
+    "preview.addon.runtimes": "Runtime",
+    "preview.addon.sensitive": "Sensitif",
+    "preview.addon.serverType": "Jenis server",
+    "preview.addon.settings": "Pengaturan",
+    "preview.addon.tools": "Alat",
+    "preview.addon.untrustedWorkspaces": "Ruang kerja tidak tepercaya",
+    "preview.addon.updateURL": "Alamat pembaruan",
+    "preview.addon.webEntry": "Berkas masuk web",
     "preview.archive.entryEncrypted": "Terenkripsi",
     "preview.archive.entryModified": "Dimodifikasi",
     "preview.archive.locked": "Terkunci",
@@ -807,6 +897,18 @@
       "other": "Kemungkinan rahasia yang disembunyikan: %2$@."
     },
     "preview.info.onThisMac": "Diproses di Mac ini",
+    "preview.install.commands": "Perintah yang dipasang",
+    "preview.install.dependencies": "Dependensi",
+    "preview.install.generator": "Dibuat dengan",
+    "preview.install.installedScripts": "Skrip yang dipasang",
+    "preview.install.license": "Lisensi",
+    "preview.install.nativeModules": "Modul native",
+    "preview.install.pureLibrary": "Pustaka Python murni",
+    "preview.install.requiresPython": "Python yang dibutuhkan",
+    "preview.install.startupFiles": "Berkas jalur yang dipasang (.pth)",
+    "preview.install.summary": "Ringkasan",
+    "preview.install.tags": "Tag kompatibilitas",
+    "preview.install.wheelVersion": "Versi format wheel",
     "preview.interaction.close": "Tutup",
     "preview.interaction.copied": "Disalin ke papan klip",
     "preview.interaction.copy": "Salin",
@@ -907,6 +1009,44 @@
     "preview.mode.summary": "Ringkasan",
     "preview.mode.table": "Tabel",
     "preview.mode.tree": "Pohon",
+    "preview.model.adapterKind": "Adaptor",
+    "preview.model.alignment": "Perataan (byte)",
+    "preview.model.architecture": "Arsitektur",
+    "preview.model.author": "Penulis",
+    "preview.model.baseModels": "Model dasar",
+    "preview.model.bitsPerWeight": "Bit per bobot",
+    "preview.model.blockCount": "Jumlah lapisan",
+    "preview.model.chatTemplate": "Templat obrolan",
+    "preview.model.chatTemplateBytes": "Ukuran templat obrolan (byte)",
+    "preview.model.contextLength": "Panjang konteks",
+    "preview.model.dataBytes": "Ukuran data tensor (byte)",
+    "preview.model.dtypes": "Tipe data",
+    "preview.model.embeddingLength": "Ukuran embedding",
+    "preview.model.expertCount": "Pakar",
+    "preview.model.expertUsedCount": "Pakar yang dipakai per token",
+    "preview.model.fileType": "Jenis berkas",
+    "preview.model.ggufVersion": "Versi GGUF",
+    "preview.model.headCount": "Kepala atensi",
+    "preview.model.headCountKV": "Kepala kunci/nilai",
+    "preview.model.headerBytes": "Ukuran header (byte)",
+    "preview.model.languages": "Bahasa",
+    "preview.model.license": "Lisensi",
+    "preview.model.loraRank": "Rank LoRA",
+    "preview.model.metadataCount": "Entri metadata",
+    "preview.model.organization": "Organisasi",
+    "preview.model.otherMetadata": "Metadata lainnya",
+    "preview.model.parameters": "Parameter",
+    "preview.model.quantization": "Kuantisasi",
+    "preview.model.quantizedBy": "Dikuantisasi oleh",
+    "preview.model.shardCount": "Pecahan dalam set",
+    "preview.model.shardIndex": "Pecahan",
+    "preview.model.sizeLabel": "Label ukuran",
+    "preview.model.tags": "Tag",
+    "preview.model.tensorCount": "Jumlah tensor",
+    "preview.model.tensorTypes": "Jenis tensor",
+    "preview.model.tensors": "Tensor",
+    "preview.model.tokenizer": "Tokenizer",
+    "preview.model.vocabularySize": "Ukuran kosakata",
     "preview.outline.duplicateKey": "Kunci duplikat",
     "preview.outline.key": "Kunci",
     "preview.outline.value": "Nilai",
@@ -1021,6 +1161,22 @@
     "preview.package.versionCode": "Kode versi",
     "preview.package.versionName": "Nama versi",
     "preview.package.webSeeds": "Web seed",
+    "preview.pickle.checked": "Yang diperiksa",
+    "preview.pickle.checked.importsOnly": "Hanya impor. Berkas tidak pernah dimuat.",
+    "preview.pickle.checksumErrors": "Checksum tidak cocok",
+    "preview.pickle.count": "Kemunculan",
+    "preview.pickle.imports": "Impor",
+    "preview.pickle.kind": "Jenis",
+    "preview.pickle.kind.code": "Dapat menjalankan kode",
+    "preview.pickle.kind.expected": "Lazim untuk data model",
+    "preview.pickle.kind.networkOrFiles": "Jaringan atau berkas",
+    "preview.pickle.kind.uncommon": "Tidak umum",
+    "preview.pickle.partial": "Diperiksa sebagian",
+    "preview.pickle.persistentIDs": "ID persisten",
+    "preview.pickle.pickleProtocol": "Protokol pickle",
+    "preview.pickle.pickles": "Pickle yang dipindai",
+    "preview.pickle.storageBytes": "Byte penyimpanan tensor",
+    "preview.pickle.storages": "Penyimpanan tensor",
     "preview.privacyNotice": "Informasi yang diduga rahasia disembunyikan. Pemilihan dan penyalinan menggunakan konten yang telah disamarkan.",
     "preview.profile.shownRows": {
       "other": "Profil menggunakan %2$@ baris pertama yang dibaca."
