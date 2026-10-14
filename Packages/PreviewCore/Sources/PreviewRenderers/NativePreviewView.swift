@@ -170,6 +170,7 @@ public final class NativePreviewView: NSView {
         textContent.translatesAutoresizingMaskIntoConstraints = false
         findingsBanner.translatesAutoresizingMaskIntoConstraints = false
         findingsBanner.onCopyConcealedText = { [weak self] in self?.copyConcealedText() }
+        findingsBanner.onCopyFindingsReport = { [weak self] in self?.copyFindingsReport() }
         addSubview(findingsBanner)
         addSubview(textContent)
         outlineView.translatesAutoresizingMaskIntoConstraints = false
