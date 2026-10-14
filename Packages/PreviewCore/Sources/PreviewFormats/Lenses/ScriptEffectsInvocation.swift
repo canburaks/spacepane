@@ -231,7 +231,7 @@ enum ScriptTool {
         "runas": .runas, "schtasks": .schtasks, "reg": .reg, "netsh": .netsh, "certutil": .certutil,
         "bitsadmin": .bitsadmin, "plistbuddy": .plistBuddy,
         "set-mppreference": .setMpPreference, "add-mppreference": .addMpPreference, "get-credential": .getCredential,
-        "read-host": .readHost, "start-process": .startProcess, "saps": .startProcess,
+        "read-host": .readHost, "start-process": .startProcess, "saps": .startProcess, "start": .startProcess,
         "iwr": .webRequest, "irm": .webRequest, "invoke-webrequest": .webRequest, "invoke-restmethod": .webRequest,
         "set-itemproperty": .registryProperty, "new-itemproperty": .registryProperty, "register-scheduledtask": .registerTask
     ]

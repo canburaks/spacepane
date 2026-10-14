@@ -57,6 +57,7 @@ struct ScriptEffectsPowerShellTests {
         ScriptCase("Start-Process -Verb RunAs", "Start-Process powershell -Verb RunAs\n", language: .powerShell, [.elevates()]),
         ScriptCase("Start-Process -Verb runas lowercase", "Start-Process -FilePath x.exe -Verb runas\n", language: .powerShell, [.elevates()]),
         ScriptCase("Start-Process -Verb:RunAs", "Start-Process -Verb:RunAs x.exe\n", language: .powerShell, [.elevates()]),
+        ScriptCase("start alias with -Verb RunAs", "start powershell -Verb RunAs\n", language: .powerShell, [.elevates()]),
         ScriptCase("runas", "runas /user:Administrator cmd\n", language: .powerShell, [.elevates()]),
         // Persistence.
         ScriptCase("schtasks /create", "schtasks /create /tn Example /tr x.exe /sc onlogon\n", language: .powerShell, [.persistence()]),

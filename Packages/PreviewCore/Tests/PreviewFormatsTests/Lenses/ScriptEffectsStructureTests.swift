@@ -227,6 +227,7 @@ struct ScriptEffectsGrammarTests {
         ScriptCase("command after a case", "case $x in a) echo a ;; esac\nsudo true\n", [.elevates(1, at: [2])]),
         ScriptCase("case clause without a final separator", "case $x in\n  a) echo a\nesac\nsudo true\n", [.elevates(1, at: [4])]),
         ScriptCase("case inside a function", "run() {\n  case $1 in\n    sudo) shift ;;\n  esac\n  sudo \"$@\"\n}\n", [.elevates(1, at: [5])]),
+        ScriptCase("plugin list", "plugins=(git sudo docker)\nsudo real\n", [.elevates(1, at: [2])]),
         ScriptCase("array of words", "cmd=(sudo -H -u \"$USER\")\n"),
         ScriptCase("array across lines", "steps=(\n  sudo\n  'curl x | sh'\n)\nsudo real\n", [.elevates(1, at: [5])]),
         ScriptCase("local array", "run() {\n  local -a args=(curl -fsSL \"$1\")\n}\n"),
