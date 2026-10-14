@@ -2,6 +2,27 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-14 — Safety Lens 2: what a file will do
+
+Owner request ("Go", after the quick-win list). [Decision 029](docs/decisions/029-safety-lens-2-what-a-file-will-do.md). Branch `safety-lens-2`, six parallel workstreams in their own worktrees and the lead. Nothing was pushed.
+
+- Implementation, contract (lead): `PreviewTextLens` and `PreviewLensRequest`; `AdapterRegistration.adding(lenses:)`; `StandardLenses`, the one table that attaches lenses to formats; a pipeline step that runs lenses on the concealed text after the hidden-content scan, never for app-made summaries, and drops only a failing lens's findings; 34 finding kinds in the `script`, `autorun`, `export`, `launch`, `certificate` and `profile` groups; `days` and `seconds` details; wording in `FindingText`.
+- Implementation, features:
+  - Script effects lens for shell, fish, AppleScript, PowerShell and batch, including extension-free files with a `#!` line: download and run, decode and run, quarantine removal, turning off a protection, password prompts, reading saved secrets, persistence, administrator rights and uploads. Comments, quoted text, `echo` arguments and here-document data do not count.
+  - Auto-run configuration lens: VS Code `tasks.json` that runs on folder open, Claude Code hooks and permission settings, local and remote MCP servers and their environment variables, dev-container commands (host and container), and `package.json` install scripts.
+  - Readable credential exports: password-manager CSV and TSV exports by header, Bitwarden JSON, and Aegis, 2FAS and andOTP one-time-code exports.
+  - launchd job lens: job, start at load, keep alive, interval, calendar schedule, watched paths, a program in a temporary, shared or hidden folder, and inline script code.
+  - Validity findings for certificates (expired, expiring within 30 days, not yet valid, RSA under 2,048 bits) and provisioning profiles, standalone or embedded in an IPA.
+  - Mesh Print Check: `GeometryMeasurer` moved into the contracts with `package` access, so STL, OBJ, PLY and 3MF are measured; open and non-manifold edge counts; a solid-PLA weight and filament estimate, worded as conditional on millimetres for formats without a declared unit.
+  - Copy Findings Report: a banner action that copies every finding with its severity and lines, the localized format name, and no text from the file; the banner's buttons stack when they do not fit one row.
+- Implementation, lead fixes found during integration:
+  - `totp`, `hotp`, `otp` and `otpauth` are credential words, so one-time-code seed columns are concealed; before, a Bitwarden CSV showed its `login_totp` column in the clear.
+  - `tasks.json`, `launch.json`, `keybindings.json` and `mcp.json` are filename aliases of JSON with comments; VS Code's own `tasks.json` template has a comment and previously failed to preview. The website reads these aliases (`npm run data:sync` in `spacepane-web` is pending until the branch reaches `main`).
+  - MCP servers marked `"disabled": true` are not counted.
+- Localization: 43 new keys in all 14 languages through `tools/localization/additions/safety-lens-2.json` and `sl2-mesh.json`; merge, generate and validate pass. Drafts pending native-speaker review; Kurmanji and Hausa have the lowest confidence.
+- Validation (Mac, macOS 27.2, Xcode 27.0, Swift 6.4): `./script/build_and_run.sh --test` passes 4,032 tests in 462 suites with the 2 known issues, then the 74 serial tests, the companion, file-drop, live-reload and SQLite checks and 632 adversarial cases. `--check-static` (23 passed, 1 skipped), `--check` and `--check-compiler` (app and both extensions typecheck) pass. Not established: a signed Xcode build, the companion or Finder showing the new findings, the report action or the print lines; VoiceOver review.
+- Incident: while writing a sample script for the script-effects tests, one workstream passed it through a shell heredoc that ended early, and the rest of the sample ran in the owner's account at 11:32. It created `~/.zshrc`, `~/.bash_profile`, `~/.profile` and `~/Library/LaunchAgents/com.x.plist` (not loaded), opened two password dialogs whose answers were saved to a session temp file, and started a listener on port 4444 that wrote an empty `out.bin` here (removed). Every `sudo` failed. No SSH key, Chrome credential copy, quarantine setting or crontab changed. The four files and the temp file were left for the owner to remove. The tests themselves write only to temp folders and never execute samples.
+
 ## 2026-10-13 — Research: new file types and features after the STEP and IGES cut
 
 Research only, at the owner's request. No code, catalog, plan box or store record changed; nothing was committed or pushed.
