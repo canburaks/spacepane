@@ -262,12 +262,72 @@
     "finding.archive.macMetadata": "Abubuwan albarkatun Mac a cikin __MACOSX: %lld.",
     "finding.archive.nested": "Kundin fayil da ke cikin wannan kundin fayil, ba a buɗe ba: %lld.",
     "finding.archive.unsafePath": "Abubuwan da za a rubuta a wajen babban fayil ɗin makoma: %lld.",
+    "finding.autorun.agentHooks": {
+      "one": "Umarni %2$@ yana gudana da kansa lokacin da wakilin AI ya yi aiki (hook).",
+      "other": "Umarni %2$@ suna gudana da kansu lokacin da wakilin AI ya yi aiki (hooks)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "Saiti %2$@ yana ba wa wakilin AI damar yin aiki ba tare da tambaya tukuna ba.",
+      "other": "Saituna %2$@ suna ba wa wakilin AI damar yin aiki ba tare da tambaya tukuna ba."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "Umarnin dev container %2$@ yana gudana da kansa a cikin container.",
+      "other": "Umarnin dev container %2$@ suna gudana da kansu a cikin container."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "Aiki %2$@ yana gudana da kansa idan an buɗe babban fayil a manhajar gyaran lamba.",
+      "other": "Ayyuka %2$@ suna gudana da kansu idan an buɗe babban fayil a manhajar gyaran lamba."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "Umarnin dev container %2$@ yana gudana a wannan Mac kafin container ya fara.",
+      "other": "Umarnin dev container %2$@ suna gudana a wannan Mac kafin container ya fara."
+    },
+    "finding.autorun.installScripts": {
+      "one": "Script na kunshi %2$@ yana gudana da kansa yayin shigarwa.",
+      "other": "Script na kunshi %2$@ suna gudana da kansu yayin shigarwa."
+    },
+    "finding.autorun.localServers": {
+      "one": "MCP server %2$@ yana fara shiri a wannan Mac.",
+      "other": "MCP server %2$@ suna fara shirye-shirye a wannan Mac."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "MCP server %2$@ yana haɗuwa da wani sabis a intanet.",
+      "other": "MCP server %2$@ suna haɗuwa da sabis a intanet."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "An ba da environment variable %2$@ ga MCP server.",
+      "other": "An ba da environment variable %2$@ ga MCP server."
+    },
     "finding.banner.label": "Abubuwan da za a duba a wannan fayil",
+    "finding.certificate.expired": {
+      "one": "Takardar shaida %2$@ ta ƙare aiki.",
+      "other": "Takaddun shaida %2$@ sun ƙare aiki."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Takardar shaida za ta ƙare aiki a cikin kwana %2$@.",
+      "other": "Takardar shaida za ta ƙare aiki a cikin kwana %2$@."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "Takardar shaida %2$@ ba ta fara aiki ba tukuna.",
+      "other": "Takaddun shaida %2$@ ba su fara aiki ba tukuna."
+    },
+    "finding.certificate.weakKey": {
+      "one": "Takardar shaida %2$@ tana amfani da gajeren makullin RSA.",
+      "other": "Takaddun shaida %2$@ suna amfani da gajerun makullan RSA."
+    },
     "finding.detail.cells": "Sel: %@",
     "finding.detail.cellsMore": "Sel: %1$@ da ƙarin %2$lld",
     "finding.detail.decodedText": "Boyayyen rubutu, ana nuna shi a matsayin rubutu a sarari: %@",
     "finding.detail.lines": "Layuka: %@",
     "finding.detail.linesMore": "Layuka: %1$@ da ƙarin %2$lld",
+    "finding.export.readableCodeSecrets": {
+      "one": "An adana sirri %2$@ na lambar amfani sau ɗaya a nan a siffar da za a iya karantawa.",
+      "other": "An adana sirrika %2$@ na lambobin amfani sau ɗaya a nan a siffar da za a iya karantawa."
+    },
+    "finding.export.readableLogins": {
+      "one": "An adana bayanin shiga %2$@ na manajan kalmomin sirri a nan a siffar da za a iya karantawa. Share wannan fayil ɗin export idan ba a buƙatarsa kuma.",
+      "other": "An adana bayanan shiga %2$@ na manajan kalmomin sirri a nan a siffar da za a iya karantawa. Share wannan fayil ɗin export idan ba a buƙatarsa kuma."
+    },
     "finding.hidden.agentInstructions": "Wannan yana kama da fayil na umarni ga kayan aikin coding na AI, inda boyayyen rubutu zai iya jagorantar su.",
     "finding.hidden.bidirectionalControls": "Haruffa masu canza alkibla waɗanda ke sa a karanta code daban da yadda yake aiki: %lld.",
     "finding.hidden.markdownComments": "Sharhin HTML da yawancin masu duba Markdown ke ɓoyewa: %lld.",
@@ -276,6 +336,17 @@
     "finding.hidden.unicodeTags": "Haruffan tag marasa ganuwa masu ɗauke da rubutu a ɓoye: %lld.",
     "finding.hidden.variationSelectors": "Variation selectors da ba a zata ba, waɗanda za su iya ɓoye bayanai: %lld.",
     "finding.hidden.zeroWidth": "Haruffan zero-width marasa ganuwa: %lld.",
+    "finding.launch.atLoad": "Shirin yana farawa lokacin shiga ko lokacin kunna naʼura.",
+    "finding.launch.hiddenLocation": "Shirin yana cikin babban fayil na wucin gadi, wanda aka raba, ko wanda aka ɓoye.",
+    "finding.launch.inlineScript": "Aikin yana gudanar da lambar shell ko ta script da aka rubuta a cikin wannan fayil.",
+    "finding.launch.interval": "Shirin yana gudana a kowane %@.",
+    "finding.launch.job": "Wannan aikin launchd ne: macOS yana fara shirin da aka ambata a cikinsa.",
+    "finding.launch.keepAlive": "macOS yana sake fara shirin duk lokacin da ya tsaya.",
+    "finding.launch.schedule": "Shirin yana gudana bisa jadawalin kalanda.",
+    "finding.launch.watchPaths": {
+      "one": "Hanya %2$@ da ake sa ido a kanta tana fara shirin idan ta canja.",
+      "other": "Hanyoyi %2$@ da ake sa ido a kansu suna fara shirin idan sun canja."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "Suna %2$@ da aka jera yana ɗauke da haruffan da aka ɓoye.",
       "other": "Sunaye %2$@ da aka jera suna ɗauke da haruffan da aka ɓoye."
@@ -287,12 +358,53 @@
     "finding.notebook.notExecuted": "Babu sel na code da aka gudanar, don haka littafin rubutun ba shi da sakamakon da aka adana.",
     "finding.notebook.outOfOrder": "An gudanar da sel ba bisa tsari ba: %@.",
     "finding.notebook.unexecutedCells": "Sel na code da ba a taɓa gudanarwa ba: %lld.",
+    "finding.profile.expired": "Wannan bayanin provisioning ya ƙare aiki.",
+    "finding.profile.expiresSoon": {
+      "one": "Wannan bayanin provisioning zai ƙare aiki a cikin kwana %2$@.",
+      "other": "Wannan bayanin provisioning zai ƙare aiki a cikin kwana %2$@."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "babban fayil na ajiyar cloud",
+    "finding.script.asksForPassword": {
+      "one": "Wuri %2$@ yana neman kalmar sirri.",
+      "other": "Wurare %2$@ suna neman kalmar sirri."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "Wuri %2$@ yana decoding rubutun da aka yi wa encoding, sannan yana gudanar da shi.",
+      "other": "Wurare %2$@ suna decoding rubutun da aka yi wa encoding, sannan suna gudanar da shi."
+    },
+    "finding.script.disablesProtection": {
+      "one": "Umarni %2$@ yana kashe wata kariyar tsaro.",
+      "other": "Umarni %2$@ suna kashe kariyar tsaro."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "Wuri %2$@ yana sauke lamba daga intanet kuma yana gudanar da ita.",
+      "other": "Wurare %2$@ suna sauke lamba daga intanet kuma suna gudanar da ita."
+    },
+    "finding.script.elevates": {
+      "one": "Umarni %2$@ yana gudana da izinin mai gudanarwa.",
+      "other": "Umarni %2$@ suna gudana da izinin mai gudanarwa."
+    },
+    "finding.script.persistence": {
+      "one": "Umarni %2$@ yana saita shirin da zai gudana lokacin shiga ko bisa jadawali.",
+      "other": "Umarni %2$@ suna saita shirye-shiryen da za su gudana lokacin shiga ko bisa jadawali."
+    },
+    "finding.script.readsSecrets": {
+      "one": "Umarni %2$@ yana karanta kalmomin sirri, makullai ko bayanan burauza da aka adana.",
+      "other": "Umarni %2$@ suna karanta kalmomin sirri, makullai ko bayanan burauza da aka adana."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "Umarni %2$@ yana cire alamar keɓewa (quarantine) ta macOS daga fayiloli.",
+      "other": "Umarni %2$@ suna cire alamar keɓewa (quarantine) ta macOS daga fayiloli."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "Umarni %2$@ yana aika fayiloli ko bayanai zuwa intanet.",
+      "other": "Umarni %2$@ suna aika fayiloli ko bayanai zuwa intanet."
+    },
     "finding.secret.apiKey": "Makullan API da aka ɓoye: %lld.",
     "finding.secret.authorizationHeader": "Bayanan tantance izini da aka ɓoye: %lld.",
     "finding.secret.cloudAccessKey": "Makullan shiga na cloud da aka ɓoye: %lld.",
@@ -312,6 +424,11 @@
       "one": "An ɓoye sirri %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa.",
       "other": "An ɓoye sirrika %2$@ da ake zargi. Zaɓi da kwafawa suna amfani da rubutun da aka ɓoye bayanansa."
     },
+    "findings.report.copied": "An kwafi rahoton abubuwan da aka gano",
+    "findings.report.copy": "Kwafi rahoton abubuwan da aka gano",
+    "findings.report.copyHint": "Yana kwafar jerin waɗannan abubuwan da aka gano. Ba a haɗa rubutu daga fayil ba.",
+    "findings.report.footer": "Wannan jeri ba ya ƙunshi rubutu daga fayil.",
+    "findings.report.heading": "Abubuwan da aka gano: %@",
     "format.archive.7z.description": "Jerin shigarwar 7z mai iyaka daga kan fayil, har da wanda aka matse. Ba a taɓa buɗe bayanan fayiloli ba; ba a jera taskokin da kan fayilolinsu aka ɓoye ba.",
     "format.archive.7z.name": "Kundin 7-Zip",
     "format.archive.bzip2.description": "Buɗe rafukan bzip2 mai iyaka: jerin TAR.BZ2 da rubutun da ake goyon baya. Ana bayyana sauran abubuwan a matsayin binary.",

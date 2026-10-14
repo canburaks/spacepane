@@ -262,12 +262,72 @@
     "finding.archive.macMetadata": "Mac-Ressourceneinträge in __MACOSX: %lld.",
     "finding.archive.nested": "Archive in diesem Archiv, nicht geöffnet: %lld.",
     "finding.archive.unsafePath": "Einträge, die außerhalb des Zielordners geschrieben würden: %lld.",
+    "finding.autorun.agentHooks": {
+      "one": "%2$@ Befehl läuft von selbst, wenn ein KI-Agent handelt (ein Hook).",
+      "other": "%2$@ Befehle laufen von selbst, wenn ein KI-Agent handelt (Hooks)."
+    },
+    "finding.autorun.agentPermissions": {
+      "one": "%2$@ Einstellung erlaubt einem KI-Agenten, ohne vorherige Nachfrage zu handeln.",
+      "other": "%2$@ Einstellungen erlauben einem KI-Agenten, ohne vorherige Nachfrage zu handeln."
+    },
+    "finding.autorun.containerCommands": {
+      "one": "%2$@ Dev-Container-Befehl läuft von selbst im Container.",
+      "other": "%2$@ Dev-Container-Befehle laufen von selbst im Container."
+    },
+    "finding.autorun.folderOpenTask": {
+      "one": "%2$@ Aufgabe läuft von selbst, wenn der Ordner im Code-Editor geöffnet wird.",
+      "other": "%2$@ Aufgaben laufen von selbst, wenn der Ordner im Code-Editor geöffnet wird."
+    },
+    "finding.autorun.hostCommand": {
+      "one": "%2$@ Dev-Container-Befehl läuft auf diesem Mac, bevor der Container startet.",
+      "other": "%2$@ Dev-Container-Befehle laufen auf diesem Mac, bevor der Container startet."
+    },
+    "finding.autorun.installScripts": {
+      "one": "%2$@ Paketskript läuft bei der Installation von selbst.",
+      "other": "%2$@ Paketskripte laufen bei der Installation von selbst."
+    },
+    "finding.autorun.localServers": {
+      "one": "%2$@ MCP-Server startet ein Programm auf diesem Mac.",
+      "other": "%2$@ MCP-Server starten Programme auf diesem Mac."
+    },
+    "finding.autorun.remoteServers": {
+      "one": "%2$@ MCP-Server verbindet sich mit einem Dienst im Internet.",
+      "other": "%2$@ MCP-Server verbinden sich mit Diensten im Internet."
+    },
+    "finding.autorun.serverEnvironment": {
+      "one": "%2$@ Umgebungsvariable wird an MCP-Server weitergegeben.",
+      "other": "%2$@ Umgebungsvariablen werden an MCP-Server weitergegeben."
+    },
     "finding.banner.label": "Zu prüfende Punkte in dieser Datei",
+    "finding.certificate.expired": {
+      "one": "%2$@ Zertifikat ist abgelaufen.",
+      "other": "%2$@ Zertifikate sind abgelaufen."
+    },
+    "finding.certificate.expiresSoon": {
+      "one": "Ein Zertifikat läuft in %2$@ Tag ab.",
+      "other": "Ein Zertifikat läuft in %2$@ Tagen ab."
+    },
+    "finding.certificate.notYetValid": {
+      "one": "%2$@ Zertifikat ist noch nicht gültig.",
+      "other": "%2$@ Zertifikate sind noch nicht gültig."
+    },
+    "finding.certificate.weakKey": {
+      "one": "%2$@ Zertifikat verwendet einen kurzen RSA-Schlüssel.",
+      "other": "%2$@ Zertifikate verwenden kurze RSA-Schlüssel."
+    },
     "finding.detail.cells": "Zellen: %@",
     "finding.detail.cellsMore": "Zellen: %1$@ und %2$lld weitere",
     "finding.detail.decodedText": "Versteckter Text, als reiner Text angezeigt: %@",
     "finding.detail.lines": "Zeilen: %@",
     "finding.detail.linesMore": "Zeilen: %1$@ und %2$lld weitere",
+    "finding.export.readableCodeSecrets": {
+      "one": "%2$@ Geheimnis für Einmalcodes ist hier in lesbarer Form gespeichert.",
+      "other": "%2$@ Geheimnisse für Einmalcodes sind hier in lesbarer Form gespeichert."
+    },
+    "finding.export.readableLogins": {
+      "one": "%2$@ Passwortmanager-Login ist hier in lesbarer Form gespeichert. Löschen Sie diesen Export, wenn Sie ihn nicht mehr brauchen.",
+      "other": "%2$@ Passwortmanager-Logins sind hier in lesbarer Form gespeichert. Löschen Sie diesen Export, wenn Sie ihn nicht mehr brauchen."
+    },
     "finding.hidden.agentInstructions": "Dies scheint eine Anweisungsdatei für KI-Coding-Tools zu sein; versteckter Text kann sie steuern.",
     "finding.hidden.bidirectionalControls": "Richtungsändernde Zeichen, durch die Code anders gelesen wird, als er ausgeführt wird: %lld.",
     "finding.hidden.markdownComments": "HTML-Kommentare, die die meisten Markdown-Ansichten ausblenden: %lld.",
@@ -276,6 +336,17 @@
     "finding.hidden.unicodeTags": "Unsichtbare Tag-Zeichen, die versteckten Text enthalten: %lld.",
     "finding.hidden.variationSelectors": "Unerwartete Variationsselektoren, die Daten verstecken können: %lld.",
     "finding.hidden.zeroWidth": "Unsichtbare Zeichen mit Breite null: %lld.",
+    "finding.launch.atLoad": "Das Programm startet bei der Anmeldung oder beim Hochfahren.",
+    "finding.launch.hiddenLocation": "Das Programm liegt in einem temporären, freigegebenen oder versteckten Ordner.",
+    "finding.launch.inlineScript": "Der Job führt Shell- oder Skriptcode aus, der in dieser Datei steht.",
+    "finding.launch.interval": "Das Programm läuft im Abstand von %@.",
+    "finding.launch.job": "Das ist ein launchd-Job: macOS startet das darin genannte Programm.",
+    "finding.launch.keepAlive": "macOS startet das Programm neu, sobald es beendet wird.",
+    "finding.launch.schedule": "Das Programm läuft nach einem Kalenderzeitplan.",
+    "finding.launch.watchPaths": {
+      "one": "%2$@ überwachter Pfad startet das Programm, wenn er sich ändert.",
+      "other": "%2$@ überwachte Pfade starten das Programm, wenn sie sich ändern."
+    },
     "finding.listing.hiddenCharacters": {
       "one": "%2$@ aufgeführter Name enthält verborgene Zeichen.",
       "other": "%2$@ aufgeführte Namen enthalten verborgene Zeichen."
@@ -287,12 +358,53 @@
     "finding.notebook.notExecuted": "Keine Codezelle wurde ausgeführt, daher enthält das Notebook keine gespeicherten Ergebnisse.",
     "finding.notebook.outOfOrder": "Zellen wurden nicht der Reihe nach ausgeführt: %@.",
     "finding.notebook.unexecutedCells": "Codezellen, die nie ausgeführt wurden: %lld.",
+    "finding.profile.expired": "Dieses Provisioning-Profil ist abgelaufen.",
+    "finding.profile.expiresSoon": {
+      "one": "Dieses Provisioning-Profil läuft in %2$@ Tag ab.",
+      "other": "Dieses Provisioning-Profil läuft in %2$@ Tagen ab."
+    },
     "finding.provider.box": "Box",
     "finding.provider.dropbox": "Dropbox",
     "finding.provider.googleDrive": "Google Drive",
     "finding.provider.iCloudDrive": "iCloud Drive",
     "finding.provider.oneDrive": "OneDrive",
     "finding.provider.other": "einem Cloud-Speicherordner",
+    "finding.script.asksForPassword": {
+      "one": "%2$@ Stelle fragt nach einem Passwort.",
+      "other": "%2$@ Stellen fragen nach einem Passwort."
+    },
+    "finding.script.decodeAndRun": {
+      "one": "%2$@ Stelle dekodiert kodierten Text und führt ihn aus.",
+      "other": "%2$@ Stellen dekodieren kodierten Text und führen ihn aus."
+    },
+    "finding.script.disablesProtection": {
+      "one": "%2$@ Befehl schaltet einen Sicherheitsschutz aus.",
+      "other": "%2$@ Befehle schalten Sicherheitsschutzfunktionen aus."
+    },
+    "finding.script.downloadAndRun": {
+      "one": "%2$@ Stelle lädt Code aus dem Internet herunter und führt ihn aus.",
+      "other": "%2$@ Stellen laden Code aus dem Internet herunter und führen ihn aus."
+    },
+    "finding.script.elevates": {
+      "one": "%2$@ Befehl läuft mit Administratorrechten.",
+      "other": "%2$@ Befehle laufen mit Administratorrechten."
+    },
+    "finding.script.persistence": {
+      "one": "%2$@ Befehl richtet ein Programm ein, das bei der Anmeldung oder nach einem Zeitplan läuft.",
+      "other": "%2$@ Befehle richten Programme ein, die bei der Anmeldung oder nach einem Zeitplan laufen."
+    },
+    "finding.script.readsSecrets": {
+      "one": "%2$@ Befehl liest gespeicherte Passwörter, Schlüssel oder Browserdaten.",
+      "other": "%2$@ Befehle lesen gespeicherte Passwörter, Schlüssel oder Browserdaten."
+    },
+    "finding.script.removesQuarantine": {
+      "one": "%2$@ Befehl entfernt die macOS-Quarantänemarkierung von Dateien.",
+      "other": "%2$@ Befehle entfernen die macOS-Quarantänemarkierung von Dateien."
+    },
+    "finding.script.uploadsFiles": {
+      "one": "%2$@ Befehl sendet Dateien oder Daten ins Internet.",
+      "other": "%2$@ Befehle senden Dateien oder Daten ins Internet."
+    },
     "finding.secret.apiKey": "Verborgene API-Schlüssel: %lld.",
     "finding.secret.authorizationHeader": "Verborgene Autorisierungsdaten: %lld.",
     "finding.secret.cloudAccessKey": "Verborgene Cloud-Zugangsschlüssel: %lld.",
@@ -312,6 +424,11 @@
       "one": "%2$@ mögliches Geheimnis ausgeblendet. Auswahl und Kopieren verwenden den unkenntlich gemachten Text.",
       "other": "%2$@ mögliche Geheimnisse ausgeblendet. Auswahl und Kopieren verwenden den unkenntlich gemachten Text."
     },
+    "findings.report.copied": "Befundbericht kopiert",
+    "findings.report.copy": "Befundbericht kopieren",
+    "findings.report.copyHint": "Kopiert eine Liste dieser Befunde. Es ist kein Text aus der Datei enthalten.",
+    "findings.report.footer": "Diese Liste enthält keinen Text aus der Datei.",
+    "findings.report.heading": "Befunde: %@",
     "format.archive.7z.description": "Begrenzte 7z-Eintragslisten aus dem Header, auch bei komprimierten Headern. Dateidaten werden nie dekodiert; Archive mit verschlüsselten Headern werden nicht aufgelistet.",
     "format.archive.7z.name": "7-Zip-Archive",
     "format.archive.bzip2.description": "Begrenzte Dekomprimierung von bzip2-Datenströmen: TAR.BZ2-Listen und unterstützter Text. Anderer Inhalt wird als binär gemeldet.",
