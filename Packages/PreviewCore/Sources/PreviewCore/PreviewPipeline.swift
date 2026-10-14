@@ -171,6 +171,9 @@ private actor PreviewWorker {
                     ? try HiddenContentScanner.scan(text: safe.text, formatID: formatID, fileName: url.lastPathComponent,
                                                     privacy: privacy, context: context)
                     : []
+                // Lenses read the same concealed text and report what the file would do (decision 029).
+                let lensed = try LensRunner.findings(registration.lenses, text: safe.text, document: document,
+                                                     formatID: formatID, url: url, context: context)
                 let images = document.images.filter(\.isValid)
                 return .ready(TextPresentation(formatID: formatID, text: safe.text, lineCount: lineCount,
                     byteCount: byteCount, encoding: encoding, redactionCount: safe.redactionCount,
@@ -178,7 +181,7 @@ private actor PreviewWorker {
                     sourceRecordCount: document.sourceRecordCount, sourceLanguage: document.sourceLanguage,
                     images: images, truncatedSourceBytes: truncatedSourceBytes, isReformatted: document.isReformatted,
                     findings: PreviewFindings.normalized(
-                        document.findings + safe.findings + hiddenContent
+                        document.findings + safe.findings + hiddenContent + lensed
                             + syncFolderFindings(url: url, redactionCount: safe.redactionCount)),
                     origin: document.origin, facts: facts(for: document, sourceSize: sourceSize)))
             } catch is CancellationError { return .cancelled }
@@ -217,6 +220,28 @@ private actor PreviewWorker {
         let kept = try PartialTextPrefix.keptByteCount(of: bytes.data, boundary: boundary,
                                                        budget: context.budget, context: context)
         return (FileBytes(data: Data(bytes.data.prefix(kept))), total)
+    }
+}
+
+/// Runs a registration's lenses over the concealed text (decision 029). App-made summaries are never read.
+/// A lens's own failure drops only its findings; cancellation and the request deadline still end the request.
+enum LensRunner {
+    static func findings(_ lenses: [any PreviewTextLens], text: String, document: ParsedTextDocument,
+                         formatID: FormatID, url: URL, context: RequestContext) throws -> [PreviewFinding] {
+        guard !lenses.isEmpty, document.origin != .summary else { return [] }
+        let parent = url.deletingLastPathComponent().lastPathComponent
+        let request = PreviewLensRequest(formatID: formatID, fileName: url.lastPathComponent,
+                                         parentDirectoryName: parent.isEmpty || parent == "/" ? nil : parent,
+                                         sourceLanguage: document.sourceLanguage, origin: document.origin)
+        var found: [PreviewFinding] = []
+        for lens in lenses {
+            try context.checkpoint()
+            do { found += try lens.findings(in: text, request: request, context: context) }
+            catch let error as CancellationError { throw error }
+            catch PreviewFailure.deadlineExceeded { throw PreviewFailure.deadlineExceeded }
+            catch { continue }
+        }
+        return found
     }
 }
 
