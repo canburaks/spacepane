@@ -1210,6 +1210,37 @@
 				<string>com.quicklookpro.file.ndjson</string>
 				<string>public.source-code</string>
 				<string>public.shell-script</string>
+				<string>public.zsh-script</string>
+				<string>public.bash-script</string>
+				<string>public.csh-script</string>
+				<string>public.ksh-script</string>
+				<string>public.tcsh-script</string>
+				<string>com.apple.terminal.shell-script</string>
+				<string>com.apple.applescript.text</string>
+				<string>com.apple.metal</string>
+				<string>com.apple.rez-source</string>
+				<string>com.netscape.javascript-source</string>
+				<string>com.sun.java-source</string>
+				<string>public.ada-source</string>
+				<string>public.assembly-source</string>
+				<string>public.c-header</string>
+				<string>public.c-plus-plus-header</string>
+				<string>public.c-plus-plus-source</string>
+				<string>public.c-source</string>
+				<string>public.fortran-90-source</string>
+				<string>public.fortran-95-source</string>
+				<string>public.fortran-source</string>
+				<string>public.make-source</string>
+				<string>public.nasm-assembly-source</string>
+				<string>public.objective-c-plus-plus-source</string>
+				<string>public.objective-c-source</string>
+				<string>public.pascal-source</string>
+				<string>public.perl-script</string>
+				<string>public.php-script</string>
+				<string>public.protobuf-source</string>
+				<string>public.python-script</string>
+				<string>public.ruby-script</string>
+				<string>public.swift-source</string>
 				<string>org.webmeister.spacepane.type.source-code</string>
 				<string>com.quicklookpro.file.ada</string>
 				<string>com.quicklookpro.file.adb</string>
