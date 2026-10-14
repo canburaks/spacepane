@@ -17,10 +17,12 @@ enum PyTorchArchiveScanner {
         var storages = 0
         var storageBytes = 0
         var members: [ZIPEntry] = []
-        for entry in archive.entries where entry.kind == "file" {
+        for (index, entry) in archive.entries.enumerated() where entry.kind == "file" {
+            if index.isMultiple(of: 1_024) { try context.checkpoint() }
             if isStorage(entry.path) {
                 storages += 1
-                storageBytes = storageBytes.addingReportingOverflow(entry.uncompressedSize).partialValue
+                let (sum, overflow) = storageBytes.addingReportingOverflow(entry.uncompressedSize)
+                storageBytes = overflow ? Int.max : sum
             }
             if NativeCodeSignature.hasNativeSuffix(entry.path) { report.nativeMembers += 1 }
             if entry.path.lowercased().hasSuffix(".pkl") { members.append(entry) }
@@ -32,7 +34,8 @@ enum PyTorchArchiveScanner {
         var budgetSpent = false
         for entry in members.prefix(maximumPickleMembers) {
             try context.checkpoint()
-            guard !entry.isEncrypted, entry.method == 0 || entry.method == 8, entry.uncompressedSize <= maximumMemberBytes else {
+            guard !entry.isEncrypted, entry.method == 0 || entry.method == 8,
+                  entry.uncompressedSize <= maximumMemberBytes, entry.compressedSize <= maximumMemberBytes + 65_536 else {
                 report.isPartial = true
                 continue
             }
