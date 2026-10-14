@@ -23,13 +23,16 @@ struct MeshPrintCheckPerformanceTests {
 
     /// Loose triangles on a grid: no vertex is shared, so the output mesh has three positions per triangle (the
     /// most the 32 MiB output allowance admits at this size) and every edge is an open one. Binary STL at 50 bytes
-    /// a triangle: 334,000 of them fill the 16 MiB input cap.
-    private func triangleSoupSTL(triangles: Int) -> Data {
+    /// a triangle: 334,000 of them fill the 16 MiB input cap. In file order the triangles walk the grid, which the
+    /// measurer's sorts find easy; `scattered` places them by a fixed permutation, the case where nothing is sorted.
+    private func triangleSoupSTL(triangles: Int, scattered: Bool) -> Data {
         var data = Data(repeating: 0x20, count: 80) + MeshFixtures.little32(UInt32(triangles))
         data.reserveCapacity(84 + 50 * triangles)
         func float(_ value: Float) { data += MeshFixtures.little32(value.bitPattern) }
         for triangle in 0..<triangles {
-            let x = Float(triangle % 600), y = Float(triangle / 600)
+            // 104,729 is prime and does not divide 334,200, so the cells are distinct.
+            let cell = scattered ? (triangle * 104_729) % 334_200 : triangle
+            let x = Float(cell % 600), y = Float(cell / 600)
             data += Data(repeating: 0, count: 12)
             for corner in [(x, y, Float(0)), (x + 0.5, y, 0), (x, y + 0.5, 0.25)] {
                 float(corner.0); float(corner.1); float(corner.2)
@@ -47,7 +50,8 @@ struct MeshPrintCheckPerformanceTests {
         let inputs: [(name: String, adapter: any GeometryFormatAdapter, data: Data)] = [
             ("3MF at the triangle ceiling", ThreeMFAdapter(),
              MeshFixtures.threeMF(vertices: torusVertices, triangles: MeshFixtures.triangles(torus.quads))),
-            ("STL binary soup at the input cap", STLAdapter(), triangleSoupSTL(triangles: 334_000))]
+            ("STL binary soup at the input cap", STLAdapter(), triangleSoupSTL(triangles: 334_000, scattered: false)),
+            ("STL binary scattered soup at the input cap", STLAdapter(), triangleSoupSTL(triangles: 334_000, scattered: true))]
         for input in inputs {
             #expect(input.data.count <= GeometryLimits.maximumInputBytes, "\(input.name) fixture exceeds the input cap")
             let parseStart = ContinuousClock.now
