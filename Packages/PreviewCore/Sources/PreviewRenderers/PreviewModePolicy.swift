@@ -78,7 +78,7 @@ enum PreviewModePolicy {
             // family (identity, signing and permissions lead); Files and Tree stay one click away. ZIP, TAR,
             // the other archives and folders open in Files (decision 014), and so does a package whose
             // Summary could not be built.
-            return modes.summary != nil && SummaryLabelSet.packages.formats.contains(formatID) ? .summary : .files
+            return modes.summary != nil && SafeSchemaLabels.summaryFirstListings.contains(formatID) ? .summary : .files
         }
         // [ebooks]
         if formatID == .comicBook, !modes.images.isEmpty { return .pages }

@@ -1919,6 +1919,101 @@
       "descriptionKey": "format.data.numpy-archive.description"
     },
     {
+      "id": "ml.gguf",
+      "contentTypes": [
+        "org.webmeister.spacepane.type.gguf"
+      ],
+      "importedContentTypes": [
+        {
+          "identifier": "org.webmeister.spacepane.type.gguf",
+          "conformsTo": "public.data",
+          "extensions": [
+            "gguf"
+          ],
+          "descriptionKey": "format.ml.gguf.name",
+          "referenceURL": "https://github.com/ggml-org/ggml/blob/master/docs/gguf.md"
+        }
+      ],
+      "extensions": [
+        "gguf"
+      ],
+      "group": "structured",
+      "presentation": "text",
+      "primaryView": "summary",
+      "thumbnail": "generic",
+      "nameKey": "format.ml.gguf.name",
+      "descriptionKey": "format.ml.gguf.description"
+    },
+    {
+      "id": "ml.safetensors",
+      "contentTypes": [
+        "org.webmeister.spacepane.type.safetensors"
+      ],
+      "importedContentTypes": [
+        {
+          "identifier": "org.webmeister.spacepane.type.safetensors",
+          "conformsTo": "public.data",
+          "extensions": [
+            "safetensors"
+          ],
+          "descriptionKey": "format.ml.safetensors.name",
+          "referenceURL": "https://huggingface.co/docs/safetensors/index"
+        }
+      ],
+      "extensions": [
+        "safetensors"
+      ],
+      "group": "structured",
+      "presentation": "text",
+      "primaryView": "summary",
+      "thumbnail": "generic",
+      "nameKey": "format.ml.safetensors.name",
+      "descriptionKey": "format.ml.safetensors.description"
+    },
+    {
+      "id": "ml.pickle",
+      "contentTypes": [
+        "org.webmeister.spacepane.type.pytorch",
+        "org.webmeister.spacepane.type.pickle"
+      ],
+      "importedContentTypes": [
+        {
+          "identifier": "org.webmeister.spacepane.type.pytorch",
+          "conformsTo": "public.data",
+          "extensions": [
+            "pt",
+            "pth",
+            "ckpt"
+          ],
+          "descriptionKey": "format.ml.pickle.name",
+          "referenceURL": "https://pytorch.org/docs/stable/notes/serialization.html"
+        },
+        {
+          "identifier": "org.webmeister.spacepane.type.pickle",
+          "conformsTo": "public.data",
+          "extensions": [
+            "pickle",
+            "joblib"
+          ],
+          "descriptionKey": "format.ml.pickle.name",
+          "referenceURL": "https://docs.python.org/3/library/pickle.html"
+        }
+      ],
+      "extensions": [
+        "pt",
+        "pth",
+        "ckpt",
+        "pickle",
+        "joblib"
+      ],
+      "group": "structured",
+      "presentation": "text",
+      "primaryView": "summary",
+      "thumbnail": "generic",
+      "nameKey": "format.ml.pickle.name",
+      "descriptionKey": "format.ml.pickle.description"
+    },
+    {
       "id": "data.har",
       "contentTypes": [
         "org.webmeister.spacepane.type.har"
@@ -2595,6 +2690,123 @@
           "referenceURL": "https://www.bittorrent.org/beps/bep_0003.html"
         }
       ]
+    },
+    {
+      "id": "package.mcp-bundle",
+      "contentTypes": [
+        "org.webmeister.spacepane.type.mcp-bundle"
+      ],
+      "importedContentTypes": [
+        {
+          "identifier": "org.webmeister.spacepane.type.mcp-bundle",
+          "conformsTo": "public.zip-archive",
+          "extensions": [
+            "mcpb",
+            "dxt"
+          ],
+          "descriptionKey": "format.package.mcp-bundle.name",
+          "referenceURL": "https://github.com/modelcontextprotocol/mcpb"
+        }
+      ],
+      "extensions": [
+        "mcpb",
+        "dxt"
+      ],
+      "group": "containers",
+      "presentation": "text",
+      "primaryView": "summary",
+      "thumbnail": "generic",
+      "nameKey": "format.package.mcp-bundle.name",
+      "descriptionKey": "format.package.mcp-bundle.description"
+    },
+    {
+      "id": "package.editor-extension",
+      "contentTypes": [
+        "org.webmeister.spacepane.type.vsix"
+      ],
+      "importedContentTypes": [
+        {
+          "identifier": "org.webmeister.spacepane.type.vsix",
+          "conformsTo": "public.zip-archive",
+          "extensions": [
+            "vsix"
+          ],
+          "descriptionKey": "format.package.editor-extension.name",
+          "referenceURL": "https://code.visualstudio.com/api/working-with-extensions/publishing-extension"
+        }
+      ],
+      "extensions": [
+        "vsix"
+      ],
+      "group": "containers",
+      "presentation": "text",
+      "primaryView": "summary",
+      "thumbnail": "generic",
+      "nameKey": "format.package.editor-extension.name",
+      "descriptionKey": "format.package.editor-extension.description"
+    },
+    {
+      "id": "package.browser-extension",
+      "contentTypes": [
+        "org.webmeister.spacepane.type.xpi",
+        "org.chromium.extension"
+      ],
+      "importedContentTypes": [
+        {
+          "identifier": "org.webmeister.spacepane.type.xpi",
+          "conformsTo": "public.zip-archive",
+          "extensions": [
+            "xpi"
+          ],
+          "descriptionKey": "format.package.browser-extension.name",
+          "referenceURL": "https://extensionworkshop.com/documentation/publish/package-your-extension/"
+        },
+        {
+          "identifier": "org.chromium.extension",
+          "conformsTo": "public.data",
+          "extensions": [
+            "crx"
+          ],
+          "descriptionKey": "format.package.browser-extension.name",
+          "referenceURL": "https://developer.chrome.com/docs/extensions/how-to/distribute/host-on-linux"
+        }
+      ],
+      "extensions": [
+        "xpi",
+        "crx"
+      ],
+      "group": "containers",
+      "presentation": "text",
+      "primaryView": "summary",
+      "thumbnail": "generic",
+      "nameKey": "format.package.browser-extension.name",
+      "descriptionKey": "format.package.browser-extension.description"
+    },
+    {
+      "id": "package.python-wheel",
+      "contentTypes": [
+        "org.webmeister.spacepane.type.python-wheel"
+      ],
+      "importedContentTypes": [
+        {
+          "identifier": "org.webmeister.spacepane.type.python-wheel",
+          "conformsTo": "public.zip-archive",
+          "extensions": [
+            "whl"
+          ],
+          "descriptionKey": "format.package.python-wheel.name",
+          "referenceURL": "https://packaging.python.org/en/latest/specifications/binary-distribution-format/"
+        }
+      ],
+      "extensions": [
+        "whl"
+      ],
+      "group": "containers",
+      "presentation": "text",
+      "primaryView": "summary",
+      "thumbnail": "generic",
+      "nameKey": "format.package.python-wheel.name",
+      "descriptionKey": "format.package.python-wheel.description"
     },
     {
       "id": "audio.midi",

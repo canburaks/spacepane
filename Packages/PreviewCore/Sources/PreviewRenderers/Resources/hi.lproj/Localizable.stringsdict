@@ -66,6 +66,22 @@
 			<string>यह पूर्वावलोकन अधिकतम %2$@ आइटम वाले दस्तावेज़ पढ़ता है, और इस दस्तावेज़ में उससे अधिक हैं। इसे इस प्रकार की फ़ाइल के लिए बने ऐप में खोलें।</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>इसके अंदर %2$@ नेटिव प्रोग्राम या लाइब्रेरी है।</string>
+			<key>other</key>
+			<string>इसके अंदर %2$@ नेटिव प्रोग्राम या लाइब्रेरी हैं।</string>
+		</dict>
+	</dict>
 	<key>finding.autorun.agentHooks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -210,6 +226,54 @@
 			<string>%2$@ एनवायरनमेंट वैरिएबल MCP सर्वरों को दिए जाते हैं।</string>
 		</dict>
 	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ सेटिंग पासवर्ड या कुंजी माँगती है।</string>
+			<key>other</key>
+			<string>%2$@ सेटिंग पासवर्ड या कुंजियाँ माँगती हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ सेटिंग सर्वर को आपके होम, दस्तावेज़, डाउनलोड या डेस्कटॉप फ़ोल्डर तक पहुँच देती है।</string>
+			<key>other</key>
+			<string>%2$@ सेटिंग सर्वर को आपके होम, दस्तावेज़, डाउनलोड या डेस्कटॉप फ़ोल्डर तक पहुँच देती हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ टूल विवरण AI से दूसरी फ़ाइलें पढ़ने या आपसे कुछ छिपाने को कहता है।</string>
+			<key>other</key>
+			<string>%2$@ टूल विवरण AI से दूसरी फ़ाइलें पढ़ने या आपसे कुछ छिपाने को कहते हैं।</string>
+		</dict>
+	</dict>
 	<key>finding.certificate.expired</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -306,6 +370,70 @@
 			<string>%2$@ पासवर्ड मैनेजर लॉगिन यहाँ पढ़े जा सकने वाले रूप में सहेजे गए हैं। ज़रूरत न रहने पर इस एक्सपोर्ट को हटा दें।</string>
 		</dict>
 	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>इसके साथ %2$@ और एक्सटेंशन इंस्टॉल होता है।</string>
+			<key>other</key>
+			<string>इसके साथ %2$@ और एक्सटेंशन इंस्टॉल होते हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ संवेदनशील ब्राउज़र अनुमति माँगता है।</string>
+			<key>other</key>
+			<string>%2$@ संवेदनशील ब्राउज़र अनुमतियाँ माँगता है।</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ डिपेंडेंसी रजिस्ट्री की जगह Git रिपॉज़िटरी या वेब पते से आती है।</string>
+			<key>other</key>
+			<string>%2$@ डिपेंडेंसी रजिस्ट्री की जगह Git रिपॉज़िटरी या वेब पतों से आती हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ जगह Python के हर बार शुरू होने पर Python कोड चलाती है।</string>
+			<key>other</key>
+			<string>%2$@ जगहें Python के हर बार शुरू होने पर Python कोड चलाती हैं।</string>
+		</dict>
+	</dict>
 	<key>finding.launch.watchPaths</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -336,6 +464,54 @@
 			<string>सूची के %2$@ नाम में छिपे वर्ण हैं।</string>
 			<key>other</key>
 			<string>सूची के %2$@ नामों में छिपे वर्ण हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ इंपोर्ट इस फ़ाइल को लोड करते समय नेटवर्क या फ़ाइलों का उपयोग करने देता है।</string>
+			<key>other</key>
+			<string>%2$@ इंपोर्ट इस फ़ाइल को लोड करते समय नेटवर्क या फ़ाइलों का उपयोग करने देते हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ इंपोर्ट इस फ़ाइल को लोड करते समय कमांड या कोड चलाने देता है।</string>
+			<key>other</key>
+			<string>%2$@ इंपोर्ट इस फ़ाइल को लोड करते समय कमांड या कोड चलाने देते हैं।</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ इंपोर्ट सामान्य मॉडल डेटा नहीं है।</string>
+			<key>other</key>
+			<string>%2$@ इंपोर्ट सामान्य मॉडल डेटा नहीं हैं।</string>
 		</dict>
 	</dict>
 	<key>finding.profile.expiresSoon</key>

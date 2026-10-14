@@ -66,6 +66,22 @@
 			<string>Wannan dubawa tana karanta takardu masu abubuwa har %2$@, amma wannan takardar tana da fiye da haka. Buɗe fayil ɗin a cikin manhajar da aka ƙera don irin wannan fayil.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>A ciki akwai shiri ko ɗakin karatu na native guda %2$@.</string>
+			<key>other</key>
+			<string>A ciki akwai shirye-shirye ko ɗakunan karatu na native guda %2$@.</string>
+		</dict>
+	</dict>
 	<key>finding.autorun.agentHooks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -210,6 +226,54 @@
 			<string>An ba da environment variable %2$@ ga MCP server.</string>
 		</dict>
 	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Saiti %2$@ yana neman kalmar sirri ko makulli.</string>
+			<key>other</key>
+			<string>Saituna %2$@ suna neman kalmomin sirri ko makullai.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Saiti %2$@ yana ba server damar shiga babban fayil ɗin Home, Documents, Downloads ko Desktop naku.</string>
+			<key>other</key>
+			<string>Saituna %2$@ suna ba server damar shiga manyan fayilolin Home, Documents, Downloads ko Desktop naku.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bayanin kayan aiki %2$@ yana umartar AI ya karanta wasu fayiloli ko ya ɓoye wani abu daga gare ku.</string>
+			<key>other</key>
+			<string>Bayanan kayan aiki %2$@ suna umartar AI ya karanta wasu fayiloli ko ya ɓoye wani abu daga gare ku.</string>
+		</dict>
+	</dict>
 	<key>finding.certificate.expired</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -306,6 +370,70 @@
 			<string>An adana bayanan shiga %2$@ na manajan kalmomin sirri a nan a siffar da za a iya karantawa. Share wannan fayil ɗin export idan ba a buƙatarsa kuma.</string>
 		</dict>
 	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Yana shigar da wani extension guda %2$@ tare da shi.</string>
+			<key>other</key>
+			<string>Yana shigar da wasu extension guda %2$@ tare da shi.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Yana neman izini %2$@ na burauza mai muhimmanci.</string>
+			<key>other</key>
+			<string>Yana neman izini %2$@ na burauza masu muhimmanci.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Dependency %2$@ yana zuwa daga Git repository ko adireshin yanar gizo, ba daga registry ba.</string>
+			<key>other</key>
+			<string>Dependencies %2$@ suna zuwa daga Git repository ko adireshin yanar gizo, ba daga registry ba.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Wuri %2$@ yana gudanar da lambar Python duk lokacin da Python ya fara.</string>
+			<key>other</key>
+			<string>Wurare %2$@ suna gudanar da lambar Python duk lokacin da Python ya fara.</string>
+		</dict>
+	</dict>
 	<key>finding.launch.watchPaths</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -336,6 +464,54 @@
 			<string>Suna %2$@ da aka jera yana ɗauke da haruffan da aka ɓoye.</string>
 			<key>other</key>
 			<string>Sunaye %2$@ da aka jera suna ɗauke da haruffan da aka ɓoye.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Import %2$@ yana ba da damar amfani da hanyar sadarwa ko fayiloli idan an ɗora wannan fayil.</string>
+			<key>other</key>
+			<string>Import %2$@ suna ba da damar amfani da hanyar sadarwa ko fayiloli idan an ɗora wannan fayil.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Import %2$@ yana ba da damar gudanar da umarni ko lamba idan an ɗora wannan fayil.</string>
+			<key>other</key>
+			<string>Import %2$@ suna ba da damar gudanar da umarni ko lamba idan an ɗora wannan fayil.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Import %2$@ ba bayanan samfuri na yau da kullum ba ne.</string>
+			<key>other</key>
+			<string>Import %2$@ ba bayanan samfuri na yau da kullum ba ne.</string>
 		</dict>
 	</dict>
 	<key>finding.profile.expiresSoon</key>

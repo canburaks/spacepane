@@ -57,4 +57,8 @@ public enum StandardFormatAdapters {
         + DocumentFormatAdapters.registrations
         // [mesh]
         + MeshFormatAdapters.registrations
+        // [safety-lens-3] Decision 030: model files, add-ons and installable packages.
+        + ModelFormatAdapters.registrations
+        + AddOnFormatAdapters.registrations
+        + InstallableFormatAdapters.registrations
 }

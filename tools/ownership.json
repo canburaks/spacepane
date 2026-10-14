@@ -28,7 +28,8 @@
     "Apps/PrevApp/Resources/**",
     "Packages/PreviewCore/Sources/PreviewRenderers/HostedConfiguration.swift",
     "Packages/PreviewCore/Sources/PreviewRenderers/RendererResources.swift",
-    "Packages/PreviewCore/Sources/PreviewRenderers/NativeGeometryPreviewView.swift"
+    "Packages/PreviewCore/Sources/PreviewRenderers/NativeGeometryPreviewView.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Models/ModelFormatAdapters.swift"
   ],
   "ux-chrome": [
     "Packages/PreviewCore/Sources/PreviewRenderers/NativePreviewView.swift",

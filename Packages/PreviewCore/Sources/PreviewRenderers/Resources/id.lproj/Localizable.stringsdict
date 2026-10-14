@@ -58,6 +58,20 @@
 			<string>Pratinjau ini membaca dokumen dengan hingga %2$@ item, dan dokumen ini memiliki lebih banyak. Buka di aplikasi yang dibuat untuk jenis berkas ini.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>Di dalamnya ada %2$@ program atau pustaka native.</string>
+		</dict>
+	</dict>
 	<key>finding.autorun.agentHooks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -184,6 +198,48 @@
 			<string>%2$@ variabel lingkungan diteruskan ke server MCP.</string>
 		</dict>
 	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ pengaturan meminta kata sandi atau kunci.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ pengaturan memberi server akses ke folder Rumah, Dokumen, Unduhan, atau Desktop Anda.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ deskripsi alat menyuruh AI membaca berkas lain atau menyembunyikan sesuatu dari Anda.</string>
+		</dict>
+	</dict>
 	<key>finding.certificate.expired</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -268,6 +324,62 @@
 			<string>%2$@ login pengelola kata sandi disimpan di sini dalam bentuk yang dapat dibaca. Hapus ekspor ini jika sudah tidak diperlukan.</string>
 		</dict>
 	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>Menginstal %2$@ ekstensi lain bersamanya.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>Meminta %2$@ izin peramban yang sensitif.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ dependensi berasal dari repositori Git atau alamat web, bukan dari registri.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ tempat menjalankan kode Python setiap kali Python dimulai.</string>
+		</dict>
+	</dict>
 	<key>finding.launch.watchPaths</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -294,6 +406,48 @@
 			<string>lld</string>
 			<key>other</key>
 			<string>%2$@ nama dalam daftar mengandung karakter tersembunyi.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ impor memungkinkan penggunaan jaringan atau berkas saat berkas ini dimuat.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ impor memungkinkan perintah atau kode berjalan saat berkas ini dimuat.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ impor bukan data model biasa.</string>
 		</dict>
 	</dict>
 	<key>finding.profile.expiresSoon</key>

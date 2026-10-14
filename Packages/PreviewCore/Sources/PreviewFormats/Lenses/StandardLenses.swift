@@ -12,6 +12,8 @@ public enum StandardLenses {
         .csv: [CredentialExportLens()],
         .tsv: [CredentialExportLens()],
         .propertyList: [LaunchdJobLens()],
+        // Decision 030: a `.pth` path file is shown as text; the lens never runs on the pickle summaries.
+        .pickle: [PythonPathFileLens()],
     ]
 
     /// Registrations with their lenses attached; formats without a row are returned unchanged.

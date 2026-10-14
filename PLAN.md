@@ -238,12 +238,12 @@ Started 2026-10-05 at the user's request, following [the unique-feature research
 Started at the owner's request ("Continue development") as the next step after Safety Lens 2. [Decision 030](docs/decisions/030-safety-lens-3-models-add-ons-and-packages.md) records the contract and the rules. Branch `safety-lens-3`, from `safety-lens-2`; one workstream per feature, each in its own worktree.
 
 - [x] Contract: seven format IDs, 22 finding kinds with wording, string keys and workstream markers, optional extra findings on archive listings, ownership entries.
-- [ ] GGUF and safetensors summaries from the header only: architecture, parameters, quantisation, context, licence, chat template; incomplete-download and layout findings.
-- [ ] Pickle and PyTorch scan: an opcode walker that lists what loading would import, classified; broken-stream and mismatched-content findings; `.pth` path files shown as text with a startup-code finding.
-- [ ] MCP bundle card (`.mcpb`, `.dxt`); editor extension card (`.vsix`); browser extension card (`.xpi`, `.crx`).
-- [ ] Install-time findings in npm tarballs and Python source packages; Python wheel summary (`.whl`) with `.pth` startup code and native modules.
-- [ ] Translations of the new keys in all 14 languages (drafts).
-- [ ] Integrate: catalog entries and imported types, manifests, composition, appearance samples, host matrix; `--check`, `--test`, `--check-static`, `--check-compiler`.
+- [x] GGUF and safetensors summaries from the header only: architecture, parameters, quantisation, context, licence, chat template; incomplete-download and layout findings.
+- [x] Pickle and PyTorch scan: an opcode walker that lists what loading would import, classified; broken-stream and mismatched-content findings; `.pth` path files shown as text with a startup-code finding.
+- [x] MCP bundle card (`.mcpb`, `.dxt`); editor extension card (`.vsix`); browser extension card (`.xpi`, `.crx`).
+- [x] Install-time findings in npm tarballs and Python source packages; Python wheel summary (`.whl`) with `.pth` startup code and native modules.
+- [x] Translations of the new keys in all 14 languages (drafts), resources regenerated and validated.
+- [x] Integrate: catalog entries and imported types, manifests, composition, appearance samples, host fixtures, host matrix; `--check`, `--test` (4,445 tests in 498 suites, 2 known issues; 74 serial tests; 696 adversarial cases), `--check-static` and `--check-compiler` pass on the integrated branch. No signed build or Quick Look run yet.
 - [ ] Observe the new formats in the Quick Look panel with a development-signed build; Finder, thumbnails and VoiceOver separately.
 - [ ] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main`: seven formats join the catalog.
 

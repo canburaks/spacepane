@@ -82,6 +82,26 @@
 			<string>Этот предпросмотр читает документы не более чем из %2$@ элемента, а в этом документе их больше. Откройте файл в приложении, предназначенном для этого типа файлов.</string>
 		</dict>
 	</dict>
+	<key>finding.artifact.nativeCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Внутри %2$@ нативные программы или библиотеки.</string>
+			<key>many</key>
+			<string>Внутри %2$@ нативных программ или библиотек.</string>
+			<key>one</key>
+			<string>Внутри %2$@ нативная программа или библиотека.</string>
+			<key>other</key>
+			<string>Внутри %2$@ нативной программы или библиотеки.</string>
+		</dict>
+	</dict>
 	<key>finding.autorun.agentHooks</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -262,6 +282,66 @@
 			<string>%2$@ переменные окружения передаются MCP-серверам.</string>
 		</dict>
 	</dict>
+	<key>finding.bundle.asksForSecrets</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ настройки запрашивают пароли или ключи.</string>
+			<key>many</key>
+			<string>%2$@ настроек запрашивают пароли или ключи.</string>
+			<key>one</key>
+			<string>%2$@ настройка запрашивает пароль или ключ.</string>
+			<key>other</key>
+			<string>%2$@ настройки запрашивают пароли или ключи.</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.broadFolderAccess</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ настройки дают серверу доступ к вашей домашней папке либо к папкам «Документы», «Загрузки» или «Рабочий стол».</string>
+			<key>many</key>
+			<string>%2$@ настроек дают серверу доступ к вашей домашней папке либо к папкам «Документы», «Загрузки» или «Рабочий стол».</string>
+			<key>one</key>
+			<string>%2$@ настройка даёт серверу доступ к вашей домашней папке либо к папке «Документы», «Загрузки» или «Рабочий стол».</string>
+			<key>other</key>
+			<string>%2$@ настройки дают серверу доступ к вашей домашней папке либо к папкам «Документы», «Загрузки» или «Рабочий стол».</string>
+		</dict>
+	</dict>
+	<key>finding.bundle.toolTextTargetsAssistant</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ описания инструментов велят ИИ читать другие файлы или что-то от вас скрывать.</string>
+			<key>many</key>
+			<string>%2$@ описаний инструментов велят ИИ читать другие файлы или что-то от вас скрывать.</string>
+			<key>one</key>
+			<string>%2$@ описание инструмента велит ИИ читать другие файлы или что-то от вас скрывать.</string>
+			<key>other</key>
+			<string>%2$@ описания инструментов велят ИИ читать другие файлы или что-то от вас скрывать.</string>
+		</dict>
+	</dict>
 	<key>finding.certificate.expired</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -382,6 +462,86 @@
 			<string>%2$@ логина из менеджера паролей сохранены здесь в читаемом виде. Удалите этот экспорт, когда он вам больше не понадобится.</string>
 		</dict>
 	</dict>
+	<key>finding.extension.installsOthers</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Вместе с ним устанавливаются %2$@ других расширения.</string>
+			<key>many</key>
+			<string>Вместе с ним устанавливаются %2$@ других расширений.</string>
+			<key>one</key>
+			<string>Вместе с ним устанавливается %2$@ другое расширение.</string>
+			<key>other</key>
+			<string>Вместе с ним устанавливаются %2$@ других расширения.</string>
+		</dict>
+	</dict>
+	<key>finding.extension.sensitivePermissions</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>Запрашивает %2$@ чувствительных разрешения браузера.</string>
+			<key>many</key>
+			<string>Запрашивает %2$@ чувствительных разрешений браузера.</string>
+			<key>one</key>
+			<string>Запрашивает %2$@ чувствительное разрешение браузера.</string>
+			<key>other</key>
+			<string>Запрашивает %2$@ чувствительного разрешения браузера.</string>
+		</dict>
+	</dict>
+	<key>finding.install.remoteDependencies</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ зависимости берутся из репозиториев Git или веб-адресов, а не из реестра.</string>
+			<key>many</key>
+			<string>%2$@ зависимостей берутся из репозиториев Git или веб-адресов, а не из реестра.</string>
+			<key>one</key>
+			<string>%2$@ зависимость берётся из репозитория Git или веб-адреса, а не из реестра.</string>
+			<key>other</key>
+			<string>%2$@ зависимости берутся из репозиториев Git или веб-адресов, а не из реестра.</string>
+		</dict>
+	</dict>
+	<key>finding.install.startupCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>В %2$@ местах при каждом запуске Python выполняется код Python.</string>
+			<key>many</key>
+			<string>В %2$@ местах при каждом запуске Python выполняется код Python.</string>
+			<key>one</key>
+			<string>В %2$@ месте при каждом запуске Python выполняется код Python.</string>
+			<key>other</key>
+			<string>В %2$@ места при каждом запуске Python выполняется код Python.</string>
+		</dict>
+	</dict>
 	<key>finding.launch.watchPaths</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -420,6 +580,66 @@
 			<string>%2$@ имя в списке содержит скрытые символы.</string>
 			<key>other</key>
 			<string>%2$@ имени в списке содержат скрытые символы.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.networkOrFiles</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ импорта позволяют использовать сеть или файлы при загрузке этого файла.</string>
+			<key>many</key>
+			<string>%2$@ импортов позволяют использовать сеть или файлы при загрузке этого файла.</string>
+			<key>one</key>
+			<string>%2$@ импорт позволяет использовать сеть или файлы при загрузке этого файла.</string>
+			<key>other</key>
+			<string>%2$@ импорта позволяют использовать сеть или файлы при загрузке этого файла.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.runsCode</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ импорта позволяют выполнить команды или код при загрузке этого файла.</string>
+			<key>many</key>
+			<string>%2$@ импортов позволяют выполнить команды или код при загрузке этого файла.</string>
+			<key>one</key>
+			<string>%2$@ импорт позволяет выполнить команды или код при загрузке этого файла.</string>
+			<key>other</key>
+			<string>%2$@ импорта позволяют выполнить команды или код при загрузке этого файла.</string>
+		</dict>
+	</dict>
+	<key>finding.pickle.uncommonImports</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ импорта не относятся к обычным данным модели.</string>
+			<key>many</key>
+			<string>%2$@ импортов не относятся к обычным данным модели.</string>
+			<key>one</key>
+			<string>%2$@ импорт не относится к обычным данным модели.</string>
+			<key>other</key>
+			<string>%2$@ импорта не относятся к обычным данным модели.</string>
 		</dict>
 	</dict>
 	<key>finding.profile.expiresSoon</key>
