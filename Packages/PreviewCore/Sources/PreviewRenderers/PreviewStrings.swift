@@ -1048,6 +1048,38 @@ public enum PreviewStrings {
         // (end of sl3-pickle)
         // ----
         // [sl3-addons] Decision 030: MCP bundle and extension summary labels. Workstream sl3-addons adds its keys below this line.
+        case addOnDescription = "preview.addon.description"
+        case addOnManifestVersion = "preview.addon.manifestVersion"
+        case addOnAuthor = "preview.addon.author"
+        case addOnLicense = "preview.addon.license"
+        case addOnServerType = "preview.addon.serverType"
+        case addOnEntryPoint = "preview.addon.entryPoint"
+        case addOnCommand = "preview.addon.command"
+        case addOnArguments = "preview.addon.arguments"
+        case addOnEnvironment = "preview.addon.environment"
+        case addOnRuntimes = "preview.addon.runtimes"
+        case addOnTools = "preview.addon.tools"
+        case addOnPrompts = "preview.addon.prompts"
+        case addOnSettings = "preview.addon.settings"
+        case addOnSensitive = "preview.addon.sensitive"
+        case addOnRequired = "preview.addon.required"
+        case addOnPublisher = "preview.addon.publisher"
+        case addOnEngine = "preview.addon.engine"
+        case addOnEntry = "preview.addon.entry"
+        case addOnWebEntry = "preview.addon.webEntry"
+        case addOnActivationEvents = "preview.addon.activationEvents"
+        case addOnCategories = "preview.addon.categories"
+        case addOnCommands = "preview.addon.commands"
+        case addOnExtensionPack = "preview.addon.extensionPack"
+        case addOnExtensionDependencies = "preview.addon.extensionDependencies"
+        case addOnUntrustedWorkspaces = "preview.addon.untrustedWorkspaces"
+        case addOnBrowser = "preview.addon.browser"
+        case addOnAddonID = "preview.addon.addonID"
+        case addOnOptionalPermissions = "preview.addon.optionalPermissions"
+        case addOnHostPermissions = "preview.addon.hostPermissions"
+        case addOnContentScriptMatches = "preview.addon.contentScriptMatches"
+        case addOnBackground = "preview.addon.background"
+        case addOnUpdateURL = "preview.addon.updateURL"
         // (end of sl3-addons)
         // ----
         // [sl3-install] Decision 030: Python wheel summary labels. Workstream sl3-install adds its keys below this line.
