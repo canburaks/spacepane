@@ -127,26 +127,18 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         self.theme = theme
         self.locale = locale
         localizeControls()
-        refreshSummary()
+        summaryLabel.stringValue = Self.summaryLines(for: presentation, locale: locale).joined(separator: "\n")
+        viewport.setAccessibilityValue(summaryLabel.stringValue)
         updateAppearance()
         onCommandAvailabilityChanged?()
     }
 
-    /// Writes the summary lines of the shown model: the model's own summary, then (for the print formats) the Mesh Print
-    /// Check, whose width, depth and height follow the axis that is up now, so the up-axis button rewrites them.
-    private func refreshSummary() {
-        guard let presentation else { return }
-        summaryLabel.stringValue = Self.summaryLines(for: presentation, upAxis: camera.upAxis, locale: locale)
-            .joined(separator: "\n")
-        viewport.setAccessibilityValue(failure == nil ? summaryLabel.stringValue : failureLabel.stringValue)
-    }
-
     /// Every line the view shows for a model: `summaryLines(for:)` and, for the STL, OBJ, PLY and 3MF formats, the
     /// lines of the Mesh Print Check (`GeometryPrintCheck`). CAD models keep their summary as it was.
-    static func summaryLines(for presentation: GeometryPresentation, upAxis: GeometryUpAxis, locale: Locale,
+    static func summaryLines(for presentation: GeometryPresentation, locale: Locale,
                              languagePreferences: [String]? = nil) -> [String] {
         var lines = summaryLines(for: presentation.mesh, locale: locale, languagePreferences: languagePreferences)
-        if let check = GeometryPrintCheck(presentation: presentation, upAxis: upAxis) {
+        if let check = GeometryPrintCheck(presentation: presentation) {
             lines += check.lines(locale: locale, languagePreferences: languagePreferences)
         }
         return lines
@@ -275,7 +267,6 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         case .toggleUpAxis:
             camera.setUpAxis(camera.upAxis.toggled, viewport: renderingSize)
             updateUpAxisControl()
-            refreshSummary()
         }
         updateBackend()
         if let spoken = spokenResult(of: action) { announcer?.announce(spoken, from: viewport) }
@@ -492,52 +483,32 @@ private enum GeometryNumberText {
 }
 
 /// The Mesh Print Check of a model (decision 029) as numbers, before any wording, so tests read it without a localized
-/// resource. It belongs to the four triangle-mesh formats that people print from; a CAD model has none. Everything
-/// comes from the mesh the reader built: the bounds, and the measurements of the displayed tessellation. Nothing is
-/// a certified dimension, and the estimate is an upper bound for a part printed solid.
+/// resource. It belongs to the four triangle-mesh formats that people print from; a CAD model has none. The size of
+/// the model is not repeated here: the summary line above already shows it. Everything comes from the measurements
+/// of the displayed tessellation; nothing is certified, and the estimate is an upper bound for a part printed solid.
 struct GeometryPrintCheck {
     /// The formats that show the check.
     static let formats: Set<FormatID> = [.meshSTL, .meshOBJ, .meshPLY, .mesh3MF]
 
-    /// The model's extents in `units` (plain numbers when the file declares none). Slicers read X as the width and Y as
-    /// the depth of a part that stands on Z; a model that stands on Y has its depth along Z.
-    let width: Double, depth: Double, height: Double
-    /// The unit the extents are shown in; `nil` when the model's unit is undeclared.
-    let units: GeometrySummaryUnits?
     /// Zero when the surface has no gap or when nothing could be measured; the line is shown only above zero.
     let openEdgeCount: Int
     let nonManifoldEdgeCount: Int
-    /// Present only when the volume is known and the unit is declared or assumed millimetres.
+    /// Present when the volume is known and the unit allows an estimate (see `GeometryPrintEstimate`).
     let estimate: GeometryPrintEstimate?
 
-    init?(presentation: GeometryPresentation, upAxis: GeometryUpAxis) {
+    init?(presentation: GeometryPresentation) {
         guard Self.formats.contains(presentation.formatID) else { return nil }
-        let mesh = presentation.mesh
-        let units = GeometrySummaryUnits(mesh.unitProvenance)
-        let extents = (mesh.bounds.maximum - mesh.bounds.minimum) / (units?.millimetresPerUnit ?? 1)
-        width = extents.x
-        switch upAxis {
-        case .z: depth = extents.y; height = extents.z
-        case .y: depth = extents.z; height = extents.y
-        }
-        self.units = units
-        openEdgeCount = mesh.measurements?.openEdgeCount ?? 0
-        nonManifoldEdgeCount = mesh.measurements?.nonManifoldEdgeCount ?? 0
-        estimate = mesh.measurements.flatMap { GeometryPrintEstimate($0) }
+        let measurements = presentation.mesh.measurements
+        openEdgeCount = measurements?.openEdgeCount ?? 0
+        nonManifoldEdgeCount = measurements?.nonManifoldEdgeCount ?? 0
+        estimate = measurements.flatMap { GeometryPrintEstimate($0) }
     }
 
-    /// The size line, then the open-edge and non-manifold lines when they are above zero, then the estimate when there
-    /// is one. Each line is a complete localized template; counts go through the plural machinery.
+    /// The open-edge and non-manifold lines when they are above zero, then the estimate when there is one. Each line is
+    /// a complete localized template; counts go through the plural machinery.
     func lines(locale: Locale, languagePreferences: [String]? = nil) -> [String] {
         let preferences = languagePreferences
-        let sizes = [width, depth, height].map { GeometryNumberText.length($0, locale: locale) }
-        var lines: [String]
-        if let units {
-            lines = [PreviewStrings.format(.meshPrintSize, arguments: sizes + [units.lengthSymbol(locale: locale)],
-                                           locale: locale, languagePreferences: preferences)]
-        } else {
-            lines = [PreviewStrings.format(.meshPrintSizeUnitless, arguments: sizes, locale: locale, languagePreferences: preferences)]
-        }
+        var lines: [String] = []
         if openEdgeCount > 0 {
             lines.append(PreviewStrings.count(.meshPrintOpenEdges, openEdgeCount, locale: locale, languagePreferences: preferences))
         }
@@ -546,14 +517,15 @@ struct GeometryPrintCheck {
                                               locale: locale, languagePreferences: preferences))
         }
         if let estimate {
-            let mass = GeometryNumberText.measure(estimate.massGrams, locale: locale)
-            let filament = GeometryNumberText.measure(estimate.filamentLengthMetres, locale: locale)
-            let diameter = GeometryNumberText.measure(GeometryPrintEstimate.filamentDiameterMillimetres, locale: locale)
-            lines.append(PreviewStrings.format(.meshPrintEstimate, arguments: [
-                mass, GeometrySummaryUnits.symbol(of: UnitMass.grams, locale: locale),
-                filament, GeometrySummaryUnits.symbol(of: UnitLength.meters, locale: locale),
-                diameter, GeometrySummaryUnits.symbol(of: UnitLength.millimeters, locale: locale)],
-                locale: locale, languagePreferences: preferences))
+            let arguments: [CVarArg] = [
+                GeometryNumberText.measure(estimate.massGrams, locale: locale),
+                GeometrySummaryUnits.symbol(of: UnitMass.grams, locale: locale),
+                GeometryNumberText.measure(estimate.filamentLengthMetres, locale: locale),
+                GeometrySummaryUnits.symbol(of: UnitLength.meters, locale: locale),
+                GeometryNumberText.measure(GeometryPrintEstimate.filamentDiameterMillimetres, locale: locale),
+                GeometrySummaryUnits.symbol(of: UnitLength.millimeters, locale: locale)]
+            lines.append(PreviewStrings.format(.meshPrintEstimate, arguments: arguments,
+                                               locale: locale, languagePreferences: preferences))
         }
         return lines
     }
