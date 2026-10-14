@@ -134,4 +134,14 @@ extension PickleStream {
     static func imports(_ pairs: [(String, String)]) -> [UInt8] {
         join(proto2, pairs.flatMap { global($0.0, $0.1) + pop }, none, stop)
     }
+
+    /// The five pickles legacy `torch.save` writes, each with its own header, then raw storage bytes.
+    static func legacyFile(afterPickles tail: [UInt8]) -> [UInt8] {
+        let magic: [UInt8] = [0x80, 0x02, 0x8A, 0x0A, 0x6C, 0xFC, 0x9C, 0x46, 0xF9, 0x20, 0x6A, 0xA8, 0x50, 0x19, 0x2E]
+        let version: [UInt8] = [0x80, 0x02, 0x4D, 0xE9, 0x03, 0x2E]
+        let systemInfo = join(proto2, [0x7D], mark, binUnicode("protocol_version"), [0x4D, 0xE9, 0x03],
+                                binUnicode("little_endian"), [0x88], [0x75], stop)
+        let keys = join(proto2, [0x5D], mark, binUnicode("0"), [0x65], stop)
+        return join(magic, version, systemInfo, torchCheckpoint(), keys, tail)
+    }
 }
