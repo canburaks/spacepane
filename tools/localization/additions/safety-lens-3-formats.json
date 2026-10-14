@@ -120,7 +120,7 @@
   },
   "format.package.mcp-bundle.description": {
     "comment": "One-sentence description of a file type in the companion's File Types list: MCP bundles; the summary shows what the bundled server runs and asks for. Technical names stay as they are. Draft translations pending native-speaker review.",
-    "en": "The server's program, tools, settings and folder access from its manifest. Nothing is installed or run.",
+    "en": "The server’s program, tools, settings and folder access from its manifest. Nothing is installed or run.",
     "tr": "Sunucunun programı, araçları, ayarları ve klasör erişimi, manifestten okunur. Hiçbir şey kurulmaz veya çalıştırılmaz.",
     "de": "Programm, Werkzeuge, Einstellungen und Ordnerzugriff des Servers aus dem Manifest. Nichts wird installiert oder ausgeführt.",
     "fr": "Programme, outils, réglages et accès aux dossiers du serveur, lus dans le manifeste. Rien n’est installé ni exécuté.",
