@@ -367,6 +367,16 @@ public struct AdapterRegistration: Sendable {
     public let sourcePolicy: SourceReadPolicy
     public let defaultBudget: PreviewBudget?
     public let emptyInputPolicy: EmptyInputPolicy
+    /// Lenses that read this format's displayed text after concealment (decision 029). Empty by default.
+    public private(set) var lenses: [any PreviewTextLens] = []
+
+    /// The same registration with `lenses` appended, for the composition boundary.
+    public func adding(lenses added: [any PreviewTextLens]) -> AdapterRegistration {
+        var copy = self
+        copy.lenses += added
+        return copy
+    }
+
     public init(formatID: FormatID, defaultBudget: PreviewBudget,
                 geometryAdapter: @escaping @Sendable () -> any GeometryFormatAdapter) {
         self.formatID = formatID

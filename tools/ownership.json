@@ -289,5 +289,41 @@
     "Packages/PreviewCore/Tests/PreviewRenderersTests/**",
     "Packages/PreviewCore/Tests/PreviewRenderersTests/Interaction/ViewLookupSupport.swift",
     "tools/localization/additions/ux-seams*.json"
+  ],
+  "sl2-script": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/ScriptEffects*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/ScriptEffects*.swift"
+  ],
+  "sl2-config": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/AutoRunConfig*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/LaunchdJob*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/CredentialExport*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/LensJSON*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/AutoRunConfig*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/LaunchdJob*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/CredentialExport*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/LensJSON*.swift"
+  ],
+  "sl2-expiry": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Packages/CertificateAdapter.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Packages/ProvisioningProfileAdapter.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Packages/*Expiry*.swift"
+  ],
+  "sl2-mesh": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Geometry/**",
+    "Packages/PreviewCore/Sources/PreviewContracts/GeometryMeasurement*.swift",
+    "Packages/PreviewCore/Sources/PreviewCADFormats/GeometryMeasurement.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/NativeGeometryPreviewView.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Geometry/**",
+    "Packages/PreviewCore/Tests/PreviewRenderersTests/*PrintCheck*.swift",
+    "Packages/PreviewCore/Tests/PreviewRenderersTests/Geometry/**"
+  ],
+  "sl2-report": [
+    "Packages/PreviewCore/Sources/PreviewRenderers/Findings/NativeFindingsBanner.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/Findings/FindingsReport*.swift",
+    "Packages/PreviewCore/Tests/PreviewRenderersTests/Findings/FindingsReport*.swift"
+  ],
+  "sl2-strings": [
+    "tools/localization/additions/safety-lens-2.json"
   ]
 }
