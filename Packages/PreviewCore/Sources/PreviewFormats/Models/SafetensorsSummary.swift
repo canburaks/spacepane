@@ -18,7 +18,10 @@ extension SafetensorsAdapter {
         }
         let format = header.metadata.first { $0.key == "format" }?.value
         fields.text("format", format)
-        fields.text("shard", SafetensorsConventions.shard(fromFileName: fileName))
+        if let shard = SafetensorsConventions.shard(fromFileName: fileName) {
+            fields.number("shardIndex", shard.index)
+            fields.number("shardCount", shard.count)
+        }
         if let kind = SafetensorsConventions.adapterKind(header.tensors) {
             fields.text("adapterKind", kind)
             fields.number("loraRank", SafetensorsConventions.loraRank(header.tensors))

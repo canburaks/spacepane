@@ -123,14 +123,15 @@ enum SafetensorsConventions {
         }
     }
 
-    /// "2 of 5" for a Hugging Face shard name such as `model-00002-of-00005.safetensors`.
-    static func shard(fromFileName fileName: String?) -> String? {
+    /// The position and size of a shard set from a Hugging Face shard name such as
+    /// `model-00002-of-00005.safetensors` (index 2, count 5).
+    static func shard(fromFileName fileName: String?) -> (index: Int, count: Int)? {
         guard var name = fileName?.lowercased(), name.hasSuffix(".safetensors") else { return nil }
         name.removeLast(".safetensors".count)
         let parts = name.components(separatedBy: "-of-")
         guard parts.count == 2, let total = Int(parts[1]), parts[1].allSatisfy({ $0.isASCII && $0.isNumber }), total > 0,
               let digits = parts[0].split(separator: "-").last, digits.allSatisfy({ $0.isASCII && $0.isNumber }),
               let index = Int(digits), (1...total).contains(index), total <= 99_999 else { return nil }
-        return "\(index) of \(total)"
+        return (index, total)
     }
 }
