@@ -86,6 +86,14 @@ struct PythonWheelSafetyTests {
         }
     }
 
+    @Test func aWheelWithMoreMembersThanTheSharedZIPLimitFailsBoundedly() throws {
+        let files = (0..<10_001).map { ("example/m\($0).py", Data()) }
+        let data = Fixtures.zip(Fixtures.wheelMembers(extra: files), deflate: false)
+        #expect(throws: PreviewFailure.tooManyNodes) {
+            try PythonWheelAdapter().parse(FileBytes(data: data), context: Fixtures.context)
+        }
+    }
+
     @Test func unsafeMemberNamesAreRefusedAsMalformed() throws {
         let data = Fixtures.zip(Fixtures.wheelMembers(extra: [("../escape.txt", Data("x".utf8))]))
         #expect(throws: PreviewFailure.malformedDocument) {
