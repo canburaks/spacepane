@@ -316,12 +316,14 @@
     "Packages/PreviewCore/Sources/PreviewRenderers/NativeGeometryPreviewView.swift",
     "Packages/PreviewCore/Tests/PreviewFormatsTests/Geometry/**",
     "Packages/PreviewCore/Tests/PreviewRenderersTests/*PrintCheck*.swift",
-    "Packages/PreviewCore/Tests/PreviewRenderersTests/Geometry/**"
+    "Packages/PreviewCore/Tests/PreviewRenderersTests/Geometry/**",
+    "tools/localization/additions/sl2-mesh.json"
   ],
   "sl2-report": [
     "Packages/PreviewCore/Sources/PreviewRenderers/Findings/NativeFindingsBanner.swift",
     "Packages/PreviewCore/Sources/PreviewRenderers/Findings/FindingsReport*.swift",
-    "Packages/PreviewCore/Tests/PreviewRenderersTests/Findings/FindingsReport*.swift"
+    "Packages/PreviewCore/Tests/PreviewRenderersTests/Findings/FindingsReport*.swift",
+    "tools/localization/additions/sl2-report.json"
   ],
   "sl2-strings": [
     "tools/localization/additions/safety-lens-2.json"
