@@ -227,32 +227,38 @@ enum ScriptBytes {
         }
     }
 
-    /// A copy with every line cut to `lineLimit` bytes and marked, or `nil` when no line is longer.
+    /// A copy in which every line longer than `lineLimit` is cut and marked, and every line holding the
+    /// concealment token is marked at its end, or `nil` when no line needs either. Concealment can swallow a
+    /// closing quote (`"Password:••••`); the marker keeps what that line opened from running into the next.
     static func limitingLines(of bytes: UnsafeBufferPointer<UInt8>) -> [UInt8]? {
-        var needsCut = false
+        let token = Array(SecretFieldPolicy.concealmentToken.utf8)
+        func needsMarker(_ lineStart: Int, _ lineLength: Int) -> Bool {
+            lineLength > lineLimit || holds(token, in: bytes, from: lineStart, to: lineStart + min(lineLength, lineLimit))
+        }
+        var marked = false
         var lineStart = 0
         var index = 0
-        while index < bytes.count {
-            let length = breakLength(in: bytes, at: index)
+        while index <= bytes.count {
+            let length = index < bytes.count ? breakLength(in: bytes, at: index) : 1
             if length > 0 {
-                if index - lineStart > lineLimit { needsCut = true; break }
+                if needsMarker(lineStart, index - lineStart) { marked = true; break }
                 index += length
                 lineStart = index
             } else {
                 index += 1
             }
         }
-        guard needsCut || bytes.count - lineStart > lineLimit else { return nil }
+        guard marked else { return nil }
         var result: [UInt8] = []
-        result.reserveCapacity(bytes.count)
+        result.reserveCapacity(bytes.count + 64)
         lineStart = 0
         index = 0
         while index <= bytes.count {
             let length = index < bytes.count ? breakLength(in: bytes, at: index) : 1
-            if length > 0 || index == bytes.count {
+            if length > 0 {
                 let lineLength = index - lineStart
                 result.append(contentsOf: bytes[lineStart..<(lineStart + min(lineLength, lineLimit))])
-                if lineLength > lineLimit { result.append(cutMarker) }
+                if needsMarker(lineStart, lineLength) { result.append(cutMarker) }
                 if index < bytes.count { result.append(contentsOf: bytes[index..<(index + length)]) }
                 index += length
                 lineStart = index
@@ -261,5 +267,16 @@ enum ScriptBytes {
             }
         }
         return result
+    }
+
+    /// Whether `token` occurs in `bytes[start..<end]`. Linear in the range for the short token used here.
+    private static func holds(_ token: [UInt8], in bytes: UnsafeBufferPointer<UInt8>, from start: Int, to end: Int) -> Bool {
+        guard let first = token.first, end - start >= token.count else { return false }
+        var index = start
+        while index + token.count <= end {
+            if bytes[index] == first, (1..<token.count).allSatisfy({ bytes[index + $0] == token[$0] }) { return true }
+            index += 1
+        }
+        return false
     }
 }
