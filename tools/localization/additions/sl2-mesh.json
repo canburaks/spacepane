@@ -1,0 +1,156 @@
+{
+  "mesh.printCheck.openEdges": {
+    "case": "meshPrintOpenEdges",
+    "comment": "Plural key (one count sentence; the first formatter argument chooses the plural form and is never printed, the second is the count already formatted for the locale). Print-check line of a 3D model preview: the number of open edges, meaning edges that only one triangle of the surface uses, so the surface has a gap there and is not watertight. Shown only when the count is above zero. Say it as a fact about the surface; never claim the model is broken or cannot be printed. Count of the displayed tessellation. Draft translations pending native-speaker review.",
+    "en": {
+      "one": "%2$@ open edge (a gap in the surface)",
+      "other": "%2$@ open edges (gaps in the surface)"
+    },
+    "tr": {
+      "one": "%2$@ açık kenar (yüzeyde bir boşluk)",
+      "other": "%2$@ açık kenar (yüzeyde boşluklar)"
+    },
+    "de": {
+      "one": "%2$@ offene Kante (eine Lücke in der Oberfläche)",
+      "other": "%2$@ offene Kanten (Lücken in der Oberfläche)"
+    },
+    "fr": {
+      "one": "%2$@ arête ouverte (un trou dans la surface)",
+      "other": "%2$@ arêtes ouvertes (des trous dans la surface)"
+    },
+    "zh-Hans": {
+      "other": "%2$@ 条开放边（表面存在缺口）"
+    },
+    "ja": {
+      "other": "開放エッジが %2$@ 本あります（表面に隙間があります）"
+    },
+    "hi": {
+      "one": "%2$@ खुला किनारा (सतह में एक अंतराल)",
+      "other": "%2$@ खुले किनारे (सतह में अंतराल)"
+    },
+    "ku-Latn": {
+      "one": "%2$@ qeraxa vekirî (valahiyek di rûyê de)",
+      "other": "%2$@ qeraxên vekirî (valahî di rûyê de)"
+    },
+    "ru": {
+      "one": "%2$@ открытое ребро (разрыв в поверхности)",
+      "few": "%2$@ открытых ребра (разрывы в поверхности)",
+      "many": "%2$@ открытых рёбер (разрывы в поверхности)",
+      "other": "%2$@ открытого ребра (разрывы в поверхности)"
+    },
+    "id": {
+      "other": "%2$@ tepi terbuka (celah pada permukaan)"
+    },
+    "bn": {
+      "one": "%2$@টি খোলা প্রান্ত (পৃষ্ঠে একটি ফাঁক)",
+      "other": "%2$@টি খোলা প্রান্ত (পৃষ্ঠে ফাঁক)"
+    },
+    "ha": {
+      "one": "%2$@ gefen buɗe (gibi a saman)",
+      "other": "%2$@ gefuna buɗaɗɗu (giɓi a saman)"
+    },
+    "pt": {
+      "one": "%2$@ aresta aberta (uma lacuna na superfície)",
+      "other": "%2$@ arestas abertas (lacunas na superfície)"
+    },
+    "es": {
+      "one": "%2$@ arista abierta (un hueco en la superficie)",
+      "other": "%2$@ aristas abiertas (huecos en la superficie)"
+    }
+  },
+  "mesh.printCheck.nonManifoldEdges": {
+    "case": "meshPrintNonManifoldEdges",
+    "comment": "Plural key (one count sentence; the first formatter argument chooses the plural form and is never printed, the second is the count already formatted for the locale). Print-check line of a 3D model preview: the number of edges that more than two faces of the surface share. A solid's surface cannot have such an edge, and it makes a slicer's idea of inside and outside ambiguous. Shown only when the count is above zero. Say it as a fact about the surface; never claim the model is broken or cannot be printed. Do not write the number two as a digit. Count of the displayed tessellation. Draft translations pending native-speaker review.",
+    "en": {
+      "one": "%2$@ edge shared by more than two faces",
+      "other": "%2$@ edges shared by more than two faces"
+    },
+    "tr": {
+      "one": "İkiden fazla yüzün paylaştığı kenar sayısı: %2$@",
+      "other": "İkiden fazla yüzün paylaştığı kenar sayısı: %2$@"
+    },
+    "de": {
+      "one": "%2$@ Kante, die von mehr als zwei Flächen geteilt wird",
+      "other": "%2$@ Kanten, die von mehr als zwei Flächen geteilt werden"
+    },
+    "fr": {
+      "one": "%2$@ arête partagée par plus de deux faces",
+      "other": "%2$@ arêtes partagées par plus de deux faces"
+    },
+    "zh-Hans": {
+      "other": "%2$@ 条边被两个以上的面共用"
+    },
+    "ja": {
+      "other": "二つを超える面が共有する辺が %2$@ 本あります"
+    },
+    "hi": {
+      "one": "दो से अधिक फलकों द्वारा साझा किया गया %2$@ किनारा",
+      "other": "दो से अधिक फलकों द्वारा साझा किए गए %2$@ किनारे"
+    },
+    "ku-Latn": {
+      "one": "%2$@ qerax bi zêdetirî ji du rûyan re hevpar e",
+      "other": "%2$@ qerax bi zêdetirî ji du rûyan re hevpar in"
+    },
+    "ru": {
+      "one": "%2$@ ребро, общее для более чем двух граней",
+      "few": "%2$@ ребра, общих для более чем двух граней",
+      "many": "%2$@ рёбер, общих для более чем двух граней",
+      "other": "%2$@ ребра, общих для более чем двух граней"
+    },
+    "id": {
+      "other": "%2$@ tepi yang dipakai bersama oleh lebih dari dua sisi"
+    },
+    "bn": {
+      "one": "দুইয়ের বেশি তলের সাথে ভাগ করা %2$@টি প্রান্ত",
+      "other": "দুইয়ের বেশি তলের সাথে ভাগ করা %2$@টি প্রান্ত"
+    },
+    "ha": {
+      "one": "%2$@ gefen da fuskoki fiye da biyu ke rabawa",
+      "other": "%2$@ gefuna da fuskoki fiye da biyu ke rabawa"
+    },
+    "pt": {
+      "one": "%2$@ aresta compartilhada por mais de duas faces",
+      "other": "%2$@ arestas compartilhadas por mais de duas faces"
+    },
+    "es": {
+      "one": "%2$@ arista compartida por más de dos caras",
+      "other": "%2$@ aristas compartidas por más de dos caras"
+    }
+  },
+  "mesh.printCheck.estimate": {
+    "case": "meshPrintEstimate",
+    "comment": "Formatted key. Estimate line of a 3D model preview, shown only when the model's volume is known and its length unit is declared or assumed to be millimetres. It says what the model would use if it were printed completely solid in PLA, a common 3D-printing plastic, and it must be honest that this is an upper bound because slicing software usually prints with less infill than solid. Argument 1 is the mass already formatted for the locale and argument 2 its localized unit symbol (grams, for example g); argument 3 is the length of filament already formatted and argument 4 its localized unit symbol (metres, for example m); argument 5 is the filament diameter already formatted (1.75) and argument 6 its localized unit symbol (millimetres, for example mm). Keep the six positional placeholders; the order may change where the language needs it, and each unit goes after its number the way the language writes units. Do not add singular or plural forms: word it so it reads naturally for any number. Approximate value computed from the displayed tessellation, not a promise about a print. Draft translations pending native-speaker review.",
+    "en": "If printed solid in PLA: about %1$@ %2$@ and %3$@ %4$@ of %5$@ %6$@ filament. Slicers usually print with less infill, so this is an upper bound.",
+    "tr": "PLA ile dolu basılırsa: yaklaşık %1$@ %2$@ ve %3$@ %4$@ uzunluğunda %5$@ %6$@ filament. Dilimleyiciler genellikle daha az dolgu ile bastığı için bu bir üst sınırdır.",
+    "de": "Massiv aus PLA gedruckt: etwa %1$@ %2$@ und %3$@ %4$@ Filament mit %5$@ %6$@ Durchmesser. Slicer drucken meist mit weniger Füllung, daher ist dies eine Obergrenze.",
+    "fr": "Imprimé plein en PLA : environ %1$@ %2$@ et %3$@ %4$@ de filament de %5$@ %6$@. Les logiciels de tranchage impriment souvent avec moins de remplissage ; c’est donc une limite haute.",
+    "zh-Hans": "若用 PLA 实心打印：约 %1$@ %2$@，需要 %3$@ %4$@ 的 %5$@ %6$@ 耗材。切片软件通常使用更少的填充，因此这是上限。",
+    "ja": "PLA で中実のまま印刷した場合：約 %1$@ %2$@、%5$@ %6$@ のフィラメントを %3$@ %4$@ 使用します。スライサーは通常、より少ない充填で印刷するため、これは上限値です。",
+    "hi": "PLA में ठोस प्रिंट करने पर: लगभग %1$@ %2$@ और %5$@ %6$@ फ़िलामेंट का %3$@ %4$@। स्लाइसर आमतौर पर कम इनफ़िल के साथ प्रिंट करते हैं, इसलिए यह ऊपरी सीमा है।",
+    "ku-Latn": "Heke bi PLA ve ji hundir ve tije were çapkirin: nêzîkî %1$@ %2$@ û %3$@ %4$@ fîlamenta %5$@ %6$@. Slicer bi gelemperî bi dagirtina kêmtir çap dikin, ji ber vê yekê ev sînorê jorîn e.",
+    "ru": "При сплошной печати из PLA: примерно %1$@ %2$@ и %3$@ %4$@ нити диаметром %5$@ %6$@. Слайсеры обычно печатают с меньшим заполнением, поэтому это верхняя оценка.",
+    "id": "Jika dicetak padat dengan PLA: sekitar %1$@ %2$@ dan %3$@ %4$@ filamen berdiameter %5$@ %6$@. Slicer biasanya mencetak dengan isian lebih sedikit, jadi ini adalah batas atas.",
+    "bn": "PLA দিয়ে নিরেট ছাপলে: প্রায় %1$@ %2$@ এবং %5$@ %6$@ ফিলামেন্টের %3$@ %4$@। স্লাইসার সাধারণত কম ইনফিল দিয়ে ছাপে, তাই এটি সর্বোচ্চ সীমা।",
+    "ha": "Idan aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.",
+    "pt": "Se impresso maciço em PLA: cerca de %1$@ %2$@ e %3$@ %4$@ de filamento de %5$@ %6$@. Os fatiadores costumam imprimir com menos preenchimento, então este é um limite superior.",
+    "es": "Si se imprime macizo en PLA: unos %1$@ %2$@ y %3$@ %4$@ de filamento de %5$@ %6$@. Los laminadores suelen imprimir con menos relleno, así que es un límite superior."
+  },
+  "mesh.printCheck.estimateIfMillimetres": {
+    "case": "meshPrintEstimateIfMillimetres",
+    "comment": "Formatted key. Estimate line of a 3D model preview (STL, OBJ and PLY files) whose file declares no length unit. The numbers in such a file have no stated unit, so the estimate is only valid if they happen to be millimetres, the usual convention of 3D printing; the sentence must open with that condition and must never present the unit as a fact or call the file broken. Like the other estimate key, it says what the model would use if it were printed completely solid in PLA, a common 3D-printing plastic, and it must be honest that this is an upper bound because slicing software usually prints with less infill than solid. The arguments are the same as in the estimate key for a declared unit: argument 1 is the mass already formatted for the locale and argument 2 its localized unit symbol (grams, for example g); argument 3 is the length of filament already formatted and argument 4 its localized unit symbol (metres, for example m); argument 5 is the filament diameter already formatted (1.75) and argument 6 its localized unit symbol (millimetres, for example mm). Keep the six positional placeholders; the order may change where the language needs it, and each unit goes after its number the way the language writes units. Do not add singular or plural forms. Approximate value computed from the displayed tessellation, not a promise about a print. Draft translations pending native-speaker review.",
+    "en": "If the units are millimetres and it is printed solid in PLA: about %1$@ %2$@ and %3$@ %4$@ of %5$@ %6$@ filament. Slicers usually print with less infill, so this is an upper bound.",
+    "tr": "Birimler milimetre ise ve PLA ile dolu basılırsa: yaklaşık %1$@ %2$@ ve %3$@ %4$@ uzunluğunda %5$@ %6$@ filament. Dilimleyiciler genellikle daha az dolgu ile bastığı için bu bir üst sınırdır.",
+    "de": "Wenn die Einheit Millimeter ist und massiv aus PLA gedruckt wird: etwa %1$@ %2$@ und %3$@ %4$@ Filament mit %5$@ %6$@ Durchmesser. Slicer drucken meist mit weniger Füllung, daher ist dies eine Obergrenze.",
+    "fr": "Si les unités sont des millimètres et que la pièce est imprimée pleine en PLA : environ %1$@ %2$@ et %3$@ %4$@ de filament de %5$@ %6$@. Les logiciels de tranchage impriment souvent avec moins de remplissage ; c’est donc une limite haute.",
+    "zh-Hans": "若单位为毫米且用 PLA 实心打印：约 %1$@ %2$@，需要 %3$@ %4$@ 的 %5$@ %6$@ 耗材。切片软件通常使用更少的填充，因此这是上限。",
+    "ja": "単位がミリメートルで、PLA で中実のまま印刷した場合：約 %1$@ %2$@、%5$@ %6$@ のフィラメントを %3$@ %4$@ 使用します。スライサーは通常、より少ない充填で印刷するため、これは上限値です。",
+    "hi": "यदि इकाई मिलीमीटर है और PLA में ठोस प्रिंट किया जाए: लगभग %1$@ %2$@ और %5$@ %6$@ फ़िलामेंट का %3$@ %4$@। स्लाइसर आमतौर पर कम इनफ़िल के साथ प्रिंट करते हैं, इसलिए यह ऊपरी सीमा है।",
+    "ku-Latn": "Heke yekeyên pîvanê milîmetre bin û bi PLA ve ji hundir ve tije were çapkirin: nêzîkî %1$@ %2$@ û %3$@ %4$@ fîlamenta %5$@ %6$@. Slicer bi gelemperî bi dagirtina kêmtir çap dikin, ji ber vê yekê ev sînorê jorîn e.",
+    "ru": "Если единицы — миллиметры и печать сплошная из PLA: примерно %1$@ %2$@ и %3$@ %4$@ нити диаметром %5$@ %6$@. Слайсеры обычно печатают с меньшим заполнением, поэтому это верхняя оценка.",
+    "id": "Jika satuannya milimeter dan dicetak padat dengan PLA: sekitar %1$@ %2$@ dan %3$@ %4$@ filamen berdiameter %5$@ %6$@. Slicer biasanya mencetak dengan isian lebih sedikit, jadi ini adalah batas atas.",
+    "bn": "একক মিলিমিটার হলে এবং PLA দিয়ে নিরেট ছাপলে: প্রায় %1$@ %2$@ এবং %5$@ %6$@ ফিলামেন্টের %3$@ %4$@। স্লাইসার সাধারণত কম ইনফিল দিয়ে ছাপে, তাই এটি সর্বোচ্চ সীমা।",
+    "ha": "Idan an auna da milimita kuma aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.",
+    "pt": "Se as unidades forem milímetros e a peça for impressa maciça em PLA: cerca de %1$@ %2$@ e %3$@ %4$@ de filamento de %5$@ %6$@. Os fatiadores costumam imprimir com menos preenchimento, então este é um limite superior.",
+    "es": "Si las unidades son milímetros y se imprime macizo en PLA: unos %1$@ %2$@ y %3$@ %4$@ de filamento de %5$@ %6$@. Los laminadores suelen imprimir con menos relleno, así que es un límite superior."
+  }
+}
