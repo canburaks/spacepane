@@ -16,19 +16,9 @@ struct PickleScanTests {
         return (result, report)
     }
 
-    /// The five pickles legacy `torch.save` writes, each with its own header, then raw storage bytes.
-    private func legacyFile(afterPickles tail: [UInt8]) -> [UInt8] {
-        let magic: [UInt8] = [0x80, 0x02, 0x8A, 0x0A, 0x6C, 0xFC, 0x9C, 0x46, 0xF9, 0x20, 0x6A, 0xA8, 0x50, 0x19, 0x2E]
-        let version: [UInt8] = [0x80, 0x02, 0x4D, 0xE9, 0x03, 0x2E]
-        let systemInfo = S.join(S.proto2, [0x7D], S.mark, S.binUnicode("protocol_version"), [0x4D, 0xE9, 0x03],
-                                S.binUnicode("little_endian"), [0x88], [0x75], S.stop)
-        let keys = S.join(S.proto2, [0x5D], S.mark, S.binUnicode("0"), [0x65], S.stop)
-        return S.join(magic, version, systemInfo, S.torchCheckpoint(), keys, tail)
-    }
-
     @Test func legacyFilesHoldSeveralPicklesFollowedByRawData() throws {
         let storage = S.join([0x04, 0, 0, 0, 0, 0, 0, 0], [UInt8](repeating: 0x11, count: 16))
-        let bytes = legacyFile(afterPickles: storage)
+        let bytes = S.legacyFile(afterPickles: storage)
         #expect(PickleStreamScanner.isLegacyPyTorch(Data(bytes)))
         let (result, report) = try scan(bytes, isWindow: true)
         #expect(result == .scanned && report.pickles == 5 && report.persistentIDs == 1)
@@ -38,10 +28,10 @@ struct PickleScanTests {
 
     @Test func rawDataThatLooksLikeAHeaderStopsTheScanQuietly() throws {
         let tail: [UInt8] = [0x80, 0x02, 0x7F, 0x7F, 0x7F, 0x80, 0x03]
-        let (_, report) = try scan(legacyFile(afterPickles: tail))
+        let (_, report) = try scan(S.legacyFile(afterPickles: tail))
         #expect(report.pickles == 5 && !report.isBroken && !report.isPartial)
         // The same bytes that name an import and then break are not quiet.
-        let (_, loud) = try scan(legacyFile(afterPickles: S.join(S.proto2, S.global("os", "system"), [0x7F])))
+        let (_, loud) = try scan(S.legacyFile(afterPickles: S.join(S.proto2, S.global("os", "system"), [0x7F])))
         #expect(loud.pickles == 6 && loud.isBroken)
         #expect(loud.tally.distinctCount(.code) == 1)
     }
