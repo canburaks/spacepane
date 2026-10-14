@@ -245,7 +245,7 @@ Started at the owner's request ("Continue development") as the next step after S
 - [x] Translations of the new keys in all 14 languages (drafts), resources regenerated and validated.
 - [x] Integrate: catalog entries and imported types, manifests, composition, appearance samples, host fixtures, host matrix; `--check`, `--test` (4,445 tests in 498 suites, 2 known issues; 74 serial tests; 696 adversarial cases), `--check-static` and `--check-compiler` pass on the integrated branch. No signed build or Quick Look run yet.
 - [ ] Observe the new formats in the Quick Look panel with a development-signed build; Finder, thumbnails and VoiceOver separately.
-- [ ] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main`: seven formats join the catalog.
+- [x] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main`: seven formats join the catalog. Done 2026-10-14 (`spacepane-web` 6b6e8c8); the site lists them badged "Coming in an update" and leaves them out of its counts (b12e605, deployed).
 
 ### Safety Lens 2: what a file will do — 2026-10-14
 
@@ -266,7 +266,7 @@ Started at the owner's request after [the 2026-10-13 research](docs/market/2026-
 - [ ] Decide what to do where Apple's previewers keep a type on macOS 27.2 (CSV; STL, OBJ, PLY): accept companion-only for those findings, or present them another way. Check macOS 15 and 26 first.
 - [ ] VoiceOver and keyboard review of the report action; native-speaker review of the new strings.
 - [ ] Before marketing, recheck uniqueness with a paced App Store scan and word claims as "no other Quick Look app we found".
-- [ ] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main`: the JSON-with-comments filename aliases changed.
+- [x] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main`: the JSON-with-comments filename aliases changed. Done 2026-10-14 in the same sync (`spacepane-web` 6b6e8c8).
 
 ### World-class UX/UI program — 2026-10-06
 
