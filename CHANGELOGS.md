@@ -2,6 +2,18 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-14 — Safety Lens 2 observed in the Quick Look panel; routing fixes
+
+Owner request ("continue"). [Validation record](docs/validation/safety-lens-2-panel-2026-10-14.md). A development-signed Debug build of `safety-lens-2` was registered from `.build/xcode` and observed through `qlmanage -p`; Finder itself was not observed.
+
+- Validation: the commented `.vscode/tasks.json` showed "1 finding to review." and a launch agent "5 findings to review.", both with Copy Findings Report. A routing survey of the 31 App Review samples and five script fixtures found that types claimed only through a parent type went to Apple's previewer, and exactly claimed types reached SpacePane, except CSV and the STL, OBJ and PLY meshes, which Apple's own previewers keep on macOS 27.2.
+- Implementation, fixes found by observing:
+  - The source-code format claims 31 of Apple's exact source and script types (shells, AppleScript, Swift, Python, the C family, Objective-C, JavaScript, Java, Ruby, Perl, PHP and others); `.swift`, `.py`, `.sh`, `.zsh`, `.command` and AppleScript then reached SpacePane. HTML, CSS, `.ts` and types exported by other apps stay unclaimed.
+  - A warning other than the secret-inventory kinds now leads the collapsed findings banner; before, a script with three warnings read "1 likely secret hidden."
+  - The script lens closes a quote that concealment cut at the end of its line, so commands after a concealed password prompt are read.
+- Not established: Finder, thumbnails, VoiceOver, other macOS versions. CSV exports and STL, OBJ and PLY print checks reach users only in the companion on macOS 27.2.
+- Website: catalog content types and filename aliases changed on this branch; run `npm run data:sync` in `spacepane-web` when it reaches `main`.
+
 ## 2026-10-14 — Safety Lens 2: what a file will do
 
 Owner request ("Go", after the quick-win list). [Decision 029](docs/decisions/029-safety-lens-2-what-a-file-will-do.md). Branch `safety-lens-2`, six parallel workstreams in their own worktrees and the lead. Nothing was pushed.

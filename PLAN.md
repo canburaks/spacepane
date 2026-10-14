@@ -247,7 +247,9 @@ Started at the owner's request after [the 2026-10-13 research](docs/market/2026-
 - [x] Copy Findings Report in the findings banner.
 - [x] Translations of the new keys in all 14 languages (drafts), resources regenerated and validated.
 - [x] Integrate: `--check`, `--test` (4,032 tests in 462 suites, 2 known issues; 74 serial tests; 632 adversarial cases), `--check-static` and `--check-compiler` host typechecks pass on the integrated branch. No signed Xcode build or Finder run yet.
-- [ ] Observe the new findings, the report action and the print lines in the signed companion and in Finder's Quick Look panel and preview pane.
+- [ ] Observe the new findings, the report action and the print lines in the signed companion and in Finder's Quick Look panel and preview pane. Status 2026-10-14: seen in the Quick Look panel through `qlmanage` with a development-signed build ([record](docs/validation/safety-lens-2-panel-2026-10-14.md)); Finder, thumbnails and the companion remain.
+- [x] Route source and script types to SpacePane by claiming Apple's exact types (found by the panel survey).
+- [ ] Decide what to do where Apple's previewers keep a type on macOS 27.2 (CSV; STL, OBJ, PLY): accept companion-only for those findings, or present them another way. Check macOS 15 and 26 first.
 - [ ] VoiceOver and keyboard review of the report action; native-speaker review of the new strings.
 - [ ] Before marketing, recheck uniqueness with a paced App Store scan and word claims as "no other Quick Look app we found".
 - [ ] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main`: the JSON-with-comments filename aliases changed.
