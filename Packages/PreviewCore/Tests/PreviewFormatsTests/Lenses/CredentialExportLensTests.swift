@@ -304,6 +304,7 @@ struct CredentialExportJSONTests {
           { "secret" : \(token), "type" : "OTHER" },
           { "type" : "TOTP" },
           { "secret" : \(token) },
+          { "secret" : \(token), "type" : "\u{17F}team" },
           5
         ]
         """
