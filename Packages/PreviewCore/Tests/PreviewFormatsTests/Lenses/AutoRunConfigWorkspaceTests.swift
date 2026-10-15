@@ -3,11 +3,10 @@ import Testing
 import PreviewContracts
 import PreviewFormats
 
-// VS Code workspace files (`*.code-workspace`): their tasks sit one level down under `tasks.tasks[]`,
-// their editor servers under `settings.mcp.servers`, and the name only has to end in `.code-workspace`.
+// VS Code workspace files (`*.code-workspace`): their tasks sit one level down under `tasks.tasks[]`, and the
+// name only has to end in `.code-workspace`. Their `settings` are not read: no verified rule covers them.
 
-/// Folder-open tasks at 22 and 25; editor servers: a local command at 8 with two environment keys on the
-/// same line, a remote address at 9; the disabled server at 10 is not counted.
+/// Folder-open tasks at 22 and 25. The MCP servers under `settings.mcp` (lines 6 to 12) are not read.
 let autoRunWorkspaceFile = """
 {
   // A workspace file: comments and trailing commas are accepted.
@@ -42,14 +41,11 @@ let autoRunWorkspaceFile = """
 @Suite("Auto-run configuration lens: VS Code workspace files")
 struct AutoRunWorkspaceTests {
     @Test(arguments: [FormatID.json, .jsonWithComments])
-    func folderOpenTasksAndEditorServersAreCounted(format: FormatID) throws {
+    func folderOpenTasksAreCountedAndTheSettingsServersAreNot(format: FormatID) throws {
         let result = try autoRunFindings(autoRunWorkspaceFile, fileName: "Demo.code-workspace", parent: nil, format: format)
-        #expect(Set(result.map(\.kind)) == [.autorunFolderOpenTask, .autorunLocalServers, .autorunRemoteServers, .autorunServerEnvironment])
+        #expect(result.map(\.kind) == [.autorunFolderOpenTask])
         #expect(autoRunSummary(.autorunFolderOpenTask, in: result) == "2 [22, 25]")
-        #expect(autoRunSummary(.autorunLocalServers, in: result) == "1 [8]")
-        #expect(autoRunSummary(.autorunRemoteServers, in: result) == "1 [9]")
-        #expect(autoRunSummary(.autorunServerEnvironment, in: result) == "2 [8]")
-        #expect(result.first { $0.kind == .autorunFolderOpenTask }?.detail == PreviewFindingDetail.none)
+        #expect(result.first?.detail == PreviewFindingDetail.none)
     }
 
     @Test(arguments: [
@@ -96,6 +92,7 @@ struct AutoRunWorkspaceTests {
     }
 
     @Test(arguments: [
+        #"{ "settings": { "mcp": { "servers": { "a": { "command": "npx" } } } } }"#,
         #"{ "mcp": { "servers": { "a": { "command": "npx" } } } }"#,
         #"{ "settings": { "mcpServers": { "a": { "command": "npx" } } } }"#,
         #"{ "settings": { "mcp": { "mcpServers": { "a": { "command": "npx" } } } } }"#,
@@ -103,7 +100,7 @@ struct AutoRunWorkspaceTests {
         #"{ "settings": { "mcp": "servers" } }"#,
         #"{ "settings": { "mcp": { "servers": { "a": { "command": "npx", "disabled": true } } } } }"#
     ])
-    func serversOutsideSettingsMcpStaySilent(text: String) throws {
+    func serversInAWorkspaceFileStaySilent(text: String) throws {
         #expect(try autoRunFindings(text, fileName: "Demo.code-workspace", parent: nil, format: .jsonWithComments).isEmpty, "\(text)")
     }
 
