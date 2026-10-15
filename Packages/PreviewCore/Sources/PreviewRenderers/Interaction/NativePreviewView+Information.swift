@@ -11,8 +11,8 @@ extension NativePreviewView {
         return .init(hasContent: hasDisplayableContent || geometryPresentation != nil,
             selectionCopy: hasText || hasOutline || hasTable || custom is any PreviewSafeCopying,
             wholeTextCopy: copyAllText?.isEmpty == false,
-            search: hasText || hasOutline ? .full : (hasTable ? .filter : .none),
-            sourceLineNavigation: hasText && selectedMode != .rendered,
+            search: !acceptsTypedInput ? .none : (hasText || hasOutline ? .full : (hasTable ? .filter : .none)),
+            sourceLineNavigation: acceptsTypedInput && hasText && selectedMode != .rendered,
             zoom: hasDisplayableContent && geometryPresentation == nil
                 && (custom == nil || custom?.respondsToTextZoom == true || custom is any SafeModeZoomable),
             geometryNavigation: geometrySupportsNavigation, modeCount: displayedModes.count)

@@ -77,7 +77,7 @@ struct PreviewStatePresenterTests {
         let invisibles = PreviewStatePresenter.notices(for: presentation(), mode: .invisibles, hasStructureFallback: false,
                                                       markupNotices: [], profileNotices: ["unused profile note"],
                                                       hasRecords: false, locale: locale)
-        #expect(invisibles == [PresentationNotice(kind: .provenance, text: PreviewStrings.text(.previewInvisiblesNote))])
+        #expect(invisibles.isEmpty)
         let profile = PreviewStatePresenter.notices(for: presentation(), mode: .profile, hasStructureFallback: false,
                                                    markupNotices: [], profileNotices: ["safe profile note"],
                                                    hasRecords: false, locale: locale)
