@@ -102,6 +102,7 @@ enum ConcealmentSurfaceSupport {
             }
         case .files: return table(try #require(modes.files))
         case .rows: return table(try #require(modes.sampleRows))
+        case .endpoints: return table(try #require(modes.endpoints).table)
         case .tree:
             func tree(_ roots: [SafeListingTree.Node]) -> [String] {
                 roots.flatMap { [$0.name, $0.path, $0.kind] + tree($0.children) }

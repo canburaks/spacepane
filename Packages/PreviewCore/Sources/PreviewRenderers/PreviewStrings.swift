@@ -1155,6 +1155,9 @@ public enum PreviewStrings {
         // (end of tq-interaction)
         // ----
         // [tq-openapi] Tier 1 quick wins (2026-10-14 list, item 5): the OpenAPI endpoint table. Workstream tq-openapi adds its keys below this line.
+        case previewModeEndpoints = "preview.mode.endpoints"
+        case openAPIColumnDeprecated = "preview.openapi.column.deprecated"
+        case openAPIUnresolvedReferences = "preview.openapi.unresolvedReferences"
         // (end of tq-openapi)
     }
 
