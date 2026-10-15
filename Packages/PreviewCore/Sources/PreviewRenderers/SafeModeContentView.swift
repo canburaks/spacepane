@@ -106,6 +106,8 @@ enum SafeModeViewRegistry {
         // [data]
         case .plot: return NativePlotPreviewView(frame: .zero)
         case .rows: return NativeRowsPreviewView(frame: .zero)
+        // [openapi]
+        case .endpoints: return NativeEndpointsPreviewView(frame: .zero)
         // [packages]
         case .icon: return PackageIconView()
         default: return nil

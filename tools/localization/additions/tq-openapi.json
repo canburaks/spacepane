@@ -1,0 +1,97 @@
+{
+  "preview.mode.endpoints": {
+    "case": "previewModeEndpoints",
+    "comment": "Mode label, shown in the mode control beside Source and Outline, for the table of operations in an OpenAPI or Swagger document (one row per method and path). Draft translations pending native-speaker review.",
+    "en": "Endpoints",
+    "tr": "Uç noktalar",
+    "de": "Endpunkte",
+    "fr": "Points d’accès",
+    "zh-Hans": "端点",
+    "ja": "エンドポイント",
+    "hi": "एंडपॉइंट",
+    "ku-Latn": "Xalên dawîn",
+    "ru": "Конечные точки",
+    "id": "Endpoint",
+    "bn": "এন্ডপয়েন্ট",
+    "ha": "Hanyoyin ƙarshe",
+    "pt": "Pontos finais",
+    "es": "Puntos finales"
+  },
+  "preview.openapi.column.deprecated": {
+    "case": "openAPIColumnDeprecated",
+    "comment": "Column header of the Endpoints table. The cells in this column say Yes, using the same word as the Yes value, for an operation the document marks as deprecated, and are empty otherwise. Draft translations pending native-speaker review.",
+    "en": "Deprecated",
+    "tr": "Kullanım dışı",
+    "de": "Veraltet",
+    "fr": "Obsolète",
+    "zh-Hans": "已弃用",
+    "ja": "非推奨",
+    "hi": "पदावनत",
+    "ku-Latn": "Betalkirî",
+    "ru": "Устарело",
+    "id": "Usang",
+    "bn": "অবচিত",
+    "ha": "An soke",
+    "pt": "Obsoleto",
+    "es": "Obsoleto"
+  },
+  "preview.openapi.unresolvedReferences": {
+    "case": "openAPIUnresolvedReferences",
+    "comment": "Limits sentence under the Endpoints table: how many path items name a reference this preview cannot follow inside the document, so their operations are not listed. The first formatter argument selects the plural category and is never printed; the second is the count formatted for the presentation locale and every variant prints it as %2$@. Draft translations pending native-speaker review.",
+    "en": {
+      "one": "%2$@ path item refers to another file or an unknown location and is not listed.",
+      "other": "%2$@ path items refer to other files or unknown locations and are not listed."
+    },
+    "tr": {
+      "one": "%2$@ yol öğesi başka bir dosyaya veya bilinmeyen bir konuma işaret ediyor ve listelenmiyor.",
+      "other": "%2$@ yol öğesi başka dosyalara veya bilinmeyen konumlara işaret ediyor ve listelenmiyor."
+    },
+    "de": {
+      "one": "%2$@ Pfadelement verweist auf eine andere Datei oder einen unbekannten Ort und wird nicht aufgelistet.",
+      "other": "%2$@ Pfadelemente verweisen auf andere Dateien oder unbekannte Orte und werden nicht aufgelistet."
+    },
+    "fr": {
+      "one": "%2$@ élément de chemin renvoie vers un autre fichier ou un emplacement inconnu et n’est pas listé.",
+      "other": "%2$@ éléments de chemin renvoient vers d’autres fichiers ou des emplacements inconnus et ne sont pas listés."
+    },
+    "zh-Hans": {
+      "other": "%2$@ 个路径项引用了其他文件或未知位置，因此未列出。"
+    },
+    "ja": {
+      "other": "%2$@ 件のパス項目が別のファイルまたは不明な場所を参照しているため、一覧には表示されません。"
+    },
+    "hi": {
+      "one": "%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थान की ओर संदर्भ देता है, इसलिए वह सूची में नहीं है।",
+      "other": "%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थानों की ओर संदर्भ देते हैं, इसलिए वे सूची में नहीं हैं।"
+    },
+    "ku-Latn": {
+      "one": "%2$@ tiştê rêyê li pelekî din an cihekî nenas dinihêre û navnîş nabe.",
+      "other": "%2$@ tiştên rêyê li pelên din an cihên nenas dinihêrin û navnîş nabin."
+    },
+    "ru": {
+      "one": "%2$@ элемент пути ссылается на другой файл или неизвестное место и не показан.",
+      "few": "%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны.",
+      "many": "%2$@ элементов пути ссылаются на другие файлы или неизвестные места и не показаны.",
+      "other": "%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны."
+    },
+    "id": {
+      "other": "%2$@ item jalur merujuk ke berkas lain atau lokasi yang tidak diketahui, sehingga tidak ditampilkan."
+    },
+    "bn": {
+      "one": "%2$@টি পাথ-আইটেম অন্য একটি ফাইল বা অজানা স্থানের দিকে নির্দেশ করে, তাই তালিকায় নেই।",
+      "other": "%2$@টি পাথ-আইটেম অন্য ফাইল বা অজানা স্থানের দিকে নির্দেশ করে, তাই তালিকায় নেই।"
+    },
+    "ha": {
+      "one": "%2$@ abu na hanya yana nuni zuwa wani fayil ko wurin da ba a sani ba, don haka ba a jera shi ba.",
+      "other": "%2$@ abubuwan hanya suna nuni zuwa wasu fayiloli ko wuraren da ba a sani ba, don haka ba a jera su ba."
+    },
+    "pt": {
+      "one": "%2$@ item de caminho aponta para outro arquivo ou para um local desconhecido e não é listado.",
+      "other": "%2$@ itens de caminho apontam para outros arquivos ou locais desconhecidos e não são listados."
+    },
+    "es": {
+      "one": "%2$@ elemento de ruta hace referencia a otro archivo o a una ubicación desconocida y no se muestra.",
+      "other": "%2$@ elementos de ruta hacen referencia a otros archivos o a ubicaciones desconocidas y no se muestran."
+    }
+  }
+}
