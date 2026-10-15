@@ -11,8 +11,8 @@ import PreviewContracts
 /// that reads it (`tasks.json` in `.vscode`, `settings.json` in `.claude`, `mcp.json` in `.cursor`, `hooks.json`
 /// in `.cursor`), and a finding appears only for the structure that tool reads. A VS Code workspace file is
 /// recognized by its `.code-workspace` suffix alone, because workspace names are free. The same text under
-/// any other name or in any other folder says nothing. Names and folders compare ignoring ASCII case, as macOS volumes do; the keys
-/// inside the file compare by code units.
+/// any other name or in any other folder says nothing. Names and folders compare ignoring ASCII case, as
+/// macOS volumes do; the keys inside the file compare by code units.
 ///
 /// The lens reads the displayed, concealed text through `LensJSON`, which accepts the comments and
 /// trailing commas these files carry and the concealment token where a secret value stood.
