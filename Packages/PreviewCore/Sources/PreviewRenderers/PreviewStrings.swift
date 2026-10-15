@@ -1150,6 +1150,12 @@ public enum PreviewStrings {
         case installInstalledScripts = "preview.install.installedScripts"
         case installNativeModules = "preview.install.nativeModules"
         // (end of sl3-install)
+        // ----
+        // [tq-interaction] Tier 1 quick wins (2026-10-14 list, items 2 and 4). Workstream tq-interaction adds its keys below this line.
+        // (end of tq-interaction)
+        // ----
+        // [tq-openapi] Tier 1 quick wins (2026-10-14 list, item 5): the OpenAPI endpoint table. Workstream tq-openapi adds its keys below this line.
+        // (end of tq-openapi)
     }
 
     public static func text(_ key: Key, languagePreferences: [String]? = nil) -> String {
