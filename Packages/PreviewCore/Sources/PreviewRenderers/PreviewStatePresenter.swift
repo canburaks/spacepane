@@ -83,9 +83,7 @@ enum PreviewStatePresenter {
             notices.append(PresentationNotice(kind: .fallback, text: PreviewStrings.text(.previewStructureFallback)))
         }
         notices += PresentationNotices.typed(markupNotices, as: .provenance)
-        if mode == .invisibles {
-            notices.append(PresentationNotice(kind: .provenance, text: PreviewStrings.text(.previewInvisiblesNote)))
-        }
+        // The invisibles mode carries no note (owner, 2026-10-15).
         if mode == .profile {
             notices += PresentationNotices.typed(profileNotices, as: .provenance)
         }

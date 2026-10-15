@@ -27,8 +27,10 @@ extension NativePreviewView {
     }
 
     func updateAccessoryBar(showsOutline: Bool) {
-        let content: PreviewAccessoryBar.Content = showsOutline ? .filter : (goToLineIsOpen ? .goToLine : .none)
-        if !showsOutline { clearFilter() }
+        // Without typed input the outline filter would be a dead field, so the bar stays empty.
+        let showsFilter = showsOutline && acceptsTypedInput
+        let content: PreviewAccessoryBar.Content = showsFilter ? .filter : (goToLineIsOpen ? .goToLine : .none)
+        if !showsFilter { clearFilter() }
         accessoryBar.show(content)
         accessoryHeightConstraint?.constant = accessoryBar.requiredHeight
     }
@@ -97,6 +99,7 @@ extension NativePreviewView {
     var showsOutlineMode: Bool { hasDisplayableContent && !outlineView.isHidden }
 
     private func performFind(_ action: NSTextFinder.Action) -> Bool {
+        guard acceptsTypedInput else { return false }
         if showsTextMode {
             let item = NSMenuItem()
             item.tag = action.rawValue
@@ -203,6 +206,7 @@ extension NativePreviewView {
     /// `reportCopy`, and spoken feedback goes through the preview's one announcer. Each successful copy
     /// produces one chip and one announcement.
     func adoptPreviewServices(_ view: NSView) {
+        if let host = view as? any PreviewHostsTable { host.table.acceptsTypedInput = acceptsTypedInput }
         if let copier = view as? any PreviewSafeCopying {
             copier.pasteboard = pasteboard
             copier.tagCopyPolicy = { [weak self] in self?.safetyLensFoundTags ?? false }
@@ -229,7 +233,7 @@ extension NativePreviewView {
     /// Opens the inline bar for the displayed text. Not available over outlines, tables and loading states.
     @discardableResult
     func presentGoToLine() -> Bool {
-        guard showsTextMode, selectedMode != .rendered else { return false }
+        guard acceptsTypedInput, showsTextMode, selectedMode != .rendered else { return false }
         goToLineIsOpen = true
         updateAccessoryBar(showsOutline: false)
         accessoryBar.goToLineBar.show(lineCount: currentLineIndex().count)

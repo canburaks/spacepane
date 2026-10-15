@@ -82,8 +82,23 @@ extension SafeDataProfile {
 
     /// Table-level notes for the status line, one localized sentence each.
     func statusLines(locale: Locale) -> [String] {
+        lines(for: tableNotes, locale: locale)
+    }
+
+    /// The notes the preview shows. Sampling and concealed-column notes are left out (owner, 2026-10-15): the
+    /// limits strip already says how many rows the profile uses, and concealment is visible in the cells.
+    func noteLines(locale: Locale) -> [String] {
+        lines(for: tableNotes.filter { note in
+            switch note {
+            case .sampled, .concealedColumns: false
+            case .raggedRows, .duplicateNames: true
+            }
+        }, locale: locale)
+    }
+
+    private func lines(for notes: [TableNote], locale: Locale) -> [String] {
         let formats = ProfileFormats(locale: locale)
-        return tableNotes.map { note in
+        return notes.map { note in
             switch note {
             case .sampled(let profiled, let total):
                 PreviewStrings.format(.profileStatusSampled, arguments: [formats.count(profiled), formats.count(total)], locale: locale)
@@ -217,6 +232,7 @@ final class LazyDataProfile {
         let profile: SafeDataProfile
         let table: SafeTable
         let statusLines: [String]
+        let noteLines: [String]
     }
 
     private let source: SafeTable
@@ -237,7 +253,8 @@ final class LazyDataProfile {
         // The profile covers the rows the source table read, so it is a partial read exactly when the source is.
         var table = profile.displayTable(locale: locale)
         table.isPartialRead = source.isPartialRead
-        let computed = Result(profile: profile, table: table, statusLines: profile.statusLines(locale: locale))
+        let computed = Result(profile: profile, table: table, statusLines: profile.statusLines(locale: locale),
+                              noteLines: profile.noteLines(locale: locale))
         result = computed
         return computed
     }

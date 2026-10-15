@@ -2,6 +2,15 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-15 — No typed filter in Finder; three notes removed
+
+Owner report and decisions: in Finder the table filter did not work, because typed keys went to Finder, which jumped to another file; the owner chose to hide the filter in Finder, to hide the table filter field until asked for, and to remove the profile sampling, concealed-column and invisibles notes.
+
+- Implementation: `NativePreviewView.acceptsTypedInput` (default true); the preview extension sets it to false. Without typed input the table offers no filter field or search button, the outline filter bar stays empty, and find and go-to-line are neither offered nor dispatched. Everywhere, the table filter field is hidden until the new search button beside Sort or Command-F opens it; the bar keeps Sort. The invisibles mode has no note, and the profile shows only its ragged-row and duplicate-name notes (`noteLines`); `statusLines` keeps all four for tests and copy.
+- Research: Finder does not pass typed keys to Quick Look extensions. Peek states it needs Accessibility access to intercept shortcuts and deliver them to its extension, which a sandboxed App Store extension cannot have. Not observed here: this session could not drive Finder.
+- Tests: `HiddenFilterAndNotesTests` (7, written first); three existing tests now assert that the removed notes are absent. `--check-static`, `--check-compiler` and `--test` pass: 4,525 tests in 512 suites with the 2 known issues, 74 serial tests, 696 adversarial cases. A development-signed Debug build was rebuilt and registered.
+- Not established: the change in Finder itself.
+
 ## 2026-10-15 — Tier 1 quick wins
 
 Owner request ("Implement tier 1 quick wins 1 to 7 from the new list, here, with parallel Sonnet agents"). Branch `tier1-quick-wins`: four workstreams in their own worktrees (`tq-script`, `tq-autorun`, `tq-interaction`, `tq-openapi`) and the lead. The workstream agents were defined for Sonnet 5.5, but their transcripts show they ran on Haiku 5.5; their commits say so. Nothing was pushed.
