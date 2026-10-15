@@ -122,7 +122,7 @@ struct TqOpenAPIEndpointTableTests {
     }
 
     @Test func referenceCyclesStopAndCountAsUnresolved() throws {
-        let value = try list(#"{"openapi": "3.0.3", "paths": {"/x": {"$ref": "#/paths/~1y"}, "/y": {"$ref": "#/paths/~1x"}}}"#)
+        let value = try list(##"{"openapi": "3.0.3", "paths": {"/x": {"$ref": "#/paths/~1y"}, "/y": {"$ref": "#/paths/~1x"}}}"##)
         #expect(value.table.rows.isEmpty)
         #expect(value.unresolvedReferences == 2)
     }
