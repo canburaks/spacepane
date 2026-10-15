@@ -30,7 +30,7 @@ struct PropertyListOutputBudgetTests {
         let input: [String: Any] = [key: ["line\n\t\"\\/\u{2028}😀", 42, true],
                                   "empty": [Any](), "blob": Data([1, 2]), "date": Date(timeIntervalSince1970: 0)]
         let normalized = try normalizer.value(input, depth: 1)
-        let serialized = try JSONSerialization.data(withJSONObject: normalized, options: [.sortedKeys, .prettyPrinted, .fragmentsAllowed])
+        let serialized = try JSONSerialization.data(withJSONObject: normalized, options: [.sortedKeys, .prettyPrinted, .fragmentsAllowed, .withoutEscapingSlashes])
         #expect(normalizer.outputBound >= serialized.count)
         #expect(normalizer.outputBound <= context.budget.maxOutputUTF8Bytes)
         let binary = try PropertyListSerialization.data(fromPropertyList: input, format: .binary, options: 0)
