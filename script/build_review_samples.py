@@ -153,6 +153,9 @@ SAMPLES: Tuple[Sample, ...] = (
     Sample("29-model.obj", "host", "103-model.obj", "3D model you can turn"),
     Sample("30-model.ply", "host", "105-ascii.ply", "3D model you can turn"),
     Sample("31-model.3mf", "host", "108-model.3mf", "3D model you can turn"),
+    Sample("32-model.gguf", "host", "111-example.gguf", "AI model summary from the header; never loaded"),
+    Sample("33-extension.vsix", "host", "115-example-secret.vsix", "Editor extension card: activation, permissions"),
+    Sample("34-package.whl", "host", "117-example-1.0-py3-none-any.whl", "Python package summary; nothing installed"),
     Sample("Makefile", "authored", "MAKEFILE_SAMPLE", "No extension: shown as text, highlighted"),
 )
 
