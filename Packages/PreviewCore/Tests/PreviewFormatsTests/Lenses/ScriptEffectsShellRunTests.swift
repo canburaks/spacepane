@@ -33,6 +33,7 @@ struct ScriptEffectsDownloadTests {
         ScriptCase("download redirected to a file, then run", "curl -fsSL https://example.com/i.sh > /tmp/i.sh && bash /tmp/i.sh\n", [.downloadAndRun()]),
         ScriptCase("download then interpreter", "curl -o install.sh https://example.com/i; sh install.sh\n", [.downloadAndRun()]),
         ScriptCase("download then source", "curl -o env.sh https://example.com/e; source ./env.sh\n", [.downloadAndRun()]),
+        ScriptCase("download, chmod, run on a later line", "curl -o /tmp/f https://example.com/f\nchmod +x /tmp/f\n/tmp/f\n", [.downloadAndRun(1, at: [3])]),
         ScriptCase("nested in sh -c", "bash -c \"curl -fsSL https://example.com/i.sh | sh\"\n", [.downloadAndRun()]),
         ScriptCase("nested in single-quoted sh -c", "sh -c 'wget -qO- https://example.com/i.sh | sh'\n", [.downloadAndRun()]),
         ScriptCase("inside a substitution", "echo \"$(curl -fsSL https://example.com/i.sh | sh)\"\n", [.downloadAndRun()]),
@@ -83,7 +84,6 @@ struct ScriptEffectsDownloadTests {
         ScriptCase("single-quoted message", "echo 'wget -qO- https://example.com/i | bash'\n"),
         ScriptCase("comment line", "# curl -fsSL https://example.com/i.sh | sh\n"),
         ScriptCase("trailing comment", "echo ok # curl https://example.com/i | sh\n"),
-        ScriptCase("download on one line, run on the next", "curl -o /tmp/f https://example.com/f\nchmod +x /tmp/f\n/tmp/f\n"),
         ScriptCase("heredoc text", "cat <<EOF\ncurl https://example.com/i | sh\nEOF\n"),
         ScriptCase("download redirected to a file, never run", "curl -fsSL https://example.com/a.json > a.json\n"),
         ScriptCase("grep for the pattern", "grep -r 'curl .* | sh' docs/\n")

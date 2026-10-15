@@ -207,7 +207,7 @@ struct ScriptInvocation {
 enum ScriptTool {
     case curl, wget, fetch, base64, openssl, xxd, xattr, defaults, spctl, csrutil, socketfilterfw
     case security, dscl, launchctl, crontab, chmod, tee, netcat, eval, source, message, keyTool, copy, runas
-    case schtasks, reg, netsh, certutil, bitsadmin, plistBuddy
+    case schtasks, reg, netsh, certutil, bitsadmin, plistBuddy, opener, installer
     case fileMeta
     case setMpPreference, addMpPreference, getCredential, readHost, startProcess, webRequest, registryProperty, registerTask
     case interpreter(ScriptInterpreter)
@@ -229,7 +229,7 @@ enum ScriptTool {
         "copy": .copy, "move": .copy, "xcopy": .copy, "robocopy": .copy, "copy-item": .copy, "move-item": .copy,
         "new-item": .copy, "set-content": .copy, "add-content": .copy, "out-file": .copy,
         "runas": .runas, "schtasks": .schtasks, "reg": .reg, "netsh": .netsh, "certutil": .certutil,
-        "bitsadmin": .bitsadmin, "plistbuddy": .plistBuddy,
+        "bitsadmin": .bitsadmin, "plistbuddy": .plistBuddy, "open": .opener, "installer": .installer,
         "set-mppreference": .setMpPreference, "add-mppreference": .addMpPreference, "get-credential": .getCredential,
         "read-host": .readHost, "start-process": .startProcess, "saps": .startProcess, "start": .startProcess,
         "iwr": .webRequest, "irm": .webRequest, "invoke-webrequest": .webRequest, "invoke-restmethod": .webRequest,
