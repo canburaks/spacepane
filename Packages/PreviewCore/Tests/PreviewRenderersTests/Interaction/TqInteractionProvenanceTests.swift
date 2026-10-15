@@ -96,6 +96,60 @@ struct TqInteractionProvenanceTests {
         #expect(openedPanelLines(host).contains(note))
     }
 
+    // MARK: Model
+
+    @Test func everyNoticeLandsInExactlyOneSlotInItsOwnOrder() {
+        let notices: [PresentationNotice] = [
+            .init(kind: .provenance, text: "p1"), .init(kind: .limit, text: "l1"),
+            .init(kind: .fallback, text: "f1"), .init(kind: .provenance, text: "p2"), .init(kind: .limit, text: "l2")
+        ]
+        let slots = PresentationNoticeSlots(notices)
+        #expect(slots.provenance == ["p1", "p2"])
+        #expect(slots.limits == ["l1", "l2"])
+        #expect(slots.status == ["f1"])
+        #expect(slots.provenance.count + slots.limits.count + slots.status.count == notices.count)
+        #expect(PresentationNoticeSlots([]).status.isEmpty)
+    }
+
+    @Test func theRealNotesAreProvenanceAndTheRealLimitsStayLimits() {
+        let reformatted = PresentationNoticeSlots(PresentationNotices.notices(for: presentation(isReformatted: true),
+                                                                              locale: english))
+        #expect(reformatted.provenance == [PreviewStrings.text(.codeNoticeReformatted)])
+        #expect(reformatted.limits.isEmpty && reformatted.status.isEmpty)
+        let signed = PresentationNoticeSlots(PresentationNotices.notices(
+            for: presentation("{}", format: .applicationBundle, syntax: .json), locale: english))
+        #expect(signed.provenance == [PreviewStrings.text(.packageNoticeSignature)])
+        let certificate = PresentationNoticeSlots(PresentationNotices.notices(
+            for: presentation("{}", format: .certificate, syntax: .json), locale: english))
+        #expect(certificate.provenance == [PreviewStrings.text(.packageNoticeCertificate)])
+        let partial = PresentationNoticeSlots(PresentationNotices.notices(
+            for: presentation(truncatedSourceBytes: 3_000_000), locale: english))
+        #expect(partial.limits.count == 1 && partial.provenance.isEmpty)
+        let protectedBook = PresentationNoticeSlots(PresentationNotices.notices(
+            for: presentation("---\ndrm: true\n---\nBody", format: .epub, syntax: .markdown), locale: english))
+        #expect(protectedBook.limits == [PreviewStrings.text(.ebooksNoticeDRM)] && protectedBook.provenance.isEmpty)
+    }
+
+    // MARK: Copy
+
+    @Test func theProvenanceSectionFollowsTheCountAndPrecedesTheCommands() {
+        let lines = PreviewInfoPanelCopy.lines(providerName: "Acme Preview", concealedCount: 1, commands: [.find],
+            locale: english, languagePreferences: ["en"], provenance: ["Formatted for display"])
+        #expect(lines == ["Read-only preview", "Processed on this Mac", "Preview by Acme Preview",
+            "1 likely secret concealed.", PreviewStrings.text(.previewInfoNotesHeading, languagePreferences: ["en"]),
+            "Formatted for display", "Commands in this view",
+            PreviewStrings.format(.previewInfoCommand, arguments: [PreviewCommand.find.localizedTitle(
+                locale: english, languagePreferences: ["en"]), "⌘F"], locale: english, languagePreferences: ["en"])])
+    }
+
+    @Test func noProvenanceAddsNoHeadingAndTheSectionIsOmittedWhenEmpty() {
+        let bare = PreviewInfoPanelCopy.lines(providerName: nil, concealedCount: 0, commands: [], locale: english,
+            languagePreferences: ["en"])
+        #expect(bare == PreviewInfoPanelCopy.lines(providerName: nil, concealedCount: 0, commands: [], locale: english,
+            languagePreferences: ["en"], provenance: []))
+        #expect(!bare.contains(PreviewStrings.text(.previewInfoNotesHeading, languagePreferences: ["en"])))
+    }
+
     private func geometry() throws -> GeometryPresentation {
         let mesh = try PreviewMesh(positions: [SIMD3<Float>(-1, -1, 0), SIMD3<Float>(1, -1, 0), SIMD3<Float>(0, 1, 0)],
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
