@@ -85,17 +85,7 @@ enum AutoRunRules {
     /// `http` or `streamable-http`, connects to a remote one. The keys of every `env` object are counted
     /// together; their values are never read.
     static func servers(_ root: LensJSONNode, readsEditorKey: Bool, into tally: inout AutoRunTally) {
-        servers(root, containers: readsEditorKey ? ["mcpServers", "servers"] : ["mcpServers"], into: &tally)
-    }
-
-    /// A workspace file's `settings.mcp` object holds servers in the shape of `.vscode/mcp.json`: a `servers`
-    /// object with the same entries, read by the same rule.
-    static func workspaceServers(_ root: LensJSONNode, into tally: inout AutoRunTally) {
-        guard let mcp = root.member("settings")?.value.member("mcp")?.value else { return }
-        servers(mcp, containers: ["servers"], into: &tally)
-    }
-
-    private static func servers(_ root: LensJSONNode, containers: [String], into tally: inout AutoRunTally) {
+        let containers = readsEditorKey ? ["mcpServers", "servers"] : ["mcpServers"]
         for container in containers {
             for server in root.member(container)?.value.members ?? [] where server.value.members != nil {
                 let node = server.value

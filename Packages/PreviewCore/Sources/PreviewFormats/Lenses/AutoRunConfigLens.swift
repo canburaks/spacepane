@@ -25,10 +25,7 @@ public struct AutoRunConfigLens: PreviewTextLens {
         guard !roles.isEmpty, let root = try LensJSON.parse(text, context: context), root.members != nil else { return [] }
         var tally = AutoRunTally()
         if roles.contains(.editorTasks) { AutoRunRules.editorTasks(root, into: &tally) }
-        if roles.contains(.workspaceFile) {
-            AutoRunRules.workspaceTasks(root, into: &tally)
-            AutoRunRules.workspaceServers(root, into: &tally)
-        }
+        if roles.contains(.workspaceFile) { AutoRunRules.workspaceTasks(root, into: &tally) }
         if roles.contains(.cursorHooks) { AutoRunRules.cursorHooks(root, into: &tally) }
         if roles.contains(.agentSettings) { AutoRunRules.agentSettings(root, into: &tally) }
         if roles.contains(.servers) { AutoRunRules.servers(root, readsEditorKey: roles.contains(.editorServersKey), into: &tally) }
@@ -49,7 +46,7 @@ struct AutoRunRoles: OptionSet {
     static let editorServersKey = AutoRunRoles(rawValue: 8)
     static let devContainer = AutoRunRoles(rawValue: 16)
     static let packageManifest = AutoRunRoles(rawValue: 32)
-    /// A VS Code workspace file (`*.code-workspace`, any folder): tasks under `tasks.tasks`, editor servers under `settings.mcp`.
+    /// A VS Code workspace file (`*.code-workspace`, any folder): folder-open tasks under `tasks.tasks`.
     static let workspaceFile = AutoRunRoles(rawValue: 64)
     /// Cursor's `hooks.json` in a `.cursor` folder: commands under `hooks.<event>[]`.
     static let cursorHooks = AutoRunRoles(rawValue: 128)
