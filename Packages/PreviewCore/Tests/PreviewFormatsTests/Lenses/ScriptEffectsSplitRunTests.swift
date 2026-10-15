@@ -121,7 +121,10 @@ struct ScriptEffectsSplitPowerShellTests {
         ScriptCase("a run inside a comment", "iwr https://example.com/a.ps1 -OutFile a.ps1\n# & .\\a.ps1\n", language: .powerShell),
         ScriptCase("a download inside a string", "Write-Host \"iwr https://example.com/a.ps1 -OutFile a.ps1\"\n& .\\a.ps1\n", language: .powerShell),
         ScriptCase("a run before the download", "& .\\a.ps1\niwr https://example.com/a.ps1 -OutFile a.ps1\n", language: .powerShell),
-        ScriptCase("a request without an output file", "iwr https://example.com/a.ps1\n& .\\a.ps1\n", language: .powerShell)
+        ScriptCase("a request without an output file", "iwr https://example.com/a.ps1\n& .\\a.ps1\n", language: .powerShell),
+        ScriptCase("Start-Process of a document", "iwr https://example.com/r.pdf -OutFile r.pdf\nStart-Process r.pdf\n", language: .powerShell),
+        ScriptCase("Start-Process of a data file by -FilePath", "iwr https://example.com/d.csv -OutFile d.csv\nStart-Process -FilePath d.csv\n",
+                   language: .powerShell)
     ]
 
     @Test(arguments: negatives) func staysSilentWithoutARun(_ scenario: ScriptCase) throws { try scenario.check() }
