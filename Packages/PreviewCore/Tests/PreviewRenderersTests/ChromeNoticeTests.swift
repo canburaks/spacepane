@@ -88,7 +88,7 @@ struct ChromeNoticeTests {
         return host
     }
 
-    @Test func limitsGoToTheLimitsSlotAndEverythingElseToTheNotesInTheirOriginalOrder() {
+    @Test func limitsGoToTheLimitsSlotAndTheStatusTextKeepsEveryNoticeInItsOrder() {
         let host = harness()
         defer { host.release() }
         let sample = presentation("token = ••••", redactions: 1, truncatedSourceBytes: 4_000_000, isReformatted: true)
@@ -98,7 +98,8 @@ struct ChromeNoticeTests {
         let reformatted = PreviewStrings.text(.codeNoticeReformatted)
         #expect(!limit.isEmpty)
         #expect(host.view.limitsLabel.stringValue == limit)
-        #expect(host.view.statusLabel.stringValue == reformatted)
+        // A formatting note is provenance: the information panel draws it, so the status line holds no note here.
+        #expect(host.view.statusLabel.stringValue.isEmpty)
         // The status text keeps every notice in the order its family produced them, whichever slot shows each.
         #expect(host.view.displayedStatus == [limit, reformatted].joined(separator: "\n"))
     }

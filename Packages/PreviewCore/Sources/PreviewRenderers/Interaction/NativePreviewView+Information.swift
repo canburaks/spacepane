@@ -71,7 +71,8 @@ extension NativePreviewView {
         guard forOpening || infoPanel.isExpanded else { return }
         let commands = commandAvailability.commands
         let lines = PreviewInfoPanelCopy.lines(providerName: providerName,
-            concealedCount: safePresentation?.redactionCount ?? 0, commands: commands, locale: presentationLocale)
+            concealedCount: safePresentation?.redactionCount ?? 0, commands: commands, locale: presentationLocale,
+            provenance: provenanceLines)
         infoPanel.display(lines: lines, commands: commands, palette: currentPalette())
     }
 
