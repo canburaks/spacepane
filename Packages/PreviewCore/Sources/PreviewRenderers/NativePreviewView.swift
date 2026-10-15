@@ -134,6 +134,15 @@ public final class NativePreviewView: NSView {
     public var providerName: String? {
         didSet { if providerName != oldValue { applyStyling() } }
     }
+    /// False where typed keys never reach the preview. Finder sends them to its own file list, so a Quick Look
+    /// extension sets this and the preview offers no filter field, find or go-to-line there; the companion keeps them.
+    public var acceptsTypedInput = true {
+        didSet {
+            guard acceptsTypedInput != oldValue else { return }
+            tableView.acceptsTypedInput = acceptsTypedInput
+            for view in modeViews.values { (view as? any PreviewHostsTable)?.table.acceptsTypedInput = acceptsTypedInput }
+        }
+    }
     /// Tests substitute a private pasteboard so they never touch the user's clipboard.
     var pasteboard = NSPasteboard.general {
         didSet {
@@ -411,7 +420,7 @@ public final class NativePreviewView: NSView {
         let notices = PreviewStatePresenter.notices(
             for: presentation, mode: mode, hasStructureFallback: modes?.hasStructureFallback == true,
             markupNotices: MarkupRendering.notices(for: presentation, document: modes?.markdown, mode: mode, locale: locale),
-            profileNotices: mode == .profile ? modes?.profile?.value.statusLines ?? [] : [],
+            profileNotices: mode == .profile ? modes?.profile?.value.noteLines ?? [] : [],
             hasRecords: modes?.records != nil,
             modeLimitNotices: modes.map {
                 ModePresentationNotices.notices(for: presentation, modes: $0, mode: mode, locale: locale)
