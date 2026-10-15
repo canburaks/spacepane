@@ -39,6 +39,8 @@ final class PreviewViewController: NSViewController, @MainActor QLPreviewingCont
         content.resourceVisibility = .hostManaged
         content.suspendResources()
         content.providerName = HostedConfiguration().displayName
+        // Finder sends typed keys to its own file list, never to the extension: offer no typed filter or find.
+        content.acceptsTypedInput = false
         view = content
     }
 

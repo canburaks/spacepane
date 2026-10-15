@@ -210,11 +210,11 @@ struct ChromeSkeletonTests {
         let control = view.modeControl
         let resting = displayedFrame(of: control, in: view)
         #expect(!control.isHidden && view.statusLabel.isHidden)
-        // Invisibles adds a provenance note, which the information panel draws, so the status line stays hidden.
+        // Invisibles carries no note (owner, 2026-10-15), so the status line stays hidden.
         // The control moves nothing either way.
         try select(.invisibles, in: view)
         #expect(same(displayedFrame(of: control, in: view), resting))
-        #expect(view.statusLabel.isHidden && view.displayedStatus.contains(PreviewStrings.text(.previewInvisiblesNote)))
+        #expect(view.statusLabel.isHidden && !view.displayedStatus.contains(PreviewStrings.text(.previewInvisiblesNote)))
         // Back to Source: the note goes away and the control still does not move.
         try select(.source, in: view)
         #expect(same(displayedFrame(of: control, in: view), resting) && view.statusLabel.isHidden)
