@@ -48,8 +48,9 @@ enum ScriptFixture {
     }
 
     /// The facts of a script's findings in the contract's kind order, whatever order the lens produced them in.
-    static func facts(_ text: String, language: SourceLanguageID? = .shell, format: FormatID = .sourceCode) throws -> [ScriptFact] {
-        try findings(text, language: language, format: format)
+    static func facts(_ text: String, language: SourceLanguageID? = .shell, format: FormatID = .sourceCode,
+                      fileName: String = "script") throws -> [ScriptFact] {
+        try findings(text, language: language, format: format, fileName: fileName)
             .sorted { $0.kind.declarationOrder < $1.kind.declarationOrder }
             .map { ScriptFact($0.kind, $0.count, $0.lines) }
     }
