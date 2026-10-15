@@ -77,45 +77,56 @@ extension ScriptEffectsAnalyzer {
 
     // MARK: Saved files
 
-    /// Follows files a script downloads or decodes, makes executable and runs. The finding belongs to the
-    /// line that saved the file: that is where the code is fetched.
+    /// Follows files a script downloads or decodes, makes executable and runs. A file saved on one line and run
+    /// on a later one is one finding. Shell and PowerShell report it on the line of the run, in the run's command
+    /// list; batch scripts report it on the line that saved the file, as they always have.
     func trackFiles(_ command: ScriptCommand, _ invocation: ScriptInvocation, dialect: ScriptDialect, line: Int,
-                    files: inout ScriptSavedFiles) {
+                    effects: inout ScriptListEffects) {
         let windows = dialect == .batch || dialect == .powerShell
         let arguments = invocation.arguments
         // A download is saved where its option or its output redirection says.
         let redirected = command.redirects.last { $0.kind == .output || $0.kind == .append }?.target.text
         if let saved = Self.downloadTarget(of: invocation) ?? (Self.isDownloader(invocation) ? redirected : nil) {
-            Self.remember(ScriptArguments.fileKey(saved, windows: windows), line: line, in: &files.downloads)
+            ScriptSavedFiles.remember(ScriptSavedFile(key: ScriptArguments.fileKey(saved, windows: windows), line: line), in: &savedFiles.downloads)
         }
         if let decoded = Self.decodeTarget(of: invocation) {
-            Self.remember(ScriptArguments.fileKey(decoded, windows: windows), line: line, in: &files.decodes)
+            ScriptSavedFiles.remember(ScriptSavedFile(key: ScriptArguments.fileKey(decoded, windows: windows), line: line), in: &savedFiles.decodes)
         } else if Self.isDecoder(invocation) {
             for redirect in command.redirects where redirect.kind == .output || redirect.kind == .append {
-                Self.remember(ScriptArguments.fileKey(redirect.target.text, windows: windows), line: line, in: &files.decodes)
+                let file = ScriptSavedFile(key: ScriptArguments.fileKey(redirect.target.text, windows: windows), line: line)
+                ScriptSavedFiles.remember(file, in: &savedFiles.decodes)
             }
         }
         if case .chmod? = ScriptTool.named(invocation.name) {
             let operands = arguments.filter { !$0.text.hasPrefix("-") }
             if let mode = operands.first, ScriptArguments.setsExecuteBit(mode.text) {
-                for target in operands.dropFirst() { files.executable.insert(ScriptArguments.fileKey(target.text, windows: false)) }
+                for target in operands.dropFirst() { savedFiles.markExecutable(ScriptArguments.fileKey(target.text, windows: false)) }
             }
         }
-        guard let (path, direct) = Self.executedFile(invocation) else { return }
-        let key = ScriptArguments.fileKey(path, windows: windows)
+        guard let run = Self.executedFile(invocation, dialect: dialect) else { return }
+        let key = ScriptArguments.fileKey(run.path, windows: windows)
         // A directly run file needs the execute bit a `chmod` of this script gave it, unless it is a Windows file.
-        guard !direct || windows || files.executable.contains(key) else { return }
-        if let index = files.downloads.firstIndex(where: { ScriptArguments.sameFile($0.key, key, windows: windows) }) {
-            record(.downloadAndRun, line: files.downloads.remove(at: index).line)
+        // A file that `open` launches needs a name of a kind that runs when opened, or the same execute bit.
+        let runs = !run.direct || windows || savedFiles.executable.contains(key)
+            || (run.opened && ScriptArguments.opensAsProgram(run.path))
+        guard runs else { return }
+        if let index = savedFiles.downloads.firstIndex(where: { ScriptArguments.sameFile($0.key, key, windows: windows) }) {
+            reportSavedRun(.downloadAndRun, saved: savedFiles.downloads.remove(at: index), dialect: dialect, effects: &effects)
         }
-        if let index = files.decodes.firstIndex(where: { ScriptArguments.sameFile($0.key, key, windows: windows) }) {
-            record(.decodeAndRun, line: files.decodes.remove(at: index).line)
+        if let index = savedFiles.decodes.firstIndex(where: { ScriptArguments.sameFile($0.key, key, windows: windows) }) {
+            reportSavedRun(.decodeAndRun, saved: savedFiles.decodes.remove(at: index), dialect: dialect, effects: &effects)
         }
     }
 
-    private static func remember(_ key: String, line: Int, in list: inout [ScriptSavedFile]) {
-        if list.count >= ScriptSavedFiles.limit { list.removeFirst() }
-        list.append(ScriptSavedFile(key: key, line: line))
+    /// One run of a saved file. Batch scripts tally it on the saving line; the other dialects add it to the run's
+    /// command list, which is tallied on the line of the run.
+    private func reportSavedRun(_ effect: ScriptEffect, saved: ScriptSavedFile, dialect: ScriptDialect,
+                                effects: inout ScriptListEffects) {
+        if dialect == .batch {
+            record(effect, line: saved.line)
+        } else {
+            effects.add(effect)
+        }
     }
 
     /// The file a downloader saves to, including the Windows downloaders (`certutil -urlcache`, `bitsadmin /transfer`).
@@ -124,6 +135,7 @@ extension ScriptEffectsAnalyzer {
         switch ScriptTool.named(invocation.name) {
         case .curl?, .fetch?: return ScriptArguments.curl(arguments).outputFile
         case .wget?: return ScriptArguments.wget(arguments).outputFile
+        case .webRequest?: return ScriptArguments.outFile(arguments)
         case .certutil?:
             let texts = arguments.map { $0.text.lowercased() }
             guard texts.contains(where: { $0 == "-urlcache" || $0 == "/urlcache" }), texts.contains(where: { $0 == "-f" || $0 == "/f" }) else { return nil }
@@ -147,17 +159,33 @@ extension ScriptEffectsAnalyzer {
         return operands.count >= 2 ? operands.last?.text : nil
     }
 
-    /// The file a command runs, and whether it runs it directly (needing an execute bit) or as a
-    /// script of an interpreter or `source`.
-    static func executedFile(_ invocation: ScriptInvocation) -> (path: String, direct: Bool)? {
+    /// The file a command runs. `direct` means it runs as a program and needs an execute bit; `opened` means
+    /// `open` launches it, which runs only some kinds of file.
+    struct ExecutedFile {
+        var path: String
+        var direct: Bool
+        var opened = false
+    }
+
+    /// The file a command runs: directly, as a script of an interpreter or `source`, through `open` or
+    /// `installer -pkg`, or through PowerShell's `Start-Process`. `start` runs a file only in PowerShell.
+    static func executedFile(_ invocation: ScriptInvocation, dialect: ScriptDialect) -> ExecutedFile? {
+        let arguments = invocation.arguments
         switch ScriptTool.named(invocation.name) {
         case .interpreter(let kind)?:
-            guard kind != .powerShell, case .file(let index?) = kind.program(arguments: invocation.arguments) else { return nil }
-            return (invocation.arguments[index].text, false)
+            guard kind != .powerShell, case .file(let index?) = kind.program(arguments: arguments) else { return nil }
+            return ExecutedFile(path: arguments[index].text, direct: false)
         case .source?:
-            return invocation.arguments.first.map { ($0.text, false) }
+            return arguments.first.map { ExecutedFile(path: $0.text, direct: false) }
+        case .opener?:
+            return ScriptArguments.openedFile(arguments).map { ExecutedFile(path: $0, direct: true, opened: true) }
+        case .installer?:
+            return ScriptArguments.installedPackage(arguments).map { ExecutedFile(path: $0, direct: false) }
+        case .startProcess?:
+            guard dialect == .powerShell else { return nil }
+            return ScriptArguments.startedFile(arguments).map { ExecutedFile(path: $0, direct: false) }
         default:
-            return (invocation.commandWord.text, true)
+            return ExecutedFile(path: invocation.commandWord.text, direct: true)
         }
     }
 }

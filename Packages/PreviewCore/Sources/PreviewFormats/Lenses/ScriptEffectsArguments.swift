@@ -97,6 +97,69 @@ enum ScriptArguments {
         return (text[..<equals].lowercased(), String(text[text.index(after: equals)...]))
     }
 
+    // MARK: PowerShell, open and installer
+
+    /// The file a PowerShell web request saves to: the value of `-OutFile`.
+    static func outFile(_ arguments: [ScriptWord]) -> String? {
+        parameterValue(arguments, name: "outfile", minimum: 5)
+    }
+
+    /// The file PowerShell's `Start-Process` starts: its `-FilePath` value, or a path given first.
+    static func startedFile(_ arguments: [ScriptWord]) -> String? {
+        if let value = parameterValue(arguments, name: "filepath", minimum: 2) { return value }
+        guard let first = arguments.first, !first.text.hasPrefix("-"), !first.text.isEmpty else { return nil }
+        return first.text
+    }
+
+    /// The value of a PowerShell parameter, given by its name or an abbreviation of at least `minimum` characters
+    /// (dash included), as `-OutFile path` or `-OutFile:path`. Parameter names are case-insensitive.
+    private static func parameterValue(_ arguments: [ScriptWord], name: String, minimum: Int) -> String? {
+        for (index, word) in arguments.enumerated() {
+            let parts = word.text.split(separator: ":", maxSplits: 1, omittingEmptySubsequences: false)
+            guard let parameter = parts.first, parameter.hasPrefix("-"), parameter.count >= minimum,
+                  name.hasPrefix(parameter.dropFirst().lowercased()) else { continue }
+            if parts.count == 2 { return parts[1].isEmpty ? nil : String(parts[1]) }
+            guard index + 1 < arguments.count, !arguments[index + 1].text.isEmpty else { return nil }
+            return arguments[index + 1].text
+        }
+        return nil
+    }
+
+    /// Applications, command and tool scripts and installer packages: the kinds of file `open` runs rather than shows.
+    private static let openedProgramExtensions: Set<String> = ["app", "command", "tool", "pkg", "mpkg"]
+
+    /// The file `open` launches: its first operand, skipping the options and `-a` and `-b`, which take a value.
+    /// `--args` passes the rest to the program, so no file follows it.
+    static func openedFile(_ arguments: [ScriptWord]) -> String? {
+        var index = 0
+        while index < arguments.count {
+            let text = arguments[index].text
+            if text == "--args" { return nil }
+            if text == "-a" || text == "-b" {
+                index += 2
+            } else if text.hasPrefix("-") {
+                index += 1
+            } else {
+                return text.isEmpty ? nil : text
+            }
+        }
+        return nil
+    }
+
+    /// Whether `open` runs a file of this name, judged from its last extension alone.
+    static func opensAsProgram(_ path: String) -> Bool {
+        let name = path.split(separator: "/").last ?? ""
+        guard let dot = name.lastIndex(of: "."), dot != name.startIndex else { return false }
+        return openedProgramExtensions.contains(name[name.index(after: dot)...].lowercased())
+    }
+
+    /// The package `installer -pkg` installs.
+    static func installedPackage(_ arguments: [ScriptWord]) -> String? {
+        guard let index = arguments.firstIndex(where: { $0.text == "-pkg" }), index + 1 < arguments.count,
+              !arguments[index + 1].text.isEmpty else { return nil }
+        return arguments[index + 1].text
+    }
+
     // MARK: Small predicates
 
     /// The letters of a short option cluster (`-rd` gives `rd`); `nil` for words that are not one.
