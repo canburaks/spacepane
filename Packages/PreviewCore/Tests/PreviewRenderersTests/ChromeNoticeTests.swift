@@ -5,7 +5,8 @@ import PreviewContracts
 @testable import PreviewRenderers
 
 /// Typed notices (decision 027, Q-51 groundwork): every notice says whether it is a limit (shown in the slot at the
-/// bottom), a fallback or provenance (shown below the mode control). `PresentationNotices.lines` keeps its old shape.
+/// bottom), a fallback (shown below the mode control) or provenance (shown in the information panel).
+/// `PresentationNotices.lines` keeps its old shape.
 @Suite("Chrome notices", .serialized)
 @MainActor
 struct ChromeNoticeTests {
