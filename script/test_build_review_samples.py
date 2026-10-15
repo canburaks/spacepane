@@ -182,7 +182,11 @@ class ArchiveTests(unittest.TestCase):
         self.assertIsNone(samples.PLACEHOLDER.search(notes), notes)
         self.assertNotIn("support@spacepane.com", SUBMISSION)
         self.assertIn("info@spacepane.com", notes)
-        for fact in ("1.0.0 (build 3)", "macOS 27.2", "macOS 15", "public.data", "com.quicklookpro", "Developer Mode"):
+        # The notes name the version and build that Base.xcconfig sets, so the two cannot drift apart.
+        settings = dict(line.split(" = ", 1) for line in (ROOT / "Configuration" / "Base.xcconfig").read_text().splitlines()
+                        if " = " in line and not line.startswith("//"))
+        version = f"{settings['MARKETING_VERSION'].strip()} (build {settings['CURRENT_PROJECT_VERSION'].strip()})"
+        for fact in (version, "macOS 27.2", "macOS 15", "public.data", "com.quicklookpro", "Developer Mode"):
             self.assertIn(fact, notes)
         for stale in ("STEP", "IGES", "CAD", "Open CASCADE", "LGPL", "spacepane-cad-source"):
             self.assertNotIn(stale, notes)

@@ -132,6 +132,8 @@ Not in App Store Connect yet:
 | Promotional text | `Press Space and see what's really inside: JSON as an outline, SQLite as tables, archives as a list. Made on your Mac, read-only, with likely secrets concealed.` | 159 / 170 |
 | What's New | `The first release of SpacePane.` | |
 
+For 1.1.0 the What's New, promotional text and description drafts are in [version-1.1.0.md](version-1.1.0.md).
+
 How the three indexed fields work together:
 
 - Apple matches words across name, subtitle and keywords, so no word is repeated. "json viewer" is `JSON`

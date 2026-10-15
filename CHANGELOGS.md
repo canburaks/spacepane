@@ -2,6 +2,16 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-15 — Version 1.1.0 configured
+
+Owner request ("configure all necessary files", release 1.1.0 setup).
+
+- Configuration: `MARKETING_VERSION = 1.1.0` (the owner's change) and `CURRENT_PROJECT_VERSION = 4` in `Configuration/Base.xcconfig`; CAD stays off.
+- Documentation: [docs/release/version-1.1.0.md](docs/release/version-1.1.0.md), the release record: contents since 1.0.0 (build 3), What's New (730 characters), promotional text (169), description (3,740 of 4,000), the claim gate and the steps left. The App Review notes in `app-store-submission.md` name 1.1.0 (build 4) and the three new samples; the listing and the roadmap point at the record; a PLAN section.
+- Review samples: `32-model.gguf`, `33-extension.vsix` and `34-package.whl` from the host fixtures; `python3 script/build_review_samples.py --check` passes (36 files).
+- Tests: `script/test_build_review_samples.py` now reads the version and build the notes must name from `Base.xcconfig` instead of a literal `1.0.0 (build 3)`. `--check-static` and `--check` pass.
+- Not done: nothing was archived or uploaded; 1.0.0 (build 3) is still in review. The website is unchanged; its badges change on `app-store-launch` after approval.
+
 ## 2026-10-15 — Tier 1 quick wins
 
 Owner request ("Implement tier 1 quick wins 1 to 7 from the new list, here, with parallel Sonnet agents"). Branch `tier1-quick-wins`: four workstreams in their own worktrees (`tq-script`, `tq-autorun`, `tq-interaction`, `tq-openapi`) and the lead. The workstream agents were defined for Sonnet 5.5, but their transcripts show they ran on Haiku 5.5; their commits say so. Nothing was pushed.
