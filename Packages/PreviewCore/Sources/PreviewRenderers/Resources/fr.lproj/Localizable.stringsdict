@@ -884,6 +884,22 @@
 			<string>Secrets potentiels masqués : %2$@.</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ élément de chemin renvoie vers un autre fichier ou un emplacement inconnu et n’est pas listé.</string>
+			<key>other</key>
+			<string>%2$@ éléments de chemin renvoient vers d’autres fichiers ou des emplacements inconnus et ne sont pas listés.</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

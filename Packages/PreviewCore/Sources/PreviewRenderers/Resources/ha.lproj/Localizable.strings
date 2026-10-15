@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "Umarnin wannan kallo";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "Bayanai game da wannan samfotin";
 "preview.info.onThisMac" = "An sarrafa a wannan Mac";
 "preview.install.commands" = "Umarnin da ake shigarwa";
 "preview.install.dependencies" = "Abubuwan dogaro";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "Abubuwan Ciki";
 "preview.mode.cues" = "Rubutun ƙasa";
 "preview.mode.diagram" = "Zane";
+"preview.mode.endpoints" = "Hanyoyin ƙarshe";
 "preview.mode.files" = "Fayiloli";
 "preview.mode.icon" = "Gunki";
 "preview.mode.invisibles" = "Marasa ganuwa";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "Tensors";
 "preview.model.tokenizer" = "Tokenizer";
 "preview.model.vocabularySize" = "Girman ƙamus";
+"preview.openapi.column.deprecated" = "An soke";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "Maɓalli mai maimaituwa";
 "preview.outline.key" = "Maɓalli";
 "preview.outline.value" = "Ƙima";

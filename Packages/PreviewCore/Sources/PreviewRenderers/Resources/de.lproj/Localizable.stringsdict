@@ -802,6 +802,22 @@
 			<string>Verborgene mögliche Geheimnisse: %2$@.</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ Pfadelement verweist auf eine andere Datei oder einen unbekannten Ort und wird nicht aufgelistet.</string>
+			<key>other</key>
+			<string>%2$@ Pfadelemente verweisen auf andere Dateien oder unbekannte Orte und werden nicht aufgelistet.</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

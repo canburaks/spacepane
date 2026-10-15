@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "Fermanên di vê dîtinê de";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "Nîşeyên der barê vê pêşdîtinê";
 "preview.info.onThisMac" = "Li ser vê Macê hatiye pêvajokirin";
 "preview.install.commands" = "Fermanên tên sazkirin";
 "preview.install.dependencies" = "Girêdayîbûn";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "Naverok";
 "preview.mode.cues" = "Binnivîs";
 "preview.mode.diagram" = "Diyagram";
+"preview.mode.endpoints" = "Xalên dawîn";
 "preview.mode.files" = "Pel";
 "preview.mode.icon" = "Îkon";
 "preview.mode.invisibles" = "Nedîtbar";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "Tensor";
 "preview.model.tokenizer" = "Tokenizer";
 "preview.model.vocabularySize" = "Mezinahiya ferhengê";
+"preview.openapi.column.deprecated" = "Betalkirî";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "Mifteya dubare";
 "preview.outline.key" = "Mifte";
 "preview.outline.value" = "Nirx";
