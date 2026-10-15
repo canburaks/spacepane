@@ -7,7 +7,7 @@ extension NativePreviewView {
         let custom = shownModeView
         let hasText = showsTextMode
         let hasOutline = showsOutlineMode
-        let hasTable = showsTableMode || custom is any PreviewHostsTable
+        let hasTable = shownTable != nil
         return .init(hasContent: hasDisplayableContent || geometryPresentation != nil,
             selectionCopy: hasText || hasOutline || hasTable || custom is any PreviewSafeCopying,
             wholeTextCopy: copyAllText?.isEmpty == false,
