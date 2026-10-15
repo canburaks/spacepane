@@ -9,7 +9,17 @@ enum AutoRunRules {
     /// A task whose `runOptions.runOn` is `folderOpen` starts when the folder is opened in the editor
     /// (once the user allows automatic tasks). The finding points at the `runOn` key.
     static func editorTasks(_ root: LensJSONNode, into tally: inout AutoRunTally) {
-        for task in root.member("tasks")?.value.elements ?? [] {
+        folderOpenTasks(root.member("tasks")?.value.elements ?? [], into: &tally)
+    }
+
+    /// A workspace file keeps its tasks one level down, as `tasks: { version, tasks: [...] }`; the same task
+    /// rule applies to the inner list. A top-level array under `tasks` is not a workspace shape and adds nothing.
+    static func workspaceTasks(_ root: LensJSONNode, into tally: inout AutoRunTally) {
+        folderOpenTasks(root.member("tasks")?.value.member("tasks")?.value.elements ?? [], into: &tally)
+    }
+
+    private static func folderOpenTasks(_ tasks: [LensJSONNode], into tally: inout AutoRunTally) {
+        for task in tasks {
             guard let runOn = task.member("runOptions")?.value.member("runOn"), runOn.value.isString("folderOpen") else { continue }
             tally.add(.autorunFolderOpenTask, line: runOn.line)
         }
@@ -52,6 +62,20 @@ enum AutoRunRules {
         ["Bash", "Bash(*)", "Bash(:*)"].contains { rule.equalsExactly($0) }
     }
 
+    // MARK: Cursor hooks
+
+    /// Cursor's `hooks.json` maps each event (`beforeShellExecution`, `afterFileEdit`, ...) to a list of entries;
+    /// an entry with a non-empty string `command` runs that command. Other keys, event names and entries
+    /// (a prompt hook has no command) add nothing, and the file's `version` is not required.
+    static func cursorHooks(_ root: LensJSONNode, into tally: inout AutoRunTally) {
+        for event in root.member("hooks")?.value.members ?? [] {
+            for entry in event.value.elements ?? [] {
+                guard let command = entry.member("command"), let text = command.value.string, !text.isEmpty else { continue }
+                tally.add(.autorunAgentHooks, line: command.line)
+            }
+        }
+    }
+
     // MARK: MCP servers
 
     private static let remoteTypes = ["sse", "http", "streamable-http"]
@@ -61,7 +85,17 @@ enum AutoRunRules {
     /// `http` or `streamable-http`, connects to a remote one. The keys of every `env` object are counted
     /// together; their values are never read.
     static func servers(_ root: LensJSONNode, readsEditorKey: Bool, into tally: inout AutoRunTally) {
-        let containers = readsEditorKey ? ["mcpServers", "servers"] : ["mcpServers"]
+        servers(root, containers: readsEditorKey ? ["mcpServers", "servers"] : ["mcpServers"], into: &tally)
+    }
+
+    /// A workspace file's `settings.mcp` object holds servers in the shape of `.vscode/mcp.json`: a `servers`
+    /// object with the same entries, read by the same rule.
+    static func workspaceServers(_ root: LensJSONNode, into tally: inout AutoRunTally) {
+        guard let mcp = root.member("settings")?.value.member("mcp")?.value else { return }
+        servers(mcp, containers: ["servers"], into: &tally)
+    }
+
+    private static func servers(_ root: LensJSONNode, containers: [String], into tally: inout AutoRunTally) {
         for container in containers {
             for server in root.member(container)?.value.members ?? [] where server.value.members != nil {
                 let node = server.value
