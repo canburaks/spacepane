@@ -28,7 +28,7 @@ From [CHANGELOGS.md](../../CHANGELOGS.md), 2026-10-14 and 2026-10-15:
 - **Safety Lens 2** ([decision 029](../decisions/029-safety-lens-2-what-a-file-will-do.md)): script effects (shell, AppleScript, PowerShell, batch, `.tool`), auto-run configuration (VS Code tasks and workspace files, Claude Code and Cursor hooks, MCP servers, dev containers, `package.json`), readable credential exports, launchd jobs, certificate and profile validity, Mesh Print Check, Copy Findings Report.
 - **Safety Lens 3** ([decision 030](../decisions/030-safety-lens-3-models-add-ons-and-packages.md)): seven new formats (GGUF, safetensors, pickle and PyTorch, MCP bundles, editor extensions, browser extensions, Python wheels) and install findings in npm and Python source packages. 74 file types become 81.
 - **Tier 1 quick wins**: OpenAPI and Swagger endpoint table, download-then-run across lines, property-list slashes, Command-F in table modes (companion), provenance notes in the information panel.
-- **If PR 9 is merged first:** Finder previews offer no typed filter, find or go-to-line; the table filter opens on demand in the companion; three notes removed. Merge it before archiving 1.1.0 or record that it is left for 1.1.1.
+- **No typed filter in Finder** (PR 9, merged 2026-10-15): Finder previews offer no typed filter, find or go-to-line; the table filter opens on demand in the companion; the invisibles note and the profile's sampling and concealed-column notes are removed.
 - 31 of Apple's exact source and script types are now claimed, so `.swift`, `.py`, `.sh`, `.zsh`, `.command` and AppleScript reach SpacePane in the panel (observed 2026-10-14).
 
 ## Store text for 1.1.0 (drafts)
@@ -144,7 +144,7 @@ print line holds for 3MF in Finder and for the other three only in the companion
 ## Steps left, in order
 
 1. 1.0.0 (build 3) approved by App Review.
-2. Decide on PR 9 and merge it, or leave it for 1.1.1.
+2. PR 9 is merged (2026-10-15), so it ships in 1.1.0.
 3. Observe the claim-gate list above on a development-signed build of `main`, then archive: `./script/build_and_run.sh --archive`, then `python3 script/check_release_archive.py` on the archive.
 4. On the owner's instruction: upload (`--upload`), create version 1.1.0 in App Store Connect, select build 4, paste What's New and the description, attach `SpacePane-Review-Samples.zip`, paste the notes, submit.
 5. After approval: on `spacepane-web`'s `app-store-launch` branch, drop the "Coming in an update" badges for Safety Lens 2 and 3 and count the seven formats, then merge that branch to `main` (the owner merges after approval). Switch the promotional text.

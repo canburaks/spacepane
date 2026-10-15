@@ -989,7 +989,8 @@ struct DataProfileModeTests {
         let text = "n\n" + (0..<10_050).map(String.init).joined(separator: "\n") + "\n"
         view.display(.ready(presentation(text)), locale: english)
         try select(.previewModeProfile, in: view)
-        #expect(try statusText(view).contains("Rows profiled: 10,000 of 10,050"))
+        // The sampling note is not shown (owner, 2026-10-15); the limits strip names the rows the profile uses.
+        #expect(try !statusText(view).contains("Rows profiled"))
         let pane = try pane(view)
         #expect(pane.tableView.numberOfRows == 1)
         #expect(try field(pane, 0, SafeDataProfile.Field.maximum.rawValue).stringValue == "9999")
@@ -1095,7 +1096,8 @@ struct DataProfileModeTests {
         #expect(try field(pane, 1, 1).stringValue == "Concealed")
         #expect(try field(pane, 2, 1).stringValue == "Concealed")
         #expect(try field(pane, 1, SafeDataProfile.Field.missing.rawValue).stringValue == "1 (33.3%)")
-        #expect(try statusText(view).contains("Columns with concealed values show only how many cells are empty."))
+        // The concealed-column note is not shown (owner, 2026-10-15).
+        #expect(try !statusText(view).contains("Columns with concealed values"))
         // Copying the profile cannot reveal them either.
         let pasteboard = NSPasteboard(name: .init(UUID().uuidString))
         defer { pasteboard.releaseGlobally() }

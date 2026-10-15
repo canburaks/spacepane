@@ -11,6 +11,14 @@ Owner request ("configure all necessary files", release 1.1.0 setup).
 - Review samples: `32-model.gguf`, `33-extension.vsix` and `34-package.whl` from the host fixtures; `python3 script/build_review_samples.py --check` passes (36 files).
 - Tests: `script/test_build_review_samples.py` now reads the version and build the notes must name from `Base.xcconfig` instead of a literal `1.0.0 (build 3)`. `--check-static` and `--check` pass.
 - Not done: nothing was archived or uploaded; 1.0.0 (build 3) is still in review. The website is unchanged; its badges change on `app-store-launch` after approval.
+## 2026-10-15 — No typed filter in Finder; three notes removed
+
+Owner report and decisions: in Finder the table filter did not work, because typed keys went to Finder, which jumped to another file; the owner chose to hide the filter in Finder, to hide the table filter field until asked for, and to remove the profile sampling, concealed-column and invisibles notes.
+
+- Implementation: `NativePreviewView.acceptsTypedInput` (default true); the preview extension sets it to false. Without typed input the table offers no filter field or search button, the outline filter bar stays empty, and find and go-to-line are neither offered nor dispatched. Everywhere, the table filter field is hidden until the new search button beside Sort or Command-F opens it; the bar keeps Sort. The invisibles mode has no note, and the profile shows only its ragged-row and duplicate-name notes (`noteLines`); `statusLines` keeps all four for tests and copy.
+- Research: Finder does not pass typed keys to Quick Look extensions. Peek states it needs Accessibility access to intercept shortcuts and deliver them to its extension, which a sandboxed App Store extension cannot have. Not observed here: this session could not drive Finder.
+- Tests: `HiddenFilterAndNotesTests` (7, written first); three existing tests now assert that the removed notes are absent. `--check-static`, `--check-compiler` and `--test` pass: 4,525 tests in 512 suites with the 2 known issues, 74 serial tests, 696 adversarial cases. A development-signed Debug build was rebuilt and registered.
+- Not established: the change in Finder itself.
 
 ## 2026-10-15 — Tier 1 quick wins
 

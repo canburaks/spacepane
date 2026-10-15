@@ -240,7 +240,7 @@ Configured at the owner's request. Release record: [docs/release/version-1.1.0.m
 - [x] `MARKETING_VERSION = 1.1.0`, `CURRENT_PROJECT_VERSION = 4`, `PREV_INCLUDE_CAD = NO`.
 - [x] What's New, promotional text and description drafts with counted lengths; App Review notes name 1.1.0 (build 4); three review samples for the new formats (36 files, `--check` passes).
 - [ ] 1.0.0 (build 3) approved.
-- [ ] PR 9 merged or left for 1.1.1.
+- [x] PR 9 merged (2026-10-15); it ships in 1.1.0.
 - [ ] Claim-gate observation on a signed build; archive and `check_release_archive.py`.
 - [ ] Upload, version record and submission, on the owner's instruction.
 - [ ] After approval: website badges and counts on `app-store-launch`, then the owner merges it; promotional text switched.
@@ -258,8 +258,9 @@ Started at the owner's request ("Implement tier 1 quick wins 1 to 7") from [the 
 - [x] Download-then-run across lines in shell and PowerShell scripts.
 - [x] Strings for the new keys in 14 languages (drafts); resources regenerated and validated.
 - [ ] Observe in the Quick Look panel with a signed build: Command-F in table, profile, files and rows views; the information panel's notes section at compact width; the Endpoints mode; `.tool` and `.code-workspace` routing. VoiceOver order of the panel.
-- [ ] Owner call: whether profile sampling and concealed-column notes, and the invisibles note, belong in the information panel (they follow the existing `provenance` kind) or stay visible.
-- [ ] Owner call, from the 2026-10-06 answers: hide the table filter bar until asked for, behind a header search affordance.
+- [x] Owner call (2026-10-15): the profile sampling and concealed-column notes and the invisibles note are not shown at all.
+- [x] Owner call (2026-10-15): the table filter field is hidden until asked for (a search button beside Sort, or Command-F). Finder sends typed keys to its own file list, so a Finder preview offers no filter field, outline filter, find or go-to-line; the companion keeps them.
+- [ ] Observe in Finder with a signed build that the table shows only Sort, that typing selects files as before without a dead field, and that the companion still filters.
 - [ ] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main` (new strings).
 
 ### Safety Lens 3: model files, add-ons and packages — 2026-10-14
