@@ -76,6 +76,12 @@ struct AutoRunCursorHooksTests {
         #expect(autoRunSummary(.autorunAgentHooks, in: result) == "1 [5]")
     }
 
+    @Test func aConcealedCommandStillCounts() throws {
+        // The privacy stage hides a value that looks like a credential; the hook still runs, so it still counts.
+        let text = "{ \"hooks\": { \"stop\": [ { \"command\": \(autoRunToken) } ] } }"
+        #expect(autoRunSummary(.autorunAgentHooks, in: try autoRunFindings(text, fileName: "hooks.json", parent: ".cursor")) == "1 [1]")
+    }
+
     @Test func claudeShapedHooksAreNotReadAsCursorHooks() throws {
         #expect(try autoRunFindings(autoRunClaudeSettings, fileName: "hooks.json", parent: ".cursor").isEmpty)
     }
