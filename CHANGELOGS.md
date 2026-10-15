@@ -2,6 +2,23 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-15 — Tier 1 quick wins
+
+Owner request ("Implement tier 1 quick wins 1 to 7 from the new list, here, with parallel Sonnet agents"). Branch `tier1-quick-wins`: four workstreams in their own worktrees (`tq-script`, `tq-autorun`, `tq-interaction`, `tq-openapi`) and the lead. The workstream agents were defined for Sonnet 5.5, but their transcripts show they ran on Haiku 5.5; their commits say so. Nothing was pushed.
+
+- Implementation, features:
+  - Script effects read `.tool` files as shell scripts unless their `#!` line names another interpreter; `SourceLanguageDetector` lists `tool` and its doc comment now says the language also selects the lens's lexer.
+  - Download-then-run across lines in shell and PowerShell: a file a command downloads or decodes and a later command runs counts once, on the line of the run (up to 64 saved paths per document). `open` counts only for apps, command files and packages; `Start-Process` only for program types. Batch already matched across lines and still reports at the saving line.
+  - The auto-run lens reads folder-open tasks under `tasks.tasks` in `*.code-workspace` files and hook commands in `.cursor/hooks.json` (concealed commands count). Workspace `settings.mcp` is not read, because no rule reads `.vscode/settings.json` either.
+  - Command-F opens and focuses the table filter from anywhere in the preview in table, profile, files and rows modes; before, it worked only when the table already had focus.
+  - Notices are split into provenance, limit and status slots. Provenance notes (formatting, signatures and trust, offline Markdown, approximated formulas, CAD metadata, profile notes, invisibles) moved from the status line to the information panel under "Notes about this preview", as the owner answered on 2026-10-06.
+  - Endpoints mode for OpenAPI 3 and Swagger 2 JSON: method, path, summary or operation ID, deprecated; local `$ref` path items followed with a hop limit; 5,000-row cap; notices for the cap and unresolved references. Built from the concealed outline, never the initial mode; a spec over the outline cap gets no Endpoints mode.
+  - Property-list Source views show `/` as written. A URL with a password now has only the password concealed; before, the whole escaped value was.
+- Localization: 4 new keys in 14 languages (drafts) through `tools/localization/additions/tq-openapi.json` and `tq-interaction.json`; merge, generate and validate pass.
+- Documentation: decision 029 (where the auto-run lens looks; download-then-run across lines; `.tool`), a PLAN section.
+- Validation (Mac, macOS 27.2, Swift 6.4): `--check-static` (23 passed, 1 skipped: tree-sitter not installed), `--check`, `--check-compiler` and `--test` pass: 4,518 tests in 511 suites with the 2 known issues, 74 serial tests, 696 adversarial cases. Not established: any of this in the Quick Look panel or Finder, VoiceOver order of the panel, `.tool` and `.code-workspace` routing.
+- Website: new strings; run `npm run data:sync` in `spacepane-web` when this branch reaches `main`.
+
 ## 2026-10-14 — Remaining feature improvements, quick wins first
 
 Research only, at the owner's request ("make a list ... by sorting the quick wins"). No code, catalog, plan box or store record changed.
