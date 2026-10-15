@@ -88,6 +88,8 @@ public final class NativePreviewView: NSView {
     private var noticesText = ""
     private var statusText = ""
     private var limitsText = ""
+    /// The provenance notes of the displayed content. They are drawn in the information panel, not the status line.
+    var provenanceLines: [String] = []
     /// The page column's "Page n of m" position (Q-76), shown in the limits slot while Pages is the mode.
     private var positionLimitText = ""
     private var displayedLimits: String {
@@ -415,8 +417,10 @@ public final class NativePreviewView: NSView {
                 ModePresentationNotices.notices(for: presentation, modes: $0, mode: mode, locale: locale)
             } ?? [], locale: locale)
         noticesText = notices.map(\.text).joined(separator: "\n")
-        statusText = notices.filter { $0.kind != .limit }.map(\.text).joined(separator: "\n")
-        limitsText = notices.filter { $0.kind == .limit }.map(\.text).joined(separator: "\n")
+        let slots = PresentationNoticeSlots(notices)
+        statusText = slots.status.joined(separator: "\n")
+        limitsText = slots.limits.joined(separator: "\n")
+        provenanceLines = slots.provenance
         if mode != .pages { positionLimitText = "" }
         if presentationChanged { clearModeViews() }
         let customView = modeView(for: mode)
@@ -547,6 +551,7 @@ public final class NativePreviewView: NSView {
         noticesText = ""
         statusText = ""
         limitsText = ""
+        provenanceLines = []
         positionLimitText = ""
         resetInteractionState()
     }
@@ -648,9 +653,10 @@ public final class NativePreviewView: NSView {
         }
         if let geometryPresentation {
             showsTypographyHint = false
-            headerView.display(.init(notes: PreviewStrings.text(.cadPrivacyNotice), limits: "",
-                                     providerName: providerName, showsInfoBadge: true, locale: presentationLocale),
-                               palette: palette)
+            // The CAD note says what the document metadata omits: a provenance note, so it is drawn in the panel.
+            provenanceLines = [PreviewStrings.text(.cadPrivacyNotice)]
+            headerView.display(.init(notes: "", limits: "", providerName: providerName, showsInfoBadge: true,
+                                     locale: presentationLocale), palette: palette)
             // The viewport follows the chosen color schemes like every text view.
             geometryView?.syntaxStyle = syntaxStyle
             geometryView?.show(geometryPresentation, theme: theme, locale: presentationLocale)
@@ -907,8 +913,8 @@ public final class NativePreviewView: NSView {
 extension NativePreviewView {
     /// What the status area says, as one text: the notices, then the typography hint, then the zoom reminder, joined
     /// by newlines and empty when there is none. A state replaces all of it with its title and body. The notices
-    /// include the limits, which sit in their own slot at the bottom, and the zoom reminder is the chip's spoken
-    /// text, so the text is the same wherever the preview draws each part.
+    /// include the limits, which sit in their own slot at the bottom, and the provenance notes, which the information
+    /// panel draws. The zoom reminder is the chip's spoken text, so the text is the same wherever each part is drawn.
     var displayedStatus: String {
         var lines: [String]
         if let stateContent {

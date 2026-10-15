@@ -91,12 +91,13 @@ struct ChromeSkeletonTests {
         host.show(plainPresentation("safe"))
         #expect(host.view.displayedStatus.isEmpty)
         let text = "token = [concealed]"
-        let concealed = TextPresentation(formatID: .plainText, text: text, lineCount: 1,
+        // A structure fallback is a note that stays in the status line; a formatting note now lives in the panel.
+        let concealed = TextPresentation(formatID: .json, text: text, lineCount: 1,
                                          byteCount: text.utf8.count, encoding: .utf8,
-                                         redactionCount: 1, isReformatted: true)
+                                         redactionCount: 1, syntax: .json)
         host.show(concealed)
         let privacy = PreviewStrings.count(.findingSummaryConcealed, 1, locale: host.view.presentationLocale)
-        let notice = PreviewStrings.text(.codeNoticeReformatted)
+        let notice = PreviewStrings.text(.previewStructureFallback)
         #expect(host.view.findingsBanner.summaryLabel.stringValue == privacy)
         #expect(host.view.displayedStatus == notice)
         #expect(host.view.statusLabel.stringValue == notice)
@@ -209,11 +210,11 @@ struct ChromeSkeletonTests {
         let control = view.modeControl
         let resting = displayedFrame(of: control, in: view)
         #expect(!control.isHidden && view.statusLabel.isHidden)
-        // Invisibles adds a note. It sits below the control and moves nothing.
+        // Invisibles adds a provenance note, which the information panel draws, so the status line stays hidden.
+        // The control moves nothing either way.
         try select(.invisibles, in: view)
         #expect(same(displayedFrame(of: control, in: view), resting))
-        #expect(!view.statusLabel.isHidden && !view.statusLabel.stringValue.isEmpty)
-        #expect(displayedFrame(of: view.statusLabel, in: view).maxY <= displayedFrame(of: control, in: view).minY + 0.5)
+        #expect(view.statusLabel.isHidden && view.displayedStatus.contains(PreviewStrings.text(.previewInvisiblesNote)))
         // Back to Source: the note goes away and the control still does not move.
         try select(.source, in: view)
         #expect(same(displayedFrame(of: control, in: view), resting) && view.statusLabel.isHidden)
@@ -356,11 +357,12 @@ struct ChromeSkeletonTests {
     @Test func voiceOverReadsTheHeaderTheFindingsTheControlTheContentAndTheLimitsInThatOrder() throws {
         let host = harness()
         defer { host.release() }
-        host.show(presentationWithInvisibles(redactions: 1, truncatedSourceBytes: 3_000_000, isReformatted: true))
+        // No status note here: the formatting note is in the information panel, so the status line is out of the order.
+        host.show(presentationWithInvisibles(redactions: 1, truncatedSourceBytes: 3_000_000))
         host.press("=", .command)
         host.view.layoutSubtreeIfNeeded()
         let view = host.view
-        let expected: [NSView] = [view.factsLabel, view.statusLabel, view.chip, view.infoBadge, view.findingsBanner, view.modeControl,
+        let expected: [NSView] = [view.factsLabel, view.chip, view.infoBadge, view.findingsBanner, view.modeControl,
                                   view.scrollView, view.limitsLabel]
         #expect(view.navigationOrderViews.map(ObjectIdentifier.init) == expected.map(ObjectIdentifier.init))
         // AppKit exposes labels and segmented controls through their cells on this SDK. Choose each view's
@@ -396,15 +398,15 @@ struct ChromeSkeletonTests {
     /// slot shrinks instead (the first row of a 200 pt preview once lost its content to a 38 pt column of notes).
     @Test func aNarrowPreviewKeepsItsNotesReadableAndItsContentInView() throws {
         let view = NativePreviewView(frame: NSRect(x: 0, y: 0, width: 200, height: 140))
-        // A real formatting notice shares the first row with the badge; privacy stays in its summary.
+        // A real status note (a structure fallback) shares the first row with the badge; privacy stays in its summary.
         let text = "safe words"
-        let safe = TextPresentation(formatID: .plainText, text: text, lineCount: 1,
+        let safe = TextPresentation(formatID: .json, text: text, lineCount: 1,
                                     byteCount: text.utf8.count, encoding: .utf8,
-                                    redactionCount: 1, isReformatted: true)
+                                    redactionCount: 1, syntax: .json)
         view.display(.ready(safe), locale: english)
         view.layoutSubtreeIfNeeded()
         #expect(view.density == .compact && !view.statusLabel.isHidden)
-        #expect(view.statusLabel.stringValue == PreviewStrings.text(.codeNoticeReformatted))
+        #expect(view.statusLabel.stringValue == PreviewStrings.text(.previewStructureFallback))
         #expect(!view.findingsBanner.isHidden)
         #expect(view.findingsBanner.summaryLabel.stringValue == PreviewStrings.count(.findingSummaryConcealed, 1, locale: english))
         #expect(view.statusLabel.frame.width >= PreviewChrome.notesMinimumWidth - 1)

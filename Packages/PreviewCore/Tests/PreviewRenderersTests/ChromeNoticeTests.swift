@@ -5,7 +5,8 @@ import PreviewContracts
 @testable import PreviewRenderers
 
 /// Typed notices (decision 027, Q-51 groundwork): every notice says whether it is a limit (shown in the slot at the
-/// bottom), a fallback or provenance (shown below the mode control). `PresentationNotices.lines` keeps its old shape.
+/// bottom), a fallback (shown below the mode control) or provenance (shown in the information panel).
+/// `PresentationNotices.lines` keeps its old shape.
 @Suite("Chrome notices", .serialized)
 @MainActor
 struct ChromeNoticeTests {
@@ -88,7 +89,7 @@ struct ChromeNoticeTests {
         return host
     }
 
-    @Test func limitsGoToTheLimitsSlotAndEverythingElseToTheNotesInTheirOriginalOrder() {
+    @Test func limitsGoToTheLimitsSlotAndTheStatusTextKeepsEveryNoticeInItsOrder() {
         let host = harness()
         defer { host.release() }
         let sample = presentation("token = ••••", redactions: 1, truncatedSourceBytes: 4_000_000, isReformatted: true)
@@ -98,7 +99,8 @@ struct ChromeNoticeTests {
         let reformatted = PreviewStrings.text(.codeNoticeReformatted)
         #expect(!limit.isEmpty)
         #expect(host.view.limitsLabel.stringValue == limit)
-        #expect(host.view.statusLabel.stringValue == reformatted)
+        // A formatting note is provenance: the information panel draws it, so the status line holds no note here.
+        #expect(host.view.statusLabel.stringValue.isEmpty)
         // The status text keeps every notice in the order its family produced them, whichever slot shows each.
         #expect(host.view.displayedStatus == [limit, reformatted].joined(separator: "\n"))
     }

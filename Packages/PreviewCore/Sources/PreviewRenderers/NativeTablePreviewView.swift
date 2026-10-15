@@ -76,10 +76,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         tableView.intercellSpacing = NSSize(width: 12, height: 0)
         tableView.safeCopy = { [weak self] in self?.selectedSafeText() ?? "" }
         tableView.didCopyRows = { [weak self] event in self?.reportCopy(event) }
-        tableView.focusFilter = { [weak self] in
-            guard let self else { return }
-            self.window?.makeFirstResponder(self.filterField)
-        }
+        tableView.focusFilter = { [weak self] in _ = self?.showFilter() }
         configureFilterBar()
         stack.orientation = .vertical
         stack.alignment = .width
@@ -368,6 +365,17 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     @objc private func filterFieldChanged(_ field: NSSearchField) {
         setFilter(field.stringValue)
         announceFilterResult()
+    }
+
+    /// Shows the filter bar if it is hidden and moves keyboard focus into the filter field. The table's own Command-F
+    /// and the preview's Command-F in every table mode both come here, so "from anywhere" is the same action as
+    /// "with the table focused". False when no table is loaded, so the key is not taken.
+    @discardableResult
+    func showFilter() -> Bool {
+        guard table != nil else { return false }
+        filterBar.isHidden = false
+        window?.makeFirstResponder(filterField)
+        return true
     }
 
     /// Hides every row without the text; an empty text shows every row again.
