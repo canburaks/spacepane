@@ -80368,6 +80368,96 @@
         }
       }
     },
+    "preview.info.notesHeading": {
+      "comment": "Heading above the notes about how this preview was made, in the inline preview information panel (for example that a signature was not verified or that formulas are approximated). It sits between the count of concealed values and the commands heading. Draft translations pending native-speaker review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes about this preview"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu önizleme hakkında notlar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hinweise zu dieser Vorschau"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remarques sur cet aperçu"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关于此预览的说明"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプレビューについての注記"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस पूर्वावलोकन के बारे में नोट"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nîşeyên der barê vê pêşdîtinê"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Примечания об этом предпросмотре"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catatan tentang pratinjau ini"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই প্রিভিউ সম্পর্কে নোট"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bayanai game da wannan samfotin"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas sobre esta pré-visualização"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas sobre esta vista previa"
+          }
+        }
+      }
+    },
     "preview.info.onThisMac": {
       "comment": "Privacy/provenance sentence in the inline preview information panel. Describes local app processing; does not make a claim about the file provider or Finder routing. Draft translations pending native-speaker review.",
       "extractionState": "manual",
@@ -89276,6 +89366,96 @@
         }
       }
     },
+    "preview.mode.endpoints": {
+      "comment": "Mode label, shown in the mode control beside Source and Outline, for the table of operations in an OpenAPI or Swagger document (one row per method and path). Draft translations pending native-speaker review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endpoints"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uç noktalar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endpunkte"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Points d’accès"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "端点"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エンドポイント"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एंडपॉइंट"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xalên dawîn"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Конечные точки"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endpoint"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এন্ডপয়েন্ট"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanyoyin ƙarshe"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pontos finais"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos finales"
+          }
+        }
+      }
+    },
     "preview.mode.files": {
       "comment": "Preview mode title: a sortable table of the files listed in a folder or archive.",
       "extractionState": "manual",
@@ -93946,6 +94126,348 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tamaño del vocabulario"
+          }
+        }
+      }
+    },
+    "preview.openapi.column.deprecated": {
+      "comment": "Column header of the Endpoints table. The cells in this column say Yes, using the same word as the Yes value, for an operation the document marks as deprecated, and are empty otherwise. Draft translations pending native-speaker review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deprecated"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanım dışı"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veraltet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obsolète"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已弃用"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "非推奨"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पदावनत"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalkirî"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Устарело"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usang"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অবচিত"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An soke"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obsoleto"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obsoleto"
+          }
+        }
+      }
+    },
+    "preview.openapi.unresolvedReferences": {
+      "comment": "Limits sentence under the Endpoints table: how many path items name a reference this preview cannot follow inside the document, so their operations are not listed. The first formatter argument selects the plural category and is never printed; the second is the count formatted for the presentation locale and every variant prints it as %2$@. Draft translations pending native-speaker review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ path item refers to another file or an unknown location and is not listed."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ path items refer to other files or unknown locations and are not listed."
+                }
+              }
+            }
+          }
+        },
+        "tr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ yol öğesi başka bir dosyaya veya bilinmeyen bir konuma işaret ediyor ve listelenmiyor."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ yol öğesi başka dosyalara veya bilinmeyen konumlara işaret ediyor ve listelenmiyor."
+                }
+              }
+            }
+          }
+        },
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ Pfadelement verweist auf eine andere Datei oder einen unbekannten Ort und wird nicht aufgelistet."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ Pfadelemente verweisen auf andere Dateien oder unbekannte Orte und werden nicht aufgelistet."
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ élément de chemin renvoie vers un autre fichier ou un emplacement inconnu et n’est pas listé."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ éléments de chemin renvoient vers d’autres fichiers ou des emplacements inconnus et ne sont pas listés."
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans": {
+          "variations": {
+            "plural": {
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ 个路径项引用了其他文件或未知位置，因此未列出。"
+                }
+              }
+            }
+          }
+        },
+        "ja": {
+          "variations": {
+            "plural": {
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ 件のパス項目が別のファイルまたは不明な場所を参照しているため、一覧には表示されません。"
+                }
+              }
+            }
+          }
+        },
+        "hi": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थान की ओर संदर्भ देता है, इसलिए वह सूची में नहीं है।"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थानों की ओर संदर्भ देते हैं, इसलिए वे सूची में नहीं हैं।"
+                }
+              }
+            }
+          }
+        },
+        "ku-Latn": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ tiştê rêyê li pelekî din an cihekî nenas dinihêre û navnîş nabe."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ tiştên rêyê li pelên din an cihên nenas dinihêrin û navnîş nabin."
+                }
+              }
+            }
+          }
+        },
+        "ru": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ элемент пути ссылается на другой файл или неизвестное место и не показан."
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны."
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ элементов пути ссылаются на другие файлы или неизвестные места и не показаны."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны."
+                }
+              }
+            }
+          }
+        },
+        "id": {
+          "variations": {
+            "plural": {
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ item jalur merujuk ke berkas lain atau lokasi yang tidak diketahui, sehingga tidak ditampilkan."
+                }
+              }
+            }
+          }
+        },
+        "bn": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@টি পাথ-আইটেম অন্য একটি ফাইল বা অজানা স্থানের দিকে নির্দেশ করে, তাই তালিকায় নেই।"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@টি পাথ-আইটেম অন্য ফাইল বা অজানা স্থানের দিকে নির্দেশ করে, তাই তালিকায় নেই।"
+                }
+              }
+            }
+          }
+        },
+        "ha": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ abu na hanya yana nuni zuwa wani fayil ko wurin da ba a sani ba, don haka ba a jera shi ba."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ abubuwan hanya suna nuni zuwa wasu fayiloli ko wuraren da ba a sani ba, don haka ba a jera su ba."
+                }
+              }
+            }
+          }
+        },
+        "pt": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ item de caminho aponta para outro arquivo ou para um local desconhecido e não é listado."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ itens de caminho apontam para outros arquivos ou locais desconhecidos e não são listados."
+                }
+              }
+            }
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ elemento de ruta hace referencia a otro archivo o a una ubicación desconocida y no se muestra."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%2$@ elementos de ruta hacen referencia a otros archivos o a ubicaciones desconocidas y no se muestran."
+                }
+              }
+            }
           }
         }
       }

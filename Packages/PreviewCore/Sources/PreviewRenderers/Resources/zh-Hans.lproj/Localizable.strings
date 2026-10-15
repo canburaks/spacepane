@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "此视图中的命令";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "关于此预览的说明";
 "preview.info.onThisMac" = "在此 Mac 上处理";
 "preview.install.commands" = "安装的命令";
 "preview.install.dependencies" = "依赖项";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "目录";
 "preview.mode.cues" = "字幕条目";
 "preview.mode.diagram" = "图表";
+"preview.mode.endpoints" = "端点";
 "preview.mode.files" = "文件";
 "preview.mode.icon" = "图标";
 "preview.mode.invisibles" = "不可见字符";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "张量";
 "preview.model.tokenizer" = "分词器";
 "preview.model.vocabularySize" = "词表大小";
+"preview.openapi.column.deprecated" = "已弃用";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "重复的键";
 "preview.outline.key" = "键";
 "preview.outline.value" = "值";

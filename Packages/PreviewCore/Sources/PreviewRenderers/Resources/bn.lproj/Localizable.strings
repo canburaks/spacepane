@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "এই দৃশ্যের কমান্ড";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "এই প্রিভিউ সম্পর্কে নোট";
 "preview.info.onThisMac" = "এই Mac-এ প্রক্রিয়া করা হয়েছে";
 "preview.install.commands" = "ইনস্টল হওয়া কমান্ড";
 "preview.install.dependencies" = "নির্ভরতা";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "সূচিপত্র";
 "preview.mode.cues" = "সাবটাইটেল";
 "preview.mode.diagram" = "ডায়াগ্রাম";
+"preview.mode.endpoints" = "এন্ডপয়েন্ট";
 "preview.mode.files" = "ফাইল";
 "preview.mode.icon" = "আইকন";
 "preview.mode.invisibles" = "অদৃশ্য অক্ষর";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "টেনসর";
 "preview.model.tokenizer" = "টোকেনাইজার";
 "preview.model.vocabularySize" = "শব্দভান্ডারের আকার";
+"preview.openapi.column.deprecated" = "অবচিত";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "পুনরাবৃত্ত কি";
 "preview.outline.key" = "কি";
 "preview.outline.value" = "মান";

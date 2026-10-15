@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "Commands in this view";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "Notes about this preview";
 "preview.info.onThisMac" = "Processed on this Mac";
 "preview.install.commands" = "Commands installed";
 "preview.install.dependencies" = "Dependencies";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "Contents";
 "preview.mode.cues" = "Cues";
 "preview.mode.diagram" = "Diagram";
+"preview.mode.endpoints" = "Endpoints";
 "preview.mode.files" = "Files";
 "preview.mode.icon" = "Icon";
 "preview.mode.invisibles" = "Invisibles";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "Tensors";
 "preview.model.tokenizer" = "Tokenizer";
 "preview.model.vocabularySize" = "Vocabulary size";
+"preview.openapi.column.deprecated" = "Deprecated";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "Duplicate key";
 "preview.outline.key" = "Key";
 "preview.outline.value" = "Value";

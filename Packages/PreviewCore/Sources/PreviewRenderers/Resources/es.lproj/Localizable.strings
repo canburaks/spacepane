@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "Comandos de esta vista";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "Notas sobre esta vista previa";
 "preview.info.onThisMac" = "Procesado en este Mac";
 "preview.install.commands" = "Comandos instalados";
 "preview.install.dependencies" = "Dependencias";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "Contenido";
 "preview.mode.cues" = "Subtítulos";
 "preview.mode.diagram" = "Diagrama";
+"preview.mode.endpoints" = "Puntos finales";
 "preview.mode.files" = "Archivos";
 "preview.mode.icon" = "Icono";
 "preview.mode.invisibles" = "Invisibles";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "Tensores";
 "preview.model.tokenizer" = "Tokenizador";
 "preview.model.vocabularySize" = "Tamaño del vocabulario";
+"preview.openapi.column.deprecated" = "Obsoleto";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "Clave duplicada";
 "preview.outline.key" = "Clave";
 "preview.outline.value" = "Valor";
