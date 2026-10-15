@@ -20,7 +20,7 @@ struct SourceLanguageDetectorTests {
         ("schema.graphql", .graphQL), ("api.proto", .protobuf), ("api.thrift", .thrift), ("main.tf", .hcl),
         ("flake.nix", .nix), ("rules.bzl", .starlark), ("find.cmake", .cmake), ("App.vue", .vue), ("style.scss", .scss),
         ("deploy.ps1", .powerShell), ("run.bat", .batch), ("config.fish", .fish), ("env.nu", .nushell),
-        ("tell.applescript", .appleScript), ("schema.prisma", .prisma), ("flow.puml", .plantUML), ("index.html", .html),
+        ("tell.applescript", .appleScript), ("setup.tool", .shell), ("schema.prisma", .prisma), ("flow.puml", .plantUML), ("index.html", .html),
         ("query.sql", .sql), ("shader.wgsl", .wgsl), ("page.tsx", .typescript), ("app.mjs", .javascript)
     ]) func suffixesMapToTheirLanguage(filename: String, expected: SourceLanguageID) {
         #expect(language(filename) == expected, "\(filename)")

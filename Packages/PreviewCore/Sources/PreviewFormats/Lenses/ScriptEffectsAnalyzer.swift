@@ -9,19 +9,34 @@ struct ScriptListEffects {
     func count(of effect: ScriptEffect) -> Int { counts[effect.rawValue] }
 }
 
-/// A file a command saved by downloading or decoding, and the line that did it.
+/// A file a command saved by downloading or decoding, keyed by its literal path text (see
+/// `ScriptArguments.fileKey`), and the line that saved it.
 struct ScriptSavedFile {
     var key: String
     var line: Int
 }
 
-/// Files saved by downloading or decoding, and files made executable. A batch script keeps them across
-/// lines; any other script keeps them for one command list.
+/// Files a script saved by downloading or decoding, and files it made executable. They belong to the whole
+/// document, so a download on one line is matched by a run on a later one. Each list keeps at most `limit`
+/// entries and forgets the oldest first, which bounds the store for any input.
 struct ScriptSavedFiles {
+    static let limit = 64
     var downloads: [ScriptSavedFile] = []
     var decodes: [ScriptSavedFile] = []
-    var executable: Set<String> = []
-    static let limit = 8
+    var executable: [String] = []
+
+    /// Records a file, forgetting the oldest entry of its list when the list is full.
+    static func remember(_ file: ScriptSavedFile, in list: inout [ScriptSavedFile]) {
+        if list.count >= limit { list.removeFirst() }
+        list.append(file)
+    }
+
+    /// Records a file as executable once, under the same bound.
+    mutating func markExecutable(_ key: String) {
+        guard !executable.contains(key) else { return }
+        if executable.count >= Self.limit { executable.removeFirst() }
+        executable.append(key)
+    }
 }
 
 /// Applies the effect rules to the command lists of one script. One instance serves one lens call; it
@@ -34,8 +49,8 @@ final class ScriptEffectsAnalyzer {
     let context: RequestContext
     let bytes: UnsafeBufferPointer<UInt8>
     private(set) var tally = ScriptEffectsTally()
-    /// Files an earlier line of a batch script saved, to be recognized when a later line runs them.
-    var pendingBatchFiles = ScriptSavedFiles()
+    /// Files the document saved or made executable so far, recognized when a later command runs them.
+    var savedFiles = ScriptSavedFiles()
 
     init(bytes: UnsafeBufferPointer<UInt8>, context: RequestContext) {
         self.bytes = bytes
@@ -86,7 +101,6 @@ final class ScriptEffectsAnalyzer {
         let commands = list.commands
         let invocations = commands.map { ScriptInvocation.resolve($0, dialect: dialect) }
         evaluatePipelines(commands, invocations, effects: &effects)
-        var files = dialect == .batch ? pendingBatchFiles : ScriptSavedFiles()
         for index in commands.indices {
             let command = commands[index]
             let invocation = invocations[index]
@@ -94,7 +108,7 @@ final class ScriptEffectsAnalyzer {
             evaluateSecrets(of: command, invocation: invocation, effects: &effects)
             if let invocation {
                 try evaluate(invocation, of: command, dialect: dialect, depth: depth, line: line, effects: &effects)
-                trackFiles(command, invocation, dialect: dialect, line: line, files: &files)
+                trackFiles(command, invocation, dialect: dialect, line: line, effects: &effects)
             }
             for word in command.words where !word.substitutions.isEmpty {
                 try evaluate(substitutionsOf: word, dialect: dialect, depth: depth, line: line, effects: &effects)
@@ -103,7 +117,6 @@ final class ScriptEffectsAnalyzer {
                 try evaluate(substitutionsOf: redirect.target, dialect: dialect, depth: depth, line: line, effects: &effects)
             }
         }
-        if dialect == .batch { pendingBatchFiles = files }
         try evaluateWindows(list, invocations, dialect: dialect, depth: depth, line: line, inSubstitution: inSubstitution, effects: &effects)
     }
 

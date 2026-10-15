@@ -14,10 +14,11 @@ extension ScriptEffectsAnalyzer {
         let runs = statement.names.contains("iex") || statement.names.contains("invoke-expression")
             || words.contains { $0.contains("scriptblock]::create") }
         let fetches = !statement.names.isDisjoint(with: Self.powerShellFetchers) || words.contains { $0.contains(".downloadstring") }
-        if runs, fetches {
-            effects.add(.downloadAndRun)
-        } else if !statement.names.isDisjoint(with: ["start-process", "saps", "invoke-item"]),
-                  words.contains(where: { $0.contains(".downloadfile") }) || (fetches && words.contains("-outfile")) {
+        let startsDownload = !statement.names.isDisjoint(with: ["start-process", "saps", "invoke-item"])
+            && (words.contains(where: { $0.contains(".downloadfile") }) || (fetches && words.contains("-outfile")))
+        // A run of a file this list saved (`iwr ... -OutFile x; Start-Process x`) is already counted once by the saved-file
+        // rule, which is why the statement is not counted again.
+        if (runs && fetches) || startsDownload, effects.count(of: .downloadAndRun) == 0 {
             effects.add(.downloadAndRun)
         }
         if runs, words.contains(where: { $0.contains("::frombase64string") }) { effects.add(.decodeAndRun) }
