@@ -136,7 +136,7 @@ struct TqInteractionProvenanceTests {
         let lines = PreviewInfoPanelCopy.lines(providerName: "Acme Preview", concealedCount: 1, commands: [.find],
             locale: english, languagePreferences: ["en"], provenance: ["Formatted for display"])
         #expect(lines == ["Read-only preview", "Processed on this Mac", "Preview by Acme Preview",
-            "1 likely secret concealed.", PreviewStrings.text(.previewInfoNotesHeading, languagePreferences: ["en"]),
+            "1 likely secret concealed.", "Notes about this preview",
             "Formatted for display", "Commands in this view",
             PreviewStrings.format(.previewInfoCommand, arguments: [PreviewCommand.find.localizedTitle(
                 locale: english, languagePreferences: ["en"]), "⌘F"], locale: english, languagePreferences: ["en"])])
@@ -147,7 +147,7 @@ struct TqInteractionProvenanceTests {
             languagePreferences: ["en"])
         #expect(bare == PreviewInfoPanelCopy.lines(providerName: nil, concealedCount: 0, commands: [], locale: english,
             languagePreferences: ["en"], provenance: []))
-        #expect(!bare.contains(PreviewStrings.text(.previewInfoNotesHeading, languagePreferences: ["en"])))
+        #expect(!bare.contains("Notes about this preview"))
     }
 
     private func geometry() throws -> GeometryPresentation {
