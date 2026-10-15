@@ -2,6 +2,15 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-15 — Version 1.1.0 configured
+
+Owner request ("configure all necessary files", release 1.1.0 setup).
+
+- Configuration: `MARKETING_VERSION = 1.1.0` (the owner's change) and `CURRENT_PROJECT_VERSION = 4` in `Configuration/Base.xcconfig`; CAD stays off.
+- Documentation: [docs/release/version-1.1.0.md](docs/release/version-1.1.0.md), the release record: contents since 1.0.0 (build 3), What's New (730 characters), promotional text (169), description (3,740 of 4,000), the claim gate and the steps left. The App Review notes in `app-store-submission.md` name 1.1.0 (build 4) and the three new samples; the listing and the roadmap point at the record; a PLAN section.
+- Review samples: `32-model.gguf`, `33-extension.vsix` and `34-package.whl` from the host fixtures; `python3 script/build_review_samples.py --check` passes (36 files).
+- Tests: `script/test_build_review_samples.py` now reads the version and build the notes must name from `Base.xcconfig` instead of a literal `1.0.0 (build 3)`. `--check-static` and `--check` pass.
+- Not done: nothing was archived or uploaded; 1.0.0 (build 3) is still in review. The website is unchanged; its badges change on `app-store-launch` after approval.
 ## 2026-10-15 — No typed filter in Finder; three notes removed
 
 Owner report and decisions: in Finder the table filter did not work, because typed keys went to Finder, which jumped to another file; the owner chose to hide the filter in Finder, to hide the table filter field until asked for, and to remove the profile sampling, concealed-column and invisibles notes.

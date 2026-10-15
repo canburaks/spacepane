@@ -61,7 +61,7 @@ Paste the quoted block into the Notes field of App Review Information, attach `S
 
 | Statement | Basis | Still to observe |
 | --- | --- | --- |
-| Version 1.0.0, build 3 | Build 1 was uploaded on 2026-10-10 and will not be submitted. Build 2 was uploaded on 2026-10-12 with CAD in it; it is for the owner's internal TestFlight testing only and must not be submitted ([decision 028](../decisions/028-no-cad-in-version-1.md)). The submission build is build 3, built without CAD. | `CURRENT_PROJECT_VERSION = 3` and `PREV_INCLUDE_CAD = NO` must be in the archive that is uploaded and selected for the version. |
+| Version 1.1.0, build 4 (1.0.0 build 3 was the first submission) | Build 1 was uploaded on 2026-10-10 and will not be submitted. Build 2 was uploaded on 2026-10-12 with CAD in it; it is for the owner's internal TestFlight testing only and must not be submitted ([decision 028](../decisions/028-no-cad-in-version-1.md)). The submission build is build 3, built without CAD. | `CURRENT_PROJECT_VERSION = 4` and `PREV_INCLUDE_CAD = NO` must be in the archive that is uploaded and selected for the version. |
 | Tested on macOS 27.2, Apple silicon | The host matrix and the signed-host records. | Repeat on the store-signed build (plan Phases 3 and 4). |
 | Tested on macOS 15.2 | The owner's report (2026-10-12) of a run in a macOS 15.2 virtual machine, taken as given on the owner's instruction. No session observed it and it is not in the host matrix. | Record the run in `docs/validation/host-matrix.json`. |
 | Enabling the extensions | Step 1 relies on the in-app "Open System Settings" button first and gives the macOS 15 path (the companion's own setup text gives the same path) as the manual route. No path for macOS 26 or 27 is recorded in `docs/validation/` or `CHANGELOGS.md` (searched 2026-10-12), and the button, which opens the Login Items & Extensions pane (`GeneralView.swift`), has never been observed. | The exact System Settings route on 27.2, word for word. Add it to step 1 if the button lands elsewhere. |
@@ -70,7 +70,7 @@ Paste the quoted block into the Notes field of App Review Information, attach `S
 
 STEP and IGES do not ship in 1.0 ([decision 028](../decisions/028-no-cad-in-version-1.md), decided 2026-10-13, which settled R-2 of the review readiness plan). The 3D paragraph and the two CAD file names were taken out of the block, and the two CAD samples out of `SAMPLES` in the builder; `--check` fails if the notes and the archive disagree. The notes make no claim about Open CASCADE or a source offer, because the build has none. If CAD returns, restore the paragraph and the two samples from git history (the commit before 2026-10-13) after the steps in decision 028, "Bringing CAD back".
 
-> SpacePane 1.0.0 (build 3) adds Quick Look previews and thumbnails to Finder. It is a small companion app plus two Quick Look extensions, SpacePane Preview and SpacePane Thumbnails. Everything runs on the Mac: no account, no sign-in, no network access, no in-app purchase. It needs Apple silicon and macOS 15 or later.
+> SpacePane 1.1.0 (build 4) adds Quick Look previews and thumbnails to Finder. It is a small companion app plus two Quick Look extensions, SpacePane Preview and SpacePane Thumbnails. Everything runs on the Mac: no account, no sign-in, no network access, no in-app purchase. It needs Apple silicon and macOS 15 or later.
 >
 > Tested on macOS 27.2 and on macOS 15.2, on Apple silicon.
 >
@@ -79,6 +79,8 @@ STEP and IGES do not ship in 1.0 ([decision 028](../decisions/028-no-cad-in-vers
 > 2. Unzip the attached SpacePane-Review-Samples.zip. Its README.txt lists every file and what to look for.
 > 3. In Finder select 01-settings.json and press Space. It opens as a JSON outline with a Source view. The file holds a deliberately fake token and password; SpacePane conceals them and the file is unchanged.
 > 4. Also try 07-stations.sqlite (database tables), 08-release.zip (archive listing, nothing extracted), 15-analysis.ipynb (notebook, never run), 16-document.md (Markdown), 28-binary.stl (a 3D model you can turn) and Makefile (a file with no extension).
+>
+> New in 1.1.0: previews say what a file would do if it were run, installed or trusted. 32-model.gguf shows an AI model's summary read from its header (the model is never loaded), 33-extension.vsix an editor extension's activation and permissions, and 34-package.whl a Python package's contents and the code it runs at start (nothing is installed). Findings are statements about the file's text; SpacePane never runs it.
 >
 > macOS decides which installed app previews each file type. If another app already previews a type, Quick Look may use it. An info symbol in the preview shows when SpacePane made it.
 >
