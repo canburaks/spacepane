@@ -125,8 +125,12 @@ enum ScriptArguments {
         return nil
     }
 
-    /// Applications, command and tool scripts and installer packages: the kinds of file `open` runs rather than shows.
+    /// Applications, command and tool scripts and installer packages: the kinds of file macOS `open` runs rather than shows.
     private static let openedProgramExtensions: Set<String> = ["app", "command", "tool", "pkg", "mpkg"]
+    /// Programs, scripts, installers and shortcuts that Windows starts as code rather than shows in a viewer.
+    private static let startedProgramExtensions: Set<String> = [
+        "bat", "cmd", "com", "exe", "hta", "jar", "js", "lnk", "msi", "ps1", "scr", "vbs", "wsf"
+    ]
 
     /// The file `open` launches: its first operand, skipping the options and `-a` and `-b`, which take a value.
     /// `--args` passes the rest to the program, so no file follows it.
@@ -146,11 +150,13 @@ enum ScriptArguments {
         return nil
     }
 
-    /// Whether `open` runs a file of this name, judged from its last extension alone.
-    static func opensAsProgram(_ path: String) -> Bool {
+    /// Whether `open` (macOS) or `Start-Process` (Windows) runs a file of this name rather than showing it, judged
+    /// from its last extension alone.
+    static func opensAsProgram(_ path: String, windows: Bool) -> Bool {
         let name = path.split(separator: "/").last ?? ""
         guard let dot = name.lastIndex(of: "."), dot != name.startIndex else { return false }
-        return openedProgramExtensions.contains(name[name.index(after: dot)...].lowercased())
+        let programs = windows ? startedProgramExtensions : openedProgramExtensions
+        return programs.contains(name[name.index(after: dot)...].lowercased())
     }
 
     /// The package `installer -pkg` installs.
