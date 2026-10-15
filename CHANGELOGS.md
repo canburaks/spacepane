@@ -2,6 +2,14 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-14 — Remaining feature improvements, quick wins first
+
+Research only, at the owner's request ("make a list ... by sorting the quick wins"). No code, catalog, plan box or store record changed.
+
+- Research: five agents audited what is left of the 2026-10-13 research against the code after Safety Lens 2 and 3 (leftovers; dialect lenses and developer binaries; office, business and creative formats; science, maker and hobby formats; interaction and cross-cutting work). Two more tried to refute the twelve cheapest ratings: seven grew and two shrank. The lead read the code behind two claims: an escaped-slash plist URL is concealed whole, so that item is cosmetic, and YAML concealment is by key name only, so Kubernetes `Secret` values with ordinary key names show in the clear (not run).
+- Documentation: [docs/market/2026-10-14-quick-wins-after-safety-lens-3.md](docs/market/2026-10-14-quick-wins-after-safety-lens-3.md). It ranks seven quick wins that need no new format or owner decision (`.tool` script effects, Cmd-F in table modes, plist slash escaping, provenance notes in the info panel, an OpenAPI endpoint table, workspace and Cursor hook files in the auto-run lens, download-then-run across lines), then small new formats led by `.1pux`, SARIF and reference files, then medium work grouped by enabler (a YAML reader in `PreviewFormats`, a line primitive in the geometry renderer), every other audited item unranked, owner decisions, platform spikes and open validation. Every item is a proposal.
+- Limits: ratings are code readings, not spikes; nothing was built, run or observed in Finder; no web or App Store queries.
+
 ## 2026-10-14 — A shorter README; website synced
 
 Owner request: make the README up to date, lean and easy to understand.
