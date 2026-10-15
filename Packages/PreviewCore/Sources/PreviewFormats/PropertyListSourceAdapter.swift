@@ -44,7 +44,7 @@ public struct PropertyListSourceAdapter: FormatAdapter, BinaryFormatAdapter {
         var normalizer = PropertyListNormalizer(context: context)
         let normalized = try normalizer.value(value, depth: 1)
         let json: Data
-        do { json = try JSONSerialization.data(withJSONObject: normalized, options: [.sortedKeys, .prettyPrinted, .fragmentsAllowed]) }
+        do { json = try JSONSerialization.data(withJSONObject: normalized, options: [.sortedKeys, .prettyPrinted, .fragmentsAllowed, .withoutEscapingSlashes]) }
         catch { throw PreviewFailure.malformedDocument }
         guard json.count <= context.budget.maxOutputUTF8Bytes else { throw PreviewFailure.outputTooLarge }
         let source = String(decoding: json, as: UTF8.self)

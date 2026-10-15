@@ -987,6 +987,7 @@
       "one": "Posibles secretos ocultos: %2$@.",
       "other": "Posibles secretos ocultos: %2$@."
     },
+    "preview.info.notesHeading": "Notas sobre esta vista previa",
     "preview.info.onThisMac": "Procesado en este Mac",
     "preview.install.commands": "Comandos instalados",
     "preview.install.dependencies": "Dependencias",
@@ -1086,6 +1087,7 @@
     "preview.mode.contents": "Contenido",
     "preview.mode.cues": "Subtítulos",
     "preview.mode.diagram": "Diagrama",
+    "preview.mode.endpoints": "Puntos finales",
     "preview.mode.files": "Archivos",
     "preview.mode.icon": "Icono",
     "preview.mode.invisibles": "Invisibles",
@@ -1138,6 +1140,11 @@
     "preview.model.tensors": "Tensores",
     "preview.model.tokenizer": "Tokenizador",
     "preview.model.vocabularySize": "Tamaño del vocabulario",
+    "preview.openapi.column.deprecated": "Obsoleto",
+    "preview.openapi.unresolvedReferences": {
+      "one": "%2$@ elemento de ruta hace referencia a otro archivo o a una ubicación desconocida y no se muestra.",
+      "other": "%2$@ elementos de ruta hacen referencia a otros archivos o a ubicaciones desconocidas y no se muestran."
+    },
     "preview.outline.duplicateKey": "Clave duplicada",
     "preview.outline.key": "Clave",
     "preview.outline.value": "Valor",

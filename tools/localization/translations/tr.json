@@ -946,6 +946,7 @@
       "one": "%2$@ olası gizli bilgi gizlendi.",
       "other": "%2$@ olası gizli bilgi gizlendi."
     },
+    "preview.info.notesHeading": "Bu önizleme hakkında notlar",
     "preview.info.onThisMac": "Bu Mac’te işlendi",
     "preview.install.commands": "Kurulan komutlar",
     "preview.install.dependencies": "Bağımlılıklar",
@@ -1045,6 +1046,7 @@
     "preview.mode.contents": "İçindekiler",
     "preview.mode.cues": "Altyazılar",
     "preview.mode.diagram": "Diyagram",
+    "preview.mode.endpoints": "Uç noktalar",
     "preview.mode.files": "Dosyalar",
     "preview.mode.icon": "Simge",
     "preview.mode.invisibles": "Görünmezler",
@@ -1097,6 +1099,11 @@
     "preview.model.tensors": "Tensörler",
     "preview.model.tokenizer": "Belirteçleyici",
     "preview.model.vocabularySize": "Sözcük dağarcığı boyutu",
+    "preview.openapi.column.deprecated": "Kullanım dışı",
+    "preview.openapi.unresolvedReferences": {
+      "one": "%2$@ yol öğesi başka bir dosyaya veya bilinmeyen bir konuma işaret ediyor ve listelenmiyor.",
+      "other": "%2$@ yol öğesi başka dosyalara veya bilinmeyen konumlara işaret ediyor ve listelenmiyor."
+    },
     "preview.outline.duplicateKey": "Yinelenen anahtar",
     "preview.outline.key": "Anahtar",
     "preview.outline.value": "Değer",

@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "Команды в этом представлении";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "Примечания об этом предпросмотре";
 "preview.info.onThisMac" = "Обработано на этом Mac";
 "preview.install.commands" = "Устанавливаемые команды";
 "preview.install.dependencies" = "Зависимости";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "Содержание";
 "preview.mode.cues" = "Реплики";
 "preview.mode.diagram" = "Диаграмма";
+"preview.mode.endpoints" = "Конечные точки";
 "preview.mode.files" = "Файлы";
 "preview.mode.icon" = "Значок";
 "preview.mode.invisibles" = "Невидимые";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "Тензоры";
 "preview.model.tokenizer" = "Токенизатор";
 "preview.model.vocabularySize" = "Размер словаря";
+"preview.openapi.column.deprecated" = "Устарело";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "Повторяющийся ключ";
 "preview.outline.key" = "Ключ";
 "preview.outline.value" = "Значение";

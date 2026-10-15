@@ -802,6 +802,22 @@
 			<string>%2$@ likely secrets concealed.</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ path item refers to another file or an unknown location and is not listed.</string>
+			<key>other</key>
+			<string>%2$@ path items refer to other files or unknown locations and are not listed.</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

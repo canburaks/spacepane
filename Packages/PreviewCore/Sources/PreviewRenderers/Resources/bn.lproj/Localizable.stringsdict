@@ -802,6 +802,22 @@
 			<string>লুকানো সম্ভাব্য গোপন তথ্য: %2$@।</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@টি পাথ-আইটেম অন্য একটি ফাইল বা অজানা স্থানের দিকে নির্দেশ করে, তাই তালিকায় নেই।</string>
+			<key>other</key>
+			<string>%2$@টি পাথ-আইটেম অন্য ফাইল বা অজানা স্থানের দিকে নির্দেশ করে, তাই তালিকায় নেই।</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

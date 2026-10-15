@@ -23,6 +23,7 @@ enum ModePresentationNotices {
             notices.append(.init(kind: .limit, text: PreviewStrings.text(.listingPartialNotice)))
         }
         notices += DrawnModeNotices.notices(modes: modes, mode: mode, locale: locale)
+        notices += OpenAPIEndpointNotices.notices(modes: modes, mode: mode, locale: locale)
         guard let table else { return notices }
         if table.truncation.contains(.rows) {
             if mode == .profile {

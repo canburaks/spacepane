@@ -802,6 +802,22 @@
 			<string>Agahiyên gengaz ên veşartî hatin veşartin: %2$@.</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ tiştê rêyê li pelekî din an cihekî nenas dinihêre û navnîş nabe.</string>
+			<key>other</key>
+			<string>%2$@ tiştên rêyê li pelên din an cihên nenas dinihêrin û navnîş nabin.</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

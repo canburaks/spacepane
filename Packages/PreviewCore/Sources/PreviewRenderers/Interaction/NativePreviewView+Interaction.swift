@@ -112,7 +112,19 @@ extension NativePreviewView {
             default: return false
             }
         }
+        // A table has no text finder: Command-F opens its filter from anywhere in the preview, and the other find
+        // commands are not advertised there (see `PreviewCommandAvailability.search`).
+        if let table = shownTable { return action == .showFindInterface && table.showFilter() }
         return false
+    }
+
+    /// The table a table mode shows: the preview's own table in Table and Profile, or the table that a Files or Rows
+    /// view hosts. Nil when no table is on screen. Command-F and the information panel's availability both read it,
+    /// so they cannot disagree.
+    var shownTable: NativeTablePreviewView? {
+        if let hosted = shownModeView as? any PreviewHostsTable { return hosted.table }
+        guard showsTableMode else { return nil }
+        return contentView(for: selectedMode) as? NativeTablePreviewView
     }
 
     // MARK: Zoom

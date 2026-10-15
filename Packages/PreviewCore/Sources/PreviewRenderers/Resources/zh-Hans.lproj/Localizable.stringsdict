@@ -702,6 +702,20 @@
 			<string>已隐藏 %2$@ 项疑似机密信息。</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>other</key>
+			<string>%2$@ 个路径项引用了其他文件或未知位置，因此未列出。</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

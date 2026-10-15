@@ -9,7 +9,17 @@ enum AutoRunRules {
     /// A task whose `runOptions.runOn` is `folderOpen` starts when the folder is opened in the editor
     /// (once the user allows automatic tasks). The finding points at the `runOn` key.
     static func editorTasks(_ root: LensJSONNode, into tally: inout AutoRunTally) {
-        for task in root.member("tasks")?.value.elements ?? [] {
+        folderOpenTasks(root.member("tasks")?.value.elements ?? [], into: &tally)
+    }
+
+    /// A workspace file keeps its tasks one level down, as `tasks: { version, tasks: [...] }`; the same task
+    /// rule applies to the inner list. A top-level array under `tasks` is not a workspace shape and adds nothing.
+    static func workspaceTasks(_ root: LensJSONNode, into tally: inout AutoRunTally) {
+        folderOpenTasks(root.member("tasks")?.value.member("tasks")?.value.elements ?? [], into: &tally)
+    }
+
+    private static func folderOpenTasks(_ tasks: [LensJSONNode], into tally: inout AutoRunTally) {
+        for task in tasks {
             guard let runOn = task.member("runOptions")?.value.member("runOn"), runOn.value.isString("folderOpen") else { continue }
             tally.add(.autorunFolderOpenTask, line: runOn.line)
         }
@@ -50,6 +60,22 @@ enum AutoRunRules {
 
     private static func allowsEveryShellCommand(_ rule: String) -> Bool {
         ["Bash", "Bash(*)", "Bash(:*)"].contains { rule.equalsExactly($0) }
+    }
+
+    // MARK: Cursor hooks
+
+    /// Cursor's `hooks.json` maps each event (`beforeShellExecution`, `afterFileEdit`, ...) to a list of entries;
+    /// an entry with a non-empty string `command` runs that command. A concealed command counts too, as in
+    /// `hookCommandLine`: the privacy stage hid its text, not the hook. Other keys, event names and entries
+    /// (a prompt hook has no command) add nothing, and the file's `version` is not required.
+    static func cursorHooks(_ root: LensJSONNode, into tally: inout AutoRunTally) {
+        for event in root.member("hooks")?.value.members ?? [] {
+            for entry in event.value.elements ?? [] {
+                guard let command = entry.member("command"), command.value.isConcealed || command.value.string?.isEmpty == false
+                else { continue }
+                tally.add(.autorunAgentHooks, line: command.line)
+            }
+        }
     }
 
     // MARK: MCP servers

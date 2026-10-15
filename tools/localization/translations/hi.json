@@ -946,6 +946,7 @@
       "one": "छिपाई गई संभावित गोपनीय जानकारियाँ: %2$@।",
       "other": "छिपाई गई संभावित गोपनीय जानकारियाँ: %2$@।"
     },
+    "preview.info.notesHeading": "इस पूर्वावलोकन के बारे में नोट",
     "preview.info.onThisMac": "इस Mac पर संसाधित",
     "preview.install.commands": "इंस्टॉल होने वाले कमांड",
     "preview.install.dependencies": "निर्भरताएँ",
@@ -1045,6 +1046,7 @@
     "preview.mode.contents": "विषय-सूची",
     "preview.mode.cues": "उपशीर्षक",
     "preview.mode.diagram": "आरेख",
+    "preview.mode.endpoints": "एंडपॉइंट",
     "preview.mode.files": "फ़ाइलें",
     "preview.mode.icon": "आइकन",
     "preview.mode.invisibles": "अदृश्य अक्षर",
@@ -1097,6 +1099,11 @@
     "preview.model.tensors": "टेंसर",
     "preview.model.tokenizer": "टोकनाइज़र",
     "preview.model.vocabularySize": "शब्दावली का आकार",
+    "preview.openapi.column.deprecated": "पदावनत",
+    "preview.openapi.unresolvedReferences": {
+      "one": "%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थान की ओर संदर्भ देता है, इसलिए वह सूची में नहीं है।",
+      "other": "%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थानों की ओर संदर्भ देते हैं, इसलिए वे सूची में नहीं हैं।"
+    },
     "preview.outline.duplicateKey": "दोहराई गई कुंजी",
     "preview.outline.key": "कुंजी",
     "preview.outline.value": "मान",

@@ -1,0 +1,20 @@
+{
+  "preview.info.notesHeading": {
+    "case": "previewInfoNotesHeading",
+    "comment": "Heading above the notes about how this preview was made, in the inline preview information panel (for example that a signature was not verified or that formulas are approximated). It sits between the count of concealed values and the commands heading. Draft translations pending native-speaker review.",
+    "en": "Notes about this preview",
+    "tr": "Bu önizleme hakkında notlar",
+    "de": "Hinweise zu dieser Vorschau",
+    "fr": "Remarques sur cet aperçu",
+    "zh-Hans": "关于此预览的说明",
+    "ja": "このプレビューについての注記",
+    "hi": "इस पूर्वावलोकन के बारे में नोट",
+    "ku-Latn": "Nîşeyên der barê vê pêşdîtinê",
+    "ru": "Примечания об этом предпросмотре",
+    "id": "Catatan tentang pratinjau ini",
+    "bn": "এই প্রিভিউ সম্পর্কে নোট",
+    "ha": "Bayanai game da wannan samfotin",
+    "pt": "Notas sobre esta pré-visualização",
+    "es": "Notas sobre esta vista previa"
+  }
+}

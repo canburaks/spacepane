@@ -795,6 +795,7 @@
 "preview.info.command" = "%1$@ — %2$@";
 "preview.info.commandsHeading" = "Perintah dalam tampilan ini";
 "preview.info.concealedCount" = "%#@count@";
+"preview.info.notesHeading" = "Catatan tentang pratinjau ini";
 "preview.info.onThisMac" = "Diproses di Mac ini";
 "preview.install.commands" = "Perintah yang dipasang";
 "preview.install.dependencies" = "Dependensi";
@@ -894,6 +895,7 @@
 "preview.mode.contents" = "Daftar Isi";
 "preview.mode.cues" = "Subtitel";
 "preview.mode.diagram" = "Diagram";
+"preview.mode.endpoints" = "Endpoint";
 "preview.mode.files" = "Berkas";
 "preview.mode.icon" = "Ikon";
 "preview.mode.invisibles" = "Tak Terlihat";
@@ -946,6 +948,8 @@
 "preview.model.tensors" = "Tensor";
 "preview.model.tokenizer" = "Tokenizer";
 "preview.model.vocabularySize" = "Ukuran kosakata";
+"preview.openapi.column.deprecated" = "Usang";
+"preview.openapi.unresolvedReferences" = "%#@count@";
 "preview.outline.duplicateKey" = "Kunci duplikat";
 "preview.outline.key" = "Kunci";
 "preview.outline.value" = "Nilai";
