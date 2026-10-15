@@ -30,6 +30,8 @@ enum PreviewModePolicy {
         case .rows: .summaryRows
         // [packages]
         case .icon: .previewModeIcon
+        // [openapi]
+        case .endpoints: .previewModeEndpoints
         // [code]
         }
     }
@@ -44,6 +46,8 @@ enum PreviewModePolicy {
         // Profile exists only where a profile was prepared (CSV and TSV), not for every family's table.
         if modes.profile != nil { values.append(.profile) }
         if modes.cues != nil { values.append(.cues) }
+        // [openapi] Offered beside the JSON modes. It is never the initial mode: JSON still opens in Source.
+        if modes.endpoints != nil { values.append(.endpoints) }
         // [workstream mode availability] Append your modes below your marker.
         // [markup]
         if (modes.markdown?.headings.count ?? 0) >= 2 { values.append(.contents) }
