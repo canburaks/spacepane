@@ -233,6 +233,23 @@ Started 2026-10-05 at the user's request, following [the unique-feature research
   - more AI-agent file names.
 - [ ] Before marketing, recheck uniqueness claims, and word them as "no other Quick Look app we found".
 
+### Tier 1 quick wins — 2026-10-15
+
+Started at the owner's request ("Implement tier 1 quick wins 1 to 7") from [the 2026-10-14 list](docs/market/2026-10-14-quick-wins-after-safety-lens-3.md). Branch `tier1-quick-wins`; four workstreams in their own worktrees (`tq-script`, `tq-autorun`, `tq-interaction`, `tq-openapi`) and the lead.
+
+- [x] `.tool` files read as shell scripts by the script-effects lens, unless their `#!` line names another interpreter.
+- [x] Command-F opens and focuses the table filter from anywhere in the preview in every table mode.
+- [x] Property-list Source views show `/` as written; a URL password stays concealed, now on its own.
+- [x] Provenance notes (formatting, signatures and trust, offline Markdown, approximated formulas, CAD metadata, profile notes, invisibles) shown in the information panel under their own heading instead of the status line.
+- [x] Endpoints mode for OpenAPI 3 and Swagger 2 JSON: method, path, summary, deprecated; local `$ref` path items; 5,000-row cap and unresolved-reference notices. Never the initial mode.
+- [x] Auto-run lens reads folder-open tasks in `*.code-workspace` files and hook commands in `.cursor/hooks.json`.
+- [x] Download-then-run across lines in shell and PowerShell scripts.
+- [x] Strings for the new keys in 14 languages (drafts); resources regenerated and validated.
+- [ ] Observe in the Quick Look panel with a signed build: Command-F in table, profile, files and rows views; the information panel's notes section at compact width; the Endpoints mode; `.tool` and `.code-workspace` routing. VoiceOver order of the panel.
+- [ ] Owner call: whether profile sampling and concealed-column notes, and the invisibles note, belong in the information panel (they follow the existing `provenance` kind) or stay visible.
+- [ ] Owner call, from the 2026-10-06 answers: hide the table filter bar until asked for, behind a header search affordance.
+- [ ] Run `npm run data:sync` in `spacepane-web` when this branch reaches `main` (new strings).
+
 ### Safety Lens 3: model files, add-ons and packages — 2026-10-14
 
 Started at the owner's request ("Continue development") as the next step after Safety Lens 2. [Decision 030](docs/decisions/030-safety-lens-3-models-add-ons-and-packages.md) records the contract and the rules. Branch `safety-lens-3`, from `safety-lens-2`; one workstream per feature, each in its own worktree.
