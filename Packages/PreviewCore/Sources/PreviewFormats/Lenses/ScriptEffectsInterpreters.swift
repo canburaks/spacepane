@@ -106,9 +106,11 @@ extension ScriptEffectsAnalyzer {
         guard let run = Self.executedFile(invocation, dialect: dialect) else { return }
         let key = ScriptArguments.fileKey(run.path, windows: windows)
         // A directly run file needs the execute bit a `chmod` of this script gave it, unless it is a Windows file.
-        // A file that `open` launches needs a name of a kind that runs when opened, or the same execute bit.
-        let runs = !run.direct || windows || savedFiles.executable.contains(key)
-            || (run.opened && ScriptArguments.opensAsProgram(run.path))
+        // A file that `open` or `Start-Process` launches runs only if its name is of a program kind, or it has the bit.
+        let hasExecuteBit = savedFiles.executable.contains(key)
+        let runs = run.opened
+            ? hasExecuteBit || ScriptArguments.opensAsProgram(run.path, windows: windows)
+            : !run.direct || windows || hasExecuteBit
         guard runs else { return }
         if let index = savedFiles.downloads.firstIndex(where: { ScriptArguments.sameFile($0.key, key, windows: windows) }) {
             reportSavedRun(.downloadAndRun, saved: savedFiles.downloads.remove(at: index), dialect: dialect, effects: &effects)
@@ -160,7 +162,7 @@ extension ScriptEffectsAnalyzer {
     }
 
     /// The file a command runs. `direct` means it runs as a program and needs an execute bit; `opened` means
-    /// `open` launches it, which runs only some kinds of file.
+    /// `open` or `Start-Process` launches it, which runs only some kinds of file.
     struct ExecutedFile {
         var path: String
         var direct: Bool
@@ -183,7 +185,7 @@ extension ScriptEffectsAnalyzer {
             return ScriptArguments.installedPackage(arguments).map { ExecutedFile(path: $0, direct: false) }
         case .startProcess?:
             guard dialect == .powerShell else { return nil }
-            return ScriptArguments.startedFile(arguments).map { ExecutedFile(path: $0, direct: false) }
+            return ScriptArguments.startedFile(arguments).map { ExecutedFile(path: $0, direct: false, opened: true) }
         default:
             return ExecutedFile(path: invocation.commandWord.text, direct: true)
         }
