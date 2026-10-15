@@ -192,12 +192,12 @@ struct ZoomBadgeAndReloadRenderingTests {
         #expect(textFrame.maxY <= badge.minY)
         #expect(view.bounds.maxY - textFrame.maxY <= 10 + PreviewInfoBadge.side + 8)
         let initialRow = view.headerGuide.frame
-        let safe = TextPresentation(formatID: .plainText, text: "safe reformatted text", lineCount: 1,
-            byteCount: 21, encoding: .utf8, redactionCount: 0, isReformatted: true)
+        let safe = TextPresentation(formatID: .json, text: "safe reformatted text", lineCount: 1,
+            byteCount: 21, encoding: .utf8, redactionCount: 0, syntax: .json)
         view.display(.ready(safe))
         view.layoutSubtreeIfNeeded()
         #expect(view.headerGuide.frame == initialRow)
-        #expect(!status.isHidden && status.stringValue == PreviewStrings.text(.codeNoticeReformatted))
+        #expect(!status.isHidden && status.stringValue == PreviewStrings.text(.previewStructureFallback))
         #expect(status.frame.maxY < badge.minY)
         #expect(status.alignmentRect(forFrame: status.frame).width == view.bounds.width - 2 * PreviewChrome.inset)
     }
