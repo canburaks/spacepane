@@ -233,6 +233,18 @@ Started 2026-10-05 at the user's request, following [the unique-feature research
   - more AI-agent file names.
 - [ ] Before marketing, recheck uniqueness claims, and word them as "no other Quick Look app we found".
 
+### Version 1.1.0 — 2026-10-15
+
+Configured at the owner's request. Release record: [docs/release/version-1.1.0.md](docs/release/version-1.1.0.md).
+
+- [x] `MARKETING_VERSION = 1.1.0`, `CURRENT_PROJECT_VERSION = 4`, `PREV_INCLUDE_CAD = NO`.
+- [x] What's New, promotional text and description drafts with counted lengths; App Review notes name 1.1.0 (build 4); three review samples for the new formats (36 files, `--check` passes).
+- [ ] 1.0.0 (build 3) approved.
+- [ ] PR 9 merged or left for 1.1.1.
+- [ ] Claim-gate observation on a signed build; archive and `check_release_archive.py`.
+- [ ] Upload, version record and submission, on the owner's instruction.
+- [ ] After approval: website badges and counts on `app-store-launch`, then the owner merges it; promotional text switched.
+
 ### Tier 1 quick wins — 2026-10-15
 
 Started at the owner's request ("Implement tier 1 quick wins 1 to 7") from [the 2026-10-14 list](docs/market/2026-10-14-quick-wins-after-safety-lens-3.md). Branch `tier1-quick-wins`; four workstreams in their own worktrees (`tq-script`, `tq-autorun`, `tq-interaction`, `tq-openapi`) and the lead.

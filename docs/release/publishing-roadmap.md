@@ -145,7 +145,7 @@ format, and macOS 15 and signed smoke tests are recorded in `docs/validation/`.
 1. Release the approved build. On the website, replace "Coming soon" with Apple's official **Download on the Mac App Store** badge and link.
 2. Watch Organizer crashes, App Store reviews and the support inbox daily for the first two weeks. Answer reviews politely.
 3. **1.0.1** for crash fixes; Apple usually reviews bug-fix updates quickly.
-4. **1.1 candidates:**
+4. **1.1.0** is configured (2026-10-15): Safety Lens 2 and 3 and the tier 1 quick wins, build 4; see [version-1.1.0.md](version-1.1.0.md). Earlier **1.1 candidates:**
    - more reviewed languages
    - STEP/IGES, if deferred
    - the `proxy.ts` middleware once Netlify's plugin is fixed (in the `spacepane-web` repository)
