@@ -28,8 +28,15 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     let filterField = NSSearchField()
     /// Chooses the sort column and direction without a pointer; a pull-down menu.
     let sortButton = NSPopUpButton(frame: .zero, pullsDown: true)
+    /// Opens the filter field; shown while the field is hidden and the host passes typed keys to the preview.
+    let searchButton = NSButton()
     private let filterStatusLabel = NSTextField(labelWithString: "")
-    private let filterBar = NSStackView()
+    let filterBar = NSStackView()
+    /// False where typed keys never reach the preview (Finder sends them to its own file list), so the filter
+    /// field, its button and Command-F are not offered. Sorting needs no typing and stays.
+    var acceptsTypedInput = true {
+        didSet { if !acceptsTypedInput { hideFilterField() } else { updateSearchButton() } }
+    }
     private let stack = NSStackView()
     private var table: SafeTable?
     /// Source row indexes in display order: the current sort, then the filter.
@@ -140,6 +147,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
             }
         }
         filterBar.isHidden = false
+        updateSearchButton()
         updateAccessibilityLabel()
     }
 
@@ -155,6 +163,8 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         filter.reset()
         filterStatusLabel.stringValue = ""
         filterStatusLabel.isHidden = true
+        filterField.isHidden = true
+        updateSearchButton()
         filterBar.isHidden = true
         removeAllColumns()
         tableView.reloadData()
@@ -283,7 +293,19 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         filterBar.spacing = 8
         filterBar.edgeInsets = NSEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
         filterBar.translatesAutoresizingMaskIntoConstraints = false
-        for view in [filterField, filterStatusLabel, sortButton] as [NSView] { filterBar.addArrangedSubview(view) }
+        searchButton.bezelStyle = .accessoryBarAction
+        searchButton.isBordered = false
+        searchButton.imagePosition = .imageOnly
+        searchButton.image = NSImage(systemSymbolName: Self.searchSymbol, accessibilityDescription: nil)
+        searchButton.target = self
+        searchButton.action = #selector(searchButtonPressed(_:))
+        searchButton.setContentHuggingPriority(.required, for: .horizontal)
+        let spacer = NSView()
+        spacer.setContentHuggingPriority(.init(1), for: .horizontal)
+        for view in [searchButton, filterField, filterStatusLabel, spacer, sortButton] as [NSView] {
+            filterBar.addArrangedSubview(view)
+        }
+        filterField.isHidden = true
         filterBar.isHidden = true
     }
 
@@ -292,6 +314,8 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         filterField.placeholderString = PreviewStrings.text(.listingFilterPlaceholder)
         filterField.setAccessibilityLabel(PreviewStrings.text(.listingFilterLabel))
         filterField.setAccessibilityHelp(PreviewStrings.text(.listingFilterHelp))
+        searchButton.setAccessibilityLabel(PreviewStrings.text(.listingFilterLabel))
+        searchButton.toolTip = PreviewStrings.text(.listingFilterLabel)
         let menu = NSMenu()
         menu.autoenablesItems = false
         // A pull-down button shows its first item as its title.
@@ -372,10 +396,29 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     /// "with the table focused". False when no table is loaded, so the key is not taken.
     @discardableResult
     func showFilter() -> Bool {
-        guard table != nil else { return false }
+        guard table != nil, acceptsTypedInput else { return false }
         filterBar.isHidden = false
+        filterField.isHidden = false
+        updateSearchButton()
         window?.makeFirstResponder(filterField)
         return true
+    }
+
+    @objc private func searchButtonPressed(_ sender: NSButton) { showFilter() }
+
+    /// The SF Symbol for the button that opens the filter field.
+    private static let searchSymbol = "magnifyingglass"
+
+    /// Hides the filter field and drops its text, so no hidden filter keeps rows out of view.
+    private func hideFilterField() {
+        if !filterText.isEmpty { setFilter("") }
+        filterField.isHidden = true
+        filterStatusLabel.isHidden = true
+        updateSearchButton()
+    }
+
+    private func updateSearchButton() {
+        searchButton.isHidden = !acceptsTypedInput || !filterField.isHidden
     }
 
     /// Hides every row without the text; an empty text shows every row again.
