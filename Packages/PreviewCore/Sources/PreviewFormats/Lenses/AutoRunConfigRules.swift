@@ -65,12 +65,14 @@ enum AutoRunRules {
     // MARK: Cursor hooks
 
     /// Cursor's `hooks.json` maps each event (`beforeShellExecution`, `afterFileEdit`, ...) to a list of entries;
-    /// an entry with a non-empty string `command` runs that command. Other keys, event names and entries
+    /// an entry with a non-empty string `command` runs that command. A concealed command counts too, as in
+    /// `hookCommandLine`: the privacy stage hid its text, not the hook. Other keys, event names and entries
     /// (a prompt hook has no command) add nothing, and the file's `version` is not required.
     static func cursorHooks(_ root: LensJSONNode, into tally: inout AutoRunTally) {
         for event in root.member("hooks")?.value.members ?? [] {
             for entry in event.value.elements ?? [] {
-                guard let command = entry.member("command"), let text = command.value.string, !text.isEmpty else { continue }
+                guard let command = entry.member("command"), command.value.isConcealed || command.value.string?.isEmpty == false
+                else { continue }
                 tally.add(.autorunAgentHooks, line: command.line)
             }
         }
