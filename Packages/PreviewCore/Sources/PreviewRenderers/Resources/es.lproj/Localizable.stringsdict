@@ -884,6 +884,22 @@
 			<string>Posibles secretos ocultos: %2$@.</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ elemento de ruta hace referencia a otro archivo o a una ubicación desconocida y no se muestra.</string>
+			<key>other</key>
+			<string>%2$@ elementos de ruta hacen referencia a otros archivos o a ubicaciones desconocidas y no se muestran.</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

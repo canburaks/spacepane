@@ -896,6 +896,7 @@
     "preview.info.concealedCount": {
       "other": "機密情報の可能性がある項目を非表示：%2$@。"
     },
+    "preview.info.notesHeading": "このプレビューについての注記",
     "preview.info.onThisMac": "このMac上で処理",
     "preview.install.commands": "インストールされるコマンド",
     "preview.install.dependencies": "依存関係",
@@ -995,6 +996,7 @@
     "preview.mode.contents": "目次",
     "preview.mode.cues": "キュー",
     "preview.mode.diagram": "図",
+    "preview.mode.endpoints": "エンドポイント",
     "preview.mode.files": "ファイル",
     "preview.mode.icon": "アイコン",
     "preview.mode.invisibles": "不可視文字",
@@ -1047,6 +1049,10 @@
     "preview.model.tensors": "テンソル",
     "preview.model.tokenizer": "トークナイザー",
     "preview.model.vocabularySize": "語彙サイズ",
+    "preview.openapi.column.deprecated": "非推奨",
+    "preview.openapi.unresolvedReferences": {
+      "other": "%2$@ 件のパス項目が別のファイルまたは不明な場所を参照しているため、一覧には表示されません。"
+    },
     "preview.outline.duplicateKey": "重複したキー",
     "preview.outline.key": "キー",
     "preview.outline.value": "値",

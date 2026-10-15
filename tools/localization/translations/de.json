@@ -946,6 +946,7 @@
       "one": "Verborgene mögliche Geheimnisse: %2$@.",
       "other": "Verborgene mögliche Geheimnisse: %2$@."
     },
+    "preview.info.notesHeading": "Hinweise zu dieser Vorschau",
     "preview.info.onThisMac": "Auf diesem Mac verarbeitet",
     "preview.install.commands": "Installierte Befehle",
     "preview.install.dependencies": "Abhängigkeiten",
@@ -1045,6 +1046,7 @@
     "preview.mode.contents": "Inhalt",
     "preview.mode.cues": "Untertitel",
     "preview.mode.diagram": "Diagramm",
+    "preview.mode.endpoints": "Endpunkte",
     "preview.mode.files": "Dateien",
     "preview.mode.icon": "Symbol",
     "preview.mode.invisibles": "Unsichtbares",
@@ -1097,6 +1099,11 @@
     "preview.model.tensors": "Tensoren",
     "preview.model.tokenizer": "Tokenizer",
     "preview.model.vocabularySize": "Vokabulargröße",
+    "preview.openapi.column.deprecated": "Veraltet",
+    "preview.openapi.unresolvedReferences": {
+      "one": "%2$@ Pfadelement verweist auf eine andere Datei oder einen unbekannten Ort und wird nicht aufgelistet.",
+      "other": "%2$@ Pfadelemente verweisen auf andere Dateien oder unbekannte Orte und werden nicht aufgelistet."
+    },
     "preview.outline.duplicateKey": "Doppelter Schlüssel",
     "preview.outline.key": "Schlüssel",
     "preview.outline.value": "Wert",

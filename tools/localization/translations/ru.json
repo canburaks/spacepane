@@ -1046,6 +1046,7 @@
       "many": "Скрыто возможных секретных значений: %2$@.",
       "other": "Скрыто возможных секретных значений: %2$@."
     },
+    "preview.info.notesHeading": "Примечания об этом предпросмотре",
     "preview.info.onThisMac": "Обработано на этом Mac",
     "preview.install.commands": "Устанавливаемые команды",
     "preview.install.dependencies": "Зависимости",
@@ -1145,6 +1146,7 @@
     "preview.mode.contents": "Содержание",
     "preview.mode.cues": "Реплики",
     "preview.mode.diagram": "Диаграмма",
+    "preview.mode.endpoints": "Конечные точки",
     "preview.mode.files": "Файлы",
     "preview.mode.icon": "Значок",
     "preview.mode.invisibles": "Невидимые",
@@ -1197,6 +1199,13 @@
     "preview.model.tensors": "Тензоры",
     "preview.model.tokenizer": "Токенизатор",
     "preview.model.vocabularySize": "Размер словаря",
+    "preview.openapi.column.deprecated": "Устарело",
+    "preview.openapi.unresolvedReferences": {
+      "one": "%2$@ элемент пути ссылается на другой файл или неизвестное место и не показан.",
+      "few": "%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны.",
+      "many": "%2$@ элементов пути ссылаются на другие файлы или неизвестные места и не показаны.",
+      "other": "%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны."
+    },
     "preview.outline.duplicateKey": "Повторяющийся ключ",
     "preview.outline.key": "Ключ",
     "preview.outline.value": "Значение",

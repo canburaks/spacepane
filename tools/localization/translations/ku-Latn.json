@@ -946,6 +946,7 @@
       "one": "Agahiyên gengaz ên veşartî hatin veşartin: %2$@.",
       "other": "Agahiyên gengaz ên veşartî hatin veşartin: %2$@."
     },
+    "preview.info.notesHeading": "Nîşeyên der barê vê pêşdîtinê",
     "preview.info.onThisMac": "Li ser vê Macê hatiye pêvajokirin",
     "preview.install.commands": "Fermanên tên sazkirin",
     "preview.install.dependencies": "Girêdayîbûn",
@@ -1045,6 +1046,7 @@
     "preview.mode.contents": "Naverok",
     "preview.mode.cues": "Binnivîs",
     "preview.mode.diagram": "Diyagram",
+    "preview.mode.endpoints": "Xalên dawîn",
     "preview.mode.files": "Pel",
     "preview.mode.icon": "Îkon",
     "preview.mode.invisibles": "Nedîtbar",
@@ -1097,6 +1099,11 @@
     "preview.model.tensors": "Tensor",
     "preview.model.tokenizer": "Tokenizer",
     "preview.model.vocabularySize": "Mezinahiya ferhengê",
+    "preview.openapi.column.deprecated": "Betalkirî",
+    "preview.openapi.unresolvedReferences": {
+      "one": "%2$@ tiştê rêyê li pelekî din an cihekî nenas dinihêre û navnîş nabe.",
+      "other": "%2$@ tiştên rêyê li pelên din an cihên nenas dinihêrin û navnîş nabin."
+    },
     "preview.outline.duplicateKey": "Mifteya dubare",
     "preview.outline.key": "Mifte",
     "preview.outline.value": "Nirx",

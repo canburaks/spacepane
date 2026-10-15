@@ -54,15 +54,36 @@ enum ScriptDialect: Sendable {
     /// `nil` for every file the lens does not read: other formats, other languages, plain text.
     init?(request: PreviewLensRequest, text: String) {
         guard request.formatID == .sourceCode || request.formatID == .extensionlessText else { return nil }
+        let firstLine = text.prefix(while: { $0 != "\n" && $0 != "\r" })
         if let language = request.sourceLanguage {
+            // The name says shell for a `.tool` file, but the program it runs is the one its #! line names.
+            if language == .shell, Self.isToolFile(request.fileName) {
+                guard let dialect = Self.toolDialect(firstLine: firstLine) else { return nil }
+                self = dialect
+                return
+            }
             guard let dialect = Self(language: language) else { return nil }
             self = dialect
             return
         }
         // Normally the extension-free adapter has named the language from a `#!` line already.
-        guard request.formatID == .extensionlessText, let dialect = Self(interpreterLine: text.prefix(while: { $0 != "\n" && $0 != "\r" }))
-        else { return nil }
+        guard request.formatID == .extensionlessText, let dialect = Self(interpreterLine: firstLine) else { return nil }
         self = dialect
+    }
+
+    /// Terminal's `.tool` shell-script extension. The source-code adapter names such a file shell from its
+    /// name alone, so the lens checks the `#!` line that name cannot see.
+    static func isToolFile(_ fileName: String) -> Bool {
+        fileName.lowercased().hasSuffix(".tool")
+    }
+
+    /// The dialect of a `.tool` file: shell when it has no `#!` line or one that names a shell, and whatever
+    /// `init?(interpreterLine:)` reads otherwise. `nil` for another interpreter (Python, Ruby, Perl, Node) or an
+    /// unknown program, so such a file gets no shell findings. A byte-order mark before the `#!` is skipped.
+    private static func toolDialect(firstLine: Substring) -> Self? {
+        let line = firstLine.drop(while: { $0 == "\u{FEFF}" })
+        guard line.hasPrefix("#!") else { return .shell }
+        return Self(interpreterLine: line)
     }
 
     init?(language: SourceLanguageID) {

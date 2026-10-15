@@ -366,5 +366,37 @@
   ],
   "sl3-strings": [
     "tools/localization/additions/safety-lens-3.json"
+  ],
+  "tq-script": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/ScriptEffects*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Code/SourceLanguageDetector.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/ScriptEffects*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/**/SourceLanguageDetector*.swift"
+  ],
+  "tq-autorun": [
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/AutoRunConfig*.swift",
+    "Packages/PreviewCore/Sources/PreviewFormats/Lenses/LensJSON*.swift",
+    "Packages/PreviewCore/Tests/PreviewFormatsTests/Lenses/AutoRunConfig*.swift"
+  ],
+  "tq-interaction": [
+    "Packages/PreviewCore/Sources/PreviewRenderers/NativeTablePreviewView.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/Interaction/NativePreviewView+Interaction.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/Interaction/NativePreviewView+Information.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/Interaction/PreviewInfoPanel*.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/Interaction/PreviewCommandAvailability.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/PresentationNotices.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/ModePresentationNotices.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/Facts/**",
+    "Packages/PreviewCore/Sources/PreviewRenderers/PreviewStrings.swift",
+    "tools/localization/additions/tq-interaction*.json"
+  ],
+  "tq-openapi": [
+    "Packages/PreviewCore/Sources/PreviewRenderers/SafePreviewModes.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/PreviewModePolicy.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/SafeModeContentView.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/OpenAPI/**",
+    "Packages/PreviewCore/Sources/PreviewRenderers/NativePreviewView.swift",
+    "Packages/PreviewCore/Sources/PreviewRenderers/PreviewStrings.swift",
+    "tools/localization/additions/tq-openapi*.json"
   ]
 }

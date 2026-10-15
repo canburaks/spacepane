@@ -27,6 +27,9 @@ enum NativePreviewMode: Hashable {
     // [packages]
     /// An application icon extracted from a package, drawn by its own view.
     case icon
+    // [openapi]
+    /// The operations of an OpenAPI or Swagger document, one row each, shown by a native table.
+    case endpoints
     // [code]
     var title: PreviewStrings.Key { PreviewModePolicy.title(for: self) }
 }
@@ -69,6 +72,9 @@ struct SafePreviewModes {
     // [data]
     var plot: SafePlot?
     var sampleRows: SafeTable?
+    // [openapi]
+    /// The operations of an OpenAPI or Swagger document, derived from the concealed JSON outline (tier 1 item 5).
+    var endpoints: OpenAPIEndpointList?
     // [packages]
     /// Derived only when the findings report hidden characters, so clean previews pay nothing.
     var invisibles: SafeInvisibleText?
@@ -131,6 +137,8 @@ struct SafePreviewModes {
         } else if presentation.syntax == .json {
             outline = SafeStructuredText.json(presentation.text)
             hasStructureFallback = outline == nil
+            // [openapi] Read before a schema label below can replace the outline; the table never reads source bytes.
+            endpoints = OpenAPIEndpointList.derive(from: outline?.first)
             if SafeSchemaLabels.formats.contains(presentation.formatID), let nodes = outline {
                 summary = SafeSchemaLabels.localize(nodes, formatID: presentation.formatID, locale: locale)
                 outline = nil

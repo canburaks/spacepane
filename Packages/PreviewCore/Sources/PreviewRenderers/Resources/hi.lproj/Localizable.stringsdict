@@ -802,6 +802,22 @@
 			<string>छिपाई गई संभावित गोपनीय जानकारियाँ: %2$@।</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थान की ओर संदर्भ देता है, इसलिए वह सूची में नहीं है।</string>
+			<key>other</key>
+			<string>%2$@ पथ-आइटम किसी दूसरी फ़ाइल या अज्ञात स्थानों की ओर संदर्भ देते हैं, इसलिए वे सूची में नहीं हैं।</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

@@ -1002,6 +1002,26 @@
 			<string>Скрыто возможных секретных значений: %2$@.</string>
 		</dict>
 	</dict>
+	<key>preview.openapi.unresolvedReferences</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>few</key>
+			<string>%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны.</string>
+			<key>many</key>
+			<string>%2$@ элементов пути ссылаются на другие файлы или неизвестные места и не показаны.</string>
+			<key>one</key>
+			<string>%2$@ элемент пути ссылается на другой файл или неизвестное место и не показан.</string>
+			<key>other</key>
+			<string>%2$@ элемента пути ссылаются на другие файлы или неизвестные места и не показаны.</string>
+		</dict>
+	</dict>
 	<key>preview.profile.shownRows</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

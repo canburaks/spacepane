@@ -4,13 +4,18 @@ import PreviewContracts
 /// Names the source language of a previewed file from its name alone, or from the interpreter named by
 /// a `#!` line when the file has no name that says. It never reads file content beyond the first line
 /// the caller already holds, never consults the file system and never decides which format handles a
-/// file: format identity comes from the catalog, and the language is only a decoration hint.
+/// file: format identity comes from the catalog.
+///
+/// The language is more than a colour. The script-effects lens (decision 029) reads a file as the shell,
+/// PowerShell, batch or AppleScript language named here, so a wrong guess can change the findings a file
+/// gets as well as its colours. A `.tool` file is named shell here; the lens reads its `#!` line itself,
+/// because this name-only lookup cannot see that line.
 ///
 /// Lookup order: exact lowercased file name, then well-known name prefixes (`Dockerfile.dev`), then the
 /// final suffix (`app.dockerfile`). Suffixes with several plausible
 /// languages (`.h` C or C++, `.m` Objective-C or MATLAB, `.v` Verilog or Coq, `.pl` Perl or Prolog)
-/// resolve to the reading that matches the system's type declaration or the larger user base; the
-/// result changes colors only, so a wrong guess never changes what the file shows.
+/// resolve to the reading that matches the system's type declaration or the larger user base. A wrong
+/// guess changes colours and the script lens's reading; it never changes which format handles the file.
 public enum SourceLanguageDetector {
     public static func language(for hint: PreviewNameHint?) -> SourceLanguageID? {
         guard let hint else { return nil }
@@ -91,7 +96,7 @@ public enum SourceLanguageDetector {
         (.elm, "elm"),
         (.clojure, "clj cljs cljc"),
         (.lisp, "lisp lsp rkt scm el"),
-        (.shell, "sh bash zsh ksh csh tcsh command"),
+        (.shell, "sh bash zsh ksh csh tcsh command tool"),
         (.fish, "fish"),
         (.powerShell, "ps1 psm1 psd1"),
         (.batch, "bat cmd"),
