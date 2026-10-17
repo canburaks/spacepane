@@ -9,6 +9,8 @@ struct GeneralView: View {
     let preferences: CompanionPreferences
     let diagnostics: QuickLookProviderDiagnostics
     @Environment(\.locale) private var locale
+    /// Set by the first press of Open System Settings; the manual route stays under the button from then on.
+    @State private var systemSettingsAttempt: SystemSettingsOpening.Result?
 
     var body: some View {
         // The status has one home, the sidebar footer, so the header carries no pill of its own.
@@ -94,15 +96,25 @@ struct GeneralView: View {
     private var banner: some View {
         let content = bannerContent
         return SettingsCard(separatesRows: false) {
-            ViewThatFits(in: .horizontal) {
-                HStack(alignment: .center, spacing: 12) {
-                    bannerLead(content)
-                    Spacer(minLength: 8)
-                    openSystemSettingsButton
+            VStack(alignment: .leading, spacing: 8) {
+                ViewThatFits(in: .horizontal) {
+                    HStack(alignment: .center, spacing: 12) {
+                        bannerLead(content)
+                        Spacer(minLength: 8)
+                        openSystemSettingsButton
+                    }
+                    VStack(alignment: .leading, spacing: 10) {
+                        bannerLead(content)
+                        openSystemSettingsButton
+                            .padding(.leading, BannerLayout.badgeSize + 12)
+                    }
                 }
-                VStack(alignment: .leading, spacing: 10) {
-                    bannerLead(content)
-                    openSystemSettingsButton
+                // macOS cannot confirm which pane opened, so the way there is written out after every attempt.
+                if let attempt = systemSettingsAttempt, let route = SystemSettingsOpening.manualRouteKey(after: attempt) {
+                    Text(PreviewStrings.text(route))
+                        .font(CompanionTypography.note)
+                        .foregroundStyle(CompanionInk.hint)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.leading, BannerLayout.badgeSize + 12)
                 }
             }
@@ -123,7 +135,7 @@ struct GeneralView: View {
     }
 
     private var openSystemSettingsButton: some View {
-        Button(PreviewStrings.text(.openSystemSettings)) { SystemSettingsDestination.open() }
+        Button(PreviewStrings.text(.openSystemSettings)) { systemSettingsAttempt = SystemSettingsDestination.open() }
             .fixedSize()
     }
 
@@ -156,16 +168,17 @@ private struct BannerContent {
 
 /// Opening System Settings is allowed; the app never changes a system setting.
 private enum SystemSettingsDestination {
-    /// Unverified on macOS 15: the Login Items & Extensions deep link may not be honored,
-    /// in which case the System Settings app opens instead.
+    /// The Login Items & Extensions pane. The link is not documented for macOS 15 and may open System Settings on
+    /// another pane, which the app cannot tell, so the page shows the manual route after every attempt.
     static let loginItemsAndExtensions = URL(string: "x-apple.systempreferences:com.apple.LoginItems-Settings.extension")
     static let applicationIdentifier = "com.apple.systempreferences"
 
-    @MainActor static func open() {
+    @MainActor static func open() -> SystemSettingsOpening.Result {
         let workspace = NSWorkspace.shared
-        if let loginItemsAndExtensions, workspace.open(loginItemsAndExtensions) { return }
-        if let application = workspace.urlForApplication(withBundleIdentifier: applicationIdentifier) {
-            workspace.open(application)
-        }
+        return SystemSettingsOpening.open(
+            link: loginItemsAndExtensions,
+            openLink: { workspace.open($0) },
+            applicationURL: { workspace.urlForApplication(withBundleIdentifier: applicationIdentifier) },
+            openApplication: { workspace.open($0) })
     }
 }
