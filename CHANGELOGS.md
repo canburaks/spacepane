@@ -6,7 +6,7 @@ Record material changes under dated entries, newest first. Distinguish research,
 
 Owner request: use compressed images in the README.
 
-- `docs/readme/` holds JPEG copies of the eight README screenshots, 1600 px wide at quality 80 (`sips`), about 1.3 MB in total against about 14 MB for the PNGs. `README.md` points at them. The store-listing PNGs are unchanged and stay the source; regenerate the copies when a screenshot is retaken.
+- `docs/readme/` holds WebP copies of the eight README screenshots, 1200 px wide at quality 70 (`cwebp -q 70 -m 6 -resize 1200 0`), about 250 KB in total against about 14 MB for the PNGs; an earlier JPEG pass (about 1.3 MB) was replaced the same day. `README.md` points at them. The store-listing PNGs are unchanged and stay the source; regenerate the copies when a screenshot is retaken.
 
 ## 2026-10-17 — README as a showroom page (documentation only)
 
