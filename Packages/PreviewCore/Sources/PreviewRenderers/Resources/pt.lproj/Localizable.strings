@@ -1251,7 +1251,7 @@
 "settings.scheme.title" = "Esquema de cores";
 "settings.searchFileTypes" = "Buscar tipos de arquivo";
 "settings.storageUnavailable" = "O armazenamento de ajustes está indisponível. As escolhas valem somente enquanto o app estiver aberto.";
-"setup.notConfigured" = "Os ajustes são salvos apenas para este app. Até que o App Group compartilhado desta versão seja configurado, as extensões mostram uma mensagem de configuração nas pré-visualizações do Finder e mantêm as miniaturas genéricas.";
+"setup.notConfigured" = "Os ajustes são salvos apenas para este app até que o compartilhamento com as pré-visualizações do Finder seja configurado. Até lá, as pré-visualizações no Finder mostram uma mensagem de configuração e as miniaturas ficam genéricas.";
 "setup.steps" = "Ative as extensões do Quick Look em Ajustes do Sistema > Geral > Itens de Início e Extensões. Depois, selecione um arquivo compatível no Finder e pressione Espaço.";
 "setup.unverified" = "O macOS escolhe qual app fornece pré-visualizações e miniaturas para cada tipo de arquivo. Se outro app também for compatível com um tipo, o Finder pode usar esse app.";
 "shell.subtitle" = "Extensão do Quick Look";
@@ -1259,7 +1259,7 @@
 "state.empty.body" = "Ele não tem conteúdo, então não há nada para pré-visualizar.";
 "state.empty.title" = "Este arquivo está vazio";
 "state.settingsUnavailable.title" = "Os ajustes estão indisponíveis";
-"status.appOnly" = "Ajustes só do app";
+"status.appOnly" = "Salvo apenas para este app";
 "status.loading" = "Carregando ajustes…";
 "status.recovered" = "Ajustes redefinidos";
 "status.saveFailed" = "Alterações não salvas";

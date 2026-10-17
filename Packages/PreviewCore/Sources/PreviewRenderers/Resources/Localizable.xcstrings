@@ -122040,91 +122040,91 @@
       }
     },
     "setup.notConfigured": {
-      "comment": "Banner body when shared extension storage is unavailable and settings stay private to the companion. Describes what the extensions do meanwhile: they show a setup message in Finder previews and keep thumbnails generic (content-free) until the build's shared App Group is configured. Keep App Group untranslated.",
+      "comment": "Banner body shown when settings cannot be shared with the Finder previews and stay private to this app. Written for a person who is not a developer: it must not mention App Groups, builds, extensions or entitlements. It says what happens meanwhile: previews in Finder show a setup message and thumbnails stay generic (without any file content) until sharing is set up.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Settings are saved for this app only. Until this build’s shared App Group is configured, the extensions show a setup message in Finder previews and keep thumbnails generic."
+            "value": "Settings are saved for this app only until sharing with Finder previews is set up. Until then, previews in Finder show a setup message and thumbnails stay generic."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ayarlar yalnızca bu uygulama için kaydedilir. Bu derlemenin paylaşılan App Group yapılandırması tamamlanana kadar uzantılar Finder önizlemelerinde bir kurulum mesajı gösterir ve küçük resimleri genel tutar."
+            "value": "Finder önizlemeleriyle paylaşım ayarlanana kadar ayarlar yalnızca bu uygulama için kaydedilir. O zamana kadar Finder’daki önizlemeler bir kurulum mesajı gösterir ve küçük resimler genel kalır."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Einstellungen werden nur für diese App gespeichert. Bis die gemeinsame App Group dieser Version eingerichtet ist, zeigen die Erweiterungen in Finder-Vorschauen einen Einrichtungshinweis und nur generische Miniaturbilder."
+            "value": "Einstellungen werden nur für diese App gespeichert, bis die gemeinsame Nutzung mit den Finder-Vorschauen eingerichtet ist. Bis dahin zeigen Vorschauen im Finder einen Einrichtungshinweis und Miniaturbilder bleiben generisch."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les réglages sont enregistrés pour cette app uniquement. Tant que l’App Group partagé de cette version n’est pas configuré, les extensions affichent un message de configuration dans les aperçus Finder et ne produisent que des vignettes génériques."
+            "value": "Les réglages sont enregistrés pour cette app uniquement, jusqu’à ce que le partage avec les aperçus du Finder soit configuré. D’ici là, les aperçus du Finder affichent un message de configuration et les vignettes restent génériques."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "设置仅保存在此应用中。在此版本的共享 App Group 配置完成之前，扩展会在访达预览中显示设置提示，并让缩略图保持通用样式。"
+            "value": "在设置与访达预览的共享配置完成之前，设置仅保存在此应用中。在此之前，访达中的预览会显示设置提示，缩略图保持通用样式。"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "設定はこのアプリ内にのみ保存されています。このビルドの共有 App Group が構成されるまで、機能拡張は Finder のプレビューにセットアップに関するメッセージを表示し、サムネイルは汎用のままにします。"
+            "value": "Finder のプレビューとの共有が設定されるまで、設定はこのアプリ内にのみ保存されます。それまで、Finder のプレビューにはセットアップに関するメッセージが表示され、サムネイルは汎用のままです。"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "सेटिंग्ज़ केवल इस ऐप के लिए सहेजी गई हैं। इस बिल्ड का साझा App Group कॉन्फ़िगर होने तक एक्सटेंशन Finder पूर्वावलोकन में सेटअप संदेश दिखाते हैं और थंबनेल सामान्य रखते हैं।"
+            "value": "Finder पूर्वावलोकन के साथ साझा करना सेट अप होने तक सेटिंग्ज़ केवल इस ऐप के लिए सहेजी जाती हैं। तब तक Finder पूर्वावलोकन में सेटअप संदेश दिखता है और थंबनेल सामान्य रहते हैं।"
           }
         },
         "ku-Latn": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mîheng tenê ji bo vê sepanê têne tomarkirin. Heta ku App Group a hevpar a vê avakirinê neyê sazkirin, pêvek di pêşdîtinên Finder de agahiyeke sazkirinê nîşan didin û wêneyên biçûk giştî dihêlin."
+            "value": "Heta ku parvekirina bi pêşdîtinên Finder re neyê sazkirin, mîheng tenê ji bo vê sepanê têne tomarkirin. Heta wê demê pêşdîtinên Finder agahiyeke sazkirinê nîşan didin û wêneyên biçûk giştî dimînin."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Настройки сохранены только для этого приложения. Пока общая группа App Group этой сборки не настроена, расширения показывают в предпросмотрах Finder сообщение о настройке, а миниатюры оставляют универсальными."
+            "value": "Пока обмен с предпросмотрами Finder не настроен, настройки сохраняются только для этого приложения. До тех пор предпросмотры в Finder показывают сообщение о настройке, а миниатюры остаются универсальными."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pengaturan hanya disimpan untuk aplikasi ini. Sampai App Group bersama untuk versi ini dikonfigurasi, ekstensi menampilkan pesan penyiapan di pratinjau Finder dan membiarkan gambar mini tetap generik."
+            "value": "Pengaturan hanya disimpan untuk aplikasi ini sampai berbagi dengan pratinjau Finder disiapkan. Sampai saat itu, pratinjau di Finder menampilkan pesan penyiapan dan gambar mini tetap generik."
           }
         },
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "সেটিংস শুধু এই অ্যাপের জন্য সংরক্ষিত। এই বিল্ডের ভাগ করা App Group কনফিগার না হওয়া পর্যন্ত এক্সটেনশনগুলো Finder প্রিভিউতে একটি সেটআপ বার্তা দেখায় এবং থাম্বনেইল সাধারণ রাখে।"
+            "value": "Finder প্রিভিউয়ের সঙ্গে শেয়ারিং সেট আপ না হওয়া পর্যন্ত সেটিংস শুধু এই অ্যাপের জন্য সংরক্ষিত থাকে। ততক্ষণ Finder প্রিভিউতে একটি সেটআপ বার্তা দেখা যায় এবং থাম্বনেইল সাধারণ থাকে।"
           }
         },
         "ha": {
           "stringUnit": {
             "state": "translated",
-            "value": "An adana saitunan don wannan manhajar kaɗai. Har sai an saita App Group na bai ɗaya na wannan sigar, ƙari suna nuna sanarwar saiti a dubawar Finder, kuma suna barin ƙananan hotuna a matsayin na gama gari."
+            "value": "Har sai an saita rabawa da dubawar Finder, ana adana saitunan don wannan manhajar kaɗai. Har zuwa lokacin, dubawar Finder tana nuna sanarwar saiti, kuma ƙananan hotuna suna zama na gama gari."
           }
         },
         "pt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Os ajustes são salvos apenas para este app. Até que o App Group compartilhado desta versão seja configurado, as extensões mostram uma mensagem de configuração nas pré-visualizações do Finder e mantêm as miniaturas genéricas."
+            "value": "Os ajustes são salvos apenas para este app até que o compartilhamento com as pré-visualizações do Finder seja configurado. Até lá, as pré-visualizações no Finder mostram uma mensagem de configuração e as miniaturas ficam genéricas."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Los ajustes se guardan solo para esta app. Hasta que se configure el App Group compartido de esta versión, las extensiones muestran un mensaje de configuración en las vistas previas de Finder y mantienen las miniaturas genéricas."
+            "value": "Los ajustes se guardan solo para esta app hasta que se configure el uso compartido con las vistas previas del Finder. Hasta entonces, las vistas previas del Finder muestran un mensaje de configuración y las miniaturas se mantienen genéricas."
           }
         }
       }
@@ -122760,91 +122760,91 @@
       }
     },
     "status.appOnly": {
-      "comment": "Short status label: settings are saved for this app only; extension sharing is not configured.",
+      "comment": "Short status label: settings are saved for this app only and are not shared with the Finder previews yet. Plain words; no mention of App Groups or builds.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "App-only settings"
+            "value": "Saved for this app only"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yalnızca uygulama ayarları"
+            "value": "Yalnızca bu uygulama için kaydedildi"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nur App-Einstellungen"
+            "value": "Nur für diese App gespeichert"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Réglages de l’app uniquement"
+            "value": "Enregistré pour cette app uniquement"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "仅限本应用的设置"
+            "value": "仅保存在此应用中"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "アプリのみの設定"
+            "value": "このアプリ内のみに保存"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "केवल ऐप की सेटिंग्ज़"
+            "value": "केवल इस ऐप के लिए सहेजा गया"
           }
         },
         "ku-Latn": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mîhengên tenê yên sepanê"
+            "value": "Tenê ji bo vê sepanê hatiye tomarkirin"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Настройки только в приложении"
+            "value": "Сохранено только для этого приложения"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hanya pengaturan aplikasi"
+            "value": "Disimpan hanya untuk aplikasi ini"
           }
         },
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "শুধু অ্যাপের সেটিংস"
+            "value": "শুধু এই অ্যাপের জন্য সংরক্ষিত"
           }
         },
         "ha": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saitunan manhaja kawai"
+            "value": "An adana don wannan manhajar kaɗai"
           }
         },
         "pt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustes só do app"
+            "value": "Salvo apenas para este app"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustes solo de la app"
+            "value": "Guardado solo para esta app"
           }
         }
       }

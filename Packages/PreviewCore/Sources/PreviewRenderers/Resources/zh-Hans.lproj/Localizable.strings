@@ -1251,7 +1251,7 @@
 "settings.scheme.title" = "配色方案";
 "settings.searchFileTypes" = "搜索文件类型";
 "settings.storageUnavailable" = "设置存储不可用。选择仅在此应用打开时生效。";
-"setup.notConfigured" = "设置仅保存在此应用中。在此版本的共享 App Group 配置完成之前，扩展会在访达预览中显示设置提示，并让缩略图保持通用样式。";
+"setup.notConfigured" = "在设置与访达预览的共享配置完成之前，设置仅保存在此应用中。在此之前，访达中的预览会显示设置提示，缩略图保持通用样式。";
 "setup.steps" = "请在“系统设置”>“通用”>“登录项与扩展”中打开快速查看扩展。然后在访达中选择支持的文件并按空格键。";
 "setup.unverified" = "每种文件类型由哪个应用提供预览和缩略图由 macOS 决定。如果其他应用也支持该类型，访达可能会使用该应用。";
 "shell.subtitle" = "快速查看扩展";
@@ -1259,7 +1259,7 @@
 "state.empty.body" = "文件没有内容，因此无可预览。";
 "state.empty.title" = "此文件为空";
 "state.settingsUnavailable.title" = "设置不可用";
-"status.appOnly" = "仅限本应用的设置";
+"status.appOnly" = "仅保存在此应用中";
 "status.loading" = "正在载入设置…";
 "status.recovered" = "设置已重置";
 "status.saveFailed" = "更改未保存";

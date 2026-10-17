@@ -1251,7 +1251,7 @@
 "settings.scheme.title" = "Renk şeması";
 "settings.searchFileTypes" = "Dosya türlerinde ara";
 "settings.storageUnavailable" = "Ayar depolama alanı kullanılamıyor. Seçimler yalnızca bu uygulama açıkken geçerlidir.";
-"setup.notConfigured" = "Ayarlar yalnızca bu uygulama için kaydedilir. Bu derlemenin paylaşılan App Group yapılandırması tamamlanana kadar uzantılar Finder önizlemelerinde bir kurulum mesajı gösterir ve küçük resimleri genel tutar.";
+"setup.notConfigured" = "Finder önizlemeleriyle paylaşım ayarlanana kadar ayarlar yalnızca bu uygulama için kaydedilir. O zamana kadar Finder’daki önizlemeler bir kurulum mesajı gösterir ve küçük resimler genel kalır.";
 "setup.steps" = "Sistem Ayarları > Genel > Giriş Öğeleri ve Uzantılar bölümünde Quick Look uzantılarını açın. Ardından Finder'da desteklenen bir dosya seçip Boşluk tuşuna basın.";
 "setup.unverified" = "Her dosya türü için önizleme ve küçük resimleri hangi uygulamanın sağlayacağını macOS seçer. Başka bir uygulama da aynı türü destekliyorsa Finder o uygulamayı kullanabilir.";
 "shell.subtitle" = "Quick Look Uzantısı";
@@ -1259,7 +1259,7 @@
 "state.empty.body" = "İçeriği olmadığı için önizlenecek bir şey yok.";
 "state.empty.title" = "Bu dosya boş";
 "state.settingsUnavailable.title" = "Ayarlar kullanılamıyor";
-"status.appOnly" = "Yalnızca uygulama ayarları";
+"status.appOnly" = "Yalnızca bu uygulama için kaydedildi";
 "status.loading" = "Ayarlar yükleniyor…";
 "status.recovered" = "Ayarlar sıfırlandı";
 "status.saveFailed" = "Değişiklikler kaydedilmedi";
