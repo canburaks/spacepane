@@ -125,3 +125,14 @@ Until a corrected build is submitted, the review notes should not direct the rev
 - Why SQLite previewed on 2026-10-04 and 2026-10-11: run `lsregister -dump` on a Mac where it previews and read which bundle's `org.sqlite.sqlite` block is active. If it is TablePro's, the explanation above is confirmed. There is no way to read this Mac's state on those dates.
 - Why Quick Look does not fall back to the extension's exact `public.data` claim for a dynamic type: a Quick Look question, not needed for the fix. The observation (no extension process for `real.sqlite`, extension process for `real.whl`) is what matters.
 - macOS 15.2: step 3 of the VM test.
+
+## Observed after installing build 6
+
+2026-10-17, 18:15 to 18:21, macOS 27.2 (26B5101f), Apple silicon. The TestFlight-signed build 5 was removed from `/Applications` by the owner (root-owned; a copy is kept under `.build/installed-backup/`), the development-signed 1.1.0 (6) archive from `build6-integration-2026-10-17` was copied there with `ditto` and opened once.
+
+- `pluginkit -mAD`: the preview extension stays enabled under the same identifier; the thumbnail extension stays registered and not enabled.
+- `UTType(filenameExtension:)`: `sqlite` → `org.sqlite.sqlite` (declared), `rar` → `org.webmeister.spacepane.type.rar` (declared), `ipynb` unchanged. `db3` and `s3db` (TablePro-only tags) still resolve to dynamic types, as expected: that declaration is inactive. `mdls -name kMDItemContentType` on `stations.sqlite` now prints `org.sqlite.sqlite`.
+- Finder: selecting `stations.sqlite` and pressing Space opens SpacePane's preview (Rows: 3 · Columns: 5 · Size: 119 kB, modes Source, Summary, Table; no Filter field). Recorded in `docs/validation/host-matrix.json` as host `mac-build6-2026-10-17`, `database.sqlite` finderPreview = provider.
+- The installed app carries `en.lproj` only (6 folders across the app, the two extensions and their nested bundles), the pruning phase's result.
+
+Not observed: thumbnails, macOS 15, a store- or TestFlight-signed build 6.
