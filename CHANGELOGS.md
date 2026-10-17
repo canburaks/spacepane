@@ -2,6 +2,15 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-17 — README rewritten around screenshots and a minimal build (documentation only)
+
+Owner request: show the features with images, keep only the minimum needed to compile the app locally, and drop the rest.
+
+- `README.md` now has a short introduction, a two-column feature table using five store-listing screenshots (02 secrets, 03 notebooks, 05 archives, 06 Markdown, 09 Theme) and a three-step build section (copy `Local.xcconfig`, fill `DEVELOPMENT_TEAM`, `PREVIEW_BASE_BUNDLE_IDENTIFIER` and `APP_GROUP_IDENTIFIER`, run `./script/build_and_run.sh`).
+- Left out: screenshots 01 and 04 (they show the Filter field removed in build 5, and 01 lists a STEP file), 07 (a STEP model, not shipped) and 08 (an outdated "76 of 76" count). Removed sections: status, repository layout, adding a file type, translations, troubleshooting and the document index; that material remains in `AGENTS.md`, `PLAN.md` and `docs/`.
+- The old README said each target needs its own App Group and that the run registers the extensions; all three targets read `$(APP_GROUP_IDENTIFIER)`, and run mode has no registration step, so neither claim was kept.
+- Checks: `./script/build_and_run.sh --check-static` OK (23 passed, 1 skipped: tree-sitter not installed).
+
 ## 2026-10-17 — Review notes, replies and release records corrected after the rejection-risk review (documentation only)
 
 Request from the lead session: apply the cheap documentation fixes that [the rejection-risk review](docs/reviews/2026-10-17-app-store-rejection-risk.md) (findings 1, 3, 5, 11, 12, 13, 14, 15 and 18) named, in the repository only, so the corrected material is ready whether or not the owner pulls 1.1.0 (build 5) from review. No Swift, project, resource, store or website change; nothing was uploaded, submitted or edited in App Store Connect.
