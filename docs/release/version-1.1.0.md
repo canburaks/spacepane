@@ -23,6 +23,7 @@ earlier 1.1.0 submissions as Removed and no 1.0.0 submission at all.
 | 2026-10-15 23:23 | 1.1.0 | 4 (uploaded 2026-10-15) | Removed from review (it still linked the unreachable CAD client code, Guideline 2.5.19) | 2026-10-15 | Automatic |
 | 2026-10-17 11:08 | 1.1.0 | 5 (uploaded 2026-10-17 10:39) | **Waiting for Review** | 2026-10-15 (the block as it stood before the corrections of 2026-10-17) | **Automatic**; the review readiness plan (R-4) asked for Manual |
 | not yet | 1.1.0 | 6 (prepared 2026-10-17; archived locally, **not uploaded**) | Not in App Store Connect | 2026-10-17 (corrected block, without the `com.quicklookpro.*` paragraph) | Manual (to be selected at submission) |
+| 2026-10-17 18:39 | 1.1.0 | 6 (merged tree of `build6-integration-2026-10-17`, archived 18:1x, exported with Apple Distribution signing) | Uploaded with `--upload` on the owner's instruction; TestFlight processing; not yet selected for the version, not submitted | corrected block (build 6) | unchanged until the owner edits it |
 
 Also on the version page on 2026-10-17: sign-in required off, attachment `SpacePane-Review-Samples.zip`, six Mac
 screenshots, and the description of 1.0 ("That is 74 file types") rather than the 1.1.0 text below. Builds 1.0.0 (1)
