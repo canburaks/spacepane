@@ -184,9 +184,22 @@ public struct FormatCatalog: Sendable {
         let defaultEnabled: Bool?
     }
 
+    /// `conformsTo` is one identifier or a list of parents, as UTTypeConformsTo is in the manifests.
     private struct ImportedContentType: Decodable {
         let identifier: String
-        let conformsTo: String
+        let conformsTo: [String]
+
+        private enum CodingKeys: String, CodingKey { case identifier, conformsTo }
+
+        init(from decoder: any Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            identifier = try container.decode(String.self, forKey: .identifier)
+            if let single = try? container.decode(String.self, forKey: .conformsTo) {
+                conformsTo = [single]
+            } else {
+                conformsTo = try container.decode([String].self, forKey: .conformsTo)
+            }
+        }
     }
 
     private static func catalog(from entries: [CatalogEntry]) -> FormatCatalog {
@@ -198,7 +211,7 @@ public struct FormatCatalog: Sendable {
                 // A CLT process may run before the host's imported declarations are registered.
                 // Only catalog-declared imported types receive this narrow construction path.
                 if let imported = entry.importedContentTypes?.first(where: { $0.identifier == identifier }),
-                   let parent = UTType(imported.conformsTo) {
+                   let parent = imported.conformsTo.lazy.compactMap({ UTType($0) }).first {
                     return UTType(importedAs: identifier, conformingTo: parent)
                 }
                 // Additional system types can be unavailable on an older supported OS.

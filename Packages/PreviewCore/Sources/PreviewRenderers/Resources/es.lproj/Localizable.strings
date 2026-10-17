@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "Las vistas previas de modelos 3D usan Open CASCADE Technology bajo la GNU LGPL 2.1 con la excepción de Open CASCADE. Los avisos de licencia se incluyen con la app.";
 "about.acknowledgements.openCascade" = "El copyright de Open CASCADE Technology pertenece a OPEN CASCADE SAS y a sus colaboradores. El código fuente del asistente de importación 3D y la oferta escrita para el código fuente de la biblioteca son públicos.";
 "about.acknowledgements.title" = "Agradecimientos";
-"about.description" = "Una extensión local de Quick Look para vistas previas y miniaturas de texto, datos estructurados, archivos comprimidos, bases de datos y modelos 3D.";
+"about.description" = "Vistas previas y miniaturas de texto, datos estructurados, archivos comprimidos, bases de datos y modelos 3D directamente en el Finder, por completo en su Mac.";
 "about.howItWorks.body" = "Cuando esta app ofrece la vista previa, las opciones de Tipos de archivo se aplican a las nuevas vistas previas y miniaturas de Finder, y los posibles secretos se ocultan antes de mostrar, seleccionar o copiar el contenido. Los archivos se leen localmente y nunca se modifican. Las miniaturas genéricas no contienen texto de origen. macOS elige el proveedor de Quick Look.";
 "about.howItWorks.title" = "Cómo funciona";
 "about.link.documentation" = "Documentación";
@@ -521,7 +521,7 @@
 "general.banner.sharedBody" = "Activa las extensiones en Ajustes del Sistema. macOS elige el proveedor de vistas previas y miniaturas.";
 "general.banner.sharedTitle" = "Los ajustes se comparten con las extensiones de Quick Look";
 "general.banner.unavailableTitle" = "El almacenamiento de ajustes no está disponible";
-"general.developerMode.subtitle" = "Muestra Probar vista previa en la barra lateral para que puedas abrir un archivo directamente en esta app.";
+"general.developerMode.subtitle" = "Muestra la página Probar vista previa en la barra lateral (⌘5) y el comando Abrir archivo (⌘O) para abrir un archivo directamente en esta app.";
 "general.developerMode.title" = "Modo desarrollador";
 "general.finder.foldersSubtitle" = "Resume el contenido directo de una carpeta en Quick Look.";
 "general.finder.foldersTitle" = "Previsualizar carpetas";
@@ -536,6 +536,7 @@
 "general.storage.title" = "Almacenamiento de ajustes";
 "general.subtitle" = "Configura la integración con Finder y Quick Look.";
 "help.keyboard.body" = "⌘1 a ⌘4 cambian de página. ⌘, abre General. ⌘Z deshace el último restablecimiento, cambio masivo, importación de tema o eliminación de perfil; ⇧⌘Z lo rehace.";
+"help.keyboard.bodyDeveloper" = "⌘1 a ⌘5 cambian de página. ⌘O abre un archivo en Probar vista previa. ⌘, abre General. ⌘Z deshace el último restablecimiento, cambio masivo, importación de tema o eliminación de perfil; ⇧⌘Z lo rehace.";
 "help.keyboard.title" = "Atajos de teclado";
 "listing.risk.hiddenCharacters" = "Caracteres ocultos en el nombre";
 "mesh.printCheck.estimate" = "Si se imprime macizo en PLA: unos %1$@ %2$@ y %3$@ %4$@ de filamento de %5$@ %6$@. Los laminadores suelen imprimir con menos relleno, así que es un límite superior.";
@@ -1250,15 +1251,15 @@
 "settings.scheme.title" = "Esquema de color";
 "settings.searchFileTypes" = "Buscar tipos de archivo";
 "settings.storageUnavailable" = "El almacenamiento de ajustes no está disponible. Las opciones se aplican solo mientras la app está abierta.";
-"setup.notConfigured" = "Los ajustes se guardan solo para esta app. Hasta que se configure el App Group compartido de esta versión, las extensiones muestran un mensaje de configuración en las vistas previas de Finder y mantienen las miniaturas genéricas.";
+"setup.notConfigured" = "Los ajustes se guardan solo para esta app hasta que se configure el uso compartido con las vistas previas del Finder. Hasta entonces, las vistas previas del Finder muestran un mensaje de configuración y las miniaturas se mantienen genéricas.";
 "setup.steps" = "Activa las extensiones de Quick Look en Ajustes del Sistema > General > Ítems de inicio y extensiones. Después, selecciona un archivo compatible en Finder y pulsa Espacio.";
 "setup.unverified" = "macOS elige qué app ofrece las vistas previas y miniaturas de cada tipo de archivo. Si otra app también admite un tipo, Finder puede usar esa app.";
-"shell.subtitle" = "Extensión de Quick Look";
+"shell.subtitle" = "Vistas previas de archivos para el Finder";
 "state.configurationUnavailable.title" = "La app no está configurada correctamente";
 "state.empty.body" = "No tiene contenido, así que no hay nada que previsualizar.";
 "state.empty.title" = "Este archivo está vacío";
 "state.settingsUnavailable.title" = "Los ajustes no están disponibles";
-"status.appOnly" = "Ajustes solo de la app";
+"status.appOnly" = "Guardado solo para esta app";
 "status.loading" = "Cargando ajustes…";
 "status.recovered" = "Ajustes restablecidos";
 "status.saveFailed" = "Cambios no guardados";
