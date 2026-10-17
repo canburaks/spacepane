@@ -86,8 +86,6 @@ STEP and IGES do not ship in 1.0 ([decision 028](../decisions/028-no-cad-in-vers
 >
 > The preview extension declares public.data exactly once so that text files with no extension (such as Makefile) can be previewed, and only for previews, never thumbnails. Quick Look matches that type exactly, so PDFs, images and files with an extension are not routed to it, and a binary file with no extension shows a short explanation instead of its bytes.
 >
-> The com.quicklookpro.* identifiers are listed in the extensions' supported types; SpacePane neither imports nor exports them and declares no type of its own under that name. They name types that another developer's Quick Look app may have declared on a user's Mac for the same file suffixes, so files tagged that way still preview. SpacePane claims no ownership of them, and a Mac without that app skips them.
->
 > Developer Mode (off by default, on the General page) only reveals a Try Preview page and an Open File command for checking a file inside the companion. It changes nothing in Finder.
 >
 > Contact details are entered in App Store Connect. Email: info@spacepane.com. Support: https://spacepane.com/support. Privacy: https://spacepane.com/privacy.
@@ -135,7 +133,7 @@ Apple's notice of 2026-10-17 lists six changes. Each was checked against SpacePa
 
 | Change | What it means here | Status |
 | --- | --- | --- |
-| Before You Submit, After You Submit: links to more documentation | The checklist asks for complete metadata, current contact details and explanations of non-obvious features in the review notes. | The notes explain enabling the extensions, the samples, Developer Mode, `public.data` and the `com.quicklookpro.*` identifiers. |
+| Before You Submit, After You Submit: links to more documentation | The checklist asks for complete metadata, current contact details and explanations of non-obvious features in the review notes. | The notes explain enabling the extensions, the samples, Developer Mode and `public.data`; the paragraph about the `com.quicklookpro.*` identifiers was removed with the identifiers themselves in build 6 ([decision 004](../decisions/004-json-lines-and-group-controls.md), amendment of 2026-10-17). |
 | 1.2 User-generated content: scope and safeguards | Applies to apps that host or share content between users. | Not applicable: SpacePane previews the user's own local files and shares nothing. |
 | 2.3.14 Creative assets (new) | Rules for the product-page creative-asset type. | None uploaded; the rule for adding any is in [app-store-listing.md](app-store-listing.md#other-product-page-fields). |
 | 2.5.19 Hidden, dormant or undocumented features (new) | Every function must be clear to users and App Review. | No launch argument, environment variable, hidden preference, feature flag or debug-only code enables anything. Developer Mode is a visible switch on the General page, described there and in the notes. Build 4 still linked the CAD importer client into the companion and the preview extension although nothing could reach it (no service, no worker, no catalog entry, no type declaration); build 5, the build in review, links it in neither (zero `PreviewCADFormats` references in its archive, inspected 2026-10-17), and `script/check_release_archive.py` refuses any `PreviewCADFormats` code in a build without CAD. |

@@ -3,9 +3,7 @@
     {
       "id": "text.plain",
       "contentTypes": [
-        "public.plain-text",
-        "com.quicklookpro.file.text",
-        "com.quicklookpro.file.txt"
+        "public.plain-text"
       ],
       "extensions": [
         "txt",
@@ -23,10 +21,6 @@
         "mix.lock",
         "go.sum",
         "cartfile.resolved"
-      ],
-      "optionalContentTypes": [
-        "com.quicklookpro.file.text",
-        "com.quicklookpro.file.txt"
       ]
     },
     {
@@ -96,14 +90,10 @@
       "id": "data.json-lines",
       "contentTypes": [
         "org.jsonlines.jsonl",
-        "public.ndjson",
-        "com.quicklookpro.file.jsonl",
-        "com.quicklookpro.file.ndjson"
+        "public.ndjson"
       ],
       "optionalContentTypes": [
-        "public.ndjson",
-        "com.quicklookpro.file.jsonl",
-        "com.quicklookpro.file.ndjson"
+        "public.ndjson"
       ],
       "importedContentTypes": [
         {
@@ -164,154 +154,7 @@
         "public.python-script",
         "public.ruby-script",
         "public.swift-source",
-        "org.webmeister.spacepane.type.source-code",
-        "com.quicklookpro.file.ada",
-        "com.quicklookpro.file.adb",
-        "com.quicklookpro.file.ads",
-        "com.quicklookpro.file.asm",
-        "com.quicklookpro.file.astro",
-        "com.quicklookpro.file.awk",
-        "com.quicklookpro.file.bash",
-        "com.quicklookpro.file.bat",
-        "com.quicklookpro.file.bazel",
-        "com.quicklookpro.file.bzl",
-        "com.quicklookpro.file.cc",
-        "com.quicklookpro.file.cjs",
-        "com.quicklookpro.file.clj",
-        "com.quicklookpro.file.cljc",
-        "com.quicklookpro.file.cljs",
-        "com.quicklookpro.file.cmake",
-        "com.quicklookpro.file.cmd",
-        "com.quicklookpro.file.coffee",
-        "com.quicklookpro.file.command",
-        "com.quicklookpro.file.cplusplus",
-        "com.quicklookpro.file.cr",
-        "com.quicklookpro.file.cs",
-        "com.quicklookpro.file.csh",
-        "com.quicklookpro.file.cshtml",
-        "com.quicklookpro.file.csx",
-        "com.quicklookpro.file.cts",
-        "com.quicklookpro.file.cu",
-        "com.quicklookpro.file.cuh",
-        "com.quicklookpro.file.cxx",
-        "com.quicklookpro.file.d",
-        "com.quicklookpro.file.dart",
-        "com.quicklookpro.file.eex",
-        "com.quicklookpro.file.ejs",
-        "com.quicklookpro.file.el",
-        "com.quicklookpro.file.elm",
-        "com.quicklookpro.file.erb",
-        "com.quicklookpro.file.erl",
-        "com.quicklookpro.file.ex",
-        "com.quicklookpro.file.exs",
-        "com.quicklookpro.file.f",
-        "com.quicklookpro.file.f03",
-        "com.quicklookpro.file.f08",
-        "com.quicklookpro.file.f90",
-        "com.quicklookpro.file.f95",
-        "com.quicklookpro.file.fish",
-        "com.quicklookpro.file.for",
-        "com.quicklookpro.file.frag",
-        "com.quicklookpro.file.fs",
-        "com.quicklookpro.file.fsi",
-        "com.quicklookpro.file.fsx",
-        "com.quicklookpro.file.gemspec",
-        "com.quicklookpro.file.glsl",
-        "com.quicklookpro.file.go",
-        "com.quicklookpro.file.gql",
-        "com.quicklookpro.file.gradle",
-        "com.quicklookpro.file.graphql",
-        "com.quicklookpro.file.groovy",
-        "com.quicklookpro.file.haml",
-        "com.quicklookpro.file.handlebars",
-        "com.quicklookpro.file.hbs",
-        "com.quicklookpro.file.hcl",
-        "com.quicklookpro.file.heex",
-        "com.quicklookpro.file.hh",
-        "com.quicklookpro.file.hlsl",
-        "com.quicklookpro.file.hplusplus",
-        "com.quicklookpro.file.hrl",
-        "com.quicklookpro.file.hs",
-        "com.quicklookpro.file.htm",
-        "com.quicklookpro.file.hxx",
-        "com.quicklookpro.file.ino",
-        "com.quicklookpro.file.jade",
-        "com.quicklookpro.file.jl",
-        "com.quicklookpro.file.jsx",
-        "com.quicklookpro.file.ksh",
-        "com.quicklookpro.file.kt",
-        "com.quicklookpro.file.kts",
-        "com.quicklookpro.file.less",
-        "com.quicklookpro.file.lhs",
-        "com.quicklookpro.file.liquid",
-        "com.quicklookpro.file.lisp",
-        "com.quicklookpro.file.lsp",
-        "com.quicklookpro.file.lua",
-        "com.quicklookpro.file.make",
-        "com.quicklookpro.file.metal",
-        "com.quicklookpro.file.mjs",
-        "com.quicklookpro.file.mk",
-        "com.quicklookpro.file.ml",
-        "com.quicklookpro.file.mli",
-        "com.quicklookpro.file.mll",
-        "com.quicklookpro.file.mly",
-        "com.quicklookpro.file.mts",
-        "com.quicklookpro.file.mustache",
-        "com.quicklookpro.file.nim",
-        "com.quicklookpro.file.nims",
-        "com.quicklookpro.file.nix",
-        "com.quicklookpro.file.njk",
-        "com.quicklookpro.file.nu",
-        "com.quicklookpro.file.pas",
-        "com.quicklookpro.file.pl",
-        "com.quicklookpro.file.pm",
-        "com.quicklookpro.file.prisma",
-        "com.quicklookpro.file.proto",
-        "com.quicklookpro.file.ps1",
-        "com.quicklookpro.file.psd1",
-        "com.quicklookpro.file.psm1",
-        "com.quicklookpro.file.pug",
-        "com.quicklookpro.file.purs",
-        "com.quicklookpro.file.pyi",
-        "com.quicklookpro.file.pyw",
-        "com.quicklookpro.file.r",
-        "com.quicklookpro.file.rake",
-        "com.quicklookpro.file.razor",
-        "com.quicklookpro.file.rkt",
-        "com.quicklookpro.file.rs",
-        "com.quicklookpro.file.s",
-        "com.quicklookpro.file.sass",
-        "com.quicklookpro.file.sc",
-        "com.quicklookpro.file.scala",
-        "com.quicklookpro.file.scm",
-        "com.quicklookpro.file.scss",
-        "com.quicklookpro.file.slim",
-        "com.quicklookpro.file.sol",
-        "com.quicklookpro.file.sql",
-        "com.quicklookpro.file.styl",
-        "com.quicklookpro.file.sv",
-        "com.quicklookpro.file.svelte",
-        "com.quicklookpro.file.svh",
-        "com.quicklookpro.file.tcsh",
-        "com.quicklookpro.file.tf",
-        "com.quicklookpro.file.tfvars",
-        "com.quicklookpro.file.thrift",
-        "com.quicklookpro.file.ts",
-        "com.quicklookpro.file.tsx",
-        "com.quicklookpro.file.twig",
-        "com.quicklookpro.file.v",
-        "com.quicklookpro.file.vb",
-        "com.quicklookpro.file.vbs",
-        "com.quicklookpro.file.vert",
-        "com.quicklookpro.file.vh",
-        "com.quicklookpro.file.vhd",
-        "com.quicklookpro.file.vhdl",
-        "com.quicklookpro.file.vue",
-        "com.quicklookpro.file.wast",
-        "com.quicklookpro.file.wat",
-        "com.quicklookpro.file.wgsl",
-        "com.quicklookpro.file.zig",
-        "com.quicklookpro.file.zsh"
+        "org.webmeister.spacepane.type.source-code"
       ],
       "extensions": [
         "swift",
@@ -719,166 +562,13 @@
           "descriptionKey": "format.text.source-code.name",
           "referenceURL": "https://developer.apple.com/documentation/uniformtypeidentifiers/uttype-swift.struct/sourcecode"
         }
-      ],
-      "optionalContentTypes": [
-        "com.quicklookpro.file.ada",
-        "com.quicklookpro.file.adb",
-        "com.quicklookpro.file.ads",
-        "com.quicklookpro.file.asm",
-        "com.quicklookpro.file.astro",
-        "com.quicklookpro.file.awk",
-        "com.quicklookpro.file.bash",
-        "com.quicklookpro.file.bat",
-        "com.quicklookpro.file.bazel",
-        "com.quicklookpro.file.bzl",
-        "com.quicklookpro.file.cc",
-        "com.quicklookpro.file.cjs",
-        "com.quicklookpro.file.clj",
-        "com.quicklookpro.file.cljc",
-        "com.quicklookpro.file.cljs",
-        "com.quicklookpro.file.cmake",
-        "com.quicklookpro.file.cmd",
-        "com.quicklookpro.file.coffee",
-        "com.quicklookpro.file.command",
-        "com.quicklookpro.file.cplusplus",
-        "com.quicklookpro.file.cr",
-        "com.quicklookpro.file.cs",
-        "com.quicklookpro.file.csh",
-        "com.quicklookpro.file.cshtml",
-        "com.quicklookpro.file.csx",
-        "com.quicklookpro.file.cts",
-        "com.quicklookpro.file.cu",
-        "com.quicklookpro.file.cuh",
-        "com.quicklookpro.file.cxx",
-        "com.quicklookpro.file.d",
-        "com.quicklookpro.file.dart",
-        "com.quicklookpro.file.eex",
-        "com.quicklookpro.file.ejs",
-        "com.quicklookpro.file.el",
-        "com.quicklookpro.file.elm",
-        "com.quicklookpro.file.erb",
-        "com.quicklookpro.file.erl",
-        "com.quicklookpro.file.ex",
-        "com.quicklookpro.file.exs",
-        "com.quicklookpro.file.f",
-        "com.quicklookpro.file.f03",
-        "com.quicklookpro.file.f08",
-        "com.quicklookpro.file.f90",
-        "com.quicklookpro.file.f95",
-        "com.quicklookpro.file.fish",
-        "com.quicklookpro.file.for",
-        "com.quicklookpro.file.frag",
-        "com.quicklookpro.file.fs",
-        "com.quicklookpro.file.fsi",
-        "com.quicklookpro.file.fsx",
-        "com.quicklookpro.file.gemspec",
-        "com.quicklookpro.file.glsl",
-        "com.quicklookpro.file.go",
-        "com.quicklookpro.file.gql",
-        "com.quicklookpro.file.gradle",
-        "com.quicklookpro.file.graphql",
-        "com.quicklookpro.file.groovy",
-        "com.quicklookpro.file.haml",
-        "com.quicklookpro.file.handlebars",
-        "com.quicklookpro.file.hbs",
-        "com.quicklookpro.file.hcl",
-        "com.quicklookpro.file.heex",
-        "com.quicklookpro.file.hh",
-        "com.quicklookpro.file.hlsl",
-        "com.quicklookpro.file.hplusplus",
-        "com.quicklookpro.file.hrl",
-        "com.quicklookpro.file.hs",
-        "com.quicklookpro.file.htm",
-        "com.quicklookpro.file.hxx",
-        "com.quicklookpro.file.ino",
-        "com.quicklookpro.file.jade",
-        "com.quicklookpro.file.jl",
-        "com.quicklookpro.file.jsx",
-        "com.quicklookpro.file.ksh",
-        "com.quicklookpro.file.kt",
-        "com.quicklookpro.file.kts",
-        "com.quicklookpro.file.less",
-        "com.quicklookpro.file.lhs",
-        "com.quicklookpro.file.liquid",
-        "com.quicklookpro.file.lisp",
-        "com.quicklookpro.file.lsp",
-        "com.quicklookpro.file.lua",
-        "com.quicklookpro.file.make",
-        "com.quicklookpro.file.metal",
-        "com.quicklookpro.file.mjs",
-        "com.quicklookpro.file.mk",
-        "com.quicklookpro.file.ml",
-        "com.quicklookpro.file.mli",
-        "com.quicklookpro.file.mll",
-        "com.quicklookpro.file.mly",
-        "com.quicklookpro.file.mts",
-        "com.quicklookpro.file.mustache",
-        "com.quicklookpro.file.nim",
-        "com.quicklookpro.file.nims",
-        "com.quicklookpro.file.nix",
-        "com.quicklookpro.file.njk",
-        "com.quicklookpro.file.nu",
-        "com.quicklookpro.file.pas",
-        "com.quicklookpro.file.pl",
-        "com.quicklookpro.file.pm",
-        "com.quicklookpro.file.prisma",
-        "com.quicklookpro.file.proto",
-        "com.quicklookpro.file.ps1",
-        "com.quicklookpro.file.psd1",
-        "com.quicklookpro.file.psm1",
-        "com.quicklookpro.file.pug",
-        "com.quicklookpro.file.purs",
-        "com.quicklookpro.file.pyi",
-        "com.quicklookpro.file.pyw",
-        "com.quicklookpro.file.r",
-        "com.quicklookpro.file.rake",
-        "com.quicklookpro.file.razor",
-        "com.quicklookpro.file.rkt",
-        "com.quicklookpro.file.rs",
-        "com.quicklookpro.file.s",
-        "com.quicklookpro.file.sass",
-        "com.quicklookpro.file.sc",
-        "com.quicklookpro.file.scala",
-        "com.quicklookpro.file.scm",
-        "com.quicklookpro.file.scss",
-        "com.quicklookpro.file.slim",
-        "com.quicklookpro.file.sol",
-        "com.quicklookpro.file.sql",
-        "com.quicklookpro.file.styl",
-        "com.quicklookpro.file.sv",
-        "com.quicklookpro.file.svelte",
-        "com.quicklookpro.file.svh",
-        "com.quicklookpro.file.tcsh",
-        "com.quicklookpro.file.tf",
-        "com.quicklookpro.file.tfvars",
-        "com.quicklookpro.file.thrift",
-        "com.quicklookpro.file.ts",
-        "com.quicklookpro.file.tsx",
-        "com.quicklookpro.file.twig",
-        "com.quicklookpro.file.v",
-        "com.quicklookpro.file.vb",
-        "com.quicklookpro.file.vbs",
-        "com.quicklookpro.file.vert",
-        "com.quicklookpro.file.vh",
-        "com.quicklookpro.file.vhd",
-        "com.quicklookpro.file.vhdl",
-        "com.quicklookpro.file.vue",
-        "com.quicklookpro.file.wast",
-        "com.quicklookpro.file.wat",
-        "com.quicklookpro.file.wgsl",
-        "com.quicklookpro.file.zig",
-        "com.quicklookpro.file.zsh"
       ]
     },
     {
       "id": "config.ini",
       "contentTypes": [
         "org.webmeister.spacepane.type.ini",
-        "com.apple.xcode.configsettings",
-        "com.quicklookpro.file.cfg",
-        "com.quicklookpro.file.conf",
-        "com.quicklookpro.file.ini",
-        "com.quicklookpro.file.properties"
+        "com.apple.xcode.configsettings"
       ],
       "extensions": [
         "ini",
@@ -909,11 +599,7 @@
         }
       ],
       "optionalContentTypes": [
-        "com.apple.xcode.configsettings",
-        "com.quicklookpro.file.cfg",
-        "com.quicklookpro.file.conf",
-        "com.quicklookpro.file.ini",
-        "com.quicklookpro.file.properties"
+        "com.apple.xcode.configsettings"
       ],
       "filenameAliases": [
         ".editorconfig",
@@ -932,8 +618,7 @@
     {
       "id": "text.log",
       "contentTypes": [
-        "com.apple.log",
-        "com.quicklookpro.file.log"
+        "com.apple.log"
       ],
       "extensions": [
         "log"
@@ -943,10 +628,7 @@
       "primaryView": "source",
       "thumbnail": "content",
       "nameKey": "format.text.log.name",
-      "descriptionKey": "format.text.log.description",
-      "optionalContentTypes": [
-        "com.quicklookpro.file.log"
-      ]
+      "descriptionKey": "format.text.log.description"
     },
     {
       "id": "data.jsonc",
@@ -1169,8 +851,7 @@
       "id": "data.toml",
       "contentTypes": [
         "org.toml.toml",
-        "public.toml",
-        "com.quicklookpro.file.toml"
+        "public.toml"
       ],
       "extensions": [
         "toml"
@@ -1193,8 +874,7 @@
         }
       ],
       "optionalContentTypes": [
-        "public.toml",
-        "com.quicklookpro.file.toml"
+        "public.toml"
       ],
       "filenameAliases": [
         "cargo.lock",
@@ -1206,8 +886,7 @@
     {
       "id": "config.environment",
       "contentTypes": [
-        "org.webmeister.spacepane.type.environment",
-        "com.quicklookpro.file.env"
+        "org.webmeister.spacepane.type.environment"
       ],
       "extensions": [
         "env"
@@ -1234,9 +913,6 @@
       ],
       "filenamePrefixes": [
         ".env."
-      ],
-      "optionalContentTypes": [
-        "com.quicklookpro.file.env"
       ]
     },
     {
@@ -1260,15 +936,7 @@
       "contentTypes": [
         "net.daringfireball.markdown",
         "com.rstudio.rmarkdown",
-        "org.quarto.qmarkdown",
-        "com.quicklookpro.file.markdown",
-        "com.quicklookpro.file.mdown",
-        "com.quicklookpro.file.mdwn",
-        "com.quicklookpro.file.mdx",
-        "com.quicklookpro.file.mkd",
-        "com.quicklookpro.file.mkdn",
-        "com.quicklookpro.file.qmd",
-        "com.quicklookpro.file.rmd"
+        "org.quarto.qmarkdown"
       ],
       "extensions": [
         "md",
@@ -1314,25 +982,14 @@
       ],
       "optionalContentTypes": [
         "com.rstudio.rmarkdown",
-        "org.quarto.qmarkdown",
-        "com.quicklookpro.file.markdown",
-        "com.quicklookpro.file.mdown",
-        "com.quicklookpro.file.mdwn",
-        "com.quicklookpro.file.mdx",
-        "com.quicklookpro.file.mkd",
-        "com.quicklookpro.file.mkdn",
-        "com.quicklookpro.file.qmd",
-        "com.quicklookpro.file.rmd"
+        "org.quarto.qmarkdown"
       ]
     },
     {
       "id": "text.latex",
       "contentTypes": [
         "org.webmeister.spacepane.type.latex",
-        "org.tug.tex",
-        "com.quicklookpro.file.cls",
-        "com.quicklookpro.file.sty",
-        "com.quicklookpro.file.tex"
+        "org.tug.tex"
       ],
       "extensions": [
         "tex",
@@ -1361,17 +1018,13 @@
         }
       ],
       "optionalContentTypes": [
-        "org.tug.tex",
-        "com.quicklookpro.file.cls",
-        "com.quicklookpro.file.sty",
-        "com.quicklookpro.file.tex"
+        "org.tug.tex"
       ]
     },
     {
       "id": "text.bibtex",
       "contentTypes": [
-        "org.webmeister.spacepane.type.bibtex",
-        "com.quicklookpro.file.bib"
+        "org.webmeister.spacepane.type.bibtex"
       ],
       "extensions": [
         "bib"
@@ -1392,17 +1045,12 @@
           "descriptionKey": "format.text.bibtex.name",
           "referenceURL": "https://www.bibtex.org/Format/"
         }
-      ],
-      "optionalContentTypes": [
-        "com.quicklookpro.file.bib"
       ]
     },
     {
       "id": "text.asciidoc",
       "contentTypes": [
-        "org.webmeister.spacepane.type.asciidoc",
-        "com.quicklookpro.file.adoc",
-        "com.quicklookpro.file.asciidoc"
+        "org.webmeister.spacepane.type.asciidoc"
       ],
       "extensions": [
         "adoc",
@@ -1425,19 +1073,13 @@
           "descriptionKey": "format.text.asciidoc.name",
           "referenceURL": "https://docs.asciidoctor.org/asciidoc/latest/"
         }
-      ],
-      "optionalContentTypes": [
-        "com.quicklookpro.file.adoc",
-        "com.quicklookpro.file.asciidoc"
       ]
     },
     {
       "id": "text.restructuredtext",
       "contentTypes": [
         "org.webmeister.spacepane.type.restructuredtext",
-        "org.python.restructuredtext",
-        "com.quicklookpro.file.rest",
-        "com.quicklookpro.file.rst"
+        "org.python.restructuredtext"
       ],
       "extensions": [
         "rst",
@@ -1462,16 +1104,13 @@
         }
       ],
       "optionalContentTypes": [
-        "org.python.restructuredtext",
-        "com.quicklookpro.file.rest",
-        "com.quicklookpro.file.rst"
+        "org.python.restructuredtext"
       ]
     },
     {
       "id": "text.org",
       "contentTypes": [
-        "org.webmeister.spacepane.type.org",
-        "com.quicklookpro.file.org"
+        "org.webmeister.spacepane.type.org"
       ],
       "extensions": [
         "org"
@@ -1492,9 +1131,6 @@
           "descriptionKey": "format.text.org.name",
           "referenceURL": "https://orgmode.org/worg/org-syntax.html"
         }
-      ],
-      "optionalContentTypes": [
-        "com.quicklookpro.file.org"
       ]
     },
     {
@@ -1529,9 +1165,7 @@
       "id": "text.diff",
       "contentTypes": [
         "org.gnu.diff",
-        "public.patch-file",
-        "com.quicklookpro.file.diff",
-        "com.quicklookpro.file.patch"
+        "public.patch-file"
       ],
       "extensions": [
         "diff",
@@ -1556,9 +1190,7 @@
         }
       ],
       "optionalContentTypes": [
-        "public.patch-file",
-        "com.quicklookpro.file.diff",
-        "com.quicklookpro.file.patch"
+        "public.patch-file"
       ]
     },
     {
@@ -1638,8 +1270,7 @@
         "com.apple.property-list",
         "com.apple.binary-property-list",
         "org.webmeister.spacepane.type.entitlements",
-        "com.apple.xcode.entitlements-property-list",
-        "com.quicklookpro.file.plist"
+        "com.apple.xcode.entitlements-property-list"
       ],
       "extensions": [
         "plist",
@@ -1653,8 +1284,7 @@
       "descriptionKey": "format.data.property-list.description",
       "optionalContentTypes": [
         "com.apple.binary-property-list",
-        "com.apple.xcode.entitlements-property-list",
-        "com.quicklookpro.file.plist"
+        "com.apple.xcode.entitlements-property-list"
       ],
       "importedContentTypes": [
         {
@@ -1792,7 +1422,10 @@
       "importedContentTypes": [
         {
           "identifier": "org.apache.parquet",
-          "conformsTo": ["public.database", "public.data"],
+          "conformsTo": [
+            "public.database",
+            "public.data"
+          ],
           "extensions": [
             "parquet"
           ],
@@ -2215,8 +1848,7 @@
     {
       "id": "text.jupyter-notebook",
       "contentTypes": [
-        "org.jupyter.ipynb",
-        "com.quicklookpro.file.ipynb"
+        "org.jupyter.ipynb"
       ],
       "importedContentTypes": [
         {
@@ -2237,10 +1869,7 @@
       "primaryView": "rendered",
       "thumbnail": "content",
       "nameKey": "format.text.jupyter-notebook.name",
-      "descriptionKey": "format.text.jupyter-notebook.description",
-      "optionalContentTypes": [
-        "com.quicklookpro.file.ipynb"
-      ]
+      "descriptionKey": "format.text.jupyter-notebook.description"
     },
     {
       "id": "archive.comic-book",
@@ -2367,7 +1996,10 @@
       "importedContentTypes": [
         {
           "identifier": "org.sqlite.sqlite",
-          "conformsTo": ["public.database", "public.data"],
+          "conformsTo": [
+            "public.database",
+            "public.data"
+          ],
           "extensions": [
             "sqlite",
             "sqlite3",
@@ -2452,7 +2084,10 @@
       "importedContentTypes": [
         {
           "identifier": "org.webmeister.spacepane.type.rar",
-          "conformsTo": ["public.archive", "public.data"],
+          "conformsTo": [
+            "public.archive",
+            "public.data"
+          ],
           "extensions": [
             "rar"
           ],
