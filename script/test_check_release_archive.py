@@ -297,15 +297,44 @@ class LanguageTests(ArchiveCase):
             (fixture.paths["cad-service"] / "Contents/Resources/de.lproj").mkdir(parents=True)
         self.assertFailure(self.run_check(after=after), "CADImportService.xpc", "de")
 
-    def test_draft_translations_inside_a_nested_resource_bundle_are_a_note_not_a_failure(self):
-        def after(fixture):
-            nested = fixture.app / "Contents/Resources/PreviewCore_PreviewRenderers.bundle/Contents/Resources"
-            for language in ("en", "de", "tr"):
-                (nested / f"{language}.lproj").mkdir(parents=True)
-        report = self.run_check(after=after)
+    NESTED = "Contents/Resources/PreviewCore_PreviewRenderers.bundle/Contents/Resources"
+
+    def add_nested(self, fixture, role, languages):
+        nested = fixture.paths[role] / self.NESTED
+        for language in languages:
+            (nested / f"{language}.lproj").mkdir(parents=True)
+            (nested / f"{language}.lproj/Localizable.strings").write_text('"key" = "value";\n')
+
+    def test_draft_translations_inside_the_companions_nested_bundle_are_refused(self):
+        # The nested bundle reaches the host's language rule only by observation (macOS 27.2, 2026-10-12), so a
+        # build must not carry the drafts at all (review of 2026-10-17, finding 16).
+        report = self.run_check(after=lambda fixture: self.add_nested(fixture, "app", ("en", "de", "tr")))
+        self.assertFailure(report, "SpacePane.app", "PreviewCore_PreviewRenderers.bundle", "de, tr", "ship list")
+
+    def test_draft_translations_inside_an_extensions_nested_bundle_are_refused(self):
+        for role, name in (("preview", "PrevPreviewExtension.appex"), ("thumbnail", "PrevThumbnailExtension.appex")):
+            with self.subTest(role=role):
+                report = self.run_check(after=lambda fixture, role=role: self.add_nested(fixture, role, ("en", "ja")))
+                self.assertFailure(report, name, "PreviewCore_PreviewRenderers.bundle", "ja", "ship list")
+
+    def test_a_nested_bundle_carrying_the_ship_list_only_passes_without_a_note(self):
+        report = self.run_check(after=lambda fixture: [self.add_nested(fixture, role, ("en",)) for role in LOCALIZED_ROLES])
         self.assertClean(report)
-        self.assertTrue(any("PreviewCore_PreviewRenderers.bundle" in note and "de, tr" in note for note in report.notes),
-                        report.notes)
+        self.assertFalse(any("PreviewCore_PreviewRenderers.bundle" in note for note in report.notes), report.notes)
+
+    def test_a_nested_bundle_may_carry_every_shipped_language(self):
+        def edit(fixture):
+            fixture.shipped = ["en", "de"]
+            for role in LOCALIZED_ROLES:
+                fixture.infos[role]["CFBundleLocalizations"] = ["en", "de"]
+                fixture.languages[role] = ["en", "de"]
+        report = self.run_check(edit, after=lambda fixture: self.add_nested(fixture, "app", ("en", "de")))
+        self.assertClean(report)
+
+    def test_a_draft_below_the_nested_bundles_top_level_is_found(self):
+        def after(fixture):
+            (fixture.app / self.NESTED / "Resources/fr.lproj").mkdir(parents=True)
+        self.assertFailure(self.run_check(after=after), "PreviewCore_PreviewRenderers.bundle", "fr")
 
     def test_the_repository_ship_list_is_read_when_none_is_supplied(self):
         self.assertEqual(archive_check.shipped_languages(), ["en"])
