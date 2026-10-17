@@ -102,11 +102,16 @@ enum SystemSettingsOpening {
 
     static func open(link: URL?, openLink: (URL) -> Bool, applicationURL: () -> URL?,
                      openApplication: (URL) -> Void) -> Result {
-        .failed
+        // `open` answers true whenever a handler accepts the scheme, even one that ignores the pane, so the
+        // application fallback runs only for a refused link and an accepted one stays unconfirmed.
+        if let link, openLink(link) { return .linkAccepted }
+        guard let application = applicationURL() else { return .failed }
+        openApplication(application)
+        return .applicationOnly
     }
 
     /// The sentence shown under the button after an attempt, or nil when none is needed.
     static func manualRouteKey(after result: Result) -> PreviewStrings.Key? {
-        nil
+        .setupSteps
     }
 }
