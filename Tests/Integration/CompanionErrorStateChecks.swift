@@ -53,7 +53,9 @@ enum CompanionErrorStateChecks {
         try await recoveryRestoresDefaultsOnlyOnRequest(isolated)
         try await retryRetainsChoicesAndUndo(isolated)
         try await flushingPersistsTheNewestChoices(isolated)
-        print("Passed 6 companion error-state checks (isolated storage; injected save waits; no UI validation).")
+        try await quittingSavesTheLastChoiceBeforeTheReply(isolated)
+        try await quittingIsNeverHeldBackByStorage(isolated)
+        print("Passed 8 companion error-state checks (isolated storage; injected save waits; no UI validation).")
     }
 
     private static func check(_ condition: @autoclosure () -> Bool, _ message: String) throws {
@@ -232,5 +234,70 @@ enum CompanionErrorStateChecks {
         try check(loaded.snapshot.theme == .light && !loaded.snapshot.isEnabled(.json)
                   && !loaded.snapshot.showsContentThumbnails,
                   "The last appearance choice and independent policy choices must all survive the drain")
+    }
+
+    // MARK: Quitting
+
+    /// Command-Q with a toggle still being saved: the quit waits for the write, then replies once, and a fresh
+    /// store reads the choice. The save deadline is parked and released afterwards, so no clock is involved.
+    private static func quittingSavesTheLastChoiceBeforeTheReply(_ root: URL) async throws {
+        let url = root.appendingPathComponent("quit.json")
+        let settings = CompanionSettings(store: PreferenceStore(url: url), storageMode: .shared)
+        await settings.load()
+        let deadline = ErrorStateCheckLatch()
+        defer { deadline.open() }
+        var idleReplies = 0
+        let quitsAtOnce = settings.prepareToQuit(sleep: { _ in await deadline.wait() }, reply: { idleReplies += 1 })
+        try check(quitsAtOnce && idleReplies == 0,
+                  "With nothing pending the app must quit at once and never wait for a reply")
+        settings.setTheme(.dark)
+        settings.setEnabled(false, for: .json)
+        let expected = settings.snapshot
+        var replies = 0
+        let replied = ErrorStateCheckLatch()
+        let quitsNow = settings.prepareToQuit(sleep: { _ in await deadline.wait() }, reply: { replies += 1; replied.open() })
+        try check(!quitsNow, "A choice that is not on disk yet must hold the quit until it is saved")
+        await replied.wait()
+        let loaded = await PreferenceStore(url: url).load()
+        try check(replies == 1 && loaded.state == .loaded && loaded.snapshot == expected,
+                  "The quit must reply once, after the last choice is on disk")
+    }
+
+    /// The quit is bounded: it replies once when the limit passes, when the write is refused and when there is no
+    /// storage at all (which also needs no wait, because nothing can be saved).
+    private static func quittingIsNeverHeldBackByStorage(_ root: URL) async throws {
+        let blockedParent = root.appendingPathComponent("quit-blocked")
+        let blocked = CompanionSettings(store: PreferenceStore(url: blockedParent.appendingPathComponent("settings.json")),
+                                        storageMode: .shared)
+        await blocked.load()
+        try Data("not a directory".utf8).write(to: blockedParent)
+        blocked.setTheme(.dark)
+        let deadline = ErrorStateCheckLatch()
+        defer { deadline.open() }
+        var refusedReplies = 0
+        let refusedReplied = ErrorStateCheckLatch()
+        let refusedQuitsNow = blocked.prepareToQuit(sleep: { _ in await deadline.wait() },
+                                                    reply: { refusedReplies += 1; refusedReplied.open() })
+        await refusedReplied.wait()
+        try check(!refusedQuitsNow && refusedReplies == 1,
+                  "A refused write must still let the quit go ahead, after one reply")
+
+        let slow = CompanionSettings(store: PreferenceStore(url: root.appendingPathComponent("quit-slow.json")), storageMode: .shared)
+        await slow.load()
+        slow.setTheme(.light)
+        var expiredReplies = 0
+        let expiredReplied = ErrorStateCheckLatch()
+        let expiredQuitsNow = slow.prepareToQuit(sleep: { _ in }, reply: { expiredReplies += 1; expiredReplied.open() })
+        await expiredReplied.wait()
+        try check(!expiredQuitsNow && expiredReplies == 1,
+                  "A limit that has passed must release the quit with exactly one reply")
+
+        let unsaved = CompanionSettings(store: nil, storageMode: .unavailable)
+        await unsaved.load()
+        unsaved.setTheme(.dark)
+        var unsavedReplies = 0
+        let quitsWithoutStorage = unsaved.prepareToQuit(sleep: { _ in await deadline.wait() }, reply: { unsavedReplies += 1 })
+        try check(quitsWithoutStorage && unsavedReplies == 0,
+                  "Without storage nothing can be saved, so the quit must not wait")
     }
 }
