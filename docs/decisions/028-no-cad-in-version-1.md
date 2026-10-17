@@ -65,14 +65,15 @@ In order:
 
 1. Settle the licence first. Either the limited static-linking exception (scoped as described in the background) is obtained, or the LGPL route is cleared in a way the owner accepts, or the helper is replaced. Record the outcome; do not infer it from this record.
 2. Set `PREV_INCLUDE_CAD` to YES in `Configuration/Base.xcconfig`.
-3. Restore the two catalog entries from `Configuration/CADFormatCatalogEntries.json` into `FormatCatalog.json`, then regenerate what the catalog drives: manifests (`script/sync_manifests.py`), appearance samples (`script/generate_appearance_samples.py`) and the host matrix (`docs/validation/host-matrix.json`). Run `npm run data:sync` in `spacepane-web` and commit the result there.
-4. Restore the store copy and the samples, from git history before 2026-10-13 or from the text kept here:
+3. Link the `PreviewCADFormats` package product into the `Prev` and `PrevPreviewExtension` targets again (target package dependency and Frameworks phase). Since 2026-10-17 neither links it while the setting is NO, so the CAD importer client does not ship as dormant code (App Review Guideline 2.5.19); `script/validate_project.py` refuses YES without the links and `script/check_release_archive.py` refuses NO with any `PreviewCADFormats` code in an executable.
+4. Restore the two catalog entries from `Configuration/CADFormatCatalogEntries.json` into `FormatCatalog.json`, then regenerate what the catalog drives: manifests (`script/sync_manifests.py`), appearance samples (`script/generate_appearance_samples.py`) and the host matrix (`docs/validation/host-matrix.json`). Run `npm run data:sync` in `spacepane-web` and commit the result there.
+5. Restore the store copy and the samples, from git history before 2026-10-13 or from the text kept here:
    - Description, 3D bullet: `• STL, OBJ, PLY and 3MF models you can turn, plus STEP and IGES CAD models once you switch them on`; the count line becomes 76 again.
    - Description, under GOOD TO KNOW: `• STEP and IGES previews are off by default, because large models take time and memory. Their measurements are approximate.`
    - Description, last paragraph, only if the chosen licence route needs it: `3D previews use Open CASCADE Technology under the GNU LGPL 2.1 with the Open CASCADE exception. The helper's source and the written offer for the library source: https://github.com/canburaks/spacepane-cad-source`
    - Keywords, the earlier line ending `step,iges,stl,cad`; the localized drafts likewise.
    - Review notes: the STEP and IGES paragraph and the two CAD sample files (`32-winch-gear.step`, `33-box.iges`) in `script/build_review_samples.py`, with the "switch on first" step in its README.
    - Screenshot scene 07 with a STEP model, and the File Types page with the CAD rows.
-5. Refresh the public source mirror with `script/package_cad_source_offer.py`, tag it for the app build it matches, and push it only on the owner's instruction (`mani run mirror-drift` shows whether it is behind).
-6. Validate the store-signed XPC path on TestFlight (decision 027, D27): turn STEP on, preview a model, and read the CAD peer requirement result under the TestFlight and the Mac App Store signatures, as recorded in [the TestFlight runbook](../release/testflight.md).
-7. Update decision 006, the dependency audit and the changelog, and remove the pointer at the top of decision 006.
+6. Refresh the public source mirror with `script/package_cad_source_offer.py`, tag it for the app build it matches, and push it only on the owner's instruction (`mani run mirror-drift` shows whether it is behind).
+7. Validate the store-signed XPC path on TestFlight (decision 027, D27): turn STEP on, preview a model, and read the CAD peer requirement result under the TestFlight and the Mac App Store signatures, as recorded in [the TestFlight runbook](../release/testflight.md).
+8. Update decision 006, the dependency audit and the changelog, and remove the pointer at the top of decision 006.

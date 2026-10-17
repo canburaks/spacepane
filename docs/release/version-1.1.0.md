@@ -14,7 +14,7 @@ Review; 1.1.0 is submitted only after 1.0.0 is approved (or rejected and resolve
 | Setting | Value | Where |
 |---|---|---|
 | `MARKETING_VERSION` | `1.1.0` | `Configuration/Base.xcconfig` |
-| `CURRENT_PROJECT_VERSION` | `4` (build 3 was 1.0.0's submission; macOS build numbers must keep rising) | `Configuration/Base.xcconfig` |
+| `CURRENT_PROJECT_VERSION` | `5` (build 3 was 1.0.0's submission; build 4 was 1.1.0's first submission and carried the unreachable CAD client code that Guideline 2.5.19 rules out, so it is replaced; macOS build numbers must keep rising) | `Configuration/Base.xcconfig` |
 | `PREV_INCLUDE_CAD` | `NO` (decision 028 still holds: no STEP or IGES) | `Configuration/Base.xcconfig` |
 | Shipped languages | English only; no translation has a recorded review | `tools/localization/languages.json` |
 

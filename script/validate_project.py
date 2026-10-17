@@ -162,12 +162,26 @@ def validate_cad_wiring(root, objects, targets, include_cad):
               f"{target_name}: the embed phase must declare both scripts and the helper entitlements as inputs")
 
 
-def validate_cad_graph(objects, targets):
+def validate_cad_graph(objects, targets, include_cad):
     """Keep the byte-only CAD service private to the preview's target graph."""
     products = {name: {objects[item]["productName"] for item in target["packageProductDependencies"]}
                 for name, target in targets.items()}
     check(products["CADImportService"] == {"PreviewCADFormats", "PreviewContracts"},
           "CAD service must link only CAD formats and numeric contracts")
+    # The companion and the preview extension link the CAD importer client only in a build with CAD. Without it the
+    # client would be dormant code in two shipped executables (App Review Guideline 2.5.19), so bringing CAD back
+    # adds the product to both targets again (decision 028, "Bringing CAD back").
+    for target_name in ("Prev", "PrevPreviewExtension"):
+        linked = "PreviewCADFormats" in products[target_name]
+        files = [objects[item] for phase in targets[target_name]["buildPhases"]
+                 if objects[phase]["isa"] == "PBXFrameworksBuildPhase" for item in objects[phase]["files"]]
+        linked_in_phase = any(objects.get(item.get("productRef"), {}).get("productName") == "PreviewCADFormats" for item in files)
+        if include_cad:
+            check(linked and linked_in_phase, f"{target_name} must link PreviewCADFormats when PREV_INCLUDE_CAD is YES: "
+                  "add the package product to the target and its Frameworks phase (decision 028, \"Bringing CAD back\")")
+        else:
+            check(not linked and not linked_in_phase, f"{target_name} must not link PreviewCADFormats when PREV_INCLUDE_CAD "
+                  "is NO: the CAD importer client would ship as dormant code (Guideline 2.5.19)")
     # Content thumbnails run the shared pipeline with the standard adapters; CAD thumbnails stay generic,
     # so the thumbnail extension must never link the CAD importer client.
     check(products["PrevThumbnailExtension"] == {"PreviewContracts", "PreviewCore", "PreviewFileAccess", "PreviewFormats",
@@ -377,7 +391,7 @@ def validate():
     target_product_types = {"Prev": "application", "PrevPreviewExtension": "app-extension",
                             "PrevThumbnailExtension": "app-extension", "CADImportService": "xpc-service"}
     check(set(targets) == set(target_product_types), "Expected companion, preview, thumbnail and private CAD service targets")
-    validate_cad_graph(objects, targets)
+    validate_cad_graph(objects, targets, include_cad)
     validate_cad_wiring(ROOT, objects, targets, include_cad)
     validate_privacy_manifests(ROOT, objects, targets)
     for target_name, target in targets.items():
