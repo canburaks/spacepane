@@ -2,6 +2,15 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-17 — Draft languages pruned from the nested resource bundle; privacy-manifest reasons tied to code (findings 16 and 21)
+
+Request from the lead session: fix findings 16 and 21 of [the rejection-risk review](docs/reviews/2026-10-17-app-store-rejection-risk.md). Record: [nested-language-pruning-2026-10-17.md](docs/validation/nested-language-pruning-2026-10-17.md).
+
+- Finding (validation): in a copy of the build 5 preview or thumbnail extension used as the main bundle, a system language of Turkish or German makes the nested `PreviewCore_PreviewRenderers.bundle` answer in that language with no preferences, which is how `PreviewStrings.text` looks strings up. The companion answers in English. The earlier "unreachable" observation does not extend to the extensions. Simulation by staged copy and launch argument, not a Finder run.
+- Implementation: `script/prune_resource_languages.py` and a "Prune draft languages" run-script phase in `Prev`, `PrevPreviewExtension` and `PrevThumbnailExtension` remove every `.lproj` outside `shipped` from the nested bundle before signing. `script/prune-outputs.xcfilelist` declares the 39 deleted paths, so `ENABLE_USER_SCRIPT_SANDBOXING` stays `YES`. The drafts stay in the repository and the package. `script/check_release_archive.py` now fails an archive whose nested bundle carries one (it noted them). `script/check_bundle_localizations.py` adds a lookup without preferences, run inside a staged copy of each host under each chosen language as system language; it fails on the build 5 app.
+- Implementation: the thumbnail manifest no longer declares `DDA9.1` (no thumbnail request shows a file date); `35F9.1` stays because the statically linked MIDI renderer references `systemUptime` and upload validation reads references. Every manifest comment names the Swift file behind each reason. Apple's reason list was read again and has no code for files an app finds for itself, so the companion keeps `3B52.1` for its provider scan and says so.
+- Validation: signed archive of 1.1.0 (5) from this branch has 6 `.lproj` against 45 in the submitted build 5, passes `check_release_archive.py` and `codesign --verify --deep --strict`; `test_check_release_archive.py` (127), `test_prune_resource_languages.py` (25) and `--check-static` pass. Nothing was run in Finder or uploaded. The build number is unchanged.
+
 ## 2026-10-17 — Review notes, replies and release records corrected after the rejection-risk review (documentation only)
 
 Request from the lead session: apply the cheap documentation fixes that [the rejection-risk review](docs/reviews/2026-10-17-app-store-rejection-risk.md) (findings 1, 3, 5, 11, 12, 13, 14, 15 and 18) named, in the repository only, so the corrected material is ready whether or not the owner pulls 1.1.0 (build 5) from review. No Swift, project, resource, store or website change; nothing was uploaded, submitted or edited in App Store Connect.
