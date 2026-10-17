@@ -2,8 +2,10 @@
 """Inspect signed app/extension resources without launching hosts or changing preferences.
 
 This verifies explicit Foundation lookup from the supplied artifacts, including
-regional aliases, fallback and interpolation. Finder's effective
-language, UTType display, layout and VoiceOver still need separate host observations.
+regional aliases, fallback and interpolation, and the lookup the production string API makes: no
+preferences at all, in a process whose system language is each chosen language in turn. A build that
+ships English only must answer in English for every one of them (review of 2026-10-17, finding 16).
+Finder's effective language, UTType display, layout and VoiceOver still need separate host observations.
 """
 import argparse
 import hashlib
@@ -11,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import plistlib
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -85,7 +88,8 @@ def main() -> None:
                         "-strict-concurrency=complete", "-default-isolation", "nonisolated",
                         "-o", str(executable), str(ROOT / "Tests/Integration/LocalizedBundleChecks.swift")], check=True)
         manifest_path = directory / "manifest.json"
-        for preferences, language in cases:
+
+        def expected_for(language):
             translated = {key: item["localizations"][language].get("stringUnit", {"value": "%#@count@"})["value"] for key, item in strings.items()}
             expected_hosts = []
             for role, host in hosts.items():
@@ -94,18 +98,56 @@ def main() -> None:
                     "CFBundleDisplayName": title, "CFBundleName": title,
                     **{key: translated[key] for key in type_keys},
                 }})
-            manifest_path.write_text(json.dumps({"preferences": preferences, "expectedLanguage": language, "formattingLocale": preferences[0],
-                                                  "bundles": expected_hosts, "strings": translated}))
+            return translated, expected_hosts
+
+        def run(preferences, language):
             # Explicit lookup avoids altering any preference domain or assuming
             # that the standalone helper chooses languages like a Finder host.
-            result = subprocess.run([str(executable), str(manifest_path)],
-                                    check=False, capture_output=True, text=True, timeout=20)
+            translated, expected_hosts = expected_for(language)
+            manifest_path.write_text(json.dumps({"preferences": preferences, "expectedLanguage": language, "formattingLocale": preferences[0],
+                                                  "bundles": expected_hosts, "strings": translated}))
+            result = subprocess.run([str(executable), str(manifest_path)], check=False, capture_output=True, text=True, timeout=20)
             if result.returncode:
                 raise RuntimeError(f"Resource lookup failed for {preferences}: {result.stderr.strip()}")
+
+        def stage(role, host):
+            """A copy of one host with the checker as its executable, so that `Bundle.main` is that host."""
+            staged = directory / "staged" / role / host.name
+            (staged / "Contents/MacOS").mkdir(parents=True)
+            subprocess.run(["/usr/bin/ditto", str(host / "Contents/Resources"), str(staged / "Contents/Resources")], check=True)
+            shutil.copy(host / "Contents/Info.plist", staged / "Contents/Info.plist")
+            shutil.copy(executable, staged / "Contents/MacOS/LocalizedBundleChecks")
+            return staged
+
+        def run_without_preferences(system_language, expected):
+            """The production lookup passes no preferences: each host answers under the system language alone."""
+            translated, expected_hosts = expected_for(expected)
+            for entry in expected_hosts:
+                staged = stage(entry["role"], hosts[entry["role"]])
+                manifest = {"preferences": [REGIONAL_PREFERENCES[expected]], "systemLanguage": system_language,
+                            "expectedLanguage": expected, "formattingLocale": REGIONAL_PREFERENCES[expected],
+                            "bundles": [{**entry, "path": str(staged)}], "strings": translated}
+                manifest_path.write_text(json.dumps(manifest))
+                result = subprocess.run([str(staged / "Contents/MacOS/LocalizedBundleChecks"), str(manifest_path),
+                                         "-AppleLanguages", f"({system_language})"],
+                                        check=False, capture_output=True, text=True, timeout=20)
+                if result.returncode:
+                    raise RuntimeError(f"Lookup without preferences failed for the {entry['role']} host under system language "
+                                       f"{system_language}: {result.stderr.strip()}")
+                shutil.rmtree(staged.parent)
+
+        for preferences, language in cases:
+            run(preferences, language)
             print(f"Passed explicit preferences {preferences}: {language}; all 3 bundle contexts")
+        for system_language in policy["languages"]:
+            # With no preferences the bundle answers in the system language only when the build ships it.
+            expected = system_language if system_language in languages else policy["developmentLanguage"]
+            run_without_preferences(system_language, expected)
+            print(f"Passed lookup without preferences under system language {system_language}: {expected}; all 3 hosts as the main bundle")
     if resource_hashes(app) != before:
         raise RuntimeError("Supplied app resources changed during read-only inspection")
-    print(f"Passed {len(cases)} explicit language cases, {len(hosts)} signed bundles, {len(strings)} keys each; resources unchanged.")
+    print(f"Passed {len(cases)} explicit language cases and {len(policy['languages'])} cases without preferences, "
+          f"{len(hosts)} signed bundles, {len(strings)} keys each; resources unchanged.")
     print("This is resource lookup evidence; actual companion/Finder effective language, layout and VoiceOver remain separate.")
 
 
