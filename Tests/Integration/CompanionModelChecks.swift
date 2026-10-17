@@ -151,6 +151,23 @@ struct CompanionModelChecks {
             try check(route.resolved(developerMode: false) == route && route.resolved(developerMode: true) == route,
                       "Other routes must never be remapped")
         }
+        try keyboardHelpListsEveryPageShortcut()
+    }
+
+    /// The Help text states the page shortcuts, so it must reach exactly as far as the View menu does: the highest
+    /// number it names is the count of offered pages, and Open File's Command-O appears only with Developer Mode.
+    private static func keyboardHelpListsEveryPageShortcut() throws {
+        for developerMode in [false, true] {
+            let help = PreviewStrings.text(CompanionRoute.keyboardHelp(developerMode: developerMode), languagePreferences: ["en"])
+            let pages = CompanionRoute.available(developerMode: developerMode)
+            let highest = pages.compactMap { route in
+                (route.shortcutKey.character.wholeNumberValue).map { (route, $0) }
+            }.map(\.1).max()
+            try check(highest == pages.count && help.contains("\u{2318}1 to \u{2318}\(pages.count)"),
+                      "The Help must name the shortcuts of exactly the offered pages (developerMode \(developerMode)): \(help)")
+            try check(help.contains("\u{2318}O") == developerMode,
+                      "Open File's shortcut belongs in the Help only while Developer Mode is on (developerMode \(developerMode))")
+        }
     }
 
     private static func developerModePersistsInIsolatedSuite() throws {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-10-08",
+  "generated": "2026-10-17",
   "hosts": [
     {
       "id": "mac-2026-10-04",
@@ -28,6 +28,15 @@
       "date": "2026-10-08",
       "record": "docs/validation/quality-program-signed-host-2026-10-08.md#information-and-facts-in-the-signed-3a97e4f-artifact",
       "identity": "org.webmeister.spacepane; source 3a97e4fab6a3ac36c97f95df39cce90c63273191"
+    },
+    {
+      "id": "mac-build6-2026-10-17",
+      "os": "macOS 27.2 (26B5101f)",
+      "hardware": "Apple M5 Pro, 48 GiB",
+      "signing": "development",
+      "date": "2026-10-17",
+      "record": "docs/validation/uti-resolution-2026-10-17.md#observed-after-installing-build-6",
+      "identity": "org.webmeister.spacepane; 1.1.0 (6) archived from build6-integration-2026-10-17 and copied to /Applications"
     }
   ],
   "formats": [
@@ -76,7 +85,7 @@
         "finderPreview": {
           "outcome": "provider",
           "host": "mac-quality-info-2026-10-08",
-          "note": "Signed 3a97e4f shows concealed synthetic JSON, cached facts and working inline information. The panel additionally verifies native scrollbar control and mode-sensitive help; key focus and VoiceOver remain open."
+          "note": "Signed 3a97e4f shows concealed synthetic JSON, cached facts and working inline information. The panel additionally verifies native scrollbar control and mode-sensitive help; key focus and VoiceOver remain open. Seen again on build 6 (mac-build6-2026-10-17): Outline view with the concealment banner and the Copy Findings Report button."
         },
         "finderThumbnail": {
           "outcome": "notObserved",
@@ -854,7 +863,9 @@
       "resolvedType": "org.sqlite.sqlite",
       "surfaces": {
         "finderPreview": {
-          "outcome": "notObserved"
+          "outcome": "provider",
+          "host": "mac-build6-2026-10-17",
+          "note": "Build 6 installed in /Applications: UTType(filenameExtension: \"sqlite\") resolves to org.sqlite.sqlite (build 5 gave a dynamic type), and Space on stations.sqlite in Finder opens SpacePane's Table view with Source, Summary and Table modes and no Filter field. Captured by script/store-screenshots/capture.sh scene 4 on 2026-10-17 18:21."
         },
         "finderThumbnail": {
           "outcome": "notObserved"

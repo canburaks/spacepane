@@ -902,6 +902,7 @@ public enum PreviewStrings {
         case windowTitle = "window.title"
         case helpKeyboardTitle = "help.keyboard.title"
         case helpKeyboardBody = "help.keyboard.body"
+        case helpKeyboardBodyDeveloper = "help.keyboard.bodyDeveloper"
         case typographyPointText = "appearance.pointText"
         case typographyPointsSpoken = "appearance.pointsSpoken"
         case profileSaveEmpty = "appearance.profile.saveEmpty"

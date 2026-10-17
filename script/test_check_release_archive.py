@@ -297,15 +297,44 @@ class LanguageTests(ArchiveCase):
             (fixture.paths["cad-service"] / "Contents/Resources/de.lproj").mkdir(parents=True)
         self.assertFailure(self.run_check(after=after), "CADImportService.xpc", "de")
 
-    def test_draft_translations_inside_a_nested_resource_bundle_are_a_note_not_a_failure(self):
-        def after(fixture):
-            nested = fixture.app / "Contents/Resources/PreviewCore_PreviewRenderers.bundle/Contents/Resources"
-            for language in ("en", "de", "tr"):
-                (nested / f"{language}.lproj").mkdir(parents=True)
-        report = self.run_check(after=after)
+    NESTED = "Contents/Resources/PreviewCore_PreviewRenderers.bundle/Contents/Resources"
+
+    def add_nested(self, fixture, role, languages):
+        nested = fixture.paths[role] / self.NESTED
+        for language in languages:
+            (nested / f"{language}.lproj").mkdir(parents=True)
+            (nested / f"{language}.lproj/Localizable.strings").write_text('"key" = "value";\n')
+
+    def test_draft_translations_inside_the_companions_nested_bundle_are_refused(self):
+        # The nested bundle reaches the host's language rule only by observation (macOS 27.2, 2026-10-12), so a
+        # build must not carry the drafts at all (review of 2026-10-17, finding 16).
+        report = self.run_check(after=lambda fixture: self.add_nested(fixture, "app", ("en", "de", "tr")))
+        self.assertFailure(report, "SpacePane.app", "PreviewCore_PreviewRenderers.bundle", "de, tr", "ship list")
+
+    def test_draft_translations_inside_an_extensions_nested_bundle_are_refused(self):
+        for role, name in (("preview", "PrevPreviewExtension.appex"), ("thumbnail", "PrevThumbnailExtension.appex")):
+            with self.subTest(role=role):
+                report = self.run_check(after=lambda fixture, role=role: self.add_nested(fixture, role, ("en", "ja")))
+                self.assertFailure(report, name, "PreviewCore_PreviewRenderers.bundle", "ja", "ship list")
+
+    def test_a_nested_bundle_carrying_the_ship_list_only_passes_without_a_note(self):
+        report = self.run_check(after=lambda fixture: [self.add_nested(fixture, role, ("en",)) for role in LOCALIZED_ROLES])
         self.assertClean(report)
-        self.assertTrue(any("PreviewCore_PreviewRenderers.bundle" in note and "de, tr" in note for note in report.notes),
-                        report.notes)
+        self.assertFalse(any("PreviewCore_PreviewRenderers.bundle" in note for note in report.notes), report.notes)
+
+    def test_a_nested_bundle_may_carry_every_shipped_language(self):
+        def edit(fixture):
+            fixture.shipped = ["en", "de"]
+            for role in LOCALIZED_ROLES:
+                fixture.infos[role]["CFBundleLocalizations"] = ["en", "de"]
+                fixture.languages[role] = ["en", "de"]
+        report = self.run_check(edit, after=lambda fixture: self.add_nested(fixture, "app", ("en", "de")))
+        self.assertClean(report)
+
+    def test_a_draft_below_the_nested_bundles_top_level_is_found(self):
+        def after(fixture):
+            (fixture.app / self.NESTED / "Resources/fr.lproj").mkdir(parents=True)
+        self.assertFailure(self.run_check(after=after), "PreviewCore_PreviewRenderers.bundle", "fr")
 
     def test_the_repository_ship_list_is_read_when_none_is_supplied(self):
         self.assertEqual(archive_check.shipped_languages(), ["en"])
@@ -1115,6 +1144,73 @@ class CADModeProjectTests(unittest.TestCase):
         phase["inputFileListPaths"] = ["$(SRCROOT)/.build/cad/bundle-inputs.xcfilelist"]
         with self.assertRaisesRegex(ValueError, "through PREV_CAD_BUNDLE_INPUTS"):
             validate_project.validate_cad_wiring(ROOT, objects, targets, False)
+
+
+class RepositoryManifestTests(unittest.TestCase):
+    """The privacy manifests of this repository, read as they are (review of 2026-10-17, finding 21).
+
+    Apple's upload validation reads which required-reason APIs a binary references, not whether a request reaches
+    them, so a category stays declared while the code is linked. A reason code is Apple's statement of purpose, so
+    a code stays only while some shipped path needs it, and the comment beside each one names the Swift file that
+    does."""
+    MANIFESTS = {"app": "Apps/PrevApp/Resources/PrivacyInfo.xcprivacy",
+                 "preview": "Extensions/PrevPreviewExtension/PrivacyInfo.xcprivacy",
+                 "thumbnail": "Extensions/PrevThumbnailExtension/PrivacyInfo.xcprivacy"}
+
+    def load(self, role):
+        data = (ROOT / self.MANIFESTS[role]).read_bytes()
+        return plistlib.loads(data), data.decode("utf-8")
+
+    def reasons(self, role):
+        value, _ = self.load(role)
+        return {entry["NSPrivacyAccessedAPIType"]: entry["NSPrivacyAccessedAPITypeReasons"]
+                for entry in value["NSPrivacyAccessedAPITypes"]}
+
+    def comment(self, role):
+        return re.search(r"<!--(.*?)-->", self.load(role)[1], re.S).group(1)
+
+    def test_the_thumbnail_declares_no_display_of_file_dates(self):
+        # Folders, archives and MIDI are glyph-only types, so no thumbnail request lists a modified date.
+        self.assertNotIn("DDA9.1", self.reasons("thumbnail")[archive_check.FILE_TIMESTAMP])
+
+    def test_the_thumbnail_keeps_the_boot_time_reason_for_the_linked_midi_clock(self):
+        # The renderer module is linked statically, so the binary references systemUptime.
+        self.assertEqual(self.reasons("thumbnail")[archive_check.SYSTEM_BOOT_TIME], ["35F9.1"])
+
+    def test_the_thumbnail_keeps_the_reasons_for_the_files_it_reads(self):
+        self.assertEqual(sorted(self.reasons("thumbnail")[archive_check.FILE_TIMESTAMP]), ["3B52.1", "C617.1"])
+
+    def test_the_preview_and_the_companion_keep_every_reason_they_show(self):
+        for role in ("preview", "app"):
+            with self.subTest(role=role):
+                self.assertEqual(sorted(self.reasons(role)[archive_check.FILE_TIMESTAMP]), ["3B52.1", "C617.1", "DDA9.1"])
+                self.assertEqual(self.reasons(role)[archive_check.SYSTEM_BOOT_TIME], ["35F9.1"])
+
+    def test_every_declared_reason_is_in_apples_list_for_its_category(self):
+        for role in self.MANIFESTS:
+            for category, codes in self.reasons(role).items():
+                self.assertLessEqual(set(codes), archive_check.API_REASONS[category], f"{role} {category}")
+
+    def test_the_comment_names_a_source_file_for_every_declared_reason(self):
+        sources = {Path(name).name for name in subprocess.run(["git", "ls-files", "*.swift"], cwd=ROOT, capture_output=True,
+                                                              text=True, check=True).stdout.split()}
+        for role in self.MANIFESTS:
+            comment = self.comment(role)
+            for code in sorted({code for codes in self.reasons(role).values() for code in codes}):
+                lines = [line for line in comment.splitlines() if line.strip().startswith(code)]
+                self.assertEqual(len(lines), 1, f"{role}: the comment needs one line for {code}")
+                named = re.findall(r"\b[A-Za-z0-9]+\.swift\b", lines[0])
+                self.assertTrue(named, f"{role}: the line for {code} names no Swift file")
+                for name in named:
+                    self.assertIn(name, sources, f"{role}: {name} named for {code} is not in the repository")
+
+    def test_the_companion_comment_covers_the_provider_scan_under_3b52(self):
+        line = [line for line in self.comment("app").splitlines() if line.strip().startswith("3B52.1")][0]
+        self.assertIn("QuickLookProviderScanner.swift", line)
+
+    def test_the_thumbnail_comment_says_why_there_is_no_display_reason(self):
+        self.assertIn("DDA9.1", self.comment("thumbnail"))
+        self.assertIn("FolderScan.swift", self.comment("thumbnail"))
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ text lives in [app-store-listing.md](app-store-listing.md) for 1.0 and here for 
 the listing file takes it over. Uploading, submitting and releasing happen only on the owner's explicit
 instruction.
 
-**Status (2026-10-17):** 1.1.0 (build 5) is submitted and Waiting for Review; see the status table below. The
+**Status (2026-10-17):** 1.1.0 (build 5) is submitted and Waiting for Review; build 6, the replacement that fixes the findings of the rejection-risk review, is prepared and archived locally but not uploaded (see the status table below). The
 earlier record here, that 1.0.0 (build 3) was waiting for review and 1.1.0 would follow its approval, is history: the
 1.0.0 submission no longer exists in App Store Connect.
 
@@ -22,6 +22,8 @@ earlier 1.1.0 submissions as Removed and no 1.0.0 submission at all.
 | 2026-10-13 18:09 | 1.0.0 as recorded here; listed under 1.1.0 | 3 | Removed from review (the first submission) | 2026-10-13 | Automatic |
 | 2026-10-15 23:23 | 1.1.0 | 4 (uploaded 2026-10-15) | Removed from review (it still linked the unreachable CAD client code, Guideline 2.5.19) | 2026-10-15 | Automatic |
 | 2026-10-17 11:08 | 1.1.0 | 5 (uploaded 2026-10-17 10:39) | **Waiting for Review** | 2026-10-15 (the block as it stood before the corrections of 2026-10-17) | **Automatic**; the review readiness plan (R-4) asked for Manual |
+| not yet | 1.1.0 | 6 (prepared 2026-10-17; archived locally, **not uploaded**) | Not in App Store Connect | 2026-10-17 (corrected block, without the `com.quicklookpro.*` paragraph) | Manual (to be selected at submission) |
+| 2026-10-17 18:39 | 1.1.0 | 6 (merged tree of `build6-integration-2026-10-17`, archived 18:1x, exported with Apple Distribution signing) | Uploaded with `--upload` on the owner's instruction; TestFlight processing; not yet selected for the version, not submitted | corrected block (build 6) | unchanged until the owner edits it |
 
 Also on the version page on 2026-10-17: sign-in required off, attachment `SpacePane-Review-Samples.zip`, six Mac
 screenshots, and the description of 1.0 ("That is 74 file types") rather than the 1.1.0 text below. Builds 1.0.0 (1)
@@ -29,13 +31,13 @@ and (2) were uploaded on 2026-10-10 and 2026-10-12 and never submitted.
 
 ### Replacing the submission
 
-What the owner does if 1.1.0 (5) is to be replaced or its metadata corrected while it waits, in order. The queue position
+What the owner does if 1.1.0 (5) is to be replaced (by build 6) or its metadata corrected while it waits, in order. The queue position
 resets at step 5; a rejection resets it too and adds a reply cycle, which is the trade-off the review names.
 
 1. Remove the version from review (App Store Connect, the submission's menu: Remove from Review). The status returns to
    Prepare for Submission; the build stays attached.
 2. Select the new build on the version page if there is one (a replacement build raises `CURRENT_PROJECT_VERSION`
-   and keeps `PREV_INCLUDE_CAD = NO`); to correct metadata only, keep build 5.
+   and keeps `PREV_INCLUDE_CAD = NO`); to correct metadata only, keep build 5. Build 6 is that replacement: it fixes the SQLite, Parquet and RAR type declarations (review finding 0), stops registering generic formats for thumbnails (finding 9), drops the `com.quicklookpro.*` identifiers (finding 11) and empties the stale CAD service key (finding 22); the notes of step 3 name `1.1.0 (build 6)`.
 3. Re-paste the Notes for App Review from [app-store-submission.md](app-store-submission.md#notes-for-app-review)
    (the corrected block of 2026-10-17), the What's New and the description below, and switch the release option to
    Manually release this version.
@@ -181,7 +183,7 @@ observed before build 5 was submitted on 2026-10-17: the three 1.1.0 samples are
 ## App Review
 
 - Notes: [app-store-submission.md, "Notes for App Review"](app-store-submission.md#notes-for-app-review) names 1.1.0 (build 5; build 4 named it until 2026-10-17) and the three new samples. Corrected on 2026-10-17 after the rejection-risk review: step 1 places the "Open System Settings" button in the banner at the top of the General page (not in the "Turn on the extensions" row), step 4 names `31-model.3mf` as the model and keeps `28-binary.stl` with a Try Preview fallback, the opening names the thumbnail extension without claiming thumbnails, and "Tested on macOS 15.2" is gone until a run is recorded. The block in App Store Connect is still the one pasted on 2026-10-17 (see the status table).
-- Prepared replies: the 4.2 reply leads with the Theme page's live previews and names 3MF as the model example; the `com.quicklookpro.*` paragraph says the identifiers are listed in the supported types, neither imported nor exported.
+- Prepared replies: the 4.2 reply leads with the Theme page's live previews and names 3MF as the model example; the `com.quicklookpro.*` paragraph (identifiers listed in the supported types, neither imported nor exported) is gone from the notes in build 6, because the identifiers are gone from the supported types.
 - Samples: `python3 script/build_review_samples.py` adds `32-model.gguf`, `33-extension.vsix` and `34-package.whl` (36 files); `--check` passes (2026-10-17).
 
 ## Steps left, in order

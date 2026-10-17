@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "3B model önizlemeleri, Open CASCADE istisnasıyla birlikte GNU LGPL 2.1 kapsamında Open CASCADE Technology kullanır. Lisans bildirimleri uygulamayla birlikte gelir.";
 "about.acknowledgements.openCascade" = "Open CASCADE Technology’nin telif hakkı OPEN CASCADE SAS ve katkıda bulunanlara aittir. 3B içe aktarma yardımcısının kaynağı ve kütüphane kaynağına ilişkin yazılı teklif herkese açıktır.";
 "about.acknowledgements.title" = "Teşekkürler";
-"about.description" = "Metin, yapılandırılmış veri, arşivler, veritabanları ve 3B modeller için yerel bir Quick Look önizleme ve küçük resim uzantısı.";
+"about.description" = "Metin, yapılandırılmış veri, arşivler, veritabanları ve 3B modellerin önizlemelerini ve küçük resimlerini doğrudan Finder’da görün; hepsi tamamen Mac’inizde işlenir.";
 "about.howItWorks.body" = "Bu uygulama önizlemeyi sağladığında, Dosya Türleri seçimleri yeni Finder önizlemeleri ve küçük resimleri için geçerlidir ve olası gizli bilgiler, içerik gösterilmeden, seçilmeden veya kopyalanmadan önce gizlenir. Dosyalar yerel olarak okunur ve asla değiştirilmez. Genel küçük resimler kaynak metin içermez. Quick Look sağlayıcısını macOS seçer.";
 "about.howItWorks.title" = "Nasıl çalışır";
 "about.link.documentation" = "Belgeler";
@@ -521,7 +521,7 @@
 "general.banner.sharedBody" = "Uzantıları Sistem Ayarları'nda açın. Önizleme ve küçük resim sağlayıcısını macOS seçer.";
 "general.banner.sharedTitle" = "Ayarlar Quick Look uzantılarıyla paylaşılıyor";
 "general.banner.unavailableTitle" = "Ayar depolama alanı kullanılamıyor";
-"general.developerMode.subtitle" = "Kenar çubuğunda Önizlemeyi Dene öğesini gösterir; böylece bir dosyayı doğrudan bu uygulamada açabilirsiniz.";
+"general.developerMode.subtitle" = "Kenar çubuğunda Önizlemeyi Dene sayfasını (⌘5) ve Dosya Aç komutunu (⌘O) gösterir; böylece bir dosyayı doğrudan bu uygulamada açabilirsiniz.";
 "general.developerMode.title" = "Geliştirici Modu";
 "general.finder.foldersSubtitle" = "Quick Look'ta bir klasörün doğrudan içeriğini özetler.";
 "general.finder.foldersTitle" = "Klasörleri önizle";
@@ -536,6 +536,7 @@
 "general.storage.title" = "Ayar depolama alanı";
 "general.subtitle" = "Finder ve Quick Look entegrasyonunu ayarlayın.";
 "help.keyboard.body" = "⌘1 – ⌘4 sayfalar arasında geçiş yapar. ⌘, Genel sayfasını açar. ⌘Z son sıfırlamayı, toplu değişikliği, tema içe aktarmayı veya profil silmeyi geri alır; ⇧⌘Z yeniden uygular.";
+"help.keyboard.bodyDeveloper" = "⌘1 – ⌘5 sayfalar arasında geçiş yapar. ⌘O, Önizlemeyi Dene sayfasında bir dosya açar. ⌘, Genel sayfasını açar. ⌘Z son sıfırlamayı, toplu değişikliği, tema içe aktarmayı veya profil silmeyi geri alır; ⇧⌘Z yeniden uygular.";
 "help.keyboard.title" = "Klavye kısayolları";
 "listing.risk.hiddenCharacters" = "Adda gizli karakterler";
 "mesh.printCheck.estimate" = "PLA ile dolu basılırsa: yaklaşık %1$@ %2$@ ve %3$@ %4$@ uzunluğunda %5$@ %6$@ filament. Dilimleyiciler genellikle daha az dolgu ile bastığı için bu bir üst sınırdır.";
@@ -1250,15 +1251,15 @@
 "settings.scheme.title" = "Renk şeması";
 "settings.searchFileTypes" = "Dosya türlerinde ara";
 "settings.storageUnavailable" = "Ayar depolama alanı kullanılamıyor. Seçimler yalnızca bu uygulama açıkken geçerlidir.";
-"setup.notConfigured" = "Ayarlar yalnızca bu uygulama için kaydedilir. Bu derlemenin paylaşılan App Group yapılandırması tamamlanana kadar uzantılar Finder önizlemelerinde bir kurulum mesajı gösterir ve küçük resimleri genel tutar.";
+"setup.notConfigured" = "Finder önizlemeleriyle paylaşım ayarlanana kadar ayarlar yalnızca bu uygulama için kaydedilir. O zamana kadar Finder’daki önizlemeler bir kurulum mesajı gösterir ve küçük resimler genel kalır.";
 "setup.steps" = "Sistem Ayarları > Genel > Giriş Öğeleri ve Uzantılar bölümünde Quick Look uzantılarını açın. Ardından Finder'da desteklenen bir dosya seçip Boşluk tuşuna basın.";
 "setup.unverified" = "Her dosya türü için önizleme ve küçük resimleri hangi uygulamanın sağlayacağını macOS seçer. Başka bir uygulama da aynı türü destekliyorsa Finder o uygulamayı kullanabilir.";
-"shell.subtitle" = "Quick Look Uzantısı";
+"shell.subtitle" = "Finder için dosya önizlemeleri";
 "state.configurationUnavailable.title" = "Uygulama doğru kurulmamış";
 "state.empty.body" = "İçeriği olmadığı için önizlenecek bir şey yok.";
 "state.empty.title" = "Bu dosya boş";
 "state.settingsUnavailable.title" = "Ayarlar kullanılamıyor";
-"status.appOnly" = "Yalnızca uygulama ayarları";
+"status.appOnly" = "Yalnızca bu uygulama için kaydedildi";
 "status.loading" = "Ayarlar yükleniyor…";
 "status.recovered" = "Ayarlar sıfırlandı";
 "status.saveFailed" = "Değişiklikler kaydedilmedi";
