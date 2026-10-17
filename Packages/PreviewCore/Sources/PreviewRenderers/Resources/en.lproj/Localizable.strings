@@ -521,7 +521,7 @@
 "general.banner.sharedBody" = "Turn the extensions on in System Settings. macOS chooses the preview and thumbnail provider.";
 "general.banner.sharedTitle" = "Settings are shared with the Quick Look extensions";
 "general.banner.unavailableTitle" = "Settings storage is unavailable";
-"general.developerMode.subtitle" = "Shows Try Preview in the sidebar so you can open a file directly in this app.";
+"general.developerMode.subtitle" = "Shows the Try Preview page in the sidebar (⌘5) and the Open File command (⌘O), so you can open a file directly in this app.";
 "general.developerMode.title" = "Developer Mode";
 "general.finder.foldersSubtitle" = "Summarize a folder’s direct contents in Quick Look.";
 "general.finder.foldersTitle" = "Preview folders";
@@ -536,6 +536,7 @@
 "general.storage.title" = "Settings storage";
 "general.subtitle" = "Set up Finder and Quick Look integration.";
 "help.keyboard.body" = "⌘1 to ⌘4 switch pages. ⌘, opens General. ⌘Z undoes the last reset, bulk change, theme import or profile deletion; ⇧⌘Z redoes it.";
+"help.keyboard.bodyDeveloper" = "⌘1 to ⌘5 switch pages. ⌘O opens a file in Try Preview. ⌘, opens General. ⌘Z undoes the last reset, bulk change, theme import or profile deletion; ⇧⌘Z redoes it.";
 "help.keyboard.title" = "Keyboard shortcuts";
 "listing.risk.hiddenCharacters" = "Hidden characters in name";
 "mesh.printCheck.estimate" = "If printed solid in PLA: about %1$@ %2$@ and %3$@ %4$@ of %5$@ %6$@ filament. Slicers usually print with less infill, so this is an upper bound.";

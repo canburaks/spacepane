@@ -97,7 +97,7 @@ struct CompanionShell: View {
                         diagnostics: diagnostics)
         case .fileTypes: FileTypeSettingsView(settings: settings)
         case .theme: AppearanceSettingsView(settings: settings, sample: sampleSession)
-        case .about: AboutView(configuration: configuration)
+        case .about: AboutView(configuration: configuration, developerMode: preferences.developerMode)
         case .tryPreview: DirectPreviewView(session: session, settings: settings)
         }
     }
