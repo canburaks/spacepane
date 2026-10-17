@@ -2,6 +2,12 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-17 — README images compressed (documentation only)
+
+Owner request: use compressed images in the README.
+
+- `docs/readme/` holds JPEG copies of the eight README screenshots, 1600 px wide at quality 80 (`sips`), about 1.3 MB in total against about 14 MB for the PNGs. `README.md` points at them. The store-listing PNGs are unchanged and stay the source; regenerate the copies when a screenshot is retaken.
+
 ## 2026-10-17 — README as a showroom page (documentation only)
 
 Owner follow-up: the README must read like a page for the app, with large images.
