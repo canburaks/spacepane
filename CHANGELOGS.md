@@ -22,6 +22,7 @@ Lead session: the three fix branches of the day (`build6-release-fixes-2026-10-1
 
 - Screenshot: `docs/release/store-listing/screenshots/01-press-space.png` retaken from the installed TestFlight-signed build 5 at Retina scale (Finder window 2000×1240, panel 2080×1440 captures; 2880×1800 opaque composite). No Filter field, no `.step` file, "Open with Xcode". The SQLite screenshot stays out of the store set until an installed build 6 routes `.sqlite` (see the validation record of the same day). Details in [screenshots.md](docs/release/store-listing/screenshots.md).
 - Validation: the gates named in the pull request were run on the merged tree; see the pull request description for the results.
+- Screenshots (18:27): `01-press-space.png` and `04-database.png` retaken from the installed build 6 on the Retina mode (Finder window 2000×1240, panels 2080×1440 and 2580×1560; 2880×1800 opaque composites). The SQLite scene is the first since build 5 that Finder routes to SpacePane.
 - Observation (Mac, 18:21): build 6 installed in `/Applications` makes `.sqlite` and `.rar` resolve to their declared types, and Finder's Quick Look on `stations.sqlite` shows SpacePane's Table view. Recorded in `docs/validation/host-matrix.json` (host `mac-build6-2026-10-17`) and in the type-resolution record.
 
 ## 2026-10-17 — Draft languages pruned from the nested resource bundle; privacy-manifest reasons tied to code (findings 16 and 21)
