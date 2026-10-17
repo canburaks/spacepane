@@ -40,4 +40,22 @@ struct CopyCompanionWordingTests {
         #expect(english.range(of: #"\bbuild\b"#, options: [.regularExpression, .caseInsensitive]) == nil, "\(english)")
         #expect(english.contains("saved for this app only"), "\(english)")
     }
+
+    // MARK: Product framing (review finding 25)
+
+    @Test func theProductIsDescribedByWhatItDoesNotByItsComponentType() {
+        for key in [PreviewStrings.Key.shellSubtitle, .aboutDescription] {
+            let text = Self.english(key)
+            for word in ["extension", "plug-in", "plugin"] {
+                #expect(!text.localizedCaseInsensitiveContains(word), "\(key) calls the product a \(word): \(text)")
+            }
+        }
+        #expect(Self.english(.shellSubtitle).localizedCaseInsensitiveContains("Finder"), "\(Self.english(.shellSubtitle))")
+    }
+
+    @Test func theTechnicalFactsStayInTheAboutHelp() {
+        // The Help section on the About page is where the Quick Look extensions are named and switched on.
+        #expect(Self.english(.setupSteps).contains("Quick Look extensions"), "\(Self.english(.setupSteps))")
+        #expect(Self.english(.aboutHowItWorksBody).contains("Quick Look provider"), "\(Self.english(.aboutHowItWorksBody))")
+    }
 }
