@@ -521,7 +521,7 @@
 "general.banner.sharedBody" = "Kunna ƙarin a Saitunan Tsari. macOS ne ke zaɓar mai samar da dubawa da ƙananan hotuna.";
 "general.banner.sharedTitle" = "Ana raba saituna da ƙarin Quick Look";
 "general.banner.unavailableTitle" = "Wurin adana saituna ba ya samuwa";
-"general.developerMode.subtitle" = "Yana nuna Gwada Dubawa a gefen allo domin ku buɗe fayil kai tsaye a wannan manhaja.";
+"general.developerMode.subtitle" = "Yana nuna shafin Gwada Dubawa a gefen allo (⌘5) da umarnin Buɗe Fayil (⌘O), domin ku buɗe fayil kai tsaye a wannan manhajar.";
 "general.developerMode.title" = "Yanayin Mai Haɓakawa";
 "general.finder.foldersSubtitle" = "Yana taƙaita abubuwan da ke kai tsaye a cikin babban fayil a Quick Look.";
 "general.finder.foldersTitle" = "Duba manyan fayiloli";
@@ -536,6 +536,7 @@
 "general.storage.title" = "Wurin adana saituna";
 "general.subtitle" = "Saita haɗin Finder da Quick Look.";
 "help.keyboard.body" = "⌘1 zuwa ⌘4 suna sauya shafuka. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa.";
+"help.keyboard.bodyDeveloper" = "⌘1 zuwa ⌘5 suna sauya shafuka. ⌘O yana buɗe fayil a “Gwada Dubawa”. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa.";
 "help.keyboard.title" = "Gajerun hanyoyin madannai";
 "listing.risk.hiddenCharacters" = "Haruffan da aka ɓoye a suna";
 "mesh.printCheck.estimate" = "Idan aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.";

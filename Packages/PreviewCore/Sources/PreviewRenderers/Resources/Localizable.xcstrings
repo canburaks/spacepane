@@ -54742,91 +54742,91 @@
       }
     },
     "general.developerMode.subtitle": {
-      "comment": "Explains Developer Mode. Try Preview is the name of the sidebar item; translate it as in navigation.tryPreview.",
+      "comment": "Explains Developer Mode, a switch on the General page. It reveals two things: the Try Preview page in the sidebar (shortcut Command-5) and the Open File command (shortcut Command-O). Try Preview and Open File are the names of those items; translate them exactly as in navigation.tryPreview and action.openFile, without the trailing ellipsis. Keep the keyboard symbols as they are.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Shows Try Preview in the sidebar so you can open a file directly in this app."
+            "value": "Shows the Try Preview page in the sidebar (⌘5) and the Open File command (⌘O), so you can open a file directly in this app."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kenar çubuğunda Önizlemeyi Dene öğesini gösterir; böylece bir dosyayı doğrudan bu uygulamada açabilirsiniz."
+            "value": "Kenar çubuğunda Önizlemeyi Dene sayfasını (⌘5) ve Dosya Aç komutunu (⌘O) gösterir; böylece bir dosyayı doğrudan bu uygulamada açabilirsiniz."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zeigt „Vorschau testen“ in der Seitenleiste an, damit Sie eine Datei direkt in dieser App öffnen können."
+            "value": "Zeigt die Seite „Vorschau testen“ in der Seitenleiste (⌘5) und den Befehl „Datei öffnen“ (⌘O) an, damit Sie eine Datei direkt in dieser App öffnen können."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Affiche Essayer l’aperçu dans la barre latérale pour ouvrir un fichier directement dans cette app."
+            "value": "Affiche la page Essayer l’aperçu dans la barre latérale (⌘5) et la commande Ouvrir un fichier (⌘O) pour ouvrir un fichier directement dans cette app."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "在边栏中显示“试用预览”，以便直接在此应用中打开文件。"
+            "value": "在边栏中显示“试用预览”页面 (⌘5) 和“打开文件”命令 (⌘O)，以便直接在此应用中打开文件。"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "サイドバーに「プレビューを試す」を表示し、このアプリでファイルを直接開けるようにします。"
+            "value": "サイドバーに「プレビューを試す」ページ (⌘5) と「ファイルを開く」コマンド (⌘O) を表示し、ファイルをこのアプリで直接開けるようにします。"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "साइडबार में “पूर्वावलोकन आज़माएँ” दिखाता है, ताकि आप किसी फ़ाइल को सीधे इस ऐप में खोल सकें।"
+            "value": "साइडबार में “पूर्वावलोकन आज़माएँ” पृष्ठ (⌘5) और “फ़ाइल खोलें” कमांड (⌘O) दिखाता है, ताकि आप किसी फ़ाइल को सीधे इस ऐप में खोल सकें।"
           }
         },
         "ku-Latn": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pêşdîtinê Biceribîne di darika kêlekê de nîşan dide da ku tu pelekî rasterast di vê sepanê de veke."
+            "value": "Rûpela Pêşdîtinê Biceribîne di darika kêlekê de (⌘5) û fermana Pel Veke (⌘O) nîşan dide da ku hûn bikaribin pelekê rasterast di vê sepanê de vekin."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Показывает «Проверить предпросмотр» в боковом меню, чтобы открывать файл прямо в этом приложении."
+            "value": "Показывает в боковой панели страницу «Проверить предпросмотр» (⌘5) и команду «Открыть файл» (⌘O), чтобы можно было открыть файл прямо в этом приложении."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Menampilkan Coba Pratinjau di bilah samping agar Anda dapat membuka berkas langsung di aplikasi ini."
+            "value": "Menampilkan halaman Coba Pratinjau di bilah samping (⌘5) dan perintah Buka Berkas (⌘O) agar Anda dapat membuka berkas langsung di aplikasi ini."
           }
         },
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "সাইডবারে “প্রিভিউ চেষ্টা করুন” দেখায়, যাতে আপনি সরাসরি এই অ্যাপে ফাইল খুলতে পারেন।"
+            "value": "সাইডবারে “প্রিভিউ চেষ্টা করুন” পৃষ্ঠা (⌘5) এবং “ফাইল খুলুন” কমান্ড (⌘O) দেখায়, যাতে আপনি সরাসরি এই অ্যাপে ফাইল খুলতে পারেন।"
           }
         },
         "ha": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yana nuna Gwada Dubawa a gefen allo domin ku buɗe fayil kai tsaye a wannan manhaja."
+            "value": "Yana nuna shafin Gwada Dubawa a gefen allo (⌘5) da umarnin Buɗe Fayil (⌘O), domin ku buɗe fayil kai tsaye a wannan manhajar."
           }
         },
         "pt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mostra Testar Pré-visualização na barra lateral para você abrir um arquivo diretamente neste app."
+            "value": "Mostra a página Testar Pré-visualização na barra lateral (⌘5) e o comando Abrir Arquivo (⌘O) para que você abra um arquivo diretamente neste app."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Muestra Probar vista previa en la barra lateral para que puedas abrir un archivo directamente en esta app."
+            "value": "Muestra la página Probar vista previa en la barra lateral (⌘5) y el comando Abrir archivo (⌘O) para abrir un archivo directamente en esta app."
           }
         }
       }
@@ -56087,6 +56087,96 @@
           "stringUnit": {
             "state": "translated",
             "value": "⌘1 a ⌘4 cambian de página. ⌘, abre General. ⌘Z deshace el último restablecimiento, cambio masivo, importación de tema o eliminación de perfil; ⇧⌘Z lo rehace."
+          }
+        }
+      }
+    },
+    "help.keyboard.bodyDeveloper": {
+      "comment": "Explanation in the Help section of the About page, shown instead of help.keyboard.body while Developer Mode is on. Command-1 to Command-5 switch between the five pages (General, File Types, Theme, About, Try Preview); Command-O opens a file in the Try Preview page (use the translated page name as it appears in the sidebar, navigation.tryPreview); Command-comma opens General (use the translated name of the General page as it appears in the sidebar); Command-Z and Shift-Command-Z undo and redo the last reset, bulk change, theme import or profile deletion. Keep the keyboard symbols as they are.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 to ⌘5 switch pages. ⌘O opens a file in Try Preview. ⌘, opens General. ⌘Z undoes the last reset, bulk change, theme import or profile deletion; ⇧⌘Z redoes it."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 – ⌘5 sayfalar arasında geçiş yapar. ⌘O, Önizlemeyi Dene sayfasında bir dosya açar. ⌘, Genel sayfasını açar. ⌘Z son sıfırlamayı, toplu değişikliği, tema içe aktarmayı veya profil silmeyi geri alır; ⇧⌘Z yeniden uygular."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 bis ⌘5 wechseln die Seiten. ⌘O öffnet eine Datei in „Vorschau testen“. ⌘, öffnet „Allgemein“. ⌘Z macht das letzte Zurücksetzen, die letzte Sammeländerung, den letzten Designimport oder das Löschen eines Profils rückgängig; ⇧⌘Z stellt es wieder her."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 à ⌘5 changent de page. ⌘O ouvre un fichier dans Essayer l’aperçu. ⌘, ouvre Général. ⌘Z annule la dernière réinitialisation, modification groupée, importation de thème ou suppression de profil ; ⇧⌘Z la rétablit."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 至 ⌘5 切换页面。⌘O 在“试用预览”中打开文件。⌘, 打开“通用”。⌘Z 撤销最近一次重置、批量更改、主题导入或方案删除；⇧⌘Z 重做。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1〜⌘5 でページを切り替えます。⌘O で「プレビューを試す」にファイルを開きます。⌘, で「一般」を開きます。⌘Z で直前のリセット、一括変更、テーマの読み込み、プロファイルの削除を取り消し、⇧⌘Z でやり直します。"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 से ⌘5 पृष्ठ बदलते हैं। ⌘O “पूर्वावलोकन आज़माएँ” में फ़ाइल खोलता है। ⌘, “सामान्य” खोलता है। ⌘Z पिछले रीसेट, सामूहिक बदलाव, थीम आयात या प्रोफ़ाइल हटाने को पूर्ववत करता है; ⇧⌘Z उसे फिर से करता है।"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 heta ⌘5 di navbera rûpelan de diguherin. ⌘O pelekê di “Pêşdîtinê Biceribîne” de vedike. ⌘, “Giştî” vedike. ⌘Z vegerandina dawî, guhertina komî, têxistina temayê an jêbirina profîlê betal dike; ⇧⌘Z dîsa dike."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1–⌘5 переключают страницы. ⌘O открывает файл на странице «Проверить предпросмотр». ⌘, открывает «Основные». ⌘Z отменяет последний сброс, массовое изменение, импорт темы или удаление профиля; ⇧⌘Z возвращает отменённое."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 hingga ⌘5 berpindah antarhalaman. ⌘O membuka berkas di Coba Pratinjau. ⌘, membuka Umum. ⌘Z membatalkan pengaturan ulang, perubahan massal, impor tema, atau penghapusan profil terakhir; ⇧⌘Z mengulanginya."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 থেকে ⌘5 পৃষ্ঠা বদলায়। ⌘O “প্রিভিউ চেষ্টা করুন”-এ একটি ফাইল খোলে। ⌘, “সাধারণ” খোলে। ⌘Z শেষ রিসেট, গণ-পরিবর্তন, থিম আমদানি বা প্রোফাইল মোছা পূর্বাবস্থায় ফেরায়; ⇧⌘Z আবার করে।"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 zuwa ⌘5 suna sauya shafuka. ⌘O yana buɗe fayil a “Gwada Dubawa”. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 a ⌘5 alternam entre as páginas. ⌘O abre um arquivo em Testar Pré-visualização. ⌘, abre Geral. ⌘Z desfaz a última redefinição, alteração em massa, importação de tema ou exclusão de perfil; ⇧⌘Z refaz."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘1 a ⌘5 cambian de página. ⌘O abre un archivo en Probar vista previa. ⌘, abre General. ⌘Z deshace el último restablecimiento, cambio masivo, importación de tema o eliminación de perfil; ⇧⌘Z lo rehace."
           }
         }
       }
