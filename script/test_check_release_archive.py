@@ -418,6 +418,22 @@ class NoCADArchiveTests(NoCADArchiveCase):
             (fixture.archive / "dSYMs/CADImportService.xpc.dSYM").mkdir()
         self.assertFailure(self.run_check(after=after), "CADImportService.xpc.dSYM", "belongs to the CAD service")
 
+    def test_the_cad_importer_client_linked_into_a_main_executable_is_refused(self):
+        # Guideline 2.5.19: code for a feature the build does not offer must not ride along in a shipped binary.
+        for role in ("app", "preview", "thumbnail"):
+            with self.subTest(role=role):
+                def after(fixture, role=role):
+                    executable = fixture.paths[role] / f"Contents/MacOS/{role}-binary"
+                    executable.write_bytes(executable.read_bytes() + b"_TtC17PreviewCADFormats16CADImportService\x00")
+                report = self.run_check(after=after)
+                self.assertFailure(report, "PreviewCADFormats", f"Contents/MacOS/{role}-binary")
+                self.assertEqual(len(report.failures), 1, report.failures)
+
+    def test_a_mention_of_the_module_outside_an_executable_is_not_code(self):
+        def after(fixture):
+            (fixture.app / "Contents/Resources/notes.txt").write_text("PreviewCADFormats")
+        self.assertClean(self.run_check(after=after))
+
     def test_the_occt_notices_folder_is_refused(self):
         def after(fixture):
             notices = fixture.app / "Contents/Resources/OCCT-Notices"

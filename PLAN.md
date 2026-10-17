@@ -238,7 +238,7 @@ Started 2026-10-05 at the user's request, following [the unique-feature research
 Configured at the owner's request. Release record: [docs/release/version-1.1.0.md](docs/release/version-1.1.0.md).
 
 - [x] `MARKETING_VERSION = 1.1.0`, `CURRENT_PROJECT_VERSION = 4`, `PREV_INCLUDE_CAD = NO`.
-- [x] What's New, promotional text and description drafts with counted lengths; App Review notes name 1.1.0 (build 4); three review samples for the new formats (36 files, `--check` passes).
+- [x] What's New, promotional text and description drafts with counted lengths; App Review notes name 1.1.0 (build 5 since 2026-10-17, replacing build 4); three review samples for the new formats (36 files, `--check` passes).
 - [ ] 1.0.0 (build 3) approved.
 - [x] PR 9 merged (2026-10-15); it ships in 1.1.0.
 - [ ] Claim-gate observation on a signed build; archive and `check_release_archive.py`.
@@ -621,6 +621,7 @@ Release preparation, 2026-10-04 (Apple silicon, macOS 27.2, Xcode 27.0). Submiss
 - [ ] Get native-speaker review of the 13 website translations (in the `spacepane-web` repository) (drafts, like the app's); Hausa and Kurmanji have the lowest confidence.
 - [ ] Run Organizer Validate App and the App Store Connect export; confirm the re-signed helper identifiers in the exported app. The hosted `testflight` workflow and the `--archive-unsigned`, `--export` and `--upload` modes (2026-10-10) do this with an App Store Connect API key; its dry run is the first xcodebuild archive on the hosted runner, and its signed and upload levels wait for the certificate and API-key secrets ([runbook](docs/release/testflight.md)).
 - [x] Ship only reviewed languages (owner rule; decision 027 D22): `tools/localization/languages.json` separates the chosen set from `shipped` (`en` for 1.0), bundle metadata is generated for shipped languages only, the three Info.plists declare them, and `script/check_release_archive.py` refuses any other top-level `.lproj`. A local Release archive of build 2 passed the check on 2026-10-12, and App Store Connect lists "English" as the only localization of the uploaded build 3 (read 2026-10-13).
+- [x] Keep code for features the build does not offer out of the shipped executables (App Review Guideline 2.5.19, revision of October 2026): with `PREV_INCLUDE_CAD = NO` the companion and the preview extension do not link `PreviewCADFormats`; `script/validate_project.py` and `script/check_release_archive.py` enforce it. Done 2026-10-17; ships from the next build after 1.1.0 (4).
 - [x] Decide whether IGES/STEP ship in 1.0 while the OCCT source/relinking obligation above is open; update the About description and store copy to match. **Decided 2026-10-13 (owner): they do not** ([decision 028](docs/decisions/028-no-cad-in-version-1.md)). Open Cascade neither confirmed nor rejected the source-offer route and pointed to its paid static-linking exception; the product is built with `PREV_INCLUDE_CAD = NO` and has 74 file types.
 
 ## Initial resource and performance targets
