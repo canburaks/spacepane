@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "As pré-visualizações de modelos 3D usam o Open CASCADE Technology sob a GNU LGPL 2.1 com a exceção do Open CASCADE. Os avisos de licença estão incluídos no app.";
 "about.acknowledgements.openCascade" = "O copyright do Open CASCADE Technology pertence à OPEN CASCADE SAS e aos seus colaboradores. O código-fonte do auxiliar de importação 3D e a oferta escrita para o código-fonte da biblioteca são públicos.";
 "about.acknowledgements.title" = "Agradecimentos";
-"about.description" = "Uma extensão local do Quick Look para pré-visualização e miniaturas de texto, dados estruturados, arquivos compactados, bancos de dados e modelos 3D.";
+"about.description" = "Pré-visualizações e miniaturas de texto, dados estruturados, arquivos compactados, bancos de dados e modelos 3D direto no Finder, inteiramente no seu Mac.";
 "about.howItWorks.body" = "Quando este app fornece a pré-visualização, as escolhas em Tipos de Arquivo valem para novas pré-visualizações e miniaturas do Finder, e possíveis segredos são ocultados antes de o conteúdo ser exibido, selecionado ou copiado. Os arquivos são lidos localmente e nunca alterados. Miniaturas genéricas não contêm texto de origem. O macOS escolhe o provedor do Quick Look.";
 "about.howItWorks.title" = "Como funciona";
 "about.link.documentation" = "Documentação";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Os ajustes são salvos apenas para este app até que o compartilhamento com as pré-visualizações do Finder seja configurado. Até lá, as pré-visualizações no Finder mostram uma mensagem de configuração e as miniaturas ficam genéricas.";
 "setup.steps" = "Ative as extensões do Quick Look em Ajustes do Sistema > Geral > Itens de Início e Extensões. Depois, selecione um arquivo compatível no Finder e pressione Espaço.";
 "setup.unverified" = "O macOS escolhe qual app fornece pré-visualizações e miniaturas para cada tipo de arquivo. Se outro app também for compatível com um tipo, o Finder pode usar esse app.";
-"shell.subtitle" = "Extensão do Quick Look";
+"shell.subtitle" = "Pré-visualização de arquivos para o Finder";
 "state.configurationUnavailable.title" = "O app não está configurado corretamente";
 "state.empty.body" = "Ele não tem conteúdo, então não há nada para pré-visualizar.";
 "state.empty.title" = "Este arquivo está vazio";

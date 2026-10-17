@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "3B model önizlemeleri, Open CASCADE istisnasıyla birlikte GNU LGPL 2.1 kapsamında Open CASCADE Technology kullanır. Lisans bildirimleri uygulamayla birlikte gelir.";
 "about.acknowledgements.openCascade" = "Open CASCADE Technology’nin telif hakkı OPEN CASCADE SAS ve katkıda bulunanlara aittir. 3B içe aktarma yardımcısının kaynağı ve kütüphane kaynağına ilişkin yazılı teklif herkese açıktır.";
 "about.acknowledgements.title" = "Teşekkürler";
-"about.description" = "Metin, yapılandırılmış veri, arşivler, veritabanları ve 3B modeller için yerel bir Quick Look önizleme ve küçük resim uzantısı.";
+"about.description" = "Metin, yapılandırılmış veri, arşivler, veritabanları ve 3B modellerin önizlemelerini ve küçük resimlerini doğrudan Finder’da görün; hepsi tamamen Mac’inizde işlenir.";
 "about.howItWorks.body" = "Bu uygulama önizlemeyi sağladığında, Dosya Türleri seçimleri yeni Finder önizlemeleri ve küçük resimleri için geçerlidir ve olası gizli bilgiler, içerik gösterilmeden, seçilmeden veya kopyalanmadan önce gizlenir. Dosyalar yerel olarak okunur ve asla değiştirilmez. Genel küçük resimler kaynak metin içermez. Quick Look sağlayıcısını macOS seçer.";
 "about.howItWorks.title" = "Nasıl çalışır";
 "about.link.documentation" = "Belgeler";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Finder önizlemeleriyle paylaşım ayarlanana kadar ayarlar yalnızca bu uygulama için kaydedilir. O zamana kadar Finder’daki önizlemeler bir kurulum mesajı gösterir ve küçük resimler genel kalır.";
 "setup.steps" = "Sistem Ayarları > Genel > Giriş Öğeleri ve Uzantılar bölümünde Quick Look uzantılarını açın. Ardından Finder'da desteklenen bir dosya seçip Boşluk tuşuna basın.";
 "setup.unverified" = "Her dosya türü için önizleme ve küçük resimleri hangi uygulamanın sağlayacağını macOS seçer. Başka bir uygulama da aynı türü destekliyorsa Finder o uygulamayı kullanabilir.";
-"shell.subtitle" = "Quick Look Uzantısı";
+"shell.subtitle" = "Finder için dosya önizlemeleri";
 "state.configurationUnavailable.title" = "Uygulama doğru kurulmamış";
 "state.empty.body" = "İçeriği olmadığı için önizlenecek bir şey yok.";
 "state.empty.title" = "Bu dosya boş";

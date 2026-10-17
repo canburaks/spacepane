@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "3D 模型预览使用 Open CASCADE Technology，遵循 GNU LGPL 2.1 及 Open CASCADE 例外条款。许可声明随应用一同提供。";
 "about.acknowledgements.openCascade" = "Open CASCADE Technology 的版权归 OPEN CASCADE SAS 及其贡献者所有。3D 导入辅助程序的源代码以及针对该库源代码的书面要约均已公开。";
 "about.acknowledgements.title" = "致谢";
-"about.description" = "一个本地快速查看预览和缩略图扩展，支持文本、结构化数据、归档、数据库和 3D 模型。";
+"about.description" = "直接在访达中预览文本、结构化数据、归档、数据库和 3D 模型并显示缩略图，全程在本机完成。";
 "about.howItWorks.body" = "当此应用提供预览时，“文件类型”中的选择适用于新的访达预览和缩略图，可能的机密信息也会在内容显示、选择或拷贝前隐藏。文件在本地读取，绝不会被修改。通用缩略图不包含源文本。快速查看提供程序由 macOS 选择。";
 "about.howItWorks.title" = "工作原理";
 "about.link.documentation" = "文档";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "在设置与访达预览的共享配置完成之前，设置仅保存在此应用中。在此之前，访达中的预览会显示设置提示，缩略图保持通用样式。";
 "setup.steps" = "请在“系统设置”>“通用”>“登录项与扩展”中打开快速查看扩展。然后在访达中选择支持的文件并按空格键。";
 "setup.unverified" = "每种文件类型由哪个应用提供预览和缩略图由 macOS 决定。如果其他应用也支持该类型，访达可能会使用该应用。";
-"shell.subtitle" = "快速查看扩展";
+"shell.subtitle" = "访达文件预览";
 "state.configurationUnavailable.title" = "应用未正确设置";
 "state.empty.body" = "文件没有内容，因此无可预览。";
 "state.empty.title" = "此文件为空";

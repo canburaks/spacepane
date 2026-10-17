@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "3D-Modellvorschauen verwenden Open CASCADE Technology unter der GNU LGPL 2.1 mit der Open-CASCADE-Ausnahme. Lizenzhinweise sind in der App enthalten.";
 "about.acknowledgements.openCascade" = "Das Copyright an Open CASCADE Technology liegt bei OPEN CASCADE SAS und seinen Mitwirkenden. Der Quellcode des 3D-Import-Helfers und das schriftliche Angebot für den Quellcode der Bibliothek sind öffentlich.";
 "about.acknowledgements.title" = "Danksagungen";
-"about.description" = "Eine lokale Quick Look-Erweiterung für Vorschau und Miniaturbilder von Text, strukturierten Daten, Archiven, Datenbanken und 3D-Modellen.";
+"about.description" = "Vorschau und Miniaturbilder für Text, strukturierte Daten, Archive, Datenbanken und 3D-Modelle direkt im Finder – vollständig auf Ihrem Mac.";
 "about.howItWorks.body" = "Wenn diese App die Vorschau bereitstellt, gilt die Auswahl unter „Dateitypen“ für neue Finder-Vorschauen und Miniaturbilder, und wahrscheinliche Geheimnisse werden verborgen, bevor Inhalte angezeigt, ausgewählt oder kopiert werden. Dateien werden lokal gelesen und nie verändert. Generische Miniaturbilder enthalten keinen Quelltext. macOS wählt den Quick Look-Anbieter.";
 "about.howItWorks.title" = "So funktioniert es";
 "about.link.documentation" = "Dokumentation";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Einstellungen werden nur für diese App gespeichert, bis die gemeinsame Nutzung mit den Finder-Vorschauen eingerichtet ist. Bis dahin zeigen Vorschauen im Finder einen Einrichtungshinweis und Miniaturbilder bleiben generisch.";
 "setup.steps" = "Aktivieren Sie die Quick Look-Erweiterungen unter Systemeinstellungen > Allgemein > Anmeldeobjekte & Erweiterungen. Wählen Sie dann eine unterstützte Datei im Finder aus und drücken Sie die Leertaste.";
 "setup.unverified" = "macOS wählt für jeden Dateityp, welche App Vorschauen und Miniaturbilder bereitstellt. Unterstützt eine andere App denselben Typ, verwendet der Finder möglicherweise diese App.";
-"shell.subtitle" = "Quick Look-Erweiterung";
+"shell.subtitle" = "Dateivorschau für den Finder";
 "state.configurationUnavailable.title" = "Die App ist nicht korrekt eingerichtet";
 "state.empty.body" = "Sie hat keinen Inhalt, deshalb gibt es nichts anzuzeigen.";
 "state.empty.title" = "Diese Datei ist leer";
