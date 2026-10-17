@@ -2,6 +2,13 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-17 — README as a showroom page (documentation only)
+
+Owner follow-up: the README must read like a page for the app, with large images.
+
+- `README.md` now opens with a centered title and tagline and the app-preview poster (`docs/release/store-listing/app-preview/remotion/poster.png`) as a full-width hero, then one section per feature, each with a full-width screenshot: secrets (02), notebooks (03), SQLite (04), archives (05), Markdown and code (06), File Types (08) and Theme (09). Images use Markdown syntax instead of an HTML table.
+- 04 and the poster show the Filter field that build 5 removed, and 08 shows an outdated "76 of 76" count; the owner wanted a fuller showroom, so they are used until recaptures exist. 01 and 07 stay out because they show a STEP file.
+
 ## 2026-10-17 — README rewritten around screenshots and a minimal build (documentation only)
 
 Owner request: show the features with images, keep only the minimum needed to compile the app locally, and drop the rest.
