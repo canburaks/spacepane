@@ -112,9 +112,7 @@ struct CodeCatalogTests {
 
     @Test func newImportedTypesLoadWithoutARegisteredHostAndSystemTypesAreUsedWhereTheyExist() throws {
         let log = try #require(catalog.descriptor(for: .log))
-        // Another product's optional aliases load only where that product is installed.
-        #expect(log.contentTypes.filter { !$0.identifier.hasPrefix(Self.thirdPartyAliasPrefix) }
-                == [UTType("com.apple.log")].compactMap { $0 })
+        #expect(log.contentTypes == [UTType("com.apple.log")].compactMap { $0 })
         for id in [FormatID.iniConfiguration, .jsonWithComments, .subStationAlpha, .timedText, .subViewer, .lyrics, .microDVD] {
             let descriptor = try #require(catalog.descriptor(for: id))
             #expect(descriptor.canonicalContentType.identifier.hasPrefix("org.webmeister.spacepane.type."), "\(id.rawValue)")
@@ -125,16 +123,14 @@ struct CodeCatalogTests {
         }
     }
 
-    private static let thirdPartyAliasPrefix = "com.quicklookpro."
+    private static let foreignPrefix = "com.quicklookpro."
 
-    /// Where another product has typed a file with its own identifier, the file still reaches the
-    /// matching format. The aliases exist only on Macs with that product installed.
-    @Test func thirdPartyAliasesAreNeverCanonicalAndClassifyToTheirFormat() {
+    /// The identifiers belong to another developer's product, so no format lists them (decision 004, amended
+    /// 2026-10-17); files are reached through the system and owner-declared types.
+    @Test func noFormatListsAnotherDevelopersContentTypeIdentifier() {
         for descriptor in catalog.descriptors {
-            #expect(!descriptor.canonicalContentType.identifier.hasPrefix(Self.thirdPartyAliasPrefix), "\(descriptor.id.rawValue)")
-            for type in descriptor.contentTypes where type.identifier.hasPrefix(Self.thirdPartyAliasPrefix) {
-                #expect(catalog.classify(url: URL(fileURLWithPath: "/tmp/sample"), contentType: type) == descriptor.id,
-                        "\(type.identifier)")
+            for type in descriptor.contentTypes {
+                #expect(!type.identifier.hasPrefix(Self.foreignPrefix), "\(descriptor.id.rawValue): \(type.identifier)")
             }
         }
     }

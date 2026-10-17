@@ -80,7 +80,7 @@ USER_DEFAULTS = "NSPrivacyAccessedAPICategoryUserDefaults"
 
 # Apple's required-reason codes per accessed-API category, as listed on Apple's NSPrivacyAccessedAPIType page
 # (developer.apple.com/documentation/bundleresources/app-privacy-configuration/nsprivacyaccessedapitypes/
-# nsprivacyaccessedapitype, read 2026-10-06). Recheck them against Apple's current page before every
+# nsprivacyaccessedapitype, read 2026-10-06 and read again 2026-10-17 without a change). Recheck them against Apple's current page before every
 # submission: a code outside its category's list is rejected at upload.
 API_REASONS: Dict[str, Set[str]] = {
     FILE_TIMESTAMP: {"DDA9.1", "C617.1", "3B52.1", "0A2A.1"},
@@ -367,9 +367,11 @@ def shipped_languages() -> List[str]:
 def check_languages(report: Report, bundles: List[Bundle], shipped: List[str]) -> None:
     """The top-level `.lproj` set of the app and both extensions is exactly the ship list.
 
-    The store lists every language found there, and macOS resolves a nested resource bundle's language
-    through its host bundle, so draft translations inside `PreviewCore_*.bundle` stay unreachable while
-    the host carries the ship list only. They are noted, not refused.
+    The store lists every language found there. A nested resource bundle (`PreviewCore_PreviewRenderers.bundle`)
+    must carry no other language either: macOS resolves its language through the host bundle, which kept the
+    drafts unreachable in one observation (macOS 27.2, 2026-10-12) and has not been re-tested, so
+    script/prune_resource_languages.py removes them at build time and a draft that survives is refused
+    (review of 2026-10-17, finding 16).
     """
     for bundle in bundles:
         resources = bundle.path / "Contents/Resources"
@@ -385,9 +387,9 @@ def check_languages(report: Report, bundles: List[Bundle], shipped: List[str]) -
                      f"must equal the ship list {shipped}")
         for nested in sorted(resources.glob("*.bundle")) if resources.is_dir() else []:
             drafts = sorted({item.name[:-len(".lproj")] for item in nested.rglob("*.lproj")} - set(shipped))
-            if drafts:
-                report.note(f"{bundle.name}/{nested.name} holds draft translations that the host's ship list keeps "
-                            f"unreachable: {', '.join(drafts)}")
+            report.check(not drafts,
+                         f"{bundle.name}/{nested.name} carries draft languages {', '.join(drafts)}, which are not in the "
+                         f"ship list {sorted(shipped)}; script/prune_resource_languages.py must remove them at build time")
 
 
 def check_extension_attributes(report: Report, bundles: List[Bundle]) -> None:

@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<!--
-		SpacePane tracks nothing and collects nothing. Reasons for the API categories below (decision 027, Q-45):
-		3B52.1  metadata and timestamps of files the user opened (checked while reading, never written)
-		C617.1  size and type of the settings file in the App Group container
-		DDA9.1  modified dates shown in folder and archive listings
-		35F9.1  elapsed time of MIDI playback
-		CA92.1  the companion's own defaults (developer mode)
+		SpacePane tracks nothing and collects nothing. Each reason below names the code that needs it (decision 027, Q-45).
+		3B52.1  metadata of files the user opened or dropped, checked while reading and never written (BoundedFileReader.swift, PreviewFileClassifier.swift). Also the provider scan the user starts, which takes the type and size of application bundle files in the Applications folders to find other Quick Look providers (QuickLookProviderScanner.swift); no date is read from them, and Apple's list has no reason code for files an app finds for itself (checked 2026-10-17)
+		C617.1  size and type of the settings file in the App Group container (BoundedPreferencesData.swift)
+		DDA9.1  modified dates shown in folder listings (FolderScan.swift)
+		35F9.1  elapsed time of MIDI playback (NativeMIDIPlayback.swift)
+		CA92.1  the companion's own defaults, developer mode (CompanionPreferences.swift)
 	-->
 	<key>NSPrivacyAccessedAPITypes</key>
 	<array>

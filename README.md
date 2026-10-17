@@ -6,7 +6,7 @@ Everything stays on your Mac: files are only read, and nothing inside them is ru
 
 <p align="center"><a href="https://spacepane.com">spacepane.com</a> · macOS 15 or later</p>
 
-![SpacePane previewing settings.json in Quick Look with two likely secrets hidden](docs/release/store-listing/app-preview/remotion/poster.png)
+![Finder with SpacePane's Quick Look panel open on settings.json, two likely secrets hidden](docs/release/store-listing/screenshots/01-press-space.png)
 
 ## Secrets stay hidden
 

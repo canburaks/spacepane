@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "Pratinjau model 3D menggunakan Open CASCADE Technology di bawah GNU LGPL 2.1 dengan pengecualian Open CASCADE. Pemberitahuan lisensi disertakan bersama aplikasi.";
 "about.acknowledgements.openCascade" = "Hak cipta Open CASCADE Technology dimiliki OPEN CASCADE SAS dan para kontributornya. Kode sumber pembantu impor 3D dan penawaran tertulis untuk kode sumber pustaka tersedia untuk umum.";
 "about.acknowledgements.title" = "Ucapan Terima Kasih";
-"about.description" = "Ekstensi pratinjau dan gambar mini Quick Look lokal untuk teks, data terstruktur, arsip, basis data, dan model 3D.";
+"about.description" = "Pratinjau dan gambar mini untuk teks, data terstruktur, arsip, basis data, dan model 3D langsung di Finder, sepenuhnya di Mac Anda.";
 "about.howItWorks.body" = "Saat aplikasi ini menyediakan pratinjau, pilihan Jenis Berkas berlaku untuk pratinjau dan gambar mini Finder yang baru, dan informasi yang diduga rahasia disembunyikan sebelum konten ditampilkan, dipilih, atau disalin. Berkas dibaca secara lokal dan tidak pernah diubah. Gambar mini generik tidak berisi teks sumber. macOS memilih penyedia Quick Look.";
 "about.howItWorks.title" = "Cara kerjanya";
 "about.link.documentation" = "Dokumentasi";
@@ -521,7 +521,7 @@
 "general.banner.sharedBody" = "Aktifkan ekstensi di Pengaturan Sistem. macOS memilih penyedia pratinjau dan gambar mini.";
 "general.banner.sharedTitle" = "Pengaturan dibagikan dengan ekstensi Quick Look";
 "general.banner.unavailableTitle" = "Penyimpanan pengaturan tidak tersedia";
-"general.developerMode.subtitle" = "Menampilkan Coba Pratinjau di bilah samping agar Anda dapat membuka berkas langsung di aplikasi ini.";
+"general.developerMode.subtitle" = "Menampilkan halaman Coba Pratinjau di bilah samping (⌘5) dan perintah Buka Berkas (⌘O) agar Anda dapat membuka berkas langsung di aplikasi ini.";
 "general.developerMode.title" = "Mode Pengembang";
 "general.finder.foldersSubtitle" = "Meringkas isi langsung folder di Quick Look.";
 "general.finder.foldersTitle" = "Pratinjau folder";
@@ -536,6 +536,7 @@
 "general.storage.title" = "Penyimpanan pengaturan";
 "general.subtitle" = "Siapkan integrasi Finder dan Quick Look.";
 "help.keyboard.body" = "⌘1 hingga ⌘4 berpindah antarhalaman. ⌘, membuka Umum. ⌘Z membatalkan pengaturan ulang, perubahan massal, impor tema, atau penghapusan profil terakhir; ⇧⌘Z mengulanginya.";
+"help.keyboard.bodyDeveloper" = "⌘1 hingga ⌘5 berpindah antarhalaman. ⌘O membuka berkas di Coba Pratinjau. ⌘, membuka Umum. ⌘Z membatalkan pengaturan ulang, perubahan massal, impor tema, atau penghapusan profil terakhir; ⇧⌘Z mengulanginya.";
 "help.keyboard.title" = "Pintasan keyboard";
 "listing.risk.hiddenCharacters" = "Karakter tersembunyi dalam nama";
 "mesh.printCheck.estimate" = "Jika dicetak padat dengan PLA: sekitar %1$@ %2$@ dan %3$@ %4$@ filamen berdiameter %5$@ %6$@. Slicer biasanya mencetak dengan isian lebih sedikit, jadi ini adalah batas atas.";
@@ -1250,15 +1251,15 @@
 "settings.scheme.title" = "Skema warna";
 "settings.searchFileTypes" = "Cari jenis berkas";
 "settings.storageUnavailable" = "Penyimpanan pengaturan tidak tersedia. Pilihan hanya berlaku selama aplikasi terbuka.";
-"setup.notConfigured" = "Pengaturan hanya disimpan untuk aplikasi ini. Sampai App Group bersama untuk versi ini dikonfigurasi, ekstensi menampilkan pesan penyiapan di pratinjau Finder dan membiarkan gambar mini tetap generik.";
+"setup.notConfigured" = "Pengaturan hanya disimpan untuk aplikasi ini sampai berbagi dengan pratinjau Finder disiapkan. Sampai saat itu, pratinjau di Finder menampilkan pesan penyiapan dan gambar mini tetap generik.";
 "setup.steps" = "Aktifkan ekstensi Quick Look di Pengaturan Sistem > Umum > Item Masuk & Ekstensi. Lalu pilih berkas yang didukung di Finder dan tekan Spasi.";
 "setup.unverified" = "macOS memilih aplikasi yang menyediakan pratinjau dan gambar mini untuk setiap jenis berkas. Jika aplikasi lain juga mendukung jenis tersebut, Finder mungkin menggunakan aplikasi itu.";
-"shell.subtitle" = "Ekstensi Quick Look";
+"shell.subtitle" = "Pratinjau berkas untuk Finder";
 "state.configurationUnavailable.title" = "Aplikasi belum disiapkan dengan benar";
 "state.empty.body" = "Berkas ini tidak berisi konten, jadi tidak ada yang dapat dipratinjau.";
 "state.empty.title" = "Berkas ini kosong";
 "state.settingsUnavailable.title" = "Pengaturan tidak tersedia";
-"status.appOnly" = "Hanya pengaturan aplikasi";
+"status.appOnly" = "Disimpan hanya untuk aplikasi ini";
 "status.loading" = "Memuat pengaturan…";
 "status.recovered" = "Pengaturan diatur ulang";
 "status.saveFailed" = "Perubahan tidak tersimpan";

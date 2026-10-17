@@ -186,8 +186,10 @@ class ArchiveTests(unittest.TestCase):
         settings = dict(line.split(" = ", 1) for line in (ROOT / "Configuration" / "Base.xcconfig").read_text().splitlines()
                         if " = " in line and not line.startswith("//"))
         version = f"{settings['MARKETING_VERSION'].strip()} (build {settings['CURRENT_PROJECT_VERSION'].strip()})"
-        for fact in (version, "macOS 27.2", "macOS 15", "public.data", "com.quicklookpro", "Developer Mode"):
+        for fact in (version, "macOS 27.2", "macOS 15", "public.data", "Developer Mode"):
             self.assertIn(fact, notes)
+        # The identifiers belong to another developer's product and are no longer listed (decision 004, 2026-10-17).
+        self.assertNotIn("quicklookpro", notes)
         for stale in ("STEP", "IGES", "CAD", "Open CASCADE", "LGPL", "spacepane-cad-source"):
             self.assertNotIn(stale, notes)
 

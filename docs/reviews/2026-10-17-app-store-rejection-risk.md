@@ -158,3 +158,23 @@ Review-note samples against the evidence:
 - App Store Connect was read in the desktop app's browser pane with the owner's existing session; nothing was changed there. Screenshots were fetched from Apple's public image CDN at 1440×900.
 - Live website checks used `curl` and the browser pane on 2026-10-17; the support page's email is decoded by Cloudflare's script in a browser and shows as `[email protected]` in the raw HTML.
 - Prior-context retrieval from Nowledge Mem failed with `401: Missing API key`, so no earlier memory of App Review outcomes was consulted.
+
+## Addendum 2026-10-17: finding 0 and what the build 6 branch changed
+
+Written after the review, from [the type-resolution record](../validation/uti-resolution-2026-10-17.md). The branch `build6-release-fixes-2026-10-17` changes the items below; none of it is uploaded or submitted.
+
+### Finding 0 (new): Blocker for build 5
+
+**SQLite, Parquet and RAR files never reach SpacePane because their declarations do not conform to `public.data`.**
+
+| ID | Severity | Guideline | Evidence | Fix |
+|---|---|---|---|---|
+| 0 | **Blocker** | 2.1 (the reviewer cannot reproduce step 4 of the notes) | `org.sqlite.sqlite` (`database.sqlite`) and `org.apache.parquet` (`data.parquet`) conform only to `public.database`; `org.webmeister.spacepane.type.rar` (`archive.rar`) only to `public.archive`. macOS declares both parents with no `UTTypeConformsTo` (`UTType("public.database").supertypes` and `UTType("public.archive").supertypes` are empty on macOS 27.2), so the three types conform to neither `public.data` nor `public.item`. Launch Services resolves a file's type only among types that conform to `public.data`: `UTType(tag: "sqlite", conformingTo: .data)` returns a dynamic type, `URLResourceValues.contentType` of a `.sqlite` file is `dyn.ah62d4rv4ge81g6pqrf4gn`, and `qlmanage -p` on it never starts `PrevPreviewExtension`. Build 5 therefore shows the generic icon for `07-stations.sqlite` on every Mac, including the reviewer's, and `.parquet` and `.rar` fail the same way. The other 58 imported identifiers resolve under every filter. Evidence: `docs/validation/uti-resolution-2026-10-17.md` (commit `6698eea` on `uti-resolution-2026-10-17`, cherry-picked onto this branch). | `importedContentTypes[].conformsTo` may now be a list. The three declarations list their current parent and `public.data` (`["public.database", "public.data"]`, `["public.archive", "public.data"]`); the three manifests are regenerated; `validate_project.py` refuses a declaration that stops at `public.database` or `public.archive`; a Swift test reads the catalog and requires every imported declaration to reach `public.data` through at least one declared parent on the host. Build 6 carries the fix; build 5 cannot be repaired by anything on the reviewer's Mac. The lead observes the installed result. |
+
+Ranking effect: this is the top finding. The notes' SQLite step could not succeed in build 5, which is a reproduction failure (verdict item 1) that no wording change repairs; only a new build does. Side finding in the record, left open: macOS exports `net.daringfireball.markdown` itself, so SpacePane's ten extra Markdown suffixes resolve to dynamic types on every Mac and need their own decision.
+
+### Findings changed by this branch
+
+- **Finding 9 (thumbnail claims): changed.** The thumbnail list is generated from formats whose policy is `content` only (315 types before, 88 after the identifiers of finding 11 left as well); folders, every archive family, disk images, installer packages, profiles, certificates and MIDI are no longer registered and keep their system icons. `package.application` moved from `content` to `generic`, so app bundles keep their own icon. No Finder observation was made; the reason is the absence of one. Decision 022 carries the amendment.
+- **Finding 11 (`com.quicklookpro.*`): changed.** All 179 identifiers (358 occurrences) are removed from the catalog and both extensions' supported types, `validate_project.py` forbids the prefix, and the notes lose their paragraph about them. On a Mac where that other app has registered its types and wins a suffix, routing for those files follows that app. Decision 004 carries the amendment.
+- **Finding 22 (CAD residue): partly changed.** `CADImportServiceIdentifier` in `Preview-Info.plist` now resolves through `PREV_CAD_SERVICE_IDENTIFIER`, which is empty while `PREV_INCLUDE_CAD` is NO. An Info.plist cannot omit a key by build setting, so the key remains with an empty string; the Open CASCADE strings in the string tables are untouched and belong to another session. `check_release_archive.py` is untouched and still expects the identifier when CAD is YES.
