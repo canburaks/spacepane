@@ -272,7 +272,7 @@ struct ConcealmentRemainingSurfaceTests {
         let url = try directory.write(fixture), before = try directory.snapshot()
         let geometry = try #require(ThumbnailGeometry(maximumSize: CGSize(width: 768, height: 768), scale: 1))
         var limits = ThumbnailLimits.standard; limits.textBudget = Surface.budget
-        let contentFree = [.environment, .archive, .geoJSON].contains(kind)
+        let contentFree = [.environment, .archive, .geoJSON, .application].contains(kind)
         let descriptor = try #require(FormatCatalog.standard.descriptor(for: fixture.formatID))
         #expect(descriptor.thumbnail == (contentFree ? .generic : .content))
         if contentFree {

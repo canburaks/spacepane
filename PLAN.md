@@ -242,6 +242,8 @@ Configured at the owner's request. Release record: [docs/release/version-1.1.0.m
 - [ ] 1.0.0 (build 3) approved.
 - [x] PR 9 merged (2026-10-15); it ships in 1.1.0.
 - [ ] Claim-gate observation on a signed build; archive and `check_release_archive.py`.
+- [x] Build 6 prepared on branch `build6-release-fixes-2026-10-17` (2026-10-17): SQLite, Parquet and RAR declarations reach `public.data` (review finding 0), the thumbnail extension registers `content` formats only, the `com.quicklookpro.*` identifiers are gone, the CAD service key is empty while CAD is out; `CURRENT_PROJECT_VERSION = 6`. Not uploaded.
+- [ ] Observe `.sqlite`, `.parquet` and `.rar` in Finder on an installed build 6, and a folder, an archive and an app bundle keeping their system icons; record it in `docs/validation/host-matrix.json`. Upload build 6 and re-paste the notes only on the owner's instruction.
 - [ ] Upload, version record and submission, on the owner's instruction.
 - [ ] After approval: website badges and counts on `app-store-launch`, then the owner merges it; promotional text switched.
 

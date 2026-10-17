@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CADImportServiceIdentifier</key>
-	<string>$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import</string>
+	<string>$(PREV_CAD_SERVICE_IDENTIFIER)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleLocalizations</key>
@@ -736,6 +736,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.database</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>format.data.parquet.name</string>
@@ -1161,6 +1162,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.database</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>format.database.sqlite.name</string>
@@ -1182,6 +1184,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.archive</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>format.archive.rar.name</string>
@@ -1375,8 +1378,6 @@
 			<key>QLSupportedContentTypes</key>
 			<array>
 				<string>public.plain-text</string>
-				<string>com.quicklookpro.file.text</string>
-				<string>com.quicklookpro.file.txt</string>
 				<string>public.data</string>
 				<string>public.json</string>
 				<string>org.webmeister.spacepane.type.webmanifest</string>
@@ -1384,8 +1385,6 @@
 				<string>com.apple.xcode.xcstrings</string>
 				<string>org.jsonlines.jsonl</string>
 				<string>public.ndjson</string>
-				<string>com.quicklookpro.file.jsonl</string>
-				<string>com.quicklookpro.file.ndjson</string>
 				<string>public.source-code</string>
 				<string>public.shell-script</string>
 				<string>public.zsh-script</string>
@@ -1420,161 +1419,9 @@
 				<string>public.ruby-script</string>
 				<string>public.swift-source</string>
 				<string>org.webmeister.spacepane.type.source-code</string>
-				<string>com.quicklookpro.file.ada</string>
-				<string>com.quicklookpro.file.adb</string>
-				<string>com.quicklookpro.file.ads</string>
-				<string>com.quicklookpro.file.asm</string>
-				<string>com.quicklookpro.file.astro</string>
-				<string>com.quicklookpro.file.awk</string>
-				<string>com.quicklookpro.file.bash</string>
-				<string>com.quicklookpro.file.bat</string>
-				<string>com.quicklookpro.file.bazel</string>
-				<string>com.quicklookpro.file.bzl</string>
-				<string>com.quicklookpro.file.cc</string>
-				<string>com.quicklookpro.file.cjs</string>
-				<string>com.quicklookpro.file.clj</string>
-				<string>com.quicklookpro.file.cljc</string>
-				<string>com.quicklookpro.file.cljs</string>
-				<string>com.quicklookpro.file.cmake</string>
-				<string>com.quicklookpro.file.cmd</string>
-				<string>com.quicklookpro.file.coffee</string>
-				<string>com.quicklookpro.file.command</string>
-				<string>com.quicklookpro.file.cplusplus</string>
-				<string>com.quicklookpro.file.cr</string>
-				<string>com.quicklookpro.file.cs</string>
-				<string>com.quicklookpro.file.csh</string>
-				<string>com.quicklookpro.file.cshtml</string>
-				<string>com.quicklookpro.file.csx</string>
-				<string>com.quicklookpro.file.cts</string>
-				<string>com.quicklookpro.file.cu</string>
-				<string>com.quicklookpro.file.cuh</string>
-				<string>com.quicklookpro.file.cxx</string>
-				<string>com.quicklookpro.file.d</string>
-				<string>com.quicklookpro.file.dart</string>
-				<string>com.quicklookpro.file.eex</string>
-				<string>com.quicklookpro.file.ejs</string>
-				<string>com.quicklookpro.file.el</string>
-				<string>com.quicklookpro.file.elm</string>
-				<string>com.quicklookpro.file.erb</string>
-				<string>com.quicklookpro.file.erl</string>
-				<string>com.quicklookpro.file.ex</string>
-				<string>com.quicklookpro.file.exs</string>
-				<string>com.quicklookpro.file.f</string>
-				<string>com.quicklookpro.file.f03</string>
-				<string>com.quicklookpro.file.f08</string>
-				<string>com.quicklookpro.file.f90</string>
-				<string>com.quicklookpro.file.f95</string>
-				<string>com.quicklookpro.file.fish</string>
-				<string>com.quicklookpro.file.for</string>
-				<string>com.quicklookpro.file.frag</string>
-				<string>com.quicklookpro.file.fs</string>
-				<string>com.quicklookpro.file.fsi</string>
-				<string>com.quicklookpro.file.fsx</string>
-				<string>com.quicklookpro.file.gemspec</string>
-				<string>com.quicklookpro.file.glsl</string>
-				<string>com.quicklookpro.file.go</string>
-				<string>com.quicklookpro.file.gql</string>
-				<string>com.quicklookpro.file.gradle</string>
-				<string>com.quicklookpro.file.graphql</string>
-				<string>com.quicklookpro.file.groovy</string>
-				<string>com.quicklookpro.file.haml</string>
-				<string>com.quicklookpro.file.handlebars</string>
-				<string>com.quicklookpro.file.hbs</string>
-				<string>com.quicklookpro.file.hcl</string>
-				<string>com.quicklookpro.file.heex</string>
-				<string>com.quicklookpro.file.hh</string>
-				<string>com.quicklookpro.file.hlsl</string>
-				<string>com.quicklookpro.file.hplusplus</string>
-				<string>com.quicklookpro.file.hrl</string>
-				<string>com.quicklookpro.file.hs</string>
-				<string>com.quicklookpro.file.htm</string>
-				<string>com.quicklookpro.file.hxx</string>
-				<string>com.quicklookpro.file.ino</string>
-				<string>com.quicklookpro.file.jade</string>
-				<string>com.quicklookpro.file.jl</string>
-				<string>com.quicklookpro.file.jsx</string>
-				<string>com.quicklookpro.file.ksh</string>
-				<string>com.quicklookpro.file.kt</string>
-				<string>com.quicklookpro.file.kts</string>
-				<string>com.quicklookpro.file.less</string>
-				<string>com.quicklookpro.file.lhs</string>
-				<string>com.quicklookpro.file.liquid</string>
-				<string>com.quicklookpro.file.lisp</string>
-				<string>com.quicklookpro.file.lsp</string>
-				<string>com.quicklookpro.file.lua</string>
-				<string>com.quicklookpro.file.make</string>
-				<string>com.quicklookpro.file.metal</string>
-				<string>com.quicklookpro.file.mjs</string>
-				<string>com.quicklookpro.file.mk</string>
-				<string>com.quicklookpro.file.ml</string>
-				<string>com.quicklookpro.file.mli</string>
-				<string>com.quicklookpro.file.mll</string>
-				<string>com.quicklookpro.file.mly</string>
-				<string>com.quicklookpro.file.mts</string>
-				<string>com.quicklookpro.file.mustache</string>
-				<string>com.quicklookpro.file.nim</string>
-				<string>com.quicklookpro.file.nims</string>
-				<string>com.quicklookpro.file.nix</string>
-				<string>com.quicklookpro.file.njk</string>
-				<string>com.quicklookpro.file.nu</string>
-				<string>com.quicklookpro.file.pas</string>
-				<string>com.quicklookpro.file.pl</string>
-				<string>com.quicklookpro.file.pm</string>
-				<string>com.quicklookpro.file.prisma</string>
-				<string>com.quicklookpro.file.proto</string>
-				<string>com.quicklookpro.file.ps1</string>
-				<string>com.quicklookpro.file.psd1</string>
-				<string>com.quicklookpro.file.psm1</string>
-				<string>com.quicklookpro.file.pug</string>
-				<string>com.quicklookpro.file.purs</string>
-				<string>com.quicklookpro.file.pyi</string>
-				<string>com.quicklookpro.file.pyw</string>
-				<string>com.quicklookpro.file.r</string>
-				<string>com.quicklookpro.file.rake</string>
-				<string>com.quicklookpro.file.razor</string>
-				<string>com.quicklookpro.file.rkt</string>
-				<string>com.quicklookpro.file.rs</string>
-				<string>com.quicklookpro.file.s</string>
-				<string>com.quicklookpro.file.sass</string>
-				<string>com.quicklookpro.file.sc</string>
-				<string>com.quicklookpro.file.scala</string>
-				<string>com.quicklookpro.file.scm</string>
-				<string>com.quicklookpro.file.scss</string>
-				<string>com.quicklookpro.file.slim</string>
-				<string>com.quicklookpro.file.sol</string>
-				<string>com.quicklookpro.file.sql</string>
-				<string>com.quicklookpro.file.styl</string>
-				<string>com.quicklookpro.file.sv</string>
-				<string>com.quicklookpro.file.svelte</string>
-				<string>com.quicklookpro.file.svh</string>
-				<string>com.quicklookpro.file.tcsh</string>
-				<string>com.quicklookpro.file.tf</string>
-				<string>com.quicklookpro.file.tfvars</string>
-				<string>com.quicklookpro.file.thrift</string>
-				<string>com.quicklookpro.file.ts</string>
-				<string>com.quicklookpro.file.tsx</string>
-				<string>com.quicklookpro.file.twig</string>
-				<string>com.quicklookpro.file.v</string>
-				<string>com.quicklookpro.file.vb</string>
-				<string>com.quicklookpro.file.vbs</string>
-				<string>com.quicklookpro.file.vert</string>
-				<string>com.quicklookpro.file.vh</string>
-				<string>com.quicklookpro.file.vhd</string>
-				<string>com.quicklookpro.file.vhdl</string>
-				<string>com.quicklookpro.file.vue</string>
-				<string>com.quicklookpro.file.wast</string>
-				<string>com.quicklookpro.file.wat</string>
-				<string>com.quicklookpro.file.wgsl</string>
-				<string>com.quicklookpro.file.zig</string>
-				<string>com.quicklookpro.file.zsh</string>
 				<string>org.webmeister.spacepane.type.ini</string>
 				<string>com.apple.xcode.configsettings</string>
-				<string>com.quicklookpro.file.cfg</string>
-				<string>com.quicklookpro.file.conf</string>
-				<string>com.quicklookpro.file.ini</string>
-				<string>com.quicklookpro.file.properties</string>
 				<string>com.apple.log</string>
-				<string>com.quicklookpro.file.log</string>
 				<string>org.webmeister.spacepane.type.jsonc</string>
 				<string>org.webmeister.spacepane.type.substation-alpha</string>
 				<string>org.webmeister.spacepane.type.ttml</string>
@@ -1585,41 +1432,20 @@
 				<string>public.yaml</string>
 				<string>org.toml.toml</string>
 				<string>public.toml</string>
-				<string>com.quicklookpro.file.toml</string>
 				<string>org.webmeister.spacepane.type.environment</string>
-				<string>com.quicklookpro.file.env</string>
 				<string>net.daringfireball.markdown</string>
 				<string>com.rstudio.rmarkdown</string>
 				<string>org.quarto.qmarkdown</string>
-				<string>com.quicklookpro.file.markdown</string>
-				<string>com.quicklookpro.file.mdown</string>
-				<string>com.quicklookpro.file.mdwn</string>
-				<string>com.quicklookpro.file.mdx</string>
-				<string>com.quicklookpro.file.mkd</string>
-				<string>com.quicklookpro.file.mkdn</string>
-				<string>com.quicklookpro.file.qmd</string>
-				<string>com.quicklookpro.file.rmd</string>
 				<string>org.webmeister.spacepane.type.latex</string>
 				<string>org.tug.tex</string>
-				<string>com.quicklookpro.file.cls</string>
-				<string>com.quicklookpro.file.sty</string>
-				<string>com.quicklookpro.file.tex</string>
 				<string>org.webmeister.spacepane.type.bibtex</string>
-				<string>com.quicklookpro.file.bib</string>
 				<string>org.webmeister.spacepane.type.asciidoc</string>
-				<string>com.quicklookpro.file.adoc</string>
-				<string>com.quicklookpro.file.asciidoc</string>
 				<string>org.webmeister.spacepane.type.restructuredtext</string>
 				<string>org.python.restructuredtext</string>
-				<string>com.quicklookpro.file.rest</string>
-				<string>com.quicklookpro.file.rst</string>
 				<string>org.webmeister.spacepane.type.org</string>
-				<string>com.quicklookpro.file.org</string>
 				<string>org.webmeister.spacepane.type.fountain</string>
 				<string>org.gnu.diff</string>
 				<string>public.patch-file</string>
-				<string>com.quicklookpro.file.diff</string>
-				<string>com.quicklookpro.file.patch</string>
 				<string>org.webmeister.spacepane.type.mermaid</string>
 				<string>org.webmeister.spacepane.type.drawio</string>
 				<string>public.xml</string>
@@ -1627,7 +1453,6 @@
 				<string>com.apple.binary-property-list</string>
 				<string>org.webmeister.spacepane.type.entitlements</string>
 				<string>com.apple.xcode.entitlements-property-list</string>
-				<string>com.quicklookpro.file.plist</string>
 				<string>org.webmeister.spacepane.type.strings</string>
 				<string>com.apple.xcode.strings-text</string>
 				<string>org.webmeister.spacepane.type.strings-dictionary</string>
@@ -1654,7 +1479,6 @@
 				<string>org.w3.webvtt</string>
 				<string>org.webmeister.spacepane.type.nfo</string>
 				<string>org.jupyter.ipynb</string>
-				<string>com.quicklookpro.file.ipynb</string>
 				<string>org.webmeister.spacepane.type.comic-book-zip</string>
 				<string>org.idpf.epub-container</string>
 				<string>org.webmeister.spacepane.type.fictionbook</string>
