@@ -181,7 +181,7 @@ observed before build 5 was submitted on 2026-10-17: the three 1.1.0 samples are
 ## App Review
 
 - Notes: [app-store-submission.md, "Notes for App Review"](app-store-submission.md#notes-for-app-review) names 1.1.0 (build 5; build 4 named it until 2026-10-17) and the three new samples. Corrected on 2026-10-17 after the rejection-risk review: step 1 places the "Open System Settings" button in the banner at the top of the General page (not in the "Turn on the extensions" row), step 4 names `31-model.3mf` as the model and keeps `28-binary.stl` with a Try Preview fallback, the opening names the thumbnail extension without claiming thumbnails, and "Tested on macOS 15.2" is gone until a run is recorded. The block in App Store Connect is still the one pasted on 2026-10-17 (see the status table).
-- Prepared replies: the 4.2 reply leads with the Theme page's live previews and names 3MF as the model example; the `com.quicklookpro.*` paragraph says the identifiers are listed in the supported types, neither imported nor exported.
+- Prepared replies: the 4.2 reply leads with the Theme page's live previews and names 3MF as the model example; the `com.quicklookpro.*` paragraph (identifiers listed in the supported types, neither imported nor exported) is gone from the notes in build 6, because the identifiers are gone from the supported types.
 - Samples: `python3 script/build_review_samples.py` adds `32-model.gguf`, `33-extension.vsix` and `34-package.whl` (36 files); `--check` passes (2026-10-17).
 
 ## Steps left, in order

@@ -36,8 +36,9 @@ CAD_EMBED_SCRIPT = ('if [ "${PREV_INCLUDE_CAD}" = YES ]; then\n  /usr/bin/python
 # Targets that compile the CAD registration under the PREV_INCLUDE_CAD condition, and the one that would embed the service.
 CAD_CONDITION_TARGETS = {"Prev", "PrevPreviewExtension"}
 CAD_SERVICE_PRODUCT = "CADImportService.xpc"
-# Identifier namespaces of other installed products whose file types this app also accepts.
-THIRD_PARTY_ALIAS_PREFIXES = ("com.quicklookpro.",)
+# Identifier namespaces of other developers' products. They are never listed, as optional aliases or otherwise: the
+# identifiers belong to that product and App Review may read them as targeting it (decision 004, amended 2026-10-17).
+FOREIGN_IDENTIFIER_PREFIXES = ("com.quicklookpro.",)
 # macOS declares these two system types with no UTTypeConformsTo, so they reach neither public.data nor public.item.
 # Launch Services resolves a file's type only among types that conform to public.data, so an imported declaration
 # that stops at one of them is never chosen for its extension and Quick Look never asks this app
@@ -312,12 +313,9 @@ def validate_catalog(formats):
         optional = item.get("optionalContentTypes", [])
         check(set(optional).issubset(item["contentTypes"]), "Optional types must be explicit catalog aliases")
         check(item["contentTypes"][0] not in optional, "The canonical type cannot be optional")
-        # Another product's identifiers (decision 004) are accepted only as optional aliases, so a
-        # file that app has typed still reaches this format; they are never canonical or declared.
-        foreign = [t for t in item["contentTypes"] if t.startswith(THIRD_PARTY_ALIAS_PREFIXES)]
-        check(set(foreign).issubset(optional), f"{item['id']}: third-party aliases must be optional")
-        check(not {d["identifier"] for d in item.get("importedContentTypes", [])}.intersection(foreign),
-              f"{item['id']}: never declare another product's type")
+        foreign = [t for t in item["contentTypes"] if t.startswith(FOREIGN_IDENTIFIER_PREFIXES)]
+        check(not foreign, f"{item['id']}: never list another developer's content type identifier ({foreign[:1]}); "
+                           "files are reached through system and owner-declared types (decision 004)")
         for declaration in item.get("importedContentTypes", []):
             identifier = declaration["identifier"]
             check(identifier in item["contentTypes"], "Imported types must belong to their format")
