@@ -71,7 +71,7 @@ struct ModesCommandTableTests {
             switch equivalent.key {
             case .letter(let letter, let position): typed = String(letter); keyCode = position
             case .digit(let digit): typed = String(digit); keyCode = PreviewKeyCode.numberRow[digit]
-            case .symbols(let accepted): typed = accepted[0]; keyCode = nil
+            case .symbols(let accepted, let position): typed = accepted[0]; keyCode = position
             }
             let own = PreviewCommand(charactersIgnoringModifiers: typed, keyCode: keyCode, modifiers: equivalent.modifiers,
                                      scope: command.scope)
@@ -95,6 +95,7 @@ struct ModesCommandTableTests {
         #expect(PreviewKeyCode.numberRow[1] == 0x12 && PreviewKeyCode.numberRow[0] == 0x1D && PreviewKeyCode.keypad[0] == 0x52)
         #expect(PreviewKeyCode.ansiC == 0x08 && PreviewKeyCode.ansiF == 0x03 && PreviewKeyCode.ansiG == 0x05)
         #expect(PreviewKeyCode.ansiL == 0x25 && PreviewKeyCode.ansiR == 0x0F)
+        #expect(PreviewKeyCode.ansiMinus == 0x1B && PreviewKeyCode.ansiEqual == 0x18)
         #expect(PreviewKeyCode.space == 0x31 && PreviewKeyCode.escape == 0x35)
         #expect(PreviewKeyCode.returnKey == 0x24 && PreviewKeyCode.keypadEnter == 0x4C)
     }
@@ -192,6 +193,43 @@ struct ModesCommandTableTests {
         #expect(PreviewCommand(event: try modesKeyDown(typed: "=", keyCode: 24, modifiers: [.command, .option])) == nil)
         #expect(PreviewCommand(event: try modesKeyDown(typed: "=", keyCode: 24, modifiers: .control)) == nil)
         #expect(PreviewCommand(event: try modesKeyDown(typed: "=", keyCode: 24, modifiers: [])) == nil)
+    }
+
+    @Test func zoomKeysFallBackToThePositionOnALayoutThatTypesNoLatinCharacter() throws {
+        // Thai Kedmanee types ข and ช, and Japanese kana input ほ and へ, on the keys a US keyboard has the minus
+        // and the equals sign on (key codes 27 and 24). Neither layout types a Latin character there.
+        for typed in ["ข", "ほ"] {
+            #expect(PreviewCommand(event: try modesKeyDown(typed: typed, keyCode: 27, modifiers: .command)) == .zoomOut, "\(typed)")
+            #expect(PreviewCommand(event: try modesKeyDown(typed: typed, keyCode: 27, modifiers: [.command, .shift])) == .zoomOut, "\(typed)")
+        }
+        for typed in ["ช", "へ"] {
+            #expect(PreviewCommand(event: try modesKeyDown(typed: typed, keyCode: 24, modifiers: .command)) == .zoomIn, "\(typed)")
+            #expect(PreviewCommand(event: try modesKeyDown(typed: typed, keyCode: 24, modifiers: [.command, .shift])) == .zoomIn, "\(typed)")
+        }
+        // The 3D viewport's plain keys follow the same rule.
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ข", keyCode: 27, modifiers: []), scope: .viewport) == .cameraZoomOut)
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ช", keyCode: 24, modifiers: []), scope: .viewport) == .cameraZoomIn)
+        // Any other position, and any other modifiers, are not zoom.
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ข", keyCode: 1, modifiers: .command)) == nil)
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ข", keyCode: 27, modifiers: [.command, .option])) == nil)
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ข", keyCode: 27, modifiers: [])) == nil)
+        // A character-only input has no position to fall back to.
+        #expect(PreviewCommand(charactersIgnoringModifiers: "ข", modifiers: .command) == nil)
+    }
+
+    @Test func zoomKeysNeverUseThePositionOnALatinLayout() throws {
+        // German QWERTZ types ß on the minus position and an acute accent on the equals position, and its minus
+        // is on the slash key (44). Command-ß must not zoom out just because ß is not ASCII.
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ß", keyCode: 27, modifiers: .command)) == nil)
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "´", keyCode: 24, modifiers: .command)) == nil)
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "-", keyCode: 44, modifiers: .command)) == .zoomOut)
+        // Spanish types ñ and an apostrophe; Turkish types ö; none of them is zoom either.
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ñ", keyCode: 27, modifiers: .command)) == nil)
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ö", keyCode: 24, modifiers: [.command, .shift])) == nil)
+        // ASCII punctuation on those positions is a character, never a position (AZERTY types ) on key 27).
+        #expect(PreviewCommand(event: try modesKeyDown(typed: ")", keyCode: 27, modifiers: .command)) == nil)
+        // A Command layer that stays Latin decides, whatever the key types.
+        #expect(PreviewCommand(event: try modesKeyDown(typed: "ข", produced: "-", keyCode: 99, modifiers: .command)) == .zoomOut)
     }
 
     @Test func spaceEscapeAndTheArrowsAreNeverCommands() throws {

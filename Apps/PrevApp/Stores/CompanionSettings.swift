@@ -244,6 +244,21 @@ final class CompanionSettings {
         drainWaiters.removeAll { $0 === waiter }
         return persistedRevision == revision
     }
+
+    /// Called when the app is asked to quit. Answers whether it may quit now. When it may not, the save in flight (or
+    /// one more try) is awaited for at most `limit`, and `reply` is called once afterwards, saved or not, so a quit
+    /// is never held back by storage.
+    func prepareToQuit(limit: Duration = .seconds(2),
+                       sleep: @escaping @Sendable (Duration) async throws -> Void = { try await Task.sleep(for: $0) },
+                       reply: @escaping () -> Void) -> Bool {
+        // Everything is on disk, or there is no storage that could take it: waiting would only delay the quit.
+        guard store != nil, persistedRevision != revision else { return true }
+        Task {
+            _ = await flushPendingSave(limit: limit, sleep: sleep)
+            reply()
+        }
+        return false
+    }
 }
 
 /// One caller of `flushPendingSave`, resumed when the save finishes or its limit passes, whichever is first.
