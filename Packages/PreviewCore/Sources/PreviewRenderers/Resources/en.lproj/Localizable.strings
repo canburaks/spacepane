@@ -1251,7 +1251,7 @@
 "settings.scheme.title" = "Color scheme";
 "settings.searchFileTypes" = "Search file types";
 "settings.storageUnavailable" = "Settings storage is unavailable. Choices apply only while this app is open.";
-"setup.notConfigured" = "Settings are saved for this app only. Until this build’s shared App Group is configured, the extensions show a setup message in Finder previews and keep thumbnails generic.";
+"setup.notConfigured" = "Settings are saved for this app only until sharing with Finder previews is set up. Until then, previews in Finder show a setup message and thumbnails stay generic.";
 "setup.steps" = "Turn on the Quick Look extensions in System Settings > General > Login Items & Extensions. Then select a supported file in Finder and press Space.";
 "setup.unverified" = "macOS chooses which app provides previews and thumbnails for each file type. If another app also supports a type, Finder may use that app instead.";
 "shell.subtitle" = "Quick Look Extension";
@@ -1259,7 +1259,7 @@
 "state.empty.body" = "It has no content, so there is nothing to preview.";
 "state.empty.title" = "This file is empty";
 "state.settingsUnavailable.title" = "Settings are unavailable";
-"status.appOnly" = "App-only settings";
+"status.appOnly" = "Saved for this app only";
 "status.loading" = "Loading settings…";
 "status.recovered" = "Settings were reset";
 "status.saveFailed" = "Changes not saved";

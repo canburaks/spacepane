@@ -1251,7 +1251,7 @@
 "settings.scheme.title" = "カラースキーム";
 "settings.searchFileTypes" = "ファイルの種類を検索";
 "settings.storageUnavailable" = "設定の保存先を利用できません。選択はこのアプリを開いている間のみ適用されます。";
-"setup.notConfigured" = "設定はこのアプリ内にのみ保存されています。このビルドの共有 App Group が構成されるまで、機能拡張は Finder のプレビューにセットアップに関するメッセージを表示し、サムネイルは汎用のままにします。";
+"setup.notConfigured" = "Finder のプレビューとの共有が設定されるまで、設定はこのアプリ内にのみ保存されます。それまで、Finder のプレビューにはセットアップに関するメッセージが表示され、サムネイルは汎用のままです。";
 "setup.steps" = "「システム設定」>「一般」>「ログイン項目と機能拡張」でクイックルックの機能拡張をオンにしてください。次に、Finder で対応ファイルを選択してスペースキーを押します。";
 "setup.unverified" = "ファイルの種類ごとにプレビューとサムネイルを提供するアプリは macOS が選択します。別のアプリも同じ種類に対応している場合、Finder はそのアプリを使うことがあります。";
 "shell.subtitle" = "クイックルック機能拡張";
@@ -1259,7 +1259,7 @@
 "state.empty.body" = "内容がないため、プレビューするものがありません。";
 "state.empty.title" = "このファイルは空です";
 "state.settingsUnavailable.title" = "設定を利用できません";
-"status.appOnly" = "アプリのみの設定";
+"status.appOnly" = "このアプリ内のみに保存";
 "status.loading" = "設定を読み込み中…";
 "status.recovered" = "設定がリセットされました";
 "status.saveFailed" = "変更は保存されていません";
