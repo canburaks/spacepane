@@ -13,6 +13,16 @@ Request from the lead session: apply the cheap documentation fixes that [the rej
 - Screenshots (`store-listing/screenshots.md`): the live hero and SQLite screenshots show the Filter field that build 5 removed from Finder previews (PR 9) and, in the hero, `winch-gear.step` in Finder's list; both must be recaptured from the owner's signed build 5 before the next submission. Not recaptured here: that needs the signed build.
 - Checks: `./script/build_and_run.sh --check-static` OK (23 passed, 1 skipped: tree-sitter not installed); `python3 script/build_review_samples.py --check` ok (36 files); `script/test_build_review_samples.py` 29 tests pass.
 
+## 2026-10-17 — App Store rejection-risk review (documentation only)
+
+Owner request: analyze the app for possible App Store decline reasons across many dimensions, with parallel auditors.
+
+- Research: ten read-only audits (entitlements and manifests; companion completeness; store metadata; privacy; licensing; hidden and dormant code; localization and accessibility; the Quick Look extensions; the website; release records), consolidated with the lead's own checks of the kept archives, the live website and App Store Connect, in [the review](docs/reviews/2026-10-17-app-store-rejection-risk.md). No Swift, project, resource, string, store or website change was made.
+- State read live: version 1.1.0 build 5 is Waiting for Review since 11:08 (submitted by the owner); the two earlier 1.1.0 submissions show as Removed and no 1.0.0 submission remains. App Privacy is published as Data Not Collected. The release option is Automatic. Six screenshots are uploaded; the live description still says "74 file types".
+- Verdict: no blocker in the binary. The highest risks are reproduction (notes step 1 names a button that sits in the banner, not the row; the System Settings deep link is unobserved on macOS 26 and 27; step 4 names an STL sample that Apple's previewer takes on 27.2; the three 1.1.0 samples and every thumbnail are unobserved; no store-signed build was ever installed), metadata accuracy (74 against 81 types; two live screenshots show a removed Filter field and a `.step` file in Finder's list), the 4.2 framing of Developer Mode, and the thumbnail list, which is generated from every format whose policy is not `none` and so claims folders, app bundles, archives, disk images and installer packages with a generic glyph.
+- Cleared by inspection of the archives: builds 4 and 5 embed no XPC service; build 5 has zero `PreviewCADFormats` references; only the never-submitted 1.0.0 build 1 carried 14 top-level `.lproj`; no `.DS_Store`; the About page's LGPL text is gated on an absent notices folder. The nested renderer bundle still carries all 14 draft languages.
+- Nowledge Mem retrieval failed (`401: Missing API key`), so no earlier memory of App Review outcomes was consulted.
+
 ## 2026-10-17 — App Review Guidelines revision: no dormant CAD code
 
 Owner request: fix what Apple's guideline-revision notice of 2026-10-17 raises (1.2, 2.3.14, 2.5.19, 3.1.1(a), 5, Before and After You Submit).
