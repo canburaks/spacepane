@@ -20,8 +20,6 @@
 		A36A92556050BFE9909A4E40 /* PreviewPreferences in Frameworks */ = {isa = PBXBuildFile; productRef = 030599004D80F982F976ED03 /* PreviewPreferences */; };
 		B6EC3310CC0439AB26283981 /* PreviewThumbnails in Frameworks */ = {isa = PBXBuildFile; productRef = CFA560A96BC059E4AE658E59 /* PreviewThumbnails */; };
 		C041D98D54E68F0180C9F0E7 /* PrevPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 93BB3710961CBFC789E327C6 /* PrevPreviewExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CAD100000000000000000001 /* PreviewCADFormats in Frameworks */ = {isa = PBXBuildFile; productRef = CAD000000000000000000001 /* PreviewCADFormats */; };
-		CAD100000000000000000002 /* PreviewCADFormats in Frameworks */ = {isa = PBXBuildFile; productRef = CAD000000000000000000002 /* PreviewCADFormats */; };
 		CAD30000000000000000000D /* CADImportService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = CAD300000000000000000002 /* CADImportService.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAD300000000000000000010 /* PreviewCADFormats in Frameworks */ = {isa = PBXBuildFile; productRef = CAD30000000000000000000E /* PreviewCADFormats */; };
 		CAD300000000000000000011 /* PreviewContracts in Frameworks */ = {isa = PBXBuildFile; productRef = CAD30000000000000000000F /* PreviewContracts */; };
@@ -117,7 +115,6 @@
 				94DC0E977F99ADE3C324ACCB /* PreviewCore in Frameworks */,
 				4177E137C13643A3A1D9080B /* PreviewFileAccess in Frameworks */,
 				EA71C634C654FE38E944F1BD /* PreviewFormats in Frameworks */,
-				CAD100000000000000000001 /* PreviewCADFormats in Frameworks */,
 				A36A92556050BFE9909A4E40 /* PreviewPreferences in Frameworks */,
 				9313C05B54BE6383E6F3FA80 /* PreviewRenderers in Frameworks */,
 			);
@@ -139,7 +136,6 @@
 				3BC86B95D28A9ED543967C9B /* PreviewContracts in Frameworks */,
 				945A98D320A2C4C8062A0034 /* PreviewCore in Frameworks */,
 				E51F181EA3AACEB87FB9EAB7 /* PreviewFormats in Frameworks */,
-				CAD100000000000000000002 /* PreviewCADFormats in Frameworks */,
 				F3CF0F5BCBDBA2AF32FBB50D /* PreviewPreferences in Frameworks */,
 				758DAD0C610EF114817BF3BE /* PreviewRenderers in Frameworks */,
 			);
@@ -229,7 +225,6 @@
 				65FD98F79DE23DA6B859494B /* PreviewCore */,
 				C3581187B663487FBC5C194C /* PreviewFileAccess */,
 				35F3146BC2C0B22826E2B37E /* PreviewFormats */,
-				CAD000000000000000000001 /* PreviewCADFormats */,
 				030599004D80F982F976ED03 /* PreviewPreferences */,
 				373505F5EA7C43694DC7F0CB /* PreviewRenderers */,
 			);
@@ -292,7 +287,6 @@
 				86209ED337A0CC766EF6846D /* PreviewContracts */,
 				13FEA656C9B3571C425A5756 /* PreviewCore */,
 				4BA3C03126FCA773D5A70924 /* PreviewFormats */,
-				CAD000000000000000000002 /* PreviewCADFormats */,
 				ED9F8F8A5172652C1F406E95 /* PreviewPreferences */,
 				32A6A4FD0C25577ADAD0CDBF /* PreviewRenderers */,
 			);
@@ -859,16 +853,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
 			productName = PreviewCore;
-		};
-		CAD000000000000000000001 /* PreviewCADFormats */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
-			productName = PreviewCADFormats;
-		};
-		CAD000000000000000000002 /* PreviewCADFormats */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4C62EC40DF63DF0873D128AE /* XCLocalSwiftPackageReference "Packages/PreviewCore" */;
-			productName = PreviewCADFormats;
 		};
 		CAD30000000000000000000E /* PreviewCADFormats */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -14,7 +14,7 @@ Review; 1.1.0 is submitted only after 1.0.0 is approved (or rejected and resolve
 | Setting | Value | Where |
 |---|---|---|
 | `MARKETING_VERSION` | `1.1.0` | `Configuration/Base.xcconfig` |
-| `CURRENT_PROJECT_VERSION` | `4` (build 3 was 1.0.0's submission; macOS build numbers must keep rising) | `Configuration/Base.xcconfig` |
+| `CURRENT_PROJECT_VERSION` | `5` (build 3 was 1.0.0's submission; build 4 was 1.1.0's first submission and carried the unreachable CAD client code that Guideline 2.5.19 rules out, so it is replaced; macOS build numbers must keep rising) | `Configuration/Base.xcconfig` |
 | `PREV_INCLUDE_CAD` | `NO` (decision 028 still holds: no STEP or IGES) | `Configuration/Base.xcconfig` |
 | Shipped languages | English only; no translation has a recorded review | `tools/localization/languages.json` |
 
@@ -138,7 +138,7 @@ print line holds for 3MF in Finder and for the other three only in the companion
 
 ## App Review
 
-- Notes: [app-store-submission.md, "Notes for App Review"](app-store-submission.md#notes-for-app-review) now names 1.1.0 (build 4) and the three new samples.
+- Notes: [app-store-submission.md, "Notes for App Review"](app-store-submission.md#notes-for-app-review) now names 1.1.0 (build 5; build 4 named it until 2026-10-17) and the three new samples.
 - Samples: `python3 script/build_review_samples.py` adds `32-model.gguf`, `33-extension.vsix` and `34-package.whl` (36 files); `--check` passes.
 
 ## Steps left, in order
@@ -146,5 +146,5 @@ print line holds for 3MF in Finder and for the other three only in the companion
 1. 1.0.0 (build 3) approved by App Review.
 2. PR 9 is merged (2026-10-15), so it ships in 1.1.0.
 3. Observe the claim-gate list above on a development-signed build of `main`, then archive: `./script/build_and_run.sh --archive`, then `python3 script/check_release_archive.py` on the archive.
-4. On the owner's instruction: upload (`--upload`), create version 1.1.0 in App Store Connect, select build 4, paste What's New and the description, attach `SpacePane-Review-Samples.zip`, paste the notes, submit.
+4. On the owner's instruction: upload (`--upload`), create version 1.1.0 in App Store Connect, select build 5 (build 4 was selected first and is replaced, Guideline 2.5.19), paste What's New and the description, attach `SpacePane-Review-Samples.zip`, paste the notes, submit.
 5. After approval: on `spacepane-web`'s `app-store-launch` branch, drop the "Coming in an update" badges for Safety Lens 2 and 3 and count the seven formats, then merge that branch to `main` (the owner merges after approval). Switch the promotional text.

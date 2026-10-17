@@ -379,6 +379,12 @@ screenshots are settled; previews show before screenshots, so a weak one costs m
 | Age rating | 4+ | Entered in App Store Connect (2026-10-12) |
 | Support, privacy, marketing URLs | As recorded above | The support, privacy and open-source pages are live and show `info@spacepane.com`. The domain has MX, SPF and DMARC records; whether the mailbox answers is unconfirmed (review readiness plan, Phase 0) |
 
+Creative assets (Guideline 2.3.14, added in the guideline revision of October 2026) are a separate asset type from
+screenshots and app previews: images App Store Connect can show in the product page header and in search results.
+SpacePane has none uploaded (checked 2026-10-17). If any are added, each must show the app's own content,
+functionality or brand, follow the same rules as the rest of this page (only what the claim check allows), suit all
+audiences, and carry no price, discount, unverifiable claim or reference to another app.
+
 Custom product pages, product page optimization, in-app events and Apple Ads are iPhone and iPad features;
 none applies to a Mac app. The two levers that do exist on the Mac are the promotional text, which can be
 changed at any time without a new version, and a featuring nomination in App Store Connect, which Apple asks

@@ -5,8 +5,9 @@ usage: check_release_archive.py PATH.xcarchive
 
 The archive is checked against PREV_INCLUDE_CAD (script/cad_mode.py reads it from Configuration/Base.xcconfig,
 then Local.xcconfig, then the environment; decision 028). With NO, version 1.0's value, the archive must carry no
-CAD at all: no XPC service, no CADWorker, no Helpers directory, no OCCT-Notices folder, and no Mach-O file but the
-three main executables. With YES it must carry the CAD service and both CAD worker copies, as before.
+CAD at all: no XPC service, no CADWorker, no Helpers directory, no OCCT-Notices folder, no Mach-O file but the
+three main executables, and none of the CAD importer client's code linked into those executables (App Review
+Guideline 2.5.19 on dormant features). With YES it must carry the CAD service and both CAD worker copies, as before.
 
 These checks mirror upload validation and App Review requirements that can be read locally: store
 metadata keys, the compiled icon, the languages each bundle carries against the ship list, quarantine
@@ -549,6 +550,25 @@ def check_no_cad_residue(report: Report, app: Path, bundles: List[Bundle]) -> No
                     "carries no OCCT notices")
 
 
+CAD_CLIENT_MODULE = b"PreviewCADFormats"
+
+
+def check_no_cad_code(report: Report, app: Path, machos: List[Path]) -> None:
+    """No executable of the build without CAD links the CAD importer client.
+
+    The Swift module name appears in every mangled symbol and Objective-C class name the module contributes, so a
+    byte search finds the module whatever the linker kept. Guideline 2.5.19 forbids dormant features; code for STEP
+    and IGES previews the build does not offer would be one."""
+    for path in machos:
+        try:
+            linked = CAD_CLIENT_MODULE in path.read_bytes()
+        except OSError as error:
+            report.fail(f"{path.relative_to(app)} could not be read: {error}")
+            continue
+        report.check(not linked, f"{path.relative_to(app)} links the CAD importer client (PreviewCADFormats); the build "
+                                 "without CAD (PREV_INCLUDE_CAD = NO) links it into no executable")
+
+
 def main_executables(bundles: List[Bundle]) -> Set[Path]:
     """The declared main executable of each bundle, whether or not the file exists."""
     executables: Set[Path] = set()
@@ -610,6 +630,7 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
             report.check(path in allowed,
                          f"{path.relative_to(app)} is a Mach-O file other than the main executable of the app or an "
                          "extension; the build without CAD (PREV_INCLUDE_CAD = NO) carries only those three")
+        check_no_cad_code(report, app, machos)
     for path in machos:
         architectures = tools.architectures(path)
         report.check(architectures == EXPECTED_ARCHITECTURES,
