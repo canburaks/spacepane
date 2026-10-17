@@ -38,6 +38,11 @@ CAD_CONDITION_TARGETS = {"Prev", "PrevPreviewExtension"}
 CAD_SERVICE_PRODUCT = "CADImportService.xpc"
 # Identifier namespaces of other installed products whose file types this app also accepts.
 THIRD_PARTY_ALIAS_PREFIXES = ("com.quicklookpro.",)
+# macOS declares these two system types with no UTTypeConformsTo, so they reach neither public.data nor public.item.
+# Launch Services resolves a file's type only among types that conform to public.data, so an imported declaration
+# that stops at one of them is never chosen for its extension and Quick Look never asks this app
+# (docs/validation/uti-resolution-2026-10-17.md). Such a declaration must list public.data as a parent as well.
+PARENTS_WITHOUT_DATA = ("public.database", "public.archive")
 # Each bundle's privacy manifest sits in a folder the project synchronizes into that target, so the build copies it
 # into Contents/Resources without a build-file entry (decision 027, Q-45). The roles are the ones
 # check_release_archive.py uses for the manifest's required categories.
@@ -262,12 +267,22 @@ def validate_privacy_manifests(root, objects, targets):
                       f"{relative} is excluded from the {target_name} target by a membership exception")
 
 
-def validate():
-    catalog = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())
-    formats = catalog["formats"]
-    include_cad = configured_include_cad()
-    check(formats, "Format catalog cannot be empty")
-    cad_entries = validate_cad_catalog(ROOT, formats, include_cad)
+def declared_parents(declaration):
+    """The parents of an imported declaration: `conformsTo` is one identifier or a non-empty list of distinct ones."""
+    value = declaration["conformsTo"]
+    parents = [value] if isinstance(value, str) else value
+    identifier = declaration["identifier"]
+    check(isinstance(parents, list) and parents and all(isinstance(item, str) and item for item in parents)
+          and len(set(parents)) == len(parents),
+          f"{identifier}: conformsTo must be an identifier or a list of distinct identifiers")
+    check("public.data" in parents or not set(parents).intersection(PARENTS_WITHOUT_DATA),
+          f"{identifier}: parents {parents} stop at a system type with no parent, so the type never reaches public.data "
+          "and Launch Services never resolves its extension; list public.data as well")
+    return parents
+
+
+def validate_catalog(formats):
+    """Check the catalog by itself; returns the preview types, the thumbnail types and the imported declarations."""
     check(len({item["id"] for item in formats}) == len(formats), "Duplicate format IDs")
     types = [content_type for item in formats for content_type in item["contentTypes"]]
     owners = {}
@@ -308,12 +323,22 @@ def validate():
             check(set(declaration["extensions"]).issubset(item["extensions"]), "Imported suffixes must belong to their format")
             imported.append({
                 "UTTypeIdentifier": identifier,
-                "UTTypeConformsTo": [declaration["conformsTo"]],
+                "UTTypeConformsTo": declared_parents(declaration),
                 "UTTypeDescription": declaration["descriptionKey"],
                 "UTTypeReferenceURL": declaration["referenceURL"],
                 "UTTypeTagSpecification": {"public.filename-extension": declaration["extensions"]},
             })
     check(len({item["UTTypeIdentifier"] for item in imported}) == len(imported), "Duplicate imported content type declarations")
+    return types, thumbnail_types, imported
+
+
+def validate():
+    catalog = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())
+    formats = catalog["formats"]
+    include_cad = configured_include_cad()
+    check(formats, "Format catalog cannot be empty")
+    cad_entries = validate_cad_catalog(ROOT, formats, include_cad)
+    types, thumbnail_types, imported = validate_catalog(formats)
     package = json.loads(subprocess.check_output(["/usr/bin/xcrun", "swift", "package", "--package-path", str(ROOT / "Packages/PreviewCore"), "dump-package"]))
     exported_products = {item["name"] for item in package["products"]}
     check(exported_products == {"PreviewContracts", "PreviewFileAccess", "PreviewCore", "PreviewFormats", "PreviewCADFormats", "PreviewPreferences", "PreviewRenderers", "PreviewThumbnails"}, "Swift package exported-product inventory drifted")
