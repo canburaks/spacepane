@@ -23,7 +23,8 @@ enum CompanionPresentationChecks {
         try profileNamesAreCheckedAfterTrimming()
         try transferMessagesAreProblemsOnlyWhenTheyFail()
         try scanAnnouncementsReadTheConclusion()
-        print("Passed 8 companion presentation checks (isolated defaults and storage; no window, font or VoiceOver).")
+        try openingSystemSettingsAdmitsWhatItCannotConfirm()
+        print("Passed 9 companion presentation checks (isolated defaults and storage; no window, font or VoiceOver).")
     }
 
     private static func check(_ condition: @autoclosure () -> Bool, _ message: String) throws {
@@ -279,5 +280,38 @@ enum CompanionPresentationChecks {
         let text = found.announcement(locale: Locale(identifier: "en_US"), languagePreferences: english)
         try check(text.contains("1") && text != none.announcement(languagePreferences: english),
                   "A scan that found an app announces how many: \(text)")
+    }
+
+    // MARK: System Settings
+
+    /// The link may be accepted without the pane showing, so the manual route follows every attempt, and the
+    /// application fallback runs exactly when the link was refused.
+    private static func openingSystemSettingsAdmitsWhatItCannotConfirm() throws {
+        let link = URL(string: "x-apple.systempreferences:synthetic")
+        let application = URL(fileURLWithPath: "/System/Applications/Synthetic.app")
+        var openedApplications: [URL] = []
+        let accepted = SystemSettingsOpening.open(link: link, openLink: { _ in true }, applicationURL: { application },
+                                                  openApplication: { openedApplications.append($0) })
+        try check(accepted == .linkAccepted && openedApplications.isEmpty,
+                  "An accepted link must be reported as such and must not open the application a second time")
+        let refused = SystemSettingsOpening.open(link: link, openLink: { _ in false }, applicationURL: { application },
+                                                 openApplication: { openedApplications.append($0) })
+        try check(refused == .applicationOnly && openedApplications == [application],
+                  "A refused link must open System Settings itself, once")
+        openedApplications = []
+        let unparsable = SystemSettingsOpening.open(link: nil, openLink: { _ in true }, applicationURL: { application },
+                                                    openApplication: { openedApplications.append($0) })
+        try check(unparsable == .applicationOnly && openedApplications == [application],
+                  "Without a usable link System Settings must still open")
+        let neither = SystemSettingsOpening.open(link: link, openLink: { _ in false }, applicationURL: { nil },
+                                                 openApplication: { openedApplications.append($0) })
+        try check(neither == .failed, "A refused link and a missing application must be reported as a failure")
+        for result in [SystemSettingsOpening.Result.linkAccepted, .applicationOnly, .failed] {
+            try check(SystemSettingsOpening.manualRouteKey(after: result) == .setupSteps,
+                      "The manual route must follow every attempt, because no attempt confirms the pane: \(result)")
+        }
+        let route = PreviewStrings.text(.setupSteps, languagePreferences: ["en"])
+        try check(route.contains("Login Items & Extensions") && route.contains("Quick Look"),
+                  "The manual route must name the pane in the words System Settings uses: \(route)")
     }
 }

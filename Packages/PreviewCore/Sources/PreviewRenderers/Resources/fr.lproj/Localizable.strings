@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "Les aperçus de modèles 3D utilisent Open CASCADE Technology sous licence GNU LGPL 2.1 avec l’exception Open CASCADE. Les avis de licence sont inclus dans l’app.";
 "about.acknowledgements.openCascade" = "Open CASCADE Technology est protégé par le copyright d’OPEN CASCADE SAS et de ses contributeurs. Le code source de l’assistant d’import 3D et l’offre écrite pour le code source de la bibliothèque sont publics.";
 "about.acknowledgements.title" = "Remerciements";
-"about.description" = "Une extension locale Quick Look d’aperçu et de vignettes pour le texte, les données structurées, les archives, les bases de données et les modèles 3D.";
+"about.description" = "Aperçus et vignettes du texte, des données structurées, des archives, des bases de données et des modèles 3D directement dans le Finder, entièrement sur votre Mac.";
 "about.howItWorks.body" = "Lorsque cette app fournit l’aperçu, les choix de Types de fichiers s’appliquent aux nouveaux aperçus et vignettes Finder, et les secrets probables sont masqués avant que le contenu soit affiché, sélectionné ou copié. Les fichiers sont lus localement et jamais modifiés. Les vignettes génériques ne contiennent aucun texte source. macOS choisit le fournisseur Quick Look.";
 "about.howItWorks.title" = "Fonctionnement";
 "about.link.documentation" = "Documentation";
@@ -521,7 +521,7 @@
 "general.banner.sharedBody" = "Activez les extensions dans Réglages Système. macOS choisit le fournisseur d’aperçus et de vignettes.";
 "general.banner.sharedTitle" = "Les réglages sont partagés avec les extensions Quick Look";
 "general.banner.unavailableTitle" = "Le stockage des réglages est indisponible";
-"general.developerMode.subtitle" = "Affiche Essayer l’aperçu dans la barre latérale pour ouvrir un fichier directement dans cette app.";
+"general.developerMode.subtitle" = "Affiche la page Essayer l’aperçu dans la barre latérale (⌘5) et la commande Ouvrir un fichier (⌘O) pour ouvrir un fichier directement dans cette app.";
 "general.developerMode.title" = "Mode développeur";
 "general.finder.foldersSubtitle" = "Résume le contenu direct d’un dossier dans Quick Look.";
 "general.finder.foldersTitle" = "Aperçu des dossiers";
@@ -536,6 +536,7 @@
 "general.storage.title" = "Stockage des réglages";
 "general.subtitle" = "Configurez l’intégration à Finder et à Quick Look.";
 "help.keyboard.body" = "⌘1 à ⌘4 changent de page. ⌘, ouvre Général. ⌘Z annule la dernière réinitialisation, modification groupée, importation de thème ou suppression de profil ; ⇧⌘Z la rétablit.";
+"help.keyboard.bodyDeveloper" = "⌘1 à ⌘5 changent de page. ⌘O ouvre un fichier dans Essayer l’aperçu. ⌘, ouvre Général. ⌘Z annule la dernière réinitialisation, modification groupée, importation de thème ou suppression de profil ; ⇧⌘Z la rétablit.";
 "help.keyboard.title" = "Raccourcis clavier";
 "listing.risk.hiddenCharacters" = "Caractères masqués dans le nom";
 "mesh.printCheck.estimate" = "Imprimé plein en PLA : environ %1$@ %2$@ et %3$@ %4$@ de filament de %5$@ %6$@. Les logiciels de tranchage impriment souvent avec moins de remplissage ; c’est donc une limite haute.";
@@ -1250,15 +1251,15 @@
 "settings.scheme.title" = "Palette de couleurs";
 "settings.searchFileTypes" = "Rechercher des types de fichiers";
 "settings.storageUnavailable" = "Le stockage des réglages est indisponible. Les choix s’appliquent uniquement tant que cette app est ouverte.";
-"setup.notConfigured" = "Les réglages sont enregistrés pour cette app uniquement. Tant que l’App Group partagé de cette version n’est pas configuré, les extensions affichent un message de configuration dans les aperçus Finder et ne produisent que des vignettes génériques.";
+"setup.notConfigured" = "Les réglages sont enregistrés pour cette app uniquement, jusqu’à ce que le partage avec les aperçus du Finder soit configuré. D’ici là, les aperçus du Finder affichent un message de configuration et les vignettes restent génériques.";
 "setup.steps" = "Activez les extensions Quick Look dans Réglages Système > Général > Ouverture et extensions. Sélectionnez ensuite un fichier pris en charge dans Finder et appuyez sur Espace.";
 "setup.unverified" = "macOS choisit l’app qui fournit les aperçus et les vignettes de chaque type de fichier. Si une autre app prend aussi en charge un type, Finder peut utiliser cette app.";
-"shell.subtitle" = "Extension Quick Look";
+"shell.subtitle" = "Aperçus de fichiers pour le Finder";
 "state.configurationUnavailable.title" = "L’application n’est pas correctement configurée";
 "state.empty.body" = "Il ne contient rien, il n’y a donc rien à afficher.";
 "state.empty.title" = "Ce fichier est vide";
 "state.settingsUnavailable.title" = "Les réglages sont indisponibles";
-"status.appOnly" = "Réglages de l’app uniquement";
+"status.appOnly" = "Enregistré pour cette app uniquement";
 "status.loading" = "Chargement des réglages…";
 "status.recovered" = "Réglages réinitialisés";
 "status.saveFailed" = "Modifications non enregistrées";
