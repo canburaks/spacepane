@@ -1,5 +1,7 @@
 # SpacePane — App Store Connect worksheet for 1.0.0 (draft)
 
+**Amended 2026-10-17:** the version in review is 1.1.0 (build 5), submitted 2026-10-17 at 11:08 and Waiting for Review; the 1.0.0 (3) and 1.1.0 (4) submissions were removed and no 1.0.0 submission remains ([version-1.1.0.md, status table](../version-1.1.0.md#submission-status)). The release option is Automatic in App Store Connect, against the Manual this worksheet and the readiness plan ask for. Section 3 below describes 1.0.0 and is superseded where the 1.1.0 record differs.
+
 Status: draft answers, written 2026-10-10 from the repository and annotated on 2026-10-12 with what App Store Connect was observed to hold that day. Amended 2026-10-13: version 1.0 ships without STEP and IGES ([decision 028](../../decisions/028-no-cad-in-version-1.md)), so the submission build is build 3 without CAD, build 2 (which has CAD) is for internal TestFlight testing only, and the description and keywords stored in App Store Connect are out of date and are re-pasted from [../app-store-listing.md](../app-store-listing.md). Several answers are now entered there (marked "Entered" below); screenshots, the build selection, review notes and the attachment are not. [../app-store-listing.md](../app-store-listing.md#what-app-store-connect-holds) records the full list. App Store Connect's forms change; the owner confirms every answer against the live form on the day of entry. Where this worksheet and App Store Connect differ, App Store Connect is the record. The review notes, the archive and upload steps and the sample-file zip are in [../app-store-submission.md](../app-store-submission.md) and are not repeated here. Listing text is in [../app-store-listing.md](../app-store-listing.md) ([listing.en.md](listing.en.md) is a pointer to it); screenshots in [screenshots.md](screenshots.md).
 
 "Basis" names the file that supports an answer, so the owner can recheck it.
@@ -31,12 +33,12 @@ Status: draft answers, written 2026-10-10 from the repository and annotated on 2
 
 Open inconsistency, for the lead and the website stream, not changed here: `Configuration/Branding.xcconfig` (`PREV_SUPPORT_URL`, `PREV_PRIVACY_POLICY_URL`) and `../app-store-submission.md` still use the `.html` forms `https://spacepane.com/support.html` and `https://spacepane.com/privacy.html`, which belong to the old static `Website/` (now in the `spacepane-web` repository). The About links inside the app and the URLs entered in App Store Connect should resolve to the same live pages. Check both forms respond on the deployed site and pick one.
 
-## 3. Version information (1.0.0)
+## 3. Version information (1.0.0; superseded by 1.1.0 build 5 on 2026-10-17)
 
 | Field | Answer |
 |---|---|
-| Version | 1.0.0 (`MARKETING_VERSION`, `Configuration/Base.xcconfig`). The App Store Connect version record reads 1.0.0 (observed 2026-10-12). |
-| Build | Build 1.0.0 (1) was uploaded on 2026-10-10. It is "Ready to Submit", has zero installs and is not attached to the version; it will not be submitted. Build 2 is being prepared: `CURRENT_PROJECT_VERSION` is 1 in `Base.xcconfig`, so raise it to 2 before the next upload (review readiness plan, Phase 1 item 7). No build is selected on the version yet. |
+| Version | 1.1.0 since 2026-10-17 (`MARKETING_VERSION` in `Configuration/Base.xcconfig`; the record in [../version-1.1.0.md](../version-1.1.0.md)). History: the App Store Connect version record read 1.0.0 on 2026-10-12. |
+| Build | 1.1.0 (5), uploaded 2026-10-17 10:39, submitted 11:08, Waiting for Review. History: build 1.0.0 (1) was uploaded on 2026-10-10 and never submitted; build 2 (2026-10-12, with CAD) was internal TestFlight only; the 1.0.0 (3) submission of 2026-10-13 and the 1.1.0 (4) submission of 2026-10-15 were removed. |
 | Promotional text, description, keywords, What's New | [../app-store-listing.md](../app-store-listing.md) |
 | Screenshots | The plan in [../app-store-listing.md](../app-store-listing.md); the per-shot checks in [screenshots.md](screenshots.md) |
 | Sign-in required | No. There are no accounts. |
@@ -44,9 +46,9 @@ Open inconsistency, for the lead and the website stream, not changed here: `Conf
 | Review contact last name | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
 | Review contact phone | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
 | Review contact email | Entered in App Store Connect (observed 2026-10-12); not recorded in the repository |
-| Review notes | Not in App Store Connect yet (observed 2026-10-12). Paste the block "Notes for App Review" from [../app-store-submission.md](../app-store-submission.md). The block was revised on 2026-10-13: it names build 3 and one mesh sample (`28-binary.stl`) and has no STEP, IGES, Open CASCADE or source-offer text (decision 028). Use the current block, not a copy made earlier. |
-| Attachment | Not in App Store Connect yet (observed 2026-10-12). `SpacePane-Review-Samples.zip`, built by `python3 script/build_review_samples.py` (no STEP or IGES file in it since 2026-10-13). |
-| Release option | **Manual release** (recommended; owner decision R-4 of the review readiness plan). App Store Connect reads "Automatically release" on 2026-10-12, so it has to be changed. It lets the owner check the approved build and the website link before customers can download. Alternatives are release immediately after approval or on a set date; none is needed for 1.0.0. |
+| Review notes | In App Store Connect since 2026-10-17: the block of 2026-10-15 (names build 5 and the three 1.1.0 samples). The block in [../app-store-submission.md](../app-store-submission.md#notes-for-app-review) was corrected on 2026-10-17 (banner button, `31-model.3mf`, no thumbnail or macOS 15 claim) and is pasted again only when the version is out of review. Use the current block, not a copy made earlier. |
+| Attachment | `SpacePane-Review-Samples.zip` is attached (observed 2026-10-17), built by `python3 script/build_review_samples.py` (no STEP or IGES file in it since 2026-10-13; 36 files since 2026-10-15). |
+| Release option | **Manual release** (recommended; owner decision R-4 of the review readiness plan). App Store Connect reads "Automatically release this version" for 1.1.0 on 2026-10-17 (as it did on 2026-10-12), so it still has to be changed; the field is editable while the version is Waiting for Review. It lets the owner check the approved build and the website link before customers can download. Alternatives are release immediately after approval or on a set date; none is needed for 1.0.0. |
 
 ## 4. Age rating (2026 questionnaire)
 
@@ -152,8 +154,8 @@ So 12 of the 14 app languages have a store locale; Kurmanji and Hausa have none.
 Do these on the store build before entering the matching fields:
 
 1. The extension names in the listing, `SpacePane Preview` and `SpacePane Thumbnails`, match what System Settings shows.
-2. The General page's "Open System Settings" button opens the right pane on the macOS versions tested; record the pane path for each version.
+2. The "Open System Settings" button in the banner at the top of the General page opens the right pane on the macOS versions tested; record the pane path for each version.
 3. Both URLs in section 2 load, the privacy page says "no network access" in line with section 5, and the support page shows the contact address.
-4. The description's list of types still equals `FormatCatalog.json` (74 types, 26 + 26 + 16 + 1 + 5; it was 76 with 7 in the media group until `cad.iges` and `cad.step` left the catalog on 2026-10-13).
+4. The description's list of types still equals `FormatCatalog.json` (81 `id` entries since decision 030 on 2026-10-14, counted 2026-10-17; 74 for build 3, 26 + 26 + 16 + 1 + 5; 76 with 7 in the media group until `cad.iges` and `cad.step` left the catalog on 2026-10-13). The live description says 74 for build 5.
 5. Every screenshot gate in [screenshots.md](screenshots.md) has its observation recorded in `docs/validation/host-matrix.json`.
 6. The signed archive's entitlements contain no network key (output of `script/check_release_archive.py`).
