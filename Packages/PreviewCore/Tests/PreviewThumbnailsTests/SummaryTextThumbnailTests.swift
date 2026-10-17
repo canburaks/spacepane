@@ -146,7 +146,9 @@ struct RealSummaryAdapterThumbnailTests {
     }
 
     /// An application's summary comes from `PackageSummary.document`, which builds its own document from the
-    /// summary writer's text; this proves that hand-over keeps the writer's origin.
+    /// summary writer's text; this proves that hand-over keeps the writer's origin. Since 2026-10-17 the shipped
+    /// catalog gives application bundles the `generic` policy, so the thumbnail extension never registers them
+    /// (decision 022); this test admits them with the `content` policy to keep checking the pipeline behind it.
     @Test func anApplicationBundleWithoutAnIconIsDeclinedNotDrawnAsItsSummary() async throws {
         let fixture = try Fixture()
         defer { fixture.remove() }
@@ -156,7 +158,18 @@ struct RealSummaryAdapterThumbnailTests {
         try PropertyListSerialization.data(fromPropertyList: info, format: .xml, options: 0)
             .write(to: bundle.appendingPathComponent("Contents/Info.plist"))
         try Data("not a mach-o".utf8).write(to: bundle.appendingPathComponent("Contents/MacOS/Synthetic"))
-        let outcome = await makeService().outcome(for: bundle, geometry: geometry(384))
+        let catalog = FormatCatalog(descriptors: FormatCatalog.standard.descriptors.map { descriptor in
+            guard descriptor.id == .applicationBundle else { return descriptor }
+            return FormatDescriptor(id: descriptor.id, contentTypes: descriptor.contentTypes,
+                suffixAliases: descriptor.suffixAliases, group: descriptor.group,
+                presentation: descriptor.presentation, thumbnail: .content,
+                nameKey: descriptor.nameKey, descriptionKey: descriptor.descriptionKey,
+                filenameAliases: descriptor.filenameAliases, filenamePrefixes: descriptor.filenamePrefixes,
+                defaultEnabled: descriptor.defaultEnabled, primaryView: descriptor.primaryView)
+        }, unresolvedContentTypes: FormatCatalog.standard.unresolvedContentTypes)
+        let service = ContentThumbnailService(registrations: StandardFormatAdapters.registrations,
+                                              preferences: .fixed(.defaults), catalog: catalog, limits: relaxedLimits)
+        let outcome = await service.outcome(for: bundle, geometry: geometry(384))
         #expect(outcome.scene == nil, "\(String(describing: outcome.scene?.content.drawnStrings))")
         #expect(outcome.reason == .summaryText)
     }
