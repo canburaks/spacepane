@@ -2,6 +2,21 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-17 — README as a showroom page (documentation only)
+
+Owner follow-up: the README must read like a page for the app, with large images.
+
+- `README.md` now opens with a centered title and tagline and the hero screenshot `01-press-space.png` full width, then one section per feature, each with a full-width screenshot: secrets (02), notebooks (03), SQLite (04), archives (05), Markdown and code (06), File Types (08) and Theme (09). Images use Markdown syntax instead of an HTML table.
+- After merging `main`, 01 and 04 are the build 6 retakes (no Filter field, no `.step` file). 08 still shows an outdated "76 of 76" count; 07 stays out because it shows a STEP model.
+
+## 2026-10-17 — README rewritten around screenshots and a minimal build (documentation only)
+
+Owner request: show the features with images, keep only the minimum needed to compile the app locally, and drop the rest.
+
+- `README.md` now has a short introduction, a two-column feature table using five store-listing screenshots (02 secrets, 03 notebooks, 05 archives, 06 Markdown, 09 Theme) and a three-step build section (copy `Local.xcconfig`, fill `DEVELOPMENT_TEAM`, `PREVIEW_BASE_BUNDLE_IDENTIFIER` and `APP_GROUP_IDENTIFIER`, run `./script/build_and_run.sh`).
+- Left out: screenshots 01 and 04 (they show the Filter field removed in build 5, and 01 lists a STEP file), 07 (a STEP model, not shipped) and 08 (an outdated "76 of 76" count). Removed sections: status, repository layout, adding a file type, translations, troubleshooting and the document index; that material remains in `AGENTS.md`, `PLAN.md` and `docs/`.
+- The old README said each target needs its own App Group and that the run registers the extensions; all three targets read `$(APP_GROUP_IDENTIFIER)`, and run mode has no registration step, so neither claim was kept.
+- Checks: `./script/build_and_run.sh --check-static` OK (23 passed, 1 skipped: tree-sitter not installed).
 ## 2026-10-17 — Companion fixes from the rejection-risk review: findings 23, 17, 24, 25, 30 and 2 (implementation)
 
 Request from the lead session: fix the companion findings of [the review](docs/reviews/2026-10-17-app-store-rejection-risk.md), tests first, one concern per commit, on branch `companion-ux-fixes-2026-10-17` (not pushed). Compiled and tested on this Mac (Xcode 27, macOS 27.2); nothing was run in Finder or with VoiceOver.
