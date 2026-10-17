@@ -209,6 +209,7 @@
 				A198A700D14E91238D2BF610 /* Frameworks */,
 				4842CDB935CF78A1D34F5228 /* Resources */,
 				BBCF628F6BE59B00ED468AC2 /* Compile localized branding metadata */,
+				5125EF2380774378BBECC762 /* Prune draft languages */,
 				CAD30000000000000000000C /* Embed XPC Services */,
 			);
 			buildRules = (
@@ -240,6 +241,7 @@
 				F6CBEC465925BE4452A20ABB /* Frameworks */,
 				579AEB5462C4A39AE89A18C8 /* Resources */,
 				57CC4619640F6D5423EC991E /* Compile localized branding metadata */,
+				DAAA0B33AB8B4E519699DDB0 /* Prune draft languages */,
 			);
 			buildRules = (
 			);
@@ -270,6 +272,7 @@
 				ED7795022B66A653601652D1 /* Frameworks */,
 				61858F301F35A5605BC21FFE /* Resources */,
 				0ED737CB8B3AD6BD768A7326 /* Compile localized branding metadata */,
+				AE9152291FF4451F9D76891F /* Prune draft languages */,
 				CAD200000000000000000002 /* Embed CAD worker */,
 				AFC32963E7959E7A34264826 /* Embed App Extensions */,
 			);
@@ -421,6 +424,26 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/build_metadata.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" \"${PREVIEW_METADATA_ROLE}\"\n";
 		};
+		5125EF2380774378BBECC762 /* Prune draft languages */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/script/prune_resource_languages.py",
+				"$(SRCROOT)/tools/localization/languages.json",
+			);
+			name = "Prune draft languages";
+			outputFileListPaths = (
+				"$(SRCROOT)/script/prune-outputs.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/prune_resource_languages.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" --bundle PreviewCore_PreviewRenderers.bundle --policy \"${SRCROOT}/tools/localization/languages.json\"\n";
+		};
 		57CC4619640F6D5423EC991E /* Compile localized branding metadata */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -441,6 +464,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/build_metadata.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" \"${PREVIEW_METADATA_ROLE}\"\n";
+		};
+		AE9152291FF4451F9D76891F /* Prune draft languages */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/script/prune_resource_languages.py",
+				"$(SRCROOT)/tools/localization/languages.json",
+			);
+			name = "Prune draft languages";
+			outputFileListPaths = (
+				"$(SRCROOT)/script/prune-outputs.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/prune_resource_languages.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" --bundle PreviewCore_PreviewRenderers.bundle --policy \"${SRCROOT}/tools/localization/languages.json\"\n";
 		};
 		BBCF628F6BE59B00ED468AC2 /* Compile localized branding metadata */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -510,6 +553,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${PREV_INCLUDE_CAD}\" = YES ]; then\n  /usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\nelse\n  /usr/bin/python3 \"${SRCROOT}/script/embed_notices.py\"\nfi\n";
+		};
+		DAAA0B33AB8B4E519699DDB0 /* Prune draft languages */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/script/prune_resource_languages.py",
+				"$(SRCROOT)/tools/localization/languages.json",
+			);
+			name = "Prune draft languages";
+			outputFileListPaths = (
+				"$(SRCROOT)/script/prune-outputs.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/prune_resource_languages.py\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\" --bundle PreviewCore_PreviewRenderers.bundle --policy \"${SRCROOT}/tools/localization/languages.json\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
