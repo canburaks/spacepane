@@ -20,8 +20,14 @@ CATALOG = ROOT / 'Packages/PreviewCore/Sources/PreviewContracts/Resources/Format
 CONFIGURATION = ROOT / 'Configuration'
 
 
-def derived() -> tuple[list[str], list[str], list[dict]]:
-    formats = json.loads(CATALOG.read_text())['formats']
+def parents(declaration: dict) -> list[str]:
+    """UTTypeConformsTo for an imported declaration: `conformsTo` is one identifier or a list of them."""
+    value = declaration['conformsTo']
+    return [value] if isinstance(value, str) else list(value)
+
+
+def derived(formats: list[dict] | None = None) -> tuple[list[str], list[str], list[dict]]:
+    formats = json.loads(CATALOG.read_text())['formats'] if formats is None else formats
     preview = list(dict.fromkeys(t for item in formats for t in item['contentTypes']))
     thumbnail = list(dict.fromkeys(t for item in formats if item['thumbnail'] != 'none' for t in item['contentTypes']))
     imported = []
@@ -29,7 +35,7 @@ def derived() -> tuple[list[str], list[str], list[dict]]:
         for declaration in item.get('importedContentTypes', []):
             imported.append({
                 'UTTypeIdentifier': declaration['identifier'],
-                'UTTypeConformsTo': [declaration['conformsTo']],
+                'UTTypeConformsTo': parents(declaration),
                 'UTTypeDescription': declaration['descriptionKey'],
                 'UTTypeReferenceURL': declaration['referenceURL'],
                 'UTTypeTagSpecification': {'public.filename-extension': declaration['extensions']},

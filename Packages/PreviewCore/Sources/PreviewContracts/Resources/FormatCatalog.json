@@ -1792,7 +1792,7 @@
       "importedContentTypes": [
         {
           "identifier": "org.apache.parquet",
-          "conformsTo": "public.database",
+          "conformsTo": ["public.database", "public.data"],
           "extensions": [
             "parquet"
           ],
@@ -2367,7 +2367,7 @@
       "importedContentTypes": [
         {
           "identifier": "org.sqlite.sqlite",
-          "conformsTo": "public.database",
+          "conformsTo": ["public.database", "public.data"],
           "extensions": [
             "sqlite",
             "sqlite3",
@@ -2452,7 +2452,7 @@
       "importedContentTypes": [
         {
           "identifier": "org.webmeister.spacepane.type.rar",
-          "conformsTo": "public.archive",
+          "conformsTo": ["public.archive", "public.data"],
           "extensions": [
             "rar"
           ],

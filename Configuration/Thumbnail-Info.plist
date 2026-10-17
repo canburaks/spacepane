@@ -734,6 +734,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.database</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>format.data.parquet.name</string>
@@ -1159,6 +1160,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.database</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>format.database.sqlite.name</string>
@@ -1180,6 +1182,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.archive</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>format.archive.rar.name</string>
