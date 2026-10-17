@@ -36,8 +36,14 @@ CAD_EMBED_SCRIPT = ('if [ "${PREV_INCLUDE_CAD}" = YES ]; then\n  /usr/bin/python
 # Targets that compile the CAD registration under the PREV_INCLUDE_CAD condition, and the one that would embed the service.
 CAD_CONDITION_TARGETS = {"Prev", "PrevPreviewExtension"}
 CAD_SERVICE_PRODUCT = "CADImportService.xpc"
-# Identifier namespaces of other installed products whose file types this app also accepts.
-THIRD_PARTY_ALIAS_PREFIXES = ("com.quicklookpro.",)
+# Identifier namespaces of other developers' products. They are never listed, as optional aliases or otherwise: the
+# identifiers belong to that product and App Review may read them as targeting it (decision 004, amended 2026-10-17).
+FOREIGN_IDENTIFIER_PREFIXES = ("com.quicklookpro.",)
+# macOS declares these two system types with no UTTypeConformsTo, so they reach neither public.data nor public.item.
+# Launch Services resolves a file's type only among types that conform to public.data, so an imported declaration
+# that stops at one of them is never chosen for its extension and Quick Look never asks this app
+# (docs/validation/uti-resolution-2026-10-17.md). Such a declaration must list public.data as a parent as well.
+PARENTS_WITHOUT_DATA = ("public.database", "public.archive")
 # Each bundle's privacy manifest sits in a folder the project synchronizes into that target, so the build copies it
 # into Contents/Resources without a build-file entry (decision 027, Q-45). The roles are the ones
 # check_release_archive.py uses for the manifest's required categories.
@@ -101,6 +107,24 @@ def validate_cad_catalog(root, formats, include_cad):
           and sorted(item.get("id") for item in parked) == sorted(CAD_FORMAT_IDS),
           f"{PARKED_CAD_ENTRIES} must be an array holding exactly the cad.iges and cad.step descriptors")
     return parked
+
+
+def cad_service_key_problems(info, base, service_identifier):
+    """The preview Info.plist names the CAD service through PREV_CAD_SERVICE_IDENTIFIER: the service's identity when
+    the product carries CAD, an empty value when it does not (review finding 22). `base` holds Base.xcconfig; both
+    modes are resolved here, whichever one the current build uses."""
+    problems = []
+    if info.get("CADImportServiceIdentifier") != "$(PREV_CAD_SERVICE_IDENTIFIER)":
+        problems.append("Preview-Info.plist must set CADImportServiceIdentifier to $(PREV_CAD_SERVICE_IDENTIFIER), "
+                        "so the service is named only when PREV_INCLUDE_CAD is YES")
+    for mode, wanted in (("YES", service_identifier), ("NO", "")):
+        values = {**base, "PREV_INCLUDE_CAD": mode, "__SERVICE__": service_identifier}
+        expected = resolve_setting(values, "__SERVICE__") if wanted else ""
+        if resolve_setting(values, "PREV_CAD_SERVICE_IDENTIFIER") != expected:
+            problems.append("PREV_CAD_SERVICE_IDENTIFIER must resolve to the embedded CAD service's identity when "
+                            "PREV_INCLUDE_CAD is YES and to nothing when it is NO "
+                            f"(found {resolve_setting(values, 'PREV_CAD_SERVICE_IDENTIFIER')!r} for {mode})")
+    return problems
 
 
 def validate_cad_wiring(root, objects, targets, include_cad):
@@ -262,12 +286,22 @@ def validate_privacy_manifests(root, objects, targets):
                       f"{relative} is excluded from the {target_name} target by a membership exception")
 
 
-def validate():
-    catalog = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())
-    formats = catalog["formats"]
-    include_cad = configured_include_cad()
-    check(formats, "Format catalog cannot be empty")
-    cad_entries = validate_cad_catalog(ROOT, formats, include_cad)
+def declared_parents(declaration):
+    """The parents of an imported declaration: `conformsTo` is one identifier or a non-empty list of distinct ones."""
+    value = declaration["conformsTo"]
+    parents = [value] if isinstance(value, str) else value
+    identifier = declaration["identifier"]
+    check(isinstance(parents, list) and parents and all(isinstance(item, str) and item for item in parents)
+          and len(set(parents)) == len(parents),
+          f"{identifier}: conformsTo must be an identifier or a list of distinct identifiers")
+    check("public.data" in parents or not set(parents).intersection(PARENTS_WITHOUT_DATA),
+          f"{identifier}: parents {parents} stop at a system type with no parent, so the type never reaches public.data "
+          "and Launch Services never resolves its extension; list public.data as well")
+    return parents
+
+
+def validate_catalog(formats):
+    """Check the catalog by itself; returns the preview types, the thumbnail types and the imported declarations."""
     check(len({item["id"] for item in formats}) == len(formats), "Duplicate format IDs")
     types = [content_type for item in formats for content_type in item["contentTypes"]]
     owners = {}
@@ -288,19 +322,18 @@ def validate():
         item["contentTypes"] == ["public.data"] and not item["extensions"] and not item.get("filenameAliases")
         and not item.get("filenamePrefixes") and item["thumbnail"] == "none" and item["presentation"] == "text"
         for item in root_owners), "public.data may identify only the extension-free text format, without thumbnails")
-    thumbnail_types = list(dict.fromkeys(content_type for item in formats if item["thumbnail"] != "none"
+    # Only the `content` policy registers a type with the thumbnail extension. A `generic` format would receive
+    # SpacePane's glyph instead of the system icon with no observed benefit (decision 022, amended 2026-10-17).
+    thumbnail_types = list(dict.fromkeys(content_type for item in formats if item["thumbnail"] == "content"
                                          for content_type in item["contentTypes"]))
     imported = []
     for item in formats:
         optional = item.get("optionalContentTypes", [])
         check(set(optional).issubset(item["contentTypes"]), "Optional types must be explicit catalog aliases")
         check(item["contentTypes"][0] not in optional, "The canonical type cannot be optional")
-        # Another product's identifiers (decision 004) are accepted only as optional aliases, so a
-        # file that app has typed still reaches this format; they are never canonical or declared.
-        foreign = [t for t in item["contentTypes"] if t.startswith(THIRD_PARTY_ALIAS_PREFIXES)]
-        check(set(foreign).issubset(optional), f"{item['id']}: third-party aliases must be optional")
-        check(not {d["identifier"] for d in item.get("importedContentTypes", [])}.intersection(foreign),
-              f"{item['id']}: never declare another product's type")
+        foreign = [t for t in item["contentTypes"] if t.startswith(FOREIGN_IDENTIFIER_PREFIXES)]
+        check(not foreign, f"{item['id']}: never list another developer's content type identifier ({foreign[:1]}); "
+                           "files are reached through system and owner-declared types (decision 004)")
         for declaration in item.get("importedContentTypes", []):
             identifier = declaration["identifier"]
             check(identifier in item["contentTypes"], "Imported types must belong to their format")
@@ -308,12 +341,22 @@ def validate():
             check(set(declaration["extensions"]).issubset(item["extensions"]), "Imported suffixes must belong to their format")
             imported.append({
                 "UTTypeIdentifier": identifier,
-                "UTTypeConformsTo": [declaration["conformsTo"]],
+                "UTTypeConformsTo": declared_parents(declaration),
                 "UTTypeDescription": declaration["descriptionKey"],
                 "UTTypeReferenceURL": declaration["referenceURL"],
                 "UTTypeTagSpecification": {"public.filename-extension": declaration["extensions"]},
             })
     check(len({item["UTTypeIdentifier"] for item in imported}) == len(imported), "Duplicate imported content type declarations")
+    return types, thumbnail_types, imported
+
+
+def validate():
+    catalog = json.loads((ROOT / "Packages/PreviewCore/Sources/PreviewContracts/Resources/FormatCatalog.json").read_text())
+    formats = catalog["formats"]
+    include_cad = configured_include_cad()
+    check(formats, "Format catalog cannot be empty")
+    cad_entries = validate_cad_catalog(ROOT, formats, include_cad)
+    types, thumbnail_types, imported = validate_catalog(formats)
     package = json.loads(subprocess.check_output(["/usr/bin/xcrun", "swift", "package", "--package-path", str(ROOT / "Packages/PreviewCore"), "dump-package"]))
     exported_products = {item["name"] for item in package["products"]}
     check(exported_products == {"PreviewContracts", "PreviewFileAccess", "PreviewCore", "PreviewFormats", "PreviewCADFormats", "PreviewPreferences", "PreviewRenderers", "PreviewThumbnails"}, "Swift package exported-product inventory drifted")
@@ -370,8 +413,9 @@ def validate():
           "CAD service must be a private application XPC service")
     service_identifier = service_info["CFBundleIdentifier"]
     check(service_identifier == "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import", "CAD service identity must derive from the configured base")
-    check(plist(ROOT / "Configuration/Preview-Info.plist").get("CADImportServiceIdentifier") == service_identifier,
-          "Preview must connect to the embedded CAD service's configured identity")
+    problems = cad_service_key_problems(plist(ROOT / "Configuration/Preview-Info.plist"),
+                                        xcconfig(ROOT / "Configuration/Base.xcconfig"), service_identifier)
+    check(not problems, "; ".join(problems))
     check(service_info.get("CADAllowedClientIdentifier") == "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).preview"
           and service_info.get("CADAllowedClientTeamIdentifier") == "$(DEVELOPMENT_TEAM)",
           "CAD service peer requirements must derive from the preview identity and signing team")
