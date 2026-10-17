@@ -193,5 +193,56 @@ class CommandLineTests(unittest.TestCase):
         self.assertEqual(lprojs(root), ["en"])
 
 
+class ProjectWiringTests(unittest.TestCase):
+    """The Xcode phases run the script in the user-script sandbox, so they must declare what it deletes.
+
+    The sandbox lets a script write only to declared outputs and never conflicts with the copy of the nested
+    bundle, so the outputs are the files of every draft language, listed in script/prune-outputs.xcfilelist.
+    """
+    ROOT = SCRIPT_DIRECTORY.parent
+    RESOURCES = ROOT / "Packages/PreviewCore/Sources/PreviewRenderers/Resources"
+    NESTED_OUTPUT = "$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/PreviewCore_PreviewRenderers.bundle/Contents/Resources"
+
+    def phases(self):
+        text = (self.ROOT / "Prev.xcodeproj/project.pbxproj").read_text()
+        return re.findall(r"\{\s*isa = PBXShellScriptBuildPhase;(?:(?!\n\t\t\};).)*?name = \"Prune draft languages\";.*?\n\t\t\};",
+                          text, flags=re.S)
+
+    def test_the_output_list_names_every_file_of_every_draft_language(self):
+        policy_file = json.loads((self.ROOT / "tools/localization/languages.json").read_text())
+        expected = []
+        for language in policy_file["languages"]:
+            if language == policy_file["developmentLanguage"]:
+                continue
+            folder = self.RESOURCES / f"{language}.lproj"
+            expected.append(f"{self.NESTED_OUTPUT}/{language}.lproj")
+            expected += [f"{self.NESTED_OUTPUT}/{language}.lproj/{item.name}" for item in sorted(folder.iterdir())]
+        listed = (self.ROOT / "script/prune-outputs.xcfilelist").read_text().split()
+        self.assertEqual(sorted(listed), sorted(expected))
+
+    def test_the_app_and_both_extensions_run_the_script_with_declared_inputs_and_outputs(self):
+        phases = self.phases()
+        self.assertEqual(len(phases), 3, "the companion and each extension need one pruning phase")
+        for phase in phases:
+            self.assertIn('"$(SRCROOT)/script/prune_resource_languages.py"', phase)
+            self.assertIn('"$(SRCROOT)/tools/localization/languages.json"', phase)
+            self.assertIn('"$(SRCROOT)/script/prune-outputs.xcfilelist"', phase)
+            self.assertIn("outputFileListPaths", phase)
+            self.assertIn("--bundle PreviewCore_PreviewRenderers.bundle", phase)
+
+    def test_each_target_runs_its_phase_after_the_resources_are_copied(self):
+        text = (self.ROOT / "Prev.xcodeproj/project.pbxproj").read_text()
+        ids = re.findall(r"(\w{24}) /\* Prune draft languages \*/ = \{", text)
+        self.assertEqual(len(ids), 3)
+        for target in ("Prev", "PrevPreviewExtension", "PrevThumbnailExtension"):
+            body = re.search(rf"/\* {target} \*/ = \{{\s*isa = PBXNativeTarget;.*?buildPhases = \((.*?)\);", text, re.S).group(1)
+            phases = re.findall(r"/\* (.*?) \*/", body)
+            self.assertIn("Prune draft languages", phases, target)
+            self.assertLess(phases.index("Resources"), phases.index("Prune draft languages"), target)
+
+    def test_script_sandboxing_stays_on(self):
+        self.assertIn("ENABLE_USER_SCRIPT_SANDBOXING = YES", (self.ROOT / "Configuration/Base.xcconfig").read_text())
+
+
 if __name__ == "__main__":
     unittest.main()
