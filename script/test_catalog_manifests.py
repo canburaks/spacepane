@@ -170,6 +170,7 @@ class RealCatalogTests(unittest.TestCase):
 
 class CADServiceKeyTests(unittest.TestCase):
     SERVICE = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import"
+    KEY = {"CADImportServiceIdentifier": "$(PREV_CAD_SERVICE_IDENTIFIER)"}
 
     def settings(self, **overrides):
         values = {"PREV_CAD_SERVICE_IDENTIFIER_YES": self.SERVICE, "PREV_CAD_SERVICE_IDENTIFIER_NO": "",
@@ -177,33 +178,35 @@ class CADServiceKeyTests(unittest.TestCase):
         values.update(overrides)
         return values
 
-    def problems(self, info, include_cad, settings=None):
+    def problems(self, info, settings=None):
         return validate_project.cad_service_key_problems(info, self.settings() if settings is None else settings,
-                                                         include_cad, self.SERVICE)
+                                                         self.SERVICE)
 
     def test_the_key_resolves_to_the_service_only_when_cad_is_included(self):
-        info = {"CADImportServiceIdentifier": "$(PREV_CAD_SERVICE_IDENTIFIER)"}
-        self.assertEqual(self.problems(info, True), [])
-        self.assertEqual(self.problems(info, False), [])
+        self.assertEqual(self.problems(self.KEY), [])
 
-    def test_a_literal_identifier_is_refused_when_cad_is_left_out(self):
-        info = {"CADImportServiceIdentifier": self.SERVICE}
-        self.assertTrue(self.problems(info, False))
+    def test_a_literal_identifier_is_refused(self):
+        self.assertTrue(self.problems({"CADImportServiceIdentifier": self.SERVICE}))
+
+    def test_a_missing_key_is_refused(self):
+        self.assertTrue(self.problems({}))
 
     def test_a_setting_that_names_the_service_when_cad_is_left_out_is_refused(self):
-        info = {"CADImportServiceIdentifier": "$(PREV_CAD_SERVICE_IDENTIFIER)"}
-        self.assertTrue(self.problems(info, False, self.settings(PREV_CAD_SERVICE_IDENTIFIER_NO=self.SERVICE)))
+        self.assertTrue(self.problems(self.KEY, self.settings(PREV_CAD_SERVICE_IDENTIFIER_NO=self.SERVICE)))
 
     def test_a_setting_that_is_empty_when_cad_is_included_is_refused(self):
-        info = {"CADImportServiceIdentifier": "$(PREV_CAD_SERVICE_IDENTIFIER)"}
-        self.assertTrue(self.problems(info, True, self.settings(PREV_CAD_SERVICE_IDENTIFIER_YES="")))
+        self.assertTrue(self.problems(self.KEY, self.settings(PREV_CAD_SERVICE_IDENTIFIER_YES="")))
 
-    def test_the_real_configuration_follows_the_mode(self):
+    def test_the_real_configuration_resolves_in_both_modes(self):
         info = plist("Preview-Info.plist")
+        self.assertEqual(info["CADImportServiceIdentifier"], "$(PREV_CAD_SERVICE_IDENTIFIER)")
         settings = validate_project.xcconfig(ROOT / "Configuration/Base.xcconfig")
-        for include_cad in (True, False):
-            with self.subTest(include_cad=include_cad):
-                self.assertEqual(self.problems(info, include_cad, settings), [])
+        self.assertEqual(self.problems(info, settings), [])
+        for mode, expected in (("YES", settings["PREV_CAD_SERVICE_IDENTIFIER_YES"]), ("NO", "")):
+            values = {**settings, "PREV_INCLUDE_CAD": mode}
+            self.assertEqual(validate_project.resolve_setting(values, "PREV_CAD_SERVICE_IDENTIFIER"),
+                             validate_project.resolve_setting(values, "PREV_CAD_SERVICE_IDENTIFIER_" + mode))
+            self.assertEqual(expected == "", mode == "NO")
 
 
 if __name__ == "__main__":

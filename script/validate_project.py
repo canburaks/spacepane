@@ -109,6 +109,24 @@ def validate_cad_catalog(root, formats, include_cad):
     return parked
 
 
+def cad_service_key_problems(info, base, service_identifier):
+    """The preview Info.plist names the CAD service through PREV_CAD_SERVICE_IDENTIFIER: the service's identity when
+    the product carries CAD, an empty value when it does not (review finding 22). `base` holds Base.xcconfig; both
+    modes are resolved here, whichever one the current build uses."""
+    problems = []
+    if info.get("CADImportServiceIdentifier") != "$(PREV_CAD_SERVICE_IDENTIFIER)":
+        problems.append("Preview-Info.plist must set CADImportServiceIdentifier to $(PREV_CAD_SERVICE_IDENTIFIER), "
+                        "so the service is named only when PREV_INCLUDE_CAD is YES")
+    for mode, wanted in (("YES", service_identifier), ("NO", "")):
+        values = {**base, "PREV_INCLUDE_CAD": mode, "__SERVICE__": service_identifier}
+        expected = resolve_setting(values, "__SERVICE__") if wanted else ""
+        if resolve_setting(values, "PREV_CAD_SERVICE_IDENTIFIER") != expected:
+            problems.append("PREV_CAD_SERVICE_IDENTIFIER must resolve to the embedded CAD service's identity when "
+                            "PREV_INCLUDE_CAD is YES and to nothing when it is NO "
+                            f"(found {resolve_setting(values, 'PREV_CAD_SERVICE_IDENTIFIER')!r} for {mode})")
+    return problems
+
+
 def validate_cad_wiring(root, objects, targets, include_cad):
     """The Xcode project and the configuration drop or keep the CAD product, helper and notices as the setting says."""
     mode = "YES" if include_cad else "NO"
@@ -395,8 +413,9 @@ def validate():
           "CAD service must be a private application XPC service")
     service_identifier = service_info["CFBundleIdentifier"]
     check(service_identifier == "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import", "CAD service identity must derive from the configured base")
-    check(plist(ROOT / "Configuration/Preview-Info.plist").get("CADImportServiceIdentifier") == service_identifier,
-          "Preview must connect to the embedded CAD service's configured identity")
+    problems = cad_service_key_problems(plist(ROOT / "Configuration/Preview-Info.plist"),
+                                        xcconfig(ROOT / "Configuration/Base.xcconfig"), service_identifier)
+    check(not problems, "; ".join(problems))
     check(service_info.get("CADAllowedClientIdentifier") == "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).preview"
           and service_info.get("CADAllowedClientTeamIdentifier") == "$(DEVELOPMENT_TEAM)",
           "CAD service peer requirements must derive from the preview identity and signing team")

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CADImportServiceIdentifier</key>
-	<string>$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import</string>
+	<string>$(PREV_CAD_SERVICE_IDENTIFIER)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleLocalizations</key>

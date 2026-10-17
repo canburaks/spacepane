@@ -44,6 +44,12 @@ PREV_INCLUDE_CAD = NO
 PREV_CAD_SWIFT_CONDITION_YES = PREV_INCLUDE_CAD
 PREV_CAD_SWIFT_CONDITION_NO =
 PREV_CAD_SWIFT_CONDITION = $(PREV_CAD_SWIFT_CONDITION_$(PREV_INCLUDE_CAD))
+// The CAD service identity the preview extension's Info.plist names (CADImportServiceIdentifier). Without CAD there
+// is no service to name, so the value is empty; an Info.plist cannot omit a key by build setting, so the key stays
+// with an empty string in that mode. script/validate_project.py checks both modes.
+PREV_CAD_SERVICE_IDENTIFIER_YES = $(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import
+PREV_CAD_SERVICE_IDENTIFIER_NO =
+PREV_CAD_SERVICE_IDENTIFIER = $(PREV_CAD_SERVICE_IDENTIFIER_$(PREV_INCLUDE_CAD))
 // The preview extension's copy phase embeds the CAD service unless this names it as excluded.
 PREV_CAD_EXCLUDED_SOURCE_NAMES_YES =
 PREV_CAD_EXCLUDED_SOURCE_NAMES_NO = CADImportService.xpc
