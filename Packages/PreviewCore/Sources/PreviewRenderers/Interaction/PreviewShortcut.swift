@@ -17,6 +17,9 @@ enum PreviewKeyCode {
     static let ansiG: UInt16 = 5
     static let ansiL: UInt16 = 37
     static let ansiR: UInt16 = 15
+    /// `kVK_ANSI_Minus` and `kVK_ANSI_Equal`: where the zoom symbols sit on a US keyboard.
+    static let ansiMinus: UInt16 = 27
+    static let ansiEqual: UInt16 = 24
     /// `kVK_Return` and `kVK_ANSI_KeypadEnter`.
     static let returnKey: UInt16 = 36
     static let keypadEnter: UInt16 = 76
@@ -60,6 +63,19 @@ struct PreviewKeyInput {
                   keyCode: event.keyCode, modifiers: event.modifierFlags)
     }
 
+    /// Whether the typed or produced text holds a letter or accent of the Latin script (Latin-1 Supplement, Latin
+    /// Extended-A and -B, Latin Extended Additional, spacing modifiers, combining marks, fullwidth ASCII). Such a
+    /// layout has its own symbol on a key even when that symbol is not ASCII (a German ß or acute accent), so the
+    /// key's position says nothing about it.
+    var typesLatinCharacter: Bool {
+        (typed + produced).unicodeScalars.contains { scalar in
+            switch scalar.value {
+            case 0x80...0x36F, 0x1E00...0x1EFF, 0xFF01...0xFF5E: true
+            default: false
+            }
+        }
+    }
+
     /// The one printable ASCII character `text` holds, or nil: no character, several, or anything outside
     /// printable ASCII (a Cyrillic, Greek, Arabic, Devanagari, Bengali or kana letter, a function-key code).
     static func asciiCharacter(in text: String) -> String? {
@@ -82,8 +98,10 @@ struct PreviewKeyEquivalent: Equatable {
         /// A digit, recognised by the number-row or keypad key first, because AZERTY types punctuation on the
         /// number row; a character-only input falls back to the typed digit.
         case digit(Int)
-        /// Punctuation, recognised by the typed character only: its position differs on every layout.
-        case symbols([String])
+        /// Punctuation, recognised by the typed character. A layout that types neither a printable ASCII nor a Latin
+        /// character for the key (Thai, kana input) is recognised by the key's position, as for a letter; punctuation
+        /// has no position on a Latin layout, where it differs on every one, so those never use it.
+        case symbols([String], position: UInt16)
     }
 
     let key: Key
@@ -108,9 +126,13 @@ struct PreviewKeyEquivalent: Equatable {
         case .digit(let digit):
             if let keyCode = input.keyCode, let carried = PreviewKeyCode.digit(forKeyCode: keyCode) { return carried == digit }
             return input.typed == String(digit)
-        case .symbols(let accepted):
-            guard let symbol = PreviewKeyInput.asciiCharacter(in: input.typed) else { return false }
-            return accepted.contains(symbol)
+        case .symbols(let accepted, let position):
+            // The typed character decides first, as before; a Command layer that stays Latin decides when the key
+            // itself types something else.
+            if let symbol = PreviewKeyInput.asciiCharacter(in: input.typed) ?? PreviewKeyInput.asciiCharacter(in: input.produced) {
+                return accepted.contains(symbol)
+            }
+            return input.keyCode == position && !input.typesLatinCharacter
         }
     }
 
@@ -119,7 +141,7 @@ struct PreviewKeyEquivalent: Equatable {
         switch key {
         case .letter(let letter, _): String(letter)
         case .digit(let digit): String(digit)
-        case .symbols(let accepted): accepted.first ?? ""
+        case .symbols(let accepted, _): accepted.first ?? ""
         }
     }
 
@@ -206,8 +228,8 @@ enum PreviewCommand: Hashable, CaseIterable {
         case .findNext: PreviewKeyEquivalent(.letter("g", position: PreviewKeyCode.ansiG), modifiers: .command)
         case .findPrevious: PreviewKeyEquivalent(.letter("g", position: PreviewKeyCode.ansiG), modifiers: [.command, .shift])
         case .goToLine: PreviewKeyEquivalent(.letter("l", position: PreviewKeyCode.ansiL), modifiers: .command)
-        case .zoomIn: PreviewKeyEquivalent(.symbols(["+", "="]), modifiers: .command, toleratesShift: true)
-        case .zoomOut: PreviewKeyEquivalent(.symbols(["-", "_"]), modifiers: .command, toleratesShift: true)
+        case .zoomIn: PreviewKeyEquivalent(.symbols(["+", "="], position: PreviewKeyCode.ansiEqual), modifiers: .command, toleratesShift: true)
+        case .zoomOut: PreviewKeyEquivalent(.symbols(["-", "_"], position: PreviewKeyCode.ansiMinus), modifiers: .command, toleratesShift: true)
         case .actualSize: PreviewKeyEquivalent(.digit(0), modifiers: .command)
         case .mode(let number): PreviewKeyEquivalent(.digit(number), modifiers: [.option, .command])
         case .fitModel: PreviewKeyEquivalent(.letter("f", position: PreviewKeyCode.ansiF), toleratesShift: true)
@@ -215,8 +237,8 @@ enum PreviewCommand: Hashable, CaseIterable {
         case .viewFront: PreviewKeyEquivalent(.digit(1))
         case .viewSide: PreviewKeyEquivalent(.digit(2))
         case .viewTop: PreviewKeyEquivalent(.digit(3))
-        case .cameraZoomIn: PreviewKeyEquivalent(.symbols(["+", "="]), toleratesShift: true)
-        case .cameraZoomOut: PreviewKeyEquivalent(.symbols(["-", "_"]), toleratesShift: true)
+        case .cameraZoomIn: PreviewKeyEquivalent(.symbols(["+", "="], position: PreviewKeyCode.ansiEqual), toleratesShift: true)
+        case .cameraZoomOut: PreviewKeyEquivalent(.symbols(["-", "_"], position: PreviewKeyCode.ansiMinus), toleratesShift: true)
         }
     }
 

@@ -71,7 +71,7 @@ struct ModesCommandTableTests {
             switch equivalent.key {
             case .letter(let letter, let position): typed = String(letter); keyCode = position
             case .digit(let digit): typed = String(digit); keyCode = PreviewKeyCode.numberRow[digit]
-            case .symbols(let accepted): typed = accepted[0]; keyCode = nil
+            case .symbols(let accepted, let position): typed = accepted[0]; keyCode = position
             }
             let own = PreviewCommand(charactersIgnoringModifiers: typed, keyCode: keyCode, modifiers: equivalent.modifiers,
                                      scope: command.scope)
@@ -95,6 +95,7 @@ struct ModesCommandTableTests {
         #expect(PreviewKeyCode.numberRow[1] == 0x12 && PreviewKeyCode.numberRow[0] == 0x1D && PreviewKeyCode.keypad[0] == 0x52)
         #expect(PreviewKeyCode.ansiC == 0x08 && PreviewKeyCode.ansiF == 0x03 && PreviewKeyCode.ansiG == 0x05)
         #expect(PreviewKeyCode.ansiL == 0x25 && PreviewKeyCode.ansiR == 0x0F)
+        #expect(PreviewKeyCode.ansiMinus == 0x1B && PreviewKeyCode.ansiEqual == 0x18)
         #expect(PreviewKeyCode.space == 0x31 && PreviewKeyCode.escape == 0x35)
         #expect(PreviewKeyCode.returnKey == 0x24 && PreviewKeyCode.keypadEnter == 0x4C)
     }
