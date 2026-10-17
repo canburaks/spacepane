@@ -251,7 +251,13 @@ final class CompanionSettings {
     func prepareToQuit(limit: Duration = .seconds(2),
                        sleep: @escaping @Sendable (Duration) async throws -> Void = { try await Task.sleep(for: $0) },
                        reply: @escaping () -> Void) -> Bool {
-        true
+        // Everything is on disk, or there is no storage that could take it: waiting would only delay the quit.
+        guard store != nil, persistedRevision != revision else { return true }
+        Task {
+            _ = await flushPendingSave(limit: limit, sleep: sleep)
+            reply()
+        }
+        return false
     }
 }
 

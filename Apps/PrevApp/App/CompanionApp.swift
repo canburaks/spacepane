@@ -14,6 +14,7 @@ struct CompanionApp: App {
     @CompanionState private var settings: CompanionSettings
     @CompanionState private var preferences: CompanionPreferences
     @CompanionState private var route: CompanionRoute
+    @NSApplicationDelegateAdaptor(CompanionAppDelegate.self) private var appDelegate
 
     /// The standard adapters. Version 1.0 ships without the STEP and IGES previews: the CAD adapters are registered
     /// only in a build with `PREV_INCLUDE_CAD` (which also needs the two CAD catalog entries back in the catalog).
@@ -38,6 +39,7 @@ struct CompanionApp: App {
             CompanionShell(configuration: configuration, settings: settings, preferences: preferences,
                            pipeline: pipeline, route: $route)
                 .flushesSaveWhenInactive(settings)
+                .onAppear { appDelegate.settings = settings }
         }
         // The sidebar and page headings carry the title; the window keeps its name for the system.
         .windowStyle(.hiddenTitleBar)
