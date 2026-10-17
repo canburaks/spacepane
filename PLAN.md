@@ -238,7 +238,7 @@ Started 2026-10-05 at the user's request, following [the unique-feature research
 Configured at the owner's request. Release record: [docs/release/version-1.1.0.md](docs/release/version-1.1.0.md).
 
 - [x] `MARKETING_VERSION = 1.1.0`, `CURRENT_PROJECT_VERSION = 4`, `PREV_INCLUDE_CAD = NO`.
-- [x] What's New, promotional text and description drafts with counted lengths; App Review notes name 1.1.0 (build 4); three review samples for the new formats (36 files, `--check` passes).
+- [x] What's New, promotional text and description drafts with counted lengths; App Review notes name 1.1.0 (build 5 since 2026-10-17, replacing build 4); three review samples for the new formats (36 files, `--check` passes).
 - [ ] 1.0.0 (build 3) approved.
 - [x] PR 9 merged (2026-10-15); it ships in 1.1.0.
 - [ ] Claim-gate observation on a signed build; archive and `check_release_archive.py`.
