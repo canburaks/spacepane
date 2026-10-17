@@ -8,6 +8,7 @@ language, and the host bundles carry the ship list only. Each test builds a synt
 temporary directory and runs the script's function or command line over it; no Xcode build is involved.
 """
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -87,6 +88,19 @@ class PruneTests(unittest.TestCase):
         prune.prune(root, ["en"], "en")
         self.assertEqual(lprojs(root, "Other_Module.bundle"), ["en"])
 
+    def test_only_the_named_bundles_are_pruned(self):
+        root = resources(self.directory)
+        resources(self.directory, nested="Other_Module.bundle")
+        prune.prune(root, ["en"], "en", bundles=[NESTED])
+        self.assertEqual(lprojs(root), ["en"])
+        self.assertEqual(lprojs(root, "Other_Module.bundle"), sorted(CHOSEN))
+
+    def test_a_named_bundle_that_is_absent_is_an_error_and_nothing_is_pruned(self):
+        root = resources(self.directory)
+        with self.assertRaisesRegex(ValueError, "Absent.bundle"):
+            prune.prune(root, ["en"], "en", bundles=[NESTED, "Absent.bundle"])
+        self.assertEqual(lprojs(root), sorted(CHOSEN))
+
     def test_a_second_run_removes_nothing(self):
         root = resources(self.directory)
         prune.prune(root, ["en"], "en")
@@ -158,6 +172,14 @@ class CommandLineTests(unittest.TestCase):
         self.assertEqual(lprojs(root), ["en"])
         for language in ("de", "tr", "zh-Hans", "ku-Latn"):
             self.assertIn(f"{language}.lproj", result.stdout)
+
+    def test_the_command_line_prunes_only_the_bundles_it_is_given(self):
+        root = resources(self.directory)
+        resources(self.directory, nested="Other_Module.bundle")
+        result = self.run_script(root, "--bundle", NESTED, "--policy", policy(self.directory))
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(lprojs(root), ["en"])
+        self.assertEqual(lprojs(root, "Other_Module.bundle"), sorted(CHOSEN))
 
     def test_the_command_line_fails_with_a_message_for_a_missing_folder(self):
         result = self.run_script(self.directory / "absent", "--policy", policy(self.directory))
