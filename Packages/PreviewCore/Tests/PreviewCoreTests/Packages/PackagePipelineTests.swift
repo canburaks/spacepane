@@ -37,9 +37,11 @@ struct PackagePipelineTests {
         }
     }
 
+    /// App bundles are `generic` since 2026-10-17 (decision 022): the thumbnail extension does not register them, so
+    /// Finder keeps each app's own icon. Only the iOS app archive draws its icon.
     @Test func thumbnailPolicyIsContentOnlyWhereAnIconOrCoverIsMeaningful() {
         let catalog = FormatCatalog.standard
-        let content: Set<FormatID> = [.applicationBundle, .iosApp]
+        let content: Set<FormatID> = [.iosApp]
         for id in Self.packageFormats {
             #expect(catalog.descriptor(for: id)?.thumbnail == (content.contains(id) ? .content : .generic), "\(id.rawValue)")
         }
