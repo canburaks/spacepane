@@ -3,10 +3,12 @@
 <plist version="1.0">
 <dict>
 	<!--
-		SpacePane tracks nothing and collects nothing. Reasons for the API categories below (decision 027, Q-45):
-		3B52.1  metadata and timestamps of the file being drawn (checked while reading, never written)
-		C617.1  size and type of the settings file in the App Group container
-		DDA9.1 and 35F9.1  the listing and MIDI code this extension links but never shows
+		SpacePane tracks nothing and collects nothing. Each reason below names the code that needs it (decision 027, Q-45).
+		Upload validation reads the APIs a binary references, not the ones a request reaches, so a category stays declared while its code is linked.
+		3B52.1  metadata of the file being drawn, checked while reading and never written (BoundedFileReader.swift, PreviewFileClassifier.swift)
+		C617.1  size and type of the settings file in the App Group container (BoundedPreferencesData.swift)
+		35F9.1  elapsed time of MIDI playback: NativeMIDIPlayback.swift reads the system uptime and is linked into this extension, but no thumbnail request reaches it because MIDI files get the glyph only
+		No DDA9.1: no thumbnail shows a file date. FolderScan.swift, which reads folder modification times for a listing, is not reached because folders and archives get the glyph only (review of 2026-10-17, finding 21)
 	-->
 	<key>NSPrivacyAccessedAPITypes</key>
 	<array>
@@ -17,7 +19,6 @@
 			<array>
 				<string>3B52.1</string>
 				<string>C617.1</string>
-				<string>DDA9.1</string>
 			</array>
 		</dict>
 		<dict>

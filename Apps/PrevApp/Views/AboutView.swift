@@ -4,6 +4,8 @@ import PreviewRenderers
 
 struct AboutView: View {
     let configuration: HostedConfiguration
+    /// Developer Mode adds a page and a command, so the Help text names their shortcuts too.
+    let developerMode: Bool
     @Environment(\.locale) private var locale
     @Environment(\.openURL) private var openURL
     private let acknowledgements = AboutAcknowledgements(notices: BundledNotices())
@@ -47,7 +49,7 @@ struct AboutView: View {
                 SettingsRow(PreviewStrings.text(.generalSetupTitle), subtitle: PreviewStrings.text(.setupSteps))
                 SettingsRow(PreviewStrings.text(.providersTitle), subtitle: PreviewStrings.text(.setupUnverified))
                 SettingsRow(PreviewStrings.text(.generalLimitsTitle), subtitle: PreviewStrings.text(.generalLimitsFootnote))
-                SettingsRow(PreviewStrings.text(.helpKeyboardTitle), subtitle: PreviewStrings.text(.helpKeyboardBody))
+                SettingsRow(PreviewStrings.text(.helpKeyboardTitle), subtitle: PreviewStrings.text(CompanionRoute.keyboardHelp(developerMode: developerMode)))
             }
         }
     }

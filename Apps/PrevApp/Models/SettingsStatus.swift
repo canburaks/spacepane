@@ -1,3 +1,4 @@
+import Foundation
 import PreviewRenderers
 
 /// What the sidebar footer and the General page say about where settings are kept and whether the last save
@@ -83,5 +84,34 @@ extension CompanionSettings {
     /// The one status every surface shows, derived from what the store knows.
     var status: SettingsStatus {
         SettingsStatus(storage: storageMode, save: saveState, recovered: recoveredSettings, isLoading: isLoading)
+    }
+}
+
+/// Opening System Settings from the General page. macOS reports only that some handler accepted the link, never
+/// that the Login Items & Extensions pane is showing, so the page cannot call the attempt a success; it shows the
+/// manual route after every attempt instead. The workspace calls are injected so a check never opens a window.
+enum SystemSettingsOpening {
+    enum Result: Equatable, Sendable {
+        /// The link was accepted. System Settings opens, but the pane it shows is not confirmed.
+        case linkAccepted
+        /// The link was refused and System Settings was opened without a pane.
+        case applicationOnly
+        /// Neither opened.
+        case failed
+    }
+
+    static func open(link: URL?, openLink: (URL) -> Bool, applicationURL: () -> URL?,
+                     openApplication: (URL) -> Void) -> Result {
+        // `open` answers true whenever a handler accepts the scheme, even one that ignores the pane, so the
+        // application fallback runs only for a refused link and an accepted one stays unconfirmed.
+        if let link, openLink(link) { return .linkAccepted }
+        guard let application = applicationURL() else { return .failed }
+        openApplication(application)
+        return .applicationOnly
+    }
+
+    /// The sentence shown under the button after an attempt, or nil when none is needed.
+    static func manualRouteKey(after result: Result) -> PreviewStrings.Key? {
+        .setupSteps
     }
 }

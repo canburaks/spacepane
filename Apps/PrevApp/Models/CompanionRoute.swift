@@ -19,6 +19,12 @@ enum CompanionRoute: String, CaseIterable, Identifiable {
         requiresDeveloperMode && !developerMode ? .general : self
     }
 
+    /// The Help sentence about keyboard shortcuts. While Developer Mode is on it also names Command-5 and Command-O,
+    /// the two shortcuts that mode adds, so the help never lists fewer pages than the View menu offers.
+    static func keyboardHelp(developerMode: Bool) -> PreviewStrings.Key {
+        developerMode ? .helpKeyboardBodyDeveloper : .helpKeyboardBody
+    }
+
     var shortcutKey: KeyEquivalent {
         switch self {
         case .general: "1"
