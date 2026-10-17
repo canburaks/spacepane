@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "Las vistas previas de modelos 3D usan Open CASCADE Technology bajo la GNU LGPL 2.1 con la excepción de Open CASCADE. Los avisos de licencia se incluyen con la app.";
 "about.acknowledgements.openCascade" = "El copyright de Open CASCADE Technology pertenece a OPEN CASCADE SAS y a sus colaboradores. El código fuente del asistente de importación 3D y la oferta escrita para el código fuente de la biblioteca son públicos.";
 "about.acknowledgements.title" = "Agradecimientos";
-"about.description" = "Una extensión local de Quick Look para vistas previas y miniaturas de texto, datos estructurados, archivos comprimidos, bases de datos y modelos 3D.";
+"about.description" = "Vistas previas y miniaturas de texto, datos estructurados, archivos comprimidos, bases de datos y modelos 3D directamente en el Finder, por completo en su Mac.";
 "about.howItWorks.body" = "Cuando esta app ofrece la vista previa, las opciones de Tipos de archivo se aplican a las nuevas vistas previas y miniaturas de Finder, y los posibles secretos se ocultan antes de mostrar, seleccionar o copiar el contenido. Los archivos se leen localmente y nunca se modifican. Las miniaturas genéricas no contienen texto de origen. macOS elige el proveedor de Quick Look.";
 "about.howItWorks.title" = "Cómo funciona";
 "about.link.documentation" = "Documentación";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Los ajustes se guardan solo para esta app hasta que se configure el uso compartido con las vistas previas del Finder. Hasta entonces, las vistas previas del Finder muestran un mensaje de configuración y las miniaturas se mantienen genéricas.";
 "setup.steps" = "Activa las extensiones de Quick Look en Ajustes del Sistema > General > Ítems de inicio y extensiones. Después, selecciona un archivo compatible en Finder y pulsa Espacio.";
 "setup.unverified" = "macOS elige qué app ofrece las vistas previas y miniaturas de cada tipo de archivo. Si otra app también admite un tipo, Finder puede usar esa app.";
-"shell.subtitle" = "Extensión de Quick Look";
+"shell.subtitle" = "Vistas previas de archivos para el Finder";
 "state.configurationUnavailable.title" = "La app no está configurada correctamente";
 "state.empty.body" = "No tiene contenido, así que no hay nada que previsualizar.";
 "state.empty.title" = "Este archivo está vacío";

@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "3Dモデルのプレビューには、GNU LGPL 2.1 および Open CASCADE 例外の下で提供される Open CASCADE Technology を使用しています。ライセンス表示はアプリに含まれています。";
 "about.acknowledgements.openCascade" = "Open CASCADE Technology の著作権は OPEN CASCADE SAS とその貢献者に帰属します。3D インポートヘルパーのソースコードと、ライブラリのソースコードに関する書面による申し出は公開されています。";
 "about.acknowledgements.title" = "謝辞";
-"about.description" = "テキスト、構造化データ、アーカイブ、データベース、3Dモデル向けの、ローカルで動作するクイックルックのプレビューおよびサムネイル機能拡張です。";
+"about.description" = "テキスト、構造化データ、アーカイブ、データベース、3Dモデルのプレビューとサムネイルを Finder でそのまま表示。すべて Mac 上で処理されます。";
 "about.howItWorks.body" = "このアプリがプレビューを提供する場合、「ファイルの種類」での選択は新しい Finder のプレビューとサムネイルに適用され、秘密情報と思われる部分は内容が表示、選択、コピーされる前に隠されます。ファイルはローカルで読み取られ、変更されることはありません。汎用サムネイルにはソーステキストが含まれません。クイックルックのプロバイダは macOS が選択します。";
 "about.howItWorks.title" = "しくみ";
 "about.link.documentation" = "ドキュメント";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Finder のプレビューとの共有が設定されるまで、設定はこのアプリ内にのみ保存されます。それまで、Finder のプレビューにはセットアップに関するメッセージが表示され、サムネイルは汎用のままです。";
 "setup.steps" = "「システム設定」>「一般」>「ログイン項目と機能拡張」でクイックルックの機能拡張をオンにしてください。次に、Finder で対応ファイルを選択してスペースキーを押します。";
 "setup.unverified" = "ファイルの種類ごとにプレビューとサムネイルを提供するアプリは macOS が選択します。別のアプリも同じ種類に対応している場合、Finder はそのアプリを使うことがあります。";
-"shell.subtitle" = "クイックルック機能拡張";
+"shell.subtitle" = "Finder 用のファイルプレビュー";
 "state.configurationUnavailable.title" = "アプリが正しく設定されていません";
 "state.empty.body" = "内容がないため、プレビューするものがありません。";
 "state.empty.title" = "このファイルは空です";

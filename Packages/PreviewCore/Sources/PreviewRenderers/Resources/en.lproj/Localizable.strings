@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "3D model previews use Open CASCADE Technology under the GNU LGPL 2.1 with the Open CASCADE exception. License notices are included with the app.";
 "about.acknowledgements.openCascade" = "Open CASCADE Technology is copyright OPEN CASCADE SAS and its contributors. The source of the 3D import helper and the written offer for the library source are public.";
 "about.acknowledgements.title" = "Acknowledgements";
-"about.description" = "A local Quick Look preview and thumbnail extension for text, structured data, archives, databases and 3D models.";
+"about.description" = "Preview and thumbnail text, structured data, archives, databases and 3D models right in Finder, entirely on your Mac.";
 "about.howItWorks.body" = "When this app provides the preview, File Types choices apply to new Finder previews and thumbnails, and likely secrets are hidden before content is shown, selected or copied. Files are read locally and never changed. Generic thumbnails contain no source text. macOS chooses the Quick Look provider.";
 "about.howItWorks.title" = "How it works";
 "about.link.documentation" = "Documentation";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Settings are saved for this app only until sharing with Finder previews is set up. Until then, previews in Finder show a setup message and thumbnails stay generic.";
 "setup.steps" = "Turn on the Quick Look extensions in System Settings > General > Login Items & Extensions. Then select a supported file in Finder and press Space.";
 "setup.unverified" = "macOS chooses which app provides previews and thumbnails for each file type. If another app also supports a type, Finder may use that app instead.";
-"shell.subtitle" = "Quick Look Extension";
+"shell.subtitle" = "File previews for Finder";
 "state.configurationUnavailable.title" = "The app is not set up correctly";
 "state.empty.body" = "It has no content, so there is nothing to preview.";
 "state.empty.title" = "This file is empty";

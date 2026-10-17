@@ -272,91 +272,91 @@
       }
     },
     "about.description": {
-      "comment": "One-sentence product description on the About page.",
+      "comment": "One-sentence product description on the About page, under the app name and version. Says what the app does for the person using it, in Finder; it does not name the technical component type (extension, plug-in), which the Help section on the same page explains.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A local Quick Look preview and thumbnail extension for text, structured data, archives, databases and 3D models."
+            "value": "Preview and thumbnail text, structured data, archives, databases and 3D models right in Finder, entirely on your Mac."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Metin, yapılandırılmış veri, arşivler, veritabanları ve 3B modeller için yerel bir Quick Look önizleme ve küçük resim uzantısı."
+            "value": "Metin, yapılandırılmış veri, arşivler, veritabanları ve 3B modellerin önizlemelerini ve küçük resimlerini doğrudan Finder’da görün; hepsi tamamen Mac’inizde işlenir."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Eine lokale Quick Look-Erweiterung für Vorschau und Miniaturbilder von Text, strukturierten Daten, Archiven, Datenbanken und 3D-Modellen."
+            "value": "Vorschau und Miniaturbilder für Text, strukturierte Daten, Archive, Datenbanken und 3D-Modelle direkt im Finder – vollständig auf Ihrem Mac."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une extension locale Quick Look d’aperçu et de vignettes pour le texte, les données structurées, les archives, les bases de données et les modèles 3D."
+            "value": "Aperçus et vignettes du texte, des données structurées, des archives, des bases de données et des modèles 3D directement dans le Finder, entièrement sur votre Mac."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "一个本地快速查看预览和缩略图扩展，支持文本、结构化数据、归档、数据库和 3D 模型。"
+            "value": "直接在访达中预览文本、结构化数据、归档、数据库和 3D 模型并显示缩略图，全程在本机完成。"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "テキスト、構造化データ、アーカイブ、データベース、3Dモデル向けの、ローカルで動作するクイックルックのプレビューおよびサムネイル機能拡張です。"
+            "value": "テキスト、構造化データ、アーカイブ、データベース、3Dモデルのプレビューとサムネイルを Finder でそのまま表示。すべて Mac 上で処理されます。"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "टेक्स्ट, संरचित डेटा, संग्रह, डेटाबेस और 3D मॉडल के लिए स्थानीय Quick Look पूर्वावलोकन और थंबनेल एक्सटेंशन।"
+            "value": "टेक्स्ट, संरचित डेटा, संग्रह, डेटाबेस और 3D मॉडल के पूर्वावलोकन और थंबनेल सीधे Finder में देखें, पूरी तरह आपके Mac पर।"
           }
         },
         "ku-Latn": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pêvekeke herêmî ya Quick Look ji bo pêşdîtin û wêneyên biçûk ên nivîs, daneyên sazkirî, arşîv, bingehên daneyan û modelên 3D."
+            "value": "Pêşdîtin û wêneyên biçûk ên nivîs, daneyên sazkirî, arşîv, bingehên daneyan û modelên 3D rasterast di Finder de, bi tevahî li ser Mac a we."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Локальное расширение Quick Look для предпросмотра и миниатюр текста, структурированных данных, архивов, баз данных и 3D-моделей."
+            "value": "Предпросмотр и миниатюры текста, структурированных данных, архивов, баз данных и 3D-моделей прямо в Finder — полностью на вашем Mac."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ekstensi pratinjau dan gambar mini Quick Look lokal untuk teks, data terstruktur, arsip, basis data, dan model 3D."
+            "value": "Pratinjau dan gambar mini untuk teks, data terstruktur, arsip, basis data, dan model 3D langsung di Finder, sepenuhnya di Mac Anda."
           }
         },
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "টেক্সট, কাঠামোবদ্ধ ডেটা, আর্কাইভ, ডেটাবেস ও 3D মডেলের জন্য স্থানীয় Quick Look প্রিভিউ ও থাম্বনেইল এক্সটেনশন।"
+            "value": "টেক্সট, কাঠামোবদ্ধ ডেটা, আর্কাইভ, ডেটাবেস ও 3D মডেলের প্রিভিউ ও থাম্বনেইল সরাসরি Finder-এ, পুরোপুরি আপনার Mac-এ।"
           }
         },
         "ha": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ƙarin dubawa da ƙananan hotuna na Quick Look na cikin naʼura don rubutu, bayanai masu tsari, kundin fayil, rumbunan bayanai da samfuran 3D."
+            "value": "Dubawa da ƙananan hotuna na rubutu, bayanai masu tsari, kundin fayil, rumbunan bayanai da samfuran 3D kai tsaye a Finder, gaba ɗaya a cikin Mac ɗinku."
           }
         },
         "pt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Uma extensão local do Quick Look para pré-visualização e miniaturas de texto, dados estruturados, arquivos compactados, bancos de dados e modelos 3D."
+            "value": "Pré-visualizações e miniaturas de texto, dados estruturados, arquivos compactados, bancos de dados e modelos 3D direto no Finder, inteiramente no seu Mac."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Una extensión local de Quick Look para vistas previas y miniaturas de texto, datos estructurados, archivos comprimidos, bases de datos y modelos 3D."
+            "value": "Vistas previas y miniaturas de texto, datos estructurados, archivos comprimidos, bases de datos y modelos 3D directamente en el Finder, por completo en su Mac."
           }
         }
       }
@@ -122310,91 +122310,91 @@
       }
     },
     "shell.subtitle": {
-      "comment": "Short product category shown under the app name in the sidebar.",
+      "comment": "Short line under the app name in the sidebar: what the product does for the person using it (file previews in Finder). Do not name the technical component type (extension, plug-in). Keep it to a few words; it may wrap to two lines.",
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quick Look Extension"
+            "value": "File previews for Finder"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quick Look Uzantısı"
+            "value": "Finder için dosya önizlemeleri"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quick Look-Erweiterung"
+            "value": "Dateivorschau für den Finder"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Extension Quick Look"
+            "value": "Aperçus de fichiers pour le Finder"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "快速查看扩展"
+            "value": "访达文件预览"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "クイックルック機能拡張"
+            "value": "Finder 用のファイルプレビュー"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quick Look एक्सटेंशन"
+            "value": "Finder के लिए फ़ाइल पूर्वावलोकन"
           }
         },
         "ku-Latn": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pêveka Quick Look"
+            "value": "Pêşdîtinên pelan ji bo Finder"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Расширение Quick Look"
+            "value": "Предпросмотр файлов для Finder"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ekstensi Quick Look"
+            "value": "Pratinjau berkas untuk Finder"
           }
         },
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quick Look এক্সটেনশন"
+            "value": "Finder-এর জন্য ফাইল প্রিভিউ"
           }
         },
         "ha": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ƙarin Quick Look"
+            "value": "Dubawar fayiloli don Finder"
           }
         },
         "pt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Extensão do Quick Look"
+            "value": "Pré-visualização de arquivos para o Finder"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Extensión de Quick Look"
+            "value": "Vistas previas de archivos para el Finder"
           }
         }
       }

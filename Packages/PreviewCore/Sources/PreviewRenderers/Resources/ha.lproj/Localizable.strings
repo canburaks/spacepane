@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "Dubawar samfuran 3D tana amfani da Open CASCADE Technology ƙarƙashin GNU LGPL 2.1 tare da banbancin Open CASCADE. An haɗa sanarwar lasisi da manhajar.";
 "about.acknowledgements.openCascade" = "Haƙƙin mallaka na Open CASCADE Technology na OPEN CASCADE SAS ne da masu ba da gudummawarsa. Tushen naʼurar taimakon shigo da 3D da rubutaccen tayin tushen ɗakin karatu a bayyane suke ga kowa.";
 "about.acknowledgements.title" = "Godiya";
-"about.description" = "Ƙarin dubawa da ƙananan hotuna na Quick Look na cikin naʼura don rubutu, bayanai masu tsari, kundin fayil, rumbunan bayanai da samfuran 3D.";
+"about.description" = "Dubawa da ƙananan hotuna na rubutu, bayanai masu tsari, kundin fayil, rumbunan bayanai da samfuran 3D kai tsaye a Finder, gaba ɗaya a cikin Mac ɗinku.";
 "about.howItWorks.body" = "Lokacin da wannan manhajar ke ba da dubawa, zaɓukan Nauʼoʼin Fayil suna shafar sabbin dubawa da ƙananan hotuna na Finder, kuma ana ɓoye bayanan da ake zaton sirri ne kafin a nuna, zaɓa ko kwafi abubuwan da ke ciki. Ana karanta fayiloli a cikin naʼura kuma ba a taɓa canza su. Ƙananan hotuna na gama gari ba su ƙunshi rubutun asali ba. macOS ne ke zaɓar mai samar da Quick Look.";
 "about.howItWorks.title" = "Yadda yake aiki";
 "about.link.documentation" = "Takardun bayani";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Har sai an saita rabawa da dubawar Finder, ana adana saitunan don wannan manhajar kaɗai. Har zuwa lokacin, dubawar Finder tana nuna sanarwar saiti, kuma ƙananan hotuna suna zama na gama gari.";
 "setup.steps" = "Kunna ƙarin Quick Look a Saitunan Tsari > Gaba ɗaya > Abubuwan Shiga da Ƙari. Sannan zaɓi fayil mai tallafi a Finder ka danna maɓallin sarari.";
 "setup.unverified" = "macOS ne ke zaɓar manhajar da ke ba da dubawa da ƙananan hotuna ga kowane nauʼin fayil. Idan wata manhaja ma tana tallafa wa nauʼin, Finder na iya amfani da ita.";
-"shell.subtitle" = "Ƙarin Quick Look";
+"shell.subtitle" = "Dubawar fayiloli don Finder";
 "state.configurationUnavailable.title" = "Ba a saita manhajar yadda ya kamata ba";
 "state.empty.body" = "Ba shi da abun ciki, don haka babu abin da za a duba.";
 "state.empty.title" = "Wannan fayil ba shi da komai";

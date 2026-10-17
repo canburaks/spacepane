@@ -2,7 +2,7 @@
 "about.acknowledgements.body" = "Les aperçus de modèles 3D utilisent Open CASCADE Technology sous licence GNU LGPL 2.1 avec l’exception Open CASCADE. Les avis de licence sont inclus dans l’app.";
 "about.acknowledgements.openCascade" = "Open CASCADE Technology est protégé par le copyright d’OPEN CASCADE SAS et de ses contributeurs. Le code source de l’assistant d’import 3D et l’offre écrite pour le code source de la bibliothèque sont publics.";
 "about.acknowledgements.title" = "Remerciements";
-"about.description" = "Une extension locale Quick Look d’aperçu et de vignettes pour le texte, les données structurées, les archives, les bases de données et les modèles 3D.";
+"about.description" = "Aperçus et vignettes du texte, des données structurées, des archives, des bases de données et des modèles 3D directement dans le Finder, entièrement sur votre Mac.";
 "about.howItWorks.body" = "Lorsque cette app fournit l’aperçu, les choix de Types de fichiers s’appliquent aux nouveaux aperçus et vignettes Finder, et les secrets probables sont masqués avant que le contenu soit affiché, sélectionné ou copié. Les fichiers sont lus localement et jamais modifiés. Les vignettes génériques ne contiennent aucun texte source. macOS choisit le fournisseur Quick Look.";
 "about.howItWorks.title" = "Fonctionnement";
 "about.link.documentation" = "Documentation";
@@ -1254,7 +1254,7 @@
 "setup.notConfigured" = "Les réglages sont enregistrés pour cette app uniquement, jusqu’à ce que le partage avec les aperçus du Finder soit configuré. D’ici là, les aperçus du Finder affichent un message de configuration et les vignettes restent génériques.";
 "setup.steps" = "Activez les extensions Quick Look dans Réglages Système > Général > Ouverture et extensions. Sélectionnez ensuite un fichier pris en charge dans Finder et appuyez sur Espace.";
 "setup.unverified" = "macOS choisit l’app qui fournit les aperçus et les vignettes de chaque type de fichier. Si une autre app prend aussi en charge un type, Finder peut utiliser cette app.";
-"shell.subtitle" = "Extension Quick Look";
+"shell.subtitle" = "Aperçus de fichiers pour le Finder";
 "state.configurationUnavailable.title" = "L’application n’est pas correctement configurée";
 "state.empty.body" = "Il ne contient rien, il n’y a donc rien à afficher.";
 "state.empty.title" = "Ce fichier est vide";
