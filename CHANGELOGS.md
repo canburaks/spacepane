@@ -2,6 +2,12 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-17 — README images compressed to WebP (documentation only)
+
+Owner request: the README's images were too large; use compressed WebP copies.
+
+- `docs/readme/` holds WebP copies of the eight README screenshots, 1200 px wide at quality 70 (`cwebp -q 70 -m 6 -resize 1200 0`), about 250 KB in total against about 14 MB for the PNGs. `README.md` points at them. The store-listing PNGs are unchanged and stay the source; regenerate the copies when a screenshot is retaken.
+
 ## 2026-10-17 — README as a showroom page (documentation only)
 
 Owner follow-up: the README must read like a page for the app, with large images.
