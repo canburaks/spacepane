@@ -1567,27 +1567,13 @@
 				<string>com.quicklookpro.file.wgsl</string>
 				<string>com.quicklookpro.file.zig</string>
 				<string>com.quicklookpro.file.zsh</string>
-				<string>org.webmeister.spacepane.type.ini</string>
-				<string>com.apple.xcode.configsettings</string>
-				<string>com.quicklookpro.file.cfg</string>
-				<string>com.quicklookpro.file.conf</string>
-				<string>com.quicklookpro.file.ini</string>
-				<string>com.quicklookpro.file.properties</string>
 				<string>com.apple.log</string>
 				<string>com.quicklookpro.file.log</string>
-				<string>org.webmeister.spacepane.type.jsonc</string>
-				<string>org.webmeister.spacepane.type.substation-alpha</string>
-				<string>org.webmeister.spacepane.type.ttml</string>
-				<string>org.webmeister.spacepane.type.sbv</string>
-				<string>org.webmeister.spacepane.type.lrc</string>
-				<string>org.webmeister.spacepane.type.microdvd</string>
 				<string>org.yaml.yaml</string>
 				<string>public.yaml</string>
 				<string>org.toml.toml</string>
 				<string>public.toml</string>
 				<string>com.quicklookpro.file.toml</string>
-				<string>org.webmeister.spacepane.type.environment</string>
-				<string>com.quicklookpro.file.env</string>
 				<string>net.daringfireball.markdown</string>
 				<string>com.rstudio.rmarkdown</string>
 				<string>org.quarto.qmarkdown</string>
@@ -1640,16 +1626,6 @@
 				<string>org.webmeister.spacepane.type.arrow</string>
 				<string>org.webmeister.spacepane.type.numpy</string>
 				<string>org.webmeister.spacepane.type.numpy-archive</string>
-				<string>org.webmeister.spacepane.type.gguf</string>
-				<string>org.webmeister.spacepane.type.safetensors</string>
-				<string>org.webmeister.spacepane.type.pytorch</string>
-				<string>org.webmeister.spacepane.type.pickle</string>
-				<string>org.webmeister.spacepane.type.har</string>
-				<string>org.webmeister.spacepane.type.geojson</string>
-				<string>public.geojson</string>
-				<string>com.topografix.gpx</string>
-				<string>org.webmeister.spacepane.type.kml</string>
-				<string>org.webmeister.spacepane.type.kmz</string>
 				<string>org.webmeister.spacepane.type.subrip</string>
 				<string>org.w3.webvtt</string>
 				<string>org.webmeister.spacepane.type.nfo</string>
@@ -1660,36 +1636,7 @@
 				<string>org.webmeister.spacepane.type.fictionbook</string>
 				<string>org.ietf.mhtml</string>
 				<string>org.sqlite.sqlite</string>
-				<string>public.zip-archive</string>
-				<string>com.sun.java-archive</string>
-				<string>com.sun.web-application-archive</string>
-				<string>public.tar-archive</string>
-				<string>org.gnu.gnu-zip-archive</string>
-				<string>com.apple.xip-archive</string>
-				<string>org.webmeister.spacepane.type.rar</string>
-				<string>org.7-zip.7-zip-archive</string>
-				<string>public.bzip2-archive</string>
-				<string>public.tar-bzip2-archive</string>
-				<string>org.tukaani.xz-archive</string>
-				<string>org.tukaani.tar-xz-archive</string>
-				<string>public.folder</string>
-				<string>com.apple.application-bundle</string>
 				<string>com.apple.itunes.ipa</string>
-				<string>org.webmeister.spacepane.type.apk</string>
-				<string>org.webmeister.spacepane.type.aab</string>
-				<string>com.apple.mobileprovision</string>
-				<string>com.apple.provisionprofile</string>
-				<string>public.x509-certificate</string>
-				<string>com.apple.installer-package-archive</string>
-				<string>com.apple.disk-image-udif</string>
-				<string>org.bittorrent.torrent</string>
-				<string>org.webmeister.spacepane.type.mcp-bundle</string>
-				<string>org.webmeister.spacepane.type.vsix</string>
-				<string>org.webmeister.spacepane.type.xpi</string>
-				<string>org.chromium.extension</string>
-				<string>org.webmeister.spacepane.type.python-wheel</string>
-				<string>public.midi-audio</string>
-				<string>org.webmeister.spacepane.type.3mf</string>
 			</array>
 			<key>QLThumbnailMinimumDimension</key>
 			<integer>64</integer>

@@ -2544,7 +2544,7 @@
       "group": "containers",
       "presentation": "text",
       "primaryView": "summary",
-      "thumbnail": "content",
+      "thumbnail": "generic",
       "nameKey": "format.package.application.name",
       "descriptionKey": "format.package.application.description"
     },
