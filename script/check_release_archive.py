@@ -80,7 +80,7 @@ USER_DEFAULTS = "NSPrivacyAccessedAPICategoryUserDefaults"
 
 # Apple's required-reason codes per accessed-API category, as listed on Apple's NSPrivacyAccessedAPIType page
 # (developer.apple.com/documentation/bundleresources/app-privacy-configuration/nsprivacyaccessedapitypes/
-# nsprivacyaccessedapitype, read 2026-10-06). Recheck them against Apple's current page before every
+# nsprivacyaccessedapitype, read 2026-10-06 and read again 2026-10-17 without a change). Recheck them against Apple's current page before every
 # submission: a code outside its category's list is rejected at upload.
 API_REASONS: Dict[str, Set[str]] = {
     FILE_TIMESTAMP: {"DDA9.1", "C617.1", "3B52.1", "0A2A.1"},
