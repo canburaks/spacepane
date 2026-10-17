@@ -19,6 +19,7 @@ is 1 when any required step fails:
     image benchmark tests script/test_benchmark_release_images.py
     package link inventory script/test_package_link.py
     cad build tests     script/test_build_cad_worker.py
+    language pruning tests script/test_prune_resource_languages.py
     review samples      script/build_review_samples.py --check
     review sample tests script/test_build_review_samples.py
     localization        tools/validate_localization.py (its exit status is the result)
@@ -536,6 +537,8 @@ def build_steps(require_syntax: bool = False) -> List[Step]:
              script_step(["script/test_package_link.py"], unittest_summary)),
         Step("release archive tests", "script/test_check_release_archive.py",
              script_step(["script/test_check_release_archive.py"], unittest_summary)),
+        Step("language pruning tests", "script/test_prune_resource_languages.py",
+             script_step(["script/test_prune_resource_languages.py"], unittest_summary)),
         Step("host matrix", "script/check_host_matrix.py", script_step(["script/check_host_matrix.py"])),
         Step("host matrix tests", "script/test_check_host_matrix.py",
              script_step(["script/test_check_host_matrix.py"], unittest_summary)),
