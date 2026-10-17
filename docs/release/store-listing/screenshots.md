@@ -6,6 +6,8 @@ build and have not been uploaded. A second set in the website's dark style with 
 another session under `.build/store-screenshots/website-theater/`; it was not chosen.
 **Amended 2026-10-13 ([decision 028](../../decisions/028-no-cad-in-version-1.md)): version 1.0 ships without STEP and IGES.** The made image `07-models.png` shows a STEP model and says STEP and IGES are off until switched on, so it cannot be used; it is retaken with a mesh model (for example the generated STL) and without that line. `08-file-types.png` reads "76 of 76 enabled" (observed in the image on 2026-10-13) and the build 3 catalog has 74 types, so it is retaken from build 3. The listing's screenshot plan carries the same open item. The two app preview videos under `app-preview/` were not inspected on 2026-10-13; check them for a STEP or IGES scene and for a type count before use. Everything below is history of what was made and planned on 2026-10-10 and 2026-10-11 unless marked.
 
+**Amended 2026-10-17 ([rejection-risk review](../../reviews/2026-10-17-app-store-rejection-risk.md), finding 5).** Six screenshots are live in App Store Connect for 1.1.0 (build 5), submitted that day. Two of them show what build 5 no longer has: the hero screenshot (first in the store order, from `01-press-space.png`) shows a Filter field in the Outline view and `winch-gear.step` in Finder's file list, and the SQLite screenshot (third in the store order, from `04-database.png`) shows a Filter field. Build 5 ships no typed filter in Finder previews (PR 9, merged 2026-10-15) and no STEP support. Both must be recaptured from the owner's signed build 5 before the next submission, with no Filter field and no CAD file visible in Finder; replacing screenshots needs the version out of review. Nothing was recaptured on 2026-10-17: a recapture needs the signed build, which only the owner has. The Theme screenshot shows 13 tiles (Standard appears in both the light and dark lists) against "12 color schemes"; twelve distinct schemes exist, so a caption or recapture avoids the question but none is required.
+
 The sections under "Earlier plan" were written on 2026-10-10 and are kept for their rules; where they differ
 from the next section, the next section is what was done.
 
@@ -25,7 +27,7 @@ install before submission.
 | `05-archives.png` | Look inside. Nothing is extracted. | Quick Look panel, `release-1.4.zip`, Tree view |
 | `06-markdown.png` | Markdown, ready to read. | Quick Look panel, `README.md`, Rendered view, zoomed |
 | `07-models.png` | Models you can turn. | Quick Look panel, `winch-gear.step`; the line under the headline says STEP and IGES are off until switched on. **Not usable in 1.0 (decision 028): retake with a mesh model.** |
-| `08-file-types.png` | A switch for every file type. | The companion's File Types page, showing "76 of 76 enabled". **Retake from build 3 (74 types).** |
+| `08-file-types.png` | A switch for every file type. | The companion's File Types page, showing "76 of 76 enabled". **Retake from the submitted build (74 types in build 3; 81 in build 5).** |
 | `09-theme.png` | Your colors. Your type. | The companion's Theme page |
 
 How they are made, so they can be retaken:

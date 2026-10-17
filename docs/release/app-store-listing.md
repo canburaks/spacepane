@@ -16,6 +16,8 @@ count went from 76 to 74. This file supersedes the name, subtitle, keywords, pro
 [store-listing/listing.en.md](store-listing/listing.en.md); the App Store Connect answers in
 [store-listing/app-store-connect-worksheet.md](store-listing/app-store-connect-worksheet.md) still apply.
 
+**Updated 2026-10-17:** the version in review is 1.1.0 (build 5), submitted on 2026-10-17 ([status table](version-1.1.0.md#submission-status)); the 1.0.0 submission of 2026-10-13 was removed and no 1.0.0 submission remains. App Store Connect holds the 1.0 description below for the version in review: it says "That is 74 file types", while build 5 has 81 (the catalog's `id` entries, counted 2026-10-17). The text to paste for 1.1.0 is the description in [version-1.1.0.md](version-1.1.0.md#description-3757-of-4000-characters), which says 81 and has the CSV and model bullets reworded; the 1.0 description below is kept as history and is not pasted again. The paragraph that follows was written on 2026-10-13.
+
 **Status: entered as a draft, not submitted (updated 2026-10-13).** On 2026-10-10 the English (U.S.) and
 English (U.K.) text below was entered in App Store Connect for version 1.0.0 and saved; see
 [What App Store Connect holds](#what-app-store-connect-holds). That stored text is now out of date (it
@@ -35,7 +37,7 @@ UTF-8 bytes (limit 100), promotional text in characters (limit 170), description
 
 | # | Decision | Recommendation | Why |
 |---|---|---|---|
-| 1 | Use "Quick Look" in the app name? The earlier draft in [store-listing/listing.en.md](store-listing/listing.en.md) kept the name `SpacePane` and used the phrase only in the subtitle. | Yes, as `SpacePane for Quick Look`. **Decided 2026-10-10:** the owner saved this name in App Store Connect. | "Quick Look" is the category's head term: 11 of the top 12 store results for it carry the phrase in their name or subtitle. 12 of the 19 direct all-in-one competitors and 23 of 99 specialist preview apps have it in the name. It is not on Apple's trademark list (Finder, Mac and macOS are), and "for" is the referential wording Apple's guidelines allow. No rejection for it was found, and none was ruled out. Fallbacks B and C are below if App Review objects. |
+| 1 | Use "Quick Look" in the app name? The earlier draft in [store-listing/listing.en.md](store-listing/listing.en.md) kept the name `SpacePane` and used the phrase only in the subtitle. | Yes, as `SpacePane for Quick Look`. **Decided 2026-10-10:** the owner saved this name in App Store Connect. | "Quick Look" is the category's head term: 11 of the top 12 store results for it carry the phrase in their name or subtitle. 12 of the 19 direct all-in-one competitors and 23 of 99 specialist preview apps have it in the name. Whether "Quick Look" is on Apple's trademark list was not verified: the earlier wording here said it is not (Finder, Mac and macOS are), the description footer attributes it to Apple, and on 2026-10-17 Apple's list page could not be fetched at its recorded address. The footer's attribution stays whichever is true, because attributing a mark costs nothing and omitting one could be objected to. "For" is the referential wording Apple's guidelines allow. No rejection for it was found, and none was ruled out. Fallbacks B and C are below if App Review objects. |
 | 2 | Do IGES and STEP ship in 1.0 (decision 027 D20, OCCT licence)? | Not a copy decision. | **Decided 2026-10-13: they do not ship in 1.0** ([decision 028](../decisions/028-no-cad-in-version-1.md)). The "no CAD" swaps below are applied throughout this file. CAD may return in a later version; the steps are in decision 028, "Bringing CAD back". |
 | 3 | Which languages ship (D22: reviewed languages only)? | Publish English (U.S.) and English (U.K.) at launch. Add each other store language when its app translation is reviewed. | **Taken (owner rule "only reviewed languages ship", applied 2026-10-12): English (U.S.) and English (U.K.) at launch.** No language has a recorded review, so version 1.0 ships English only; the other 13 translations stay in the repository as drafts. The store page lists the app's languages. A German store page for an English-only app invites refunds and one-star reviews. English (U.K.) is the default or additional store language in Türkiye, India, Indonesia, Nigeria, Germany, France, Brazil and Russia. |
 | 4 | Price model (PLAN M6). | Not a copy decision. | The description avoids price wording. Paid upfront is what App Store Connect holds (USD 9.99 base, 2026-10-12), so the optional line under "Private by design" may be added. |
@@ -47,7 +49,9 @@ The repository's rule is to claim Finder previews only for types seen to open in
 [the host matrix](../validation/host-matrix.json) records the Finder preview for 4 of 74 types and the Quick
 Look panel for 21 of 74 (SpacePane's own content seen), all on development-signed builds on one Mac running
 macOS 27.2, and no Finder thumbnail for any type. (The counts were 4 of 76 and 23 of 76 until 2026-10-13,
-when the two CAD rows, which had been seen in the panel, left the matrix with the catalog entries.) Plain
+when the two CAD rows, which had been seen in the panel, left the matrix with the catalog entries.) On 2026-10-17
+the matrix holds 81 formats: Finder preview `provider` for 4 (3 on the current identity), `notObserved` for 77, and
+Finder thumbnail `notObserved` for all 81; every host is development-signed. Plain
 text and Swift source were shown by another provider in the panel; `.env` got a generic icon. No
 store-signed install has been observed.
 
@@ -153,6 +157,8 @@ How the three indexed fields work together:
   launch.
 
 ### Description
+
+**Superseded for the version in review (2026-10-17):** this is the 1.0 text that App Store Connect holds today; the 1.1.0 text with 81 file types is in [version-1.1.0.md](version-1.1.0.md). Kept as written.
 
 3,329 of 4,000 characters, recounted with python3 on 2026-10-13 after the CAD wording came out and 76 became 74 (it was 3,721). Plain text with line breaks; the store supports no other formatting. Apple
 does not list the description as a search field, so it is written to convert and to feed the store's
@@ -295,7 +301,7 @@ Claims with no Finder or panel observation at all (Finder preview and Quick Look
   field (`stl`, `obj`).
 - Hidden characters, archive risk notes and notebook health. These are findings, not formats, so the matrix
   has no row for them; nothing records one seen in Finder or the panel.
-- Every thumbnail claim: `finderThumbnail` is `notObserved` for all 74 types.
+- Every thumbnail claim: `finderThumbnail` is `notObserved` for all 74 types (all 81 on 2026-10-17).
 
 Observed, but not the view the copy claims, or not by SpacePane:
 
@@ -324,8 +330,8 @@ Observed, but not the view the copy claims, or not by SpacePane:
 | Hidden characters, archive risk notes, notebook health | none (findings on text, archive and notebook types; archive risk: `archive.zip`, `archive.tar`, `archive.rar`, `archive.7z`; notebooks: `text.jupyter-notebook`) | no row | Tested | Observe one of each in Finder |
 | No network access, read-only, no account, no analytics | none | not a format claim | Entitlements checked in the archive | Re-check the exported package |
 | Info symbol; list of other apps that preview the same types | none | not a format claim | Tested | Observe |
-| Thumbnails skip files that hold secrets | thumbnail-enabled types, none observed | notObserved for all 74 | Tested; no Finder thumbnail observed | Observe a content thumbnail, or remove "SpacePane Thumbnails" claims beyond naming the extension |
-| 74 file types, each with its own switch | every entry of the catalog (74 on 2026-10-13, after `cad.iges` and `cad.step` left it) | not a format claim | The count is the catalog's; the switches were seen in the signed companion (build 1) | Recount from the catalog after the final edit |
+| Thumbnails skip files that hold secrets | thumbnail-enabled types, none observed | notObserved for all 74 (all 81 on 2026-10-17) | Tested; no Finder thumbnail observed | Observe a content thumbnail, or remove "SpacePane Thumbnails" claims beyond naming the extension |
+| 74 file types, each with its own switch (81 in the 1.1.0 text) | every entry of the catalog (74 on 2026-10-13, after `cad.iges` and `cad.step` left it; 81 since decision 030 on 2026-10-14, counted again 2026-10-17) | not a format claim | The count is the catalog's; the switches were seen in the signed companion (build 1). The live description still says 74 for build 5 | Paste the 1.1.0 text, which says 81 |
 | 12 color schemes, profiles, theme files, per-type switches | none | not a format claim | Eleven schemes, profiles and switches seen in the signed companion (build 1). Aurora, the twelfth, was added on 2026-10-11 and is in the source only | Observe all twelve in the submission build (build 3); the description stored in App Store Connect still says 11 |
 | macOS 15 or later | none | not a format claim | Owner's report (2026-10-12): the app works on macOS 15. A macOS 15.2 virtual machine exists. No session has recorded an observation | Record the run on macOS 15 (D21) |
 
