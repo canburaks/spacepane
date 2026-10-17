@@ -6,8 +6,46 @@ text lives in [app-store-listing.md](app-store-listing.md) for 1.0 and here for 
 the listing file takes it over. Uploading, submitting and releasing happen only on the owner's explicit
 instruction.
 
-**Status:** configured, not built for the store, not uploaded. Version 1.0.0 (build 3) is still waiting for App
-Review; 1.1.0 is submitted only after 1.0.0 is approved (or rejected and resolved).
+**Status (2026-10-17):** 1.1.0 (build 5) is submitted and Waiting for Review; see the status table below. The
+earlier record here, that 1.0.0 (build 3) was waiting for review and 1.1.0 would follow its approval, is history: the
+1.0.0 submission no longer exists in App Store Connect.
+
+## Submission status
+
+Read in App Store Connect on 2026-10-17 by the session that wrote [the rejection-risk review](../reviews/2026-10-17-app-store-rejection-risk.md);
+times are Europe/Istanbul. "Notes version" is the date of the block in [app-store-submission.md](app-store-submission.md#notes-for-app-review)
+that was pasted. The repository recorded the submission of 2026-10-13 as 1.0.0 (build 3); App Store Connect lists two
+earlier 1.1.0 submissions as Removed and no 1.0.0 submission at all.
+
+| Date | Version | Build | App Store Connect status | Notes version | Release option |
+|---|---|---|---|---|---|
+| 2026-10-13 18:09 | 1.0.0 as recorded here; listed under 1.1.0 | 3 | Removed from review (the first submission) | 2026-10-13 | Automatic |
+| 2026-10-15 23:23 | 1.1.0 | 4 (uploaded 2026-10-15) | Removed from review (it still linked the unreachable CAD client code, Guideline 2.5.19) | 2026-10-15 | Automatic |
+| 2026-10-17 11:08 | 1.1.0 | 5 (uploaded 2026-10-17 10:39) | **Waiting for Review** | 2026-10-15 (the block as it stood before the corrections of 2026-10-17) | **Automatic**; the review readiness plan (R-4) asked for Manual |
+
+Also on the version page on 2026-10-17: sign-in required off, attachment `SpacePane-Review-Samples.zip`, six Mac
+screenshots, and the description of 1.0 ("That is 74 file types") rather than the 1.1.0 text below. Builds 1.0.0 (1)
+and (2) were uploaded on 2026-10-10 and 2026-10-12 and never submitted.
+
+### Replacing the submission
+
+What the owner does if 1.1.0 (5) is to be replaced or its metadata corrected while it waits, in order. The queue position
+resets at step 5; a rejection resets it too and adds a reply cycle, which is the trade-off the review names.
+
+1. Remove the version from review (App Store Connect, the submission's menu: Remove from Review). The status returns to
+   Prepare for Submission; the build stays attached.
+2. Select the new build on the version page if there is one (a replacement build raises `CURRENT_PROJECT_VERSION`
+   and keeps `PREV_INCLUDE_CAD = NO`); to correct metadata only, keep build 5.
+3. Re-paste the Notes for App Review from [app-store-submission.md](app-store-submission.md#notes-for-app-review)
+   (the corrected block of 2026-10-17), the What's New and the description below, and switch the release option to
+   Manually release this version.
+4. Re-attach `SpacePane-Review-Samples.zip`, rebuilt with `python3 script/build_review_samples.py` from the same
+   commit as the notes, and replace the two screenshots named in
+   [store-listing/screenshots.md](store-listing/screenshots.md) once they are recaptured.
+5. Add for Review, then Submit for Review. Record the new submission time in the table above.
+
+The release option is editable while the version is Waiting for Review without any of this; the description may be too
+(confirm that App Store Connect accepts the edit), the notes, the attachment, the build and the screenshots are not.
 
 ## Build settings
 
@@ -58,10 +96,13 @@ Promotional text can change without a new version; switch to this when 1.1.0 is 
 Press Space and see what a file will do: scripts, editor tasks, AI models, extensions and packages explained. Made on your Mac, read-only, with likely secrets concealed.
 ```
 
-### Description (3,740 of 4,000 characters)
+### Description (3,757 of 4,000 characters)
 
-The 1.0 description with one bullet added under STRUCTURE, three under KNOW WHAT'S HIDDEN INSIDE, and 74 changed to 81.
-Name, subtitle and keywords are unchanged.
+The 1.0 description with one bullet added under STRUCTURE, three under KNOW WHAT'S HIDDEN INSIDE, and 74 changed to 81
+(the catalog has 81 `id` entries; recounted 2026-10-17). Name, subtitle and keywords are unchanged. Two bullets were
+reworded on 2026-10-17 after the rejection-risk review (finding 13): CSV and TSV carry the "where macOS uses SpacePane"
+qualifier, and the model bullet names only 3MF, because on macOS 27.2 Apple's own previewers take STL, OBJ and PLY and
+CSV. The keyword field still carries `csv`, `stl` and `obj`; whether to drop them is the owner's call and is not made here.
 
 ```text
 Quick Look previews that tell you what's really in a file.
@@ -80,12 +121,12 @@ STRUCTURE, NOT A WALL OF TEXT
 • Jupyter notebooks with their cells and saved outputs, never run
 • Markdown as a readable document with a Contents view
 • Diffs and patches in color
-• CSV and TSV as sortable tables, with a profile of every column
+• CSV and TSV as sortable tables with a profile of every column, where macOS uses SpacePane for them
 • Mermaid and draw.io diagrams, Parquet files, EPUB books, comics and subtitles
 • MIDI files with play and scrub controls
 • Source code with syntax coloring for 84 languages
 • Text files that have no extension, such as Makefile or zprofile
-• STL, OBJ, PLY and 3MF models you can turn
+• 3MF models you can turn
 
 • GGUF and safetensors models, PyTorch files, MCP bundles, editor and browser extensions and Python wheels, summarized without running anything
 
@@ -134,17 +175,20 @@ pasting, observe in the Quick Look panel on the 1.1.0 build at least: a script w
 `32-model.gguf`, `33-extension.vsix`, `34-package.whl`, an OpenAPI JSON file, and the 3MF print lines. Drop any
 bullet whose feature Finder does not show. On macOS 27.2 Apple's previewers keep CSV, STL, OBJ and PLY, so the 3D
 print line holds for 3MF in Finder and for the other three only in the companion; the What's New wording says
-"3D models", which 3MF covers.
+"3D models", which 3MF covers, and since 2026-10-17 the description's model bullet names 3MF alone. None of this was
+observed before build 5 was submitted on 2026-10-17: the three 1.1.0 samples are `notObserved` on every surface.
 
 ## App Review
 
-- Notes: [app-store-submission.md, "Notes for App Review"](app-store-submission.md#notes-for-app-review) now names 1.1.0 (build 5; build 4 named it until 2026-10-17) and the three new samples.
-- Samples: `python3 script/build_review_samples.py` adds `32-model.gguf`, `33-extension.vsix` and `34-package.whl` (36 files); `--check` passes.
+- Notes: [app-store-submission.md, "Notes for App Review"](app-store-submission.md#notes-for-app-review) names 1.1.0 (build 5; build 4 named it until 2026-10-17) and the three new samples. Corrected on 2026-10-17 after the rejection-risk review: step 1 places the "Open System Settings" button in the banner at the top of the General page (not in the "Turn on the extensions" row), step 4 names `31-model.3mf` as the model and keeps `28-binary.stl` with a Try Preview fallback, the opening names the thumbnail extension without claiming thumbnails, and "Tested on macOS 15.2" is gone until a run is recorded. The block in App Store Connect is still the one pasted on 2026-10-17 (see the status table).
+- Prepared replies: the 4.2 reply leads with the Theme page's live previews and names 3MF as the model example; the `com.quicklookpro.*` paragraph says the identifiers are listed in the supported types, neither imported nor exported.
+- Samples: `python3 script/build_review_samples.py` adds `32-model.gguf`, `33-extension.vsix` and `34-package.whl` (36 files); `--check` passes (2026-10-17).
 
 ## Steps left, in order
 
-1. 1.0.0 (build 3) approved by App Review.
-2. PR 9 is merged (2026-10-15), so it ships in 1.1.0.
-3. Observe the claim-gate list above on a development-signed build of `main`, then archive: `./script/build_and_run.sh --archive`, then `python3 script/check_release_archive.py` on the archive.
-4. On the owner's instruction: upload (`--upload`), create version 1.1.0 in App Store Connect, select build 5 (build 4 was selected first and is replaced, Guideline 2.5.19), paste What's New and the description, attach `SpacePane-Review-Samples.zip`, paste the notes, submit.
-5. After approval: on `spacepane-web`'s `app-store-launch` branch, drop the "Coming in an update" badges for Safety Lens 2 and 3 and count the seven formats, then merge that branch to `main` (the owner merges after approval). Switch the promotional text.
+Done by the owner on 2026-10-17 (see the status table): build 5 archived, uploaded and selected, the notes pasted, the packet attached, the version submitted. Steps 1, 3 and 4 of the earlier list are therefore closed or overtaken; PR 9 (step 2) was merged on 2026-10-15 and ships in build 5. What is left:
+
+1. The owner decides whether to let the submission run or to replace it (["Replacing the submission"](#replacing-the-submission)) to correct what App Store Connect holds: the 1.0 description (74 file types against 81), the two live screenshots that show the removed Filter field and a `.step` file ([store-listing/screenshots.md](store-listing/screenshots.md)), and the notes block of 2026-10-15. The corrected text is in this repository.
+2. Switch the release option to Manually release this version (editable now).
+3. Observe the claim-gate list above on the signed build 5 (TestFlight internal group) and record it in `docs/validation/host-matrix.json`; drop any description bullet Finder contradicts before the text is pasted.
+4. After approval: on `spacepane-web`'s `app-store-launch` branch, drop the "Coming in an update" badges for Safety Lens 2 and 3 and count the seven formats, then merge that branch to `main` (the owner merges after approval). Switch the promotional text.

@@ -149,10 +149,10 @@ SAMPLES: Tuple[Sample, ...] = (
     Sample("25-silent.mid", "host", "22-silent.mid", "MIDI with play and scrub controls (no sound)"),
     Sample("26-example.swift", "appearance", "SWIFT", "Source with syntax color (macOS may differ)"),
     Sample("27-example.py", "authored", "PYTHON_SAMPLE", "Source with syntax color"),
-    Sample("28-binary.stl", "host", "101-binary.stl", "3D model you can turn"),
-    Sample("29-model.obj", "host", "103-model.obj", "3D model you can turn"),
-    Sample("30-model.ply", "host", "105-ascii.ply", "3D model you can turn"),
-    Sample("31-model.3mf", "host", "108-model.3mf", "3D model you can turn"),
+    Sample("28-binary.stl", "host", "101-binary.stl", "3D model; macOS may show its own preview"),
+    Sample("29-model.obj", "host", "103-model.obj", "3D model; macOS may show its own preview"),
+    Sample("30-model.ply", "host", "105-ascii.ply", "3D model; macOS may show its own preview"),
+    Sample("31-model.3mf", "host", "108-model.3mf", "3D model you can turn; print size and volume"),
     Sample("32-model.gguf", "host", "111-example.gguf", "AI model summary from the header; never loaded"),
     Sample("33-extension.vsix", "host", "115-example-secret.vsix", "Editor extension card: activation, permissions"),
     Sample("34-package.whl", "host", "117-example-1.0-py3-none-any.whl", "Python package summary; nothing installed"),
@@ -164,10 +164,10 @@ SpacePane review samples
 Every file here is synthetic. No secret in it is real.
 
 HOW TO TRY
-1. Open SpacePane. On the General page, under "Turn on the extensions",
-   click "Open System Settings" and switch on SpacePane Preview and
-   SpacePane Thumbnails. (macOS 15: System Settings > General > Login
-   Items & Extensions > Quick Look.)
+1. Open SpacePane. The banner at the top of the General page has an
+   "Open System Settings" button; click it and switch on SpacePane
+   Preview and SpacePane Thumbnails. (macOS 15: System Settings >
+   General > Login Items & Extensions > Quick Look.)
 2. Unzip this folder, select a file in Finder and press Space.
 
 macOS decides which app previews a type; if another app already does,
