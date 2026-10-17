@@ -303,7 +303,9 @@ def validate_catalog(formats):
         item["contentTypes"] == ["public.data"] and not item["extensions"] and not item.get("filenameAliases")
         and not item.get("filenamePrefixes") and item["thumbnail"] == "none" and item["presentation"] == "text"
         for item in root_owners), "public.data may identify only the extension-free text format, without thumbnails")
-    thumbnail_types = list(dict.fromkeys(content_type for item in formats if item["thumbnail"] != "none"
+    # Only the `content` policy registers a type with the thumbnail extension. A `generic` format would receive
+    # SpacePane's glyph instead of the system icon with no observed benefit (decision 022, amended 2026-10-17).
+    thumbnail_types = list(dict.fromkeys(content_type for item in formats if item["thumbnail"] == "content"
                                          for content_type in item["contentTypes"]))
     imported = []
     for item in formats:

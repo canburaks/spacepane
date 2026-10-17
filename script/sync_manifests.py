@@ -29,7 +29,9 @@ def parents(declaration: dict) -> list[str]:
 def derived(formats: list[dict] | None = None) -> tuple[list[str], list[str], list[dict]]:
     formats = json.loads(CATALOG.read_text())['formats'] if formats is None else formats
     preview = list(dict.fromkeys(t for item in formats for t in item['contentTypes']))
-    thumbnail = list(dict.fromkeys(t for item in formats if item['thumbnail'] != 'none' for t in item['contentTypes']))
+    # Only the `content` policy registers a type for thumbnails: a `generic` format would get SpacePane's glyph
+    # in place of the system icon (decision 022, amended 2026-10-17).
+    thumbnail = list(dict.fromkeys(t for item in formats if item['thumbnail'] == 'content' for t in item['contentTypes']))
     imported = []
     for item in formats:
         for declaration in item.get('importedContentTypes', []):
