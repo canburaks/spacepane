@@ -3,8 +3,16 @@ import Darwin
 
 /// Read-only Foundation resource inspection. This does not execute the app or
 /// either extension and cannot establish a Finder host's effective language.
+///
+/// Two modes share one manifest. With `systemLanguage` absent, `preferences` select a language
+/// explicitly. With `systemLanguage` set, the lookup passes no preferences at all, the way the
+/// production string API does (`PreviewStrings.text`): the script stages a copy of one host with this
+/// executable inside it, so that `Bundle.main` is that host, and launches it with the system language
+/// set. The nested bundle's `Bundle.localizedString` must then return the expected language by itself.
+/// macOS resolves a nested bundle's language through the main bundle, which a bare executable lacks.
 private struct Manifest: Decodable {
     let preferences: [String]
+    let systemLanguage: String?
     let expectedLanguage: String
     let formattingLocale: String
     let bundles: [Host]
@@ -43,6 +51,10 @@ struct LocalizedBundleChecks {
         let manifest = try JSONDecoder().decode(Manifest.self, from: Data(contentsOf: manifestURL))
         for expected in manifest.bundles {
             let host = try loadBundle(URL(fileURLWithPath: expected.path), label: expected.role)
+            if manifest.systemLanguage != nil {
+                try require(Bundle.main.bundleURL.standardizedFileURL == host.bundleURL.standardizedFileURL,
+                            "The checker is not running as the staged \(expected.role) host: \(Bundle.main.bundleURL.path)")
+            }
             guard let hostResources = host.resourceURL else {
                 throw CheckFailure(description: "Missing Resources directory: \(expected.role)")
             }
@@ -50,15 +62,28 @@ struct LocalizedBundleChecks {
             let resources = try loadBundle(embeddedURL, label: "\(expected.role) renderer resources")
             try require(resources.bundleURL.standardizedFileURL == embeddedURL.standardizedFileURL,
                         "Resource lookup escaped the supplied host: \(expected.role)")
-            let localizedResources = try localizedBundle(resources, preferences: manifest.preferences,
+            let localizedResources: Bundle
+            let localizedHostMetadata: Bundle
+            if let systemLanguage = manifest.systemLanguage {
+                // No preferences: whatever the bundle itself resolves. The system language of this process
+                // must be the injected one, or an English answer would prove nothing.
+                try require(Locale.preferredLanguages.first?.hasPrefix(systemLanguage) == true,
+                            "The checker did not start with system language \(systemLanguage): \(Locale.preferredLanguages)")
+                localizedResources = resources
+                localizedHostMetadata = host
+            } else {
+                localizedResources = try localizedBundle(resources, preferences: manifest.preferences,
                                                          expectedLanguage: manifest.expectedLanguage, role: expected.role)
-            let localizedHostMetadata = try localizedBundle(host, preferences: manifest.preferences,
+                localizedHostMetadata = try localizedBundle(host, preferences: manifest.preferences,
                                                             expectedLanguage: manifest.expectedLanguage, role: expected.role)
+            }
 
             for key in manifest.strings.keys.sorted() {
                 let actual = localizedResources.localizedString(forKey: key, value: "MISSING_TRANSLATION", table: nil)
                 try require(actual == manifest.strings[key],
-                            "Missing or stale embedded translation: \(expected.role)/\(manifest.expectedLanguage)/\(key)")
+                            "Missing or stale embedded translation: \(expected.role)/\(manifest.expectedLanguage)/\(key)"
+                                + (manifest.systemLanguage.map { " (system language \($0), no explicit preferences)" } ?? "")
+                                + "; got \"\(actual.prefix(60))\"")
             }
             for key in expected.metadata.keys.sorted() {
                 let actual = localizedHostMetadata.localizedString(forKey: key, value: "MISSING_METADATA", table: "InfoPlist")

@@ -2,6 +2,15 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-17 — Draft languages pruned from the nested resource bundle; privacy-manifest reasons tied to code (findings 16 and 21)
+
+Request from the lead session: fix findings 16 and 21 of [the rejection-risk review](docs/reviews/2026-10-17-app-store-rejection-risk.md). Record: [nested-language-pruning-2026-10-17.md](docs/validation/nested-language-pruning-2026-10-17.md).
+
+- Finding (validation): in a copy of the build 5 preview or thumbnail extension used as the main bundle, a system language of Turkish or German makes the nested `PreviewCore_PreviewRenderers.bundle` answer in that language with no preferences, which is how `PreviewStrings.text` looks strings up. The companion answers in English. The earlier "unreachable" observation does not extend to the extensions. Simulation by staged copy and launch argument, not a Finder run.
+- Implementation: `script/prune_resource_languages.py` and a "Prune draft languages" run-script phase in `Prev`, `PrevPreviewExtension` and `PrevThumbnailExtension` remove every `.lproj` outside `shipped` from the nested bundle before signing. `script/prune-outputs.xcfilelist` declares the 39 deleted paths, so `ENABLE_USER_SCRIPT_SANDBOXING` stays `YES`. The drafts stay in the repository and the package. `script/check_release_archive.py` now fails an archive whose nested bundle carries one (it noted them). `script/check_bundle_localizations.py` adds a lookup without preferences, run inside a staged copy of each host under each chosen language as system language; it fails on the build 5 app.
+- Implementation: the thumbnail manifest no longer declares `DDA9.1` (no thumbnail request shows a file date); `35F9.1` stays because the statically linked MIDI renderer references `systemUptime` and upload validation reads references. Every manifest comment names the Swift file behind each reason. Apple's reason list was read again and has no code for files an app finds for itself, so the companion keeps `3B52.1` for its provider scan and says so.
+- Validation: signed archive of 1.1.0 (5) from this branch has 6 `.lproj` against 45 in the submitted build 5, passes `check_release_archive.py` and `codesign --verify --deep --strict`; `test_check_release_archive.py` (127), `test_prune_resource_languages.py` (25) and `--check-static` pass. Nothing was run in Finder or uploaded. The build number is unchanged.
+
 ## 2026-10-17 — Build 6: the fixes of the rejection-risk review (implementation, validated by scripts, tests and an archive; no Finder observation)
 
 Request from the lead session: fix every problem the [rejection-risk review](docs/reviews/2026-10-17-app-store-rejection-risk.md) found in the catalog, the manifests and the release records, tests first, ending with a build 6 archive. Branch `build6-release-fixes-2026-10-17`; nothing uploaded, submitted, installed or registered with Launch Services.
@@ -23,6 +32,7 @@ Request from the lead session: establish why `UTType(filenameExtension:)` return
 - Fix named, not applied: give `database.sqlite`, `data.parquet` and `archive.rar` a conformance that includes `public.data` in `FormatCatalog.json` (`importedContentTypes[].conformsTo`, today a single string consumed by `script/sync_manifests.py` and `FormatCatalog.swift`), regenerate the three plists with `script/sync_manifests.py`, add a catalog test that every imported declaration conforms to `public.data`, run the website's `data:sync`, and ship a new build. No action on this Mac or on the reviewer's can substitute.
 - Side finding for a later decision: macOS exports `net.daringfireball.markdown` itself, so the ten extra Markdown extensions SpacePane imports under that identifier (`mdown`, `mkd`, `mdx`, `rmd`, `qmd`, `mkdn`, `mdwn`, `mdtxt`, `mdtext`, `markdn`) resolve to dynamic types on every Mac.
 - The macOS 15.2 virtual-machine test is written in the record (`mdls` and `lsregister -dump`, no compiler needed) and was not run.
+
 
 ## 2026-10-17 — Review notes, replies and release records corrected after the rejection-risk review (documentation only)
 
