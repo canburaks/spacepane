@@ -522,6 +522,8 @@ def build_steps(require_syntax: bool = False) -> List[Step]:
     return [
         Step("manifests", "script/sync_manifests.py --check",
              script_step(["script/sync_manifests.py", "--check"])),
+        Step("catalog manifest tests", "script/test_catalog_manifests.py",
+             script_step(["script/test_catalog_manifests.py"], unittest_summary)),
         Step("appearance samples", "script/generate_appearance_samples.py --check",
              script_step(["script/generate_appearance_samples.py", "--check"])),
         Step("localization tests", "tools/test_localization.py",
