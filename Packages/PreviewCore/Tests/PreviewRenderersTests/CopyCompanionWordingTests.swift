@@ -7,6 +7,8 @@ import Testing
 /// checked only for what must hold in every language.
 @Suite("Companion wording")
 struct CopyCompanionWordingTests {
+    static let languages = ["en", "tr", "de", "fr", "zh-Hans", "ja", "hi", "ku-Latn", "ru", "id", "bn", "ha", "pt", "es"]
+
     static func english(_ key: PreviewStrings.Key) -> String {
         PreviewStrings.text(key, languagePreferences: ["en"])
     }
@@ -19,5 +21,23 @@ struct CopyCompanionWordingTests {
         for fragment in ["Try Preview", "Open File", "⌘O", "⌘5"] {
             #expect(subtitle.contains(fragment), "Developer Mode subtitle must name \(fragment): \(subtitle)")
         }
+    }
+
+    // MARK: Storage wording (review finding 24)
+
+    @Test func theAppOnlyStorageStatesNameNoDeveloperConcepts() {
+        let developerWords = ["App Group", "App-Group", "AppGroup"]
+        for language in Self.languages {
+            for key in [PreviewStrings.Key.setupNotConfigured, .statusAppOnly] {
+                let text = PreviewStrings.text(key, languagePreferences: [language])
+                for word in developerWords {
+                    #expect(!text.localizedCaseInsensitiveContains(word), "\(language) \(key): \(word) in \(text)")
+                }
+            }
+        }
+        // "Build" is the developer's word for a version of the app.
+        let english = Self.english(.setupNotConfigured)
+        #expect(english.range(of: #"\bbuild\b"#, options: [.regularExpression, .caseInsensitive]) == nil, "\(english)")
+        #expect(english.contains("saved for this app only"), "\(english)")
     }
 }
