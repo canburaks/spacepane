@@ -16,6 +16,13 @@ Request from the lead session: fix the companion findings of [the review](docs/r
 - Checks: `./script/build_and_run.sh --check-static` OK (23 passed, 1 skipped: tree-sitter not installed); `python3 tools/validate_localization.py` OK; `./script/build_and_run.sh --test` OK (package tests; companion model checks: 8 settings, 12 undo, 9 presentation, 6 layout, 8 error-state, 11 model); `swift test --package-path Packages/PreviewCore --filter 'Shortcut|Interaction|Copy|Localization'` 176 tests pass; `./script/build_and_run.sh --check-compiler` typechecks the app and both extensions. Each new check was first run against a stub or the old strings and failed for the intended reason.
 - Not done: the signed Xcode build, the Command-Q path in a running app, the banner caption on screen, translated layout and VoiceOver. These stay unobserved; `docs/validation/pending-mac-verification.md` is for edits made without a compiler and was not changed.
 
+## 2026-10-17 — Build 6 integration branch and the recaptured hero screenshot
+
+Lead session: the three fix branches of the day (`build6-release-fixes-2026-10-17`, `app-store-risk-bundle-pruning-2026-10-17`, `companion-ux-fixes-2026-10-17`) merged into `build6-integration-2026-10-17`; the only conflicts were this file's top entries, kept in full.
+
+- Screenshot: `docs/release/store-listing/screenshots/01-press-space.png` retaken from the installed TestFlight-signed build 5 at Retina scale (Finder window 2000×1240, panel 2080×1440 captures; 2880×1800 opaque composite). No Filter field, no `.step` file, "Open with Xcode". The SQLite screenshot stays out of the store set until an installed build 6 routes `.sqlite` (see the validation record of the same day). Details in [screenshots.md](docs/release/store-listing/screenshots.md).
+- Validation: the gates named in the pull request were run on the merged tree; see the pull request description for the results.
+
 ## 2026-10-17 — Draft languages pruned from the nested resource bundle; privacy-manifest reasons tied to code (findings 16 and 21)
 
 Request from the lead session: fix findings 16 and 21 of [the rejection-risk review](docs/reviews/2026-10-17-app-store-rejection-risk.md). Record: [nested-language-pruning-2026-10-17.md](docs/validation/nested-language-pruning-2026-10-17.md).
