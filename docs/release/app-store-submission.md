@@ -61,7 +61,7 @@ Paste the quoted block into the Notes field of App Review Information, attach `S
 
 | Statement | Basis | Still to observe |
 | --- | --- | --- |
-| Version 1.1.0, build 4 (1.0.0 build 3 was the first submission) | Build 1 was uploaded on 2026-10-10 and will not be submitted. Build 2 was uploaded on 2026-10-12 with CAD in it; it is for the owner's internal TestFlight testing only and must not be submitted ([decision 028](../decisions/028-no-cad-in-version-1.md)). The submission build is build 3, built without CAD. | `CURRENT_PROJECT_VERSION = 4` and `PREV_INCLUDE_CAD = NO` must be in the archive that is uploaded and selected for the version. |
+| Version 1.1.0, build 5 (1.0.0 build 3 was the first submission; 1.1.0 build 4, uploaded on 2026-10-15 and submitted, is replaced because it still linked the unreachable CAD client code, Guideline 2.5.19) | Build 1 was uploaded on 2026-10-10 and will not be submitted. Build 2 was uploaded on 2026-10-12 with CAD in it; it is for the owner's internal TestFlight testing only and must not be submitted ([decision 028](../decisions/028-no-cad-in-version-1.md)). The submission build is build 3, built without CAD. | `CURRENT_PROJECT_VERSION = 5` and `PREV_INCLUDE_CAD = NO` must be in the archive that is uploaded and selected for the version. |
 | Tested on macOS 27.2, Apple silicon | The host matrix and the signed-host records. | Repeat on the store-signed build (plan Phases 3 and 4). |
 | Tested on macOS 15.2 | The owner's report (2026-10-12) of a run in a macOS 15.2 virtual machine, taken as given on the owner's instruction. No session observed it and it is not in the host matrix. | Record the run in `docs/validation/host-matrix.json`. |
 | Enabling the extensions | Step 1 relies on the in-app "Open System Settings" button first and gives the macOS 15 path (the companion's own setup text gives the same path) as the manual route. No path for macOS 26 or 27 is recorded in `docs/validation/` or `CHANGELOGS.md` (searched 2026-10-12), and the button, which opens the Login Items & Extensions pane (`GeneralView.swift`), has never been observed. | The exact System Settings route on 27.2, word for word. Add it to step 1 if the button lands elsewhere. |
@@ -70,7 +70,7 @@ Paste the quoted block into the Notes field of App Review Information, attach `S
 
 STEP and IGES do not ship in 1.0 ([decision 028](../decisions/028-no-cad-in-version-1.md), decided 2026-10-13, which settled R-2 of the review readiness plan). The 3D paragraph and the two CAD file names were taken out of the block, and the two CAD samples out of `SAMPLES` in the builder; `--check` fails if the notes and the archive disagree. The notes make no claim about Open CASCADE or a source offer, because the build has none. If CAD returns, restore the paragraph and the two samples from git history (the commit before 2026-10-13) after the steps in decision 028, "Bringing CAD back".
 
-> SpacePane 1.1.0 (build 4) adds Quick Look previews and thumbnails to Finder. It is a small companion app plus two Quick Look extensions, SpacePane Preview and SpacePane Thumbnails. Everything runs on the Mac: no account, no sign-in, no network access, no in-app purchase. It needs Apple silicon and macOS 15 or later.
+> SpacePane 1.1.0 (build 5) adds Quick Look previews and thumbnails to Finder. It is a small companion app plus two Quick Look extensions, SpacePane Preview and SpacePane Thumbnails. Everything runs on the Mac: no account, no sign-in, no network access, no in-app purchase. It needs Apple silicon and macOS 15 or later.
 >
 > Tested on macOS 27.2 and on macOS 15.2, on Apple silicon.
 >
@@ -128,6 +128,19 @@ Replies to paste into App Store Connect or the Resolution Center. Each states fa
 | Release option | Manual recommended for first release | Approval and release are separate actions. |
 
 On October 7, the legacy `.html` support/privacy URLs redirected to the canonical pages and returned HTTP 200. The owner's active address is `info@spacepane.com`, and the review-readiness audit of 2026-10-12 found it on every live page. Live page availability does not prove mailbox operation (Phase 0 item 3 of the review readiness plan sends the test message) or every translated page.
+
+## App Review Guidelines revision of October 2026
+
+Apple's notice of 2026-10-17 lists six changes. Each was checked against SpacePane on 2026-10-17 (version 1.1.0, build 4 waiting for review):
+
+| Change | What it means here | Status |
+| --- | --- | --- |
+| Before You Submit, After You Submit: links to more documentation | The checklist asks for complete metadata, current contact details and explanations of non-obvious features in the review notes. | The notes explain enabling the extensions, the samples, Developer Mode, `public.data` and the `com.quicklookpro.*` identifiers. |
+| 1.2 User-generated content: scope and safeguards | Applies to apps that host or share content between users. | Not applicable: SpacePane previews the user's own local files and shares nothing. |
+| 2.3.14 Creative assets (new) | Rules for the product-page creative-asset type. | None uploaded; the rule for adding any is in [app-store-listing.md](app-store-listing.md#other-product-page-fields). |
+| 2.5.19 Hidden, dormant or undocumented features (new) | Every function must be clear to users and App Review. | No launch argument, environment variable, hidden preference, feature flag or debug-only code enables anything. Developer Mode is a visible switch on the General page, described there and in the notes. Build 4 still linked the CAD importer client into the companion and the preview extension although nothing could reach it (no service, no worker, no catalog entry, no type declaration); from the next build neither links it, and `script/check_release_archive.py` refuses any `PreviewCADFormats` code in a build without CAD. |
+| 3.1.1(a) Music streaming and external purchase links | Applies to apps with purchases or purchase links. | Not applicable: paid up front, no in-app purchase, no purchase link. |
+| 5 Removal for facilitating trafficking or child exploitation | Legal section. | Not applicable. |
 
 ## Submission reminder
 
