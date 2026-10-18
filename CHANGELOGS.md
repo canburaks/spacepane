@@ -2,6 +2,15 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-18 — General storage actions and native File Types search (implementation)
+
+Owner request: fix the validated bug reports.
+
+- General's storage card now gets the settings (`GeneralView.swift`), so a failed save shows Try Again and a recovered settings file shows Restore Defaults, as on File Types and Theme. Before this, `SettingsStorageStatusView` received no settings and drew no action on General.
+- Q-94 (CO-09, CO-10, CO-22): File Types search is a native `NSSearchField` (`FileTypeSearchField.swift`) with magnifier, clear button, Escape to clear and the search role. ⌘F focuses it through a button that exists only on that page, so Try Preview keeps its own keys. Once typing pauses for 600 ms the page announces the visible type count with the preview's filter sentences (`preview.interaction.filter.matches` / `.noMatches`). Pattern captions, tooltips and spoken labels show the first four patterns and "+n" (`FormatFilenameSummary.shortText`, reusing `settings.providers.formatsMore`); search still reads every pattern. While settings load, the enabled-count pill is hidden and the table is replaced by "Loading settings…". No new strings, so no unreviewed translations; the "+n" form stands in for the review's "and n more".
+- Checks: two new companion model checks (`patternSummariesShortenLongLists`, `searchResultsAreAnnouncedWithTheirCount`). `./script/build_and_run.sh --check-compiler` typechecked the app and extensions, and `script/test_companion_models.py` passed, both on a Mac with Xcode 27.1. Not observed in a running app: ⌘F, Escape, VoiceOver speech and the General buttons are queued in `docs/validation/pending-mac-verification.md`.
+- Mac readings for the two `withKnownIssue` layout checks are recorded in the queue: the zero-sized host gets a 116 pt scroll view from a leading-edge minimum width, and RTL table columns line up on their leading edge within 1.73 pt. Neither check changed; both rows stay open. VoiceOver delivery from the Quick Look extension (`PreviewAnnouncer`) still needs a person listening in Finder.
+
 ## 2026-10-17 — README images compressed to WebP (documentation only)
 
 Owner request: the README's images were too large; use compressed WebP copies.

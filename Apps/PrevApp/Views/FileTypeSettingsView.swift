@@ -9,15 +9,17 @@ struct FileTypeSettingsView: View {
     @Environment(\.locale) private var locale
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorSchemeContrast) private var contrast
-    @FocusState private var searchIsFocused: Bool
+    /// Bumped by ⌘F; the search field takes focus each time it changes.
+    @CompanionState private var searchFocusRequest = 0
     /// The configured display name for the subtitle; the same source the shell uses.
     private let appName = HostedConfiguration().displayName
 
     private enum Symbol {
-        static let search = "magnifyingglass"
-        static let clear = "xmark.circle.fill"
         static let note = "info.circle"
     }
+
+    /// How long typing must pause before the result count is spoken, so it never talks over the echoed characters.
+    private static let announcementDelay = Duration.milliseconds(600)
 
     private var isSearching: Bool { !search.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
 
@@ -30,6 +32,9 @@ struct FileTypeSettingsView: View {
                                                    arguments: [catalogSummary.enabled, catalogSummary.total],
                                                    locale: locale),
                        tone: .informational)
+                // A count read before the settings load would be a wrong 0 (CO-22).
+                .opacity(settings.isLoading ? 0 : 1)
+                .accessibilityHidden(settings.isLoading)
         } content: {
             VStack(alignment: .leading, spacing: 12) {
                 controlBar.disabled(settings.isLoading)
@@ -38,10 +43,41 @@ struct FileTypeSettingsView: View {
                     SettingsUndoNotice(settings: settings, notice: notice)
                 }
                 SettingsSaveNotice(settings: settings)
-                table.disabled(settings.isLoading)
+                if settings.isLoading { loadingRow } else { table }
             }
         }
+        .background { findShortcut }
         .task { await settings.load() }
+        .task(id: search) { await announceResult(for: search) }
+    }
+
+    /// ⌘F while this page is showing; Try Preview keeps its own find, because this button exists only here.
+    private var findShortcut: some View {
+        Button(PreviewStrings.text(.searchFileTypes)) { searchFocusRequest += 1 }
+            .keyboardShortcut("f", modifiers: .command)
+            .frame(width: 0, height: 0)
+            .clipped()
+            .opacity(0)
+            .accessibilityHidden(true)
+    }
+
+    /// Speaks the number of shown types once typing pauses; a new keystroke cancels the pending sentence.
+    private func announceResult(for query: String) async {
+        guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        do { try await Task.sleep(for: Self.announcementDelay) } catch { return }
+        let groups = FileTypeSettingsGroup.matching(in: .standard, search: query)
+        CompanionAnnouncer.announce(FileTypeSettingsGroup.resultAnnouncement(for: groups, locale: locale))
+    }
+
+    /// Stands in for the table while settings load, so no box shows a state that was never read (CO-22).
+    private var loadingRow: some View {
+        HStack(spacing: 8) {
+            ProgressView().controlSize(.small)
+            Text(PreviewStrings.text(.statusLoading))
+        }
+        .font(CompanionTypography.note).foregroundStyle(CompanionInk.hint)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityElement(children: .combine)
     }
 
     // MARK: Control bar
@@ -74,31 +110,8 @@ struct FileTypeSettingsView: View {
     }
 
     private var searchField: some View {
-        HStack(spacing: 6) {
-            Image(systemName: Symbol.search).foregroundStyle(.secondary).accessibilityHidden(true)
-            TextField(text: $search, prompt: Text(PreviewStrings.text(.searchFileTypes))) {
-                Text(PreviewStrings.text(.searchFileTypes))
-            }
-            .textFieldStyle(.plain)
-            .focused($searchIsFocused)
-            .accessibilityLabel(Text(PreviewStrings.text(.searchFileTypes)))
-            if !search.isEmpty {
-                Button { search = "" } label: { Image(systemName: Symbol.clear).foregroundStyle(.secondary) }
-                    .buttonStyle(.plain)
-                    .help(PreviewStrings.text(.fileTypesClearSearch))
-                    .accessibilityLabel(Text(PreviewStrings.text(.fileTypesClearSearch)))
-            }
-        }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 5)
-        .frame(width: 260)
-        .background(Color.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 7, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 7, style: .continuous)
-            .strokeBorder(searchIsFocused ? Color.accentColor : Color.primary.opacity(contrast == .increased ? 0.4 : 0.12),
-                          lineWidth: searchIsFocused ? 2 : 1))
-        // The whole box, not only its text, focuses the field.
-        .contentShape(Rectangle())
-        .onTapGesture { searchIsFocused = true }
+        FileTypeSearchField(text: $search, prompt: PreviewStrings.text(.searchFileTypes), focusRequest: searchFocusRequest)
+            .frame(width: 260)
     }
 
     // MARK: Table
