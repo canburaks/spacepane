@@ -31,6 +31,15 @@ struct FileTypeSettingsGroup: Identifiable {
         }
     }
 
+    /// What VoiceOver says once a search settles: how many types it shows, zero included, in the same sentences
+    /// the preview's filters use.
+    static func resultAnnouncement(for groups: [Self], locale: Locale) -> String {
+        let count = groups.reduce(0) { $0 + $1.visibleMembers.count }
+        return count > 0
+            ? PreviewStrings.format(.interactionFilterMatches, arguments: [Int64(count)], locale: locale)
+            : PreviewStrings.text(.interactionFilterNoMatches)
+    }
+
     private static func nameKey(for group: FormatGroup) -> PreviewStrings.Key {
         switch group {
         case .text: .fileTypeGroupText

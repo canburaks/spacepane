@@ -12,7 +12,8 @@ struct FileTypeCell: View {
         let name = PreviewStrings.text(catalogKey: format.nameKey)
         let description = PreviewStrings.text(catalogKey: format.descriptionKey)
         let filenames = FormatFilenameSummary(format)
-        let patterns = filenames.text(locale: locale)
+        // The short form keeps a type with hundreds of patterns to two lines and a short spoken label (CO-09).
+        let patterns = filenames.shortText(locale: locale)
         Toggle(isOn: Binding(get: { settings.isEnabled(format.id) },
                              set: { settings.setEnabled($0, for: format.id) })) {
             VStack(alignment: .leading, spacing: 2) {
