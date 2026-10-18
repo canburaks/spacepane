@@ -72,7 +72,7 @@ struct GeneralView: View {
             let problems = settings.status.problemKeys.filter { $0 != bannerContent.body }
             if !problems.isEmpty {
                 SettingsSection(PreviewStrings.text(.generalStorageTitle)) {
-                    SettingsCard { SettingsStorageStatusView(keys: problems) }
+                    SettingsCard { SettingsStorageStatusView(keys: problems, settings: settings) }
                 }
             }
         }
