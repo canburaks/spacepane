@@ -22,6 +22,8 @@ struct CompanionModelChecks {
         try await sameValueResetRepairsCorruption(root)
         try await sameValueResetRetriesFailedSave(root)
         try filenameSummariesPreserveCatalogIdentity()
+        try patternSummariesShortenLongLists()
+        try searchResultsAreAnnouncedWithTheirCount()
         try aboutAcknowledgementsFollowTheBundledNoticeFolders()
         try enablementSummariesCountEveryMember()
         try groupStatusUsesAllMembersWhileSearching()
@@ -34,7 +36,7 @@ struct CompanionModelChecks {
         try await CompanionPresentationChecks.run(in: root)
         try CompanionLayoutChecks.run()
         try await CompanionErrorStateChecks.run(in: root)
-        print("Passed 11 companion model checks (isolated storage; no Finder/UI validation).")
+        print("Passed 13 companion model checks (isolated storage; no Finder/UI validation).")
     }
 
     private static func filenameSummariesPreserveCatalogIdentity() throws {
@@ -62,6 +64,46 @@ struct CompanionModelChecks {
         let groups = FileTypeSettingsGroup.matching(in: catalog, search: "package.json")
         try check(groups.flatMap(\.visibleMembers).contains { $0.id == .packageJSON },
                   "An exact filename shown in the UI must remain searchable")
+    }
+
+    /// Q-94 / CO-09: a long pattern list shows its first patterns and the count of the rest, while every pattern
+    /// stays searchable; a short list is shown whole.
+    private static func patternSummariesShortenLongLists() throws {
+        let catalog = FormatCatalog.standard
+        let english = Locale(identifier: "en")
+        let visible = FormatFilenameSummary.visiblePatterns
+        guard let long = catalog.descriptors.map(FormatFilenameSummary.init).max(by: { $0.patterns.count < $1.patterns.count }),
+              long.patterns.count > visible + 1,
+              let environment = catalog.descriptor(for: .environment) else {
+            throw CheckFailure(description: "Missing a format with a long pattern list")
+        }
+        let short = long.shortText(locale: english)
+        let hidden = long.patterns.count - visible
+        try check(short.hasPrefix(Array(long.patterns.prefix(visible)).formatted(.list(type: .and).locale(english))),
+                  "A long list must start with its first patterns")
+        try check(short.contains(hidden.formatted(.number.locale(english))) && !short.contains(long.patterns[visible]),
+                  "A long list must name the count of the rest, not the rest")
+        try check(short.count < long.text(locale: english).count, "A long list must get shorter")
+        let summary = FormatFilenameSummary(environment)
+        try check(summary.shortText(locale: english) == summary.text(locale: english), "A short list must be shown whole")
+        try check(FileTypeSettingsGroup.matching(in: catalog, search: long.patterns[long.patterns.count - 1]).contains { !$0.visibleMembers.isEmpty },
+                  "A pattern hidden from the caption must stay searchable")
+    }
+
+    /// Q-94 / CO-10: a settled search announces how many types it shows, zero included, with the preview's
+    /// filter sentences.
+    private static func searchResultsAreAnnouncedWithTheirCount() throws {
+        let english = Locale(identifier: "en")
+        let groups = FileTypeSettingsGroup.matching(in: .standard, search: "package.json")
+        let count = groups.reduce(0) { $0 + $1.visibleMembers.count }
+        try check(count > 0, "An exact filename must match")
+        try check(FileTypeSettingsGroup.resultAnnouncement(for: groups, locale: english)
+                      == PreviewStrings.format(.interactionFilterMatches, arguments: [Int64(count)], locale: english),
+                  "A search with results must announce their count")
+        let none = FileTypeSettingsGroup.matching(in: .standard, search: "zzqqxx-no-such-type")
+        try check(none.isEmpty && FileTypeSettingsGroup.resultAnnouncement(for: none, locale: english)
+                      == PreviewStrings.text(.interactionFilterNoMatches),
+                  "A search without results must announce that")
     }
 
     private static func aboutAcknowledgementsFollowTheBundledNoticeFolders() throws {
