@@ -147,6 +147,7 @@ final class DiagramCanvasView: NSView {
     var onNoticeChange: ((DiagramNotice?) -> Void)?
     private var reportedNotice: DiagramNotice?
     private var dragOrigin: NSPoint?
+    private var cachedAccessibilityChildren: [NSAccessibilityElement]?
 
     override var isFlipped: Bool { true }
     override var acceptsFirstResponder: Bool { true }
@@ -166,6 +167,9 @@ final class DiagramCanvasView: NSView {
     // MARK: Content
 
     func show(_ diagram: SafeDiagram?, palette: DiagramPalette, font: DiagramFont, locale: Locale, resetsView: Bool) {
+        if self.diagram != diagram || self.locale != locale {
+            cachedAccessibilityChildren = nil
+        }
         self.diagram = diagram
         self.palette = palette
         self.font = font
@@ -312,6 +316,7 @@ final class DiagramCanvasView: NSView {
         case .rightArrow: pan(by: CGPoint(x: -Self.keyboardStep, y: 0))
         case .upArrow: pan(by: CGPoint(x: 0, y: Self.keyboardStep))
         case .downArrow: pan(by: CGPoint(x: 0, y: -Self.keyboardStep))
+        case .home: zoomToFit()
         default:
             switch event.charactersIgnoringModifiers {
             case "+", "=": zoom(by: 1.25)
@@ -321,6 +326,31 @@ final class DiagramCanvasView: NSView {
             }
         }
     }
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        contextMenu()
+    }
+
+    func contextMenu() -> NSMenu? {
+        guard diagram != nil else { return nil }
+        let menu = NSMenu(title: "")
+        menu.autoenablesItems = false
+        let zoomIn = NSMenuItem(title: PreviewStrings.text(.interactionZoomIn), action: #selector(zoomInFromMenu(_:)), keyEquivalent: "")
+        zoomIn.target = self
+        let zoomOut = NSMenuItem(title: PreviewStrings.text(.interactionZoomOut), action: #selector(zoomOutFromMenu(_:)), keyEquivalent: "")
+        zoomOut.target = self
+        let reset = NSMenuItem(title: PreviewStrings.text(.cadReset), action: #selector(resetZoomFromMenu(_:)), keyEquivalent: "")
+        reset.target = self
+        reset.isEnabled = !fitsToView
+        menu.addItem(zoomIn)
+        menu.addItem(zoomOut)
+        menu.addItem(reset)
+        return menu
+    }
+
+    @objc private func zoomInFromMenu(_ sender: Any?) { zoom(by: 1.25) }
+    @objc private func zoomOutFromMenu(_ sender: Any?) { zoom(by: 0.8) }
+    @objc private func resetZoomFromMenu(_ sender: Any?) { zoomToFit() }
 
     // MARK: Accessibility
 
@@ -337,26 +367,42 @@ final class DiagramCanvasView: NSView {
     /// One child per node, with its label and role, then one text element summarizing the connections.
     override func accessibilityChildren() -> [Any]? {
         guard let diagram else { return [] }
-        var elements: [NSAccessibilityElement] = []
-        for node in diagram.accessibilityNodes.prefix(DiagramLimits.maximumAccessibilityNodes) {
-            let element = NSAccessibilityElement()
-            element.setAccessibilityRole(.staticText)
-            element.setAccessibilityLabel(node.label)
-            element.setAccessibilityRoleDescription(PreviewStrings.text(Self.roleKey(node.role)))
-            element.setAccessibilityParent(self)
-            element.setAccessibilityFrameInParentSpace(viewRect(for: node.rect))
-            elements.append(element)
+        let elements: [NSAccessibilityElement]
+        if let cached = cachedAccessibilityChildren {
+            elements = cached
+        } else {
+            var built: [NSAccessibilityElement] = []
+            for node in diagram.accessibilityNodes.prefix(DiagramLimits.maximumAccessibilityNodes) {
+                let element = NSAccessibilityElement()
+                element.setAccessibilityRole(.staticText)
+                element.setAccessibilityLabel(node.label)
+                element.setAccessibilityRoleDescription(PreviewStrings.text(Self.roleKey(node.role)))
+                element.setAccessibilityParent(self)
+                built.append(element)
+            }
+            if !diagram.connections.isEmpty {
+                let summary = NSAccessibilityElement()
+                summary.setAccessibilityRole(.staticText)
+                summary.setAccessibilityLabel(PreviewStrings.text(.diagramConnections))
+                summary.setAccessibilityValue(connectionSummary(diagram))
+                summary.setAccessibilityParent(self)
+                built.append(summary)
+            }
+            cachedAccessibilityChildren = built
+            elements = built
         }
-        if !diagram.connections.isEmpty {
-            let summary = NSAccessibilityElement()
-            summary.setAccessibilityRole(.staticText)
-            summary.setAccessibilityLabel(PreviewStrings.text(.diagramConnections))
-            summary.setAccessibilityValue(connectionSummary(diagram))
-            summary.setAccessibilityParent(self)
-            summary.setAccessibilityFrameInParentSpace(bounds)
-            elements.append(summary)
-        }
+        updateAccessibilityFrames(for: diagram, in: elements)
         return elements
+    }
+
+    private func updateAccessibilityFrames(for diagram: SafeDiagram, in elements: [NSAccessibilityElement]) {
+        let nodes = diagram.accessibilityNodes.prefix(DiagramLimits.maximumAccessibilityNodes)
+        for (index, node) in nodes.enumerated() where elements.indices.contains(index) {
+            elements[index].setAccessibilityFrameInParentSpace(viewRect(for: node.rect))
+        }
+        if !diagram.connections.isEmpty, let summary = elements.last {
+            summary.setAccessibilityFrameInParentSpace(bounds)
+        }
     }
 
     func connectionSummary(_ diagram: SafeDiagram) -> String {

@@ -5,14 +5,14 @@ import AppKit
 extension NativePreviewView {
     var commandAvailability: PreviewCommandAvailability {
         let custom = shownModeView
-        let hasText = showsTextMode
+        let hasText = showsTextMode || custom is MarkupReferencesView
         let hasOutline = showsOutlineMode
         let hasTable = shownTable != nil
         return .init(hasContent: hasDisplayableContent || geometryPresentation != nil,
             selectionCopy: hasText || hasOutline || hasTable || custom is any PreviewSafeCopying,
             wholeTextCopy: copyAllText?.isEmpty == false,
             search: !acceptsTypedInput ? .none : (hasText || hasOutline ? .full : (hasTable ? .filter : .none)),
-            sourceLineNavigation: acceptsTypedInput && hasText && selectedMode != .rendered,
+            sourceLineNavigation: acceptsTypedInput && showsTextMode && selectedMode != .rendered,
             zoom: hasDisplayableContent && geometryPresentation == nil
                 && (custom == nil || custom?.respondsToTextZoom == true || custom is any SafeModeZoomable),
             geometryNavigation: geometrySupportsNavigation, modeCount: displayedModes.count)

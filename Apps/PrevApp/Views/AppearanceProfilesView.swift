@@ -103,13 +103,20 @@ struct AppearanceProfilesView: View {
     /// A finished export is a quiet note.
     @ViewBuilder private func transferNotice(_ key: PreviewStrings.Key, isProblem: Bool) -> some View {
         if isProblem {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                CompanionSymbol.warning.image.foregroundStyle(CompanionTone.caution.color).accessibilityHidden(true)
+            HStack(alignment: .center, spacing: 10) {
+                SettingsIconBadge(image: CompanionSymbol.warning.image, tone: .caution, size: 22)
                 Text(PreviewStrings.text(key)).fixedSize(horizontal: false, vertical: true)
             }
             .font(CompanionTypography.note)
-            .accessibilityElement(children: .combine)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 10)
             .padding(.vertical, 8)
+            .background(Color.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .strokeBorder(CompanionTone.caution.color.opacity(0.28), lineWidth: 1)
+            )
+            .accessibilityElement(children: .combine)
         } else {
             captionText(key)
                 .accessibilityAddTraits(.updatesFrequently)
@@ -127,7 +134,9 @@ struct AppearanceProfilesView: View {
         // The profile whose appearance is the one in use is marked, in words as well as position.
         let isCurrent = profile.appearance == settings.snapshot.appearance
         Button { settings.applyAppearanceProfile(id: profile.id) } label: {
-            Text(verbatim: profile.name).multilineTextAlignment(.leading)
+            Text(verbatim: profile.name)
+                .fontWeight(isCurrent ? .semibold : .regular)
+                .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .buttonStyle(.link)
@@ -135,24 +144,26 @@ struct AppearanceProfilesView: View {
         .accessibilityHint(Text(PreviewStrings.text(.applyProfile)))
         .accessibilityValue(Text(verbatim: isCurrent ? PreviewStrings.text(.profileCurrent) : ""))
         if isCurrent {
-            Text(PreviewStrings.text(.profileCurrent))
-                .font(CompanionTypography.note).foregroundStyle(CompanionInk.hint)
+            StatusPill(text: PreviewStrings.text(.profileCurrent), tone: .informational)
                 .accessibilityHidden(true)
         }
         Button(PreviewStrings.text(.deleteProfile)) { settings.deleteAppearanceProfile(id: profile.id) }
             .buttonStyle(.link)
+            .help(PreviewStrings.format(.deleteProfileNamed, arguments: [profile.name], locale: locale))
             .accessibilityLabel(Text(PreviewStrings.format(.deleteProfileNamed,
                 arguments: [profile.name], locale: locale)))
     }
 
     @ViewBuilder private var transferButtons: some View {
         Button(PreviewStrings.text(.themeImport)) { transfer.clearMessage(); isImporting = true }
+            .help(PreviewStrings.text(.themeImportHint))
         Button(PreviewStrings.text(.themeExport)) {
             if let data = transfer.prepareExport(settings.snapshot.appearance) {
                 exportDocument = AppearanceThemeDocument(data: data)
                 isExporting = true
             }
         }
+        .help(PreviewStrings.text(.themeExport))
     }
 
     /// What Save may do with the text in the field. The name is trimmed, so a space at either end is harmless.

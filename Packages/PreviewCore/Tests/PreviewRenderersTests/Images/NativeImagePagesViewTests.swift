@@ -230,6 +230,12 @@ struct NativeImagePagesViewTests {
         #expect(view.topPageIndex == 1)
         view.scrollToEnd()
         #expect(view.handleNavigationKey(keyEvent(124)))                              // Already at the end: stays put
+        view.userInterfaceLayoutDirection = .rightToLeft
+        view.scrollToStart()
+        #expect(view.handleNavigationKey(keyEvent(123)))                              // Left in RTL: next page
+        #expect(view.topPageIndex == 1)
+        #expect(view.handleNavigationKey(keyEvent(124)))                              // Right in RTL: previous page
+        #expect(view.topPageIndex == 0)
         view.clear()
     }
 

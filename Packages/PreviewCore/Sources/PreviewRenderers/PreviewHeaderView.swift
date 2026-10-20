@@ -25,6 +25,8 @@ final class PreviewHeaderView: NSView {
     var onSelectMode: ((NativePreviewMode) -> Void)?
 
     private let chipSlotGuide = NSLayoutGuide()
+    private var chipSlotWidthConstraint: NSLayoutConstraint?
+    private var currentDensity: PreviewChrome.Density = .regular
     private var headerTopConstraint: NSLayoutConstraint?
     private var notesTopConstraint: NSLayoutConstraint?
     private var limitsGapConstraint: NSLayoutConstraint?
@@ -47,8 +49,10 @@ final class PreviewHeaderView: NSView {
         factsLabel.setContentCompressionResistancePriority(PreviewChrome.notesNaturalWidthPriority, for: .horizontal)
         factsLabel.isHidden = true
         statusLabel.font = .preferredFont(forTextStyle: .caption1)
+        statusLabel.isSelectable = true
         statusLabel.setContentHuggingPriority(NSLayoutConstraint.Priority(999), for: .vertical)
         limitsLabel.font = PreviewChrome.factsFont()
+        limitsLabel.isSelectable = true
         limitsLabel.setContentHuggingPriority(NSLayoutConstraint.Priority(999), for: .vertical)
         limitsLabel.isHidden = true
         modeSelector.onSelectMode = { [weak self] mode in self?.onSelectMode?(mode) }
@@ -86,6 +90,7 @@ final class PreviewHeaderView: NSView {
         limitsBottomConstraint = limitsBottom
         let chipSlotWidth = chipSlotGuide.widthAnchor.constraint(equalToConstant: PreviewChrome.chipSlotWidth)
         chipSlotWidth.priority = PreviewChrome.chipSlotPriority
+        chipSlotWidthConstraint = chipSlotWidth
         NSLayoutConstraint.activate(collapsedControl + collapsedNotes + collapsedLimits)
         NSLayoutConstraint.activate([
             leadingAnchor.constraint(equalTo: host.leadingAnchor), trailingAnchor.constraint(equalTo: host.trailingAnchor),
@@ -112,6 +117,7 @@ final class PreviewHeaderView: NSView {
             limitsGap, limitsLabel.leadingAnchor.constraint(equalTo: headerGuide.leadingAnchor),
             limitsLabel.trailingAnchor.constraint(equalTo: headerGuide.trailingAnchor), limitsBottom
         ])
+        updateChipSlotWidth()
     }
 
     func displayFacts(_ lines: [String]) {
@@ -132,7 +138,9 @@ final class PreviewHeaderView: NSView {
 
     func display(_ model: Model, palette: NativeTextPalette) {
         statusLabel.stringValue = model.notes
+        statusLabel.toolTip = model.notes.isEmpty ? nil : model.notes
         limitsLabel.stringValue = model.limits
+        limitsLabel.toolTip = model.limits.isEmpty ? nil : model.limits
         if model.showsInfoBadge {
             infoBadge.show(providerName: model.providerName, color: palette.foreground, locale: model.locale)
         } else { infoBadge.hide() }
@@ -141,13 +149,26 @@ final class PreviewHeaderView: NSView {
 
     func displayModes(_ available: [NativePreviewMode], selected: NativePreviewMode,
                       density: PreviewChrome.Density = .regular) {
+        currentDensity = density
         modeSelector.display(available, selected: selected, density: density)
         updateChrome()
     }
 
     func setDensity(_ density: PreviewChrome.Density) {
+        currentDensity = density
         modeSelector.setDensity(density)
         updateChrome()
+        updateChipSlotWidth()
+    }
+
+    func showChip(_ text: String, spoken: String? = nil) {
+        chip.show(text, spoken: spoken)
+        updateChipSlotWidth()
+    }
+
+    func clearChip() {
+        chip.hide()
+        updateChipSlotWidth()
     }
 
     func clearModes() {
@@ -158,6 +179,20 @@ final class PreviewHeaderView: NSView {
     override func hitTest(_ point: NSPoint) -> NSView? {
         let hit = super.hitTest(point)
         return hit === self ? nil : hit
+    }
+
+    private func updateNoteAndLimitLineLimits() {
+        let isCompact = currentDensity == .compact
+        statusLabel.maximumNumberOfLines = isCompact ? 2 : 0
+        statusLabel.lineBreakMode = isCompact ? .byTruncatingTail : .byWordWrapping
+        statusLabel.cell?.truncatesLastVisibleLine = isCompact
+        limitsLabel.maximumNumberOfLines = isCompact ? 2 : 0
+        limitsLabel.lineBreakMode = isCompact ? .byTruncatingTail : .byWordWrapping
+        limitsLabel.cell?.truncatesLastVisibleLine = isCompact
+    }
+
+    private func updateChipSlotWidth() {
+        chipSlotWidthConstraint?.constant = (currentDensity == .compact && chip.isHidden) ? 0 : PreviewChrome.chipSlotWidth
     }
 
     private func updateChrome() {
@@ -180,5 +215,7 @@ final class PreviewHeaderView: NSView {
         limitsLabel.isHidden = !hasLimits
         limitsGapConstraint?.constant = hasLimits ? -PreviewChrome.rowGap : 0
         limitsBottomConstraint?.constant = hasLimits ? -PreviewChrome.rowGap : 0
+        updateNoteAndLimitLineLimits()
+        updateChipSlotWidth()
     }
 }

@@ -33,14 +33,22 @@ struct FolderPreviewSection: View {
 
     var body: some View {
         let depth = settings.snapshot.folderDepth
+        let foldersEnabled = settings.isEnabled(.folder)
         let title = PreviewStrings.text(.behaviorFolderDepthTitle)
         SettingsSection(PreviewStrings.text(.behaviorFoldersTitle)) {
             SettingsCard {
+                SettingsToggleRow(PreviewStrings.text(.generalFoldersTitle),
+                                  subtitle: PreviewStrings.text(.generalFoldersSubtitle),
+                                  isOn: Binding(get: { settings.isEnabled(.folder) },
+                                                set: { settings.setEnabled($0, for: .folder) }))
                 SettingsRow(title, subtitle: PreviewStrings.text(.behaviorFolderDepthSubtitle)) {
                     HStack(spacing: 8) {
                         Text(PreviewStrings.format(.behaviorFolderDepthValue, arguments: [depth], locale: locale))
                             .monospacedDigit()
                             .foregroundStyle(CompanionInk.hint)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                             .accessibilityHidden(true)
                         Stepper(value: Binding(get: { settings.snapshot.folderDepth },
                                                set: { settings.setFolderDepth($0) }),
@@ -48,15 +56,18 @@ struct FolderPreviewSection: View {
                             Text(title)
                         }
                         .labelsHidden()
+                        .help(title)
                         .accessibilityLabel(Text(title))
                         .accessibilityValue(Text(depth, format: .number.locale(locale)))
                         .accessibilityHint(Text(PreviewStrings.text(.behaviorFolderDepthSubtitle)))
                     }
                 }
+                .disabled(!foldersEnabled)
                 SettingsToggleRow(PreviewStrings.text(.behaviorHiddenTitle),
                                   subtitle: PreviewStrings.text(.behaviorHiddenSubtitle),
                                   isOn: Binding(get: { settings.snapshot.showsHiddenFolderItems },
                                                 set: { settings.setShowsHiddenFolderItems($0) }))
+                    .disabled(!foldersEnabled)
             }
         }
         .disabled(settings.isLoading)

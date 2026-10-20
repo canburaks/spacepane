@@ -183,6 +183,7 @@ struct PackageSummaryRenderingTests {
 
     @Test func theIconViewDrawsAndClearsTheExtractedIcon() throws {
         let view = try #require(SafeModeViewRegistry.makeView(for: .icon) as? PackageIconView)
+        #expect(view.keyboardFocusTarget === view)
         let modes = SafePreviewModes(presentation(#"{"name":"x"}"#, format: .applicationBundle, images: [icon(128)]), locale: Locale(identifier: "en"))
         let style = SafeModeStyle(typography: .init(), palette: .init(theme: .light, isDark: false, increasedContrast: false),
                                   syntaxStyle: .init(), locale: Locale(identifier: "en"))
@@ -191,11 +192,27 @@ struct PackageSummaryRenderingTests {
         let imageView = try #require(descendants(of: NSImageView.self, in: view).first)
         #expect(imageView.image != nil)
         #expect(imageView.accessibilityLabel() == PreviewStrings.text(.packageIconAccessibility))
+        #expect(imageView.toolTip == PreviewStrings.text(.packageIconAccessibility))
         #expect(imageView.accessibilityRole() == .image)
         view.layoutSubtreeIfNeeded()
         #expect(imageView.frame.width <= 256 && imageView.frame.height <= 256)
+        view.frame = NSRect(x: 0, y: 0, width: 220, height: 220)
+        view.layoutSubtreeIfNeeded()
+        #expect(imageView.frame.width <= 196 && view.bounds.contains(imageView.frame))
+        var announced: [String] = []
+        view.announcer?.handler = { announced.append($0) }
+        let window = NSWindow(contentRect: view.frame, styleMask: [.titled], backing: .buffered, defer: false)
+        window.contentView = view
+        #expect(window.makeFirstResponder(view))
+        let findEvent = try #require(NSEvent.keyEvent(
+            with: .keyDown, location: .zero, modifierFlags: .command, timestamp: 0, windowNumber: 0,
+            context: nil, characters: "f", charactersIgnoringModifiers: "f", isARepeat: false,
+            keyCode: PreviewKeyCode.ansiF))
+        #expect(view.performKeyEquivalent(with: findEvent))
+        #expect(announced == [PreviewStrings.text(.interactionFindUnavailable)])
         view.clear()
         #expect(imageView.image == nil)
+        #expect(imageView.toolTip == nil)
         // A presentation without an icon leaves nothing from a previous request on screen.
         view.display(modes, mode: .icon, style: style)
         view.display(SafePreviewModes(presentation(#"{"name":"y"}"#, format: .applicationBundle), locale: Locale(identifier: "en")), mode: .icon, style: style)

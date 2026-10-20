@@ -20,24 +20,12 @@ struct GeneralView: View {
                     leadingColumn
                     trailingColumn
                 }
-                QuickLookProviderDiagnosticsView(diagnostics: diagnostics)
             }
         }
     }
 
     private var leadingColumn: some View {
         VStack(alignment: .leading, spacing: CompanionMetrics.sectionSpacing) {
-            SettingsSection(PreviewStrings.text(.generalFinderTitle)) {
-                SettingsCard {
-                    SettingsRow(PreviewStrings.text(.generalSetupTitle), subtitle: PreviewStrings.text(.setupSteps))
-                    SettingsToggleRow(PreviewStrings.text(.generalFoldersTitle),
-                                      subtitle: PreviewStrings.text(.generalFoldersSubtitle),
-                                      isOn: Binding(get: { settings.isEnabled(.folder) },
-                                                    set: { settings.setEnabled($0, for: .folder) }))
-                        .disabled(settings.isLoading)
-                }
-                caption(.setupUnverified)
-            }
             PreviewBehaviorSection(settings: settings)
             FolderPreviewSection(settings: settings)
         }
@@ -66,12 +54,18 @@ struct GeneralView: View {
                     SettingsCard { SettingsStorageStatusView(keys: problems, settings: settings) }
                 }
             }
+            QuickLookProviderDiagnosticsView(diagnostics: diagnostics)
         }
     }
 
     private func limitRow(_ title: PreviewStrings.Key, subtitle: PreviewStrings.Key? = nil, value: String) -> some View {
         SettingsRow(PreviewStrings.text(title), subtitle: subtitle.map { PreviewStrings.text($0) }) {
-            Text(verbatim: value).monospacedDigit().foregroundStyle(CompanionInk.hint)
+            Text(verbatim: value)
+                .monospacedDigit()
+                .foregroundStyle(CompanionInk.hint)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Color.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
         .accessibilityElement(children: .combine)
     }
@@ -110,6 +104,10 @@ struct GeneralView: View {
                 }
             }
             .padding(.vertical, CompanionMetrics.rowVerticalPadding + 4)
+            Divider()
+            SettingsRow(PreviewStrings.text(.generalSetupTitle), subtitle: PreviewStrings.text(.setupSteps))
+            caption(.setupUnverified)
+                .padding(.bottom, 6)
         }
     }
 
@@ -128,6 +126,7 @@ struct GeneralView: View {
     private var openSystemSettingsButton: some View {
         Button(PreviewStrings.text(.openSystemSettings)) { systemSettingsAttempt = SystemSettingsDestination.open() }
             .fixedSize()
+            .help(PreviewStrings.text(.openSystemSettings))
     }
 
     private var bannerContent: BannerContent {

@@ -26,8 +26,10 @@ final class MarkupReferencesView: NSView, SafeModeContentView, PreviewSafeCopyin
         get { textView.copyHandler }
         set { textView.copyHandler = newValue }
     }
-    private let styleLabel = NSTextField(labelWithString: "")
+    let styleLabel = NSTextField(labelWithString: "")
     private let scrollView = NSScrollView()
+    private var controlLeadingToLabel: NSLayoutConstraint?
+    private var controlLeadingToEdge: NSLayoutConstraint?
     private(set) var selectedStyle: BibliographyStyle = .apa
     private var bibliography: SafeBibliography?
     private var lastStyle: SafeModeStyle?
@@ -60,10 +62,14 @@ final class MarkupReferencesView: NSView, SafeModeContentView, PreviewSafeCopyin
             view.translatesAutoresizingMaskIntoConstraints = false
             addSubview(view)
         }
+        let toLabel = styleControl.leadingAnchor.constraint(equalTo: styleLabel.trailingAnchor, constant: 8)
+        let toEdge = styleControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12)
+        controlLeadingToLabel = toLabel
+        controlLeadingToEdge = toEdge
         NSLayoutConstraint.activate([
             styleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             styleLabel.centerYAnchor.constraint(equalTo: styleControl.centerYAnchor),
-            styleControl.leadingAnchor.constraint(equalTo: styleLabel.trailingAnchor, constant: 8),
+            toLabel,
             styleControl.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             styleControl.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -12),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -76,7 +82,28 @@ final class MarkupReferencesView: NSView, SafeModeContentView, PreviewSafeCopyin
 
     required init?(coder: NSCoder) { nil }
 
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+
+    override func layout() {
+        updateChromeForWidth(bounds.width)
+        super.layout()
+    }
+
+    private func updateChromeForWidth(_ width: CGFloat) {
+        guard width > 0 else { return }
+        let isCompact = width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis
+        styleLabel.isHidden = isCompact
+        styleControl.controlSize = isCompact ? .small : .regular
+        controlLeadingToLabel?.isActive = !isCompact
+        controlLeadingToEdge?.isActive = isCompact
+    }
+
     // MARK: SafeModeContentView
+
+    var keyboardFocusTarget: NSView? { textView }
 
     func display(_ modes: SafePreviewModes, mode: NativePreviewMode, style: SafeModeStyle) {
         bibliography = modes.references
@@ -97,9 +124,12 @@ final class MarkupReferencesView: NSView, SafeModeContentView, PreviewSafeCopyin
 
     private func updateLabels() {
         styleLabel.stringValue = PreviewStrings.text(.markupReferencesStyleLabel)
+        styleLabel.toolTip = styleLabel.stringValue
         styleControl.setAccessibilityLabel(PreviewStrings.text(.markupReferencesStyleLabel))
         for (index, style) in BibliographyStyle.allCases.enumerated() {
-            styleControl.setLabel(PreviewStrings.text(style.title), forSegment: index)
+            let title = PreviewStrings.text(style.title)
+            styleControl.setLabel(title, forSegment: index)
+            styleControl.setToolTip(title, forSegment: index)
         }
         styleControl.selectedSegment = BibliographyStyle.allCases.firstIndex(of: selectedStyle) ?? 0
     }

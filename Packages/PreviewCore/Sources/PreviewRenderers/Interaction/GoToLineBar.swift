@@ -8,10 +8,13 @@ final class GoToLineBar: NSView, NSTextFieldDelegate {
     /// Symbol names are string-only API; this is their one definition.
     private enum Symbol: String { case close = "xmark.circle.fill" }
 
-    private let titleLabel = NSTextField(labelWithString: "")
+    let titleLabel = NSTextField(labelWithString: "")
     let field = NSTextField()
-    private let messageLabel = NSTextField(labelWithString: "")
+    let messageLabel = NSTextField(labelWithString: "")
     private let closeButton = NSButton()
+    private var fieldLeadingToTitle: NSLayoutConstraint?
+    private var fieldLeadingToEdge: NSLayoutConstraint?
+    private var fieldWidthConstraint: NSLayoutConstraint?
     private var palette: NativeTextPalette?
     private var showsError = false
 
@@ -45,12 +48,19 @@ final class GoToLineBar: NSView, NSTextFieldDelegate {
             view.translatesAutoresizingMaskIntoConstraints = false
             addSubview(view)
         }
+        let toTitle = field.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: PreviewChrome.gap)
+        toTitle.isActive = true
+        let toEdge = field.leadingAnchor.constraint(equalTo: leadingAnchor, constant: PreviewChrome.inset)
+        toEdge.isActive = false
+        let fieldWidth = field.widthAnchor.constraint(equalToConstant: 96)
+        fieldWidth.isActive = true
+        fieldLeadingToTitle = toTitle
+        fieldLeadingToEdge = toEdge
+        fieldWidthConstraint = fieldWidth
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: PreviewChrome.inset),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            field.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: PreviewChrome.gap),
             field.centerYAnchor.constraint(equalTo: centerYAnchor),
-            field.widthAnchor.constraint(equalToConstant: 96),
             messageLabel.leadingAnchor.constraint(equalTo: field.trailingAnchor, constant: PreviewChrome.gap),
             messageLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             closeButton.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.trailingAnchor, constant: PreviewChrome.gap),
@@ -63,6 +73,26 @@ final class GoToLineBar: NSView, NSTextFieldDelegate {
     }
 
     required init?(coder: NSCoder) { nil }
+
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+
+    override func layout() {
+        updateChromeForWidth(bounds.width)
+        super.layout()
+    }
+
+    private func updateChromeForWidth(_ width: CGFloat) {
+        guard width > 0 else { return }
+        let isCompact = width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis
+        titleLabel.isHidden = isCompact
+        field.controlSize = isCompact ? .small : .regular
+        fieldLeadingToTitle?.isActive = !isCompact
+        fieldLeadingToEdge?.isActive = isCompact
+        fieldWidthConstraint?.constant = isCompact ? 72 : 96
+    }
 
     /// The text of the message line: the valid range, or the reason the last entry was rejected.
     var message: String { messageLabel.stringValue }
@@ -86,6 +116,7 @@ final class GoToLineBar: NSView, NSTextFieldDelegate {
                 : ""
             showsError = false
         }
+        messageLabel.toolTip = messageLabel.stringValue.isEmpty ? nil : messageLabel.stringValue
         updateMessageColor()
         field.setAccessibilityHelp(error ?? PreviewStrings.text(.interactionGoToLineHelp))
     }

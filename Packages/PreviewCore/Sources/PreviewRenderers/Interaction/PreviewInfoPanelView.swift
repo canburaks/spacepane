@@ -55,6 +55,7 @@ final class PreviewInfoPanelView: NSView {
                 label.font = PreviewChrome.factsFont()
                 label.isEditable = false
                 label.isSelectable = false // Information stays static; selection belongs to the preview content.
+                label.toolTip = line
                 label.setAccessibilityElement(false) // The group exposes one full, coherent text value.
                 stack.addArrangedSubview(label)
                 let width = label.widthAnchor.constraint(equalToConstant: 1)

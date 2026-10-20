@@ -8,6 +8,7 @@ struct FileTypeGroupSection: View {
     let settings: CompanionSettings
     let isExpanded: Bool
     let toggleExpansion: () -> Void
+    var overlappingProvidersByFormat: [FormatID: [String]] = [:]
     @Environment(\.locale) private var locale
     @Environment(\.layoutDirection) private var layoutDirection
 
@@ -19,7 +20,10 @@ struct FileTypeGroupSection: View {
             if isExpanded {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 190), alignment: .topLeading)],
                           alignment: .leading, spacing: 12) {
-                    ForEach(group.visibleMembers, id: \.id) { FileTypeCell(format: $0, settings: settings) }
+                    ForEach(group.visibleMembers, id: \.id) { format in
+                        FileTypeCell(format: format, settings: settings,
+                                     overlappingProviders: overlappingProvidersByFormat[format.id] ?? [])
+                    }
                 }
                 .padding(.horizontal, CompanionMetrics.cardPadding)
                 .padding(.vertical, 12)
@@ -40,11 +44,18 @@ struct FileTypeGroupSection: View {
             .help(PreviewStrings.text(.groupTypesScope))
             .accessibilityLabel(Text(verbatim: name))
             .accessibilityHint(Text(PreviewStrings.text(.groupTypesScope)))
-            Text(PreviewStrings.format(.fileTypesEnabledCount, arguments: [summary.enabled, summary.total], locale: locale))
-                .font(CompanionTypography.note).foregroundStyle(CompanionInk.hint).lineLimit(1)
-            // No status word follows: the checkbox state and the count carry the choice, and a word such as
-            // "Enabled" would read as what Finder previews.
-            Spacer(minLength: 8)
+            HStack(spacing: 8) {
+                StatusPill(
+                    text: PreviewStrings.format(.fileTypesEnabledCount, arguments: [summary.enabled, summary.total], locale: locale),
+                    tone: summary.enabled > 0 ? .informational : .neutral
+                )
+                // No status word follows: the checkbox state and the count carry the choice, and a word such as
+                // "Enabled" would read as what Finder previews.
+                Spacer(minLength: 8)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture { toggleExpansion() }
+            .help(PreviewStrings.format(.fileTypesGroupDisclosure, arguments: [name], locale: locale))
         }
         .padding(.horizontal, CompanionMetrics.cardPadding)
         .padding(.vertical, 8)

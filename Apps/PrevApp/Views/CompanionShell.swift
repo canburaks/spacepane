@@ -81,15 +81,29 @@ struct CompanionShell: View {
         route.windowTitle(appName: configuration.displayName, locale: locale)
     }
 
+    private var overlappingProvidersByFormat: [FormatID: [String]] {
+        guard case .finished(let report) = diagnostics.state else { return [:] }
+        var map: [FormatID: [String]] = [:]
+        for provider in report.providers {
+            for formatID in provider.overlappingFormats {
+                map[formatID, default: []].append(provider.name)
+            }
+        }
+        return map
+    }
+
     @ViewBuilder private func content(for route: CompanionRoute) -> some View {
         switch route {
         case .general:
             GeneralView(configuration: configuration, settings: settings,
                         diagnostics: diagnostics)
-        case .fileTypes: FileTypeSettingsView(settings: settings)
+        case .fileTypes:
+            FileTypeSettingsView(settings: settings, overlappingProvidersByFormat: overlappingProvidersByFormat)
         case .theme: AppearanceSettingsView(settings: settings, sample: sampleSession)
         case .about: AboutView(configuration: configuration)
-        case .tryPreview: DirectPreviewView(session: session, settings: settings)
+        case .tryPreview:
+            DirectPreviewView(session: session, settings: settings,
+                              overlappingProvidersByFormat: overlappingProvidersByFormat)
         }
     }
 }

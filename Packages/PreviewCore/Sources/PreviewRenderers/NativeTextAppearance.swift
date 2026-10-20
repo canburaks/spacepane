@@ -5,9 +5,9 @@ import PreviewContracts
 /// The palette is chosen from the user's light or dark color scheme (`NativeColorSchemes`); High Contrast
 /// and the system Increase Contrast setting always override that choice.
 @MainActor
-struct NativeTextPalette {
+public struct NativeTextPalette {
     let background: NSColor
-    let foreground: NSColor
+    public let foreground: NSColor
     /// The quieter ink for secondary chrome text (counts, hints, notes): AA on `background` in every scheme and 7:1
     /// in High Contrast. It is a chrome tier, not a syntax role, so turning syntax colors off does not change it.
     let muted: NSColor
@@ -25,7 +25,7 @@ struct NativeTextPalette {
     private let invisibleMarker: NSColor
 
     /// `style` carries the user's color-scheme choices; its default is the Standard palettes.
-    init(theme: PreviewTheme, isDark: Bool, increasedContrast: Bool, style: PreviewSyntaxStyle = PreviewSyntaxStyle()) {
+    public init(theme: PreviewTheme, isDark: Bool, increasedContrast: Bool, style: PreviewSyntaxStyle = PreviewSyntaxStyle()) {
         let dark: Bool
         switch theme {
         case .light: dark = false
@@ -44,7 +44,7 @@ struct NativeTextPalette {
         invisibleMarker = dark ? Self.color(contrast ? 0xFFB3DA : 0xFF8FC8) : Self.color(contrast ? 0x7A0A47 : 0xA3125F)
     }
 
-    func color(for role: PreviewSyntaxRole, style: PreviewSyntaxStyle = PreviewSyntaxStyle()) -> NSColor {
+    public func color(for role: PreviewSyntaxRole, style: PreviewSyntaxStyle = PreviewSyntaxStyle()) -> NSColor {
         guard style.usesColor else { return foreground }
         return roleColors[role] ?? foreground
     }

@@ -80,6 +80,9 @@ struct Q53InfoPanelTests {
         }
         let fullText = host.view.displayedInfoLines.joined(separator: "\n")
         #expect(host.view.infoPanelView.accessibilityValue() as? String == fullText)
+        let rowLabels = descendants(of: NSTextField.self, in: host.view.infoPanelView)
+        #expect(rowLabels.map(\.stringValue) == host.view.displayedInfoLines)
+        #expect(rowLabels.allSatisfy { $0.toolTip == $0.stringValue })
         host.view.providerName = nil
         #expect(host.view.infoPanelIsOpen && !host.view.displayedInfoLines.contains(provider))
         #expect(host.view.displayedInfoLines.contains(concealed))

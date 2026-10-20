@@ -107,8 +107,13 @@ struct SettingsToggleRow: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            SettingsRowLabel(title: title, subtitle: subtitle).accessibilityHidden(true)
-            Spacer(minLength: 8)
+            HStack(alignment: .center, spacing: 0) {
+                SettingsRowLabel(title: title, subtitle: subtitle)
+                Spacer(minLength: 8)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture { isOn.toggle() }
+            .accessibilityHidden(true)
             Toggle(isOn: $isOn) { Text(verbatim: title) }
                 .labelsHidden()
                 .toggleStyle(.switch)

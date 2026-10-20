@@ -169,6 +169,46 @@ struct Q55CompactChromeTests {
         #expect(!host.view.navigationOrderViews.contains { $0 === host.view.modePullDown || $0 === host.view.modeControl })
     }
 
+    @Test func compactFinderSidebarCollapsesEmptyChipSlotSoFactsRemainVisible() throws {
+        let host = InteractionHarness(width: 240)
+        defer { host.release() }
+        show(plainPresentation(json, format: .json, syntax: .json), in: host.view)
+        #expect(host.view.density == .compact)
+        #expect(host.view.chip.isHidden)
+        #expect(host.view.factsLabel.bounds.width >= 60)
+        #expect(host.press("=", .command))
+        host.view.layoutSubtreeIfNeeded()
+        #expect(!host.view.chip.isHidden)
+        #expect(!host.view.hasAmbiguousLayout)
+    }
+
+    @Test func compactHeaderCapsStatusAndLimitsLinesWithTooltipsAndStateViewAdaptsControls() throws {
+        let host = InteractionHarness(width: 240)
+        defer { host.release() }
+        let presentation = TextPresentation(
+            formatID: .json, text: json, lineCount: 1, byteCount: json.utf8.count, encoding: .utf8,
+            redactionCount: 0, syntax: .json, truncatedSourceBytes: 1_000_000)
+        show(presentation, in: host.view, typography: PreviewTypography(fontFamily: "MissingFontFamily123"))
+        #expect(host.view.density == .compact)
+        #expect(!host.view.statusLabel.stringValue.isEmpty)
+        #expect(!host.view.limitsLabel.stringValue.isEmpty)
+        #expect(host.view.statusLabel.maximumNumberOfLines == 2)
+        #expect(host.view.limitsLabel.maximumNumberOfLines == 2)
+        #expect(host.view.statusLabel.toolTip == host.view.statusLabel.stringValue)
+        #expect(host.view.limitsLabel.toolTip == host.view.limitsLabel.stringValue)
+        resize(host.view, to: high)
+        #expect(host.view.statusLabel.maximumNumberOfLines == 0)
+        #expect(host.view.limitsLabel.maximumNumberOfLines == 0)
+        resize(host.view, to: 240)
+        host.view.display(.disabledByUser(.json), locale: english, resetsContentState: true)
+        host.view.layoutSubtreeIfNeeded()
+        #expect(host.view.stateView.actionButtonControlSize == .small)
+        #expect(host.view.stateView.stackSpacing == PreviewChrome.rowGap)
+        resize(host.view, to: high)
+        #expect(host.view.stateView.actionButtonControlSize == .regular)
+        #expect(host.view.stateView.stackSpacing == PreviewChrome.gap)
+    }
+
     private func show(_ presentation: TextPresentation, in view: NativePreviewView, typography: PreviewTypography = .init()) {
         view.display(.ready(presentation), typography: typography, locale: english, resetsContentState: true)
         view.layoutSubtreeIfNeeded()

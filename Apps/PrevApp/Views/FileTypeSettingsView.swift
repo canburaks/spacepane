@@ -4,6 +4,7 @@ import PreviewRenderers
 
 struct FileTypeSettingsView: View {
     let settings: CompanionSettings
+    var overlappingProvidersByFormat: [FormatID: [String]] = [:]
     @CompanionState private var search = ""
     @CompanionState private var collapsed: Set<FormatGroup> = []
     @Environment(\.locale) private var locale
@@ -16,6 +17,7 @@ struct FileTypeSettingsView: View {
 
     private enum Symbol {
         static let note = "info.circle"
+        static let emptySearch = "magnifyingglass"
     }
 
     /// How long typing must pause before the result count is spoken, so it never talks over the echoed characters.
@@ -111,7 +113,8 @@ struct FileTypeSettingsView: View {
 
     private var searchField: some View {
         FileTypeSearchField(text: $search, prompt: PreviewStrings.text(.searchFileTypes), focusRequest: searchFocusRequest)
-            .frame(width: 260)
+            .frame(minWidth: 180, idealWidth: 260, maxWidth: 280)
+            .help(PreviewStrings.text(.searchFileTypes))
     }
 
     // MARK: Table
@@ -126,11 +129,17 @@ struct FileTypeSettingsView: View {
                 .padding(.vertical, 7)
             Divider()
             if groups.isEmpty {
-                Text(PreviewStrings.text(.noMatchingFileTypes))
-                    .foregroundStyle(CompanionInk.hint)
-                    .multilineTextAlignment(.center)
-                    .padding(CompanionMetrics.pagePadding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing: 8) {
+                    Image(systemName: Symbol.emptySearch)
+                        .font(.system(size: 24))
+                        .foregroundStyle(CompanionInk.hint)
+                        .accessibilityHidden(true)
+                    Text(PreviewStrings.text(.noMatchingFileTypes))
+                        .foregroundStyle(CompanionInk.hint)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(CompanionMetrics.pagePadding)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ScrollView {
                     VStack(spacing: 0) {
@@ -138,7 +147,8 @@ struct FileTypeSettingsView: View {
                             if group.id != groups.first?.id { Divider() }
                             FileTypeGroupSection(group: group, settings: settings,
                                                  isExpanded: isSearching || !collapsed.contains(group.group),
-                                                 toggleExpansion: { toggle(group.group) })
+                                                 toggleExpansion: { toggle(group.group) },
+                                                 overlappingProvidersByFormat: overlappingProvidersByFormat)
                         }
                     }
                 }

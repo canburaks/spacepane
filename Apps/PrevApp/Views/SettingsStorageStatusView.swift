@@ -19,8 +19,8 @@ struct SettingsStorageStatusView: View {
     }
 
     private func line(_ key: PreviewStrings.Key) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
-            CompanionSymbol.warning.image.foregroundStyle(CompanionTone.caution.color).accessibilityHidden(true)
+        HStack(alignment: .center, spacing: 10) {
+            SettingsIconBadge(image: CompanionSymbol.warning.image, tone: .caution, size: 22)
             Text(PreviewStrings.text(key))
                 .fixedSize(horizontal: false, vertical: true)
             if let settings, let action = SettingsStatus.action(for: key) {

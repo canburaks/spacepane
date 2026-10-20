@@ -17,7 +17,7 @@ struct AppearanceControlsView: View {
             AppearanceSchemeControls(style: $syntaxStyle)
             AppearanceFontControls(typography: $typography, fontFamilies: fontFamilies)
             AppearanceLayoutControls(typography: $typography)
-            AppearanceSyntaxControls(style: $syntaxStyle)
+            AppearanceSyntaxControls(style: $syntaxStyle, theme: theme)
         }
     }
 
@@ -53,6 +53,7 @@ struct AppearanceControlsView: View {
             }
         }
         .labelsHidden()
+        .help(PreviewStrings.text(.appearanceColorMode))
         switch kind {
         case .segmented: choices.pickerStyle(.segmented)
         case .menu: choices.pickerStyle(.menu)

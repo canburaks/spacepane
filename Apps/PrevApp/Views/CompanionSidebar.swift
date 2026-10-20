@@ -31,7 +31,14 @@ struct CompanionSidebar: View {
 
     private func destination(_ destination: CompanionRoute) -> some View {
         Label { Text(PreviewStrings.text(destination.title)) } icon: { destination.symbol.image }
+            .badge(badgeCount(for: destination))
+            .help(PreviewStrings.text(destination.title))
             .tag(destination)
+    }
+
+    private func badgeCount(for destination: CompanionRoute) -> Int {
+        guard destination == .fileTypes, !settings.isLoading else { return 0 }
+        return FileTypeEnablementSummary(FormatCatalog.standard.descriptors, isEnabled: settings.isEnabled).enabled
     }
 
     private var identity: some View {
@@ -71,7 +78,12 @@ struct CompanionSidebar: View {
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .background(tone.color.opacity(0.12), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .strokeBorder(tone.color.opacity(current.tone == .caution ? 0.28 : 0.16), lineWidth: 1)
+        )
         .padding(10)
+        .help(PreviewStrings.text(current.titleKey))
         .accessibilityElement(children: .combine)
     }
 }

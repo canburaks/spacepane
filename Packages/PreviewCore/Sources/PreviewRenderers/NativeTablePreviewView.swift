@@ -10,7 +10,7 @@ import PreviewContracts
 /// output are untouched, so neither can reveal anything the privacy filter concealed. The column header
 /// stays visible while the rows scroll, and rows alternate in background color.
 @MainActor
-final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDelegate, PreviewAnnouncing, PreviewCopyReporting, PreviewSafeCopying {
+final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, PreviewAnnouncing, PreviewCopyReporting, PreviewSafeCopying {
     private static let cellIdentifier = NSUserInterfaceItemIdentifier("safe-table-cell")
     /// The concealment token the privacy filter writes; a cell holding exactly it is drawn as a comment.
     private static let concealmentToken = SecretFieldPolicy.concealmentToken
@@ -30,7 +30,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     let sortButton = NSPopUpButton(frame: .zero, pullsDown: true)
     /// Opens the filter field; shown while the field is hidden and the host passes typed keys to the preview.
     let searchButton = NSButton()
-    private let filterStatusLabel = NSTextField(labelWithString: "")
+    let filterStatusLabel = NSTextField(labelWithString: "")
     let filterBar = NSStackView()
     /// False where typed keys never reach the preview (Finder sends them to its own file list), so the filter
     /// field, its button and Command-F are not offered. Sorting needs no typing and stays.
@@ -38,6 +38,14 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         didSet { if !acceptsTypedInput { hideFilterField() } else { updateSearchButton() } }
     }
     private let stack = NSStackView()
+    private var filterMinWidthConstraint: NSLayoutConstraint?
+    private struct SavedTableState {
+        let table: SafeTable
+        let sort: (column: Int, ascending: Bool)?
+        let filterText: String
+        let selectedSourceRows: Set<Int>
+    }
+    private var savedStates: [SafeTable.Origin: SavedTableState] = [:]
     private var table: SafeTable?
     /// Source row indexes in display order: the current sort, then the filter.
     private var order: [Int] = []
@@ -51,6 +59,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     private var columnIndexes: [NSUserInterfaceItemIdentifier: Int] = [:]
     private var stylePass: NativeTextStylePass?
     private var glyphWidth: CGFloat = 0
+    private var density: PreviewChrome.Density = .regular
     /// A table made on its own keeps this announcer; the hosting preview replaces it with its own.
     var announcer: PreviewAnnouncer? = PreviewAnnouncer()
     /// Receives each copy of rows once, after the pasteboard write; the hosting preview confirms it.
@@ -84,6 +93,8 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         tableView.safeCopy = { [weak self] in self?.selectedSafeText() ?? "" }
         tableView.didCopyRows = { [weak self] event in self?.reportCopy(event) }
         tableView.focusFilter = { [weak self] in _ = self?.showFilter() }
+        tableView.contextMenuProvider = { [weak self] row, column in self?.contextMenu(row: row, column: column) }
+        filterField.delegate = self
         configureFilterBar()
         stack.orientation = .vertical
         stack.alignment = .width
@@ -107,6 +118,16 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
 
     required init?(coder: NSCoder) { nil }
 
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+
+    override func layout() {
+        updateColumnsForWidth(bounds.width)
+        super.layout()
+    }
+
     func display(_ table: SafeTable, typography requested: PreviewTypography, palette: NativeTextPalette,
                  syntaxStyle: PreviewSyntaxStyle, locale: Locale) {
         let typography = NativeTextTypography(requested, syntaxStyle: syntaxStyle)
@@ -125,14 +146,82 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         let localeChanged = presentationLocale != locale
         presentationLocale = locale
         if changed {
+            let currentSelected = Set(tableView.selectedRowIndexes.compactMap { order.indices.contains($0) ? order[$0] : nil })
+            let sameSchemaReload: Bool
+            let previousOrigin = scrollView.contentView.bounds.origin
+            if let current = self.table {
+                sameSchemaReload = current.origin == table.origin
+                    && current.columns == table.columns
+                    && current.columnKinds == table.columnKinds
+                savedStates[current.origin] = SavedTableState(
+                    table: current,
+                    sort: sort,
+                    filterText: filterText,
+                    selectedSourceRows: currentSelected
+                )
+            } else {
+                sameSchemaReload = false
+            }
             self.table = table
-            resetOrdering(for: table)
-            rebuildColumns(for: table, font: typography.font)
-            configureFilterControls(for: table)
-            tableView.reloadData()
-            tableView.deselectAll(nil)
-            scrollView.contentView.scroll(to: .zero)
-            scrollView.reflectScrolledClipView(scrollView.contentView)
+            if let saved = savedStates[table.origin], saved.table == table {
+                sort = saved.sort
+                filterText = saved.filterText
+                filterField.stringValue = saved.filterText
+                filter.reset()
+                if !saved.filterText.isEmpty {
+                    filterField.isHidden = false
+                }
+                sortedOrder = sort.map { SafeTableOrdering.sorted(table, by: $0.column, ascending: $0.ascending) }
+                    ?? Array(table.rows.indices)
+                order = filter.rows(in: sortedOrder, of: table, matching: filterText)
+                rebuildColumns(for: table, font: typography.font)
+                configureFilterControls(for: table)
+                isSyncingSortDescriptors = true
+                tableView.sortDescriptors = sort.map { [NSSortDescriptor(key: String($0.column), ascending: $0.ascending)] } ?? []
+                isSyncingSortDescriptors = false
+                tableView.reloadData()
+                tableView.selectRowIndexes(
+                    IndexSet(order.indices.filter { saved.selectedSourceRows.contains(order[$0]) }),
+                    byExtendingSelection: false
+                )
+                updateSearchButton()
+            } else if sameSchemaReload {
+                sort = sort.flatMap { table.columns.indices.contains($0.column) ? $0 : nil }
+                filterField.stringValue = filterText
+                filter.reset()
+                if !filterText.isEmpty {
+                    filterField.isHidden = false
+                }
+                sortedOrder = sort.map { SafeTableOrdering.sorted(table, by: $0.column, ascending: $0.ascending) }
+                    ?? Array(table.rows.indices)
+                order = filter.rows(in: sortedOrder, of: table, matching: filterText)
+                rebuildColumns(for: table, font: typography.font)
+                configureFilterControls(for: table)
+                isSyncingSortDescriptors = true
+                tableView.sortDescriptors = sort.map { [NSSortDescriptor(key: String($0.column), ascending: $0.ascending)] } ?? []
+                isSyncingSortDescriptors = false
+                tableView.reloadData()
+                let restoredRowIndexes = IndexSet(order.indices.filter { currentSelected.contains(order[$0]) })
+                tableView.selectRowIndexes(restoredRowIndexes, byExtendingSelection: false)
+                let maxY = max(0, tableView.frame.height - scrollView.contentView.bounds.height)
+                scrollView.contentView.scroll(to: NSPoint(x: previousOrigin.x, y: min(max(0, previousOrigin.y), maxY)))
+                scrollView.reflectScrolledClipView(scrollView.contentView)
+                savedStates[table.origin] = SavedTableState(
+                    table: table,
+                    sort: sort,
+                    filterText: filterText,
+                    selectedSourceRows: Set(restoredRowIndexes.map { order[$0] })
+                )
+            } else {
+                savedStates[table.origin] = nil
+                resetOrdering(for: table)
+                rebuildColumns(for: table, font: typography.font)
+                configureFilterControls(for: table)
+                tableView.reloadData()
+                tableView.deselectAll(nil)
+                scrollView.contentView.scroll(to: .zero)
+                scrollView.reflectScrolledClipView(scrollView.contentView)
+            }
         } else {
             if localeChanged { configureFilterControls(for: table) }
             rescaleColumns(by: previousGlyphWidth > 0 ? glyphWidth / previousGlyphWidth : 1)
@@ -153,6 +242,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
 
     /// Releases the data and returns the view to a neutral state for the next preview.
     func clear() {
+        savedStates = [:]
         table = nil
         columnIndexes = [:]
         order = []
@@ -162,6 +252,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         filterField.stringValue = ""
         filter.reset()
         filterStatusLabel.stringValue = ""
+        filterStatusLabel.toolTip = nil
         filterStatusLabel.isHidden = true
         filterField.isHidden = true
         updateSearchButton()
@@ -196,6 +287,21 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
 
     // MARK: Cells
 
+    private static let httpMethods: Set<String> = ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "TRACE"]
+
+    static func cellRole(for text: String, kind: SafeTable.ColumnKind?) -> PreviewSyntaxRole? {
+        if text == concealmentToken || text == "NULL" || text == "null" {
+            return .comment
+        }
+        if text == "true" || text == "false" || text == "TRUE" || text == "FALSE" || httpMethods.contains(text) {
+            return .keyword
+        }
+        if kind == .number {
+            return .number
+        }
+        return nil
+    }
+
     /// One-time properties. Reused cells keep them, so per-cell work stays small for wide tables.
     private func prepare(_ field: NSTextField) {
         field.identifier = Self.cellIdentifier
@@ -208,9 +314,12 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     private func configure(_ field: NSTextField, row: Int, column: Int) {
         guard let table, let stylePass, order.indices.contains(row) else { return }
         let text = table.cell(row: order[row], column: column)
-        let attributes = text == Self.concealmentToken ? stylePass.attributes(for: .comment) : stylePass.baseAttributes
+        let kind = table.columnKinds.indices.contains(column) ? table.columnKinds[column] : nil
+        let role = Self.cellRole(for: text, kind: kind)
+        let attributes = role.map { stylePass.attributes(for: $0) } ?? stylePass.baseAttributes
         // One row stays one line: the cell shows line breaks and tabs as spaces; the tooltip keeps them.
         field.attributedStringValue = NSAttributedString(string: Self.singleLine(text), attributes: attributes)
+        field.alignment = kind == .number ? .right : .natural
         let tooltip = text.utf8.count > Self.tooltipMinimumLength ? String(text.prefix(Self.tooltipCharacters)) : nil
         if field.toolTip != tooltip { field.toolTip = tooltip }
         // The column title gives each value its context for assistive technology.
@@ -229,12 +338,14 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         indexes.reserveCapacity(table.columns.count)
         for (index, title) in table.columns.enumerated() {
             let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("safe-table-column-\(index)"))
+            let kind = table.columnKinds.indices.contains(index) ? table.columnKinds[index] : nil
             column.title = title
             column.headerToolTip = title
             column.minWidth = Self.minimumColumnWidth
             column.maxWidth = 4_000
             column.resizingMask = .userResizingMask
             column.headerCell.lineBreakMode = .byTruncatingTail
+            column.headerCell.alignment = kind == .number ? .right : .natural
             // Clicking the header sorts by this column; `sortDescriptorsDidChange` does the work.
             column.sortDescriptorPrototype = NSSortDescriptor(key: String(index), ascending: true)
             column.width = preferredWidth(of: index, in: table)
@@ -242,6 +353,59 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
             tableView.addTableColumn(column)
         }
         columnIndexes = indexes
+        updateColumnsForWidth(bounds.width)
+    }
+
+    private func isEndpointsTable(_ table: SafeTable) -> Bool {
+        table.origin == .delimitedText
+            && tableView.tableColumns.count == 4
+            && table.columns.first == PreviewStrings.text(.dataMethod)
+            && table.columns.last == PreviewStrings.text(.openAPIColumnDeprecated)
+    }
+
+    private func updateColumnsForWidth(_ width: CGFloat) {
+        guard width > 0, let table else { return }
+        let next = PreviewChrome.density(forWidth: width, previous: density)
+        let isCompact = next == .compact
+        filterField.controlSize = isCompact ? .small : .regular
+        sortButton.controlSize = isCompact ? .small : .regular
+        searchButton.controlSize = isCompact ? .small : .regular
+        filterMinWidthConstraint?.constant = isCompact ? 84 : 120
+        filterBar.edgeInsets = isCompact
+            ? NSEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+            : NSEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
+        if table.origin == .listing && tableView.tableColumns.count == 4 {
+            if next == .compact {
+                tableView.tableColumns[0].isHidden = false
+                tableView.tableColumns[0].width = max(100, width - 84)
+                tableView.tableColumns[1].isHidden = true
+                tableView.tableColumns[2].isHidden = false
+                tableView.tableColumns[2].width = 76
+                tableView.tableColumns[3].isHidden = true
+            } else if density == .compact {
+                for (index, column) in tableView.tableColumns.enumerated() {
+                    column.isHidden = false
+                    column.width = preferredWidth(of: index, in: table)
+                }
+            }
+        } else if isEndpointsTable(table) {
+            if next == .compact {
+                tableView.tableColumns[0].isHidden = false
+                tableView.tableColumns[0].minWidth = 56
+                tableView.tableColumns[0].width = 68
+                tableView.tableColumns[1].isHidden = false
+                tableView.tableColumns[1].width = max(100, width - 76)
+                tableView.tableColumns[2].isHidden = true
+                tableView.tableColumns[3].isHidden = true
+            } else if density == .compact && next == .regular {
+                for (index, column) in tableView.tableColumns.enumerated() {
+                    column.isHidden = false
+                    column.minWidth = Self.minimumColumnWidth
+                    column.width = preferredWidth(of: index, in: table)
+                }
+            }
+        }
+        density = next
     }
 
     /// Keeps user-resized widths proportional when only the font metrics change.
@@ -279,7 +443,9 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         filterField.target = self
         filterField.action = #selector(filterFieldChanged(_:))
         filterField.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        filterField.widthAnchor.constraint(greaterThanOrEqualToConstant: 120).isActive = true
+        let minWidth = filterField.widthAnchor.constraint(greaterThanOrEqualToConstant: 120)
+        minWidth.isActive = true
+        filterMinWidthConstraint = minWidth
         // Its ink is the palette's muted tier, set with every `display`.
         filterStatusLabel.font = .preferredFont(forTextStyle: .caption1)
         filterStatusLabel.lineBreakMode = .byTruncatingTail
@@ -335,6 +501,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         }
         sortButton.menu = menu
         sortButton.setAccessibilityLabel(PreviewStrings.text(.listingSortMenu))
+        sortButton.toolTip = PreviewStrings.text(.listingSortMenu)
         updateSortMenuState()
         updateFilterStatus()
     }
@@ -404,10 +571,32 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
         return true
     }
 
+    @discardableResult
+    func focusFilterField() -> Bool {
+        showFilter()
+    }
+
     @objc private func searchButtonPressed(_ sender: NSButton) { showFilter() }
 
     /// The SF Symbol for the button that opens the filter field.
     private static let searchSymbol = "magnifyingglass"
+
+    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
+            handleFilterEscape()
+            return true
+        }
+        return false
+    }
+
+    func handleFilterEscape() {
+        if !filterText.isEmpty || !filterField.stringValue.isEmpty {
+            setFilter("")
+        } else {
+            hideFilterField()
+            window?.makeFirstResponder(tableView)
+        }
+    }
 
     /// Hides the filter field and drops its text, so no hidden filter keeps rows out of view.
     private func hideFilterField() {
@@ -424,6 +613,10 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     /// Hides every row without the text; an empty text shows every row again.
     func setFilter(_ text: String) {
         if filterField.stringValue != text { filterField.stringValue = text }
+        if !text.isEmpty {
+            filterField.isHidden = false
+            updateSearchButton()
+        }
         filterText = text
         applyOrder(resort: false)
     }
@@ -453,10 +646,12 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     private func updateFilterStatus() {
         guard let table, !filterText.isEmpty else {
             filterStatusLabel.stringValue = ""
+            filterStatusLabel.toolTip = nil
             filterStatusLabel.isHidden = true
             return
         }
         filterStatusLabel.stringValue = filterStatusText(for: table)
+        filterStatusLabel.toolTip = filterStatusLabel.stringValue.isEmpty ? nil : filterStatusLabel.stringValue
         filterStatusLabel.isHidden = false
     }
 
@@ -489,6 +684,75 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     }
 
     // MARK: Copy
+
+    private struct CellCoordinate {
+        let row: Int
+        let column: Int
+    }
+
+    func contextMenu(row: Int, column: Int) -> NSMenu? {
+        guard table != nil, order.indices.contains(row) else { return nil }
+        if !tableView.selectedRowIndexes.contains(row) {
+            tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+        }
+        let menu = NSMenu(title: "")
+        menu.autoenablesItems = false
+        if column >= 0, column < tableView.tableColumns.count {
+            let tableCol = tableView.tableColumns[column]
+            if let logicalCol = columnIndexes[tableCol.identifier] {
+                let copyValue = NSMenuItem(title: PreviewStrings.text(.interactionCopyValue),
+                                           action: #selector(copyClickedCell(_:)), keyEquivalent: "")
+                copyValue.target = self
+                copyValue.representedObject = CellCoordinate(row: row, column: logicalCol)
+                menu.addItem(copyValue)
+            }
+        }
+        let copyRow = NSMenuItem(title: PreviewStrings.text(.interactionCopy),
+                                 action: #selector(copySelectedRowsFromMenu(_:)), keyEquivalent: "")
+        copyRow.target = self
+        menu.addItem(copyRow)
+        let copyAll = NSMenuItem(title: PreviewStrings.text(.interactionCopyAll),
+                                 action: #selector(copyAllShownRowsFromMenu(_:)), keyEquivalent: "")
+        copyAll.target = self
+        menu.addItem(copyAll)
+        return menu
+    }
+
+    @objc private func copyClickedCell(_ sender: NSMenuItem) {
+        guard let table, let coord = sender.representedObject as? CellCoordinate,
+              order.indices.contains(coord.row) else { return }
+        let text = Self.singleLine(table.cell(row: order[coord.row], column: coord.column))
+        guard !text.isEmpty else { return }
+        let copied = tableView.sanitizedCopyText(text)
+        guard tableView.selectionWriter(copied.text, pasteboard) else { return }
+        reportCopy(.rows(1).removingTags(copied.removedTagScalarCount))
+    }
+
+    @objc private func copySelectedRowsFromMenu(_ sender: NSMenuItem) {
+        tableView.copy(nil)
+    }
+
+    @objc private func copyAllShownRowsFromMenu(_ sender: NSMenuItem) {
+        guard table != nil, !order.isEmpty else { return }
+        let text = allShownSafeText()
+        guard !text.isEmpty else { return }
+        let copied = tableView.sanitizedCopyText(text)
+        guard tableView.selectionWriter(copied.text, pasteboard) else { return }
+        reportCopy(.rows(order.count).removingTags(copied.removedTagScalarCount))
+    }
+
+    func allShownSafeText() -> String {
+        guard let table else { return "" }
+        var lines: [String] = [table.columns.map(Self.singleLine).joined(separator: "\t")]
+        for sourceIndex in order where table.rows.indices.contains(sourceIndex) {
+            let row = table.rows[sourceIndex]
+            let line = table.columns.indices
+                .map { row.indices.contains($0) ? Self.singleLine(row[$0]) : "" }
+                .joined(separator: "\t")
+            lines.append(line)
+        }
+        return lines.joined(separator: "\n")
+    }
 
     /// Tells the hosting preview about a copy, which confirms it once. A view with no host says so itself, so a
     /// copy is never silent.
@@ -540,6 +804,7 @@ final class SafeCopyTableView: NSTableView, PreviewSafeCopying {
     /// Tests substitute a private pasteboard so they never touch the user's clipboard.
     var pasteboard = NSPasteboard.general
     var tagCopyPolicy: (() -> Bool)?
+    var contextMenuProvider: ((Int, Int) -> NSMenu?)?
     /// Returns whether the write succeeded; tests can exercise failure without changing the host's board.
     var selectionWriter: (String, NSPasteboard) -> Bool = { text, board in
         board.clearContents()
@@ -561,5 +826,26 @@ final class SafeCopyTableView: NSTableView, PreviewSafeCopying {
             if command == .find, let focusFilter { focusFilter(); return true }
         }
         return super.performKeyEquivalent(with: event)
+    }
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let point = convert(event.locationInWindow, from: nil)
+        let clickedRow = row(at: point)
+        guard clickedRow >= 0 else { return nil }
+        let clickedColumn = column(at: point)
+        if !selectedRowIndexes.contains(clickedRow) {
+            selectRowIndexes(IndexSet(integer: clickedRow), byExtendingSelection: false)
+        }
+        return contextMenuProvider?(clickedRow, clickedColumn)
+    }
+    override func moveToBeginningOfDocument(_ sender: Any?) {
+        guard numberOfRows > 0 else { return }
+        selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        scrollRowToVisible(0)
+    }
+    override func moveToEndOfDocument(_ sender: Any?) {
+        guard numberOfRows > 0 else { return }
+        let last = numberOfRows - 1
+        selectRowIndexes(IndexSet(integer: last), byExtendingSelection: false)
+        scrollRowToVisible(last)
     }
 }

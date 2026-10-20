@@ -54,8 +54,10 @@ struct AboutView: View {
                 .accessibilityHidden(true)
             Text(verbatim: configuration.displayName).font(CompanionTypography.pageTitle)
             if let version = configuration.version, let build = configuration.build {
-                Text(PreviewStrings.format(.aboutVersion, arguments: [version, build], locale: locale))
-                    .foregroundStyle(CompanionInk.hint)
+                StatusPill(
+                    text: PreviewStrings.format(.aboutVersion, arguments: [version, build], locale: locale),
+                    tone: .neutral
+                )
             }
             Text(PreviewStrings.text(.aboutDescription))
                 .foregroundStyle(CompanionInk.hint)
@@ -113,6 +115,7 @@ struct AboutView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .help(PreviewStrings.text(resource.kind.titleKey))
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isLink)
     }

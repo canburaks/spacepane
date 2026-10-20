@@ -39,12 +39,22 @@ struct MarkupContentsViewTests {
         #expect(view.headings.map(\.level) == [1, 2, 3, 1])
         let cells = (0..<4).compactMap { view.tableView(view.tableView, viewFor: nil, row: $0) as? ContentsCell }
         #expect(cells.map { $0.field.stringValue } == ["First", "Second", "Third", "Fourth"])
+        #expect(cells.first?.field.toolTip == nil)
         view.layoutSubtreeIfNeeded()
         let insets = cells.map { cell -> CGFloat in
             cell.layoutSubtreeIfNeeded()
             return cell.field.frame.minX
         }
         #expect(insets[0] < insets[1] && insets[1] < insets[2] && insets[3] == insets[0])
+
+        let longHeadingView = MarkupContentsView(frame: NSRect(x: 0, y: 0, width: 400, height: 300))
+        longHeadingView.display(
+            modes(.markdown, "# A Very Long Section Heading That Wraps In Narrow Sidebars", syntax: .markdown),
+            mode: .contents,
+            style: style()
+        )
+        let longCell = try #require(longHeadingView.tableView(longHeadingView.tableView, viewFor: nil, row: 0) as? ContentsCell)
+        #expect(longCell.field.toolTip == "A Very Long Section Heading That Wraps In Narrow Sidebars")
     }
 
     @Test func choosingAHeadingNavigatesToItsRangeInTheRenderedText() throws {
@@ -109,18 +119,33 @@ struct MarkupContentsViewTests {
 
     @Test func copyWritesOnlySelectedSafeTitlesToAPrivatePasteboardOwner() throws {
         let view = shown()
+        view.tableView.moveToEndOfDocument(nil)
+        #expect(view.tableView.selectedRow == 3)
+        view.tableView.moveToBeginningOfDocument(nil)
+        #expect(view.tableView.selectedRow == 0)
         view.tableView.selectRowIndexes(IndexSet(integer: 1), byExtendingSelection: false)
         let pasteboard = NSPasteboard(name: NSPasteboard.Name("contents-copy-\(UUID().uuidString)"))
         defer { pasteboard.releaseGlobally() }
         view.pasteboard = pasteboard
         var copies: [PreviewCopyEvent] = []
         view.copyHandler = { copies.append($0) }
-        view.tableView.copy(nil)
+        let menu = try #require(view.tableView.contextMenu(forRow: 1))
+        #expect(menu.items.map(\.title) == [PreviewStrings.text(.interactionCopy), PreviewStrings.text(.interactionCopyAll)])
+        let copyItem = try #require(menu.items.first)
+        #expect(view.tableView.sendAction(copyItem.action, to: copyItem.target))
         #expect(pasteboard.string(forType: .string) == "Second")
         #expect(copies == [.rows(1)])
         view.tableView.deselectAll(nil)
         view.tableView.copy(nil)
         #expect(copies == [.rows(1)] && pasteboard.string(forType: .string) == "Second")
+        view.display(
+            modes(.markdown, "# First\n\ntext\n\n## Second ••••\n\n### Third\n\n# Fourth", syntax: .markdown),
+            mode: .contents,
+            style: style()
+        )
+        _ = menu.items[1].target?.perform(menu.items[1].action, with: menu.items[1])
+        #expect(pasteboard.string(forType: .string) == "First\n  Second ••••\n    Third\nFourth")
+        #expect(copies == [.rows(1), .text])
     }
 
     @Test func concealedHeadingTextStaysConcealed() throws {
@@ -145,8 +170,11 @@ struct MarkupReferencesViewTests {
 
     @Test func offersTheFourStylesAndStartsWithAPA() throws {
         let view = shown()
+        #expect(view.keyboardFocusTarget === view.textView)
+        #expect(view.styleLabel.toolTip == PreviewStrings.text(.markupReferencesStyleLabel))
         #expect(view.styleControl.segmentCount == 4)
         #expect((0..<4).map { view.styleControl.label(forSegment: $0) } == BibliographyStyle.allCases.map { PreviewStrings.text($0.title) })
+        #expect((0..<4).map { view.styleControl.toolTip(forSegment: $0) } == BibliographyStyle.allCases.map { PreviewStrings.text($0.title) })
         #expect(view.selectedStyle == .apa)
         #expect(view.textView.string.hasPrefix("Knuth, D. E. (1984)."))
         #expect(view.textView.string.contains("Lovelace, A. (1843). Notes. Memoirs."))
@@ -210,6 +238,18 @@ struct MarkupReferencesViewTests {
         let view = MarkupReferencesView(frame: NSRect(x: 0, y: 0, width: 600, height: 400))
         view.display(modes(.bibtex, "@misc{x, author = {Doe, Jane}, title = {Safe}, year = {2020}, doi = ••••}", syntax: .bibtex), mode: .references, style: style())
         #expect(view.textView.string.contains("https://doi.org/••••"))
+    }
+
+    @Test func compactWidthHidesStyleLabelAndShrinksSegmentedControl() throws {
+        let view = MarkupReferencesView(frame: NSRect(x: 0, y: 0, width: 240, height: 400))
+        view.display(modes(.bibtex, bib, syntax: .bibtex), mode: .references, style: style())
+        view.layoutSubtreeIfNeeded()
+        #expect(view.styleLabel.isHidden)
+        #expect(view.styleControl.controlSize == .small)
+        view.setFrameSize(NSSize(width: 600, height: 400))
+        view.layoutSubtreeIfNeeded()
+        #expect(!view.styleLabel.isHidden)
+        #expect(view.styleControl.controlSize == .regular)
     }
 }
 

@@ -17,11 +17,13 @@ struct SettingsUndoNotice: View {
                 if isApplied { settings.undoLastAction() } else { settings.redoLastAction() }
             }
             .controlSize(.small)
+            .help(PreviewStrings.text(isApplied ? .undo : .redo))
         }
         .font(CompanionTypography.note)
         .padding(10)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.primary.opacity(0.06), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).strokeBorder(Color.primary.opacity(0.12), lineWidth: 1))
         .accessibilityElement(children: .contain)
     }
 

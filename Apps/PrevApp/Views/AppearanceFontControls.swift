@@ -50,6 +50,7 @@ struct AppearanceFontControls: View {
         .labelsHidden()
         .pickerStyle(.menu)
         .frame(maxWidth: 170)
+        .help(PreviewStrings.text(.fontFamily))
     }
 
     /// A field to type the size into, beside the stepper that nudges it by one point.
@@ -61,12 +62,14 @@ struct AppearanceFontControls: View {
                 .textFieldStyle(.roundedBorder)
                 .multilineTextAlignment(.trailing)
                 .frame(width: 56)
+                .help(PreviewStrings.text(.fontSize))
                 .accessibilityLabel(Text(PreviewStrings.text(.fontSize)))
                 .accessibilityValue(Text(spoken))
             Stepper(value: sizeBinding, in: PreviewTypography.fontSizeRange, step: 1) {
                 Text(PreviewStrings.text(.fontSize))
             }
             .labelsHidden()
+            .help(PreviewStrings.text(.fontSize))
             .accessibilityLabel(Text(PreviewStrings.text(.fontSize)))
             .accessibilityValue(Text(spoken))
         }
@@ -83,14 +86,24 @@ struct AppearanceFontControls: View {
     }
 
     private var weightPicker: some View {
+        ViewThatFits(in: .horizontal) {
+            weightControl
+                .pickerStyle(.segmented)
+                .fixedSize()
+            weightControl
+                .pickerStyle(.menu)
+                .fixedSize()
+        }
+    }
+
+    private var weightControl: some View {
         Picker(PreviewStrings.text(.fontWeight), selection: $typography.weight) {
             ForEach(PreviewFontWeight.allCases, id: \.self) { weight in
                 Text(PreviewStrings.text(weightKey(weight))).tag(weight)
             }
         }
         .labelsHidden()
-        .pickerStyle(.menu)
-        .fixedSize()
+        .help(PreviewStrings.text(.fontWeight))
     }
 
     private func weightKey(_ value: PreviewFontWeight) -> PreviewStrings.Key {

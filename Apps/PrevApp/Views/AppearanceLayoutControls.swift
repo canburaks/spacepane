@@ -41,11 +41,15 @@ struct AppearanceLayoutControls: View {
             Text(verbatim: TypographyPointFormat.text(value.wrappedValue, locale: locale))
                 .monospacedDigit()
                 .foregroundStyle(CompanionInk.hint)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Color.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                 .accessibilityHidden(true)
             Stepper(value: value, in: range, step: step) { Text(title) }
                 .labelsHidden()
                 .accessibilityLabel(Text(title))
                 .accessibilityValue(Text(spoken))
+                .help(title)
         }
     }
 
@@ -55,6 +59,9 @@ struct AppearanceLayoutControls: View {
             Text(verbatim: typography.tabWidth.formatted(.number.locale(locale)))
                 .monospacedDigit()
                 .foregroundStyle(CompanionInk.hint)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Color.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                 .accessibilityHidden(true)
             Stepper(value: $typography.tabWidth, in: PreviewTypography.tabWidthRange) { Text(title) }
                 .labelsHidden()

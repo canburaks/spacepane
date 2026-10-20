@@ -142,6 +142,7 @@ final class NativeFindingsBanner: NSView {
             ? PreviewStrings.count(.findingSummaryConcealed, concealed, locale: locale)
             : PreviewStrings.count(.findingSummary, findings.count, locale: locale)
         summaryLabel.setAccessibilityLabel(summaryLabel.stringValue)
+        summaryLabel.toolTip = summaryLabel.stringValue.isEmpty ? nil : summaryLabel.stringValue
         let first = findings.first
         let summarySymbol = leadsWithConcealment ? FindingsSymbol.concealed : first.map(FindingsSymbol.name) ?? FindingsSymbol.neutral
         summaryIcon.image = NSImage(systemSymbolName: summarySymbol, accessibilityDescription: nil)
@@ -196,6 +197,7 @@ final class NativeFindingsBanner: NSView {
         removeRows()
         summaryLabel.stringValue = ""
         summaryLabel.setAccessibilityLabel(nil)
+        summaryLabel.toolTip = nil
         offersConcealedCopy = false
         offersFindingsReport = false
         copyButton.isHidden = true
@@ -269,6 +271,7 @@ final class NativeFindingsBanner: NSView {
         let label = NSTextField(wrappingLabelWithString: message)
         label.font = NSFont.preferredFont(forTextStyle: .callout)
         label.isSelectable = true
+        label.toolTip = message
         label.setAccessibilityLabel([FindingText.severityDescription(finding.severity), message, detail].compactMap { $0 }.joined(separator: ". "))
         let text = NSStackView(views: [label])
         text.orientation = .vertical
@@ -279,6 +282,7 @@ final class NativeFindingsBanner: NSView {
             let secondary = NSTextField(wrappingLabelWithString: detail)
             secondary.font = NSFont.preferredFont(forTextStyle: .caption1)
             secondary.isSelectable = true
+            secondary.toolTip = detail
             secondary.setAccessibilityElement(false) // The message announces one coherent item, including all safe detail.
             if case .decodedText = finding.detail {
                 secondary.maximumNumberOfLines = 2

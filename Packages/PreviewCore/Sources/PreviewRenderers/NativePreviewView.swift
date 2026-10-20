@@ -177,6 +177,7 @@ public final class NativePreviewView: NSView {
             self?.needsLayout = true
             self?.layoutSubtreeIfNeeded()
         }
+        lineNumberGutter.onDoubleClick = { [weak self] in _ = self?.presentGoToLine() }
         stateView.translatesAutoresizingMaskIntoConstraints = false
         textContent.translatesAutoresizingMaskIntoConstraints = false
         findingsBanner.translatesAutoresizingMaskIntoConstraints = false

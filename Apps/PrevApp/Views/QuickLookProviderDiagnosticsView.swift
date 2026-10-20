@@ -37,8 +37,10 @@ struct QuickLookProviderDiagnosticsView: View {
     @ViewBuilder private var scanButton: some View {
         if diagnostics.isScanning {
             Button(PreviewStrings.text(.providersCancel)) { diagnostics.cancel() }
+                .help(PreviewStrings.text(.providersCancel))
         } else {
             Button(PreviewStrings.text(isFinished ? .providersRescan : .providersScan)) { diagnostics.startScan() }
+                .help(PreviewStrings.text(isFinished ? .providersRescan : .providersScan))
         }
     }
 
@@ -59,9 +61,12 @@ struct QuickLookProviderDiagnosticsView: View {
         VStack(alignment: .leading, spacing: 6) {
             Text(PreviewStrings.format(.providersChecked, arguments: [report.scannedApplications], locale: locale))
             if report.providers.isEmpty {
-                Text(PreviewStrings.text(.providersNone))
+                StatusPill(text: PreviewStrings.text(.providersNone), tone: .informational)
             } else {
-                Text(PreviewStrings.format(.providersFound, arguments: [report.providers.count], locale: locale))
+                StatusPill(
+                    text: PreviewStrings.format(.providersFound, arguments: [report.providers.count], locale: locale),
+                    tone: .caution
+                )
             }
             if report.reachedApplicationLimit {
                 caveat(PreviewStrings.format(.providersLimit, arguments: [report.scannedApplications], locale: locale))
@@ -93,11 +98,12 @@ struct QuickLookProviderDiagnosticsView: View {
     private func providerRow(_ provider: QuickLookProviderApp) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(verbatim: provider.name)
-                Text(verbatim: kindsText(provider.kinds)).foregroundStyle(CompanionInk.hint).font(CompanionTypography.note)
+                Text(verbatim: provider.name).fontWeight(.medium)
+                StatusPill(text: kindsText(provider.kinds), tone: .neutral)
             }
             Text(verbatim: formatsText(provider.overlappingFormats))
                 .font(CompanionTypography.note).foregroundStyle(CompanionInk.hint)
+                .help(fullFormatsText(provider.overlappingFormats))
         }
         .fixedSize(horizontal: false, vertical: true)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -119,14 +125,23 @@ struct QuickLookProviderDiagnosticsView: View {
     /// Catalog names of the overlapping formats. A long list shows its first names and the count of the rest,
     /// so one app that declares many types cannot fill the page.
     private func formatsText(_ formats: [FormatID]) -> String {
-        let names = formats.compactMap { FormatCatalog.standard.descriptor(for: $0) }
-            .map { PreviewStrings.text(catalogKey: $0.nameKey) }
+        let names = formatNames(formats)
         let shown = Array(names.prefix(Self.visibleFormatNames)).formatted(.list(type: .and, width: .standard).locale(locale))
         let hidden = names.count - Self.visibleFormatNames
         let list = hidden > 0
             ? PreviewStrings.format(.providersFormatsMore, arguments: [shown, hidden], locale: locale)
             : shown
         return PreviewStrings.format(.providersFormats, arguments: [list], locale: locale)
+    }
+
+    private func fullFormatsText(_ formats: [FormatID]) -> String {
+        let list = formatNames(formats).formatted(.list(type: .and, width: .standard).locale(locale))
+        return PreviewStrings.format(.providersFormats, arguments: [list], locale: locale)
+    }
+
+    private func formatNames(_ formats: [FormatID]) -> [String] {
+        formats.compactMap { FormatCatalog.standard.descriptor(for: $0) }
+            .map { PreviewStrings.text(catalogKey: $0.nameKey) }
     }
 
     private static let visibleFormatNames = 6

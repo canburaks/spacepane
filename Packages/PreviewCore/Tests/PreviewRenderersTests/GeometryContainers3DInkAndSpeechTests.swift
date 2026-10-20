@@ -212,4 +212,130 @@ struct GeometryContainers3DInkAndSpeechTests {
         #expect(speech.texts == [PreviewStrings.text(.midiPlaybackUnavailable), PreviewStrings.text(.cadFit),
                                  PreviewStrings.text(.chipCopied)])
     }
+
+    @Test func theTreeAdaptsItsColumnsForCompactFinderSidebarAndRestoresThemWhenWide() throws {
+        let (host, tree) = try listingView()
+        host.setFrameSize(NSSize(width: 240, height: 300))
+        host.needsLayout = true
+        host.layoutSubtreeIfNeeded()
+        let columns = tree.outlineView.tableColumns
+        #expect(columns.count == 4)
+        #expect(columns.map(\.isHidden) == [false, true, false, true])
+        #expect(columns[0].width == 156)
+        #expect(columns[2].width == 76)
+
+        let pasteboard = NSPasteboard(name: .init(UUID().uuidString))
+        defer { pasteboard.releaseGlobally() }
+        tree.outlineView.pasteboard = pasteboard
+        tree.outlineView.selectRowIndexes(IndexSet(integer: 1), byExtendingSelection: false)
+        tree.outlineView.copy(nil)
+        let copied = try #require(pasteboard.string(forType: .string))
+        #expect(copied.split(separator: "\t", omittingEmptySubsequences: false).count == 4)
+
+        host.setFrameSize(NSSize(width: 700, height: 300))
+        host.needsLayout = true
+        host.layoutSubtreeIfNeeded()
+        #expect(columns.map(\.isHidden) == [false, false, false, false])
+        #expect(columns.map(\.width) == [320, 80, 120, 170])
+        #expect(columns.map(\.headerCell.alignment) == [.natural, .right, .right, .natural])
+
+        let firstItem = try #require(tree.outlineView.item(atRow: 0))
+        let nameCell = try #require(tree.outlineView(tree.outlineView, viewFor: columns[0], item: firstItem) as? NSTableCellView)
+        let itemsField = try #require(tree.outlineView(tree.outlineView, viewFor: columns[1], item: firstItem) as? NSTextField)
+        let sizeField = try #require(tree.outlineView(tree.outlineView, viewFor: columns[2], item: firstItem) as? NSTextField)
+        #expect(nameCell.textField?.alignment == .natural)
+        #expect(itemsField.alignment == .right)
+        #expect(sizeField.alignment == .right)
+
+        tree.outlineView.moveToEndOfDocument(nil)
+        #expect(tree.outlineView.selectedRowIndexes == IndexSet(integer: tree.outlineView.numberOfRows - 1))
+        tree.outlineView.moveToBeginningOfDocument(nil)
+        #expect(tree.outlineView.selectedRowIndexes == IndexSet(integer: 0))
+
+        #expect(!tree.toggleExpansion(atRow: 0))
+        #expect(tree.toggleExpansion(atRow: 1))
+        #expect(tree.outlineView.numberOfRows == 3)
+        #expect(tree.toggleExpansion(atRow: 1))
+        #expect(tree.outlineView.numberOfRows == 6)
+
+        var events: [PreviewCopyEvent] = []
+        tree.copyHandler = { events.append($0) }
+        let menu = try #require(tree.contextMenu(forRow: 0))
+        #expect(menu.items.map(\.title) == [PreviewStrings.text(.interactionCopyPath), PreviewStrings.text(.interactionCopy), PreviewStrings.text(.interactionCopyAll)])
+        let copyPath = menu.items[0]
+        #expect(NSApp.sendAction(try #require(copyPath.action), to: copyPath.target, from: copyPath))
+        #expect(events == [.path])
+        #expect(pasteboard.string(forType: .string) == nameCell.textField?.stringValue)
+        _ = menu.items[2].target?.perform(menu.items[2].action, with: menu.items[2])
+        let allCopied = try #require(pasteboard.string(forType: .string))
+        #expect(allCopied.hasPrefix("Name\tItems\tSize\tModified (UTC)\nempty\t\t\t\nsrc\t2\t"))
+        #expect(allCopied.contains("main.swift"))
+        #expect(allCopied.contains("README.md"))
+        #expect(events.last == .rows(6))
+    }
+
+    @Test func theGeometryViewUsesOneControlRowWhenWideAndCompactControlsWhenNarrow() throws {
+        let view = NativeGeometryPreviewView(frame: NSRect(x: 0, y: 0, width: 640, height: 400))
+        let measurements = try #require(GeometryMeasurements(surfaceAreaSquareMillimetres: 2_200,
+                                                             volumeCubicMillimetres: 6_000, bodyCount: 1,
+                                                             unitProvenance: .declared(.millimetre)))
+        let mesh = try PreviewMesh(positions: [SIMD3<Float>(-1, -1, 0), SIMD3<Float>(1, -1, 0), SIMD3<Float>(0, 1, 0)],
+            normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
+            bounds: GeometryBounds(minimum: .zero, maximum: SIMD3<Double>(20, 20, 1)), faceCount: 1,
+            measurements: measurements,
+            headerFacts: CADHeaderFacts(schema: .stepAP214, originatingSystem: "Open CASCADE 7.9"),
+            unitProvenance: .declared(.millimetre))
+        let model = GeometryPresentation(formatID: .step, mesh: mesh, byteCount: 100)
+        view.show(model, theme: .light, locale: english)
+        view.layoutSubtreeIfNeeded()
+
+        let bar = try #require(view.subviews.compactMap { $0 as? NSStackView }.first)
+        let buttons = descendants(of: NSButton.self, in: view)
+        let summary = try #require(view.subviews.compactMap { $0 as? NSTextField }.first)
+        let fullSummary = view.accessibilitySummary
+        #expect(fullSummary.components(separatedBy: "\n").count == 3)
+        #expect(bar.orientation == .horizontal)
+        #expect(buttons.count == 8)
+        #expect(buttons.allSatisfy { $0.controlSize == .regular && $0.font?.pointSize == 13 })
+        #expect(summary.maximumNumberOfLines == 0)
+        #expect(summary.lineBreakMode == .byWordWrapping)
+        #expect(summary.toolTip == nil)
+
+        view.setFrameSize(NSSize(width: 240, height: 320))
+        view.needsLayout = true
+        view.layoutSubtreeIfNeeded()
+        #expect(bar.orientation == .vertical)
+        #expect(buttons.allSatisfy { $0.controlSize == .small && $0.font?.pointSize == NSFont.smallSystemFontSize })
+        #expect(summary.maximumNumberOfLines == 2)
+        #expect(summary.lineBreakMode == .byTruncatingTail)
+        #expect(summary.toolTip == fullSummary)
+        #expect(view.accessibilitySummary == fullSummary)
+    }
+
+    @Test func theMIDIViewUsesCompactControlsAndSingleLineStatusWithTooltipWhenNarrow() throws {
+        let view = NativeMIDIPreviewView(frame: NSRect(x: 0, y: 0, width: 240, height: 90))
+        view.show(MIDIPresentation(format: 0, trackCount: 1, ticksPerQuarter: 96, durationSeconds: 12, events: []))
+        view.layoutSubtreeIfNeeded()
+        let playButton = try #require(descendants(of: NSButton.self, in: view).first)
+        let statusLabel = try midiStatusLabel(in: view)
+        #expect(playButton.controlSize == .small)
+        #expect(playButton.toolTip == playButton.title)
+        #expect(statusLabel.isSelectable == true)
+        #expect(statusLabel.maximumNumberOfLines == 1)
+        #expect(statusLabel.toolTip == PreviewStrings.text(.midiNoAutoplay))
+
+        view.setFrameSize(NSSize(width: 500, height: 90))
+        view.layoutSubtreeIfNeeded()
+        #expect(playButton.controlSize == .regular)
+        #expect(statusLabel.maximumNumberOfLines == 0)
+        #expect(statusLabel.toolTip == nil)
+
+        view.userInterfaceLayoutDirection = .rightToLeft
+        let positionSlider = try #require(descendants(of: NSSlider.self, in: view).first)
+        let timeLabel = try #require(descendants(of: NSTextField.self, in: view).first { $0 !== statusLabel })
+        #expect(positionSlider.toolTip == PreviewStrings.text(.midiPosition))
+        #expect(timeLabel.toolTip == timeLabel.stringValue)
+        #expect(positionSlider.userInterfaceLayoutDirection == .leftToRight)
+        #expect(timeLabel.userInterfaceLayoutDirection == .leftToRight)
+    }
 }

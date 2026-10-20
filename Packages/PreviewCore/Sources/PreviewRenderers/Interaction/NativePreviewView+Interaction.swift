@@ -11,7 +11,9 @@ extension NativePreviewView {
         accessoryBar.filterBar.onChange = { [weak self] text in self?.filterTextChanged(text) }
         accessoryBar.filterBar.onAdvance = { [weak self] forward in _ = self?.outlineView.selectAdjacentMatch(forward: forward) }
         accessoryBar.filterBar.onReturnToContent = { [weak self] in self?.focusOutline() }
+        accessoryBar.filterBar.onCopyPath = { [weak self] in _ = self?.copySelectedOutlinePath() }
         outlineView.onFilterResult = { [weak self] summary in self?.accessoryBar.filterBar.show(summary) }
+        outlineView.onSelectionChange = { [weak self] path in self?.accessoryBar.filterBar.showPath(path) }
         accessoryBar.goToLineBar.onSubmit = { [weak self] input in self?.submitGoToLine(input) }
         accessoryBar.goToLineBar.onDismiss = { [weak self] in self?.dismissGoToLine() }
     }
@@ -21,6 +23,7 @@ extension NativePreviewView {
         zoom.reset()
         goToLineIsOpen = false
         clearFilter()
+        accessoryBar.filterBar.showPath(nil)
         accessoryBar.show(.none)
         accessoryHeightConstraint?.constant = 0
         cancelCopyChip()
@@ -30,7 +33,10 @@ extension NativePreviewView {
         // Without typed input the outline filter would be a dead field, so the bar stays empty.
         let showsFilter = showsOutline && acceptsTypedInput
         let content: PreviewAccessoryBar.Content = showsFilter ? .filter : (goToLineIsOpen ? .goToLine : .none)
-        if !showsFilter { clearFilter() }
+        if !showsFilter {
+            clearFilter()
+            accessoryBar.filterBar.showPath(nil)
+        }
         accessoryBar.show(content)
         accessoryHeightConstraint?.constant = accessoryBar.requiredHeight
     }
@@ -100,11 +106,11 @@ extension NativePreviewView {
 
     private func performFind(_ action: NSTextFinder.Action) -> Bool {
         guard acceptsTypedInput else { return false }
-        if showsTextMode {
+        if let targetTextView = showsTextMode ? textView : (shownModeView as? MarkupReferencesView)?.textView {
             let item = NSMenuItem()
             item.tag = action.rawValue
-            if action == .showFindInterface { window?.makeFirstResponder(textView) }
-            textView.performTextFinderAction(item)
+            if action == .showFindInterface { window?.makeFirstResponder(targetTextView) }
+            targetTextView.performTextFinderAction(item)
             return true
         }
         if showsOutlineMode {
@@ -160,6 +166,7 @@ extension NativePreviewView {
     var copyAllText: String? {
         guard hasDisplayableContent else { return nil }
         if showsTextMode { return textView.string }
+        if let references = shownModeView as? MarkupReferencesView { return references.textView.string }
         return safePresentation?.text
     }
 
@@ -169,6 +176,15 @@ extension NativePreviewView {
         let copied = TagCopySanitizer(safeDisplayedText: text, safetyLensFoundTags: safetyLensFoundTags).wholeText()
         guard plainTextCopyWriter(copied.text, pasteboard) else { return false }
         reportCopy(.text.removingTags(copied.removedTagScalarCount))
+        return true
+    }
+
+    @discardableResult
+    func copySelectedOutlinePath() -> Bool {
+        guard let path = outlineView.selectedPath, !path.isEmpty else { return false }
+        let copied = TagCopySanitizer(safeDisplayedText: path, safetyLensFoundTags: safetyLensFoundTags).wholeText()
+        guard plainTextCopyWriter(copied.text, pasteboard) else { return false }
+        reportCopy(.path.removingTags(copied.removedTagScalarCount))
         return true
     }
 
@@ -207,6 +223,7 @@ extension NativePreviewView {
     /// produces one chip and one announcement.
     func adoptPreviewServices(_ view: NSView) {
         if let host = view as? any PreviewHostsTable { host.table.acceptsTypedInput = acceptsTypedInput }
+        if let references = view as? MarkupReferencesView { references.textView.delegate = self }
         if let copier = view as? any PreviewSafeCopying {
             copier.pasteboard = pasteboard
             copier.tagCopyPolicy = { [weak self] in self?.safetyLensFoundTags ?? false }
@@ -337,7 +354,7 @@ extension NativePreviewView: NSTextViewDelegate {
     public func textView(_ view: NSTextView, menu: NSMenu, for event: NSEvent, at charIndex: Int) -> NSMenu? {
         menu.addItem(.separator())
         if view === textView, let item = codeBlockCopyMenuItem(at: charIndex) { menu.addItem(item) }
-        let items = PreviewCommand.contextMenuItems(includesGoToLine: selectedMode != .rendered) { [weak self] command in
+        let items = PreviewCommand.contextMenuItems(includesGoToLine: view === textView && selectedMode != .rendered) { [weak self] command in
             guard let self else { return }
             // A chosen item is a deliberate request, so Copy All skips the key handler's focus rule.
             if command == .copyConcealed {
