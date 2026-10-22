@@ -2,6 +2,14 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-22 — Build 7 archived, exported and uploaded to TestFlight (release and validation)
+
+Owner request: raise `CURRENT_PROJECT_VERSION` to `7` on `fix/settings-recovery-file-types-search`, inspect and update all coupled release and validation files, and build, export and upload `1.1.0 (build 7)` to TestFlight.
+
+- Build configuration and release records (`Configuration/Base.xcconfig`, `docs/release/app-store-submission.md`, `docs/release/version-1.1.0.md`): `CURRENT_PROJECT_VERSION` raised from `6` to `7` (`MARKETING_VERSION = 1.1.0`, `PREV_INCLUDE_CAD = NO`). The App Review notes block in `docs/release/app-store-submission.md` names `SpacePane 1.1.0 (build 7)` (2,754 bytes; `SpacePane-Review-Samples.zip` rebuilt with 36 files, 204,943 bytes), and the status tables in `app-store-submission.md` and `version-1.1.0.md` record build 6 (uploaded 2026-10-17 18:39) and build 7 (uploaded 2026-10-22 20:51).
+- Host matrix validation (`docs/validation/host-matrix.json`, `script/test_check_host_matrix.py`): shortened the two build-6 `finderPreview` notes (`data.json` and `database.sqlite`) to fit the 240-character limit enforced by `script/check_host_matrix.py` while keeping all recorded facts, and added `mac-build6-2026-10-17` to the recorded host list in `test_observations_name_only_the_recorded_host_and_nothing_stronger_than_the_records`.
+- Validation, archive, export and upload (20:45 to 20:51, owner's instruction): `./script/build_and_run.sh --check` passed (all 25 active `check_static.py` gates, `validate_project.py`, 1,282 localization keys across 14 locales, 81 appearance samples, 38 host-matrix tests, 29 review-sample tests, and all three host target typechecks); `./script/build_and_run.sh --archive` set aside `.build/archive/SpacePane-1.1.0-build6.xcarchive` and produced `.build/archive/Release.xcarchive`, which passed `script/check_release_archive.py` (`SpacePane.app 1.1.0 (7): 3 Mach-O files, 3 sandboxed bundles, 0 helpers, 3 privacy manifests; no CAD service, helper or OCCT notices`); `./script/build_and_run.sh --export` verified `Apple Distribution: Can Burak Sofyalioglu (Z743N6D8DS)` signing on `org.webmeister.spacepane`, `org.webmeister.spacepane.preview` and `org.webmeister.spacepane.thumbnail` and `3rd Party Mac Developer Installer` signing on `SpacePane.pkg`; and `./script/build_and_run.sh --upload` with the API key values in the shell only completed with `Upload succeeded` and `Uploaded package is processing` in App Store Connect / TestFlight. Nothing selected or submitted for App Review in App Store Connect.
+
 ## 2026-10-18 — General storage actions and native File Types search (implementation)
 
 Owner request: fix the validated bug reports.

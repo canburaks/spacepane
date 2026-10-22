@@ -360,7 +360,7 @@ class RepositoryMatrixTests(unittest.TestCase):
         for entry in self.matrix["formats"]:
             self.assertEqual(entry["surfaces"]["finderThumbnail"]["outcome"], "notObserved", entry["id"])
         self.assertEqual([host["id"] for host in self.matrix["hosts"]],
-                         ["mac-2026-10-04", "mac-quality-2026-10-08", "mac-quality-info-2026-10-08"])
+                         ["mac-2026-10-04", "mac-quality-2026-10-08", "mac-quality-info-2026-10-08", "mac-build6-2026-10-17"])
         self.assertTrue(all("macOS 15" not in host["os"] for host in self.matrix["hosts"]))
 
     def test_historical_and_current_artifact_claims_stay_with_their_own_records(self):
