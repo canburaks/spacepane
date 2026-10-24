@@ -1,5 +1,6 @@
 import AppKit
 import PreviewContracts
+import PreviewTestSupport
 import PreviewFormats
 import Testing
 @testable import PreviewRenderers
@@ -39,7 +40,7 @@ struct MeshPrintCheckTests {
         var mesh = try STLAdapter().parse(FileBytes(data: data), context: RequestContext(budget: MeshLimits.requestBudget))
         if let provenance {
             let relabelled = try #require(mesh.measurements).declaring(unitProvenance: provenance)
-            mesh = mesh.attaching(measurements: relabelled, headerFacts: nil, unitProvenance: provenance)
+            mesh = mesh.attaching(measurements: relabelled, unitProvenance: provenance)
         }
         return GeometryPresentation(formatID: formatID, mesh: mesh, byteCount: data.count)
     }
@@ -104,7 +105,7 @@ struct MeshPrintCheckTests {
 
     @Test func aModelOfAnotherFormatKeepsItsSummaryUnchanged() throws {
         // CAD models, and any format outside the four print formats, get no print check at all.
-        for formatID in [FormatID.step, .iges, FormatID(rawValue: "image.png")] {
+        for formatID in [CADTestFormatIDs.step, CADTestFormatIDs.iges, FormatID(rawValue: "image.png")] {
             let model = try presentation(boxSTL(SIMD3(30, 20, 10)), formatID: formatID, provenance: .declared(.millimetre))
             #expect(check(model) == nil, "\(formatID.rawValue)")
             let plain = NativeGeometryPreviewView.summaryLines(for: model.mesh, locale: english, languagePreferences: ["en"])
@@ -147,7 +148,7 @@ struct MeshPrintCheckTests {
 
     @Test func aModelOfAnotherFormatStillShowsOnlyItsSummary() throws {
         let view = makeView()
-        let model = try presentation(boxSTL(SIMD3(30, 20, 10)), formatID: .step, provenance: .declared(.millimetre))
+        let model = try presentation(boxSTL(SIMD3(30, 20, 10)), formatID: CADTestFormatIDs.step, provenance: .declared(.millimetre))
         view.show(model, theme: .light, locale: english)
         #expect(view.accessibilitySummary.components(separatedBy: "\n").count == 2)
     }

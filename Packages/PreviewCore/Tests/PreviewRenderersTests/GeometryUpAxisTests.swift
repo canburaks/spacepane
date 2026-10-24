@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import PreviewTestSupport
 import PreviewContracts
 import simd
 import Testing
@@ -17,7 +18,7 @@ struct GeometryUpAxisTests {
         // Owner decision D-3D: Z up for STL and 3MF; Y up for OBJ, PLY, STEP and IGES until real files are observed.
         #expect(GeometryUpAxis.conventional(for: .meshSTL) == .z)
         #expect(GeometryUpAxis.conventional(for: .mesh3MF) == .z)
-        for formatID in [FormatID.meshOBJ, .meshPLY, .step, .iges, .plainText] {
+        for formatID in [FormatID.meshOBJ, .meshPLY, CADTestFormatIDs.step, CADTestFormatIDs.iges, .plainText] {
             #expect(GeometryUpAxis.conventional(for: formatID) == .y, "\(formatID.rawValue)")
         }
         #expect(GeometryUpAxis.y.toggled == .z && GeometryUpAxis.z.toggled == .y)
@@ -157,7 +158,7 @@ struct GeometryUpAxisViewTests {
     }
 
     private func upAxisButton(in view: NativeGeometryPreviewView, naming axis: GeometryUpAxis) -> NSButton? {
-        let title = PreviewStrings.format(.cadUpAxis, arguments: [axis.letter])
+        let title = PreviewStrings.format(.geometryUpAxis, arguments: [axis.letter])
         return descendants(of: NSButton.self, in: view).first { $0.title == title }
     }
 
@@ -173,7 +174,7 @@ struct GeometryUpAxisViewTests {
         view.show(printed, theme: .dark, locale: english)
         #expect(view.camera.upAxis == .y)
         // A different model starts from its own format's convention, whatever was chosen for the last one.
-        view.show(try presentation(.step), theme: .light, locale: english)
+        view.show(try presentation(CADTestFormatIDs.step), theme: .light, locale: english)
         #expect(view.camera.upAxis == .y)
         view.navigate(.toggleUpAxis)
         #expect(view.camera.upAxis == .z)
@@ -195,15 +196,15 @@ struct GeometryUpAxisViewTests {
         view.show(try presentation(.meshSTL), theme: .light, locale: Locale(identifier: "en"))
         let button = try #require(upAxisButton(in: view, naming: .z))
         #expect(button.isEnabled)
-        #expect(button.toolTip == PreviewStrings.text(.cadUpAxisHelp))
-        #expect(button.accessibilityHelp() == PreviewStrings.text(.cadUpAxisHelp))
+        #expect(button.toolTip == PreviewStrings.text(.geometryUpAxisHelp))
+        #expect(button.accessibilityHelp() == PreviewStrings.text(.geometryUpAxisHelp))
         #expect(button.accessibilityLabel() == button.title)
         button.performClick(nil)
         #expect(view.camera.upAxis == .y)
-        #expect(button.title == PreviewStrings.format(.cadUpAxis, arguments: [GeometryUpAxis.y.letter]))
+        #expect(button.title == PreviewStrings.format(.geometryUpAxis, arguments: [GeometryUpAxis.y.letter]))
         #expect(button.accessibilityLabel() == button.title)
         button.performClick(nil)
-        #expect(view.camera.upAxis == .z && button.title == PreviewStrings.format(.cadUpAxis, arguments: [GeometryUpAxis.z.letter]))
+        #expect(view.camera.upAxis == .z && button.title == PreviewStrings.format(.geometryUpAxis, arguments: [GeometryUpAxis.z.letter]))
     }
 
     @Test func withoutAModelTheButtonDoesNothingAndAClearedViewDisablesIt() throws {

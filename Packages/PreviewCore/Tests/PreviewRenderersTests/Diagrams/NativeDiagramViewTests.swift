@@ -256,7 +256,7 @@ struct NativeDiagramViewTests {
         #expect(fittedMenu.items.map(\.title) == [
             PreviewStrings.text(.interactionZoomIn),
             PreviewStrings.text(.interactionZoomOut),
-            PreviewStrings.text(.cadReset)
+            PreviewStrings.text(.geometryReset)
         ])
         #expect(!fittedMenu.items[2].isEnabled)
         canvas.zoom(by: 1.5)

@@ -210,13 +210,13 @@ enum PreviewCommand: Hashable, CaseIterable {
         case .zoomOut: .interactionZoomOut
         case .actualSize: .interactionZoomReset
         case .mode: .interactionShowMode
-        case .fitModel: .cadFit
-        case .resetView: .cadReset
-        case .viewFront: .cadFront
-        case .viewSide: .cadSide
-        case .viewTop: .cadTop
-        case .cameraZoomIn: .cadZoomIn
-        case .cameraZoomOut: .cadZoomOut
+        case .fitModel: .geometryFit
+        case .resetView: .geometryReset
+        case .viewFront: .geometryFront
+        case .viewSide: .geometrySide
+        case .viewTop: .geometryTop
+        case .cameraZoomIn: .geometryZoomIn
+        case .cameraZoomOut: .geometryZoomOut
         }
     }
 

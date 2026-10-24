@@ -30,10 +30,10 @@ struct GeometryProvenanceContractTests {
     @Test func attachingFactsKeepsTheProvenanceAndTheCappedFlagUnlessTheCallerReplacesTheProvenance() throws {
         let source = try mesh(unit: .assumedMillimetres, faceCount: GeometryLimits.maximumFaces, capped: true)
         let measurements = try #require(GeometryMeasurements(surfaceAreaSquareMillimetres: 50, volumeCubicMillimetres: nil, bodyCount: 1))
-        let kept = source.attaching(measurements: measurements, headerFacts: nil)
+        let kept = source.attaching(measurements: measurements)
         #expect(kept.unitProvenance == .assumedMillimetres && kept.faceCountIsCapped)
-        #expect(kept.attaching(measurements: nil, headerFacts: nil) == source)
-        let replaced = source.attaching(measurements: measurements, headerFacts: nil, unitProvenance: .declared(.foot))
+        #expect(kept.attaching(measurements: nil) == source)
+        let replaced = source.attaching(measurements: measurements, unitProvenance: .declared(.foot))
         #expect(replaced.unitProvenance == .declared(.foot) && replaced.faceCountIsCapped)
         #expect(replaced.positions == source.positions && replaced.indices == source.indices)
     }

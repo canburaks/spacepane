@@ -60,7 +60,7 @@ struct A11yL10nSpokenResultsTests {
         let keys: [PreviewStrings.Key] = [
             .interactionCopied, .findingActionCopied, .interactionFilterNoMatches, .interactionGoToLineNoLines,
             .loading, .cancelled, .disabledTitle, .disabledDescription,
-            .cadFit, .cadReset, .cadFront, .cadSide, .cadTop,
+            .geometryFit, .geometryReset, .geometryFront, .geometrySide, .geometryTop,
             .previewModeSource, .previewModeOutline, .previewModeRendered, .previewModeSummary, .previewModeTable
         ]
         for language in installedLanguages() {

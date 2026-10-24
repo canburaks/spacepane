@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import PreviewTestSupport
 import Testing
 import PreviewContracts
 @testable import PreviewRenderers
@@ -124,7 +125,7 @@ struct Q53InfoPanelLayoutAndGeometryTests {
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: GeometryBounds(minimum: .zero, maximum: SIMD3<Double>(20, 20, 1)), faceCount: 1,
             unitProvenance: .declared(.millimetre))
-        return GeometryPresentation(formatID: .step, mesh: mesh, byteCount: 100)
+        return GeometryPresentation(formatID: CADTestFormatIDs.step, mesh: mesh, byteCount: 100)
     }
 }
 

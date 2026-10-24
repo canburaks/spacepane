@@ -100,21 +100,17 @@ struct LocalizationTests {
         }
     }
 
-    @Test func CADSummaryKeepsEveryComputedArgumentInAllLanguages() {
+    @Test func geometrySummaryKeepsEveryComputedArgumentInAllLanguages() {
         let width = "0,5"
         let height = "1.25"
         let depth = "9007199254740993"
-        let arguments: [CVarArg] = [Int64(12), Int64(34), width, height, depth]
+        let arguments: [CVarArg] = ["12", "34", width, height, depth, "mm"]
         for language in RendererResources.bundle.localizations {
-            let result = String(format: PreviewStrings.text(.cadSummary, languagePreferences: [language]),
+            let result = String(format: PreviewStrings.text(.geometrySummaryDimensions, languagePreferences: [language]),
                                 locale: Locale(identifier: "en_US_POSIX"), arguments: arguments)
-            for value in ["12", "34", width, height, depth] { #expect(result.contains(value)) }
-            #expect(result.contains("mm"))
+            for value in ["12", "34", width, height, depth, "mm"] { #expect(result.contains(value)) }
             #expect(!result.contains("%"))
         }
-        let result = PreviewStrings.format(.cadSummary,
-            arguments: [Int64(12), Int64(34), width, height, depth], locale: Locale(identifier: "tr_TR"))
-        #expect(result.contains(width) && result.contains(height) && result.contains(depth))
     }
 
     @Test func missingResourceUsesDocumentedDevelopmentFallbackInEveryLanguage() {

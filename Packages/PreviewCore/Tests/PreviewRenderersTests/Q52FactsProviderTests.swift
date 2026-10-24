@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import PreviewTestSupport
 import PreviewContracts
 @testable import PreviewRenderers
 
@@ -144,7 +145,7 @@ struct Q52FactsProviderTests {
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: .init(minimum: .zero, maximum: extent), faceCount: GeometryLimits.maximumFaces,
             unitProvenance: .declared(.inch), faceCountIsCapped: true)
-        let presentation = GeometryPresentation(formatID: .step, mesh: mesh, byteCount: 123)
+        let presentation = GeometryPresentation(formatID: CADTestFormatIDs.step, mesh: mesh, byteCount: 123)
         #expect(PresentationFactsProvider.facts(for: presentation).facts.contains(.geometry(
             faces: GeometryLimits.maximumFaces, bodies: nil, extentMillimetres: extent,
             unit: .declared(.inch), facesAreLowerBound: true)))

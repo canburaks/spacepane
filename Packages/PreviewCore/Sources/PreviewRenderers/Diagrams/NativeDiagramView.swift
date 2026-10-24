@@ -339,7 +339,7 @@ final class DiagramCanvasView: NSView {
         zoomIn.target = self
         let zoomOut = NSMenuItem(title: PreviewStrings.text(.interactionZoomOut), action: #selector(zoomOutFromMenu(_:)), keyEquivalent: "")
         zoomOut.target = self
-        let reset = NSMenuItem(title: PreviewStrings.text(.cadReset), action: #selector(resetZoomFromMenu(_:)), keyEquivalent: "")
+        let reset = NSMenuItem(title: PreviewStrings.text(.geometryReset), action: #selector(resetZoomFromMenu(_:)), keyEquivalent: "")
         reset.target = self
         reset.isEnabled = !fitsToView
         menu.addItem(zoomIn)

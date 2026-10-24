@@ -203,7 +203,7 @@ enum MeshBuilder {
     /// weld cannot be represented, and the preview is then shown without the facts.
     private static func measured(_ mesh: PreviewMesh, context: RequestContext) throws -> PreviewMesh {
         guard let measurements = try GeometryMeasurer.measure(mesh, context: context) else { return mesh }
-        return mesh.attaching(measurements: measurements.declaring(unitProvenance: mesh.unitProvenance), headerFacts: nil)
+        return mesh.attaching(measurements: measurements.declaring(unitProvenance: mesh.unitProvenance))
     }
 
     private static func normalized(_ vector: SIMD3<Float>) -> SIMD3<Float>? {

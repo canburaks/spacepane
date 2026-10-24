@@ -11735,2436 +11735,6 @@
         }
       }
     },
-    "cad.faceCount.atLeast": {
-      "comment": "Formatted key. A count of model faces that stopped at the preview limit, shown in the geometry summary where the number would be, so it must read as at least that many. Argument 1 is the already locale-formatted count (for example 100,000). Keep the placeholder; the default is the number followed by a plus sign. Do not add words that would not fit inside the summary line.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@+"
-          }
-        }
-      }
-    },
-    "cad.fit": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fit Model"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modeli Sığdır"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modell Einpassen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajuster le modèle"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "适应模型"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "モデルを収める"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "मॉडल फ़िट करें"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modelê Bicih Bike"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вписать модель"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesuaikan Model"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "মডেল মানানসই করুন"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daidaita Samfuri"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustar Modelo"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustar modelo"
-          }
-        }
-      }
-    },
-    "cad.front": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Front"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ön"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vorne"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Face"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "正面"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "正面"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "सामने"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pêş"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Спереди"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Depan"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "সামনে"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gaba"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Frente"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Frente"
-          }
-        }
-      }
-    },
-    "cad.header.schema": {
-      "comment": "CAD file facts line used when only the exchange schema is known. Argument 1 is a technical, non-translatable schema name such as AP214 or IGES 5.3. Do not translate or alter the argument.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schema: %1$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Şema: %1$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schema: %1$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schéma : %1$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "模式：%1$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スキーマ：%1$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "स्कीमा: %1$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Şema: %1$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Схема: %1$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skema: %1$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "স্কিমা: %1$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schema: %1$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esquema: %1$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esquema: %1$@"
-          }
-        }
-      }
-    },
-    "cad.header.schemaAndSystem": {
-      "comment": "CAD file facts line read from the file header. Argument 1 is a technical, non-translatable exchange schema name such as AP214 or IGES 5.3; argument 2 is the name of the CAD system that wrote the file, exactly as stored (a product name and version). Do not translate or alter either argument. Keep the positional placeholders.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schema: %1$@ · Created with: %2$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Şema: %1$@ · Şununla oluşturuldu: %2$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schema: %1$@ · Erstellt mit: %2$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schéma : %1$@ · Créé avec : %2$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "模式：%1$@ · 创建软件：%2$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スキーマ：%1$@ · 作成元：%2$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "स्कीमा: %1$@ · इसमें बनाया गया: %2$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Şema: %1$@ · Bi vê hatiye çêkirin: %2$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Схема: %1$@ · Создано в: %2$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skema: %1$@ · Dibuat dengan: %2$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "স্কিমা: %1$@ · যে সিস্টেমে তৈরি: %2$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schema: %1$@ · An ƙirƙira da: %2$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esquema: %1$@ · Criado com: %2$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esquema: %1$@ · Creado con: %2$@"
-          }
-        }
-      }
-    },
-    "cad.header.system": {
-      "comment": "CAD file facts line used when only the writing system is known. Argument 1 is the name of the CAD system that created or exported the file, exactly as stored (a product name and version). Do not translate or alter the argument.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Created with: %1$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Şununla oluşturuldu: %1$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erstellt mit: %1$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Créé avec : %1$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "创建软件：%1$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "作成元：%1$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "इसमें बनाया गया: %1$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bi vê hatiye çêkirin: %1$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Создано в: %1$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dibuat dengan: %1$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "যে সিস্টেমে তৈরি: %1$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An ƙirƙira da: %1$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Criado com: %1$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Creado con: %1$@"
-          }
-        }
-      }
-    },
-    "cad.interactionHelp": {
-      "comment": "Native CAD navigation help. Keep F, R, 1/2/3, +/− shortcuts unchanged; translate descriptions. Shift is the keyboard modifier.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drag to orbit. Shift-drag or right-drag to pan. Scroll to zoom. Arrow keys orbit; Shift-arrow keys pan; +/− zoom; F fits; R resets; 1/2/3 select front/side/top."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Döndürmek için sürükleyin. Kaydırmak için Shift ile veya sağ tuşla sürükleyin. Yakınlaştırmak için kaydırın. Ok tuşları döndürür; Shift-ok tuşları kaydırır; +/− yakınlaştırır; F sığdırır; R sıfırlar; 1/2/3 ön/yan/üst görünümü seçer."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zum Drehen ziehen. Zum Verschieben mit Umschalttaste oder rechter Maustaste ziehen. Zum Zoomen scrollen. Pfeiltasten drehen; Umschalt-Pfeiltasten verschieben; +/− zoomt; F passt ein; R setzt zurück; 1/2/3 wählt vorne/Seite/oben."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faites glisser pour pivoter. Faites glisser avec Maj ou le bouton droit pour déplacer. Faites défiler pour zoomer. Les flèches font pivoter ; Maj-flèches déplacent ; +/− zoome ; F ajuste ; R réinitialise ; 1/2/3 sélectionne face/côté/dessus."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "拖动以旋转。按住 Shift 拖动或用右键拖动以平移。滚动以缩放。方向键旋转；Shift 加方向键平移；+/− 缩放；F 适应模型；R 重置；1/2/3 选择正面/侧面/顶面。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ドラッグで回転。Shiftを押しながらドラッグ、または右ドラッグで移動。スクロールでズーム。矢印キーで回転、Shift＋矢印キーで移動、+/−でズーム、Fで全体表示、Rでリセット、1/2/3で正面/側面/上面を選択します。"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "घुमाने के लिए खींचें। खिसकाने के लिए Shift दबाकर या दायाँ बटन दबाकर खींचें। ज़ूम के लिए स्क्रॉल करें। तीर कुंजियाँ घुमाती हैं; Shift-तीर खिसकाते हैं; +/− ज़ूम करते हैं; F फ़िट करता है; R रीसेट करता है; 1/2/3 सामने/पार्श्व/ऊपर चुनते हैं।"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ji bo zivirandinê bikişîne. Ji bo guheztinê bi Shift an bi bişkoja rastê bikişîne. Ji bo nêzîkkirinê bilivîne. Bişkojên tîran dizivirînin; Shift-tîr diguhezînin; +/− nêzîk/dûr dikin; F bicih dike; R nû dike; 1/2/3 pêş/kêle/jor hildibijêrin."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Перетаскивайте для вращения. Перетаскивайте с Shift или правой кнопкой для перемещения. Прокручивайте для масштаба. Стрелки вращают; Shift-стрелки перемещают; +/− меняет масштаб; F вписывает; R сбрасывает; 1/2/3 выбирает вид спереди/сбоку/сверху."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seret untuk memutar. Seret dengan Shift atau tombol kanan untuk menggeser. Gulir untuk memperbesar. Tombol panah memutar; Shift-panah menggeser; +/− mengubah zoom; F menyesuaikan; R mengatur ulang; 1/2/3 memilih depan/samping/atas."
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ঘোরাতে টেনে আনুন। সরাতে Shift চেপে বা ডান বোতাম দিয়ে টানুন। জুম করতে স্ক্রল করুন। তীরচিহ্নের কী ঘোরায়; Shift-তীর সরায়; +/− জুম করে; F মানানসই করে; R রিসেট করে; 1/2/3 সামনে/পাশে/উপরে বেছে নেয়।"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ja don juyawa. Ja da Shift ko maɓallin dama don matsawa. Gungura don kusantarwa. Maɓallan kibiya suna juyawa; Shift-kibiya suna matsawa; +/− suna kusantarwa/nisantarwa; F yana daidaitawa; R yana sake saitawa; 1/2/3 suna zaɓar gaba/gefe/sama."
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arraste para girar. Arraste com Shift ou o botão direito para mover. Role para ampliar. As setas giram; Shift-setas movem; +/− altera o zoom; F ajusta; R redefine; 1/2/3 seleciona frente/lado/topo."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrastra para girar. Arrastra con Mayús o el botón derecho para desplazar. Desplázate para ampliar. Las flechas giran; Mayús-flechas desplazan; +/− cambia el zoom; F ajusta; R restablece; 1/2/3 selecciona frente/lateral/superior."
-          }
-        }
-      }
-    },
-    "cad.invalidGeometry": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This model could not be displayed safely."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu model güvenli biçimde gösterilemedi."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dieses Modell konnte nicht sicher angezeigt werden."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce modèle n’a pas pu être affiché de manière sûre."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无法安全显示此模型。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このモデルを安全に表示できませんでした。"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "इस मॉडल को सुरक्षित रूप से प्रदर्शित नहीं किया जा सका।"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ev model bi awayekî ewle nehat nîşandan."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Не удалось безопасно показать эту модель."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Model ini tidak dapat ditampilkan dengan aman."
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "এই মডেলটি নিরাপদে দেখানো যায়নি।"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ba a iya nuna wannan samfurin cikin aminci ba."
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não foi possível exibir este modelo com segurança."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se ha podido mostrar este modelo de forma segura."
-          }
-        }
-      }
-    },
-    "cad.measurements.open": {
-      "comment": "Variant of the CAD measurements line used when the surface mesh is not a closed, watertight shell, so no volume can be computed. Argument 1 is the already locale-formatted surface area in square millimetres, argument 2 the number of separate bodies (Int64). Say that the volume is unavailable because the surface is not closed; never claim the model is invalid or broken. Keep the positional placeholders and the unit symbol mm². Do not add singular or plural forms. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Surface area: %1$@ mm² · Volume unavailable (surface not closed) · Bodies: %2$lld"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzey alanı: %1$@ mm² · Hacim kullanılamıyor (yüzey kapalı değil) · Gövdeler: %2$lld"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oberfläche: %1$@ mm² · Volumen nicht verfügbar (Oberfläche nicht geschlossen) · Körper: %2$lld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aire de la surface : %1$@ mm² · Volume indisponible (surface non fermée) · Corps : %2$lld"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面积：%1$@ mm² · 体积不可用（表面未闭合） · 实体：%2$lld"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面積：%1$@ mm² · 体積は利用できません（表面が閉じていません） · ボディ数：%2$lld"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "सतह क्षेत्रफल: %1$@ mm² · आयतन उपलब्ध नहीं (सतह बंद नहीं है) · पिंड: %2$lld"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qada rûerdê: %1$@ mm² · Qebare berdest nîne (rûerd ne girtî ye) · Cism: %2$lld"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Площадь поверхности: %1$@ mm² · Объём недоступен (поверхность не замкнута) · Тела: %2$lld"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luas permukaan: %1$@ mm² · Volume tidak tersedia (permukaan tidak tertutup) · Bodi: %2$lld"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ mm² · আয়তন পাওয়া যায়নি (পৃষ্ঠতল বন্ধ নয়) · বস্তু: %2$lld"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faɗin saman: %1$@ mm² · Ƙarar ba ta samuwa (saman bai rufu ba) · Jikuna: %2$lld"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área da superfície: %1$@ mm² · Volume indisponível (superfície não fechada) · Corpos: %2$lld"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área de superficie: %1$@ mm² · Volumen no disponible (superficie no cerrada) · Cuerpos: %2$lld"
-          }
-        }
-      }
-    },
-    "cad.measurements.openUnitless": {
-      "comment": "Formatted key. Variant of the CAD measurements line used when the surface mesh is not a closed, watertight shell, so no volume can be computed, and the file declares no length unit, so the numbers carry no unit symbol. Argument 1 is the already locale-formatted surface area and argument 2 the already locale-formatted number of separate bodies. Say that the volume is unavailable because the surface is not closed; never claim the model is invalid or broken. Keep the two positional placeholders and add no unit. Do not add singular or plural forms. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Surface area: %1$@ · Volume unavailable (surface not closed) · Bodies: %2$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzey alanı: %1$@ · Hacim kullanılamıyor (yüzey kapalı değil) · Gövdeler: %2$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oberfläche: %1$@ · Volumen nicht verfügbar (Oberfläche nicht geschlossen) · Körper: %2$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aire de la surface : %1$@ · Volume indisponible (surface non fermée) · Corps : %2$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面积：%1$@ · 体积不可用（表面未闭合） · 实体：%2$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面積：%1$@ · 体積は利用できません（表面が閉じていません） · ボディ数：%2$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "सतह क्षेत्रफल: %1$@ · आयतन उपलब्ध नहीं (सतह बंद नहीं है) · पिंड: %2$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qada rûerdê: %1$@ · Qebare berdest nîne (rûerd ne girtî ye) · Cism: %2$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Площадь поверхности: %1$@ · Объём недоступен (поверхность не замкнута) · Тела: %2$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luas permukaan: %1$@ · Volume tidak tersedia (permukaan tidak tertutup) · Bodi: %2$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ · আয়তন পাওয়া যায়নি (পৃষ্ঠতল বন্ধ নয়) · বস্তু: %2$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faɗin saman: %1$@ · Ƙarar ba ta samuwa (saman bai rufu ba) · Jikuna: %2$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área da superfície: %1$@ · Volume indisponível (superfície não fechada) · Corpos: %2$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área de superficie: %1$@ · Volumen no disponible (superficie no cerrada) · Cuerpos: %2$@"
-          }
-        }
-      }
-    },
-    "cad.measurements.openUnits": {
-      "comment": "Formatted key. Variant of the CAD measurements line used when the surface mesh is not a closed, watertight shell, so no volume can be computed, and the length unit is known. Argument 1 is the already locale-formatted surface area and argument 2 its localized unit symbol (for example mm²); argument 3 is the already locale-formatted number of separate bodies. Say that the volume is unavailable because the surface is not closed; never claim the model is invalid or broken. Keep the three positional placeholders. Do not add singular or plural forms. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Surface area: %1$@ %2$@ · Volume unavailable (surface not closed) · Bodies: %3$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzey alanı: %1$@ %2$@ · Hacim kullanılamıyor (yüzey kapalı değil) · Gövdeler: %3$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oberfläche: %1$@ %2$@ · Volumen nicht verfügbar (Oberfläche nicht geschlossen) · Körper: %3$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aire de la surface : %1$@ %2$@ · Volume indisponible (surface non fermée) · Corps : %3$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面积：%1$@ %2$@ · 体积不可用（表面未闭合） · 实体：%3$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面積：%1$@ %2$@ · 体積は利用できません（表面が閉じていません） · ボディ数：%3$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "सतह क्षेत्रफल: %1$@ %2$@ · आयतन उपलब्ध नहीं (सतह बंद नहीं है) · पिंड: %3$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qada rûerdê: %1$@ %2$@ · Qebare berdest nîne (rûerd ne girtî ye) · Cism: %3$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Площадь поверхности: %1$@ %2$@ · Объём недоступен (поверхность не замкнута) · Тела: %3$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luas permukaan: %1$@ %2$@ · Volume tidak tersedia (permukaan tidak tertutup) · Bodi: %3$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ %2$@ · আয়তন পাওয়া যায়নি (পৃষ্ঠতল বন্ধ নয়) · বস্তু: %3$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faɗin saman: %1$@ %2$@ · Ƙarar ba ta samuwa (saman bai rufu ba) · Jikuna: %3$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área da superfície: %1$@ %2$@ · Volume indisponível (superfície não fechada) · Corpos: %3$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área de superficie: %1$@ %2$@ · Volumen no disponible (superficie no cerrada) · Cuerpos: %3$@"
-          }
-        }
-      }
-    },
-    "cad.measurements.solid": {
-      "comment": "CAD measurements line under the model summary. Argument 1 is the already locale-formatted surface area in square millimetres, argument 2 the already locale-formatted enclosed volume in cubic millimetres, argument 3 the number of separate bodies (Int64). Keep the positional placeholders and the unit symbols mm² and mm³. Do not add singular or plural forms: word the label so it reads naturally for any count. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Surface area: %1$@ mm² · Volume: %2$@ mm³ · Bodies: %3$lld"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzey alanı: %1$@ mm² · Hacim: %2$@ mm³ · Gövdeler: %3$lld"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oberfläche: %1$@ mm² · Volumen: %2$@ mm³ · Körper: %3$lld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aire de la surface : %1$@ mm² · Volume : %2$@ mm³ · Corps : %3$lld"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面积：%1$@ mm² · 体积：%2$@ mm³ · 实体：%3$lld"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面積：%1$@ mm² · 体積：%2$@ mm³ · ボディ数：%3$lld"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "सतह क्षेत्रफल: %1$@ mm² · आयतन: %2$@ mm³ · पिंड: %3$lld"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qada rûerdê: %1$@ mm² · Qebare: %2$@ mm³ · Cism: %3$lld"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Площадь поверхности: %1$@ mm² · Объём: %2$@ mm³ · Тела: %3$lld"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luas permukaan: %1$@ mm² · Volume: %2$@ mm³ · Bodi: %3$lld"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ mm² · আয়তন: %2$@ mm³ · বস্তু: %3$lld"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faɗin saman: %1$@ mm² · Ƙarar: %2$@ mm³ · Jikuna: %3$lld"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área da superfície: %1$@ mm² · Volume: %2$@ mm³ · Corpos: %3$lld"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área de superficie: %1$@ mm² · Volumen: %2$@ mm³ · Cuerpos: %3$lld"
-          }
-        }
-      }
-    },
-    "cad.measurements.solidUnitless": {
-      "comment": "Formatted key. CAD measurements line under the model summary, used when the file declares no length unit, so the numbers carry no unit symbol (the summary line above already says the unit is not declared). Argument 1 is the already locale-formatted surface area, argument 2 the already locale-formatted enclosed volume and argument 3 the already locale-formatted number of separate bodies. Keep the three positional placeholders and add no unit. Do not add singular or plural forms: word the label so it reads naturally for any count. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Surface area: %1$@ · Volume: %2$@ · Bodies: %3$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzey alanı: %1$@ · Hacim: %2$@ · Gövdeler: %3$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oberfläche: %1$@ · Volumen: %2$@ · Körper: %3$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aire de la surface : %1$@ · Volume : %2$@ · Corps : %3$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面积：%1$@ · 体积：%2$@ · 实体：%3$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面積：%1$@ · 体積：%2$@ · ボディ数：%3$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "सतह क्षेत्रफल: %1$@ · आयतन: %2$@ · पिंड: %3$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qada rûerdê: %1$@ · Qebare: %2$@ · Cism: %3$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Площадь поверхности: %1$@ · Объём: %2$@ · Тела: %3$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luas permukaan: %1$@ · Volume: %2$@ · Bodi: %3$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ · আয়তন: %2$@ · বস্তু: %3$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faɗin saman: %1$@ · Ƙarar: %2$@ · Jikuna: %3$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área da superfície: %1$@ · Volume: %2$@ · Corpos: %3$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área de superficie: %1$@ · Volumen: %2$@ · Cuerpos: %3$@"
-          }
-        }
-      }
-    },
-    "cad.measurements.solidUnits": {
-      "comment": "Formatted key. CAD measurements line under the model summary, used when the length unit is known. Argument 1 is the already locale-formatted surface area and argument 2 its localized unit symbol (for example mm²); argument 3 is the already locale-formatted enclosed volume and argument 4 its localized unit symbol (for example mm³); argument 5 is the already locale-formatted number of separate bodies. Keep the five positional placeholders and place each unit after its number the way the language writes units. Do not add singular or plural forms: word the label so it reads naturally for any count. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Surface area: %1$@ %2$@ · Volume: %3$@ %4$@ · Bodies: %5$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzey alanı: %1$@ %2$@ · Hacim: %3$@ %4$@ · Gövdeler: %5$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oberfläche: %1$@ %2$@ · Volumen: %3$@ %4$@ · Körper: %5$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aire de la surface : %1$@ %2$@ · Volume : %3$@ %4$@ · Corps : %5$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面积：%1$@ %2$@ · 体积：%3$@ %4$@ · 实体：%5$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表面積：%1$@ %2$@ · 体積：%3$@ %4$@ · ボディ数：%5$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "सतह क्षेत्रफल: %1$@ %2$@ · आयतन: %3$@ %4$@ · पिंड: %5$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qada rûerdê: %1$@ %2$@ · Qebare: %3$@ %4$@ · Cism: %5$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Площадь поверхности: %1$@ %2$@ · Объём: %3$@ %4$@ · Тела: %5$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Luas permukaan: %1$@ %2$@ · Volume: %3$@ %4$@ · Bodi: %5$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ %2$@ · আয়তন: %3$@ %4$@ · বস্তু: %5$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faɗin saman: %1$@ %2$@ · Ƙarar: %3$@ %4$@ · Jikuna: %5$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área da superfície: %1$@ %2$@ · Volume: %3$@ %4$@ · Corpos: %5$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Área de superficie: %1$@ %2$@ · Volumen: %3$@ %4$@ · Cuerpos: %5$@"
-          }
-        }
-      }
-    },
-    "cad.metalUnavailable": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D rendering is unavailable on this device."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu aygıtta 3B görüntüleme kullanılamıyor."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D-Darstellung ist auf diesem Gerät nicht verfügbar."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le rendu 3D est indisponible sur cet appareil."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "此设备无法进行 3D 渲染。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このデバイスでは3D描画を利用できません。"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "इस डिवाइस पर 3D रेंडरिंग उपलब्ध नहीं है।"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Li ser vê amûrê xêzkirina 3D tune ye."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D-рендеринг недоступен на этом устройстве."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perenderan 3D tidak tersedia di perangkat ini."
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "এই ডিভাইসে 3D রেন্ডারিং উপলভ্য নয়।"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ba a samun zana 3D a wannan naʼurar."
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A renderização 3D está indisponível neste dispositivo."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La renderización 3D no está disponible en este dispositivo."
-          }
-        }
-      }
-    },
-    "cad.privacyNotice": {
-      "comment": "Geometry itself may reveal sensitive shapes or modeled lettering. Only document metadata is omitted; never imply geometry has been concealed.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D geometry is shown as stored. Document metadata is omitted."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3B geometri kaydedildiği biçimde gösterilir. Belge üst verileri gösterilmez."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D-Geometrie wird wie gespeichert angezeigt. Dokumentmetadaten werden weggelassen."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La géométrie 3D est affichée telle qu’elle est enregistrée. Les métadonnées du document sont omises."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D 几何按存储的内容显示。文档元数据已省略。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D形状は保存された状態で表示されます。文書のメタデータは省略されます。"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D ज्यामिति सहेजे गए रूप में दिखाई जाती है। दस्तावेज़ मेटाडेटा छोड़ दिया जाता है।"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Geometriya 3D wekî hatî tomarkirin tê nîşandan. Metadataya belgeyê nayê nîşandan."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D-геометрия показана в сохранённом виде. Метаданные документа опущены."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Geometri 3D ditampilkan sesuai yang disimpan. Metadata dokumen dihilangkan."
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D জ্যামিতি সংরক্ষিত অবস্থায় দেখানো হয়। নথির মেটাডেটা বাদ দেওয়া হয়।"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ana nuna tsarin 3D kamar yadda aka adana shi. Ba a nuna bayanan takardar ba."
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A geometria 3D é exibida como foi armazenada. Os metadados do documento são omitidos."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La geometría 3D se muestra tal como está guardada. Se omiten los metadatos del documento."
-          }
-        }
-      }
-    },
-    "cad.reset": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reset View"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Görünümü Sıfırla"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ansicht Zurücksetzen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réinitialiser la vue"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "重置视图"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表示をリセット"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "दृश्य रीसेट करें"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dîtinê Nû Bike"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сбросить вид"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atur Ulang Tampilan"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "দৃশ্য রিসেট করুন"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sake Saita Kallo"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Redefinir Vista"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Restablecer vista"
-          }
-        }
-      }
-    },
-    "cad.side": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Side"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yan"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seite"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Côté"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "侧面"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "側面"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "पार्श्व"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kêle"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сбоку"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Samping"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "পাশে"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gefe"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lado"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lateral"
-          }
-        }
-      }
-    },
-    "cad.summary": {
-      "comment": "Safe computed geometry summary: argument 1 face count (Int64), 2 triangle count (Int64), 3/4/5 already locale-formatted width/height/depth in millimetres. Preserve positional placeholders and mm unit symbol. Approximate tessellated bounds, not certified engineering dimensions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces: %1$lld · Triangles: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzler: %1$lld · Üçgenler: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Flächen: %1$lld · Dreiecke: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces : %1$lld · Triangles : %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "面：%1$lld · 三角形：%2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "面数：%1$lld · 三角形数：%2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "फलक: %1$lld · त्रिभुज: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rû: %1$lld · Sêgoşe: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Грани: %1$lld · Треугольники: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bidang: %1$lld · Segitiga: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "তল: %1$lld · ত্রিভুজ: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fuskoki: %1$lld · Alwatika: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces: %1$lld · Triângulos: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Caras: %1$lld · Triángulos: %2$lld · %3$@ × %4$@ × %5$@ mm"
-          }
-        }
-      }
-    },
-    "cad.summary.dimensions": {
-      "comment": "Formatted key. Geometry summary line of a 3D model preview whose length unit is known. Argument 1 is the face count and argument 2 the triangle count, both already formatted for the locale (a face count can read like 100,000+ when the model has more faces than are counted); arguments 3, 4 and 5 are the model width, height and depth, already formatted for the locale; argument 6 is the localized length unit symbol (for example mm or in) that applies to all three dimensions. Keep the six positional placeholders and place the unit after the dimensions the way the language writes units. Approximate tessellated bounds, not certified engineering dimensions. Do not add singular or plural forms: word the labels so they read naturally for any count.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces: %1$@ · Triangles: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzler: %1$@ · Üçgenler: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Flächen: %1$@ · Dreiecke: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces : %1$@ · Triangles : %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "面：%1$@ · 三角形：%2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "面数：%1$@ · 三角形数：%2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "फलक: %1$@ · त्रिभुज: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rû: %1$@ · Sêgoşe: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Грани: %1$@ · Треугольники: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bidang: %1$@ · Segitiga: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "তল: %1$@ · ত্রিভুজ: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fuskoki: %1$@ · Alwatika: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces: %1$@ · Triângulos: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Caras: %1$@ · Triángulos: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
-          }
-        }
-      }
-    },
-    "cad.summary.dimensionsUnitless": {
-      "comment": "Formatted key. Geometry summary line of a 3D model preview whose file does not declare a length unit (STL, OBJ and PLY files never do). Arguments 1 and 2 are the face and triangle counts, already formatted for the locale (a face count can read like 100,000+); arguments 3, 4 and 5 are the width, height and depth as plain numbers already formatted for the locale. The closing parenthesis says the numbers have no unit because the file declares none; it must not suggest millimetres or any other unit and must not call the file broken. Keep the five positional placeholders. Approximate tessellated bounds, not certified engineering dimensions.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces: %1$@ · Triangles: %2$@ · %3$@ × %4$@ × %5$@ (unit not declared)"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yüzler: %1$@ · Üçgenler: %2$@ · %3$@ × %4$@ × %5$@ (birim belirtilmemiş)"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Flächen: %1$@ · Dreiecke: %2$@ · %3$@ × %4$@ × %5$@ (Einheit nicht angegeben)"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces : %1$@ · Triangles : %2$@ · %3$@ × %4$@ × %5$@ (unité non déclarée)"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "面：%1$@ · 三角形：%2$@ · %3$@ × %4$@ × %5$@（未声明单位）"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "面数：%1$@ · 三角形数：%2$@ · %3$@ × %4$@ × %5$@（単位は未指定）"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "फलक: %1$@ · त्रिभुज: %2$@ · %3$@ × %4$@ × %5$@ (इकाई घोषित नहीं)"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rû: %1$@ · Sêgoşe: %2$@ · %3$@ × %4$@ × %5$@ (yekeya pîvanê nehatiye diyarkirin)"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Грани: %1$@ · Треугольники: %2$@ · %3$@ × %4$@ × %5$@ (единица измерения не указана)"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bidang: %1$@ · Segitiga: %2$@ · %3$@ × %4$@ × %5$@ (satuan tidak dinyatakan)"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "তল: %1$@ · ত্রিভুজ: %2$@ · %3$@ × %4$@ × %5$@ (একক উল্লেখ করা নেই)"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fuskoki: %1$@ · Alwatika: %2$@ · %3$@ × %4$@ × %5$@ (ba a bayyana naúrar ba)"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faces: %1$@ · Triângulos: %2$@ · %3$@ × %4$@ × %5$@ (unidade não declarada)"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Caras: %1$@ · Triángulos: %2$@ · %3$@ × %4$@ × %5$@ (unidad no declarada)"
-          }
-        }
-      }
-    },
-    "cad.top": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Üst"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oben"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dessus"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "顶面"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上面"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ऊपर"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jor"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сверху"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atas"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "উপরে"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sama"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Topo"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Superior"
-          }
-        }
-      }
-    },
-    "cad.upAxis": {
-      "comment": "Formatted key. Title of a button in the 3D model controls that switches which model axis points up on screen. Argument 1 is the axis currently pointing up, a technical letter (Z or Y) that must not be translated. The button is narrow: keep the wording short. This is a per-view choice that is not saved.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Up Axis: %1$@"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yukarı eksen: %1$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Achse nach oben: %1$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Axe vertical : %1$@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "向上轴：%1$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上方向の軸：%1$@"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ऊर्ध्वाधर अक्ष: %1$@"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eksena jor: %1$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вертикальная ось: %1$@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sumbu atas: %1$@"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "উপরের অক্ষ: %1$@"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ginshiƙin sama: %1$@"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eixo para cima: %1$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eje vertical: %1$@"
-          }
-        }
-      }
-    },
-    "cad.upAxis.help": {
-      "comment": "Tooltip and VoiceOver help for the Up Axis button in the 3D model controls. It explains that the button chooses which model axis points up, that 3D-printing files (STL, 3MF) usually point Z up and most other 3D files point Y up, and that the choice applies only to this view and is not saved. Keep the letters Z and Y and the format names STL and 3MF unchanged. Two sentences or three short ones.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choose which model axis points up. 3D-printing files (STL, 3MF) usually point Z up; most other 3D files point Y up. This applies to this view only and is not saved."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modelin hangi ekseninin yukarıyı göstereceğini seçin. 3B baskı dosyaları (STL, 3MF) genellikle Z eksenini yukarı alır; diğer çoğu 3B dosya Y eksenini yukarı alır. Bu seçim yalnızca bu görünüm için geçerlidir ve kaydedilmez."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wählen Sie, welche Modellachse nach oben zeigt. 3D-Druckdateien (STL, 3MF) zeigen meist mit Z nach oben, die meisten anderen 3D-Dateien mit Y nach oben. Die Auswahl gilt nur für diese Ansicht und wird nicht gespeichert."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisissez l’axe du modèle orienté vers le haut. Les fichiers d’impression 3D (STL, 3MF) ont généralement Z vers le haut ; la plupart des autres fichiers 3D ont Y vers le haut. Ce choix ne s’applique qu’à cette vue et n’est pas enregistré."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "选择模型的哪个轴朝上。3D 打印文件（STL、3MF）通常以 Z 轴朝上，大多数其他 3D 文件以 Y 轴朝上。此选择仅对当前视图有效，不会保存。"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "モデルのどの軸を上向きにするかを選びます。3Dプリント用ファイル（STL、3MF）は通常Z軸が上、その他の多くの3DファイルはY軸が上です。この設定はこの表示だけに適用され、保存されません。"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "चुनें कि मॉडल का कौन-सा अक्ष ऊपर की ओर रहे। 3D प्रिंटिंग फ़ाइलों (STL, 3MF) में आमतौर पर Z ऊपर होता है; अधिकतर अन्य 3D फ़ाइलों में Y ऊपर होता है। यह चुनाव केवल इस दृश्य पर लागू होता है और सहेजा नहीं जाता।"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hilbijêre kîjan eksena modelê li jor be. Pelên çapkirina 3D (STL, 3MF) bi gelemperî Z li jor datînin; piraniya pelên 3D yên din Y li jor datînin. Ev hilbijartin tenê ji bo vê dîtinê derbas dibe û nayê tomarkirin."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Выберите, какая ось модели направлена вверх. Файлы для 3D-печати (STL, 3MF) обычно направляют вверх ось Z, большинство других 3D-файлов — ось Y. Выбор действует только в этом окне просмотра и не сохраняется."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pilih sumbu model yang menghadap ke atas. Berkas pencetakan 3D (STL, 3MF) biasanya menghadap ke atas pada sumbu Z; sebagian besar berkas 3D lain pada sumbu Y. Pilihan ini hanya berlaku untuk tampilan ini dan tidak disimpan."
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "মডেলের কোন অক্ষ উপরের দিকে থাকবে তা বেছে নিন। 3D প্রিন্টিং ফাইলে (STL, 3MF) সাধারণত Z উপরে থাকে; অন্য বেশিরভাগ 3D ফাইলে Y উপরে থাকে। এই পছন্দ শুধু এই ভিউয়ের জন্য প্রযোজ্য এবং সংরক্ষিত হয় না।"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zaɓi wane ginshiƙin samfurin ne yake nuna sama. Fayilolin buga 3D (STL, 3MF) yawanci Z ne yake sama; yawancin sauran fayilolin 3D Y ne yake sama. Wannan zaɓin yana aiki a wannan kallon kawai kuma ba a adana shi."
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha qual eixo do modelo aponta para cima. Arquivos de impressão 3D (STL, 3MF) costumam ter Z para cima; a maioria dos outros arquivos 3D tem Y para cima. Esta escolha vale apenas para esta vista e não é salva."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elige qué eje del modelo apunta hacia arriba. Los archivos de impresión 3D (STL, 3MF) suelen tener Z hacia arriba; la mayoría de los demás archivos 3D tienen Y hacia arriba. Esta opción solo se aplica a esta vista y no se guarda."
-          }
-        }
-      }
-    },
-    "cad.viewportLabel": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Interactive 3D model"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Etkileşimli 3B model"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Interaktives 3D-Modell"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modèle 3D interactif"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "交互式 3D 模型"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "操作可能な3Dモデル"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "इंटरैक्टिव 3D मॉडल"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modela 3D ya înteraktîf"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Интерактивная 3D-модель"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Model 3D interaktif"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ইন্টারঅ্যাক্টিভ 3D মডেল"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Samfurin 3D mai hulɗa"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modelo 3D interativo"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modelo 3D interactivo"
-          }
-        }
-      }
-    },
-    "cad.zoomIn": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zoom In"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yakınlaştır"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vergrößern"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zoom avant"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "放大"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "拡大"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ज़ूम इन"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nêzîk Bike"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Увеличить"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perbesar"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "জুম ইন"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kusantar"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ampliar"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Acercar"
-          }
-        }
-      }
-    },
-    "cad.zoomOut": {
-      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zoom Out"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uzaklaştır"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Verkleinern"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zoom arrière"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "缩小"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "縮小"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ज़ूम आउट"
-          }
-        },
-        "ku-Latn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dûr Bike"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Уменьшить"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perkecil"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "জুম আউট"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nisantar"
-          }
-        },
-        "pt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reduzir"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alejar"
-          }
-        }
-      }
-    },
     "failure.binary": {
       "comment": "Binary text rejection.",
       "extractionState": "manual",
@@ -54827,6 +52397,1896 @@
           "stringUnit": {
             "state": "translated",
             "value": "Configura la integración con Finder y Quick Look."
+          }
+        }
+      }
+    },
+    "geometry.faceCount.atLeast": {
+      "comment": "Formatted key. A count of model faces that stopped at the preview limit, shown in the geometry summary where the number would be, so it must read as at least that many. Argument 1 is the already locale-formatted count (for example 100,000). Keep the placeholder; the default is the number followed by a plus sign. Do not add words that would not fit inside the summary line.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@+"
+          }
+        }
+      }
+    },
+    "geometry.fit": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fit Model"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modeli Sığdır"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell Einpassen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajuster le modèle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "适应模型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルを収める"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मॉडल फ़िट करें"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelê Bicih Bike"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вписать модель"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesuaikan Model"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মডেল মানানসই করুন"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daidaita Samfuri"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustar Modelo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustar modelo"
+          }
+        }
+      }
+    },
+    "geometry.front": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Front"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ön"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorne"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正面"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正面"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सामने"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pêş"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Спереди"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depan"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সামনে"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gaba"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frente"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frente"
+          }
+        }
+      }
+    },
+    "geometry.interactionHelp": {
+      "comment": "Native CAD navigation help. Keep F, R, 1/2/3, +/− shortcuts unchanged; translate descriptions. Shift is the keyboard modifier.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag to orbit. Shift-drag or right-drag to pan. Scroll to zoom. Arrow keys orbit; Shift-arrow keys pan; +/− zoom; F fits; R resets; 1/2/3 select front/side/top."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Döndürmek için sürükleyin. Kaydırmak için Shift ile veya sağ tuşla sürükleyin. Yakınlaştırmak için kaydırın. Ok tuşları döndürür; Shift-ok tuşları kaydırır; +/− yakınlaştırır; F sığdırır; R sıfırlar; 1/2/3 ön/yan/üst görünümü seçer."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Drehen ziehen. Zum Verschieben mit Umschalttaste oder rechter Maustaste ziehen. Zum Zoomen scrollen. Pfeiltasten drehen; Umschalt-Pfeiltasten verschieben; +/− zoomt; F passt ein; R setzt zurück; 1/2/3 wählt vorne/Seite/oben."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites glisser pour pivoter. Faites glisser avec Maj ou le bouton droit pour déplacer. Faites défiler pour zoomer. Les flèches font pivoter ; Maj-flèches déplacent ; +/− zoome ; F ajuste ; R réinitialise ; 1/2/3 sélectionne face/côté/dessus."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拖动以旋转。按住 Shift 拖动或用右键拖动以平移。滚动以缩放。方向键旋转；Shift 加方向键平移；+/− 缩放；F 适应模型；R 重置；1/2/3 选择正面/侧面/顶面。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ドラッグで回転。Shiftを押しながらドラッグ、または右ドラッグで移動。スクロールでズーム。矢印キーで回転、Shift＋矢印キーで移動、+/−でズーム、Fで全体表示、Rでリセット、1/2/3で正面/側面/上面を選択します。"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "घुमाने के लिए खींचें। खिसकाने के लिए Shift दबाकर या दायाँ बटन दबाकर खींचें। ज़ूम के लिए स्क्रॉल करें। तीर कुंजियाँ घुमाती हैं; Shift-तीर खिसकाते हैं; +/− ज़ूम करते हैं; F फ़िट करता है; R रीसेट करता है; 1/2/3 सामने/पार्श्व/ऊपर चुनते हैं।"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ji bo zivirandinê bikişîne. Ji bo guheztinê bi Shift an bi bişkoja rastê bikişîne. Ji bo nêzîkkirinê bilivîne. Bişkojên tîran dizivirînin; Shift-tîr diguhezînin; +/− nêzîk/dûr dikin; F bicih dike; R nû dike; 1/2/3 pêş/kêle/jor hildibijêrin."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перетаскивайте для вращения. Перетаскивайте с Shift или правой кнопкой для перемещения. Прокручивайте для масштаба. Стрелки вращают; Shift-стрелки перемещают; +/− меняет масштаб; F вписывает; R сбрасывает; 1/2/3 выбирает вид спереди/сбоку/сверху."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret untuk memutar. Seret dengan Shift atau tombol kanan untuk menggeser. Gulir untuk memperbesar. Tombol panah memutar; Shift-panah menggeser; +/− mengubah zoom; F menyesuaikan; R mengatur ulang; 1/2/3 memilih depan/samping/atas."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ঘোরাতে টেনে আনুন। সরাতে Shift চেপে বা ডান বোতাম দিয়ে টানুন। জুম করতে স্ক্রল করুন। তীরচিহ্নের কী ঘোরায়; Shift-তীর সরায়; +/− জুম করে; F মানানসই করে; R রিসেট করে; 1/2/3 সামনে/পাশে/উপরে বেছে নেয়।"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ja don juyawa. Ja da Shift ko maɓallin dama don matsawa. Gungura don kusantarwa. Maɓallan kibiya suna juyawa; Shift-kibiya suna matsawa; +/− suna kusantarwa/nisantarwa; F yana daidaitawa; R yana sake saitawa; 1/2/3 suna zaɓar gaba/gefe/sama."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste para girar. Arraste com Shift ou o botão direito para mover. Role para ampliar. As setas giram; Shift-setas movem; +/− altera o zoom; F ajusta; R redefine; 1/2/3 seleciona frente/lado/topo."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra para girar. Arrastra con Mayús o el botón derecho para desplazar. Desplázate para ampliar. Las flechas giran; Mayús-flechas desplazan; +/− cambia el zoom; F ajusta; R restablece; 1/2/3 selecciona frente/lateral/superior."
+          }
+        }
+      }
+    },
+    "geometry.invalidGeometry": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This model could not be displayed safely."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu model güvenli biçimde gösterilemedi."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Modell konnte nicht sicher angezeigt werden."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce modèle n’a pas pu être affiché de manière sûre."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法安全显示此模型。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このモデルを安全に表示できませんでした。"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस मॉडल को सुरक्षित रूप से प्रदर्शित नहीं किया जा सका।"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ev model bi awayekî ewle nehat nîşandan."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось безопасно показать эту модель."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model ini tidak dapat ditampilkan dengan aman."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই মডেলটি নিরাপদে দেখানো যায়নি।"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ba a iya nuna wannan samfurin cikin aminci ba."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível exibir este modelo com segurança."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se ha podido mostrar este modelo de forma segura."
+          }
+        }
+      }
+    },
+    "geometry.measurements.openUnitless": {
+      "comment": "Formatted key. Variant of the CAD measurements line used when the surface mesh is not a closed, watertight shell, so no volume can be computed, and the file declares no length unit, so the numbers carry no unit symbol. Argument 1 is the already locale-formatted surface area and argument 2 the already locale-formatted number of separate bodies. Say that the volume is unavailable because the surface is not closed; never claim the model is invalid or broken. Keep the two positional placeholders and add no unit. Do not add singular or plural forms. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surface area: %1$@ · Volume unavailable (surface not closed) · Bodies: %2$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüzey alanı: %1$@ · Hacim kullanılamıyor (yüzey kapalı değil) · Gövdeler: %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oberfläche: %1$@ · Volumen nicht verfügbar (Oberfläche nicht geschlossen) · Körper: %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aire de la surface : %1$@ · Volume indisponible (surface non fermée) · Corps : %2$@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面积：%1$@ · 体积不可用（表面未闭合） · 实体：%2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面積：%1$@ · 体積は利用できません（表面が閉じていません） · ボディ数：%2$@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सतह क्षेत्रफल: %1$@ · आयतन उपलब्ध नहीं (सतह बंद नहीं है) · पिंड: %2$@"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qada rûerdê: %1$@ · Qebare berdest nîne (rûerd ne girtî ye) · Cism: %2$@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Площадь поверхности: %1$@ · Объём недоступен (поверхность не замкнута) · Тела: %2$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luas permukaan: %1$@ · Volume tidak tersedia (permukaan tidak tertutup) · Bodi: %2$@"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ · আয়তন পাওয়া যায়নি (পৃষ্ঠতল বন্ধ নয়) · বস্তু: %2$@"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faɗin saman: %1$@ · Ƙarar ba ta samuwa (saman bai rufu ba) · Jikuna: %2$@"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área da superfície: %1$@ · Volume indisponível (superfície não fechada) · Corpos: %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área de superficie: %1$@ · Volumen no disponible (superficie no cerrada) · Cuerpos: %2$@"
+          }
+        }
+      }
+    },
+    "geometry.measurements.openUnits": {
+      "comment": "Formatted key. Variant of the CAD measurements line used when the surface mesh is not a closed, watertight shell, so no volume can be computed, and the length unit is known. Argument 1 is the already locale-formatted surface area and argument 2 its localized unit symbol (for example mm²); argument 3 is the already locale-formatted number of separate bodies. Say that the volume is unavailable because the surface is not closed; never claim the model is invalid or broken. Keep the three positional placeholders. Do not add singular or plural forms. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surface area: %1$@ %2$@ · Volume unavailable (surface not closed) · Bodies: %3$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüzey alanı: %1$@ %2$@ · Hacim kullanılamıyor (yüzey kapalı değil) · Gövdeler: %3$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oberfläche: %1$@ %2$@ · Volumen nicht verfügbar (Oberfläche nicht geschlossen) · Körper: %3$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aire de la surface : %1$@ %2$@ · Volume indisponible (surface non fermée) · Corps : %3$@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面积：%1$@ %2$@ · 体积不可用（表面未闭合） · 实体：%3$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面積：%1$@ %2$@ · 体積は利用できません（表面が閉じていません） · ボディ数：%3$@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सतह क्षेत्रफल: %1$@ %2$@ · आयतन उपलब्ध नहीं (सतह बंद नहीं है) · पिंड: %3$@"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qada rûerdê: %1$@ %2$@ · Qebare berdest nîne (rûerd ne girtî ye) · Cism: %3$@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Площадь поверхности: %1$@ %2$@ · Объём недоступен (поверхность не замкнута) · Тела: %3$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luas permukaan: %1$@ %2$@ · Volume tidak tersedia (permukaan tidak tertutup) · Bodi: %3$@"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ %2$@ · আয়তন পাওয়া যায়নি (পৃষ্ঠতল বন্ধ নয়) · বস্তু: %3$@"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faɗin saman: %1$@ %2$@ · Ƙarar ba ta samuwa (saman bai rufu ba) · Jikuna: %3$@"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área da superfície: %1$@ %2$@ · Volume indisponível (superfície não fechada) · Corpos: %3$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área de superficie: %1$@ %2$@ · Volumen no disponible (superficie no cerrada) · Cuerpos: %3$@"
+          }
+        }
+      }
+    },
+    "geometry.measurements.solidUnitless": {
+      "comment": "Formatted key. CAD measurements line under the model summary, used when the file declares no length unit, so the numbers carry no unit symbol (the summary line above already says the unit is not declared). Argument 1 is the already locale-formatted surface area, argument 2 the already locale-formatted enclosed volume and argument 3 the already locale-formatted number of separate bodies. Keep the three positional placeholders and add no unit. Do not add singular or plural forms: word the label so it reads naturally for any count. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surface area: %1$@ · Volume: %2$@ · Bodies: %3$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüzey alanı: %1$@ · Hacim: %2$@ · Gövdeler: %3$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oberfläche: %1$@ · Volumen: %2$@ · Körper: %3$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aire de la surface : %1$@ · Volume : %2$@ · Corps : %3$@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面积：%1$@ · 体积：%2$@ · 实体：%3$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面積：%1$@ · 体積：%2$@ · ボディ数：%3$@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सतह क्षेत्रफल: %1$@ · आयतन: %2$@ · पिंड: %3$@"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qada rûerdê: %1$@ · Qebare: %2$@ · Cism: %3$@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Площадь поверхности: %1$@ · Объём: %2$@ · Тела: %3$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luas permukaan: %1$@ · Volume: %2$@ · Bodi: %3$@"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ · আয়তন: %2$@ · বস্তু: %3$@"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faɗin saman: %1$@ · Ƙarar: %2$@ · Jikuna: %3$@"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área da superfície: %1$@ · Volume: %2$@ · Corpos: %3$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área de superficie: %1$@ · Volumen: %2$@ · Cuerpos: %3$@"
+          }
+        }
+      }
+    },
+    "geometry.measurements.solidUnits": {
+      "comment": "Formatted key. CAD measurements line under the model summary, used when the length unit is known. Argument 1 is the already locale-formatted surface area and argument 2 its localized unit symbol (for example mm²); argument 3 is the already locale-formatted enclosed volume and argument 4 its localized unit symbol (for example mm³); argument 5 is the already locale-formatted number of separate bodies. Keep the five positional placeholders and place each unit after its number the way the language writes units. Do not add singular or plural forms: word the label so it reads naturally for any count. Approximate values computed from the displayed tessellated surface, not certified engineering measurements.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surface area: %1$@ %2$@ · Volume: %3$@ %4$@ · Bodies: %5$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüzey alanı: %1$@ %2$@ · Hacim: %3$@ %4$@ · Gövdeler: %5$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oberfläche: %1$@ %2$@ · Volumen: %3$@ %4$@ · Körper: %5$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aire de la surface : %1$@ %2$@ · Volume : %3$@ %4$@ · Corps : %5$@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面积：%1$@ %2$@ · 体积：%3$@ %4$@ · 实体：%5$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表面積：%1$@ %2$@ · 体積：%3$@ %4$@ · ボディ数：%5$@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सतह क्षेत्रफल: %1$@ %2$@ · आयतन: %3$@ %4$@ · पिंड: %5$@"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qada rûerdê: %1$@ %2$@ · Qebare: %3$@ %4$@ · Cism: %5$@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Площадь поверхности: %1$@ %2$@ · Объём: %3$@ %4$@ · Тела: %5$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luas permukaan: %1$@ %2$@ · Volume: %3$@ %4$@ · Bodi: %5$@"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ %2$@ · আয়তন: %3$@ %4$@ · বস্তু: %5$@"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faɗin saman: %1$@ %2$@ · Ƙarar: %3$@ %4$@ · Jikuna: %5$@"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área da superfície: %1$@ %2$@ · Volume: %3$@ %4$@ · Corpos: %5$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Área de superficie: %1$@ %2$@ · Volumen: %3$@ %4$@ · Cuerpos: %5$@"
+          }
+        }
+      }
+    },
+    "geometry.metalUnavailable": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D rendering is unavailable on this device."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu aygıtta 3B görüntüleme kullanılamıyor."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D-Darstellung ist auf diesem Gerät nicht verfügbar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le rendu 3D est indisponible sur cet appareil."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此设备无法进行 3D 渲染。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このデバイスでは3D描画を利用できません。"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर 3D रेंडरिंग उपलब्ध नहीं है।"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Li ser vê amûrê xêzkirina 3D tune ye."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D-рендеринг недоступен на этом устройстве."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perenderan 3D tidak tersedia di perangkat ini."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই ডিভাইসে 3D রেন্ডারিং উপলভ্য নয়।"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ba a samun zana 3D a wannan naʼurar."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A renderização 3D está indisponível neste dispositivo."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La renderización 3D no está disponible en este dispositivo."
+          }
+        }
+      }
+    },
+    "geometry.privacyNotice": {
+      "comment": "Geometry itself may reveal sensitive shapes or modeled lettering. Only document metadata is omitted; never imply geometry has been concealed.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D geometry is shown as stored. Document metadata is omitted."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3B geometri kaydedildiği biçimde gösterilir. Belge üst verileri gösterilmez."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D-Geometrie wird wie gespeichert angezeigt. Dokumentmetadaten werden weggelassen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La géométrie 3D est affichée telle qu’elle est enregistrée. Les métadonnées du document sont omises."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D 几何按存储的内容显示。文档元数据已省略。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D形状は保存された状態で表示されます。文書のメタデータは省略されます。"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D ज्यामिति सहेजे गए रूप में दिखाई जाती है। दस्तावेज़ मेटाडेटा छोड़ दिया जाता है।"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geometriya 3D wekî hatî tomarkirin tê nîşandan. Metadataya belgeyê nayê nîşandan."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D-геометрия показана в сохранённом виде. Метаданные документа опущены."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geometri 3D ditampilkan sesuai yang disimpan. Metadata dokumen dihilangkan."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D জ্যামিতি সংরক্ষিত অবস্থায় দেখানো হয়। নথির মেটাডেটা বাদ দেওয়া হয়।"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ana nuna tsarin 3D kamar yadda aka adana shi. Ba a nuna bayanan takardar ba."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A geometria 3D é exibida como foi armazenada. Os metadados do documento são omitidos."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La geometría 3D se muestra tal como está guardada. Se omiten los metadatos del documento."
+          }
+        }
+      }
+    },
+    "geometry.reset": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset View"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görünümü Sıfırla"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ansicht Zurücksetzen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser la vue"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重置视图"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示をリセット"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दृश्य रीसेट करें"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dîtinê Nû Bike"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сбросить вид"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atur Ulang Tampilan"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "দৃশ্য রিসেট করুন"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sake Saita Kallo"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redefinir Vista"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restablecer vista"
+          }
+        }
+      }
+    },
+    "geometry.side": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Side"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yan"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seite"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Côté"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "侧面"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "側面"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पार्श्व"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kêle"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сбоку"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Samping"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "পাশে"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefe"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lado"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lateral"
+          }
+        }
+      }
+    },
+    "geometry.summary.dimensions": {
+      "comment": "Formatted key. Geometry summary line of a 3D model preview whose length unit is known. Argument 1 is the face count and argument 2 the triangle count, both already formatted for the locale (a face count can read like 100,000+ when the model has more faces than are counted); arguments 3, 4 and 5 are the model width, height and depth, already formatted for the locale; argument 6 is the localized length unit symbol (for example mm or in) that applies to all three dimensions. Keep the six positional placeholders and place the unit after the dimensions the way the language writes units. Approximate tessellated bounds, not certified engineering dimensions. Do not add singular or plural forms: word the labels so they read naturally for any count.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faces: %1$@ · Triangles: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüzler: %1$@ · Üçgenler: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flächen: %1$@ · Dreiecke: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faces : %1$@ · Triangles : %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面：%1$@ · 三角形：%2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面数：%1$@ · 三角形数：%2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फलक: %1$@ · त्रिभुज: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rû: %1$@ · Sêgoşe: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Грани: %1$@ · Треугольники: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bidang: %1$@ · Segitiga: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "তল: %1$@ · ত্রিভুজ: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuskoki: %1$@ · Alwatika: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faces: %1$@ · Triângulos: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caras: %1$@ · Triángulos: %2$@ · %3$@ × %4$@ × %5$@ %6$@"
+          }
+        }
+      }
+    },
+    "geometry.summary.dimensionsUnitless": {
+      "comment": "Formatted key. Geometry summary line of a 3D model preview whose file does not declare a length unit (STL, OBJ and PLY files never do). Arguments 1 and 2 are the face and triangle counts, already formatted for the locale (a face count can read like 100,000+); arguments 3, 4 and 5 are the width, height and depth as plain numbers already formatted for the locale. The closing parenthesis says the numbers have no unit because the file declares none; it must not suggest millimetres or any other unit and must not call the file broken. Keep the five positional placeholders. Approximate tessellated bounds, not certified engineering dimensions.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faces: %1$@ · Triangles: %2$@ · %3$@ × %4$@ × %5$@ (unit not declared)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yüzler: %1$@ · Üçgenler: %2$@ · %3$@ × %4$@ × %5$@ (birim belirtilmemiş)"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flächen: %1$@ · Dreiecke: %2$@ · %3$@ × %4$@ × %5$@ (Einheit nicht angegeben)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faces : %1$@ · Triangles : %2$@ · %3$@ × %4$@ × %5$@ (unité non déclarée)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面：%1$@ · 三角形：%2$@ · %3$@ × %4$@ × %5$@（未声明单位）"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面数：%1$@ · 三角形数：%2$@ · %3$@ × %4$@ × %5$@（単位は未指定）"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फलक: %1$@ · त्रिभुज: %2$@ · %3$@ × %4$@ × %5$@ (इकाई घोषित नहीं)"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rû: %1$@ · Sêgoşe: %2$@ · %3$@ × %4$@ × %5$@ (yekeya pîvanê nehatiye diyarkirin)"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Грани: %1$@ · Треугольники: %2$@ · %3$@ × %4$@ × %5$@ (единица измерения не указана)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bidang: %1$@ · Segitiga: %2$@ · %3$@ × %4$@ × %5$@ (satuan tidak dinyatakan)"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "তল: %1$@ · ত্রিভুজ: %2$@ · %3$@ × %4$@ × %5$@ (একক উল্লেখ করা নেই)"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fuskoki: %1$@ · Alwatika: %2$@ · %3$@ × %4$@ × %5$@ (ba a bayyana naúrar ba)"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faces: %1$@ · Triângulos: %2$@ · %3$@ × %4$@ × %5$@ (unidade não declarada)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caras: %1$@ · Triángulos: %2$@ · %3$@ × %4$@ × %5$@ (unidad no declarada)"
+          }
+        }
+      }
+    },
+    "geometry.top": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Top"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üst"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oben"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dessus"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顶面"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上面"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऊपर"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jor"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сверху"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atas"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "উপরে"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sama"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Topo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Superior"
+          }
+        }
+      }
+    },
+    "geometry.upAxis": {
+      "comment": "Formatted key. Title of a button in the 3D model controls that switches which model axis points up on screen. Argument 1 is the axis currently pointing up, a technical letter (Z or Y) that must not be translated. The button is narrow: keep the wording short. This is a per-view choice that is not saved.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Up Axis: %1$@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yukarı eksen: %1$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Achse nach oben: %1$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Axe vertical : %1$@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "向上轴：%1$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上方向の軸：%1$@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऊर्ध्वाधर अक्ष: %1$@"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksena jor: %1$@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вертикальная ось: %1$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumbu atas: %1$@"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "উপরের অক্ষ: %1$@"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ginshiƙin sama: %1$@"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eixo para cima: %1$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eje vertical: %1$@"
+          }
+        }
+      }
+    },
+    "geometry.upAxis.help": {
+      "comment": "Tooltip and VoiceOver help for the Up Axis button in the 3D model controls. It explains that the button chooses which model axis points up, that 3D-printing files (STL, 3MF) usually point Z up and most other 3D files point Y up, and that the choice applies only to this view and is not saved. Keep the letters Z and Y and the format names STL and 3MF unchanged. Two sentences or three short ones.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose which model axis points up. 3D-printing files (STL, 3MF) usually point Z up; most other 3D files point Y up. This applies to this view only and is not saved."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelin hangi ekseninin yukarıyı göstereceğini seçin. 3B baskı dosyaları (STL, 3MF) genellikle Z eksenini yukarı alır; diğer çoğu 3B dosya Y eksenini yukarı alır. Bu seçim yalnızca bu görünüm için geçerlidir ve kaydedilmez."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wählen Sie, welche Modellachse nach oben zeigt. 3D-Druckdateien (STL, 3MF) zeigen meist mit Z nach oben, die meisten anderen 3D-Dateien mit Y nach oben. Die Auswahl gilt nur für diese Ansicht und wird nicht gespeichert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez l’axe du modèle orienté vers le haut. Les fichiers d’impression 3D (STL, 3MF) ont généralement Z vers le haut ; la plupart des autres fichiers 3D ont Y vers le haut. Ce choix ne s’applique qu’à cette vue et n’est pas enregistré."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选择模型的哪个轴朝上。3D 打印文件（STL、3MF）通常以 Z 轴朝上，大多数其他 3D 文件以 Y 轴朝上。此选择仅对当前视图有效，不会保存。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルのどの軸を上向きにするかを選びます。3Dプリント用ファイル（STL、3MF）は通常Z軸が上、その他の多くの3DファイルはY軸が上です。この設定はこの表示だけに適用され、保存されません。"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चुनें कि मॉडल का कौन-सा अक्ष ऊपर की ओर रहे। 3D प्रिंटिंग फ़ाइलों (STL, 3MF) में आमतौर पर Z ऊपर होता है; अधिकतर अन्य 3D फ़ाइलों में Y ऊपर होता है। यह चुनाव केवल इस दृश्य पर लागू होता है और सहेजा नहीं जाता।"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hilbijêre kîjan eksena modelê li jor be. Pelên çapkirina 3D (STL, 3MF) bi gelemperî Z li jor datînin; piraniya pelên 3D yên din Y li jor datînin. Ev hilbijartin tenê ji bo vê dîtinê derbas dibe û nayê tomarkirin."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выберите, какая ось модели направлена вверх. Файлы для 3D-печати (STL, 3MF) обычно направляют вверх ось Z, большинство других 3D-файлов — ось Y. Выбор действует только в этом окне просмотра и не сохраняется."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih sumbu model yang menghadap ke atas. Berkas pencetakan 3D (STL, 3MF) biasanya menghadap ke atas pada sumbu Z; sebagian besar berkas 3D lain pada sumbu Y. Pilihan ini hanya berlaku untuk tampilan ini dan tidak disimpan."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মডেলের কোন অক্ষ উপরের দিকে থাকবে তা বেছে নিন। 3D প্রিন্টিং ফাইলে (STL, 3MF) সাধারণত Z উপরে থাকে; অন্য বেশিরভাগ 3D ফাইলে Y উপরে থাকে। এই পছন্দ শুধু এই ভিউয়ের জন্য প্রযোজ্য এবং সংরক্ষিত হয় না।"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaɓi wane ginshiƙin samfurin ne yake nuna sama. Fayilolin buga 3D (STL, 3MF) yawanci Z ne yake sama; yawancin sauran fayilolin 3D Y ne yake sama. Wannan zaɓin yana aiki a wannan kallon kawai kuma ba a adana shi."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha qual eixo do modelo aponta para cima. Arquivos de impressão 3D (STL, 3MF) costumam ter Z para cima; a maioria dos outros arquivos 3D tem Y para cima. Esta escolha vale apenas para esta vista e não é salva."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige qué eje del modelo apunta hacia arriba. Los archivos de impresión 3D (STL, 3MF) suelen tener Z hacia arriba; la mayoría de los demás archivos 3D tienen Y hacia arriba. Esta opción solo se aplica a esta vista y no se guarda."
+          }
+        }
+      }
+    },
+    "geometry.viewportLabel": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interactive 3D model"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkileşimli 3B model"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interaktives 3D-Modell"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèle 3D interactif"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "交互式 3D 模型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "操作可能な3Dモデル"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इंटरैक्टिव 3D मॉडल"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modela 3D ya înteraktîf"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Интерактивная 3D-модель"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model 3D interaktif"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ইন্টারঅ্যাক্টিভ 3D মডেল"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Samfurin 3D mai hulɗa"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelo 3D interativo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelo 3D interactivo"
+          }
+        }
+      }
+    },
+    "geometry.zoomIn": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom In"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yakınlaştır"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrößern"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom avant"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "放大"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拡大"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ज़ूम इन"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nêzîk Bike"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увеличить"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbesar"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "জুম ইন"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kusantar"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ampliar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acercar"
+          }
+        }
+      }
+    },
+    "geometry.zoomOut": {
+      "comment": "CAD preview user interface. Translation draft; requires native-speaker and host review.",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom Out"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzaklaştır"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkleinern"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom arrière"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "缩小"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "縮小"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ज़ूम आउट"
+          }
+        },
+        "ku-Latn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dûr Bike"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Уменьшить"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perkecil"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "জুম আউট"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nisantar"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reduzir"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alejar"
           }
         }
       }

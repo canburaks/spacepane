@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import PreviewTestSupport
 import PreviewContracts
 import Testing
 @testable import PreviewRenderers
@@ -209,7 +210,7 @@ struct GeometryContainers3DInkAndSpeechTests {
         tree.outlineView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
         tree.copyHandler = nil
         tree.outlineView.copy(nil)
-        #expect(speech.texts == [PreviewStrings.text(.midiPlaybackUnavailable), PreviewStrings.text(.cadFit),
+        #expect(speech.texts == [PreviewStrings.text(.midiPlaybackUnavailable), PreviewStrings.text(.geometryFit),
                                  PreviewStrings.text(.chipCopied)])
     }
 
@@ -283,9 +284,8 @@ struct GeometryContainers3DInkAndSpeechTests {
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: GeometryBounds(minimum: .zero, maximum: SIMD3<Double>(20, 20, 1)), faceCount: 1,
             measurements: measurements,
-            headerFacts: CADHeaderFacts(schema: .stepAP214, originatingSystem: "Open CASCADE 7.9"),
             unitProvenance: .declared(.millimetre))
-        let model = GeometryPresentation(formatID: .step, mesh: mesh, byteCount: 100)
+        let model = GeometryPresentation(formatID: CADTestFormatIDs.step, mesh: mesh, byteCount: 100)
         view.show(model, theme: .light, locale: english)
         view.layoutSubtreeIfNeeded()
 
@@ -293,7 +293,7 @@ struct GeometryContainers3DInkAndSpeechTests {
         let buttons = descendants(of: NSButton.self, in: view)
         let summary = try #require(view.subviews.compactMap { $0 as? NSTextField }.first)
         let fullSummary = view.accessibilitySummary
-        #expect(fullSummary.components(separatedBy: "\n").count == 3)
+        #expect(fullSummary.components(separatedBy: "\n").count == 2)
         #expect(bar.orientation == .horizontal)
         #expect(buttons.count == 8)
         #expect(buttons.allSatisfy { $0.controlSize == .regular && $0.font?.pointSize == 13 })

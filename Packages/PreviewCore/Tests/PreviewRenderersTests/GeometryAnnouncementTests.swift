@@ -38,7 +38,7 @@ struct GeometryAnnouncementTests {
     }
 
     private func viewport(of view: NativeGeometryPreviewView) throws -> NSView {
-        try #require(descendants(of: NSView.self, in: view).first { $0.accessibilityLabel() == PreviewStrings.text(.cadViewportLabel) })
+        try #require(descendants(of: NSView.self, in: view).first { $0.accessibilityLabel() == PreviewStrings.text(.geometryViewportLabel) })
     }
 
     private func key(_ character: String, keyCode: UInt16) throws -> NSEvent {
@@ -56,12 +56,12 @@ struct GeometryAnnouncementTests {
         #expect(log.texts.isEmpty)
         // An STL starts Z up, so the toggle says Y is up now.
         let expectations: [(GeometryNavigation, String)] = [
-            (.preset(.front), PreviewStrings.text(.cadFront)),
-            (.preset(.side), PreviewStrings.text(.cadSide)),
-            (.preset(.top), PreviewStrings.text(.cadTop)),
-            (.fit, PreviewStrings.text(.cadFit)),
-            (.reset, PreviewStrings.text(.cadReset)),
-            (.toggleUpAxis, PreviewStrings.format(.cadUpAxis, arguments: [GeometryUpAxis.y.letter]))]
+            (.preset(.front), PreviewStrings.text(.geometryFront)),
+            (.preset(.side), PreviewStrings.text(.geometrySide)),
+            (.preset(.top), PreviewStrings.text(.geometryTop)),
+            (.fit, PreviewStrings.text(.geometryFit)),
+            (.reset, PreviewStrings.text(.geometryReset)),
+            (.toggleUpAxis, PreviewStrings.format(.geometryUpAxis, arguments: [GeometryUpAxis.y.letter]))]
         for (action, spoken) in expectations {
             view.navigate(action)
             #expect(log.texts.last == spoken, "\(spoken)")
@@ -78,8 +78,8 @@ struct GeometryAnnouncementTests {
         target.keyDown(with: try key("3", keyCode: 20))
         target.keyDown(with: try key("f", keyCode: 3))
         target.keyDown(with: try key("r", keyCode: 15))
-        #expect(log.texts == [PreviewStrings.text(.cadFront), PreviewStrings.text(.cadSide), PreviewStrings.text(.cadTop),
-                              PreviewStrings.text(.cadFit), PreviewStrings.text(.cadReset)])
+        #expect(log.texts == [PreviewStrings.text(.geometryFront), PreviewStrings.text(.geometrySide), PreviewStrings.text(.geometryTop),
+                              PreviewStrings.text(.geometryFit), PreviewStrings.text(.geometryReset)])
         // Zoom keys are steps of a continuous gesture and stay silent, like the arrows.
         target.keyDown(with: try key("+", keyCode: 24))
         #expect(log.texts.count == 5)
@@ -94,8 +94,8 @@ struct GeometryAnnouncementTests {
     }
 
     @Test func aFailureAtStartBecomesTheViewportValueAndIsSpokenOnce() throws {
-        for (error, messageKey) in [(GeometryRenderFailure.unavailable, PreviewStrings.Key.cadMetalUnavailable),
-                                    (.invalidGeometry, .cadInvalidGeometry)] {
+        for (error, messageKey) in [(GeometryRenderFailure.unavailable, PreviewStrings.Key.geometryMetalUnavailable),
+                                    (.invalidGeometry, .geometryInvalidGeometry)] {
             let (view, log) = makeView(factory: { _ in throw error })
             view.show(try presentation(), theme: .light, locale: english)
             let model = view.accessibilitySummary
@@ -128,7 +128,7 @@ struct GeometryAnnouncementTests {
         let target = try viewport(of: view)
         #expect(target.accessibilityValue() as? String == view.accessibilitySummary)
         probe.failureHandler?()
-        let message = PreviewStrings.text(.cadMetalUnavailable)
+        let message = PreviewStrings.text(.geometryMetalUnavailable)
         #expect(view.failure == .unavailable && !view.hasGPUResources)
         #expect(log.texts == [message])
         #expect(target.accessibilityValue() as? String == message)

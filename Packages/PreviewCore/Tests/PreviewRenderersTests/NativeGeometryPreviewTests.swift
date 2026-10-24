@@ -1,6 +1,7 @@
 import AppKit
 import PreviewContracts
 import Testing
+import PreviewTestSupport
 @testable import PreviewRenderers
 
 @Suite("Native geometry resource lifecycle", .serialized)
@@ -126,7 +127,7 @@ struct NativeGeometryPreviewTests {
         let backend = GeometryBackendProbe(mesh: try presentation().mesh)
         let view = NativeGeometryPreviewView(frame: NSRect(x: 0, y: 0, width: 500, height: 400), backendFactory: { _ in backend })
         view.show(try presentation(), theme: .light, locale: Locale(identifier: "en"))
-        let viewport = try #require(descendants(of: view).first { $0.accessibilityLabel() == PreviewStrings.text(.cadViewportLabel) })
+        let viewport = try #require(descendants(of: view).first { $0.accessibilityLabel() == PreviewStrings.text(.geometryViewportLabel) })
         #expect(viewport.isAccessibilityElement())
         #expect(viewport.acceptsFirstResponder)
         #expect(viewport.accessibilityRole() == .image)
@@ -141,10 +142,10 @@ struct NativeGeometryPreviewTests {
             windowNumber: 0, context: nil, characters: "2", charactersIgnoringModifiers: "2", isARepeat: false, keyCode: 19))
         viewport.keyDown(with: sideKey)
         #expect(abs(view.camera.yaw - .pi / 2) < 0.0001)
-        let reset = try #require(descendants(of: view).compactMap { $0 as? NSButton }.first { $0.title == PreviewStrings.text(.cadReset) })
+        let reset = try #require(descendants(of: view).compactMap { $0 as? NSButton }.first { $0.title == PreviewStrings.text(.geometryReset) })
         reset.performClick(nil)
         #expect(abs(view.camera.yaw - .pi / 4) < 0.0001 && abs(view.camera.pitch - .pi / 6) < 0.0001)
-        let front = try #require(descendants(of: view).compactMap { $0 as? NSButton }.first { $0.title == PreviewStrings.text(.cadFront) })
+        let front = try #require(descendants(of: view).compactMap { $0 as? NSButton }.first { $0.title == PreviewStrings.text(.geometryFront) })
         front.performClick(nil)
         #expect(view.camera.yaw == 0 && view.camera.pitch == 0)
         let summaryField = try #require(descendants(of: NSTextField.self, in: view).first { $0.stringValue == view.accessibilitySummary })
@@ -277,7 +278,7 @@ struct NativeGeometryPreviewTests {
         window.contentView = view
         view.layoutSubtreeIfNeeded()
         view.resume()
-        let viewport = try #require(descendants(of: view).first { $0.accessibilityLabel() == PreviewStrings.text(.cadViewportLabel) })
+        let viewport = try #require(descendants(of: view).first { $0.accessibilityLabel() == PreviewStrings.text(.geometryViewportLabel) })
         #expect(viewport.bounds.width > 0 && viewport.bounds.height > 0)
         #expect(!viewport.mouseDownCanMoveWindow)
         #expect(viewport.needsPanelToBecomeKey)
@@ -325,13 +326,12 @@ struct NativeGeometryPreviewTests {
         #expect(viewport.hitTest(pointInParent) == nil)
     }
 
-    private func presentation(measurements: GeometryMeasurements? = nil,
-                              headerFacts: CADHeaderFacts? = nil, formatID: FormatID = .step,
+    private func presentation(measurements: GeometryMeasurements? = nil, formatID: FormatID = CADTestFormatIDs.step,
                               bounds: GeometryBounds = GeometryBounds(minimum: .zero, maximum: SIMD3<Double>(20, 20, 1))) throws -> GeometryPresentation {
         let mesh = try PreviewMesh(positions: [SIMD3<Float>(-1, -1, 0), SIMD3<Float>(1, -1, 0), SIMD3<Float>(0, 1, 0)],
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: bounds, faceCount: 1,
-            measurements: measurements, headerFacts: headerFacts, unitProvenance: .declared(.millimetre))
+            measurements: measurements, unitProvenance: .declared(.millimetre))
         return GeometryPresentation(formatID: formatID, mesh: mesh, byteCount: 100)
     }
 
@@ -344,21 +344,18 @@ struct NativeGeometryPreviewTests {
         NativeGeometryPreviewView.summaryLines(for: geometry.mesh, locale: Locale(identifier: locale), languagePreferences: [language])
     }
 
-    @Test func summaryAddsLocalizedMeasurementAndHeaderLines() throws {
-        let geometry = try presentation(measurements: try measurements(),
-            headerFacts: CADHeaderFacts(schema: .stepAP214, originatingSystem: "Open CASCADE 7.9"))
+    @Test func summaryAddsALocalizedMeasurementLine() throws {
+        let geometry = try presentation(measurements: try measurements())
         let english = lines(geometry)
-        #expect(english.count == 3)
+        #expect(english.count == 2)
         #expect(english[0].hasPrefix("Faces: 1 · Triangles: 1 · 20 × 20 × 1 mm"))
         #expect(english[1] == "Surface area: 2,200 mm² · Volume: 6,000 mm³ · Bodies: 1")
-        #expect(english[2] == "Schema: AP214 · Created with: Open CASCADE 7.9")
         // Another locale: numbers follow the locale's grouping and no placeholder or resource key leaks.
         let german = lines(geometry, locale: "de", language: "de")
-        #expect(german.count == 3)
+        #expect(german.count == 2)
         #expect(german[1].contains("2.200") && german[1].contains("6.000"))
         #expect(german[1].contains("mm²") && german[1].contains("mm³"))
-        #expect(german[2].contains("AP214") && german[2].contains("Open CASCADE 7.9"))
-        for line in german { #expect(!line.contains("%") && !line.contains("cad.")) }
+        for line in german { #expect(!line.contains("%") && !line.contains("geometry.")) }
         let french = lines(geometry, locale: "fr", language: "fr")
         #expect(french[1].contains("2\u{202F}200") || french[1].contains("2\u{00A0}200")) // Locale-specific grouping space.
     }
@@ -366,22 +363,11 @@ struct NativeGeometryPreviewTests {
     @Test func anOpenMeshOmitsTheVolumeAndSaysWhy() throws {
         let geometry = try presentation(measurements: try measurements(area: 180, volume: nil, bodies: 3))
         let result = lines(geometry)
-        #expect(result.count == 2) // No header facts, so no third line.
+        #expect(result.count == 2)
         #expect(result[1] == "Surface area: 180 mm² · Volume unavailable (surface not closed) · Bodies: 3")
         #expect(!result[1].contains("mm³"))
         let german = lines(geometry, locale: "de", language: "de")
         #expect(german.count == 2 && !german[1].contains("mm³"))
-    }
-
-    @Test func headerLineAppearsOnlyForKnownFactsInEachCombination() throws {
-        let schemaOnly = lines(try presentation(headerFacts: CADHeaderFacts(schema: .iges(.version5_3))))
-        #expect(schemaOnly.count == 2 && schemaOnly[1] == "Schema: IGES 5.3")
-        let systemOnly = lines(try presentation(headerFacts: CADHeaderFacts(originatingSystem: "Example CAD 9")))
-        #expect(systemOnly.count == 2 && systemOnly[1] == "Created with: Example CAD 9")
-        // A unit alone (IGES) or no usable fact adds no line.
-        #expect(lines(try presentation(headerFacts: CADHeaderFacts(sourceUnit: "MM"))).count == 1)
-        #expect(lines(try presentation(headerFacts: CADHeaderFacts())).count == 1)
-        #expect(lines(try presentation()).count == 1)
     }
 
     @Test func measurementsUseFourSignificantDigits() throws {
@@ -395,16 +381,14 @@ struct NativeGeometryPreviewTests {
 
     @Test func viewShowsTheLinesAndExposesThemInTheViewportAccessibilityValue() throws {
         let view = NativeGeometryPreviewView(frame: NSRect(x: 0, y: 0, width: 600, height: 400), backendFactory: { GeometryBackendProbe(mesh: $0) })
-        let geometry = try presentation(measurements: try measurements(),
-            headerFacts: CADHeaderFacts(schema: .stepAP242, originatingSystem: "Example CAD 9"))
+        let geometry = try presentation(measurements: try measurements())
         view.show(geometry, theme: .light, locale: Locale(identifier: "en"))
         let expected = NativeGeometryPreviewView.summaryLines(for: geometry.mesh, locale: Locale(identifier: "en")).joined(separator: "\n")
         #expect(view.accessibilitySummary == expected)
         // The process language may differ from English; numbers and technical names are language independent.
-        #expect(view.accessibilitySummary.components(separatedBy: "\n").count == 3)
+        #expect(view.accessibilitySummary.components(separatedBy: "\n").count == 2)
         #expect(view.accessibilitySummary.contains("6,000 mm³") && view.accessibilitySummary.contains("2,200 mm²"))
-        #expect(view.accessibilitySummary.contains("AP242") && view.accessibilitySummary.contains("Example CAD 9"))
-        let viewport = try #require(descendants(of: view).first { $0.accessibilityLabel() == PreviewStrings.text(.cadViewportLabel) })
+        let viewport = try #require(descendants(of: view).first { $0.accessibilityLabel() == PreviewStrings.text(.geometryViewportLabel) })
         #expect(viewport.accessibilityValue() as? String == expected)
         // Controls and camera behave as before.
         let camera = view.camera
