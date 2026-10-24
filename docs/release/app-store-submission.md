@@ -73,7 +73,7 @@ Paste the quoted block into the Notes field of App Review Information, attach `S
 
 STEP and IGES do not ship in 1.0 ([decision 028](../decisions/028-no-cad-in-version-1.md), decided 2026-10-13, which settled R-2 of the review readiness plan). The 3D paragraph and the two CAD file names were taken out of the block, and the two CAD samples out of `SAMPLES` in the builder; `--check` fails if the notes and the archive disagree. The notes make no claim about Open CASCADE or a source offer, because the build has none. If CAD returns, restore the paragraph and the two samples from git history (the commit before 2026-10-13) after the steps in decision 028, "Bringing CAD back".
 
-> SpacePane 1.1.0 (build 8) is a small companion app plus two Quick Look extensions for Finder, SpacePane Preview and SpacePane Thumbnails. Everything runs on the Mac: no account, no sign-in, no network access, no in-app purchase. It needs Apple silicon and macOS 15 or later.
+> SpacePane 1.1.0 (build 9) is a small companion app plus two Quick Look extensions for Finder, SpacePane Preview and SpacePane Thumbnails. Everything runs on the Mac: no account, no sign-in, no network access, no in-app purchase. It needs Apple silicon and macOS 15 or later.
 >
 > Tested on macOS 27.2, on Apple silicon.
 >

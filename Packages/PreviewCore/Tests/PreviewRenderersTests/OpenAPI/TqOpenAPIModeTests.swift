@@ -21,6 +21,14 @@ struct TqOpenAPIModePolicyTests {
         return try #require(OpenAPIEndpointList.derive(from: root))
     }
 
+    @Test func theEndpointListIsTypedAsEndpointsAndAPlainTableWithTheSameTitlesIsNot() throws {
+        // The table view chooses the endpoint layout from this typed value, never from localized column titles.
+        let list = try endpoints(spec)
+        #expect(list.table.layout == .endpoints)
+        let lookalike = SafeTable(columns: list.table.columns, rows: [["GET", "/pets", "List", ""]], truncation: [])
+        #expect(lookalike.layout == .standard && lookalike != list.table)
+    }
+
     @Test func theEndpointsModeKeepsItsTypedTitle() {
         #expect(NativePreviewMode.endpoints.title == .previewModeEndpoints)
     }

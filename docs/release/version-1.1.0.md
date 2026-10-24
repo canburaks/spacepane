@@ -103,7 +103,7 @@ Promotional text can change without a new version; switch to this when 1.1.0 is 
 Press Space and see what a file will do: scripts, editor tasks, AI models, extensions and packages explained. Made on your Mac, read-only, with likely secrets concealed.
 ```
 
-### Description (3,797 of 4,000 characters)
+### Description (3,888 of 4,000 characters)
 
 The 1.0 description with one bullet added under STRUCTURE, three under KNOW WHAT'S HIDDEN INSIDE, and 74 changed to 81
 (the catalog has 81 `id` entries; recounted 2026-10-17). Name, subtitle and keywords are unchanged. Two bullets were
@@ -135,6 +135,7 @@ STRUCTURE, NOT A WALL OF TEXT
 • Text files that have no extension, such as Makefile or zprofile
 • 3MF models you can turn
 • GGUF and safetensors models, PyTorch files, MCP bundles, editor and browser extensions and Python wheels, summarized without running anything
+• Right-click a table, an outline or a listing to copy a value, a row, every row or a path
 
 That is 81 file types, each with its own switch.
 

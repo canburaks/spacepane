@@ -48,7 +48,8 @@ struct OpenAPIEndpointList: Equatable, Sendable {
         }
         let columns = [PreviewStrings.text(.dataMethod), PreviewStrings.text(.summaryPath),
                        PreviewStrings.text(.previewModeSummary), PreviewStrings.text(.openAPIColumnDeprecated)]
-        let table = SafeTable(columns: columns, rows: rows, truncation: truncated ? [.rows] : [], origin: .delimitedText)
+        var table = SafeTable(columns: columns, rows: rows, truncation: truncated ? [.rows] : [], origin: .delimitedText)
+        table.layout = .endpoints
         return OpenAPIEndpointList(table: table, totalOperations: totalOperations, unresolvedReferences: unresolved)
     }
 

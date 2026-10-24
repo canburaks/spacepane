@@ -293,13 +293,14 @@ struct SortableTableViewTests {
     }
 
     @Test func endpointsTableAdaptsColumnsForCompactFinderSidebarAndRestoresThemWhenWide() throws {
-        let endpoints = SafeTable(
+        var endpoints = SafeTable(
             columns: [PreviewStrings.text(.dataMethod), PreviewStrings.text(.summaryPath),
                       PreviewStrings.text(.previewModeSummary), PreviewStrings.text(.openAPIColumnDeprecated)],
             rows: [["GET", "/v1/pets", "List pets", ""], ["DELETE", "/v1/pets/{id}", "Delete pet", PreviewStrings.text(.summaryBooleanTrue)]],
             truncation: [],
             origin: .delimitedText
         )
+        endpoints.layout = .endpoints
         let view = makeView()
         view.display(endpoints, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
         view.setFrameSize(NSSize(width: 240, height: 300))

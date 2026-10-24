@@ -150,7 +150,10 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
             let sameSchemaReload: Bool
             let previousOrigin = scrollView.contentView.bounds.origin
             if let current = self.table {
+                // A live reload of the same table keeps sort, filter, selection and scroll. A change of provenance (origin
+                // or partial read) shows a different table, so it starts fresh, like any other replacement.
                 sameSchemaReload = current.origin == table.origin
+                    && current.isPartialRead == table.isPartialRead
                     && current.columns == table.columns
                     && current.columnKinds == table.columnKinds
                 savedStates[current.origin] = SavedTableState(
@@ -357,10 +360,7 @@ final class NativeTablePreviewView: NSView, NSTableViewDataSource, NSTableViewDe
     }
 
     private func isEndpointsTable(_ table: SafeTable) -> Bool {
-        table.origin == .delimitedText
-            && tableView.tableColumns.count == 4
-            && table.columns.first == PreviewStrings.text(.dataMethod)
-            && table.columns.last == PreviewStrings.text(.openAPIColumnDeprecated)
+        table.layout == .endpoints && tableView.tableColumns.count == 4
     }
 
     private func updateColumnsForWidth(_ width: CGFloat) {

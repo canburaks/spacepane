@@ -1,22 +1,4 @@
 {
-  "about.notices.openCascade.title": {
-    "case": "aboutNoticesOpenCascadeTitle",
-    "comment": "Title of a button row in the About page's Acknowledgements card, in the same style as the Website and Privacy policy link rows. Not formatted. Activating it opens, in Finder, the folder inside the app that holds the Open CASCADE Technology license texts (GNU LGPL 2.1, the Open CASCADE exception and the notices of the parser components). Keep the product name Open CASCADE unchanged. Keep it short.",
-    "en": "Open CASCADE license texts",
-    "tr": "Open CASCADE lisans metinleri",
-    "de": "Lizenztexte von Open CASCADE",
-    "fr": "Textes de licence d’Open CASCADE",
-    "zh-Hans": "Open CASCADE 许可证文本",
-    "ja": "Open CASCADE ライセンス文書",
-    "hi": "Open CASCADE लाइसेंस पाठ",
-    "ku-Latn": "Nivîsên lîsansa Open CASCADE",
-    "ru": "Тексты лицензий Open CASCADE",
-    "id": "Teks lisensi Open CASCADE",
-    "bn": "Open CASCADE লাইসেন্স পাঠ্য",
-    "ha": "Rubutun lasisin Open CASCADE",
-    "pt": "Textos de licença do Open CASCADE",
-    "es": "Textos de licencia de Open CASCADE"
-  },
   "about.notices.colorSchemes.title": {
     "case": "aboutNoticesColorSchemesTitle",
     "comment": "Title of a button row in the About page's Acknowledgements card, under the sentence about the built-in color schemes. Not formatted. Activating it opens, in Finder, the folder inside the app that holds the attribution and MIT license text for the palette values the color schemes adapt. Use the same word for color scheme as the Theme page. Keep it short.",
