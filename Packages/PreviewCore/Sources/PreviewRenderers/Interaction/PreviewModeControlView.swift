@@ -59,6 +59,7 @@ final class PreviewModeControlView: NSView {
         segmentedControl.selectedSegment = available.firstIndex(of: selectedMode) ?? -1
         if available.isEmpty {
             pullDownControl.menu = nil
+            pullDownControl.toolTip = nil
             segmentedControl.setAccessibilityValue(nil)
             pullDownControl.setAccessibilityValue(nil)
         } else {
@@ -79,6 +80,7 @@ final class PreviewModeControlView: NSView {
                 menu.addItem(item)
             }
             pullDownControl.menu = menu
+            pullDownControl.toolTip = currentTitle
             // Installing a native pull-down supplies a private action to nil-action rows. This hidden title
             // supplies the closed button's text only; restore its explicitly inert state after installation.
             title.action = nil

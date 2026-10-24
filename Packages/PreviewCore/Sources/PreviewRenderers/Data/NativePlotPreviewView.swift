@@ -11,8 +11,20 @@ import PreviewContracts
 /// the whole map. That long paths show only some of their points is a limit of the preview and goes to the limits
 /// strip as a typed notice (`DrawnModeNotices`), not into the view.
 @MainActor
-final class NativePlotPreviewView: NSView, SafeModeContentView {
+final class NativePlotPreviewView: NSView, SafeModeContentView, PreviewSafeCopying, PreviewCopyReporting, PreviewAnnouncing {
     var navigate: ((NativePreviewMode, NSRange) -> Void)?
+    /// The plot is a projected vector drawing with a fixed caption and does not scale with text zoom.
+    var respondsToTextZoom: Bool { false }
+    var pasteboard = NSPasteboard.general
+    var tagCopyPolicy: (() -> Bool)?
+    var selectionWriter: (String, NSPasteboard) -> Bool = { text, pasteboard in
+        pasteboard.clearContents()
+        return pasteboard.setString(text, forType: .string)
+    }
+    var announcer: PreviewAnnouncer? = PreviewAnnouncer()
+    var copyHandler: ((PreviewCopyEvent) -> Void)?
+
+    override var acceptsFirstResponder: Bool { true }
 
     let captionLabel = NSTextField(wrappingLabelWithString: "")
     let canvas = PlotCanvas()
@@ -22,6 +34,7 @@ final class NativePlotPreviewView: NSView, SafeModeContentView {
         super.init(frame: frameRect)
         wantsLayer = true
         captionLabel.font = .preferredFont(forTextStyle: .caption1)
+        captionLabel.isSelectable = true
         captionLabel.translatesAutoresizingMaskIntoConstraints = false
         captionLabel.setContentHuggingPriority(.required, for: .vertical)
         canvas.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +53,68 @@ final class NativePlotPreviewView: NSView, SafeModeContentView {
 
     required init?(coder: NSCoder) { nil }
 
+    override func mouseDown(with event: NSEvent) {
+        window?.makeFirstResponder(self)
+        super.mouseDown(with: event)
+    }
+
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        guard let responder = window?.firstResponder as? NSView, responder.isDescendant(of: self) else {
+            return super.performKeyEquivalent(with: event)
+        }
+        if PreviewKeyPolicy.answerFindUnavailable(event, using: announcer, from: self) { return true }
+        if PreviewCommand(event: event) == .copy {
+            copy(nil)
+            return true
+        }
+        return super.performKeyEquivalent(with: event)
+    }
+
+    @objc func copy(_ sender: Any?) {
+        let text = captionLabel.stringValue
+        guard !text.isEmpty else { return }
+        let copied = TagCopySanitizer(safeDisplayedText: text, safetyLensFoundTags: tagCopyPolicy?() ?? false).wholeText()
+        guard selectionWriter(copied.text, pasteboard) else { return }
+        let event = PreviewCopyEvent.text.removingTags(copied.removedTagScalarCount)
+        if let copyHandler {
+            copyHandler(event)
+        } else {
+            announcer?.announce(PreviewStrings.text(event.confirmationKey), from: self)
+        }
+    }
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        contextMenu()
+    }
+
+    func contextMenu() -> NSMenu? {
+        guard !captionLabel.stringValue.isEmpty else { return nil }
+        let menu = NSMenu(title: "")
+        menu.autoenablesItems = false
+        let item = NSMenuItem(title: PreviewStrings.text(.interactionCopy), action: #selector(copy(_:)), keyEquivalent: "")
+        item.target = self
+        menu.addItem(item)
+        return menu
+    }
+
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+
+    override func layout() {
+        updateChromeForWidth(bounds.width)
+        super.layout()
+    }
+
+    private func updateChromeForWidth(_ width: CGFloat) {
+        guard width > 0 else { return }
+        let isCompact = width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis
+        captionLabel.maximumNumberOfLines = isCompact ? 1 : 0
+        captionLabel.lineBreakMode = isCompact ? .byTruncatingTail : .byWordWrapping
+        captionLabel.toolTip = isCompact && !captionLabel.stringValue.isEmpty ? captionLabel.stringValue : nil
+    }
+
     func display(_ modes: SafePreviewModes, mode: NativePreviewMode, style: SafeModeStyle) {
         guard mode == .plot, let plot = modes.plot else { clear(); return }
         self.plot = plot
@@ -52,6 +127,7 @@ final class NativePlotPreviewView: NSView, SafeModeContentView {
             .dataPlotAccessibility, arguments: [Int64(plot.paths.count), Int64(plot.points.count)], locale: style.locale))
         canvas.setAccessibilityValue(extentText)
         canvas.setAccessibilityHelp(PreviewStrings.text(.dataPlotHelp))
+        updateChromeForWidth(bounds.width)
     }
 
     func clear() {
@@ -61,6 +137,7 @@ final class NativePlotPreviewView: NSView, SafeModeContentView {
         canvas.setAccessibilityLabel(nil)
         canvas.setAccessibilityValue(nil)
         canvas.setAccessibilityHelp(nil)
+        updateChromeForWidth(bounds.width)
     }
 
     /// The longitude and latitude ranges, formatted for the presentation locale. A plot framed across the

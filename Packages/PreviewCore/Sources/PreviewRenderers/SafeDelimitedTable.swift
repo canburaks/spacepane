@@ -33,6 +33,14 @@ struct SafeTable: Equatable, Sendable {
         case profile
     }
 
+    /// How the table view lays the columns out. Typed, so a user file whose headers happen to read "Method" and
+    /// "Deprecated" never gets the endpoint layout, and the choice never depends on the interface language.
+    enum Layout: Equatable, Sendable {
+        case standard
+        /// The OpenAPI endpoint list: method, path, summary, deprecated.
+        case endpoints
+    }
+
     /// Displayed column titles from the first record; blank or missing titles are already localized.
     let columns: [String]
     /// Body records after the header, each holding at most `columns.count` cells.
@@ -51,6 +59,7 @@ struct SafeTable: Equatable, Sendable {
     var cellDescriptions: [CellPosition: String] = [:]
     /// Where the rows come from; tables parsed from a file's own text are the default.
     var origin: Origin = .delimitedText
+    var layout: Layout = .standard
     /// The presentation holds only the leading part of the file (`TextPresentation.truncatedSourceBytes`), so
     /// the rows are the first ones read and Source stops at the same cut. Only text-derived tables
     /// (`.delimitedText` and `.profile`) can be partial reads.
@@ -103,7 +112,7 @@ struct SafeTable: Equatable, Sendable {
     // storage short-circuits so restyling an unchanged table stays cheap.
     static func == (lhs: Self, rhs: Self) -> Bool {
         guard lhs.truncation == rhs.truncation, lhs.headerFieldCount == rhs.headerFieldCount,
-              lhs.origin == rhs.origin, lhs.isPartialRead == rhs.isPartialRead,
+              lhs.origin == rhs.origin, lhs.layout == rhs.layout, lhs.isPartialRead == rhs.isPartialRead,
               lhs.columnKinds == rhs.columnKinds, lhs.sortKeys == rhs.sortKeys,
               exactlyEqual(lhs.columns, rhs.columns), lhs.rows.count == rhs.rows.count,
               lhs.cellDescriptions.count == rhs.cellDescriptions.count,

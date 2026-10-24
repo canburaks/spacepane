@@ -6,6 +6,7 @@ import PreviewRenderers
 struct FileTypeCell: View {
     let format: FormatDescriptor
     let settings: CompanionSettings
+    var overlappingProviders: [String] = []
     @Environment(\.locale) private var locale
 
     var body: some View {
@@ -19,6 +20,11 @@ struct FileTypeCell: View {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
                     Text(verbatim: name).lineLimit(2)
+                    primaryModeBadge
+                    if !overlappingProviders.isEmpty {
+                        StatusPill(text: overlappingProviders.joined(separator: ", "), tone: .caution)
+                            .help(PreviewStrings.text(.providersGuidance))
+                    }
                     if !format.defaultEnabled { offByDefaultBadge }
                 }
                 if !filenames.patterns.isEmpty {
@@ -34,6 +40,16 @@ struct FileTypeCell: View {
         .accessibilityHint(Text(verbatim: description))
     }
 
+    private var primaryModeBadge: some View {
+        Text(PreviewStrings.text(Self.primaryModeKey(for: format)))
+            .font(CompanionTypography.note).lineLimit(1)
+            .foregroundStyle(CompanionInk.hint)
+            .padding(.horizontal, 6).padding(.vertical, 1)
+            .background(Color.primary.opacity(0.06), in: Capsule())
+            .fixedSize()
+            .accessibilityHidden(true)
+    }
+
     private var offByDefaultBadge: some View {
         Text(PreviewStrings.text(.fileTypesOffByDefault))
             .font(CompanionTypography.note).lineLimit(1)
@@ -41,5 +57,28 @@ struct FileTypeCell: View {
             .padding(.horizontal, 6).padding(.vertical, 1)
             .background(Color.primary.opacity(0.08), in: Capsule())
             .fixedSize()
+    }
+
+    static func primaryModeKey(for format: FormatDescriptor) -> PreviewStrings.Key {
+        if format.id == .folder {
+            return .previewModeTree
+        }
+        if [.webVTT, .subRip, .subStationAlpha, .timedText, .subViewer, .lyrics, .microDVD].contains(format.id) {
+            return .previewModeCues
+        }
+        switch format.primaryView {
+        case .geometry: return .cadViewportLabel
+        case .rendered: return .previewModeRendered
+        case .pages: return .previewModePages
+        case .diagram: return .previewModeDiagram
+        case .table: return .previewModeTable
+        case .rows: return .summaryRows
+        case .plot: return .previewModePlot
+        case .records: return .previewModeRecords
+        case .files: return .previewModeFiles
+        case .outline: return .previewModeOutline
+        case .summary: return .previewModeSummary
+        case .source: return .previewModeSource
+        }
     }
 }

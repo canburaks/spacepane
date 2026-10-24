@@ -335,6 +335,10 @@ struct Q74ContentsRailTests {
         defer { fixture.release() }
         fixture.show(railHeadings())
         let rail = fixture.rail
+        let title = try #require(descendants(of: NSTextField.self, in: rail).first {
+            $0.stringValue == PreviewStrings.text(.previewModeContents)
+        })
+        #expect(title.toolTip == PreviewStrings.text(.previewModeContents))
         rail.track(reading(230, 100))
         rail.toggleButton.performClick(nil)
         fixture.host.layoutSubtreeIfNeeded()
@@ -350,6 +354,13 @@ struct Q74ContentsRailTests {
         #expect(!rail.isCollapsed && !rail.list.isHidden && rail.frame.width == ContentsRailPolicy.expandedWidth)
         #expect(rail.list.tableView.selectedRow == 3)
         #expect(rail.toggleButton.accessibilityLabel() == PreviewStrings.text(.markupContentsRailHide))
+        let doubleClick = try #require(NSEvent.mouseEvent(
+            with: .leftMouseDown, location: NSPoint(x: 60, y: 10), modifierFlags: [], timestamp: 0,
+            windowNumber: fixture.window.windowNumber, context: nil, eventNumber: 0, clickCount: 2, pressure: 1))
+        rail.mouseDown(with: doubleClick)
+        #expect(rail.isCollapsed)
+        rail.mouseDown(with: doubleClick)
+        #expect(!rail.isCollapsed)
     }
 
     @Test func foldingTheRailMovesFocusOffTheHiddenList() throws {

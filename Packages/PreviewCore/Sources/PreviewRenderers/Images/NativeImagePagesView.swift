@@ -518,8 +518,8 @@ final class NativeImagePagesView: NSScrollView, SafeModeContentView, PreviewAnno
         case 116: scrollBy(-page)
         case 115: scrollToStart()
         case 119: scrollToEnd()
-        case 124: scrollToPage(offset: 1)
-        case 123: scrollToPage(offset: -1)
+        case 124: scrollToPage(offset: userInterfaceLayoutDirection == .rightToLeft ? -1 : 1)
+        case 123: scrollToPage(offset: userInterfaceLayoutDirection == .rightToLeft ? 1 : -1)
         default: return false
         }
         return true

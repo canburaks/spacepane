@@ -8,8 +8,8 @@ struct SettingsSaveNotice: View {
 
     var body: some View {
         if let key = settings.status.editingProblem {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                CompanionSymbol.warning.image.foregroundStyle(CompanionTone.caution.color).accessibilityHidden(true)
+            HStack(alignment: .center, spacing: 10) {
+                SettingsIconBadge(image: CompanionSymbol.warning.image, tone: .caution, size: 22)
                 Text(PreviewStrings.text(key)).fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 8)
                 if let action = SettingsStatus.action(for: key) {
@@ -20,6 +20,7 @@ struct SettingsSaveNotice: View {
             .padding(10)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(CompanionTone.caution.color.opacity(0.12), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).strokeBorder(CompanionTone.caution.color.opacity(0.28), lineWidth: 1))
             .accessibilityElement(children: .contain)
         }
     }

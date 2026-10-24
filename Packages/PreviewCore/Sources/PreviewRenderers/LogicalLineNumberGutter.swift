@@ -12,6 +12,7 @@ final class LogicalLineNumberGutter: NSView {
 
     private(set) var lineIndex = LogicalLineIndex("")
     private(set) var requiredWidth: CGFloat = 0
+    var onDoubleClick: (() -> Void)?
     private weak var textView: NSTextView?
     private var font = NSFont.monospacedSystemFont(ofSize: 13, weight: .regular)
     private var foreground = NSColor.textColor
@@ -60,6 +61,7 @@ final class LogicalLineNumberGutter: NSView {
         foreground = palette.muted
         background = palette.background
         rule = palette.hairline
+        toolTip = PreviewStrings.text(.lineNumbers)
         setAccessibilityLabel(PreviewStrings.text(.lineNumbers))
         setAccessibilityHelp(PreviewStrings.text(.lineNumbersHint))
         updateThickness()
@@ -130,5 +132,9 @@ final class LogicalLineNumberGutter: NSView {
 
     override var acceptsFirstResponder: Bool { false }
     // This read-only gutter does not create text tab stops or change text selection on click.
-    override func mouseDown(with event: NSEvent) {}
+    override func mouseDown(with event: NSEvent) {
+        if event.clickCount == 2 {
+            onDoubleClick?()
+        }
+    }
 }

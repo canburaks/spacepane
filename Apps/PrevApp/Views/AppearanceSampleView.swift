@@ -9,6 +9,12 @@ struct AppearanceSampleView: View {
     let settings: CompanionSettings
     @Environment(\.locale) private var locale
     @Environment(\.colorSchemeContrast) private var contrast
+    @CompanionState private var compactSample = false
+
+    private enum Symbol {
+        static let panel = "macwindow"
+        static let sidebar = "sidebar.right"
+    }
 
     var body: some View {
         SettingsSection(PreviewStrings.text(.appearanceSampleTitle), detail: PreviewStrings.text(.appearanceSampleUpdates)) {
@@ -39,14 +45,14 @@ struct AppearanceSampleView: View {
     /// The previous sample stays visible while another loads, so the one native pane keeps its identity.
     private var pane: some View {
         ZStack(alignment: .topTrailing) {
-            if let result = session.result {
-                // The sample is always drawn in the regular density, so the chrome a control changes is
-                // visible whatever width the window gives it.
-                NativePreviewPane(result: result, typography: settings.snapshot.typography,
-                                  generation: session.generation, theme: settings.snapshot.theme,
-                                  syntaxStyle: settings.snapshot.syntaxStyle, forcedDensity: .regular)
-            } else {
-                Color(nsColor: .textBackgroundColor)
+            ZStack {
+                Color(nsColor: compactSample ? .windowBackgroundColor : .textBackgroundColor)
+                NativePreviewPane(outcome: session.outcome, isLoading: session.isLoading,
+                                  typography: settings.snapshot.typography, generation: session.generation,
+                                  theme: settings.snapshot.theme, syntaxStyle: settings.snapshot.syntaxStyle,
+                                  forcedDensity: compactSample ? .compact : .regular,
+                                  limits: session.result?.effectiveBudget)
+                    .frame(maxWidth: compactSample ? 280 : .infinity, maxHeight: .infinity)
             }
             if session.isLoading {
                 ProgressView()
@@ -69,12 +75,26 @@ struct AppearanceSampleView: View {
                 .font(CompanionTypography.note).foregroundStyle(CompanionInk.hint)
                 .lineLimit(1).truncationMode(.middle)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .help(session.itemName ?? "")
+            densityPicker
             typePicker
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
         .frame(maxWidth: .infinity)
         .background(Color(nsColor: .windowBackgroundColor))
+    }
+
+    private var densityPicker: some View {
+        Picker(PreviewStrings.text(.appearanceLayout), selection: $compactSample) {
+            Image(systemName: Symbol.panel).tag(false)
+            Image(systemName: Symbol.sidebar).tag(true)
+        }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .controlSize(.small)
+        .fixedSize()
+        .help(PreviewStrings.text(.appearanceLayout))
     }
 
     /// Every catalog format, grouped as on the File Types page.
@@ -103,6 +123,16 @@ struct AppearanceSampleView: View {
                                        arguments: [pointValueString, settings.snapshot.typography.tabWidth], locale: locale))
                 .multilineTextAlignment(.leading)
             Spacer(minLength: 8)
+            if let descriptor = FormatCatalog.standard.descriptor(for: session.selected) {
+                Text(PreviewStrings.text(FileTypeCell.primaryModeKey(for: descriptor)))
+                    .font(CompanionTypography.note)
+                    .lineLimit(1)
+                    .foregroundStyle(CompanionInk.hint)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 1)
+                    .background(Color.primary.opacity(0.06), in: Capsule())
+                    .fixedSize()
+            }
         }
         .font(CompanionTypography.note)
         .foregroundStyle(CompanionInk.hint)
@@ -146,12 +176,22 @@ struct AppearanceSampleNotes: View {
     }
 
     private var disabledNotice: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 6) {
-            CompanionSymbol.warning.image.foregroundStyle(CompanionTone.caution.color).accessibilityHidden(true)
-            Text(PreviewStrings.text(.appearanceSampleTypeDisabled)).fixedSize(horizontal: false, vertical: true)
+        HStack(alignment: .center, spacing: 8) {
+            SettingsIconBadge(image: CompanionSymbol.warning.image, tone: .caution, size: 20)
+            Text(PreviewStrings.text(.appearanceSampleTypeDisabled))
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 6)
+            Button(PreviewStrings.text(.stateActionEnableFormat)) {
+                settings.setEnabled(true, for: session.selected)
+            }
+            .controlSize(.small)
+            .help(PreviewStrings.text(.stateActionEnableFormat))
         }
         .font(CompanionTypography.note)
-        .padding(.horizontal, 2)
-        .accessibilityElement(children: .combine)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+        .background(Color.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).strokeBorder(CompanionTone.caution.color.opacity(0.28), lineWidth: 1))
+        .accessibilityElement(children: .contain)
     }
 }

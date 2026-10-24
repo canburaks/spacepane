@@ -26,6 +26,8 @@ enum OutlineRowAction: CaseIterable {
 final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSOutlineViewDelegate,
                                       PreviewAnnouncing, PreviewCopyReporting, PreviewSafeCopying {
     private enum Column: String { case key, value }
+    private static let concealmentToken = SecretFieldPolicy.concealmentToken
+    private static let regularKeyColumnWidth: CGFloat = 220
     /// A row's place in the unfiltered tree: each ancestor's name plus which same-named sibling it is.
     /// Identifies rows across a replacement of the displayed nodes (live reload) without relying on object identity.
     private struct ItemKey: Hashable {
@@ -44,12 +46,16 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
     private var stylePass: NativeTextStylePass?
     private var duplicateKeyHelp: String?
     private var rootsAreDocuments = false
+    private var presentationLocale = Locale.current
+    private var density: PreviewChrome.Density = .regular
     private(set) var filterQuery: OutlineFilterQuery?
     private(set) var filterSummary = OutlineFilterSummary()
     /// The state to return to when the filter is cleared; captured when filtering starts.
     private var unfilteredState: DisplayState?
     /// Called whenever the filter result is recomputed, including after the nodes are replaced.
     var onFilterResult: ((OutlineFilterSummary) -> Void)?
+    /// Called with the selected row's path when a single row is selected, or `nil` otherwise.
+    var onSelectionChange: ((String?) -> Void)?
     /// Tests substitute a private pasteboard so they never touch the user's clipboard.
     var pasteboard = NSPasteboard.general { didSet { outline.pasteboard = pasteboard } }
     var tagCopyPolicy: (() -> Bool)? { didSet { outline.tagCopyPolicy = tagCopyPolicy } }
@@ -58,6 +64,12 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
     /// Receives each copy of rows or of a path once, after the pasteboard write; the hosting preview confirms it.
     var copyHandler: ((PreviewCopyEvent) -> Void)?
 
+    var selectedPath: String? {
+        guard outline.selectedRowIndexes.count == 1,
+              let item = outline.item(atRow: outline.selectedRow) as? OutlineItem else { return nil }
+        return path(of: item)
+    }
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         hasVerticalScroller = true; hasHorizontalScroller = true; autohidesScrollers = true
@@ -65,18 +77,76 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
         outline.usesAlternatingRowBackgroundColors = true
         outline.allowsMultipleSelection = true
         outline.columnAutoresizingStyle = .lastColumnOnlyAutoresizingStyle
-        for (kind, width) in [(Column.key, CGFloat(220)), (.value, CGFloat(380))] {
+        for (kind, width) in [(Column.key, Self.regularKeyColumnWidth), (.value, CGFloat(380))] {
             let column = NSTableColumn(identifier: .init(kind.rawValue))
             column.width = width; column.minWidth = 80
             outline.addTableColumn(column)
             if kind == .key { outline.outlineTableColumn = column }
         }
+        outline.target = self
+        outline.doubleAction = #selector(doubleClickRow(_:))
         outline.safeCopy = { [weak self] in self?.selectedSafeText() ?? "" }
         outline.didCopyRows = { [weak self] event in self?.reportCopy(event) }
         outline.contextMenuProvider = { [weak self] rows in self?.rowMenu(for: rows) }
         documentView = outline
+        needsLayout = true
     }
     required init?(coder: NSCoder) { nil }
+
+    @objc private func doubleClickRow(_ sender: Any?) {
+        let row = outline.clickedRow >= 0 ? outline.clickedRow : outline.selectedRow
+        toggleExpansion(atRow: row)
+    }
+
+    @discardableResult
+    func toggleExpansion(atRow row: Int) -> Bool {
+        guard row >= 0, row < outline.numberOfRows,
+              let item = outline.item(atRow: row) as? OutlineItem,
+              !item.shown.isEmpty else { return false }
+        if outline.isItemExpanded(item) {
+            outline.collapseItem(item)
+        } else {
+            outline.expandItem(item)
+        }
+        return true
+    }
+
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+
+    override func layout() {
+        updateColumnWidthsForWidth(bounds.width)
+        super.layout()
+    }
+
+    private func updateColumnWidthsForWidth(_ width: CGFloat) {
+        let next = PreviewChrome.density(forWidth: width, previous: density)
+        if let column = outline.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier(Column.key.rawValue)) {
+            if next == .compact || (width > 0 && width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis) {
+                let target = max(column.minWidth, min(140, floor(width * 0.42)))
+                if density != .compact || column.width > target {
+                    column.width = target
+                }
+            } else if density == .compact, column.width < Self.regularKeyColumnWidth {
+                column.width = Self.regularKeyColumnWidth
+            }
+        }
+        let previousDensity = density
+        density = next
+        if previousDensity != next {
+            outline.enumerateAvailableRowViews { rowView, row in
+                guard row >= 0, row < self.outline.numberOfRows,
+                      let item = self.outline.item(atRow: row) as? OutlineItem else { return }
+                for columnIndex in 0..<min(rowView.numberOfColumns, self.outline.numberOfColumns) {
+                    guard let field = rowView.view(atColumn: columnIndex) as? NSTextField,
+                          let col = Column(rawValue: self.outline.tableColumns[columnIndex].identifier.rawValue) else { continue }
+                    self.configure(field, item: item, column: col)
+                }
+            }
+        }
+    }
 
     /// `rootsAreDocuments` marks outlines whose top-level rows are separate documents (JSON Lines records),
     /// which only affects the paths Copy Path produces.
@@ -87,6 +157,7 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
         stylePass = .init(typography: typography, palette: palette, syntaxStyle: syntaxStyle)
         duplicateKeyHelp = PreviewStrings.text(.previewDuplicateKey)
         self.rootsAreDocuments = rootsAreDocuments
+        presentationLocale = locale
         outline.tableColumns.first?.title = PreviewStrings.text(.previewOutlineKey)
         outline.tableColumns.last?.title = PreviewStrings.text(.previewOutlineValue)
         outline.setAccessibilityLabel(PreviewStrings.text(.previewModeOutline))
@@ -108,6 +179,7 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
                 outline.endUpdates()
             }
             onFilterResult?(filterSummary)
+            onSelectionChange?(selectedPath)
         } else {
             // Include prefetched/in-flight row views, not only the current visible rect.
             // Future cells use the new pass when requested by the delegate.
@@ -128,6 +200,7 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
         filterQuery = nil; filterSummary = OutlineFilterSummary()
         outline.reloadData()
         onFilterResult?(filterSummary)
+        onSelectionChange?(nil)
     }
 
     // MARK: Data source and delegate
@@ -148,17 +221,86 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
         configure(field, item: item, column: column)
         return field
     }
+    func outlineViewSelectionDidChange(_ notification: Notification) {
+        onSelectionChange?(selectedPath)
+    }
+    static func displayedValueText(for node: SafeOutlineNode, locale: Locale = .current) -> String {
+        guard !node.children.isEmpty, node.value == "{…}" || node.value == "[…]" else {
+            return node.value
+        }
+        return "\(node.value) (\(node.children.count.formatted(.number.locale(locale))))"
+    }
+
+    static func valueRole(for node: SafeOutlineNode) -> PreviewSyntaxRole {
+        if node.isIssue || node.value == concealmentToken || !node.children.isEmpty {
+            return .comment
+        }
+        if node.value == "true" || node.value == "false" || node.value == "null" || node.value == "nil" {
+            return .keyword
+        }
+        if isScalarNumber(node.value) {
+            return .number
+        }
+        return .string
+    }
+
+    private static func isScalarNumber(_ text: String) -> Bool {
+        let bytes = Array(text.utf8)
+        var index = 0
+        if index < bytes.count, bytes[index] == UInt8(ascii: "-") {
+            index += 1
+        }
+        guard index < bytes.count else { return false }
+        if bytes[index] == UInt8(ascii: "0") {
+            index += 1
+            if index < bytes.count, bytes[index] != UInt8(ascii: ".") {
+                return false
+            }
+        } else if (UInt8(ascii: "1")...UInt8(ascii: "9")).contains(bytes[index]) {
+            index += 1
+            while index < bytes.count, (UInt8(ascii: "0")...UInt8(ascii: "9")).contains(bytes[index]) {
+                index += 1
+            }
+        } else {
+            return false
+        }
+        if index == bytes.count { return true }
+        guard bytes[index] == UInt8(ascii: ".") else { return false }
+        index += 1
+        guard index < bytes.count else { return false }
+        while index < bytes.count {
+            guard (UInt8(ascii: "0")...UInt8(ascii: "9")).contains(bytes[index]) else { return false }
+            index += 1
+        }
+        return true
+    }
+
+    static func shouldShowHoverTooltip(for text: String, isKey: Bool, density: PreviewChrome.Density) -> Bool {
+        let count = text.utf8.count
+        if isKey {
+            return count > 48 || (density == .compact && count > 18)
+        }
+        return count > 48
+    }
+
     private func configure(_ field: NSTextField, item: OutlineItem, column: Column) {
         guard let stylePass else { return }
         field.isSelectable = true
         field.isEditable = false
         let isKey = column == .key
-        let text = isKey ? item.node.name : item.node.value
-        let role: PreviewSyntaxRole = item.node.isIssue ? .comment : isKey ? .key : .string
+        let text = isKey ? item.node.name : Self.displayedValueText(for: item.node, locale: presentationLocale)
+        let role: PreviewSyntaxRole = item.node.isIssue ? .comment : isKey ? .key : Self.valueRole(for: item.node)
         field.attributedStringValue = NSAttributedString(string: text, attributes: stylePass.attributes(for: role))
         field.lineBreakMode = .byTruncatingTail
-        field.toolTip = item.node.isDuplicateKey ? duplicateKeyHelp : nil
-        field.setAccessibilityHelp(item.node.isDuplicateKey ? duplicateKeyHelp : nil)
+        let duplicateNote = item.node.isDuplicateKey ? (duplicateKeyHelp ?? PreviewStrings.text(.previewDuplicateKey)) : nil
+        if let duplicateNote {
+            field.toolTip = duplicateNote
+        } else if Self.shouldShowHoverTooltip(for: text, isKey: isKey, density: density) {
+            field.toolTip = String(text.prefix(1_000))
+        } else {
+            field.toolTip = nil
+        }
+        field.setAccessibilityHelp(duplicateNote)
         // The context menu is invisible to keyboard and VoiceOver users, so the same commands are actions here.
         field.setAccessibilityCustomActions(OutlineRowAction.allCases.map { action in
             NSAccessibilityCustomAction(name: PreviewStrings.text(action.title)) { [weak self, weak item] in
@@ -204,6 +346,7 @@ final class NativeOutlinePreviewView: NSScrollView, NSOutlineViewDataSource, NSO
         }
         reselect(selected)
         onFilterResult?(filterSummary)
+        onSelectionChange?(selectedPath)
         return filterSummary
     }
 

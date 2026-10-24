@@ -247,6 +247,24 @@ struct NativeDiagramViewTests {
         #expect(canvas.scale > scale)
         canvas.keyDown(with: try event("0"))
         #expect(canvas.fitsToView)
+        canvas.keyDown(with: try event(String(UnicodeScalar(NSLeftArrowFunctionKey)!)))
+        #expect(!canvas.fitsToView)
+        canvas.keyDown(with: try event(String(UnicodeScalar(NSHomeFunctionKey)!)))
+        #expect(canvas.fitsToView)
+
+        let fittedMenu = try #require(canvas.contextMenu())
+        #expect(fittedMenu.items.map(\.title) == [
+            PreviewStrings.text(.interactionZoomIn),
+            PreviewStrings.text(.interactionZoomOut),
+            PreviewStrings.text(.cadReset)
+        ])
+        #expect(!fittedMenu.items[2].isEnabled)
+        canvas.zoom(by: 1.5)
+        #expect(!canvas.fitsToView)
+        let zoomedMenu = try #require(canvas.contextMenu())
+        #expect(zoomedMenu.items[2].isEnabled)
+        #expect(NSApplication.shared.sendAction(try #require(zoomedMenu.items[2].action), to: zoomedMenu.items[2].target, from: zoomedMenu.items[2]))
+        #expect(canvas.fitsToView)
     }
 
     // MARK: Accessibility
@@ -280,8 +298,13 @@ struct NativeDiagramViewTests {
         let first = try #require((canvas.accessibilityChildren() as? [NSAccessibilityElement])?.first)
         let before = first.accessibilityFrameInParentSpace()
         canvas.zoom(by: 2, around: .zero)
-        let after = try #require((canvas.accessibilityChildren() as? [NSAccessibilityElement])?.first).accessibilityFrameInParentSpace()
+        let afterElement = try #require((canvas.accessibilityChildren() as? [NSAccessibilityElement])?.first)
+        #expect(afterElement === first)
+        let after = afterElement.accessibilityFrameInParentSpace()
         #expect(abs(after.width - before.width * 2) < 1e-6)
+        _ = show("flowchart LR\nX --> Y", in: view)
+        let newFirst = try #require((canvas.accessibilityChildren() as? [NSAccessibilityElement])?.first)
+        #expect(newFirst !== first)
     }
 
     @Test func accessibilityTextIsLocalizedAndLongConnectionListsAreSummarized() throws {

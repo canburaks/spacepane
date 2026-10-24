@@ -13,6 +13,9 @@ struct GoToLineAndCopyTests {
         let host = InteractionHarness()
         defer { host.release() }
         host.show(plainPresentation(numberedLines(50)))
+        #expect(host.view.lineNumberGutter.toolTip == PreviewStrings.text(.lineNumbers))
+        #expect(host.view.statusLabel.isSelectable == true)
+        #expect(host.view.limitsLabel.isSelectable == true)
         let bar = host.view.accessoryBar
         #expect(bar.content == .none && host.view.accessoryHeightConstraint?.constant == 0)
         #expect(host.press("l", .command))
@@ -29,6 +32,22 @@ struct GoToLineAndCopyTests {
                                         doCommandBy: #selector(NSResponder.cancelOperation(_:))))
         #expect(bar.content == .none && host.view.accessoryHeightConstraint?.constant == 0)
         #expect(host.window.firstResponder === host.textView)
+        let doubleClick = try #require(
+            NSEvent.mouseEvent(
+                with: .leftMouseDown,
+                location: .zero,
+                modifierFlags: [],
+                timestamp: 0,
+                windowNumber: host.window.windowNumber,
+                context: nil,
+                eventNumber: 1,
+                clickCount: 2,
+                pressure: 1
+            )
+        )
+        host.view.lineNumberGutter.mouseDown(with: doubleClick)
+        #expect(bar.content == .goToLine)
+        #expect(!bar.goToLineBar.isHidden)
     }
 
     @Test func enteringALineSelectsAndRevealsItAndAnnouncesIt() throws {
@@ -250,6 +269,25 @@ struct GoToLineAndCopyTests {
         let searchFrame = search.convert(search.bounds, to: outlineHost.view)
         #expect(searchFrame.width >= 140 && filterBar.frame.contains(searchFrame))
         try draw(outlineHost.view)
+    }
+
+    @Test func compactGoToLineBarHidesTitleAndExposesMessageTooltip() throws {
+        let host = InteractionHarness(width: 240)
+        defer { host.release() }
+        host.show(plainPresentation(numberedLines(50)))
+        let bar = host.view.accessoryBar
+        #expect(host.press("l", .command))
+        host.view.layoutSubtreeIfNeeded()
+        #expect(bar.goToLineBar.titleLabel.isHidden == true)
+        #expect(bar.goToLineBar.field.controlSize == .small)
+        #expect(bar.goToLineBar.field.frame.width == 72)
+        #expect(bar.goToLineBar.messageLabel.toolTip == bar.goToLineBar.message)
+        host.window.setContentSize(NSSize(width: 600, height: 420))
+        host.view.setFrameSize(NSSize(width: 600, height: 420))
+        host.view.layoutSubtreeIfNeeded()
+        #expect(bar.goToLineBar.titleLabel.isHidden == false)
+        #expect(bar.goToLineBar.field.controlSize == .regular)
+        #expect(bar.goToLineBar.field.frame.width == 96)
     }
 
     private func draw(_ view: NSView) throws {

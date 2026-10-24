@@ -62,11 +62,17 @@ protocol SafeModeZoomable: SafeModeContentView {
 /// A mode view that hosts the shared native table (the Files and Rows modes). Naming the hosted `table` is all it
 /// takes to pass the preview's announcer (`PreviewAnnouncing`) and copy reporting (`PreviewCopyReporting`) on to it.
 @MainActor
-protocol PreviewHostsTable: PreviewAnnouncing, PreviewCopyReporting, PreviewSafeCopying {
+protocol PreviewHostsTable: SafeModeContentView, PreviewAnnouncing, PreviewCopyReporting, PreviewSafeCopying {
     var table: NativeTablePreviewView { get }
 }
 
+extension NativeTablePreviewView {
+    var keyboardFocusTarget: NSView? { tableView }
+}
+
 extension PreviewHostsTable {
+    var keyboardFocusTarget: NSView? { table.keyboardFocusTarget }
+
     var pasteboard: NSPasteboard {
         get { table.pasteboard }
         set { table.pasteboard = newValue }

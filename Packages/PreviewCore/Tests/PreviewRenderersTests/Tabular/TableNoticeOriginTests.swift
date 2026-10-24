@@ -167,6 +167,17 @@ struct TableNoticeOriginTests {
         #expect(notice(of: partial) == "Showing the first 1 row.")
     }
 
+    @Test func aLiveReloadOfTheSameTableKeepsTheSelectionOfRowsThatRemain() {
+        // A genuine reload of the same file: same origin, same partial-read state, same columns, one row added.
+        let before = SafeTable(columns: ["a"], rows: [["x"], ["y"]], truncation: [])
+        let after = SafeTable(columns: ["a"], rows: [["x"], ["y"], ["z"]], truncation: [])
+        let view = makeView()
+        view.display(before, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        view.tableView.selectRowIndexes(IndexSet(integer: 1), byExtendingSelection: false)
+        view.display(after, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        #expect(view.tableView.selectedRowIndexes == IndexSet(integer: 1))
+    }
+
     // MARK: Helpers
 
     private func presentation(_ formatID: FormatID, _ text: String, syntax: TextSyntax,

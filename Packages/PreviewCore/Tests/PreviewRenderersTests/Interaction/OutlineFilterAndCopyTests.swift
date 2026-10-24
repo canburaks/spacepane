@@ -209,6 +209,69 @@ struct OutlineFilterAndCopyTests {
         #expect(field.stringValue.isEmpty && !host.view.outlineView.filterSummary.isActive)
     }
 
+    @Test func selectingASingleOutlineRowShowsItsBreadcrumbPathInTheFilterBar() throws {
+        let host = InteractionHarness()
+        defer { host.release() }
+        let json = #"{"members":[{"path":"safe😀","type":"file"},{"path":"other","type":"directory"}]}"#
+        host.show(plainPresentation(json, format: .folder, syntax: .json))
+        let bar = host.view.accessoryBar
+        let pathLabel = bar.filterBar.pathLabel
+        #expect(pathLabel.isHidden)
+        #expect(pathLabel.stringValue.isEmpty)
+        let outline = try #require(host.view.outlineView.documentView as? NSOutlineView)
+        outline.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        #expect(!pathLabel.isHidden)
+        #expect(pathLabel.stringValue == "$.Summary")
+        #expect(pathLabel.toolTip == "$.Summary")
+        let members = try #require(outline.item(atRow: 1))
+        outline.expandItem(members)
+        let firstMemberRow = try #require(row(named: "[0]", in: outline))
+        outline.selectRowIndexes(IndexSet(integer: firstMemberRow), byExtendingSelection: false)
+        #expect(!pathLabel.isHidden)
+        #expect(pathLabel.stringValue == "$.Summary.members[0]")
+        #expect(pathLabel.toolTip == "$.Summary.members[0]")
+        let menu = try #require(bar.filterBar.pathContextMenu())
+        #expect(menu.items.map(\.title) == [PreviewStrings.text(.interactionCopyPath)])
+        let copyItem = try #require(menu.items.first)
+        _ = copyItem.target?.perform(copyItem.action, with: copyItem)
+        #expect(host.pasteboard.string(forType: .string) == "$.Summary.members[0]")
+        outline.selectRowIndexes(IndexSet([0, 1]), byExtendingSelection: false)
+        #expect(pathLabel.isHidden)
+        #expect(pathLabel.stringValue.isEmpty)
+        #expect(pathLabel.toolTip == nil)
+        outline.selectRowIndexes(IndexSet(integer: firstMemberRow), byExtendingSelection: false)
+        #expect(!pathLabel.isHidden)
+        #expect(pathLabel.stringValue == "$.Summary.members[0]")
+        outline.deselectAll(nil)
+        #expect(pathLabel.isHidden)
+        #expect(pathLabel.stringValue.isEmpty)
+        #expect(pathLabel.toolTip == nil)
+        #expect(bar.filterBar.pathContextMenu() == nil)
+    }
+
+    @Test func compactOutlineFilterBarShrinksSearchFieldAndExposesMatchCountTooltip() throws {
+        let host = InteractionHarness(width: 240)
+        defer { host.release() }
+        host.show(plainPresentation(#"{"members":[{"path":"a","type":"file"}]}"#, format: .folder, syntax: .json))
+        let outline = try #require(host.view.outlineView.documentView as? NSOutlineView)
+        outline.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        let field = host.view.accessoryBar.filterBar.searchField
+        field.stringValue = "a"
+        field.sendAction(field.action, to: field.target)
+        host.view.layoutSubtreeIfNeeded()
+        #expect(host.view.accessoryBar.filterBar.searchField.controlSize == .small)
+        #expect(host.view.accessoryBar.filterBar.searchField.frame.width <= 132)
+        #expect(host.view.accessoryBar.filterBar.countLabel.toolTip == host.view.accessoryBar.filterBar.countLabel.stringValue)
+        #expect(host.view.accessoryBar.filterBar.pathLabel.stringValue == "$.Summary")
+        #expect(host.view.accessoryBar.filterBar.pathLabel.isHidden)
+        host.window.setContentSize(NSSize(width: 600, height: 420))
+        host.view.setFrameSize(NSSize(width: 600, height: 420))
+        host.view.layoutSubtreeIfNeeded()
+        #expect(host.view.accessoryBar.filterBar.searchField.controlSize == .regular)
+        #expect(host.view.accessoryBar.filterBar.searchField.frame.width >= 140)
+        #expect(!host.view.accessoryBar.filterBar.pathLabel.isHidden)
+    }
+
     // MARK: Row copy actions
 
     @Test func rowCommandsCopyTheConcealedKeyValueAndPath() throws {

@@ -26,7 +26,8 @@ earlier 1.1.0 submissions as Removed and no 1.0.0 submission at all.
 | 2026-10-17 18:39 | 1.1.0 | 6 (merged tree of `build6-integration-2026-10-17`, archived 18:1x, exported with Apple Distribution signing) | Uploaded with `--upload` on the owner's instruction; TestFlight processing; not yet selected for the version, not submitted | corrected block (build 6) | unchanged until the owner edits it |
 | 2026-10-22 20:51 | 1.1.0 | 7 (`fix/settings-recovery-file-types-search`, archived 20:47, exported with Apple Distribution signing; it includes the unreviewed UI polish commit `685dbf4`, kept on the local branch `ui-ux-waves-2026-10-20`) | Uploaded with `--upload` on the owner's instruction; internal TestFlight only; never submitted | corrected block (build 7) | unchanged until the owner edits it |
 | 2026-10-17 19:14 (read 2026-10-24) | 1.1.0 | 6 | **Rejected 2026-10-23 19:06, Guideline 5.6 Developer Code of Conduct**: "features that appear to have been intentionally hidden during the review process". The submission had replaced build 5 (Removed). Causes found: the Developer Mode switch, the store description missing the Safety Lens 2 and 3 features, and leftover CAD text; see [decision 031](../decisions/031-nothing-hidden.md) | build 6 block, with the Developer Mode paragraph | Manual |
-| 2026-10-24 10:13 | 1.1.0 | 8 (merged `main` at `8b8f2b0`, archived and exported 2026-10-24, uploaded 10:06 through the signed-in Xcode account) | **Waiting for Review**, resubmitted in the same submission as build 6 on the owner's instruction ("The rest is yours"), after replacing the description with the 3,797-character text, pasting the build 8 notes, removing the Theme screenshot (it showed the four-page sidebar; five screenshots remain) and replying to App Review at 10:11 with `docs/release/app-review-reply-2026-10-24.md` | build 8 block | Manual |
+| 2026-10-24 10:13 | 1.1.0 | 8 (merged `main` at `8b8f2b0`, archived and exported 2026-10-24, uploaded 10:06 through the signed-in Xcode account) | Waiting for Review from 10:13, then **cancelled by the developer at about 10:40** so that build 9 could replace it (owner: "change the current submission to that build"); it had been resubmitted in the same submission as build 6 on the owner's instruction ("The rest is yours"), after replacing the description with the 3,797-character text, pasting the build 8 notes, removing the Theme screenshot (it showed the four-page sidebar; five screenshots remain) and replying to App Review at 10:11 with `docs/release/app-review-reply-2026-10-24.md` | build 8 block | Manual |
+| 2026-10-24 | 1.1.0 | 9 (`build9-ui-polish`: build 8 plus the UI polish commit `685dbf4`, its table and endpoint-layout fixes and the copy-commands description line; archived, exported and uploaded 10:35 through the signed-in Xcode account) | Replaces build 8 in a new submission; the description (3,888 characters) and the build 9 notes were saved first | build 9 block | Manual |
 
 Also on the version page on 2026-10-17: sign-in required off, attachment `SpacePane-Review-Samples.zip`, six Mac
 screenshots, and the description of 1.0 ("That is 74 file types") rather than the 1.1.0 text below. Builds 1.0.0 (1)
@@ -103,7 +104,7 @@ Promotional text can change without a new version; switch to this when 1.1.0 is 
 Press Space and see what a file will do: scripts, editor tasks, AI models, extensions and packages explained. Made on your Mac, read-only, with likely secrets concealed.
 ```
 
-### Description (3,797 of 4,000 characters)
+### Description (3,888 of 4,000 characters)
 
 The 1.0 description with one bullet added under STRUCTURE, three under KNOW WHAT'S HIDDEN INSIDE, and 74 changed to 81
 (the catalog has 81 `id` entries; recounted 2026-10-17). Name, subtitle and keywords are unchanged. Two bullets were
@@ -135,6 +136,7 @@ STRUCTURE, NOT A WALL OF TEXT
 • Text files that have no extension, such as Makefile or zprofile
 • 3MF models you can turn
 • GGUF and safetensors models, PyTorch files, MCP bundles, editor and browser extensions and Python wheels, summarized without running anything
+• Right-click a table, an outline or a listing to copy a value, a row, every row or a path
 
 That is 81 file types, each with its own switch.
 

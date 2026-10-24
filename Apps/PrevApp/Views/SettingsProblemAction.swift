@@ -15,5 +15,6 @@ struct SettingsProblemAction: View {
             }
         }
         .controlSize(.small)
+        .help(PreviewStrings.text(action.titleKey))
     }
 }

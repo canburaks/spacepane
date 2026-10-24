@@ -221,6 +221,7 @@ final class MarkupContentsRail: NSView, PreviewAnnouncing, PreviewCopyReporting,
 
     private func localize() {
         titleLabel.stringValue = PreviewStrings.text(.previewModeContents)
+        titleLabel.toolTip = titleLabel.stringValue
         let label = PreviewStrings.text(isCollapsed ? .markupContentsRailShow : .markupContentsRailHide)
         toggleButton.toolTip = label
         toggleButton.setAccessibilityLabel(label)
@@ -228,6 +229,18 @@ final class MarkupContentsRail: NSView, PreviewAnnouncing, PreviewCopyReporting,
     }
 
     // MARK: Folding
+
+    override func mouseDown(with event: NSEvent) {
+        let point = convert(event.locationInWindow, from: nil)
+        let inHeaderStrip = point.x >= 0
+            && point.x <= max(bounds.width, ContentsRailPolicy.expandedWidth)
+            && point.y >= 0 && point.y <= PreviewChrome.accessoryHeight
+        if event.clickCount == 2, isOffered, header.frame.contains(point) || inHeaderStrip {
+            toggleCollapsed()
+            return
+        }
+        super.mouseDown(with: event)
+    }
 
     /// Folds the rail to its toggle, or opens it again. Focus in the list moves to the toggle first, so it never
     /// stays on a hidden view.

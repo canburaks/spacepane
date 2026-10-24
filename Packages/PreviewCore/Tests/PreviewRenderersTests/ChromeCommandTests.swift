@@ -307,4 +307,37 @@ struct ChromeCommandTests {
         #expect(type(of: host.view.textView) == PreviewTextView.self)
         #expect(host.view.textView.textLayoutManager == nil && host.view.textView.copyHandler != nil)
     }
+
+    @Test func modeChordsFocusHostedTablesAndReferencesTextAndEnableFindInReferences() throws {
+        let host = harness()
+        defer { host.release() }
+        host.show(listingPresentation(archiveListingJSON, format: .zip))
+        let sourceNumber = try #require(host.view.displayedModes.firstIndex(of: .source)) + 1
+        #expect(host.press(String(sourceNumber), chord))
+        #expect(host.window.makeFirstResponder(host.textView))
+        let filesNumber = try #require(host.view.displayedModes.firstIndex(of: .files)) + 1
+        #expect(host.press(String(filesNumber), chord))
+        let filesView = try #require(host.view.shownModeView as? NativeListingFilesView)
+        #expect(host.window.firstResponder === filesView.table.tableView)
+
+        host.show(plainPresentation("@article{k, author = {Knuth}, title = {TeX}, journal = {J}, year = {1984}}", format: .bibtex, syntax: .bibtex), resetsContentState: true)
+        #expect(host.window.makeFirstResponder(host.textView))
+        let referencesNumber = try #require(host.view.displayedModes.firstIndex(of: .references)) + 1
+        #expect(host.press(String(referencesNumber), chord))
+        let referencesView = try #require(host.view.shownModeView as? MarkupReferencesView)
+        #expect(host.window.firstResponder === referencesView.textView)
+        #expect(referencesView.textView.delegate === host.view)
+        let commands = host.view.commandAvailability.commands
+        #expect(commands.contains(.find) && commands.contains(.findNext) && commands.contains(.findPrevious))
+        #expect(!commands.contains(.goToLine))
+        #expect(host.press("c", [.command, .shift]))
+        #expect(host.pasteboard.string(forType: .string) == referencesView.textView.string)
+        let menu = try #require(host.view.textView(referencesView.textView, menu: NSMenu(), for: host.keyEvent("x", []), at: 0))
+        #expect(menu.items.map(\.title).contains(PreviewStrings.text(.interactionCopyAll)))
+        #expect(!menu.items.map(\.title).contains(PreviewStrings.text(.interactionGoToLine)))
+        host.window.makeFirstResponder(referencesView.styleControl)
+        #expect(host.press("f", .command))
+        #expect((host.window.firstResponder as? NSView)?.isDescendant(of: referencesView) == true)
+        #expect(host.window.firstResponder !== referencesView.styleControl)
+    }
 }

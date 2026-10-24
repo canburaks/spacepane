@@ -136,6 +136,28 @@ struct SortableTableViewTests {
         #expect(view.sortButton.menu?.items.map(\.title).contains("x") == true)
     }
 
+    @Test func liveReloadWithSameColumnsPreservesSortFilterAndSelection() throws {
+        let view = makeView()
+        view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        view.sortRows(column: 1, ascending: false)
+        view.setFilter("b")
+        view.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        let updated = SafeTable(
+            columns: table.columns,
+            rows: table.rows + [["b-99", "500", "2026-04-01"]],
+            truncation: [],
+            columnKinds: table.columnKinds,
+            sortKeys: [1: [300, 20, nil, 20, 5, 500]]
+        )
+        view.display(updated, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        #expect(view.filterField.stringValue == "b")
+        #expect(view.tableView.sortDescriptors.first?.key == "1")
+        #expect(view.tableView.sortDescriptors.first?.ascending == false)
+        #expect(view.tableView.numberOfRows == 3)
+        #expect(try firstColumn(view) == ["b-99", "b-10", "B-2"])
+        #expect(try cell(view, row: view.tableView.selectedRow, column: 0) == "b-10")
+    }
+
     @Test func clearRemovesTheFilterBarSortStateAndRows() throws {
         let view = makeView()
         view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
@@ -149,6 +171,28 @@ struct SortableTableViewTests {
         #expect(view.tableView.sortDescriptors.isEmpty)
         view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
         #expect(view.tableView.numberOfRows == 5, "A cleared view shows the next table unfiltered")
+    }
+
+    @Test func switchingBetweenTableAndProfileRetainsSortFilterAndSelectionUntilCleared() throws {
+        let view = makeView()
+        view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        view.sortRows(column: 1, ascending: false)
+        view.setFilter("b")
+        view.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        let profile = SafeTable(columns: ["column", "type"], rows: [["name", "text"], ["size", "number"]], truncation: [], origin: .profile)
+        view.display(profile, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        #expect(view.filterField.stringValue.isEmpty)
+        #expect(view.tableView.sortDescriptors.isEmpty)
+        view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        #expect(view.filterField.stringValue == "b")
+        #expect(view.tableView.sortDescriptors.first?.key == "1")
+        #expect(view.tableView.sortDescriptors.first?.ascending == false)
+        #expect(view.tableView.numberOfRows == 2)
+        #expect(view.tableView.selectedRowIndexes == IndexSet(integer: 0))
+        view.clear()
+        view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        #expect(view.filterField.stringValue.isEmpty)
+        #expect(view.tableView.numberOfRows == 5)
     }
 
     @Test func partialListingAndRowLimitsAreSeparateHostNotices() throws {
@@ -193,6 +237,86 @@ struct SortableTableViewTests {
         #expect(try firstColumn(view) == ["-5", "9", "10", "100"])
         view.sortRows(column: 1, ascending: false)
         #expect(try firstColumn(view) == ["100", "9", "10", "-5"])
+    }
+
+    @Test func numericColumnsRightAlignAndCellRolesStyleConcealedNullBooleanAndNumericValues() throws {
+        #expect(NativeTablePreviewView.cellRole(for: "••••", kind: .text) == .comment)
+        #expect(NativeTablePreviewView.cellRole(for: "NULL", kind: .text) == .comment)
+        #expect(NativeTablePreviewView.cellRole(for: "true", kind: .text) == .keyword)
+        #expect(NativeTablePreviewView.cellRole(for: "GET", kind: .text) == .keyword)
+        #expect(NativeTablePreviewView.cellRole(for: "DELETE", kind: .text) == .keyword)
+        #expect(NativeTablePreviewView.cellRole(for: "42", kind: .number) == .number)
+        #expect(NativeTablePreviewView.cellRole(for: "hello", kind: .text) == nil)
+        let view = makeView()
+        view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        #expect(view.tableView.tableColumns[0].headerCell.alignment == .natural)
+        #expect(view.tableView.tableColumns[1].headerCell.alignment == .right)
+        let textCell = try #require(view.tableView(view.tableView, viewFor: view.tableView.tableColumns[0], row: 0) as? NSTextField)
+        let numberCell = try #require(view.tableView(view.tableView, viewFor: view.tableView.tableColumns[1], row: 0) as? NSTextField)
+        #expect(textCell.alignment == .natural)
+        #expect(numberCell.alignment == .right)
+        let pasteboard = NSPasteboard(name: .init(UUID().uuidString))
+        defer { pasteboard.releaseGlobally() }
+        view.pasteboard = pasteboard
+        let menu = try #require(view.contextMenu(row: 0, column: 0))
+        #expect(menu.items.count == 3)
+        let copyValue = menu.items[0]
+        _ = copyValue.target?.perform(try #require(copyValue.action), with: copyValue)
+        #expect(pasteboard.string(forType: .string) == "b-10")
+        let copyRow = menu.items[1]
+        _ = copyRow.target?.perform(try #require(copyRow.action), with: copyRow)
+        #expect(pasteboard.string(forType: .string) == "b-10\t300\t2026-02-01")
+        let copyAll = menu.items[2]
+        #expect(copyAll.title == PreviewStrings.text(.interactionCopyAll))
+        _ = copyAll.target?.perform(try #require(copyAll.action), with: copyAll)
+        #expect(pasteboard.string(forType: .string) == "name\tsize\twhen\nb-10\t300\t2026-02-01\nB-2\t20\t\na\t\t2025-12-31\nc\t20\t2026-02-01\nZoë\t5\t2026-03-01")
+    }
+
+    @Test func boundaryNavigationSelectsFirstAndLastRowsAndEscapeClearsThenDismissesFilter() throws {
+        let view = makeView()
+        view.display(table, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        view.tableView.moveToEndOfDocument(nil)
+        #expect(view.tableView.selectedRow == view.tableView.numberOfRows - 1)
+        view.tableView.moveToBeginningOfDocument(nil)
+        #expect(view.tableView.selectedRow == 0)
+
+        view.focusFilterField()
+        #expect(!view.filterField.isHidden)
+        view.setFilter("b")
+        #expect(view.tableView.numberOfRows == 2)
+        view.handleFilterEscape()
+        #expect(view.filterField.stringValue.isEmpty)
+        #expect(view.tableView.numberOfRows == 5)
+        #expect(!view.filterField.isHidden)
+        view.handleFilterEscape()
+        #expect(view.filterField.isHidden)
+    }
+
+    @Test func endpointsTableAdaptsColumnsForCompactFinderSidebarAndRestoresThemWhenWide() throws {
+        var endpoints = SafeTable(
+            columns: [PreviewStrings.text(.dataMethod), PreviewStrings.text(.summaryPath),
+                      PreviewStrings.text(.previewModeSummary), PreviewStrings.text(.openAPIColumnDeprecated)],
+            rows: [["GET", "/v1/pets", "List pets", ""], ["DELETE", "/v1/pets/{id}", "Delete pet", PreviewStrings.text(.summaryBooleanTrue)]],
+            truncation: [],
+            origin: .delimitedText
+        )
+        endpoints.layout = .endpoints
+        let view = makeView()
+        view.display(endpoints, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: english)
+        view.setFrameSize(NSSize(width: 240, height: 300))
+        view.layout()
+        #expect(view.tableView.tableColumns.map(\.isHidden) == [false, false, true, true])
+        #expect(view.tableView.tableColumns[0].width == 68)
+        #expect(view.sortButton.toolTip == PreviewStrings.text(.listingSortMenu))
+        #expect(view.filterField.controlSize == .small)
+        #expect(view.sortButton.controlSize == .small)
+        view.setFilter("/v1")
+        #expect(view.filterStatusLabel.toolTip == view.filterStatusLabel.stringValue)
+        view.setFrameSize(NSSize(width: 700, height: 300))
+        view.layout()
+        #expect(view.tableView.tableColumns.map(\.isHidden) == [false, false, false, false])
+        #expect(view.filterField.controlSize == .regular)
+        #expect(view.sortButton.controlSize == .regular)
     }
 
     // MARK: Helpers
@@ -381,5 +505,16 @@ struct ListingPreviewViewTests {
         #expect(files.isHidden)
         try select(.previewModeFiles, in: view)
         #expect(!files.isHidden)
+    }
+
+    @Test func filesTableAdaptsColumnsForCompactFinderSidebarAndRestoresThemWhenWide() throws {
+        let view = show()
+        let files = try #require(descendants(of: NativeListingFilesView.self, in: view).first)
+        files.table.setFrameSize(NSSize(width: 240, height: 300))
+        files.table.layout()
+        #expect(files.table.tableView.tableColumns.map(\.isHidden) == [false, true, false, true])
+        files.table.setFrameSize(NSSize(width: 700, height: 300))
+        files.table.layout()
+        #expect(files.table.tableView.tableColumns.map(\.isHidden) == [false, false, false, false])
     }
 }

@@ -4,7 +4,16 @@ import PreviewRenderers
 
 struct AppearanceSyntaxControls: View {
     @Binding var style: PreviewSyntaxStyle
+    var theme: PreviewTheme = .system
     @Environment(\.locale) private var locale
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.colorSchemeContrast) private var contrast
+
+    private var palette: NativeTextPalette {
+        let isDark = theme == .dark || (theme != .light && colorScheme == .dark)
+        let highContrast = theme == .highContrast || contrast == .increased
+        return NativeTextPalette(theme: theme, isDark: isDark, increasedContrast: highContrast, style: style)
+    }
 
     var body: some View {
         // The section title, its checkbox and its disclosure each use different words: the title names the
@@ -16,7 +25,19 @@ struct AppearanceSyntaxControls: View {
                     Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 10) {
                         ForEach(PreviewSyntaxRole.allCases, id: \.self) { role in
                             GridRow {
-                                Text(PreviewStrings.text(roleKey(role)))
+                                HStack(spacing: 8) {
+                                    RoundedRectangle(cornerRadius: 3, style: .continuous)
+                                        .fill(Color(nsColor: style.usesColor ? palette.color(for: role) : palette.foreground))
+                                        .frame(width: 10, height: 10)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 3, style: .continuous)
+                                                .strokeBorder(Color.primary.opacity(0.18), lineWidth: 0.5)
+                                        )
+                                        .accessibilityHidden(true)
+                                    Text(PreviewStrings.text(roleKey(role)))
+                                        .fontWeight(style.boldRoles.contains(role) ? .bold : .regular)
+                                        .italic(style.italicRoles.contains(role))
+                                }
                                 traitToggle(.syntaxBold, role: role, keyPath: \.boldRoles)
                                 traitToggle(.syntaxItalic, role: role, keyPath: \.italicRoles)
                             }
@@ -43,6 +64,8 @@ struct AppearanceSyntaxControls: View {
                 else { style[keyPath: keyPath].remove(role) }
             }))
         .toggleStyle(.checkbox)
+        .help(PreviewStrings.format(.syntaxStyleControl,
+            arguments: [PreviewStrings.text(roleKey(role)), PreviewStrings.text(key)], locale: locale))
         .accessibilityLabel(Text(PreviewStrings.format(.syntaxStyleControl,
             arguments: [PreviewStrings.text(roleKey(role)), PreviewStrings.text(key)], locale: locale)))
     }

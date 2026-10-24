@@ -32,6 +32,8 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
     private let summaryLabel = NSTextField(wrappingLabelWithString: "")
     private let failureLabel = NSTextField(wrappingLabelWithString: "")
     private let controls = NSStackView()
+    private var controlRows: [NSStackView] = []
+    private var rowWidthConstraints: [NSLayoutConstraint] = []
     private var buttons: [GeometryControl: NSButton] = [:]
     private var backend: (any GeometryRenderingBackend)?
     private var presentation: GeometryPresentation?
@@ -57,6 +59,7 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         controls.orientation = .vertical
         controls.spacing = 6
         controls.alignment = .leading
+        controls.distribution = .fillEqually
         for rowControls in [[GeometryControl.fit, .reset, .zoomIn, .zoomOut], [.front, .side, .top, .upAxis]] {
             let row = NSStackView()
             row.orientation = .horizontal; row.spacing = 6; row.distribution = .fillEqually
@@ -71,9 +74,13 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
                 row.addArrangedSubview(button)
             }
             controls.addArrangedSubview(row)
-            row.widthAnchor.constraint(equalTo: controls.widthAnchor).isActive = true
+            controlRows.append(row)
+            let widthConstraint = row.widthAnchor.constraint(equalTo: controls.widthAnchor)
+            widthConstraint.isActive = true
+            rowWidthConstraints.append(widthConstraint)
         }
         summaryLabel.font = .preferredFont(forTextStyle: .caption1)
+        summaryLabel.isSelectable = true
         summaryLabel.setContentHuggingPriority(.required, for: .vertical)
         failureLabel.alignment = .center
         failureLabel.isHidden = true
@@ -129,6 +136,7 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         localizeControls()
         summaryLabel.stringValue = Self.summaryLines(for: presentation, locale: locale).joined(separator: "\n")
         viewport.setAccessibilityValue(summaryLabel.stringValue)
+        updateChromeForWidth(bounds.width)
         updateAppearance()
         onCommandAvailabilityChanged?()
     }
@@ -250,6 +258,7 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         suspend()
         presentation = nil; presentationID = nil
         summaryLabel.stringValue = ""
+        summaryLabel.toolTip = nil
         viewport.setAccessibilityValue("")
         for button in buttons.values { button.isEnabled = false }
     }
@@ -295,12 +304,36 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
     }
 
     override func layout() {
+        updateChromeForWidth(bounds.width)
         super.layout()
         if needsInitialFit, viewport.bounds.width > 0, viewport.bounds.height > 0 {
             camera.fit(viewport: viewport.bounds.size)
             needsInitialFit = false
         }
         updateBackend()
+    }
+
+    private func updateChromeForWidth(_ width: CGFloat) {
+        guard width > 0 else { return }
+        if width >= 560 {
+            if controls.orientation != .horizontal {
+                NSLayoutConstraint.deactivate(rowWidthConstraints)
+                controls.orientation = .horizontal
+                controls.alignment = .centerY
+            }
+        } else if controls.orientation != .vertical {
+            controls.orientation = .vertical
+            controls.alignment = .leading
+            NSLayoutConstraint.activate(rowWidthConstraints)
+        }
+        let isCompact = width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis
+        for button in buttons.values {
+            button.controlSize = isCompact ? .small : .regular
+            button.font = .systemFont(ofSize: isCompact ? NSFont.smallSystemFontSize : 13)
+        }
+        summaryLabel.maximumNumberOfLines = isCompact ? 2 : 0
+        summaryLabel.lineBreakMode = isCompact ? .byTruncatingTail : .byWordWrapping
+        summaryLabel.toolTip = isCompact && !summaryLabel.stringValue.isEmpty ? summaryLabel.stringValue : nil
     }
 
     override func viewDidMoveToWindow() {
@@ -395,6 +428,39 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
     private func announceFailure() {
         guard failure != nil else { return }
         announcer?.announce(failureLabel.stringValue, from: viewport)
+    }
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        contextMenu()
+    }
+
+    func contextMenu() -> NSMenu? {
+        guard presentation != nil, failure == nil else { return nil }
+        let menu = NSMenu(title: "")
+        menu.autoenablesItems = false
+        let primary: [GeometryControl] = [.fit, .reset, .zoomIn, .zoomOut]
+        let presets: [GeometryControl] = [.front, .side, .top, .upAxis]
+        for control in primary {
+            menu.addItem(menuItem(for: control))
+        }
+        menu.addItem(.separator())
+        for control in presets {
+            menu.addItem(menuItem(for: control))
+        }
+        return menu
+    }
+
+    private func menuItem(for control: GeometryControl) -> NSMenuItem {
+        let title = buttons[control]?.title ?? PreviewStrings.text(control.title)
+        let item = NSMenuItem(title: title, action: #selector(activateMenuControl(_:)), keyEquivalent: "")
+        item.tag = control.rawValue
+        item.target = self
+        return item
+    }
+
+    @objc private func activateMenuControl(_ sender: NSMenuItem) {
+        guard let control = GeometryControl(rawValue: sender.tag) else { return }
+        navigate(control.action)
     }
 
     @objc private func activateControl(_ sender: NSButton) {
@@ -592,6 +658,10 @@ private final class GeometryInteractionView: NSView {
     override func mouseDown(with event: NSEvent) {
         lastDragLocation = convert(event.locationInWindow, from: nil)
         window?.makeFirstResponder(self)
+        if event.clickCount == 2 {
+            onNavigation?(.fit)
+            return
+        }
     }
     override func rightMouseDown(with event: NSEvent) { mouseDown(with: event) }
     override func mouseDragged(with event: NSEvent) {
@@ -626,6 +696,9 @@ private final class GeometryInteractionView: NSView {
         }
         let delta: SIMD2<Float>?
         switch event.specialKey {
+        case .home:
+            onNavigation?(.fit)
+            return
         case .leftArrow: delta = SIMD2<Float>(-12, 0)
         case .rightArrow: delta = SIMD2<Float>(12, 0)
         case .upArrow: delta = SIMD2<Float>(0, -12)

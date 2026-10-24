@@ -53,6 +53,7 @@ final class NativeListingTreeView: NSView, SafeModeContentView, PreviewCopyRepor
     /// The palette of the last display: icons are drawn in its muted ink, never a system ink that ignores the scheme.
     private var palette: NativeTextPalette?
     private var locale = Locale.current
+    private var density: PreviewChrome.Density = .regular
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -67,18 +68,22 @@ final class NativeListingTreeView: NSView, SafeModeContentView, PreviewCopyRepor
         outlineView.usesAlternatingRowBackgroundColors = true
         outlineView.allowsMultipleSelection = true
         outlineView.allowsColumnReordering = false
-        outlineView.columnAutoresizingStyle = .firstColumnOnlyAutoresizingStyle
+        outlineView.columnAutoresizingStyle = .noColumnAutoresizing
         outlineView.autosaveExpandedItems = false
         for (kind, width) in [(Column.name, CGFloat(320)), (.items, 80), (.size, 120), (.modified, 170)] {
             let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(kind.rawValue))
             column.width = width
             column.minWidth = kind == .name ? 120 : 56
             column.resizingMask = kind == .name ? [.autoresizingMask, .userResizingMask] : .userResizingMask
+            column.headerCell.alignment = (kind == .items || kind == .size) ? .right : .natural
             outlineView.addTableColumn(column)
             if kind == .name { outlineView.outlineTableColumn = column }
         }
+        outlineView.target = self
+        outlineView.doubleAction = #selector(doubleClickRow(_:))
         outlineView.safeCopy = { [weak self] in self?.selectedSafeText() ?? "" }
         outlineView.didCopy = { [weak self] event in self?.reportCopy(event) }
+        outlineView.contextMenuProvider = { [weak self] row in self?.contextMenu(forRow: row) }
         stack.orientation = .vertical
         stack.alignment = .width
         stack.distribution = .fill
@@ -96,6 +101,76 @@ final class NativeListingTreeView: NSView, SafeModeContentView, PreviewCopyRepor
     }
 
     required init?(coder: NSCoder) { nil }
+
+    @objc private func doubleClickRow(_ sender: Any?) {
+        let row = outlineView.clickedRow >= 0 ? outlineView.clickedRow : outlineView.selectedRow
+        toggleExpansion(atRow: row)
+    }
+
+    @discardableResult
+    func toggleExpansion(atRow row: Int) -> Bool {
+        guard row >= 0, row < outlineView.numberOfRows,
+              let item = outlineView.item(atRow: row) as? Item,
+              !item.children.isEmpty else { return false }
+        if outlineView.isItemExpanded(item) {
+            outlineView.collapseItem(item)
+        } else {
+            outlineView.expandItem(item)
+        }
+        return true
+    }
+
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+
+    override func layout() {
+        updateColumnsForWidth(bounds.width)
+        super.layout()
+    }
+
+    private func updateColumnsForWidth(_ width: CGFloat) {
+        guard width > 0 else { return }
+        let next = PreviewChrome.density(forWidth: width, previous: density)
+        if next == .compact {
+            for column in outlineView.tableColumns {
+                guard let kind = Column(rawValue: column.identifier.rawValue) else { continue }
+                switch kind {
+                case .name:
+                    column.isHidden = false
+                    column.minWidth = 100
+                    column.width = max(100, width - 84)
+                case .size:
+                    column.isHidden = false
+                    column.minWidth = 64
+                    column.width = 76
+                case .items, .modified:
+                    column.isHidden = true
+                }
+            }
+        } else if density == .compact {
+            for column in outlineView.tableColumns {
+                guard let kind = Column(rawValue: column.identifier.rawValue) else { continue }
+                column.isHidden = false
+                switch kind {
+                case .name:
+                    column.minWidth = 140
+                    column.width = 320
+                case .items:
+                    column.minWidth = 64
+                    column.width = 80
+                case .size:
+                    column.minWidth = 80
+                    column.width = 120
+                case .modified:
+                    column.minWidth = 120
+                    column.width = 170
+                }
+            }
+        }
+        density = next
+    }
 
     // MARK: SafeModeContentView
 
@@ -204,6 +279,7 @@ final class NativeListingTreeView: NSView, SafeModeContentView, PreviewCopyRepor
         guard let stylePass else { return }
         let node = item.node
         cell.textField?.attributedStringValue = NSAttributedString(string: node.name, attributes: stylePass.baseAttributes)
+        cell.textField?.alignment = .natural
         cell.textField?.toolTip = node.path == node.name ? nil : node.path
         let kind = SafeListingFormatting.kindLabel(node.kind)
         cell.imageView?.image = NSImage(systemSymbolName: Self.symbol(for: node).rawValue, accessibilityDescription: kind)
@@ -216,6 +292,7 @@ final class NativeListingTreeView: NSView, SafeModeContentView, PreviewCopyRepor
         guard let stylePass else { return }
         let text = valueText(item.node, column: column)
         field.attributedStringValue = NSAttributedString(string: text, attributes: stylePass.baseAttributes)
+        field.alignment = (column == .items || column == .size) ? .right : .natural
         field.setAccessibilityLabel(Self.title(of: column, usesUTC: tree?.usesUTC ?? false))
     }
 
@@ -271,6 +348,66 @@ final class NativeListingTreeView: NSView, SafeModeContentView, PreviewCopyRepor
 
     // MARK: Copy
 
+    func contextMenu(forRow row: Int) -> NSMenu? {
+        guard let item = outlineView.item(atRow: row) as? Item else { return nil }
+        let menu = NSMenu(title: "")
+        menu.autoenablesItems = false
+        let copyPath = NSMenuItem(title: PreviewStrings.text(.interactionCopyPath),
+                                  action: #selector(copyClickedPath(_:)), keyEquivalent: "")
+        copyPath.target = self
+        copyPath.representedObject = item
+        menu.addItem(copyPath)
+        let copyRow = NSMenuItem(title: PreviewStrings.text(.interactionCopy),
+                                 action: #selector(copySelectedRowsFromMenu(_:)), keyEquivalent: "")
+        copyRow.target = self
+        menu.addItem(copyRow)
+        let copyAll = NSMenuItem(title: PreviewStrings.text(.interactionCopyAll),
+                                 action: #selector(copyAllShownRowsFromMenu(_:)), keyEquivalent: "")
+        copyAll.target = self
+        menu.addItem(copyAll)
+        return menu
+    }
+
+    @objc private func copyClickedPath(_ sender: NSMenuItem) {
+        guard let item = sender.representedObject as? Item else { return }
+        let copied = outlineView.sanitizedCopyText(Self.singleLine(item.node.path))
+        guard !copied.text.isEmpty, outlineView.selectionWriter(copied.text, pasteboard) else { return }
+        reportCopy(.path.removingTags(copied.removedTagScalarCount))
+    }
+
+    @objc private func copySelectedRowsFromMenu(_ sender: NSMenuItem) {
+        outlineView.copy(nil)
+    }
+
+    @objc private func copyAllShownRowsFromMenu(_ sender: NSMenuItem) {
+        let count = outlineView.numberOfRows
+        guard count > 0 else { return }
+        let text = allShownSafeText()
+        guard !text.isEmpty else { return }
+        let copied = outlineView.sanitizedCopyText(text)
+        guard outlineView.selectionWriter(copied.text, pasteboard) else { return }
+        reportCopy(.rows(count).removingTags(copied.removedTagScalarCount))
+    }
+
+    func allShownSafeText() -> String {
+        let count = outlineView.numberOfRows
+        guard count > 0 else { return "" }
+        let header = [Column.name, .items, .size, .modified]
+            .map { Self.title(of: $0, usesUTC: tree?.usesUTC ?? false) }
+            .joined(separator: "\t")
+        let rows = (0..<count).compactMap { row -> String? in
+            guard let item = outlineView.item(atRow: row) as? Item else { return nil }
+            let node = item.node
+            return [
+                Self.singleLine(node.name),
+                Self.singleLine(valueText(node, column: .items)),
+                Self.singleLine(valueText(node, column: .size)),
+                Self.singleLine(valueText(node, column: .modified))
+            ].joined(separator: "\t")
+        }
+        return ([header] + rows).joined(separator: "\n")
+    }
+
     /// One confirmation per copy: through the preview when it listens, otherwise spoken here.
     private func reportCopy(_ event: PreviewCopyEvent) {
         if let copyHandler {
@@ -305,13 +442,17 @@ final class SafeCopyOutlineTreeView: NSOutlineView, PreviewSafeCopying {
     /// Tests substitute a private pasteboard so they never touch the user's clipboard.
     var pasteboard = NSPasteboard.general
     var tagCopyPolicy: (() -> Bool)?
+    var contextMenuProvider: ((Int) -> NSMenu?)?
+    var selectionWriter: (String, NSPasteboard) -> Bool = { text, board in
+        board.clearContents()
+        return board.setString(text, forType: .string)
+    }
 
     @objc func copy(_ sender: Any?) {
         let text = safeCopy?() ?? ""
         guard !text.isEmpty else { return }
         let copied = sanitizedCopyText(text)
-        pasteboard.clearContents()
-        guard pasteboard.setString(copied.text, forType: .string) else { return }
+        guard selectionWriter(copied.text, pasteboard) else { return }
         didCopy?(.rows(selectedRowIndexes.count).removingTags(copied.removedTagScalarCount))
     }
 
@@ -322,5 +463,28 @@ final class SafeCopyOutlineTreeView: NSOutlineView, PreviewSafeCopying {
             return true
         }
         return super.performKeyEquivalent(with: event)
+    }
+
+    override func moveToBeginningOfDocument(_ sender: Any?) {
+        guard numberOfRows > 0 else { return }
+        selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        scrollRowToVisible(0)
+    }
+
+    override func moveToEndOfDocument(_ sender: Any?) {
+        guard numberOfRows > 0 else { return }
+        let last = numberOfRows - 1
+        selectRowIndexes(IndexSet(integer: last), byExtendingSelection: false)
+        scrollRowToVisible(last)
+    }
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let point = convert(event.locationInWindow, from: nil)
+        let clickedRow = row(at: point)
+        guard clickedRow >= 0 else { return nil }
+        if !selectedRowIndexes.contains(clickedRow) {
+            selectRowIndexes(IndexSet(integer: clickedRow), byExtendingSelection: false)
+        }
+        return contextMenuProvider?(clickedRow)
     }
 }

@@ -37,6 +37,7 @@ struct NativePlotPreviewViewTests {
         let extent = NativePlotPreviewView.extentText(plot, locale: .current)
         #expect(view.captionLabel.stringValue.hasPrefix(extent))
         #expect(view.captionLabel.stringValue == extent)
+        #expect(view.captionLabel.isSelectable == true)
         #expect(view.canvas.accessibilityRole() == .image)
         #expect(view.canvas.isAccessibilityElement())
         #expect(view.canvas.accessibilityLabel() == PreviewStrings.format(.dataPlotAccessibility, arguments: [Int64(1), Int64(1)], locale: .current))
@@ -124,5 +125,37 @@ struct NativePlotPreviewViewTests {
         #expect(SafeModeViewRegistry.makeView(for: .plot) is NativePlotPreviewView)
         #expect(SafeModeViewRegistry.makeView(for: .summary) == nil)
         #expect(SafeModeViewRegistry.makeView(for: .table) == nil)
+    }
+
+    @Test func compactFinderSidebarTruncatesExtentCaptionToOneLineWithTooltipAndRestoresWhenWide() throws {
+        let view = NativePlotPreviewView(frame: NSRect(x: 0, y: 0, width: 240, height: 300))
+        view.display(modes(paths: [walk]), mode: .plot, style: style())
+        view.layoutSubtreeIfNeeded()
+        #expect(!view.captionLabel.stringValue.isEmpty)
+        #expect(view.captionLabel.maximumNumberOfLines == 1)
+        #expect(view.captionLabel.lineBreakMode == .byTruncatingTail)
+        #expect(view.captionLabel.toolTip == view.captionLabel.stringValue)
+
+        view.frame = NSRect(x: 0, y: 0, width: 500, height: 300)
+        view.layoutSubtreeIfNeeded()
+        #expect(view.captionLabel.maximumNumberOfLines == 0)
+        #expect(view.captionLabel.lineBreakMode == .byWordWrapping)
+        #expect(view.captionLabel.toolTip == nil)
+
+        #expect(!view.respondsToTextZoom)
+        #expect(view.zoomDecision(for: .zoomIn) == false)
+        #expect(view.keyboardFocusTarget === view)
+
+        let pasteboard = NSPasteboard.withUniqueName()
+        defer { pasteboard.releaseGlobally() }
+        view.pasteboard = pasteboard
+        var copiedEvents: [PreviewCopyEvent] = []
+        view.copyHandler = { copiedEvents.append($0) }
+        let menu = try #require(view.contextMenu())
+        #expect(menu.items.map(\.title) == [PreviewStrings.text(.interactionCopy)])
+        let copyItem = try #require(menu.items.first)
+        _ = copyItem.target?.perform(copyItem.action, with: copyItem)
+        #expect(pasteboard.string(forType: .string) == view.captionLabel.stringValue)
+        #expect(copiedEvents == [.text])
     }
 }

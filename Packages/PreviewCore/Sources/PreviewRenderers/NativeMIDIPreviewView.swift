@@ -8,6 +8,8 @@ public final class NativeMIDIPreviewView: NSView, PreviewAnnouncing {
     private let positionSlider = NSSlider(value: 0, minValue: 0, maxValue: 1, target: nil, action: nil)
     private let timeLabel = NSTextField(labelWithString: "")
     private let statusLabel = NSTextField(wrappingLabelWithString: "")
+    private let controls = NSStackView()
+    private let content = NSStackView()
     private let player = NativeMIDIPlayback()
     private var duration: Double = 0
     /// What the view says aloud: a playback failure, which otherwise changes the status line silently. The preview
@@ -22,22 +24,27 @@ public final class NativeMIDIPreviewView: NSView, PreviewAnnouncing {
         playButton.target = self
         playButton.action = #selector(togglePlayback)
         playButton.title = PreviewStrings.text(.midiPlay)
+        playButton.toolTip = playButton.title
         playButton.isEnabled = false
         playButton.setAccessibilityHelp(PreviewStrings.text(.midiPlaybackHelp))
         positionSlider.target = self
         positionSlider.action = #selector(seek)
         positionSlider.isContinuous = true
         positionSlider.isEnabled = false
+        positionSlider.userInterfaceLayoutDirection = .leftToRight
         positionSlider.setAccessibilityLabel(PreviewStrings.text(.midiPosition))
+        positionSlider.toolTip = PreviewStrings.text(.midiPosition)
         timeLabel.font = .monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
+        timeLabel.userInterfaceLayoutDirection = .leftToRight
         timeLabel.setAccessibilityLabel(PreviewStrings.text(.midiDuration))
         refreshInk()
         statusLabel.stringValue = PreviewStrings.text(.midiNoAutoplay)
-        let controls = NSStackView(views: [playButton, positionSlider, timeLabel])
+        statusLabel.isSelectable = true
+        controls.setViews([playButton, positionSlider, timeLabel], in: .leading)
         controls.orientation = .horizontal
         controls.alignment = .centerY
         controls.spacing = 10
-        let content = NSStackView(views: [controls, statusLabel])
+        content.setViews([controls, statusLabel], in: .leading)
         content.orientation = .vertical
         content.alignment = .leading
         content.spacing = 8
@@ -56,17 +63,43 @@ public final class NativeMIDIPreviewView: NSView, PreviewAnnouncing {
             guard let self else { return }
             let message = PreviewStrings.text(failure == .soundBankUnavailable ? .midiSoundBankUnavailable : .midiPlaybackUnavailable)
             statusLabel.stringValue = message
+            if statusLabel.maximumNumberOfLines == 1 {
+                statusLabel.toolTip = message.isEmpty ? nil : message
+            }
             announcer?.announce(message, from: self)
         }
+        updateChromeForWidth(frameRect.width)
     }
     public required init?(coder: NSCoder) { nil }
     isolated deinit { player.clear() }
+    public override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+    public override func layout() {
+        updateChromeForWidth(bounds.width)
+        super.layout()
+    }
+    private func updateChromeForWidth(_ width: CGFloat) {
+        guard width > 0 else { return }
+        let isCompact = width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis
+        playButton.controlSize = isCompact ? .small : .regular
+        positionSlider.controlSize = isCompact ? .small : .regular
+        controls.spacing = isCompact ? 6 : 10
+        content.spacing = isCompact ? 4 : 8
+        statusLabel.maximumNumberOfLines = isCompact ? 1 : 0
+        statusLabel.lineBreakMode = isCompact ? .byTruncatingTail : .byWordWrapping
+        statusLabel.toolTip = isCompact && !statusLabel.stringValue.isEmpty ? statusLabel.stringValue : nil
+    }
     public func show(_ presentation: MIDIPresentation) {
         duration = presentation.durationSeconds
         positionSlider.maxValue = max(0.001, duration)
         positionSlider.isEnabled = duration > 0
         playButton.isEnabled = duration > 0
         statusLabel.stringValue = PreviewStrings.text(.midiNoAutoplay)
+        if statusLabel.maximumNumberOfLines == 1 {
+            statusLabel.toolTip = statusLabel.stringValue.isEmpty ? nil : statusLabel.stringValue
+        }
         player.load(presentation)
         update(seconds: 0, playing: false)
     }
@@ -107,8 +140,10 @@ public final class NativeMIDIPreviewView: NSView, PreviewAnnouncing {
     @objc private func seek() { player.seek(to: positionSlider.doubleValue) }
     private func update(seconds: Double, playing: Bool) {
         playButton.title = PreviewStrings.text(playing ? .midiPause : .midiPlay)
+        playButton.toolTip = playButton.title
         positionSlider.doubleValue = seconds
         timeLabel.stringValue = PreviewStrings.format(.midiPositionValue, arguments: [durationText(seconds), durationText(duration)])
+        timeLabel.toolTip = timeLabel.stringValue.isEmpty ? nil : timeLabel.stringValue
         positionSlider.setAccessibilityValueDescription(durationText(seconds))
     }
     private func durationText(_ value: Double) -> String {

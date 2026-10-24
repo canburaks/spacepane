@@ -150,8 +150,29 @@ final class NativeStateView: NSView {
     var actionTitle: String { actionButton.title }
     var isActionVisible: Bool { !actionButton.isHidden }
     var isSpinnerRunning: Bool { spinner.isRunning }
+    var actionButtonControlSize: NSControl.ControlSize { actionButton.controlSize }
+    var stackSpacing: CGFloat { stack.spacing }
 
     // MARK: Drawing
+
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        needsLayout = true
+    }
+
+    override func layout() {
+        updateChromeForWidth(bounds.width)
+        super.layout()
+    }
+
+    private func updateChromeForWidth(_ width: CGFloat) {
+        guard width > 0 else { return }
+        let isCompact = width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis
+        stack.spacing = isCompact ? PreviewChrome.rowGap : PreviewChrome.gap
+        actionButton.controlSize = isCompact ? .small : .regular
+        let pointSize: CGFloat = isCompact ? 22 : PreviewChrome.stateSymbolPointSize
+        symbolView.symbolConfiguration = NSImage.SymbolConfiguration(pointSize: pointSize, weight: .regular)
+    }
 
     private func render() {
         guard let content, isRevealed else {
@@ -165,7 +186,8 @@ final class NativeStateView: NSView {
         spinner.setRunning(isLoading)
         let image = Symbol.name(for: content.kind).flatMap { NSImage(systemSymbolName: $0, accessibilityDescription: nil) }
         symbolView.image = image
-        symbolView.symbolConfiguration = NSImage.SymbolConfiguration(pointSize: PreviewChrome.stateSymbolPointSize,
+        let isCompact = bounds.width > 0 && bounds.width < PreviewChrome.compactWidth - PreviewChrome.compactHysteresis
+        symbolView.symbolConfiguration = NSImage.SymbolConfiguration(pointSize: isCompact ? 22 : PreviewChrome.stateSymbolPointSize,
                                                                      weight: .regular)
         symbolView.isHidden = image == nil
         titleLabel.stringValue = content.title
@@ -186,6 +208,7 @@ final class NativeStateView: NSView {
         symbolView.contentTintColor = palette.muted
         // The title and body read as one sentence, like a finding row.
         setAccessibilityLabel([content.title, content.body].filter { !$0.isEmpty }.joined(separator: ". "))
+        updateChromeForWidth(bounds.width)
     }
 
     private static func title(for action: StateAction) -> String {

@@ -147,6 +147,31 @@ struct NativeGeometryPreviewTests {
         let front = try #require(descendants(of: view).compactMap { $0 as? NSButton }.first { $0.title == PreviewStrings.text(.cadFront) })
         front.performClick(nil)
         #expect(view.camera.yaw == 0 && view.camera.pitch == 0)
+        let summaryField = try #require(descendants(of: NSTextField.self, in: view).first { $0.stringValue == view.accessibilitySummary })
+        #expect(summaryField.isSelectable)
+        let fittedDistance = view.camera.distance
+        view.navigate(.zoom(0.8))
+        #expect(view.camera.distance != fittedDistance)
+        let doubleClick = try #require(NSEvent.mouseEvent(with: .leftMouseDown, location: NSPoint(x: 40, y: 40),
+            modifierFlags: [], timestamp: 0, windowNumber: focusWindow.windowNumber, context: nil, eventNumber: 1, clickCount: 2, pressure: 1))
+        viewport.mouseDown(with: doubleClick)
+        #expect(view.camera.distance == fittedDistance)
+        view.navigate(.zoom(0.8))
+        #expect(view.camera.distance != fittedDistance)
+        let homeKey = try #require(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0,
+            windowNumber: 0, context: nil, characters: String(UnicodeScalar(NSHomeFunctionKey)!),
+            charactersIgnoringModifiers: String(UnicodeScalar(NSHomeFunctionKey)!), isARepeat: false, keyCode: 115))
+        viewport.keyDown(with: homeKey)
+        #expect(view.camera.distance == fittedDistance)
+        let menu = try #require(view.contextMenu())
+        #expect(menu.items.count == 9)
+        #expect(menu.items[4].isSeparatorItem)
+        view.navigate(.zoom(0.8))
+        #expect(view.camera.distance != fittedDistance)
+        _ = menu.items[0].target?.perform(menu.items[0].action, with: menu.items[0])
+        #expect(view.camera.distance == fittedDistance)
+        _ = menu.items[7].target?.perform(menu.items[7].action, with: menu.items[7])
+        #expect(view.camera.yaw == 0 && abs(view.camera.pitch - (.pi / 2 - 0.01)) < 0.0001)
 
         let host = NativePreviewView(frame: .zero)
         let safe = TextPresentation(formatID: .plainText, text: "safe source", lineCount: 1, byteCount: 11, encoding: .utf8, redactionCount: 0)

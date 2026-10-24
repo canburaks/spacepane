@@ -88,6 +88,7 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
         tableView.doubleAction = #selector(rowClicked)
         tableView.onActivate = { [weak self] row in self?.activate(row: row) }
         tableView.safeCopy = { [weak self] in self?.selectedTitles() ?? "" }
+        tableView.allSafeCopy = { [weak self] in self?.allTitles() ?? "" }
         scrollView.documentView = tableView
         scrollView.hasVerticalScroller = true
         scrollView.autohidesScrollers = true
@@ -237,6 +238,7 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
         ])
         cell.field.maximumNumberOfLines = Self.maximumTitleLines
         cell.setIndent(leadingInset(for: heading))
+        cell.field.toolTip = heading.title.utf8.count > 24 ? heading.title : nil
         cell.field.setAccessibilityLabel(PreviewStrings.format(.markupContentsItem,
             arguments: [Int64(heading.level), heading.title], locale: .current))
         cell.field.setAccessibilityHelp(PreviewStrings.text(.markupContentsHelp))
@@ -272,6 +274,12 @@ final class MarkupContentsView: NSView, SafeModeContentView, PreviewAnnouncing, 
 
     private func selectedTitles() -> String {
         tableView.selectedRowIndexes.compactMap { headings.indices.contains($0) ? headings[$0].title : nil }.joined(separator: "\n")
+    }
+
+    private func allTitles() -> String {
+        headings
+            .map { String(repeating: "  ", count: max(0, $0.level - 1)) + $0.title }
+            .joined(separator: "\n")
     }
 }
 
@@ -355,9 +363,14 @@ final class ContentsCell: NSTableCellView {
 final class ContentsTableView: NSTableView, PreviewSafeCopying {
     var onActivate: ((Int) -> Void)?
     var safeCopy: (() -> String)?
+    var allSafeCopy: (() -> String)?
     /// Tests substitute a private pasteboard so they never touch the user's clipboard.
     var pasteboard = NSPasteboard.general
     var tagCopyPolicy: (() -> Bool)?
+    var selectionWriter: (String, NSPasteboard) -> Bool = { text, board in
+        board.clearContents()
+        return board.setString(text, forType: .string)
+    }
     /// Speaks "Find is not available here" when Find is pressed while this list has focus. A list made on its own
     /// keeps this one; the hosting preview replaces it with its own.
     var announcer: PreviewAnnouncer? = PreviewAnnouncer()
@@ -378,13 +391,58 @@ final class ContentsTableView: NSTableView, PreviewSafeCopying {
         super.keyDown(with: event)
     }
 
+    override func moveToBeginningOfDocument(_ sender: Any?) {
+        guard numberOfRows > 0 else { return }
+        selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        scrollRowToVisible(0)
+    }
+
+    override func moveToEndOfDocument(_ sender: Any?) {
+        guard numberOfRows > 0 else { return }
+        let last = numberOfRows - 1
+        selectRowIndexes(IndexSet(integer: last), byExtendingSelection: false)
+        scrollRowToVisible(last)
+    }
+
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let point = convert(event.locationInWindow, from: nil)
+        let clickedRow = row(at: point)
+        guard clickedRow >= 0 else { return nil }
+        if !selectedRowIndexes.contains(clickedRow) {
+            selectRowIndexes(IndexSet(integer: clickedRow), byExtendingSelection: false)
+        }
+        return contextMenu(forRow: clickedRow)
+    }
+
+    func contextMenu(forRow row: Int) -> NSMenu? {
+        guard row >= 0, row < numberOfRows else { return nil }
+        let menu = NSMenu(title: "")
+        menu.autoenablesItems = false
+        let item = NSMenuItem(title: PreviewStrings.text(.interactionCopy), action: #selector(copy(_:)), keyEquivalent: "")
+        item.target = self
+        menu.addItem(item)
+        let copyAll = NSMenuItem(title: PreviewStrings.text(.interactionCopyAll), action: #selector(copyAllHeadings(_:)), keyEquivalent: "")
+        copyAll.target = self
+        menu.addItem(copyAll)
+        return menu
+    }
+
     @objc func copy(_ sender: Any?) {
         let text = safeCopy?() ?? ""
         guard !text.isEmpty else { return }
         let copied = sanitizedCopyText(text)
-        pasteboard.clearContents()
-        guard pasteboard.setString(copied.text, forType: .string) else { return }
-        let event = PreviewCopyEvent.rows(selectedRowIndexes.count).removingTags(copied.removedTagScalarCount)
+        guard selectionWriter(copied.text, pasteboard) else { return }
+        reportCopy(PreviewCopyEvent.rows(selectedRowIndexes.count).removingTags(copied.removedTagScalarCount))
+    }
+
+    @objc func copyAllHeadings(_ sender: Any?) {
+        guard let text = allSafeCopy?(), !text.isEmpty else { return }
+        let copied = sanitizedCopyText(text)
+        guard selectionWriter(copied.text, pasteboard) else { return }
+        reportCopy(.text.removingTags(copied.removedTagScalarCount))
+    }
+
+    private func reportCopy(_ event: PreviewCopyEvent) {
         if let copyHandler {
             copyHandler(event)
         } else {

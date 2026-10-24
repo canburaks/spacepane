@@ -130,6 +130,61 @@ struct NativeRendererInteractionTests {
         #expect(pasteboard.string(forType: .string) == "••••")
     }
 
+    @Test func outlineAdaptsKeyColumnWidthForCompactSidebarAndStylesScalarValueRolesWithLongValueTooltips() throws {
+        let view = NativeOutlinePreviewView(frame: NSRect(x: 0, y: 0, width: 240, height: 300))
+        let longValue = String(repeating: "a", count: 64)
+        let nodes: [SafeOutlineNode] = [
+            .init(id: 0, name: "short", value: "safe"),
+            .init(id: 1, name: "long", value: longValue)
+        ]
+        view.display(nodes, typography: .init(), palette: palette(), syntaxStyle: .init(), locale: .current)
+        view.layoutSubtreeIfNeeded()
+        let outline = try #require(view.documentView as? NSOutlineView)
+        let keyColumn = try #require(outline.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier("key")))
+        let valueColumn = try #require(outline.tableColumn(withIdentifier: NSUserInterfaceItemIdentifier("value")))
+        #expect(keyColumn.width >= 80 && keyColumn.width <= 140)
+
+        view.setFrameSize(NSSize(width: 600, height: 300))
+        view.layoutSubtreeIfNeeded()
+        #expect(keyColumn.width == 220)
+
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 0, name: "secret", value: "••••")) == .comment)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 1, name: "container", value: "{…}", children: [
+            .init(id: 2, name: "child", value: "1")
+        ])) == .comment)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 3, name: "flag", value: "true")) == .keyword)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 4, name: "flag", value: "false")) == .keyword)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 5, name: "empty", value: "null")) == .keyword)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 6, name: "count", value: "42")) == .number)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 7, name: "delta", value: "-3.14")) == .number)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 8, name: "zip", value: "0123")) == .string)
+        #expect(NativeOutlinePreviewView.valueRole(for: .init(id: 9, name: "text", value: "safe")) == .string)
+        #expect(NativeOutlinePreviewView.displayedValueText(for: .init(id: 1, name: "obj", value: "{…}", children: [.init(id: 2, name: "a", value: "1"), .init(id: 3, name: "b", value: "2")]), locale: Locale(identifier: "en_US")) == "{…} (2)")
+        #expect(NativeOutlinePreviewView.displayedValueText(for: .init(id: 1, name: "arr", value: "[…]", children: [.init(id: 2, name: "[0]", value: "x")]), locale: Locale(identifier: "en_US")) == "[…] (1)")
+        #expect(NativeOutlinePreviewView.displayedValueText(for: .init(id: 1, name: "leaf", value: "{…}"), locale: Locale(identifier: "en_US")) == "{…}")
+
+        let shortItem = try #require(outline.item(atRow: 0))
+        let longItem = try #require(outline.item(atRow: 1))
+        let shortField = try #require(view.outlineView(outline, viewFor: valueColumn, item: shortItem) as? NSTextField)
+        let longField = try #require(view.outlineView(outline, viewFor: valueColumn, item: longItem) as? NSTextField)
+        #expect(shortField.toolTip == nil)
+        #expect(longField.toolTip == longValue)
+
+        #expect(NativeOutlinePreviewView.shouldShowHoverTooltip(for: "authentication_config", isKey: true, density: .compact) == true)
+        #expect(NativeOutlinePreviewView.shouldShowHoverTooltip(for: "authentication_config", isKey: true, density: .regular) == false)
+        #expect(NativeOutlinePreviewView.shouldShowHoverTooltip(for: "id", isKey: true, density: .compact) == false)
+
+        view.display([.init(id: 10, name: "container", value: "{…}", children: [
+            .init(id: 11, name: "first", value: "1"),
+            .init(id: 12, name: "second", value: "2")
+        ])], typography: .init(), palette: palette(), syntaxStyle: .init(), locale: .current)
+        #expect(outline.numberOfRows == 3)
+        #expect(view.toggleExpansion(atRow: 0))
+        #expect(outline.numberOfRows == 1)
+        #expect(view.toggleExpansion(atRow: 0))
+        #expect(outline.numberOfRows == 3)
+    }
+
     private func palette() -> NativeTextPalette {
         .init(theme: .system, isDark: false, increasedContrast: false)
     }

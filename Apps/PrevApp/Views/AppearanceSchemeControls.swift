@@ -65,6 +65,7 @@ struct AppearanceSchemeControls: View {
             .labelsHidden()
             .pickerStyle(.menu)
             .fixedSize()
+            .help(PreviewStrings.text(hint))
             .accessibilityLabel(Text(name))
             .accessibilityHint(Text(PreviewStrings.text(hint)))
         }
