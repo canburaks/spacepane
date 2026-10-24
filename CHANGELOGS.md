@@ -2,6 +2,14 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-24 — Build 10 uploaded and submitted (release)
+
+Owner instruction: "Go and do everything."
+
+- Archive and upload: `--archive` passed the archive checker for 1.1.0 (10) (build 9's archive kept as `.build/archive/SpacePane-1.1.0-build9.xcarchive`); in the three executables the only string matching `cad`, `iges`, `AP2xx`, `Open CASCADE` or `developer mode` is `JSONCAdapter`. Observed in the launched build 10: the Theme page's STL sample shows Fit Model, Reset View, Front, Side, Top, Up Axis and the summary lines as text, not keys. `--export` (Apple Distribution) and the keyless upload: "Upload succeeded" at 18:24; build 10 "Ready to Submit" in TestFlight.
+- App Store Connect: the owner had submitted build 9 at 11:33 with the Retina screenshots `08-file-types.png` and `09-theme.png` added (seven screenshots). While it waited, the corrected 3,986-character description (83 languages and the other fixes) was saved. The build 9 submission was then cancelled, build 10 selected, the build 10 notes pasted, release left on Manual, and the version submitted at 18:34: **Waiting for Review**.
+- Note: App Store Connect lists five removed or cancelled 1.1.0 submissions (2026-10-13, 10-15, 10-17, 10-24 10:12 and 11:33). No further cancellation is planned.
+
 ## 2026-10-24 — Build 10: no CAD name left in the product (implementation and validation)
 
 Owner request after a Guideline 5.6 audit of build 9 (no violation, one risk): "Get rid of all of them." Decision 031, amendment of the same day, records the scope.
