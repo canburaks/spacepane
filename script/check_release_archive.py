@@ -547,6 +547,10 @@ def check_no_cad_residue(report: Report, app: Path, bundles: List[Bundle]) -> No
     for symbols in sorted((app.parents[2] / "dSYMs").glob("CAD*")):
         report.fail(f"{symbols.name} in the archive's dSYMs belongs to the CAD service; the build without CAD "
                     "(PREV_INCLUDE_CAD = NO) ships no such product")
+    for bundle in bundles:
+        if "CADImportServiceIdentifier" in bundle.info:
+            report.fail(f"{bundle.path.relative_to(app.parent)}'s Info.plist carries CADImportServiceIdentifier: the build "
+                        "without CAD (PREV_INCLUDE_CAD = NO) names no CAD service, not even with an empty value (decision 031)")
     for notices in sorted(app.rglob("OCCT-Notices")):
         report.fail(f"{notices.relative_to(app)} is an OCCT-Notices folder; the build without CAD (PREV_INCLUDE_CAD = NO) "
                     "carries no OCCT notices")
@@ -574,7 +578,13 @@ def check_no_cad_code(report: Report, app: Path, machos: List[Path]) -> None:
 # Text that only a hidden mode or the CAD helper would need (App Review rejected build 6 under Guideline 5.6 on
 # 2026-10-23 for "features that appear to have been intentionally hidden"). A build without CAD carries none of it.
 HIDDEN_FEATURE_MARKERS = ("companion.developerMode", "developerMode", "Developer Mode", "cadImporterUnavailable",
-                          "Open CASCADE", "openCascade", "spacepane-cad-source")
+                          "Open CASCADE", "openCascade", "spacepane-cad-source",
+                          # The STEP and IGES types, identifiers and keys (decision 031, 2026-10-24).
+                          "CADHeaderFacts", "CADSchema", "IGESRevision", "cad.iges", "cad.step",
+                          "CADImportServiceIdentifier")
+# A localization key of the former `cad.` family (the 3D viewer's keys are `geometry.` since 2026-10-24). The look-behind
+# keeps words such as "arcade.mode" or "decade.end" from matching.
+CAD_KEY_PATTERN = re.compile(rb"(?<![A-Za-z0-9_])cad\.[a-z]")
 
 
 def check_no_hidden_feature_text(report: Report, app: Path, machos: List[Path]) -> None:
@@ -593,6 +603,8 @@ def check_no_hidden_feature_text(report: Report, app: Path, machos: List[Path]) 
             if any(marker.encode("utf-8") in variant for variant in variants):
                 report.fail(f"{path.relative_to(app)} contains '{marker}': a build without CAD names no hidden mode "
                             "and no CAD helper (Guidelines 2.5.19 and 5.6)")
+        if any(CAD_KEY_PATTERN.search(variant) for variant in variants):
+            report.fail(f"{path.relative_to(app)} contains a 'cad.' key: a build without CAD carries none (decision 031)")
 
 
 def main_executables(bundles: List[Bundle]) -> Set[Path]:
