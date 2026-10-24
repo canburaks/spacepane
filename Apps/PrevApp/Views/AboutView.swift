@@ -4,8 +4,6 @@ import PreviewRenderers
 
 struct AboutView: View {
     let configuration: HostedConfiguration
-    /// Developer Mode adds a page and a command, so the Help text names their shortcuts too.
-    let developerMode: Bool
     @Environment(\.locale) private var locale
     @Environment(\.openURL) private var openURL
     private let acknowledgements = AboutAcknowledgements(notices: BundledNotices())
@@ -26,13 +24,6 @@ struct AboutView: View {
             helpSection
             SettingsSection(PreviewStrings.text(.aboutAcknowledgementsTitle)) {
                 SettingsCard {
-                    // Open CASCADE is acknowledged only by a build that carries it (see `AboutAcknowledgements`).
-                    if let url = acknowledgements.openCascadeNotices {
-                        bodyText(PreviewStrings.text(.aboutAcknowledgementsBody))
-                        bodyText(PreviewStrings.text(.aboutAcknowledgementsOpenCascade))
-                        if let source = configuration.links.openSource { linkRow(Resource(kind: .openSource, url: source)) }
-                        AboutNoticeRow(folder: .openCascade, url: url)
-                    }
                     bodyText(PreviewStrings.text(.schemeAcknowledgements))
                     // The notice folders exist only in a staged build; a run without them shows no button.
                     if let url = acknowledgements.colorSchemeNotices { AboutNoticeRow(folder: .colorSchemes, url: url) }
@@ -49,7 +40,7 @@ struct AboutView: View {
                 SettingsRow(PreviewStrings.text(.generalSetupTitle), subtitle: PreviewStrings.text(.setupSteps))
                 SettingsRow(PreviewStrings.text(.providersTitle), subtitle: PreviewStrings.text(.setupUnverified))
                 SettingsRow(PreviewStrings.text(.generalLimitsTitle), subtitle: PreviewStrings.text(.generalLimitsFootnote))
-                SettingsRow(PreviewStrings.text(.helpKeyboardTitle), subtitle: PreviewStrings.text(CompanionRoute.keyboardHelp(developerMode: developerMode)))
+                SettingsRow(PreviewStrings.text(.helpKeyboardTitle), subtitle: PreviewStrings.text(.helpKeyboardBody))
             }
         }
     }
@@ -148,7 +139,7 @@ struct AboutView: View {
     }
 
     private enum ResourceKind: Hashable {
-        case website, support, documentation, privacyPolicy, feedback, openSource
+        case website, support, documentation, privacyPolicy, feedback
 
         var titleKey: PreviewStrings.Key {
             switch self {
@@ -157,7 +148,6 @@ struct AboutView: View {
             case .documentation: .aboutLinkDocumentation
             case .privacyPolicy: .aboutLinkPrivacyPolicy
             case .feedback: .aboutLinkFeedback
-            case .openSource: .aboutLinkOpenSource
             }
         }
 
@@ -168,7 +158,6 @@ struct AboutView: View {
             case .documentation: .documentation
             case .privacyPolicy: .privacyPolicy
             case .feedback: .feedback
-            case .openSource: .openSource
             }
         }
     }
@@ -184,6 +173,5 @@ private enum AboutSymbol: String {
     case documentation = "book"
     case privacyPolicy = "hand.raised"
     case feedback = "bubble.left"
-    case openSource = "doc.text"
     case openLink = "arrow.up.right"
 }

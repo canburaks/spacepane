@@ -13,7 +13,7 @@ struct CopyFailureContentTests {
     static let failures: [PreviewFailure] = [
         .unsupportedFormat, .missingFile, .unreadableFile, .notRegularFile, .unavailableContent,
         .inputTooLarge, .outputTooLarge, .binaryContent, .unsupportedEncoding, .malformedDocument,
-        .cadImporterUnavailable, .encryptedContent, .structureTooDeep, .tooManyNodes, .tooManyLines,
+        .encryptedContent, .structureTooDeep, .tooManyNodes, .tooManyLines,
         .lineTooLong, .invalidBudget, .deadlineExceeded, .unsupportedVariant, .geometryTooComplex
     ]
 
@@ -96,7 +96,6 @@ struct CopyFailureContentTests {
             (.binaryContent, "This file cannot be shown as text"),
             (.unsupportedEncoding, "The text encoding is not supported"),
             (.malformedDocument, "The file is not valid"),
-            (.cadImporterUnavailable, "The CAD importer is not available"),
             (.encryptedContent, "The file is encrypted"),
             (.structureTooDeep, "The document is nested too deeply"),
             (.tooManyNodes, "The document has too many items"),
@@ -122,10 +121,6 @@ struct CopyFailureContentTests {
                 == "This preview reads UTF-8 and UTF-16 text. Save the file in one of these encodings, then preview it again.")
         // Nothing is decrypted or guessed.
         #expect(Self.copy(.encryptedContent, "en").body == "Its content cannot be shown. Open it in an app that can unlock it.")
-        // The importer failure suggests retrying and checking the installation; it never requires a reinstall.
-        let importer = Self.copy(.cadImporterUnavailable, "en").body
-        #expect(importer == "It may be busy or interrupted. Try again, or check that the app is installed correctly.")
-        #expect(!importer.localizedCaseInsensitiveContains("reinstall"))
     }
 
     // MARK: Limits

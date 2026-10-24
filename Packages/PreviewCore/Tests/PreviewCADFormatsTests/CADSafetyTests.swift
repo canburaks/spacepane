@@ -38,7 +38,7 @@ import PreviewCore
         var preferences = PreviewPreferencesSnapshot.defaults
         preferences.setEnabled(true, for: .iges, catalog: cadCatalog)
         let pipeline = PreviewPipeline(catalog: cadCatalog, registrations: CADFormatAdapters.registrations(workerURL: URL(fileURLWithPath: "/missing/helper")), reader: EmptyReader())
-        #expect(await pipeline.preview(url: URL(fileURLWithPath: "/missing/private.igs"), preferences: preferences) == .unavailable(.cadImporterUnavailable))
+        #expect(await pipeline.preview(url: URL(fileURLWithPath: "/missing/private.igs"), preferences: preferences) == .unavailable(.unreadableFile))
     }
     @Test func formatBudgetIsSelectedOnlyForCADAndExplicitBudgetWins() async {
         let registration = AdapterRegistration(formatID: .iges, defaultBudget: GeometryLimits.requestBudget) { BudgetMeshAdapter() }
@@ -86,12 +86,12 @@ import PreviewCore
         }
         let echoed = try CADWorkerProcess.run(executable: URL(fileURLWithPath: "/bin/cat"), arguments: [], input: Data(repeating: 42, count: 200_000), context: RequestContext(budget: .standard))
         #expect(echoed == Data(repeating: 42, count: 200_000))
-        #expect(throws: PreviewFailure.cadImporterUnavailable) {
+        #expect(throws: PreviewFailure.unreadableFile) {
             try CADWorkerProcess.run(executable: URL(fileURLWithPath: "/usr/bin/false"), arguments: [], input: Data(repeating: 42, count: 200_000), context: RequestContext(budget: .standard))
         }
     }
     @Test func transportMissingExecutableFailsAndSuccessfulChildIsAlreadyReaped() throws {
-        #expect(throws: PreviewFailure.cadImporterUnavailable) {
+        #expect(throws: PreviewFailure.unreadableFile) {
             try CADWorkerProcess.run(executable: URL(fileURLWithPath: "/missing/CADWorker"), arguments: [],
                 input: Data(), context: RequestContext(budget: .standard))
         }

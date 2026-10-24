@@ -85,7 +85,7 @@
         "finderPreview": {
           "outcome": "provider",
           "host": "mac-quality-info-2026-10-08",
-          "note": "Signed 3a97e4f shows concealed synthetic JSON, cached facts and working inline information. The panel additionally verifies native scrollbar control and mode-sensitive help; key focus and VoiceOver remain open. Seen again on build 6 (mac-build6-2026-10-17): Outline view with the concealment banner and the Copy Findings Report button."
+          "note": "Signed 3a97e4f shows concealed synthetic JSON, cached facts and inline info (scrollbar and mode help verified; key focus/VoiceOver open). Build 6 (mac-build6-2026-10-17) shows Outline view, concealment banner and Copy Findings Report."
         },
         "finderThumbnail": {
           "outcome": "notObserved",
@@ -865,7 +865,7 @@
         "finderPreview": {
           "outcome": "provider",
           "host": "mac-build6-2026-10-17",
-          "note": "Build 6 installed in /Applications: UTType(filenameExtension: \"sqlite\") resolves to org.sqlite.sqlite (build 5 gave a dynamic type), and Space on stations.sqlite in Finder opens SpacePane's Table view with Source, Summary and Table modes and no Filter field. Captured by script/store-screenshots/capture.sh scene 4 on 2026-10-17 18:21."
+          "note": "Build 6 in /Applications resolves .sqlite to org.sqlite.sqlite (build 5 gave a dynamic type); Space on stations.sqlite opens Table view with Source, Summary and Table modes and no Filter field (capture.sh scene 4, 2026-10-17 18:21)."
         },
         "finderThumbnail": {
           "outcome": "notObserved"

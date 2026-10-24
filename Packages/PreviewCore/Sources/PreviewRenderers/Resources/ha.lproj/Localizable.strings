@@ -1,20 +1,16 @@
 /* Generated from Localizable.xcstrings; do not edit directly. */
-"about.acknowledgements.body" = "Dubawar samfuran 3D tana amfani da Open CASCADE Technology ƙarƙashin GNU LGPL 2.1 tare da banbancin Open CASCADE. An haɗa sanarwar lasisi da manhajar.";
-"about.acknowledgements.openCascade" = "Haƙƙin mallaka na Open CASCADE Technology na OPEN CASCADE SAS ne da masu ba da gudummawarsa. Tushen naʼurar taimakon shigo da 3D da rubutaccen tayin tushen ɗakin karatu a bayyane suke ga kowa.";
 "about.acknowledgements.title" = "Godiya";
 "about.description" = "Dubawa da ƙananan hotuna na rubutu, bayanai masu tsari, kundin fayil, rumbunan bayanai da samfuran 3D kai tsaye a Finder, gaba ɗaya a cikin Mac ɗinku.";
 "about.howItWorks.body" = "Lokacin da wannan manhajar ke ba da dubawa, zaɓukan Nauʼoʼin Fayil suna shafar sabbin dubawa da ƙananan hotuna na Finder, kuma ana ɓoye bayanan da ake zaton sirri ne kafin a nuna, zaɓa ko kwafi abubuwan da ke ciki. Ana karanta fayiloli a cikin naʼura kuma ba a taɓa canza su. Ƙananan hotuna na gama gari ba su ƙunshi rubutun asali ba. macOS ne ke zaɓar mai samar da Quick Look.";
 "about.howItWorks.title" = "Yadda yake aiki";
 "about.link.documentation" = "Takardun bayani";
 "about.link.feedback" = "Aika da Raʼayi";
-"about.link.openSource" = "Sanarwar budaddiyar tushe";
 "about.link.privacyPolicy" = "Manufar Sirri";
 "about.link.support" = "Tallafi";
 "about.link.website" = "Shafin yanar gizo";
 "about.notices.colorSchemes.title" = "Sanarwar tsarin launi";
 "about.notices.open.failed" = "Ba a iya buɗe babban fayil ɗin sanarwar ba.";
 "about.notices.open.hint" = "Yana buɗe babban fayil ɗin da ke cikin manhajar a Finder.";
-"about.notices.openCascade.title" = "Rubutun lasisin Open CASCADE";
 "about.privacy.body" = "%@ yana sarrafa fayiloli a cikin Mac ɗinku. Babu abin da ke cikin fayil da ke barin naʼurarku.";
 "about.privacy.title" = "Sirri";
 "about.resources.title" = "Albarkatu";
@@ -138,7 +134,6 @@
 "cad.header.schema" = "Schema: %1$@";
 "cad.header.schemaAndSystem" = "Schema: %1$@ · An ƙirƙira da: %2$@";
 "cad.header.system" = "An ƙirƙira da: %1$@";
-"cad.importerUnavailable" = "Ba a samun mai shigo da CAD. Sake gwadawa ko duba shigar da manhajar.";
 "cad.interactionHelp" = "Ja don juyawa. Ja da Shift ko maɓallin dama don matsawa. Gungura don kusantarwa. Maɓallan kibiya suna juyawa; Shift-kibiya suna matsawa; +/− suna kusantarwa/nisantarwa; F yana daidaitawa; R yana sake saitawa; 1/2/3 suna zaɓar gaba/gefe/sama.";
 "cad.invalidGeometry" = "Ba a iya nuna wannan samfurin cikin aminci ba.";
 "cad.measurements.open" = "Faɗin saman: %1$@ mm² · Ƙarar ba ta samuwa (saman bai rufu ba) · Jikuna: %2$lld";
@@ -162,7 +157,6 @@
 "cad.zoomOut" = "Nisantar";
 "failure.binary" = "Fayil yana ɗauke da bayanan binary da ba za a nuna a matsayin rubutu ba.";
 "failure.body.binaryContent" = "Yana ɗauke da bayanan binary, ba rubutu ba. Buɗe fayil ɗin a cikin manhajar da aka ƙera don irin wannan fayil.";
-"failure.body.cadImporterUnavailable" = "Wataƙila yana aiki ko an katse shi. Sake gwadawa, ko duba ko an shigar da manhajar yadda ya kamata.";
 "failure.body.deadlineExceeded" = "Sarrafa wannan fayil ya ɗauki lokaci fiye da wanda aka yarda. Sake gwadawa, ko buɗe fayil ɗin a cikin manhajar da aka ƙera don irin wannan fayil.";
 "failure.body.deadlineExceededLimit" = "Wannan dubawa tana ba da %@ don sarrafa fayil, amma wannan ya ɗauki fiye da haka. Sake gwadawa, ko buɗe fayil ɗin a cikin manhajar da aka ƙera don irin wannan fayil.";
 "failure.body.encryptedContent" = "Ba za a iya nuna abin da ke ciki ba. Buɗe shi a cikin manhajar da za ta iya buɗe shi.";
@@ -200,7 +194,6 @@
 "failure.resourceUnavailable" = "Wani kayan nunawa ba ya samuwa.";
 "failure.structureLimit" = "Takardar ta wuce iyakar tsarin wannan dubawa.";
 "failure.title.binaryContent" = "Ba za a iya nuna wannan fayil a matsayin rubutu ba";
-"failure.title.cadImporterUnavailable" = "Ba a samun mai shigo da CAD";
 "failure.title.deadlineExceeded" = "Dubawar ta ɗauki lokaci mai tsawo da yawa";
 "failure.title.encryptedContent" = "An ɓoye fayil ɗin";
 "failure.title.geometryTooComplex" = "Samfurin ya yi sarkakiya da yawa";
@@ -371,10 +364,6 @@
 "format.archive.zip.name" = "Kundin ZIP";
 "format.audio.midi.description" = "Tsarin MIDI na yau da kullum 0/1, da kunnawa bayan zaɓi ta amfani da bankin sauti na macOS.";
 "format.audio.midi.name" = "MIDI";
-"format.cad.iges.description" = "Duban 3D na cikin naʼura. Ana kashe shi a asali saboda shigo da CAD na iya ɗaukar lokaci da ƙwaƙwalwa mai yawa.";
-"format.cad.iges.name" = "Samfuran IGES 3D";
-"format.cad.step.description" = "Duban 3D na cikin naʼura. Ana kashe shi a asali saboda shigo da CAD na iya ɗaukar lokaci da ƙwaƙwalwa mai yawa.";
-"format.cad.step.name" = "Samfuran STEP 3D";
 "format.config.environment.description" = "Sanya ƙimomi don karantawa kawai tare da ɓoye sirri; ba a aiwatar da musanya.";
 "format.config.environment.name" = "Fayilolin Muhalli";
 "format.config.ini.description" = "Sassa da saituna daga fayilolin INI, properties da .conf. Ana ɓoye sirrin da ake zato; ba a faɗaɗa ko haɗa komai.";
@@ -521,8 +510,6 @@
 "general.banner.sharedBody" = "Kunna ƙarin a Saitunan Tsari. macOS ne ke zaɓar mai samar da dubawa da ƙananan hotuna.";
 "general.banner.sharedTitle" = "Ana raba saituna da ƙarin Quick Look";
 "general.banner.unavailableTitle" = "Wurin adana saituna ba ya samuwa";
-"general.developerMode.subtitle" = "Yana nuna shafin Gwada Dubawa a gefen allo (⌘5) da umarnin Buɗe Fayil (⌘O), domin ku buɗe fayil kai tsaye a wannan manhajar.";
-"general.developerMode.title" = "Yanayin Mai Haɓakawa";
 "general.finder.foldersSubtitle" = "Yana taƙaita abubuwan da ke kai tsaye a cikin babban fayil a Quick Look.";
 "general.finder.foldersTitle" = "Duba manyan fayiloli";
 "general.finder.setupTitle" = "Kunna ƙarin";
@@ -535,8 +522,7 @@
 "general.limits.title" = "Iyakokin dubawar rubutu";
 "general.storage.title" = "Wurin adana saituna";
 "general.subtitle" = "Saita haɗin Finder da Quick Look.";
-"help.keyboard.body" = "⌘1 zuwa ⌘4 suna sauya shafuka. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa.";
-"help.keyboard.bodyDeveloper" = "⌘1 zuwa ⌘5 suna sauya shafuka. ⌘O yana buɗe fayil a “Gwada Dubawa”. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa.";
+"help.keyboard.body" = "⌘1 zuwa ⌘5 suna sauya shafuka. ⌘O yana buɗe fayil a “Gwada Dubawa”. ⌘, yana buɗe “Gaba ɗaya”. ⌘Z yana soke mayarwa ta ƙarshe, canji na gama gari, shigo da jigo ko goge salo; ⇧⌘Z yana sake yinsa.";
 "help.keyboard.title" = "Gajerun hanyoyin madannai";
 "listing.risk.hiddenCharacters" = "Haruffan da aka ɓoye a suna";
 "mesh.printCheck.estimate" = "Idan aka buga shi cikakke da PLA: kusan %1$@ %2$@ da %3$@ %4$@ na filament mai kauri %5$@ %6$@. Masu yanka (slicer) yawanci suna bugawa da ƙarancin cikawa, don haka wannan matsakaicin iyaka ne.";
@@ -553,7 +539,6 @@
 "midi.positionValue" = "%1$@ cikin %2$@";
 "midi.soundBankUnavailable" = "Ba a iya loda bankin sauti na macOS ba.";
 "navigation.about" = "Game da";
-"navigation.developer" = "Mai Haɓakawa";
 "navigation.general" = "Gaba ɗaya";
 "navigation.help" = "Taimako";
 "navigation.settings" = "Saituna";

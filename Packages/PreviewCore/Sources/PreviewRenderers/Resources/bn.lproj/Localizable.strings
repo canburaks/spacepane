@@ -1,20 +1,16 @@
 /* Generated from Localizable.xcstrings; do not edit directly. */
-"about.acknowledgements.body" = "3D মডেল প্রিভিউ Open CASCADE ব্যতিক্রমসহ GNU LGPL 2.1-এর অধীনে Open CASCADE Technology ব্যবহার করে। লাইসেন্স বিজ্ঞপ্তি অ্যাপের সঙ্গে অন্তর্ভুক্ত।";
-"about.acknowledgements.openCascade" = "Open CASCADE Technology-এর কপিরাইট OPEN CASCADE SAS ও এর অবদানকারীদের। 3D ইমপোর্ট সহায়কের সোর্স এবং লাইব্রেরির সোর্সের জন্য লিখিত প্রস্তাব সর্বজনীন।";
 "about.acknowledgements.title" = "কৃতজ্ঞতা স্বীকার";
 "about.description" = "টেক্সট, কাঠামোবদ্ধ ডেটা, আর্কাইভ, ডেটাবেস ও 3D মডেলের প্রিভিউ ও থাম্বনেইল সরাসরি Finder-এ, পুরোপুরি আপনার Mac-এ।";
 "about.howItWorks.body" = "এই অ্যাপ প্রিভিউ দিলে ফাইলের ধরনের নির্বাচন নতুন Finder প্রিভিউ ও থাম্বনেইলে প্রযোজ্য হয় এবং সম্ভাব্য গোপন তথ্য বিষয়বস্তু দেখানো, নির্বাচন বা কপি করার আগে লুকানো হয়। ফাইল স্থানীয়ভাবে পড়া হয় এবং কখনও পরিবর্তন করা হয় না। সাধারণ থাম্বনেইলে উৎস টেক্সট থাকে না। Quick Look প্রদানকারী macOS বেছে নেয়।";
 "about.howItWorks.title" = "এটি যেভাবে কাজ করে";
 "about.link.documentation" = "ডকুমেন্টেশন";
 "about.link.feedback" = "মতামত পাঠান";
-"about.link.openSource" = "ওপেন-সোর্স বিজ্ঞপ্তি";
 "about.link.privacyPolicy" = "গোপনীয়তা নীতি";
 "about.link.support" = "সহায়তা";
 "about.link.website" = "ওয়েবসাইট";
 "about.notices.colorSchemes.title" = "রঙের স্কিমের বিজ্ঞপ্তি";
 "about.notices.open.failed" = "বিজ্ঞপ্তির ফোল্ডার খোলা যায়নি।";
 "about.notices.open.hint" = "অ্যাপের ভেতরে সংরক্ষিত ফোল্ডারটি Finder-এ খোলে।";
-"about.notices.openCascade.title" = "Open CASCADE লাইসেন্স পাঠ্য";
 "about.privacy.body" = "%@ আপনার Mac-এ স্থানীয়ভাবে ফাইল প্রসেস করে। কোনো ফাইলের বিষয়বস্তু আপনার ডিভাইস ছেড়ে যায় না।";
 "about.privacy.title" = "গোপনীয়তা";
 "about.resources.title" = "সংস্থান";
@@ -138,7 +134,6 @@
 "cad.header.schema" = "স্কিমা: %1$@";
 "cad.header.schemaAndSystem" = "স্কিমা: %1$@ · যে সিস্টেমে তৈরি: %2$@";
 "cad.header.system" = "যে সিস্টেমে তৈরি: %1$@";
-"cad.importerUnavailable" = "CAD আমদানিকারক উপলভ্য নয়। আবার চেষ্টা করুন বা অ্যাপের ইনস্টলেশন পরীক্ষা করুন।";
 "cad.interactionHelp" = "ঘোরাতে টেনে আনুন। সরাতে Shift চেপে বা ডান বোতাম দিয়ে টানুন। জুম করতে স্ক্রল করুন। তীরচিহ্নের কী ঘোরায়; Shift-তীর সরায়; +/− জুম করে; F মানানসই করে; R রিসেট করে; 1/2/3 সামনে/পাশে/উপরে বেছে নেয়।";
 "cad.invalidGeometry" = "এই মডেলটি নিরাপদে দেখানো যায়নি।";
 "cad.measurements.open" = "পৃষ্ঠতলের ক্ষেত্রফল: %1$@ mm² · আয়তন পাওয়া যায়নি (পৃষ্ঠতল বন্ধ নয়) · বস্তু: %2$lld";
@@ -162,7 +157,6 @@
 "cad.zoomOut" = "জুম আউট";
 "failure.binary" = "এই ফাইলে বাইনারি বিষয়বস্তু আছে যা লেখা হিসেবে দেখানো যায় না।";
 "failure.body.binaryContent" = "এতে লেখা নয়, বাইনারি ডেটা আছে। এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।";
-"failure.body.cadImporterUnavailable" = "এটি ব্যস্ত বা বিচ্ছিন্ন হয়ে থাকতে পারে। আবার চেষ্টা করুন, অথবা অ্যাপ ঠিকমতো ইনস্টল হয়েছে কি না পরীক্ষা করুন।";
 "failure.body.deadlineExceeded" = "এই ফাইল প্রক্রিয়া করতে অনুমোদিত সময়ের চেয়ে বেশি লেগেছে। আবার চেষ্টা করুন, অথবা এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।";
 "failure.body.deadlineExceededLimit" = "এই প্রিভিউ একটি ফাইল প্রক্রিয়া করতে %@ সময় দেয়, আর এই ফাইলে তার চেয়ে বেশি লেগেছে। আবার চেষ্টা করুন, অথবা এই ধরনের ফাইলের জন্য তৈরি অ্যাপে এটি খুলুন।";
 "failure.body.encryptedContent" = "এর বিষয়বস্তু দেখানো যায় না। যে অ্যাপ এটি আনলক করতে পারে তাতে খুলুন।";
@@ -200,7 +194,6 @@
 "failure.resourceUnavailable" = "একটি প্রদর্শন সংস্থান উপলব্ধ নয়।";
 "failure.structureLimit" = "নথি এই প্রিভিউয়ের কাঠামোর সীমা ছাড়িয়েছে।";
 "failure.title.binaryContent" = "এই ফাইলটি লেখা হিসেবে দেখানো যায় না";
-"failure.title.cadImporterUnavailable" = "CAD আমদানিকারক উপলভ্য নয়";
 "failure.title.deadlineExceeded" = "প্রিভিউ করতে অনেক বেশি সময় লেগেছে";
 "failure.title.encryptedContent" = "ফাইলটি এনক্রিপ্ট করা";
 "failure.title.geometryTooComplex" = "মডেলটি অতি জটিল";
@@ -371,10 +364,6 @@
 "format.archive.zip.name" = "ZIP আর্কাইভ";
 "format.audio.midi.description" = "মানক MIDI ফরম্যাট 0/1, macOS সাউন্ড ব্যাংক দিয়ে ব্যবহারকারীর স্পষ্ট নির্দেশে চালানো হয়।";
 "format.audio.midi.name" = "MIDI";
-"format.cad.iges.description" = "স্থানীয় 3D প্রিভিউ। স্বাভাবিকভাবে বন্ধ থাকে, কারণ CAD আমদানিতে অনেক সময় ও মেমরি লাগতে পারে।";
-"format.cad.iges.name" = "IGES 3D মডেল";
-"format.cad.step.description" = "স্থানীয় 3D প্রিভিউ। স্বাভাবিকভাবে বন্ধ থাকে, কারণ CAD আমদানিতে অনেক সময় ও মেমরি লাগতে পারে।";
-"format.cad.step.name" = "STEP 3D মডেল";
 "format.config.environment.description" = "গোপন তথ্য লুকিয়ে শুধু পড়ার অ্যাসাইনমেন্ট; প্রতিস্থাপন কখনো চালানো হয় না।";
 "format.config.environment.name" = "পরিবেশ ফাইল";
 "format.config.ini.description" = "INI, properties ও .conf ফাইলের অংশ ও সেটিং। সম্ভাব্য গোপন তথ্য লুকানো হয়; কিছুই প্রসারিত বা অন্তর্ভুক্ত করা হয় না।";
@@ -521,8 +510,6 @@
 "general.banner.sharedBody" = "সিস্টেম সেটিংসে এক্সটেনশন চালু করুন। প্রিভিউ ও থাম্বনেইল প্রদানকারী macOS বেছে নেয়।";
 "general.banner.sharedTitle" = "সেটিংস Quick Look এক্সটেনশনের সঙ্গে ভাগ করা হয়";
 "general.banner.unavailableTitle" = "সেটিংসের সঞ্চয়স্থান উপলব্ধ নয়";
-"general.developerMode.subtitle" = "সাইডবারে “প্রিভিউ চেষ্টা করুন” পৃষ্ঠা (⌘5) এবং “ফাইল খুলুন” কমান্ড (⌘O) দেখায়, যাতে আপনি সরাসরি এই অ্যাপে ফাইল খুলতে পারেন।";
-"general.developerMode.title" = "ডেভেলপার মোড";
 "general.finder.foldersSubtitle" = "Quick Look-এ ফোল্ডারের সরাসরি বিষয়বস্তুর সারসংক্ষেপ দেখায়।";
 "general.finder.foldersTitle" = "ফোল্ডারের প্রিভিউ";
 "general.finder.setupTitle" = "এক্সটেনশন চালু করুন";
@@ -535,8 +522,7 @@
 "general.limits.title" = "টেক্সট প্রিভিউয়ের সীমা";
 "general.storage.title" = "সেটিংসের সঞ্চয়স্থান";
 "general.subtitle" = "Finder ও Quick Look সংযোগ সেট আপ করুন।";
-"help.keyboard.body" = "⌘1 থেকে ⌘4 পৃষ্ঠা বদলায়। ⌘, “সাধারণ” খোলে। ⌘Z শেষ রিসেট, গণ-পরিবর্তন, থিম আমদানি বা প্রোফাইল মোছা পূর্বাবস্থায় ফেরায়; ⇧⌘Z আবার করে।";
-"help.keyboard.bodyDeveloper" = "⌘1 থেকে ⌘5 পৃষ্ঠা বদলায়। ⌘O “প্রিভিউ চেষ্টা করুন”-এ একটি ফাইল খোলে। ⌘, “সাধারণ” খোলে। ⌘Z শেষ রিসেট, গণ-পরিবর্তন, থিম আমদানি বা প্রোফাইল মোছা পূর্বাবস্থায় ফেরায়; ⇧⌘Z আবার করে।";
+"help.keyboard.body" = "⌘1 থেকে ⌘5 পৃষ্ঠা বদলায়। ⌘O “প্রিভিউ চেষ্টা করুন”-এ একটি ফাইল খোলে। ⌘, “সাধারণ” খোলে। ⌘Z শেষ রিসেট, গণ-পরিবর্তন, থিম আমদানি বা প্রোফাইল মোছা পূর্বাবস্থায় ফেরায়; ⇧⌘Z আবার করে।";
 "help.keyboard.title" = "কিবোর্ড শর্টকাট";
 "listing.risk.hiddenCharacters" = "নামে লুকানো অক্ষর";
 "mesh.printCheck.estimate" = "PLA দিয়ে নিরেট ছাপলে: প্রায় %1$@ %2$@ এবং %5$@ %6$@ ফিলামেন্টের %3$@ %4$@। স্লাইসার সাধারণত কম ইনফিল দিয়ে ছাপে, তাই এটি সর্বোচ্চ সীমা।";
@@ -553,7 +539,6 @@
 "midi.positionValue" = "%1$@ (মোট %2$@)";
 "midi.soundBankUnavailable" = "macOS সাউন্ড ব্যাংক লোড করা যায়নি।";
 "navigation.about" = "সম্পর্কে";
-"navigation.developer" = "ডেভেলপার";
 "navigation.general" = "সাধারণ";
 "navigation.help" = "সাহায্য";
 "navigation.settings" = "সেটিংস";

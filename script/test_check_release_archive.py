@@ -458,6 +458,25 @@ class NoCADArchiveTests(NoCADArchiveCase):
                 self.assertFailure(report, "PreviewCADFormats", f"Contents/MacOS/{role}-binary")
                 self.assertEqual(len(report.failures), 1, report.failures)
 
+    def test_text_of_a_hidden_mode_or_the_cad_helper_in_an_executable_is_refused(self):
+        # Guideline 5.6 (rejection of 2026-10-23): no switch reveals features, and nothing names a helper the build
+        # does not carry.
+        for marker in (b"companion.developerMode", b"Developer Mode", b"cadImporterUnavailable", b"Open CASCADE",
+                       b"spacepane-cad-source"):
+            with self.subTest(marker=marker):
+                def after(fixture, marker=marker):
+                    executable = fixture.paths["preview"] / "Contents/MacOS/preview-binary"
+                    executable.write_bytes(executable.read_bytes() + marker + b"\x00")
+                report = self.run_check(after=after)
+                self.assertFailure(report, marker.decode(), "Contents/MacOS/preview-binary")
+
+    def test_text_of_a_hidden_mode_in_a_strings_resource_is_refused(self):
+        def after(fixture):
+            strings = fixture.app / "Contents/Resources/en.lproj/Localizable.strings"
+            strings.parent.mkdir(parents=True, exist_ok=True)
+            strings.write_text('"general.developerMode.title" = "Developer Mode";\n', encoding="utf-8")
+        self.assertFailure(self.run_check(after=after), "developerMode", "Localizable.strings")
+
     def test_a_mention_of_the_module_outside_an_executable_is_not_code(self):
         def after(fixture):
             (fixture.app / "Contents/Resources/notes.txt").write_text("PreviewCADFormats")

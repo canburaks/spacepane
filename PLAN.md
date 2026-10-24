@@ -163,11 +163,11 @@ for precise host observations and the remaining accessibility limitations.
 ### Companion sidebar redesign — 2026-10-04
 
 - [x] Replace the six grouped tabs with a fixed sidebar (General, File Types, Theme, About) in the same singleton window; route Command-comma to File Types and About/Help to About. Record [the decision](docs/decisions/010-companion-sidebar-redesign.md).
-- [x] Add Developer Mode, off by default and stored only in the companion's defaults; it alone reveals Try Preview, Open File, Command-O and Command-5, and turning it off closes the preview session.
+- [x] ~~Add Developer Mode, off by default and stored only in the companion's defaults; it alone reveals Try Preview, Open File, Command-O and Command-5, and turning it off closes the preview session.~~ Superseded 2026-10-24 by [decision 031](docs/decisions/031-nothing-hidden.md): App Review rejected the switch as a hidden feature (Guideline 5.6); Try Preview and File > Open are always offered.
 - [x] Rebuild General, File Types, Theme, About and Try Preview from shared page, card, row, status and two-column components; keep every earlier appearance control, the file-type semantics of decision 002 and the direct-drop contract.
 - [x] Report only what the app can know: settings storage state and enabled-type count. Leave out prototype controls with no truthful backing and list each in the decision record.
 - [x] Add 59 localized keys and retire 9 in all 14 languages (356 keys); pass `--check`, 453 package tests, 10 companion model checks, the signed build and 33 three-bundle language probes. See [validation](docs/validation/companion-redesign-2026-10-04.md).
-- [x] Inspect the real signed window: title-bar clearance, selection appearance, every page, and immediate sidebar and menu changes when Developer Mode is toggled.
+- [x] Inspect the real signed window: title-bar clearance, selection appearance, every page, and immediate sidebar and menu changes when Developer Mode is toggled. (The switch was removed on 2026-10-24, decision 031.)
 - [x] Rename the product to SpacePane through branding configuration only and set its website to spacepane.com; keep bundle and App Group identifiers, targets and stored settings unchanged.
 - [x] Let the Theme page's live preview show a built-in sample of any catalog format through the production pipeline; enforce one sample per format in `--check` and cover every text-presentation sample with a model check. See [the appearance decision](docs/decisions/003-preview-appearance.md).
 - [ ] Choose each sample type in the real window, including the two CAD samples under the sandbox, and decide whether per-format appearance overrides are wanted (a separate schema change).

@@ -233,7 +233,9 @@ class BundledNoticeTests(unittest.TestCase):
     def test_the_about_page_opens_the_folders_the_scripts_create(self):
         swift = BUNDLED_NOTICES_SWIFT.read_text()
         names = re.findall(r'case\s+\w+\s*=\s*"([^"]+)"', swift)
-        self.assertEqual(sorted(names), sorted(name for _, name in builder.NOTICE_FOLDERS))
+        # The app's About page names only the folders every build carries; the OCCT notices belong to a build with
+        # CAD, whose About section returns with it (decision 028, "Bringing CAD back").
+        self.assertEqual(sorted(names), sorted(name for _, name in builder.NOTICE_FOLDERS if name != "OCCT-Notices"))
 
 
 if __name__ == "__main__":

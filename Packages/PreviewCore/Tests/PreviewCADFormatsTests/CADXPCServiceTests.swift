@@ -37,7 +37,7 @@ struct CADXPCServiceTests {
         let result = await reply(successful, input: Data([0, 1, 2]))
         #expect(result.0 == Data([0, 1, 2]) && result.1 == nil)
         let failures: [(PreviewFailure, Int)] = [(.malformedDocument, 2), (.unsupportedFormat, 3),
-            (.inputTooLarge, 4), (.outputTooLarge, 4), (.deadlineExceeded, 5), (.cadImporterUnavailable, 1)]
+            (.inputTooLarge, 4), (.outputTooLarge, 4), (.deadlineExceeded, 5), (.unreadableFile, 1)]
         for (failure, code) in failures {
             let service = CADImportService { _, _, _ in throw failure }
             let result = await reply(service)
@@ -122,7 +122,7 @@ struct CADXPCServiceTests {
         }
         let state = CADXPCClient.ReplyState(maximumBytes: 8)
         state.receive(data: Data([7]), status: nil)
-        DispatchQueue.concurrentPerform(iterations: 100) { _ in state.complete(.failure(.cadImporterUnavailable)) }
+        DispatchQueue.concurrentPerform(iterations: 100) { _ in state.complete(.failure(.unreadableFile)) }
         guard case .success(let data) = state.result else { Issue.record("Late failure replaced successful reply"); return }
         #expect(data == Data([7]))
     }
@@ -132,7 +132,7 @@ struct CADXPCServiceTests {
         var preferences = PreviewPreferencesSnapshot.defaults
         preferences.setEnabled(true, for: .iges, catalog: cadCatalog)
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/unused/model.igs"), preferences: preferences)
-            == .unavailable(.cadImporterUnavailable))
+            == .unavailable(.unreadableFile))
         #expect(await pipeline.preview(url: URL(fileURLWithPath: "/unused/model.step")) == .disabledByUser(.step))
     }
 
@@ -184,7 +184,7 @@ struct CADXPCServiceTests {
         listener.delegate = delegate
         listener.resume()
         defer { listener.invalidate() }
-        #expect(throws: PreviewFailure.cadImporterUnavailable) {
+        #expect(throws: PreviewFailure.unreadableFile) {
             try CADXPCClient.exchange(over: NSXPCConnection(listenerEndpoint: listener.endpoint), kind: .iges,
                                       input: Data([1]), context: RequestContext(budget: PreviewBudget(maxMilliseconds: 10_000)))
         }
@@ -192,7 +192,7 @@ struct CADXPCServiceTests {
     }
 
     @Test func missingEmbeddedServiceFailsThroughBoundedClient() {
-        #expect(throws: PreviewFailure.cadImporterUnavailable) {
+        #expect(throws: PreviewFailure.unreadableFile) {
             try CADXPCClient.run(serviceName: "invalid.example.cad-test.\(UUID().uuidString)", kind: .iges,
                 // Bounded, but generous: a loaded runner can take longer than half a second to report
                 // that a service does not exist, and the subject here is the typed failure, not the time.

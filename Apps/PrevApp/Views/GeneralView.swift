@@ -6,7 +6,6 @@ import PreviewRenderers
 struct GeneralView: View {
     let configuration: HostedConfiguration
     let settings: CompanionSettings
-    let preferences: CompanionPreferences
     let diagnostics: QuickLookProviderDiagnostics
     @Environment(\.locale) private var locale
     /// Set by the first press of Open System Settings; the manual route stays under the button from then on.
@@ -41,14 +40,6 @@ struct GeneralView: View {
             }
             PreviewBehaviorSection(settings: settings)
             FolderPreviewSection(settings: settings)
-            SettingsSection(PreviewStrings.text(.navigationDeveloper)) {
-                SettingsCard {
-                    SettingsToggleRow(PreviewStrings.text(.developerModeTitle),
-                                      subtitle: PreviewStrings.text(.developerModeSubtitle),
-                                      isOn: Binding(get: { preferences.developerMode },
-                                                    set: { preferences.setDeveloperMode($0) }))
-                }
-            }
         }
     }
 

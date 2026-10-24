@@ -9,8 +9,6 @@ import Foundation
 /// as absent; the About page then leaves the row out instead of offering a button that cannot work.
 struct BundledNotices: Sendable {
     enum Folder: String, CaseIterable, Sendable {
-        /// Open CASCADE Technology and its parser components (`ThirdPartyNotices/OCCT`).
-        case openCascade = "OCCT-Notices"
         /// Palette attributions for the built-in color schemes (`ThirdPartyNotices/ColorSchemes`).
         case colorSchemes = "ColorSchemes-Notices"
     }

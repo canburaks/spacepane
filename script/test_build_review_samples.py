@@ -186,8 +186,11 @@ class ArchiveTests(unittest.TestCase):
         settings = dict(line.split(" = ", 1) for line in (ROOT / "Configuration" / "Base.xcconfig").read_text().splitlines()
                         if " = " in line and not line.startswith("//"))
         version = f"{settings['MARKETING_VERSION'].strip()} (build {settings['CURRENT_PROJECT_VERSION'].strip()})"
-        for fact in (version, "macOS 27.2", "macOS 15", "public.data", "Developer Mode"):
+        for fact in (version, "macOS 27.2", "macOS 15", "public.data", "Try Preview"):
             self.assertIn(fact, notes)
+        # Nothing in the app is revealed by a switch, so the notes name no hidden mode (App Review 5.6, 2026-10-23).
+        for hidden in ("Developer Mode", "turn on", "unlock"):
+            self.assertNotIn(hidden, notes)
         # The identifiers belong to another developer's product and are no longer listed (decision 004, 2026-10-17).
         self.assertNotIn("quicklookpro", notes)
         for stale in ("STEP", "IGES", "CAD", "Open CASCADE", "LGPL", "spacepane-cad-source"):

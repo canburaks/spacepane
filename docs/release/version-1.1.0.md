@@ -6,7 +6,7 @@ text lives in [app-store-listing.md](app-store-listing.md) for 1.0 and here for 
 the listing file takes it over. Uploading, submitting and releasing happen only on the owner's explicit
 instruction.
 
-**Status (2026-10-17):** 1.1.0 (build 5) is submitted and Waiting for Review; build 6, the replacement that fixes the findings of the rejection-risk review, is prepared and archived locally but not uploaded (see the status table below). The
+**Status (2026-10-22):** 1.1.0 (build 5) is submitted and Waiting for Review; build 6 was uploaded to TestFlight on 2026-10-17; build 7 (`fix/settings-recovery-file-types-search`) is prepared and uploaded to TestFlight on 2026-10-22 at the owner's instruction (see the status table below). The
 earlier record here, that 1.0.0 (build 3) was waiting for review and 1.1.0 would follow its approval, is history: the
 1.0.0 submission no longer exists in App Store Connect.
 
@@ -24,6 +24,9 @@ earlier 1.1.0 submissions as Removed and no 1.0.0 submission at all.
 | 2026-10-17 11:08 | 1.1.0 | 5 (uploaded 2026-10-17 10:39) | **Waiting for Review** | 2026-10-15 (the block as it stood before the corrections of 2026-10-17) | **Automatic**; the review readiness plan (R-4) asked for Manual |
 | not yet | 1.1.0 | 6 (prepared 2026-10-17; archived locally, **not uploaded**) | Not in App Store Connect | 2026-10-17 (corrected block, without the `com.quicklookpro.*` paragraph) | Manual (to be selected at submission) |
 | 2026-10-17 18:39 | 1.1.0 | 6 (merged tree of `build6-integration-2026-10-17`, archived 18:1x, exported with Apple Distribution signing) | Uploaded with `--upload` on the owner's instruction; TestFlight processing; not yet selected for the version, not submitted | corrected block (build 6) | unchanged until the owner edits it |
+| 2026-10-22 20:51 | 1.1.0 | 7 (`fix/settings-recovery-file-types-search`, archived 20:47, exported with Apple Distribution signing; it includes the unreviewed UI polish commit `685dbf4`, kept on the local branch `ui-ux-waves-2026-10-20`) | Uploaded with `--upload` on the owner's instruction; internal TestFlight only; never submitted | corrected block (build 7) | unchanged until the owner edits it |
+| 2026-10-17 19:14 (read 2026-10-24) | 1.1.0 | 6 | **Rejected 2026-10-23 19:06, Guideline 5.6 Developer Code of Conduct**: "features that appear to have been intentionally hidden during the review process". The submission had replaced build 5 (Removed). Causes found: the Developer Mode switch, the store description missing the Safety Lens 2 and 3 features, and leftover CAD text; see [decision 031](../decisions/031-nothing-hidden.md) | build 6 block, with the Developer Mode paragraph | Manual |
+| not yet | 1.1.0 | 8 (`approval-build8`: `origin/main` plus the build 7 records, without the UI polish commit, plus decision 031) | Prepared 2026-10-24; upload, the description, the reply and the submission wait for the owner | build 8 block | Manual |
 
 Also on the version page on 2026-10-17: sign-in required off, attachment `SpacePane-Review-Samples.zip`, six Mac
 screenshots, and the description of 1.0 ("That is 74 file types") rather than the 1.1.0 text below. Builds 1.0.0 (1)
@@ -31,15 +34,15 @@ and (2) were uploaded on 2026-10-10 and 2026-10-12 and never submitted.
 
 ### Replacing the submission
 
-What the owner does if 1.1.0 (5) is to be replaced (by build 6) or its metadata corrected while it waits, in order. The queue position
+What the owner does if 1.1.0 (5) is to be replaced (by build 7) or its metadata corrected while it waits, in order. The queue position
 resets at step 5; a rejection resets it too and adds a reply cycle, which is the trade-off the review names.
 
 1. Remove the version from review (App Store Connect, the submission's menu: Remove from Review). The status returns to
    Prepare for Submission; the build stays attached.
 2. Select the new build on the version page if there is one (a replacement build raises `CURRENT_PROJECT_VERSION`
-   and keeps `PREV_INCLUDE_CAD = NO`); to correct metadata only, keep build 5. Build 6 is that replacement: it fixes the SQLite, Parquet and RAR type declarations (review finding 0), stops registering generic formats for thumbnails (finding 9), drops the `com.quicklookpro.*` identifiers (finding 11) and empties the stale CAD service key (finding 22); the notes of step 3 name `1.1.0 (build 6)`.
+   and keeps `PREV_INCLUDE_CAD = NO`); to correct metadata only, keep build 5. Build 7 is the current candidate: it includes all build 6 fixes (SQLite, Parquet and RAR type declarations for finding 0; content-only thumbnail registrations for finding 9; removed `com.quicklookpro.*` identifiers for finding 11; empty CAD service key for finding 22) plus the settings recovery action wiring, `Q-94` native File Types search, and the fourteen-wave UI/UX elevation across Quick Look panel, Finder sidebar and companion app; the notes of step 3 name `1.1.0 (build 7)`.
 3. Re-paste the Notes for App Review from [app-store-submission.md](app-store-submission.md#notes-for-app-review)
-   (the corrected block of 2026-10-17), the What's New and the description below, and switch the release option to
+   (the corrected block naming build 7), the What's New and the description below, and switch the release option to
    Manually release this version.
 4. Re-attach `SpacePane-Review-Samples.zip`, rebuilt with `python3 script/build_review_samples.py` from the same
    commit as the notes, and replace the two screenshots named in
@@ -54,7 +57,7 @@ The release option is editable while the version is Waiting for Review without a
 | Setting | Value | Where |
 |---|---|---|
 | `MARKETING_VERSION` | `1.1.0` | `Configuration/Base.xcconfig` |
-| `CURRENT_PROJECT_VERSION` | `5` (build 3 was 1.0.0's submission; build 4 was 1.1.0's first submission and carried the unreachable CAD client code that Guideline 2.5.19 rules out, so it is replaced; macOS build numbers must keep rising) | `Configuration/Base.xcconfig` |
+| `CURRENT_PROJECT_VERSION` | `8` (build 3 was 1.0.0's submission, build 4 and build 5 were removed from review, build 6 was rejected under Guideline 5.6 on 2026-10-23, build 7 was internal TestFlight only; macOS build numbers must keep rising) | `Configuration/Base.xcconfig` |
 | `PREV_INCLUDE_CAD` | `NO` (decision 028 still holds: no STEP or IGES) | `Configuration/Base.xcconfig` |
 | Shipped languages | English only; no translation has a recorded review | `tools/localization/languages.json` |
 
@@ -63,13 +66,15 @@ The app, both extensions and the CAD service read these through `$(MARKETING_VER
 
 ## What 1.1.0 contains since 1.0.0 (build 3)
 
-From [CHANGELOGS.md](../../CHANGELOGS.md), 2026-10-14 and 2026-10-15:
+From [CHANGELOGS.md](../../CHANGELOGS.md), 2026-10-14 through 2026-10-22:
 
 - **Safety Lens 2** ([decision 029](../decisions/029-safety-lens-2-what-a-file-will-do.md)): script effects (shell, AppleScript, PowerShell, batch, `.tool`), auto-run configuration (VS Code tasks and workspace files, Claude Code and Cursor hooks, MCP servers, dev containers, `package.json`), readable credential exports, launchd jobs, certificate and profile validity, Mesh Print Check, Copy Findings Report.
 - **Safety Lens 3** ([decision 030](../decisions/030-safety-lens-3-models-add-ons-and-packages.md)): seven new formats (GGUF, safetensors, pickle and PyTorch, MCP bundles, editor extensions, browser extensions, Python wheels) and install findings in npm and Python source packages. 74 file types become 81.
 - **Tier 1 quick wins**: OpenAPI and Swagger endpoint table, download-then-run across lines, property-list slashes, Command-F in table modes (companion), provenance notes in the information panel.
 - **No typed filter in Finder** (PR 9, merged 2026-10-15): Finder previews offer no typed filter, find or go-to-line; the table filter opens on demand in the companion; the invisibles note and the profile's sampling and concealed-column notes are removed.
 - 31 of Apple's exact source and script types are now claimed, so `.swift`, `.py`, `.sh`, `.zsh`, `.command` and AppleScript reach SpacePane in the panel (observed 2026-10-14).
+- **Build 6 fixes** (PR 13, merged 2026-10-17): SQLite, Parquet and RAR imported UTIs conform to `public.data`; generic formats no longer register for thumbnails; `com.quicklookpro.*` identifiers are removed; `CADImportServiceIdentifier` is empty when `PREV_INCLUDE_CAD = NO`.
+- **Build 7 UI/UX & Companion fixes** (2026-10-20 to 2026-10-22): General storage status recovery actions wired; `Q-94` native File Types search (`⌘F`, short pattern summaries, spoken count announcements); 14 waves of Quick Look panel, compact Finder sidebar (`⇧⌘P`) and companion app UI/UX improvements.
 
 ## Store text for 1.1.0 (drafts)
 
@@ -98,7 +103,7 @@ Promotional text can change without a new version; switch to this when 1.1.0 is 
 Press Space and see what a file will do: scripts, editor tasks, AI models, extensions and packages explained. Made on your Mac, read-only, with likely secrets concealed.
 ```
 
-### Description (3,757 of 4,000 characters)
+### Description (3,797 of 4,000 characters)
 
 The 1.0 description with one bullet added under STRUCTURE, three under KNOW WHAT'S HIDDEN INSIDE, and 74 changed to 81
 (the catalog has 81 `id` entries; recounted 2026-10-17). Name, subtitle and keywords are unchanged. Two bullets were
@@ -112,7 +117,7 @@ Quick Look previews that tell you what's really in a file.
 Select a file in Finder and press Space. Where your Mac shows a blank icon or a wall of text, SpacePane shows structure: JSON opens as an outline you can fold, a SQLite database as its tables, an archive as a list of what's inside. It also points out what you can't see, such as hidden characters, risky archive entries and likely passwords and keys, which appear as ••••. Everything is read on your Mac and nothing is changed.
 
 HOW IT WORKS
-SpacePane is a small setup app with two Quick Look extensions: SpacePane Preview and SpacePane Thumbnails. Turn them on once in System Settings, then use Quick Look as you always do. There is no new app to switch to and nothing to learn.
+SpacePane is a small setup app with two Quick Look extensions: SpacePane Preview and SpacePane Thumbnails. Turn them on once in System Settings, then use Quick Look as you always do. The app's Try Preview page (File > Open) shows any supported file with the same preview engine.
 
 macOS chooses which app previews each file type. When it uses SpacePane, you get:
 
@@ -129,7 +134,6 @@ STRUCTURE, NOT A WALL OF TEXT
 • Source code with syntax coloring for 84 languages
 • Text files that have no extension, such as Makefile or zprofile
 • 3MF models you can turn
-
 • GGUF and safetensors models, PyTorch files, MCP bundles, editor and browser extensions and Python wheels, summarized without running anything
 
 That is 81 file types, each with its own switch.

@@ -58,7 +58,6 @@ struct AboutNoticeRow: View {
 
     private var title: String {
         switch folder {
-        case .openCascade: PreviewStrings.text(.aboutNoticesOpenCascadeTitle)
         case .colorSchemes: PreviewStrings.text(.aboutNoticesColorSchemesTitle)
         }
     }

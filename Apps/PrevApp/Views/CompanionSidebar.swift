@@ -8,19 +8,13 @@ import PreviewRenderers
 struct CompanionSidebar: View {
     let configuration: HostedConfiguration
     let settings: CompanionSettings
-    let developerMode: Bool
     @Binding var route: CompanionRoute
     @Environment(\.locale) private var locale
 
     var body: some View {
         List(selection: selection) {
             Section {
-                ForEach(destinations(developer: false)) { destination(_: $0) }
-            }
-            if developerMode {
-                Section(PreviewStrings.text(.navigationDeveloper)) {
-                    ForEach(destinations(developer: true)) { destination(_: $0) }
-                }
+                ForEach(CompanionRoute.allCases) { destination(_: $0) }
             }
         }
         .listStyle(.sidebar)
@@ -33,10 +27,6 @@ struct CompanionSidebar: View {
     private var selection: Binding<CompanionRoute?> {
         // The list may clear its selection; the window always shows one destination.
         Binding(get: { route }, set: { if let destination = $0 { route = destination } })
-    }
-
-    private func destinations(developer: Bool) -> [CompanionRoute] {
-        CompanionRoute.available(developerMode: developerMode).filter { $0.requiresDeveloperMode == developer }
     }
 
     private func destination(_ destination: CompanionRoute) -> some View {

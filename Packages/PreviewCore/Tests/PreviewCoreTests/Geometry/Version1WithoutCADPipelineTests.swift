@@ -72,7 +72,6 @@ struct Version1WithoutCADPipelineTests {
             let pipeline = PreviewPipeline(registrations: StandardFormatAdapters.registrations)
             for url in urls {
                 let outcome = await pipeline.preview(url: url)
-                #expect(outcome != .unavailable(.cadImporterUnavailable))
                 if case .ready = outcome { Issue.record("\(url.lastPathComponent) was shown as text") }
                 if case .geometryReady = outcome { Issue.record("\(url.lastPathComponent) was shown as geometry") }
             }

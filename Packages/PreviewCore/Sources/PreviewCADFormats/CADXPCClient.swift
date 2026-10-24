@@ -23,7 +23,7 @@ enum CADXPCClient {
     static func run(serviceName: String, kind: CADFileKind, input: Data, context: RequestContext) throws -> Data {
         try context.checkpoint()
         guard !serviceName.isEmpty, serviceName.utf8.count <= 255,
-              !serviceName.contains("\0"), !serviceName.contains("/") else { throw PreviewFailure.cadImporterUnavailable }
+              !serviceName.contains("\0"), !serviceName.contains("/") else { throw PreviewFailure.unreadableFile }
         guard input.count <= min(context.budget.maxInputBytes, GeometryLimits.maximumInputBytes) else {
             throw PreviewFailure.inputTooLarge
         }
@@ -36,8 +36,8 @@ enum CADXPCClient {
                          context: RequestContext) throws -> Data {
         let reply = ReplyState(maximumBytes: min(context.budget.maxOutputUTF8Bytes, GeometryLimits.maximumSerializedBytes))
         connection.remoteObjectInterface = CADImportService.interface()
-        connection.invalidationHandler = { reply.complete(.failure(.cadImporterUnavailable)) }
-        connection.interruptionHandler = { reply.complete(.failure(.cadImporterUnavailable)) }
+        connection.invalidationHandler = { reply.complete(.failure(.unreadableFile)) }
+        connection.interruptionHandler = { reply.complete(.failure(.unreadableFile)) }
         connection.resume()
         let requestID = UUID().uuidString
         var proxy: (any CADImportServiceProtocol)?
@@ -48,9 +48,9 @@ enum CADXPCClient {
         }
         proxy = connection.remoteObjectProxyWithErrorHandler { error in
             logger.error("cad.xpc.proxyFailed code=\((error as NSError).code, privacy: .public)")
-            reply.complete(.failure(.cadImporterUnavailable))
+            reply.complete(.failure(.unreadableFile))
         } as? any CADImportServiceProtocol
-        guard let proxy else { throw PreviewFailure.cadImporterUnavailable }
+        guard let proxy else { throw PreviewFailure.unreadableFile }
         logger.debug("cad.xpc.requested")
         proxy.importGeometry(input, format: kind.rawValue, requestID: requestID) { data, status in
             reply.receive(data: data, status: status)

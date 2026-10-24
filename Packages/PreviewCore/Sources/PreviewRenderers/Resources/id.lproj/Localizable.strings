@@ -1,20 +1,16 @@
 /* Generated from Localizable.xcstrings; do not edit directly. */
-"about.acknowledgements.body" = "Pratinjau model 3D menggunakan Open CASCADE Technology di bawah GNU LGPL 2.1 dengan pengecualian Open CASCADE. Pemberitahuan lisensi disertakan bersama aplikasi.";
-"about.acknowledgements.openCascade" = "Hak cipta Open CASCADE Technology dimiliki OPEN CASCADE SAS dan para kontributornya. Kode sumber pembantu impor 3D dan penawaran tertulis untuk kode sumber pustaka tersedia untuk umum.";
 "about.acknowledgements.title" = "Ucapan Terima Kasih";
 "about.description" = "Pratinjau dan gambar mini untuk teks, data terstruktur, arsip, basis data, dan model 3D langsung di Finder, sepenuhnya di Mac Anda.";
 "about.howItWorks.body" = "Saat aplikasi ini menyediakan pratinjau, pilihan Jenis Berkas berlaku untuk pratinjau dan gambar mini Finder yang baru, dan informasi yang diduga rahasia disembunyikan sebelum konten ditampilkan, dipilih, atau disalin. Berkas dibaca secara lokal dan tidak pernah diubah. Gambar mini generik tidak berisi teks sumber. macOS memilih penyedia Quick Look.";
 "about.howItWorks.title" = "Cara kerjanya";
 "about.link.documentation" = "Dokumentasi";
 "about.link.feedback" = "Kirim Masukan";
-"about.link.openSource" = "Pemberitahuan sumber terbuka";
 "about.link.privacyPolicy" = "Kebijakan Privasi";
 "about.link.support" = "Dukungan";
 "about.link.website" = "Situs Web";
 "about.notices.colorSchemes.title" = "Pemberitahuan skema warna";
 "about.notices.open.failed" = "Folder pemberitahuan tidak dapat dibuka.";
 "about.notices.open.hint" = "Membuka folder yang tersimpan di dalam aplikasi di Finder.";
-"about.notices.openCascade.title" = "Teks lisensi Open CASCADE";
 "about.privacy.body" = "%@ memproses berkas secara lokal di Mac Anda. Tidak ada konten berkas yang keluar dari perangkat Anda.";
 "about.privacy.title" = "Privasi";
 "about.resources.title" = "Sumber Daya";
@@ -138,7 +134,6 @@
 "cad.header.schema" = "Skema: %1$@";
 "cad.header.schemaAndSystem" = "Skema: %1$@ · Dibuat dengan: %2$@";
 "cad.header.system" = "Dibuat dengan: %1$@";
-"cad.importerUnavailable" = "Pengimpor CAD tidak tersedia. Coba lagi atau periksa instalasi aplikasi.";
 "cad.interactionHelp" = "Seret untuk memutar. Seret dengan Shift atau tombol kanan untuk menggeser. Gulir untuk memperbesar. Tombol panah memutar; Shift-panah menggeser; +/− mengubah zoom; F menyesuaikan; R mengatur ulang; 1/2/3 memilih depan/samping/atas.";
 "cad.invalidGeometry" = "Model ini tidak dapat ditampilkan dengan aman.";
 "cad.measurements.open" = "Luas permukaan: %1$@ mm² · Volume tidak tersedia (permukaan tidak tertutup) · Bodi: %2$lld";
@@ -162,7 +157,6 @@
 "cad.zoomOut" = "Perkecil";
 "failure.binary" = "Berkas ini berisi konten biner yang tidak dapat ditampilkan sebagai teks.";
 "failure.body.binaryContent" = "Berisi data biner, bukan teks. Buka di aplikasi yang dibuat untuk jenis berkas ini.";
-"failure.body.cadImporterUnavailable" = "Pengimpor mungkin sedang sibuk atau terputus. Coba lagi, atau periksa apakah aplikasi terinstal dengan benar.";
 "failure.body.deadlineExceeded" = "Pemrosesan berkas ini memakan waktu lebih lama dari yang diizinkan. Coba lagi, atau buka di aplikasi yang dibuat untuk jenis berkas ini.";
 "failure.body.deadlineExceededLimit" = "Pratinjau ini memberi waktu %@ untuk memproses sebuah berkas, dan berkas ini memakan waktu lebih lama. Coba lagi, atau buka di aplikasi yang dibuat untuk jenis berkas ini.";
 "failure.body.encryptedContent" = "Isinya tidak dapat ditampilkan. Buka di aplikasi yang dapat membukanya.";
@@ -200,7 +194,6 @@
 "failure.resourceUnavailable" = "Sumber daya tampilan tidak tersedia.";
 "failure.structureLimit" = "Dokumen melebihi batas struktur pratinjau ini.";
 "failure.title.binaryContent" = "Berkas ini tidak dapat ditampilkan sebagai teks";
-"failure.title.cadImporterUnavailable" = "Pengimpor CAD tidak tersedia";
 "failure.title.deadlineExceeded" = "Pratinjau memakan waktu terlalu lama";
 "failure.title.encryptedContent" = "Berkas terenkripsi";
 "failure.title.geometryTooComplex" = "Model terlalu kompleks";
@@ -371,10 +364,6 @@
 "format.archive.zip.name" = "Arsip ZIP";
 "format.audio.midi.description" = "Format MIDI Standar 0/1 dengan pemutaran eksplisit menggunakan bank suara macOS.";
 "format.audio.midi.name" = "MIDI";
-"format.cad.iges.description" = "Pratinjau 3D lokal. Dinonaktifkan secara bawaan karena impor CAD dapat memerlukan banyak waktu dan memori.";
-"format.cad.iges.name" = "Model 3D IGES";
-"format.cad.step.description" = "Pratinjau 3D lokal. Dinonaktifkan secara bawaan karena impor CAD dapat memerlukan banyak waktu dan memori.";
-"format.cad.step.name" = "Model 3D STEP";
 "format.config.environment.description" = "Penetapan nilai hanya baca dengan informasi yang diduga rahasia disamarkan; substitusi tidak pernah dijalankan.";
 "format.config.environment.name" = "Berkas Lingkungan";
 "format.config.ini.description" = "Bagian dan pengaturan dari berkas INI, properties, dan .conf. Rahasia yang mungkin disembunyikan; tidak ada yang diperluas atau disertakan.";
@@ -521,8 +510,6 @@
 "general.banner.sharedBody" = "Aktifkan ekstensi di Pengaturan Sistem. macOS memilih penyedia pratinjau dan gambar mini.";
 "general.banner.sharedTitle" = "Pengaturan dibagikan dengan ekstensi Quick Look";
 "general.banner.unavailableTitle" = "Penyimpanan pengaturan tidak tersedia";
-"general.developerMode.subtitle" = "Menampilkan halaman Coba Pratinjau di bilah samping (⌘5) dan perintah Buka Berkas (⌘O) agar Anda dapat membuka berkas langsung di aplikasi ini.";
-"general.developerMode.title" = "Mode Pengembang";
 "general.finder.foldersSubtitle" = "Meringkas isi langsung folder di Quick Look.";
 "general.finder.foldersTitle" = "Pratinjau folder";
 "general.finder.setupTitle" = "Aktifkan ekstensi";
@@ -535,8 +522,7 @@
 "general.limits.title" = "Batas pratinjau teks";
 "general.storage.title" = "Penyimpanan pengaturan";
 "general.subtitle" = "Siapkan integrasi Finder dan Quick Look.";
-"help.keyboard.body" = "⌘1 hingga ⌘4 berpindah antarhalaman. ⌘, membuka Umum. ⌘Z membatalkan pengaturan ulang, perubahan massal, impor tema, atau penghapusan profil terakhir; ⇧⌘Z mengulanginya.";
-"help.keyboard.bodyDeveloper" = "⌘1 hingga ⌘5 berpindah antarhalaman. ⌘O membuka berkas di Coba Pratinjau. ⌘, membuka Umum. ⌘Z membatalkan pengaturan ulang, perubahan massal, impor tema, atau penghapusan profil terakhir; ⇧⌘Z mengulanginya.";
+"help.keyboard.body" = "⌘1 hingga ⌘5 berpindah antarhalaman. ⌘O membuka berkas di Coba Pratinjau. ⌘, membuka Umum. ⌘Z membatalkan pengaturan ulang, perubahan massal, impor tema, atau penghapusan profil terakhir; ⇧⌘Z mengulanginya.";
 "help.keyboard.title" = "Pintasan keyboard";
 "listing.risk.hiddenCharacters" = "Karakter tersembunyi dalam nama";
 "mesh.printCheck.estimate" = "Jika dicetak padat dengan PLA: sekitar %1$@ %2$@ dan %3$@ %4$@ filamen berdiameter %5$@ %6$@. Slicer biasanya mencetak dengan isian lebih sedikit, jadi ini adalah batas atas.";
@@ -553,7 +539,6 @@
 "midi.positionValue" = "%1$@ dari %2$@";
 "midi.soundBankUnavailable" = "Bank suara macOS tidak dapat dimuat.";
 "navigation.about" = "Tentang";
-"navigation.developer" = "Pengembang";
 "navigation.general" = "Umum";
 "navigation.help" = "Bantuan";
 "navigation.settings" = "Pengaturan";

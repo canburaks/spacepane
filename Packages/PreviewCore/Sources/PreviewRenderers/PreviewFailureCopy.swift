@@ -83,8 +83,6 @@ enum PreviewFailureCopy {
             return pair(.failureTitleUnsupportedEncoding, .failureBodyUnsupportedEncoding, preferences)
         case .malformedDocument:
             return pair(.failureTitleMalformedDocument, .failureBodyMalformedDocument, preferences)
-        case .cadImporterUnavailable:
-            return pair(.failureTitleCadImporterUnavailable, .failureBodyCadImporterUnavailable, preferences)
         case .encryptedContent:
             return pair(.failureTitleEncryptedContent, .failureBodyEncryptedContent, preferences)
         case .structureTooDeep:

@@ -19,5 +19,6 @@ PREV_DOCUMENTATION_URL =
 PREV_PRIVACY_POLICY_URL = https:/$()/spacepane.com/privacy.html
 PREV_FEEDBACK_URL =
 // Where the written offer for the 3D import helper's source and the Open CASCADE library lives (LGPL 2.1
-// section 6). About shows it under Acknowledgements. Keep it https and public for as long as the offer runs.
-PREV_OPEN_SOURCE_URL = https:/$()/github.com/canburaks/spacepane-cad-source
+// section 6). Empty while the product ships without CAD (decision 028): About has no link to a helper the app does
+// not contain. Bringing CAD back sets it to https://github.com/canburaks/spacepane-cad-source again.
+PREV_OPEN_SOURCE_URL =

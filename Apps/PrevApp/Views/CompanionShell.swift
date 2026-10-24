@@ -33,11 +33,10 @@ struct CompanionShell: View {
     var body: some View {
         // A fixed sidebar is the only navigation, so it cannot be collapsed or resized away.
         HStack(spacing: 0) {
-            CompanionSidebar(configuration: configuration, settings: settings,
-                             developerMode: preferences.developerMode, route: $route)
+            CompanionSidebar(configuration: configuration, settings: settings, route: $route)
                 .frame(width: CompanionMetrics.sidebarWidth)
             Divider().ignoresSafeArea()
-            content(for: route.resolved(developerMode: preferences.developerMode))
+            content(for: route)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .frame(minWidth: 820, minHeight: 560)
@@ -46,8 +45,6 @@ struct CompanionShell: View {
         .focusedSceneValue(\.previewSession, session)
         .fileImporter(isPresented: $session.presentsFileImporter,
                       allowedContentTypes: FormatCatalog.standard.descriptors.flatMap(\.contentTypes)) { result in
-            // A picker requested before Developer Mode was turned off must not reveal its destination.
-            guard preferences.developerMode else { return }
             switch result {
             case .success(let url):
                 route = .tryPreview
@@ -58,11 +55,6 @@ struct CompanionShell: View {
             }
         }
         .task { await settings.load() }
-        .onChange(of: preferences.developerMode) {
-            route = route.resolved(developerMode: preferences.developerMode)
-            // A hidden destination must not keep a file that a later settings change would reread.
-            if !preferences.developerMode { session.close() }
-        }
         // The window opens on the page it was left on.
         .onChange(of: route) { preferences.setLastRoute(route) }
         .onChange(of: undoManager) { settings.attachUndoManager(undoManager) }
@@ -86,18 +78,17 @@ struct CompanionShell: View {
 
     /// The page that is showing, then the app, so the window is named after what it shows.
     private var windowTitle: String {
-        route.resolved(developerMode: preferences.developerMode)
-            .windowTitle(appName: configuration.displayName, locale: locale)
+        route.windowTitle(appName: configuration.displayName, locale: locale)
     }
 
     @ViewBuilder private func content(for route: CompanionRoute) -> some View {
         switch route {
         case .general:
-            GeneralView(configuration: configuration, settings: settings, preferences: preferences,
+            GeneralView(configuration: configuration, settings: settings,
                         diagnostics: diagnostics)
         case .fileTypes: FileTypeSettingsView(settings: settings)
         case .theme: AppearanceSettingsView(settings: settings, sample: sampleSession)
-        case .about: AboutView(configuration: configuration, developerMode: preferences.developerMode)
+        case .about: AboutView(configuration: configuration)
         case .tryPreview: DirectPreviewView(session: session, settings: settings)
         }
     }

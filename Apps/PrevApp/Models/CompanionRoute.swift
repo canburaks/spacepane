@@ -7,23 +7,8 @@ enum CompanionRoute: String, CaseIterable, Identifiable {
     case general, fileTypes, theme, about, tryPreview
     var id: Self { self }
 
-    /// Developer destinations stay out of the sidebar, menus and shortcuts until Developer Mode is on.
-    var requiresDeveloperMode: Bool { self == .tryPreview }
-
-    static func available(developerMode: Bool) -> [Self] {
-        allCases.filter { developerMode || !$0.requiresDeveloperMode }
-    }
-
-    /// A destination that is no longer offered resolves to the first page.
-    func resolved(developerMode: Bool) -> Self {
-        requiresDeveloperMode && !developerMode ? .general : self
-    }
-
-    /// The Help sentence about keyboard shortcuts. While Developer Mode is on it also names Command-5 and Command-O,
-    /// the two shortcuts that mode adds, so the help never lists fewer pages than the View menu offers.
-    static func keyboardHelp(developerMode: Bool) -> PreviewStrings.Key {
-        developerMode ? .helpKeyboardBodyDeveloper : .helpKeyboardBody
-    }
+    // Every destination is always offered: the sidebar, the View menu and Command-1 to Command-5 list the same
+    // five pages, and nothing is revealed by a setting (App Review Guidelines 2.5.19 and 5.6).
 
     var shortcutKey: KeyEquivalent {
         switch self {

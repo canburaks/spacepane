@@ -102,7 +102,7 @@ enum CADWorkerProcess {
         }
         try context.checkpoint()
         if isCancelled() { throw CancellationError() }
-        guard let status = child.status else { throw PreviewFailure.cadImporterUnavailable }
+        guard let status = child.status else { throw PreviewFailure.unreadableFile }
         // Darwin's wait status macros are not imported into Swift: low seven bits
         // distinguish signal termination, and the following byte is the exit code.
         guard status & 0x7f == 0 else { throw PreviewFailure.outputTooLarge }
@@ -114,13 +114,13 @@ enum CADWorkerProcess {
         case 3: throw PreviewFailure.unsupportedFormat
         case 4: throw PreviewFailure.outputTooLarge
         case 6: throw PreviewFailure.geometryTooComplex
-        default: throw PreviewFailure.cadImporterUnavailable
+        default: throw PreviewFailure.unreadableFile
         }
     }
 
     private static func launchFailure(_ code: Int32) -> PreviewFailure {
         logger.error("cad.worker.launchFailed errno=\(code, privacy: .public)")
-        return .cadImporterUnavailable
+        return .unreadableFile
     }
 
     private static func normalizeDescriptor(_ descriptor: Int32) throws -> Int32 {
@@ -167,7 +167,7 @@ enum CADWorkerProcess {
                 if result == 0 { return }
                 if errno == EINTR { continue }
                 if errno == ECHILD { reaped = true }
-                throw PreviewFailure.cadImporterUnavailable
+                throw PreviewFailure.unreadableFile
             }
         }
 
