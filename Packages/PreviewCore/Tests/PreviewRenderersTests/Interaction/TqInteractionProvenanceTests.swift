@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import PreviewTestSupport
 import Testing
 import PreviewContracts
 @testable import PreviewRenderers
@@ -91,7 +92,7 @@ struct TqInteractionProvenanceTests {
         let host = harness()
         defer { host.release() }
         host.view.display(.geometryReady(try geometry()), locale: english)
-        let note = PreviewStrings.text(.cadPrivacyNotice)
+        let note = PreviewStrings.text(.geometryPrivacyNotice)
         #expect(!host.view.statusLabel.stringValue.contains(note))
         #expect(openedPanelLines(host).contains(note))
     }
@@ -154,7 +155,7 @@ struct TqInteractionProvenanceTests {
         let mesh = try PreviewMesh(positions: [SIMD3<Float>(-1, -1, 0), SIMD3<Float>(1, -1, 0), SIMD3<Float>(0, 1, 0)],
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: GeometryBounds(minimum: .zero, maximum: SIMD3<Double>(20, 20, 1)), faceCount: 1,
-            measurements: nil, headerFacts: nil, unitProvenance: .declared(.millimetre))
-        return GeometryPresentation(formatID: .step, mesh: mesh, byteCount: 100)
+            measurements: nil, unitProvenance: .declared(.millimetre))
+        return GeometryPresentation(formatID: CADTestFormatIDs.step, mesh: mesh, byteCount: 100)
     }
 }

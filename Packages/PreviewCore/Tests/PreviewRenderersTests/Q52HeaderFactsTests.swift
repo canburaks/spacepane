@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import PreviewTestSupport
 import Testing
 import PreviewContracts
 @testable import PreviewRenderers
@@ -48,7 +49,7 @@ struct Q52HeaderFactsTests {
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: GeometryBounds(minimum: .zero, maximum: SIMD3<Double>(20, 20, 1)),
             faceCount: GeometryLimits.maximumFaces, unitProvenance: .declared(.millimetre), faceCountIsCapped: true)
-        host.view.display(.geometryReady(GeometryPresentation(formatID: .step, mesh: mesh, byteCount: 123)), locale: english)
+        host.view.display(.geometryReady(GeometryPresentation(formatID: CADTestFormatIDs.step, mesh: mesh, byteCount: 123)), locale: english)
         host.view.layoutSubtreeIfNeeded()
         let symbol = try #require(GeometrySummaryUnits(.declared(.millimetre))?.lengthSymbol(locale: english))
         #expect(host.view.displayedFacts == [format(.previewFactsFaces, [format(.previewFactsLowerBound, ["100,000"])]),

@@ -239,8 +239,9 @@ import PreviewContracts
         expectClose(mesh.measurements?.surfaceAreaSquareMillimetres, 2200)
         expectClose(mesh.measurements?.volumeCubicMillimetres, 6000)
         #expect(mesh.measurements?.bodyCount == 1)
-        #expect(mesh.headerFacts == CADHeaderFacts(schema: .stepAP242, originatingSystem: "Example CAD 9.1"))
-        #expect(!String(describing: mesh.headerFacts).contains("Person") && !String(describing: mesh.headerFacts).contains("Acme"))
+        let facts = CADHeaderReader.facts(kind: .step, data: source)
+        #expect(facts == CADHeaderFacts(schema: .stepAP242, originatingSystem: "Example CAD 9.1"))
+        #expect(!String(describing: facts).contains("Person") && !String(describing: facts).contains("Acme"))
     }
 
     /// The importer's private numeric protocol, so the decoder path is exercised with the same bytes.

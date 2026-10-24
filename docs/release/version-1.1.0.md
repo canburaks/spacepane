@@ -27,7 +27,8 @@ earlier 1.1.0 submissions as Removed and no 1.0.0 submission at all.
 | 2026-10-22 20:51 | 1.1.0 | 7 (`fix/settings-recovery-file-types-search`, archived 20:47, exported with Apple Distribution signing; it includes the unreviewed UI polish commit `685dbf4`, kept on the local branch `ui-ux-waves-2026-10-20`) | Uploaded with `--upload` on the owner's instruction; internal TestFlight only; never submitted | corrected block (build 7) | unchanged until the owner edits it |
 | 2026-10-17 19:14 (read 2026-10-24) | 1.1.0 | 6 | **Rejected 2026-10-23 19:06, Guideline 5.6 Developer Code of Conduct**: "features that appear to have been intentionally hidden during the review process". The submission had replaced build 5 (Removed). Causes found: the Developer Mode switch, the store description missing the Safety Lens 2 and 3 features, and leftover CAD text; see [decision 031](../decisions/031-nothing-hidden.md) | build 6 block, with the Developer Mode paragraph | Manual |
 | 2026-10-24 10:13 | 1.1.0 | 8 (merged `main` at `8b8f2b0`, archived and exported 2026-10-24, uploaded 10:06 through the signed-in Xcode account) | Waiting for Review from 10:13, then **cancelled by the developer at about 10:40** so that build 9 could replace it (owner: "change the current submission to that build"); it had been resubmitted in the same submission as build 6 on the owner's instruction ("The rest is yours"), after replacing the description with the 3,797-character text, pasting the build 8 notes, removing the Theme screenshot (it showed the four-page sidebar; five screenshots remain) and replying to App Review at 10:11 with `docs/release/app-review-reply-2026-10-24.md` | build 8 block | Manual |
-| 2026-10-24 | 1.1.0 | 9 (`build9-ui-polish`: build 8 plus the UI polish commit `685dbf4`, its table and endpoint-layout fixes and the copy-commands description line; archived, exported and uploaded 10:35 through the signed-in Xcode account) | Replaces build 8 in a new submission; the description (3,888 characters) and the build 9 notes were saved first | build 9 block | Manual |
+| 2026-10-24 | 1.1.0 | 9 (`build9-ui-polish`: build 8 plus the UI polish commit `685dbf4`, its table and endpoint-layout fixes and the copy-commands description line; archived, exported and uploaded 10:35 through the signed-in Xcode account) | Submitted by the owner at 11:33 with the Retina screenshots 08 and 09 added (seven screenshots); cancelled at 18:3x on the owner's instruction ("Go and do everything") so that build 10 replaced it | build 9 block | Manual |
+| 2026-10-24 18:34 | 1.1.0 | 10 (`build10-no-cad-traces`: build 9 without any CAD name, decision 031 amendment; uploaded 18:24 through the signed-in Xcode account) | **Waiting for Review** (submission of 18:34); description of 3,986 characters with 83 languages saved, build 10 notes, seven screenshots | build 10 block | Manual |
 
 Also on the version page on 2026-10-17: sign-in required off, attachment `SpacePane-Review-Samples.zip`, six Mac
 screenshots, and the description of 1.0 ("That is 74 file types") rather than the 1.1.0 text below. Builds 1.0.0 (1)
@@ -104,7 +105,7 @@ Promotional text can change without a new version; switch to this when 1.1.0 is 
 Press Space and see what a file will do: scripts, editor tasks, AI models, extensions and packages explained. Made on your Mac, read-only, with likely secrets concealed.
 ```
 
-### Description (3,888 of 4,000 characters)
+### Description (3,986 of 4,000 characters)
 
 The 1.0 description with one bullet added under STRUCTURE, three under KNOW WHAT'S HIDDEN INSIDE, and 74 changed to 81
 (the catalog has 81 `id` entries; recounted 2026-10-17). Name, subtitle and keywords are unchanged. Two bullets were
@@ -132,13 +133,13 @@ STRUCTURE, NOT A WALL OF TEXT
 • CSV and TSV as sortable tables with a profile of every column, where macOS uses SpacePane for them
 • Mermaid and draw.io diagrams, Parquet files, EPUB books, comics and subtitles
 • MIDI files with play and scrub controls
-• Source code with syntax coloring for 84 languages
+• Source code with syntax coloring for 83 languages
 • Text files that have no extension, such as Makefile or zprofile
 • 3MF models you can turn
 • GGUF and safetensors models, PyTorch files, MCP bundles, editor and browser extensions and Python wheels, summarized without running anything
 • Right-click a table, an outline or a listing to copy a value, a row, every row or a path
 
-That is 81 file types, each with its own switch.
+That is 81 file types, among them app bundles, installers, disk images, certificates, map data and LaTeX, each with its own switch.
 
 KNOW WHAT'S HIDDEN INSIDE
 Most previews show what a file looks like. SpacePane also tells you what to check first.
@@ -154,13 +155,13 @@ These are things for you to review, not a verdict that a file is safe.
 PRIVATE BY DESIGN
 • Every preview is made on your Mac
 • The app and its extensions have no network access
-• Files are only read, never changed
+• Previewed files are only read, never changed
 • Scripts inside files never run
 • No account, no analytics, no ads
 
 MAKE IT YOURS
 • Turn any file type off and SpacePane leaves it alone
-• Light, Dark and High Contrast themes with 12 color schemes
+• Light and Dark themes with 12 color schemes, plus High Contrast
 • Your font, size, spacing and line numbers
 • Save your look as a profile and share it as a small theme file
 

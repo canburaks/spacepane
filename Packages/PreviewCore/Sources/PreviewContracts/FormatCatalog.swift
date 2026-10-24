@@ -25,8 +25,6 @@ public struct FormatID: RawRepresentable, Hashable, Codable, Sendable {
     public static let webVTT = FormatID(rawValue: "text.webvtt")
     public static let nfo = FormatID(rawValue: "text.nfo")
     public static let jupyterNotebook = FormatID(rawValue: "text.jupyter-notebook")
-    public static let iges = FormatID(rawValue: "cad.iges")
-    public static let step = FormatID(rawValue: "cad.step")
     /// Text in a file whose name has no extension; macOS types every such file as plain data.
     public static let extensionlessText = FormatID(rawValue: "text.extensionless")
 }

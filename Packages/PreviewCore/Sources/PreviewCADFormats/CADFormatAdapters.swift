@@ -55,7 +55,6 @@ struct CADFormatAdapter: GeometryFormatAdapter {
         let headerFacts = CADHeaderReader.facts(kind: kind, data: input.data)
         // The importer reports the unit the file declared when it knows it; an IGES header can say it when the importer does not.
         let provenance = CADUnitProvenance.resolve(reported: mesh.unitProvenance, kind: kind, headerFacts: headerFacts)
-        return mesh.attaching(measurements: measurements?.declaring(unitProvenance: provenance), headerFacts: headerFacts,
-                              unitProvenance: provenance)
+        return mesh.attaching(measurements: measurements?.declaring(unitProvenance: provenance), unitProvenance: provenance)
     }
 }

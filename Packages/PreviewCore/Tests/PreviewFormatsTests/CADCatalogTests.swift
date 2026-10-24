@@ -35,11 +35,11 @@ func CADAliasesKeepIndependentIdentityAheadOfTextFallback(suffix: String) throws
 
 @Test func CatalogDefaultEnablementHasOneOwnerAndPreservesExistingTypes() throws {
     let catalog = try CADCatalogFixture.catalog()
-    #expect(FormatID.iges.rawValue == "cad.iges")
-    #expect(FormatID.step.rawValue == "cad.step")
+    #expect(CADTestFormatIDs.iges.rawValue == "cad.iges")
+    #expect(CADTestFormatIDs.step.rawValue == "cad.step")
     #expect(catalog.descriptors.count == FormatCatalog.standard.descriptors.count + 2)
     for descriptor in catalog.descriptors {
-        #expect(descriptor.defaultEnabled == ![FormatID.iges, .step].contains(descriptor.id))
+        #expect(descriptor.defaultEnabled == ![CADTestFormatIDs.iges, CADTestFormatIDs.step].contains(descriptor.id))
         #expect(PreviewPreferencesSnapshot.defaults.isEnabled(descriptor.id, catalog: catalog) == descriptor.defaultEnabled)
     }
 }
@@ -58,8 +58,8 @@ func CADAliasesKeepIndependentIdentityAheadOfTextFallback(suffix: String) throws
     // 74 in build 3, plus the seven formats of decision 030.
     #expect(descriptors.count == 81)
     #expect(!descriptors.contains { $0.id.rawValue.hasPrefix("cad.") })
-    #expect(FormatCatalog.standard.descriptor(for: .iges) == nil)
-    #expect(FormatCatalog.standard.descriptor(for: .step) == nil)
+    #expect(FormatCatalog.standard.descriptor(for: CADTestFormatIDs.iges) == nil)
+    #expect(FormatCatalog.standard.descriptor(for: CADTestFormatIDs.step) == nil)
 }
 
 @Test func theMeshFormatsStayInTheProductCatalogWithTheGeometryViewer() throws {

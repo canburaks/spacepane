@@ -6,12 +6,11 @@ import Testing
 @Suite("Geometry summary units and counts", .serialized)
 @MainActor
 struct GeometrySummaryUnitsTests {
-    private func mesh(_ provenance: GeometryUnitProvenance, capped: Bool = false, measurements: GeometryMeasurements? = nil,
-                      headerFacts: CADHeaderFacts? = nil) throws -> PreviewMesh {
+    private func mesh(_ provenance: GeometryUnitProvenance, capped: Bool = false, measurements: GeometryMeasurements? = nil) throws -> PreviewMesh {
         try PreviewMesh(positions: [SIMD3<Float>(-1, -1, 0), SIMD3<Float>(1, -1, 0), SIMD3<Float>(0, 1, 0)],
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: GeometryBounds(minimum: SIMD3<Double>(0, 0, 0), maximum: SIMD3<Double>(20, 20, 1)),
-            faceCount: capped ? GeometryLimits.maximumFaces : 1, measurements: measurements, headerFacts: headerFacts,
+            faceCount: capped ? GeometryLimits.maximumFaces : 1, measurements: measurements,
             unitProvenance: provenance, faceCountIsCapped: capped)
     }
 
@@ -115,16 +114,15 @@ struct GeometrySummaryUnitsTests {
 
     @Test(arguments: ["tr", "de", "fr", "zh-Hans", "ja", "hi", "ku-Latn", "ru", "id", "bn", "ha", "pt", "es"])
     func everyLanguageCompletesEveryTemplate(language: String) throws {
-        let facts = CADHeaderFacts(schema: .stepAP214, originatingSystem: "Example CAD 9")
         for provenance in [GeometryUnitProvenance.undeclared, .assumedMillimetres, .declared(.inch)] {
             for capped in [false, true] {
                 for isSolid in [true, false] {
                     let measured = try measurements(provenance, volume: isSolid ? 6_000 : nil, bodies: 2)
-                    let result = lines(try mesh(provenance, capped: capped, measurements: measured, headerFacts: facts),
+                    let result = lines(try mesh(provenance, capped: capped, measurements: measured),
                                        language: language)
-                    #expect(result.count == 3, "\(language)")
+                    #expect(result.count == 2, "\(language)")
                     for line in result {
-                        #expect(!line.isEmpty && !line.contains("%") && !line.contains("cad."), "\(language): \(line)")
+                        #expect(!line.isEmpty && !line.contains("%") && !line.contains("geometry."), "\(language): \(line)")
                     }
                 }
             }

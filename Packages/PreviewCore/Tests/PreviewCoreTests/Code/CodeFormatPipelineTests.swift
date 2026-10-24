@@ -1,6 +1,7 @@
 import Foundation
 import Synchronization
 import Testing
+import PreviewTestSupport
 import UniformTypeIdentifiers
 import PreviewContracts
 import PreviewCore
@@ -46,7 +47,7 @@ struct CodeCatalogTests {
         }
         // Every catalog format has a registration and vice versa.
         // (The CAD formats are registered by their own module.)
-        #expect(Set(catalog.descriptors.map(\.id)).subtracting([.iges, .step]) == registered)
+        #expect(Set(catalog.descriptors.map(\.id)).subtracting([CADTestFormatIDs.iges, CADTestFormatIDs.step]) == registered)
     }
 
     @Test func noSuffixOrFilenameBelongsToTwoFormats() {

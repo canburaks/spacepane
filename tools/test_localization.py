@@ -70,7 +70,7 @@ class PlaceholderTests(unittest.TestCase):
             "appearance.unavailableFontFamily", 
             "appearance.syntax.control", "appearance.profile.deleteNamed",
             "appearance.profile.count", "appearance.sample.status",
-            "preview.records.invalid", "preview.records.record", "midi.positionValue", "cad.summary.dimensions",
+            "preview.records.invalid", "preview.records.record", "midi.positionValue", "geometry.summary.dimensions",
             "preview.table.column", "preview.table.accessibilityLabel",
             "notebook.language", "notebook.cell.codeNumbered", "notebook.output.numbered", "notebook.output.notShown",
             "notebook.output.moreLines", "notebook.truncated",

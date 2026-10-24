@@ -178,9 +178,14 @@ class CADServiceKeyTests(unittest.TestCase):
         values.update(overrides)
         return values
 
-    def problems(self, info, settings=None):
+    def problems(self, info, settings=None, include_cad=True):
         return validate_project.cad_service_key_problems(info, self.settings() if settings is None else settings,
-                                                         self.SERVICE)
+                                                         self.SERVICE, include_cad)
+
+    def test_without_cad_the_key_is_absent_and_any_key_is_refused(self):
+        self.assertEqual(self.problems({}, include_cad=False), [])
+        self.assertTrue(self.problems(self.KEY, include_cad=False))
+        self.assertTrue(self.problems({"CADImportServiceIdentifier": ""}, include_cad=False))
 
     def test_the_key_resolves_to_the_service_only_when_cad_is_included(self):
         self.assertEqual(self.problems(self.KEY), [])
@@ -199,9 +204,11 @@ class CADServiceKeyTests(unittest.TestCase):
 
     def test_the_real_configuration_resolves_in_both_modes(self):
         info = plist("Preview-Info.plist")
-        self.assertEqual(info["CADImportServiceIdentifier"], "$(PREV_CAD_SERVICE_IDENTIFIER)")
+        # Version 1.x ships without CAD, so the key is absent (decision 031); with CAD it would name the service.
+        self.assertNotIn("CADImportServiceIdentifier", info)
         settings = validate_project.xcconfig(ROOT / "Configuration/Base.xcconfig")
-        self.assertEqual(self.problems(info, settings), [])
+        self.assertEqual(self.problems(info, settings, include_cad=False), [])
+        self.assertEqual(self.problems({**info, **self.KEY}, settings, include_cad=True), [])
         for mode, expected in (("YES", settings["PREV_CAD_SERVICE_IDENTIFIER_YES"]), ("NO", "")):
             values = {**settings, "PREV_INCLUDE_CAD": mode}
             self.assertEqual(validate_project.resolve_setting(values, "PREV_CAD_SERVICE_IDENTIFIER"),

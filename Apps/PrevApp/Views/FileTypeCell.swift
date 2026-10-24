@@ -67,7 +67,7 @@ struct FileTypeCell: View {
             return .previewModeCues
         }
         switch format.primaryView {
-        case .geometry: return .cadViewportLabel
+        case .geometry: return .geometryViewportLabel
         case .rendered: return .previewModeRendered
         case .pages: return .previewModePages
         case .diagram: return .previewModeDiagram

@@ -72,7 +72,7 @@ struct ThumbnailPolicyTests {
     /// Version 1.0 does not ship the CAD formats; the descriptors kept for their return still draw only a generic glyph.
     @Test func keptCADDescriptorsStayGenericWhateverTheSwitch() throws {
         let cad = try CADCatalogFixture.catalog()
-        for id in [FormatID.iges, .step] {
+        for id in [CADTestFormatIDs.iges, CADTestFormatIDs.step] {
             #expect(try #require(cad.descriptor(for: id)).thumbnail == .generic)
             #expect(ThumbnailPolicyEvaluator.resolve(.enabled(id), catalog: cad) == .fallback(.genericPolicy))
         }

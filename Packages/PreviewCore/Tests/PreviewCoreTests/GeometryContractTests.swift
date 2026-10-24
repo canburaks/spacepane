@@ -46,46 +46,24 @@ struct GeometryContractTests {
         #expect(GeometryMeasurements(surfaceAreaSquareMillimetres: 1, volumeCubicMillimetres: 1, bodyCount: 0) == nil)
     }
 
-    @Test func headerFactsOnlyCarryShortTechnicalSystemNames() {
-        #expect(CADHeaderFacts().isEmpty)
-        #expect(CADHeaderFacts(originatingSystem: "Open CASCADE 7.9").originatingSystem == "Open CASCADE 7.9")
-        #expect(CADHeaderFacts(originatingSystem: "A.B_C (x)/1+2-3").originatingSystem == "A.B_C (x)/1+2-3")
-        let unsafe = ["Jane Doe <jane@example.com>", "C:\\Users\\jane", "name;drop", "caf\u{00E9}", "tab\there", "line\nbreak",
-                      "emoji \u{1F600}", String(repeating: "x", count: CADHeaderFacts.maximumSystemNameLength + 1), ""]
-        for value in unsafe { #expect(CADHeaderFacts(originatingSystem: value).originatingSystem == nil, "\(value.debugDescription)") }
-        #expect(CADHeaderFacts(originatingSystem: String(repeating: "x", count: CADHeaderFacts.maximumSystemNameLength))
-            .originatingSystem?.count == CADHeaderFacts.maximumSystemNameLength)
-        #expect(!CADHeaderFacts(schema: .stepAP242).isEmpty)
-        #expect(CADHeaderFacts(sourceUnit: "MM").sourceUnit == "MM")
-        #expect(CADHeaderFacts(sourceUnit: "far too long unit name").sourceUnit == nil)
-    }
-
-    @Test func schemaDisplayNamesAreTechnicalIdentifiers() {
-        #expect([CADSchema.stepAP203, .stepAP203Edition2, .stepAP214, .stepAP242].map(\.displayName) == ["AP203", "AP203e2", "AP214", "AP242"])
-        #expect(IGESRevision.allCases.map { CADSchema.iges($0).displayName }
-            == ["IGES 1.0", "IGES 2.0", "IGES 3.0", "IGES 4.0", "IGES 5.0", "IGES 5.1", "IGES 5.2", "IGES 5.3"])
-        #expect(IGESRevision(rawValue: 11) == .version5_3 && IGESRevision(rawValue: 2) == nil)
-    }
-
     @Test func attachingFactsKeepsValidatedGeometryAndIdentityOfTheArrays() throws {
         let mesh = try PreviewMesh(positions: positions, normals: normals, indices: [0, 1, 2], bounds: bounds, faceCount: 1)
-        #expect(mesh.measurements == nil && mesh.headerFacts == nil)
+        #expect(mesh.measurements == nil)
         let measurements = try #require(GeometryMeasurements(surfaceAreaSquareMillimetres: 50, volumeCubicMillimetres: nil, bodyCount: 1))
-        let facts = CADHeaderFacts(schema: .stepAP214, originatingSystem: "Example CAD")
-        let enriched = mesh.attaching(measurements: measurements, headerFacts: facts)
+        let enriched = mesh.attaching(measurements: measurements)
         #expect(enriched.positions == mesh.positions && enriched.normals == mesh.normals && enriched.indices == mesh.indices)
         #expect(enriched.bounds == mesh.bounds && enriched.faceCount == mesh.faceCount)
         #expect(enriched.outputByteCount == mesh.outputByteCount)
-        #expect(enriched.measurements == measurements && enriched.headerFacts == facts)
+        #expect(enriched.measurements == measurements)
         #expect(enriched != mesh) // The facts are part of the value.
-        #expect(enriched.attaching(measurements: nil, headerFacts: nil) == mesh)
+        #expect(enriched.attaching(measurements: nil) == mesh)
         // The convenience initializer carries the same facts and still validates the geometry.
         let direct = try PreviewMesh(positions: positions, normals: normals, indices: [0, 1, 2], bounds: bounds, faceCount: 1,
-                                     measurements: measurements, headerFacts: facts)
+                                     measurements: measurements)
         #expect(direct == enriched)
         #expect(throws: PreviewFailure.malformedDocument) {
             try PreviewMesh(positions: positions, normals: normals, indices: [0, 1, 9], bounds: bounds, faceCount: 1,
-                            measurements: measurements, headerFacts: facts)
+                            measurements: measurements)
         }
     }
 

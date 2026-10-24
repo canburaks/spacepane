@@ -664,7 +664,7 @@ public final class NativePreviewView: NSView {
         if let geometryPresentation {
             showsTypographyHint = false
             // The CAD note says what the document metadata omits: a provenance note, so it is drawn in the panel.
-            provenanceLines = [PreviewStrings.text(.cadPrivacyNotice)]
+            provenanceLines = [PreviewStrings.text(.geometryPrivacyNotice)]
             headerView.display(.init(notes: "", limits: "", providerName: providerName, showsInfoBadge: true,
                                      locale: presentationLocale), palette: palette)
             // The viewport follows the chosen color schemes like every text view.

@@ -41,8 +41,9 @@ struct CADEndToEndMeasurementTests {
         expectClose(measurements.surfaceAreaSquareMillimetres, 2_200, tolerance: 1e-4)
         expectClose(measurements.volumeCubicMillimetres, 6_000, tolerance: 1e-4)
         #expect(measurements.bodyCount == 1)
-        #expect(mesh.headerFacts?.originatingSystem == "Open CASCADE 7.9")
-        #expect(mesh.headerFacts?.schema == (kind == .step ? .stepAP214 : .iges(.version5_3)))
+        let facts = CADHeaderReader.facts(kind: kind, data: try Data(contentsOf: path))
+        #expect(facts?.originatingSystem == "Open CASCADE 7.9")
+        #expect(facts?.schema == (kind == .step ? .stepAP214 : .iges(.version5_3)))
     }
 
     /// Curved parts are tessellated with chord error, so these are approximations of the analytic values.

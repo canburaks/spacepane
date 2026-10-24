@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import PreviewTestSupport
 import PreviewContracts
 @testable import PreviewRenderers
 
@@ -37,7 +38,7 @@ struct Q52PartialFactsTests {
         let mesh = try PreviewMesh(positions: [SIMD3<Float>(0, 0, 0), SIMD3<Float>(1, 0, 0), SIMD3<Float>(0, 1, 0)],
             normals: Array(repeating: SIMD3<Float>(0, 0, 1), count: 3), indices: [0, 1, 2],
             bounds: .init(minimum: .zero, maximum: SIMD3<Double>(1, 1, 0)), faceCount: 1)
-        let p = GeometryPresentation(formatID: .step, mesh: mesh, byteCount: 999,
+        let p = GeometryPresentation(formatID: CADTestFormatIDs.step, mesh: mesh, byteCount: 999,
             facts: PresentationFacts([.shownSize(shown: 4, total: 500)]))
         let facts = PresentationFactsProvider.facts(for: p)
         #expect(facts.facts.contains(.shownSize(shown: 4, total: 500)))

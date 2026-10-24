@@ -30,7 +30,6 @@ struct MeshPrintCheckAdapterTests {
         #expect(measured.bodyCount == 1, "\(name)", sourceLocation: sourceLocation)
         #expect(measured.openEdgeCount == 0 && measured.nonManifoldEdgeCount == 0, "\(name)", sourceLocation: sourceLocation)
         #expect(measured.unitProvenance == provenance, "\(name)", sourceLocation: sourceLocation)
-        #expect(mesh.headerFacts == nil, "\(name)", sourceLocation: sourceLocation)
     }
 
     // MARK: Every format

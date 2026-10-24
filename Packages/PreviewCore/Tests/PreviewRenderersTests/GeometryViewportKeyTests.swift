@@ -50,7 +50,7 @@ struct GeometryViewportKeyTests {
         view.show(GeometryPresentation(formatID: .meshSTL, mesh: mesh, byteCount: 100), theme: .light,
                   locale: Locale(identifier: "en"))
         let viewport = try #require(descendants(of: NSView.self, in: view).first {
-            $0.accessibilityLabel() == PreviewStrings.text(.cadViewportLabel)
+            $0.accessibilityLabel() == PreviewStrings.text(.geometryViewportLabel)
         })
         return Fixture(view: view, viewport: viewport, catcher: catcher, speech: speech)
     }
@@ -72,9 +72,9 @@ struct GeometryViewportKeyTests {
         // A Russian layout types Cyrillic letters on the F and R keys; they are found by position.
         fixture.viewport.keyDown(with: try key(PreviewKeyCode.ansiF, typed: "а"))
         fixture.viewport.keyDown(with: try key(PreviewKeyCode.ansiR, typed: "к"))
-        #expect(fixture.speech.texts == [PreviewStrings.text(.cadFront), PreviewStrings.text(.cadSide),
-                                         PreviewStrings.text(.cadTop), PreviewStrings.text(.cadFront),
-                                         PreviewStrings.text(.cadFit), PreviewStrings.text(.cadReset)])
+        #expect(fixture.speech.texts == [PreviewStrings.text(.geometryFront), PreviewStrings.text(.geometrySide),
+                                         PreviewStrings.text(.geometryTop), PreviewStrings.text(.geometryFront),
+                                         PreviewStrings.text(.geometryFit), PreviewStrings.text(.geometryReset)])
         #expect(fixture.catcher.received.isEmpty)
     }
 
@@ -84,8 +84,8 @@ struct GeometryViewportKeyTests {
         fixture.viewport.keyDown(with: try key(PreviewKeyCode.ansiR, typed: "r", modifiers: .capsLock))
         fixture.viewport.keyDown(with: try key(PreviewKeyCode.numberRow[2], typed: "2"))
         fixture.viewport.keyDown(with: try key(PreviewKeyCode.keypad[3], typed: "3"))
-        #expect(fixture.speech.texts == [PreviewStrings.text(.cadFit), PreviewStrings.text(.cadReset),
-                                         PreviewStrings.text(.cadSide), PreviewStrings.text(.cadTop)])
+        #expect(fixture.speech.texts == [PreviewStrings.text(.geometryFit), PreviewStrings.text(.geometryReset),
+                                         PreviewStrings.text(.geometrySide), PreviewStrings.text(.geometryTop)])
         #expect(fixture.catcher.received.isEmpty)
     }
 

@@ -109,14 +109,18 @@ def validate_cad_catalog(root, formats, include_cad):
     return parked
 
 
-def cad_service_key_problems(info, base, service_identifier):
-    """The preview Info.plist names the CAD service through PREV_CAD_SERVICE_IDENTIFIER: the service's identity when
-    the product carries CAD, an empty value when it does not (review finding 22). `base` holds Base.xcconfig; both
-    modes are resolved here, whichever one the current build uses."""
+def cad_service_key_problems(info, base, service_identifier, include_cad=True):
+    """With CAD, the preview Info.plist names the CAD service through PREV_CAD_SERVICE_IDENTIFIER (review finding 22).
+    Without CAD the key is absent altogether: even an empty CADImportServiceIdentifier names a helper the build does not
+    carry (decision 031), and bringing CAD back adds it again (decision 028). `base` holds Base.xcconfig; the setting is
+    resolved in both modes here, whichever one the current build uses."""
     problems = []
-    if info.get("CADImportServiceIdentifier") != "$(PREV_CAD_SERVICE_IDENTIFIER)":
-        problems.append("Preview-Info.plist must set CADImportServiceIdentifier to $(PREV_CAD_SERVICE_IDENTIFIER), "
-                        "so the service is named only when PREV_INCLUDE_CAD is YES")
+    if include_cad and info.get("CADImportServiceIdentifier") != "$(PREV_CAD_SERVICE_IDENTIFIER)":
+        problems.append("Preview-Info.plist must set CADImportServiceIdentifier to $(PREV_CAD_SERVICE_IDENTIFIER) "
+                        "when PREV_INCLUDE_CAD is YES")
+    if not include_cad and "CADImportServiceIdentifier" in info:
+        problems.append("Preview-Info.plist must not carry CADImportServiceIdentifier when PREV_INCLUDE_CAD is NO: "
+                        "the key names a CAD helper the build does not contain (decision 031)")
     for mode, wanted in (("YES", service_identifier), ("NO", "")):
         values = {**base, "PREV_INCLUDE_CAD": mode, "__SERVICE__": service_identifier}
         expected = resolve_setting(values, "__SERVICE__") if wanted else ""
@@ -414,7 +418,7 @@ def validate():
     service_identifier = service_info["CFBundleIdentifier"]
     check(service_identifier == "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).cad-import", "CAD service identity must derive from the configured base")
     problems = cad_service_key_problems(plist(ROOT / "Configuration/Preview-Info.plist"),
-                                        xcconfig(ROOT / "Configuration/Base.xcconfig"), service_identifier)
+                                        xcconfig(ROOT / "Configuration/Base.xcconfig"), service_identifier, include_cad)
     check(not problems, "; ".join(problems))
     check(service_info.get("CADAllowedClientIdentifier") == "$(PREVIEW_BASE_BUNDLE_IDENTIFIER).preview"
           and service_info.get("CADAllowedClientTeamIdentifier") == "$(DEVELOPMENT_TEAM)",

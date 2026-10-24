@@ -100,8 +100,7 @@ class Fixture:
     """A complete synthetic archive that passes every check; a test changes one thing and expects one problem.
 
     `include_cad` False builds the version 1.0 archive (decision 028): the three main bundles, no CAD service, no
-    CADWorker, no OCCT notices. The preview extension's Info.plist keeps its CADImportServiceIdentifier key, as the
-    real one does: the key is inert without the service."""
+    CADWorker, no OCCT notices and no CADImportServiceIdentifier key in the preview extension's Info.plist (decision 031)."""
 
     def __init__(self, root, include_cad=True):
         self.include_cad = include_cad
@@ -124,7 +123,6 @@ class Fixture:
                     "NSHumanReadableCopyright": "Copyright 2026 Example", "CFBundleIconName": "AppIcon",
                     "CFBundleIconFile": "AppIcon", "PreviewAppGroupIdentifier": GROUP},
             "preview": {**versions, "CFBundleIdentifier": BASE + ".preview", "PreviewAppGroupIdentifier": GROUP,
-                        "CADImportServiceIdentifier": BASE + ".cad-import",
                         "NSExtension": {"NSExtensionPointIdentifier": archive_check.PREVIEW_POINT,
                                         "NSExtensionPrincipalClass": "PrevPreviewExtension.PreviewViewController",
                                         "NSExtensionAttributes": {"QLSupportsSearchableItems": False,
@@ -137,6 +135,8 @@ class Fixture:
             "cad-service": {**versions, "CFBundleIdentifier": BASE + ".cad-import",
                             "CADAllowedClientIdentifier": BASE + ".preview", "CADAllowedClientTeamIdentifier": TEAM},
         }
+        if include_cad:
+            self.infos["preview"]["CADImportServiceIdentifier"] = BASE + ".cad-import"
         for role in LOCALIZED_ROLES:
             self.infos[role]["CFBundleLocalizations"] = ["en"]
         for role in BUNDLE_ROLES:
@@ -518,9 +518,27 @@ class NoCADArchiveTests(NoCADArchiveCase):
         report = self.run_check(lambda fixture: fixture.entitlements["preview"].update({"com.apple.security.network.client": True}))
         self.assertFailure(report, "PrevPreviewExtension.appex declares network access")
 
-    def test_the_preview_info_plists_inert_service_key_does_not_fail_the_check(self):
-        report = self.run_check(lambda fixture: fixture.infos["preview"].update({"CADImportServiceIdentifier": BASE + ".cad-import"}))
-        self.assertClean(report)
+    def test_a_cad_service_key_in_the_preview_info_plist_is_refused_even_when_empty(self):
+        # Decision 031: without CAD the key names a helper the build does not carry, whatever its value.
+        for value in (BASE + ".cad-import", ""):
+            with self.subTest(value=value):
+                report = self.run_check(lambda fixture: fixture.infos["preview"].update({"CADImportServiceIdentifier": value}))
+                self.assertFailure(report, "CADImportServiceIdentifier")
+
+    def test_type_names_identifiers_and_string_keys_of_the_cad_feature_are_refused(self):
+        for marker in (b"CADHeaderFacts", b"CADSchema", b"IGESRevision", b"cad.iges", b"cad.step",
+                       b"CADImportServiceIdentifier", b"\x00cad.fit\x00", b'"cad.measurements.solid"'):
+            with self.subTest(marker=marker):
+                def after(fixture, marker=marker):
+                    executable = fixture.paths["thumbnail"] / "Contents/MacOS/thumbnail-binary"
+                    executable.write_bytes(executable.read_bytes() + marker + b"\x00")
+                self.assertFailure(self.run_check(after=after), "thumbnail-binary")
+
+    def test_words_that_merely_contain_cad_are_not_refused(self):
+        def after(fixture):
+            executable = fixture.paths["app"] / "Contents/MacOS/app-binary"
+            executable.write_bytes(executable.read_bytes() + b"arcade.mode\x00decade.end\x00Cascade\x00geometry.fit\x00")
+        self.assertClean(self.run_check(after=after))
 
     def test_the_archive_with_cad_is_refused_as_a_whole(self):
         with tempfile.TemporaryDirectory() as directory:

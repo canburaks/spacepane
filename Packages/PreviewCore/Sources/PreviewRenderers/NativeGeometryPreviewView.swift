@@ -171,17 +171,17 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         let height = lengthText(extents.y / millimetresPerUnit)
         let depth = lengthText(extents.z / millimetresPerUnit)
         let faces = mesh.faceCountIsCapped
-            ? PreviewStrings.format(.cadFaceCountAtLeast, arguments: [countText(mesh.faceCount)], locale: locale,
+            ? PreviewStrings.format(.geometryFaceCountAtLeast, arguments: [countText(mesh.faceCount)], locale: locale,
                                     languagePreferences: preferences)
             : countText(mesh.faceCount)
         let triangles = countText(mesh.indices.count / 3)
         var lines: [String]
         if let units {
-            lines = [PreviewStrings.format(.cadSummaryDimensions,
+            lines = [PreviewStrings.format(.geometrySummaryDimensions,
                 arguments: [faces, triangles, width, height, depth, units.lengthSymbol(locale: locale)],
                 locale: locale, languagePreferences: preferences)]
         } else {
-            lines = [PreviewStrings.format(.cadSummaryDimensionsUnitless, arguments: [faces, triangles, width, height, depth],
+            lines = [PreviewStrings.format(.geometrySummaryDimensionsUnitless, arguments: [faces, triangles, width, height, depth],
                                            locale: locale, languagePreferences: preferences)]
         }
         if let measurements = mesh.measurements {
@@ -192,32 +192,20 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
             if let cubicMillimetres = measurements.volumeCubicMillimetres {
                 let volume = measureText(cubicMillimetres / (measuredPerUnit * measuredPerUnit * measuredPerUnit))
                 if let measuredUnits {
-                    lines.append(PreviewStrings.format(.cadMeasurementsSolidUnits,
+                    lines.append(PreviewStrings.format(.geometryMeasurementsSolidUnits,
                         arguments: [area, measuredUnits.areaSymbol(locale: locale), volume, measuredUnits.volumeSymbol(locale: locale), bodies],
                         locale: locale, languagePreferences: preferences))
                 } else {
-                    lines.append(PreviewStrings.format(.cadMeasurementsSolidUnitless, arguments: [area, volume, bodies],
+                    lines.append(PreviewStrings.format(.geometryMeasurementsSolidUnitless, arguments: [area, volume, bodies],
                                                        locale: locale, languagePreferences: preferences))
                 }
             } else if let measuredUnits {
-                lines.append(PreviewStrings.format(.cadMeasurementsOpenUnits,
+                lines.append(PreviewStrings.format(.geometryMeasurementsOpenUnits,
                     arguments: [area, measuredUnits.areaSymbol(locale: locale), bodies],
                     locale: locale, languagePreferences: preferences))
             } else {
-                lines.append(PreviewStrings.format(.cadMeasurementsOpenUnitless, arguments: [area, bodies],
+                lines.append(PreviewStrings.format(.geometryMeasurementsOpenUnitless, arguments: [area, bodies],
                                                    locale: locale, languagePreferences: preferences))
-            }
-        }
-        if let facts = mesh.headerFacts {
-            switch (facts.schema?.displayName, facts.originatingSystem) {
-            case (let schema?, let system?):
-                lines.append(PreviewStrings.format(.cadHeaderSchemaAndSystem, arguments: [schema, system],
-                                                   locale: locale, languagePreferences: preferences))
-            case (let schema?, nil):
-                lines.append(PreviewStrings.format(.cadHeaderSchema, arguments: [schema], locale: locale, languagePreferences: preferences))
-            case (nil, let system?):
-                lines.append(PreviewStrings.format(.cadHeaderSystem, arguments: [system], locale: locale, languagePreferences: preferences))
-            case (nil, nil): break
             }
         }
         return lines
@@ -289,17 +277,17 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         case .orbit, .pan, .zoom:
             return nil
         case .fit:
-            return PreviewStrings.text(.cadFit)
+            return PreviewStrings.text(.geometryFit)
         case .reset:
-            return PreviewStrings.text(.cadReset)
+            return PreviewStrings.text(.geometryReset)
         case .preset(let standardView):
             switch standardView {
-            case .front: return PreviewStrings.text(.cadFront)
-            case .side: return PreviewStrings.text(.cadSide)
-            case .top: return PreviewStrings.text(.cadTop)
+            case .front: return PreviewStrings.text(.geometryFront)
+            case .side: return PreviewStrings.text(.geometrySide)
+            case .top: return PreviewStrings.text(.geometryTop)
             }
         case .toggleUpAxis:
-            return PreviewStrings.format(.cadUpAxis, arguments: [camera.upAxis.letter], locale: locale)
+            return PreviewStrings.format(.geometryUpAxis, arguments: [camera.upAxis.letter], locale: locale)
         }
     }
 
@@ -361,7 +349,7 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         layer?.backgroundColor = palette.background.cgColor
         summaryLabel.textColor = palette.foreground
         failureLabel.textColor = palette.foreground
-        failureLabel.stringValue = failure == .invalidGeometry ? PreviewStrings.text(.cadInvalidGeometry) : PreviewStrings.text(.cadMetalUnavailable)
+        failureLabel.stringValue = failure == .invalidGeometry ? PreviewStrings.text(.geometryInvalidGeometry) : PreviewStrings.text(.geometryMetalUnavailable)
         failureLabel.isHidden = failure == nil
         // A failure is what VoiceOver reads for the viewport: the model summary no longer describes anything drawn there.
         viewport.setAccessibilityValue(failure == nil ? summaryLabel.stringValue : failureLabel.stringValue)
@@ -399,17 +387,17 @@ final class NativeGeometryPreviewView: NSView, PreviewAnnouncing {
         updateUpAxisControl()
         viewport.setAccessibilityElement(true)
         viewport.setAccessibilityRole(.image)
-        viewport.setAccessibilityLabel(PreviewStrings.text(.cadViewportLabel))
-        viewport.setAccessibilityHelp(PreviewStrings.text(.cadInteractionHelp))
-        viewport.toolTip = PreviewStrings.text(.cadInteractionHelp)
+        viewport.setAccessibilityLabel(PreviewStrings.text(.geometryViewportLabel))
+        viewport.setAccessibilityHelp(PreviewStrings.text(.geometryInteractionHelp))
+        viewport.toolTip = PreviewStrings.text(.geometryInteractionHelp)
     }
 
     /// The up-axis button names the axis that is up now. Its tooltip and help say what it does and that the choice is
     /// per view and never saved; the axis letter is a technical name and is not translated.
     private func updateUpAxisControl() {
         guard let button = buttons[.upAxis] else { return }
-        let title = PreviewStrings.format(.cadUpAxis, arguments: [camera.upAxis.letter], locale: locale)
-        let help = PreviewStrings.text(.cadUpAxisHelp)
+        let title = PreviewStrings.format(.geometryUpAxis, arguments: [camera.upAxis.letter], locale: locale)
+        let help = PreviewStrings.text(.geometryUpAxisHelp)
         button.title = title
         button.toolTip = help
         button.setAccessibilityLabel(title)
@@ -608,14 +596,14 @@ private enum GeometryControl: Int {
     /// The up-axis title is a template with the axis in it, so the view formats it itself (`updateUpAxisControl`).
     var title: PreviewStrings.Key {
         switch self {
-        case .fit: .cadFit
-        case .reset: .cadReset
-        case .zoomIn: .cadZoomIn
-        case .zoomOut: .cadZoomOut
-        case .front: .cadFront
-        case .side: .cadSide
-        case .top: .cadTop
-        case .upAxis: .cadUpAxis
+        case .fit: .geometryFit
+        case .reset: .geometryReset
+        case .zoomIn: .geometryZoomIn
+        case .zoomOut: .geometryZoomOut
+        case .front: .geometryFront
+        case .side: .geometrySide
+        case .top: .geometryTop
+        case .upAxis: .geometryUpAxis
         }
     }
     var symbol: String? {

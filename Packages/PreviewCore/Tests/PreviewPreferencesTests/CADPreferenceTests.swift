@@ -4,8 +4,8 @@ import PreviewContracts
 import PreviewPreferences
 import PreviewTestSupport
 
-private let igesID = FormatID.iges
-private let stepID = FormatID.step
+private let igesID = CADTestFormatIDs.iges
+private let stepID = CADTestFormatIDs.step
 // Version 1.0 ships without the CAD formats; these tests keep the opt-in rules honest against the two descriptors
 // kept in Configuration/CADFormatCatalogEntries.json, for the build that brings them back.
 private func cadCatalog() throws -> FormatCatalog { try CADCatalogFixture.catalog() }

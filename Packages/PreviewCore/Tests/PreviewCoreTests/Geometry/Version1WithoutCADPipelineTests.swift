@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import PreviewTestSupport
 import UniformTypeIdentifiers
 import PreviewContracts
 import PreviewFileAccess
@@ -48,7 +49,7 @@ struct Version1WithoutCADPipelineTests {
                 #expect(await pipeline.preview(url: url) == .unavailable(.unsupportedFormat), "\(url.lastPathComponent)")
                 #expect(await pipeline.inspect(url: url) == .unsupported, "\(url.lastPathComponent)")
                 // A saved choice for the old id changes nothing: the file is still not a catalog format.
-                let preferences = PreviewPreferencesSnapshot(formatOverrides: [.step: true, .iges: true])
+                let preferences = PreviewPreferencesSnapshot(formatOverrides: [CADTestFormatIDs.step: true, CADTestFormatIDs.iges: true])
                 #expect(await pipeline.preview(url: url, preferences: preferences) == .unavailable(.unsupportedFormat))
             }
         }
