@@ -145,11 +145,8 @@ enum CompanionPresentationChecks {
         try check(CompanionPreferences(defaults: defaults).restoredRoute == .general,
                   "An unknown stored page must open General")
         preferences.setLastRoute(.tryPreview)
-        try check(CompanionPreferences(defaults: defaults).restoredRoute == .general,
-                  "A stored Try Preview with Developer Mode off must open General")
-        preferences.setDeveloperMode(true)
         try check(CompanionPreferences(defaults: defaults).restoredRoute == .tryPreview,
-                  "With Developer Mode on, Try Preview is restored")
+                  "A stored Try Preview is restored: no setting hides it")
 
         let unavailable = PreviewStrings.text(.resourceUnavailable, languagePreferences: ["en"])
         for language in languages {

@@ -134,7 +134,7 @@ enum CADImportStatus: Int, Sendable {
         case .budget: .outputTooLarge
         case .geometry: .geometryTooComplex
         case .deadline: .deadlineExceeded
-        case .unavailable, .cancelled: .cadImporterUnavailable
+        case .unavailable, .cancelled: .unreadableFile
         }
     }
 }

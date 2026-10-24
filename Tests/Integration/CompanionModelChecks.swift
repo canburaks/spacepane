@@ -27,8 +27,7 @@ struct CompanionModelChecks {
         try aboutAcknowledgementsFollowTheBundledNoticeFolders()
         try enablementSummariesCountEveryMember()
         try groupStatusUsesAllMembersWhileSearching()
-        try routesFollowDeveloperMode()
-        try developerModePersistsInIsolatedSuite()
+        try everyPageIsAlwaysOffered()
         try await closedSessionIgnoresPolicyChanges(root)
         try await everyFormatHasARenderableSample(root)
         try await SettingsModelChecks.run(in: root)
@@ -36,7 +35,7 @@ struct CompanionModelChecks {
         try await CompanionPresentationChecks.run(in: root)
         try CompanionLayoutChecks.run()
         try await CompanionErrorStateChecks.run(in: root)
-        print("Passed 13 companion model checks (isolated storage; no Finder/UI validation).")
+        print("Passed 12 companion model checks (isolated storage; no Finder/UI validation).")
     }
 
     private static func filenameSummariesPreserveCatalogIdentity() throws {
@@ -107,18 +106,13 @@ struct CompanionModelChecks {
     }
 
     private static func aboutAcknowledgementsFollowTheBundledNoticeFolders() throws {
-        let occt = URL(fileURLWithPath: "/unused/OCCT-Notices"), schemes = URL(fileURLWithPath: "/unused/ColorSchemes-Notices")
-        let withBoth = AboutAcknowledgements(notices: BundledNotices(locations: [.openCascade: occt, .colorSchemes: schemes]))
-        try check(withBoth.includesOpenCascade && withBoth.openCascadeNotices == occt && withBoth.colorSchemeNotices == schemes,
-                  "A build that carries Open CASCADE must acknowledge it and offer its notices")
-        // Version 1.0 carries no Open CASCADE: its card shows the color-scheme notice only.
-        let versionOne = AboutAcknowledgements(notices: BundledNotices(locations: [.colorSchemes: schemes]))
-        try check(!versionOne.includesOpenCascade && versionOne.openCascadeNotices == nil && versionOne.colorSchemeNotices == schemes,
-                  "A build without Open CASCADE must not mention it or link to its source")
+        let schemes = URL(fileURLWithPath: "/unused/ColorSchemes-Notices")
+        // The card offers the color-scheme notice only; no folder name reveals a section another build would show.
+        try check(BundledNotices.Folder.allCases == [.colorSchemes], "The About page knows only the color-scheme notices")
+        let staged = AboutAcknowledgements(notices: BundledNotices(locations: [.colorSchemes: schemes]))
+        try check(staged.colorSchemeNotices == schemes, "A staged build offers the color-scheme notices")
         let bare = AboutAcknowledgements(notices: BundledNotices(locations: [:]))
-        try check(!bare.includesOpenCascade && bare.colorSchemeNotices == nil, "A run without notice folders offers no row")
-        let unstaged = AboutAcknowledgements(notices: BundledNotices(bundle: Bundle(for: BundleAnchor.self)))
-        try check(!unstaged.includesOpenCascade, "A development run has no OCCT-Notices folder")
+        try check(bare.colorSchemeNotices == nil, "A run without notice folders offers no row")
     }
 
     private final class BundleAnchor {}
@@ -178,54 +172,25 @@ struct CompanionModelChecks {
                   "Group status must count hidden members too")
     }
 
-    private static func routesFollowDeveloperMode() throws {
-        try check(!CompanionRoute.available(developerMode: false).contains(.tryPreview),
-                  "Try Preview must stay hidden while Developer Mode is off")
-        try check(CompanionRoute.available(developerMode: true).contains(.tryPreview),
-                  "Try Preview must appear when Developer Mode is on")
-        try check(CompanionRoute.available(developerMode: false) == [.general, .fileTypes, .theme, .about],
-                  "The standard destinations must keep their order")
-        try check(CompanionRoute.tryPreview.resolved(developerMode: false) == .general,
-                  "A hidden destination must resolve to the first page")
-        try check(CompanionRoute.tryPreview.resolved(developerMode: true) == .tryPreview,
-                  "Developer Mode must keep Try Preview selected")
-        for route in CompanionRoute.allCases where route != .tryPreview {
-            try check(route.resolved(developerMode: false) == route && route.resolved(developerMode: true) == route,
-                      "Other routes must never be remapped")
-        }
+    /// No setting reveals a page or a command (App Review Guidelines 2.5.19 and 5.6): the five pages are always in
+    /// the sidebar and the View menu, in this order, with Command-1 to Command-5.
+    private static func everyPageIsAlwaysOffered() throws {
+        try check(CompanionRoute.allCases == [.general, .fileTypes, .theme, .about, .tryPreview],
+                  "The five destinations must keep their order")
+        let keys = CompanionRoute.allCases.compactMap { $0.shortcutKey.character.wholeNumberValue }
+        try check(keys == Array(1...CompanionRoute.allCases.count), "Command-1 to Command-5 must select the pages in order")
         try keyboardHelpListsEveryPageShortcut()
     }
 
-    /// The Help text states the page shortcuts, so it must reach exactly as far as the View menu does: the highest
-    /// number it names is the count of offered pages, and Open File's Command-O appears only with Developer Mode.
+    /// The Help text states the page shortcuts, so it must reach exactly as far as the View menu does, and it names
+    /// Open File's Command-O, which is always in the File menu.
     private static func keyboardHelpListsEveryPageShortcut() throws {
-        for developerMode in [false, true] {
-            let help = PreviewStrings.text(CompanionRoute.keyboardHelp(developerMode: developerMode), languagePreferences: ["en"])
-            let pages = CompanionRoute.available(developerMode: developerMode)
-            let highest = pages.compactMap { route in
-                (route.shortcutKey.character.wholeNumberValue).map { (route, $0) }
-            }.map(\.1).max()
-            try check(highest == pages.count && help.contains("\u{2318}1 to \u{2318}\(pages.count)"),
-                      "The Help must name the shortcuts of exactly the offered pages (developerMode \(developerMode)): \(help)")
-            try check(help.contains("\u{2318}O") == developerMode,
-                      "Open File's shortcut belongs in the Help only while Developer Mode is on (developerMode \(developerMode))")
-        }
+        let help = PreviewStrings.text(.helpKeyboardBody, languagePreferences: ["en"])
+        let pages = CompanionRoute.allCases.count
+        try check(help.contains("\u{2318}1 to \u{2318}\(pages)"), "The Help must name the shortcuts of all \(pages) pages: \(help)")
+        try check(help.contains("\u{2318}O"), "The Help must name Open File's shortcut: \(help)")
     }
 
-    private static func developerModePersistsInIsolatedSuite() throws {
-        let suite = "prev.model-checks.\(UUID().uuidString)"
-        guard let defaults = UserDefaults(suiteName: suite) else {
-            throw CheckFailure(description: "Could not create an isolated defaults suite")
-        }
-        defer { defaults.removePersistentDomain(forName: suite) }
-        let preferences = CompanionPreferences(defaults: defaults)
-        try check(!preferences.developerMode, "Developer Mode must default to off")
-        preferences.setDeveloperMode(true)
-        try check(preferences.developerMode, "Developer Mode must change in memory")
-        try check(CompanionPreferences(defaults: defaults).developerMode, "Developer Mode must persist in the same suite")
-        preferences.setDeveloperMode(false)
-        try check(!CompanionPreferences(defaults: defaults).developerMode, "Turning Developer Mode off must persist")
-    }
 
     private static func check(_ condition: @autoclosure () -> Bool, _ message: String) throws {
         guard condition() else { throw CheckFailure(description: message) }
@@ -288,7 +253,7 @@ struct CompanionModelChecks {
         try check(missing.outcome == .unavailable(.unavailableContent), "A missing sample must show an explicit unavailable state")
     }
 
-    /// Turning Developer Mode off closes the session; a later file-type change must not reread the file.
+    /// Closing the session forgets the file; a later file-type change must not reread it.
     private static func closedSessionIgnoresPolicyChanges(_ root: URL) async throws {
         let store = PreferenceStore(url: root.appendingPathComponent("closed-session-preferences.json"))
         let settings = CompanionSettings(store: store, storageMode: .privateOnly)

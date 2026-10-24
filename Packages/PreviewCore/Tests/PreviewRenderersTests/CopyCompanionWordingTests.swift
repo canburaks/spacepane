@@ -13,13 +13,15 @@ struct CopyCompanionWordingTests {
         PreviewStrings.text(key, languagePreferences: ["en"])
     }
 
-    // MARK: Developer Mode (review finding 23)
+    // MARK: Keyboard help (App Review Guidelines 2.5.19 and 5.6)
 
-    @Test func developerModeNamesEverythingItEnables() {
-        let subtitle = Self.english(.developerModeSubtitle)
-        // The switch reveals the Try Preview page (⌘5) and the Open File command (⌘O), not only a sidebar row.
-        for fragment in ["Try Preview", "Open File", "⌘O", "⌘5"] {
-            #expect(subtitle.contains(fragment), "Developer Mode subtitle must name \(fragment): \(subtitle)")
+    @Test func keyboardHelpNamesTryPreviewAndOpenFileInEveryLanguage() {
+        // Try Preview (⌘5) and Open File (⌘O) are always offered, so the one Help text names both shortcuts.
+        for language in Self.languages {
+            let help = PreviewStrings.text(.helpKeyboardBody, languagePreferences: [language])
+            for fragment in ["⌘5", "⌘O"] {
+                #expect(help.contains(fragment), "\(language) keyboard help must name \(fragment): \(help)")
+            }
         }
     }
 

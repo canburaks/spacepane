@@ -1,20 +1,16 @@
 /* Generated from Localizable.xcstrings; do not edit directly. */
-"about.acknowledgements.body" = "3D-Modellvorschauen verwenden Open CASCADE Technology unter der GNU LGPL 2.1 mit der Open-CASCADE-Ausnahme. Lizenzhinweise sind in der App enthalten.";
-"about.acknowledgements.openCascade" = "Das Copyright an Open CASCADE Technology liegt bei OPEN CASCADE SAS und seinen Mitwirkenden. Der Quellcode des 3D-Import-Helfers und das schriftliche Angebot für den Quellcode der Bibliothek sind öffentlich.";
 "about.acknowledgements.title" = "Danksagungen";
 "about.description" = "Vorschau und Miniaturbilder für Text, strukturierte Daten, Archive, Datenbanken und 3D-Modelle direkt im Finder – vollständig auf Ihrem Mac.";
 "about.howItWorks.body" = "Wenn diese App die Vorschau bereitstellt, gilt die Auswahl unter „Dateitypen“ für neue Finder-Vorschauen und Miniaturbilder, und wahrscheinliche Geheimnisse werden verborgen, bevor Inhalte angezeigt, ausgewählt oder kopiert werden. Dateien werden lokal gelesen und nie verändert. Generische Miniaturbilder enthalten keinen Quelltext. macOS wählt den Quick Look-Anbieter.";
 "about.howItWorks.title" = "So funktioniert es";
 "about.link.documentation" = "Dokumentation";
 "about.link.feedback" = "Feedback senden";
-"about.link.openSource" = "Open-Source-Hinweise";
 "about.link.privacyPolicy" = "Datenschutzrichtlinie";
 "about.link.support" = "Support";
 "about.link.website" = "Website";
 "about.notices.colorSchemes.title" = "Hinweise zu Farbschemata";
 "about.notices.open.failed" = "Der Ordner mit den Hinweisen konnte nicht geöffnet werden.";
 "about.notices.open.hint" = "Öffnet den in der App gespeicherten Ordner im Finder.";
-"about.notices.openCascade.title" = "Lizenztexte von Open CASCADE";
 "about.privacy.body" = "%@ verarbeitet Dateien lokal auf Ihrem Mac. Kein Dateiinhalt verlässt Ihr Gerät.";
 "about.privacy.title" = "Datenschutz";
 "about.resources.title" = "Ressourcen";
@@ -138,7 +134,6 @@
 "cad.header.schema" = "Schema: %1$@";
 "cad.header.schemaAndSystem" = "Schema: %1$@ · Erstellt mit: %2$@";
 "cad.header.system" = "Erstellt mit: %1$@";
-"cad.importerUnavailable" = "Der CAD-Importer ist nicht verfügbar. Versuchen Sie es erneut oder prüfen Sie die App-Installation.";
 "cad.interactionHelp" = "Zum Drehen ziehen. Zum Verschieben mit Umschalttaste oder rechter Maustaste ziehen. Zum Zoomen scrollen. Pfeiltasten drehen; Umschalt-Pfeiltasten verschieben; +/− zoomt; F passt ein; R setzt zurück; 1/2/3 wählt vorne/Seite/oben.";
 "cad.invalidGeometry" = "Dieses Modell konnte nicht sicher angezeigt werden.";
 "cad.measurements.open" = "Oberfläche: %1$@ mm² · Volumen nicht verfügbar (Oberfläche nicht geschlossen) · Körper: %2$lld";
@@ -162,7 +157,6 @@
 "cad.zoomOut" = "Verkleinern";
 "failure.binary" = "Diese Datei enthält Binärdaten, die nicht als Text angezeigt werden können.";
 "failure.body.binaryContent" = "Sie enthält Binärdaten und keinen Text. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist.";
-"failure.body.cadImporterUnavailable" = "Er ist möglicherweise ausgelastet oder unterbrochen. Versuchen Sie es erneut oder prüfen Sie, ob die App korrekt installiert ist.";
 "failure.body.deadlineExceeded" = "Die Verarbeitung dieser Datei hat länger gedauert als erlaubt. Versuchen Sie es erneut oder öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist.";
 "failure.body.deadlineExceededLimit" = "Diese Vorschau erlaubt %@ für die Verarbeitung einer Datei, diese hat länger gedauert. Versuchen Sie es erneut oder öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist.";
 "failure.body.encryptedContent" = "Der Inhalt kann nicht angezeigt werden. Öffnen Sie die Datei in einer App, die sie entsperren kann.";
@@ -200,7 +194,6 @@
 "failure.resourceUnavailable" = "Eine Anzeigeressource ist nicht verfügbar.";
 "failure.structureLimit" = "Das Dokument überschreitet die Strukturbegrenzung dieser Vorschau.";
 "failure.title.binaryContent" = "Diese Datei kann nicht als Text angezeigt werden";
-"failure.title.cadImporterUnavailable" = "Der CAD-Importer ist nicht verfügbar";
 "failure.title.deadlineExceeded" = "Die Vorschau hat zu lange gedauert";
 "failure.title.encryptedContent" = "Die Datei ist verschlüsselt";
 "failure.title.geometryTooComplex" = "Das Modell ist zu komplex";
@@ -371,10 +364,6 @@
 "format.archive.zip.name" = "ZIP-Archive";
 "format.audio.midi.description" = "Standard-MIDI-Format 0/1 mit ausdrücklich gestarteter Wiedergabe über die macOS-Klangbank.";
 "format.audio.midi.name" = "MIDI";
-"format.cad.iges.description" = "Lokale 3D-Vorschau. Standardmäßig deaktiviert, da der CAD-Import viel Zeit und Speicher benötigen kann.";
-"format.cad.iges.name" = "IGES-3D-Modelle";
-"format.cad.step.description" = "Lokale 3D-Vorschau. Standardmäßig deaktiviert, da der CAD-Import viel Zeit und Speicher benötigen kann.";
-"format.cad.step.name" = "STEP-3D-Modelle";
 "format.config.environment.description" = "Schreibgeschützte Zuweisungen mit verborgenen wahrscheinlichen Geheimnissen; Ersetzungen werden nie ausgeführt.";
 "format.config.environment.name" = "Umgebungsdateien";
 "format.config.ini.description" = "Abschnitte und Einstellungen aus INI-, Properties- und .conf-Dateien. Wahrscheinliche Geheimnisse werden verborgen; nichts wird erweitert oder eingebunden.";
@@ -521,8 +510,6 @@
 "general.banner.sharedBody" = "Aktivieren Sie die Erweiterungen in den Systemeinstellungen. macOS wählt den Anbieter für Vorschau und Miniaturbilder.";
 "general.banner.sharedTitle" = "Einstellungen werden mit den Quick Look-Erweiterungen geteilt";
 "general.banner.unavailableTitle" = "Einstellungsspeicher ist nicht verfügbar";
-"general.developerMode.subtitle" = "Zeigt die Seite „Vorschau testen“ in der Seitenleiste (⌘5) und den Befehl „Datei öffnen“ (⌘O) an, damit Sie eine Datei direkt in dieser App öffnen können.";
-"general.developerMode.title" = "Entwicklermodus";
 "general.finder.foldersSubtitle" = "Fasst den direkten Inhalt eines Ordners in Quick Look zusammen.";
 "general.finder.foldersTitle" = "Ordner in der Vorschau anzeigen";
 "general.finder.setupTitle" = "Erweiterungen aktivieren";
@@ -535,8 +522,7 @@
 "general.limits.title" = "Limits für Textvorschau";
 "general.storage.title" = "Einstellungsspeicher";
 "general.subtitle" = "Finder und Quick Look einrichten.";
-"help.keyboard.body" = "⌘1 bis ⌘4 wechseln die Seiten. ⌘, öffnet „Allgemein“. ⌘Z macht das letzte Zurücksetzen, die letzte Sammeländerung, den letzten Designimport oder das Löschen eines Profils rückgängig; ⇧⌘Z stellt es wieder her.";
-"help.keyboard.bodyDeveloper" = "⌘1 bis ⌘5 wechseln die Seiten. ⌘O öffnet eine Datei in „Vorschau testen“. ⌘, öffnet „Allgemein“. ⌘Z macht das letzte Zurücksetzen, die letzte Sammeländerung, den letzten Designimport oder das Löschen eines Profils rückgängig; ⇧⌘Z stellt es wieder her.";
+"help.keyboard.body" = "⌘1 bis ⌘5 wechseln die Seiten. ⌘O öffnet eine Datei in „Vorschau testen“. ⌘, öffnet „Allgemein“. ⌘Z macht das letzte Zurücksetzen, die letzte Sammeländerung, den letzten Designimport oder das Löschen eines Profils rückgängig; ⇧⌘Z stellt es wieder her.";
 "help.keyboard.title" = "Tastaturkurzbefehle";
 "listing.risk.hiddenCharacters" = "Verborgene Zeichen im Namen";
 "mesh.printCheck.estimate" = "Massiv aus PLA gedruckt: etwa %1$@ %2$@ und %3$@ %4$@ Filament mit %5$@ %6$@ Durchmesser. Slicer drucken meist mit weniger Füllung, daher ist dies eine Obergrenze.";
@@ -553,7 +539,6 @@
 "midi.positionValue" = "%1$@ von %2$@";
 "midi.soundBankUnavailable" = "Die macOS-Klangbank konnte nicht geladen werden.";
 "navigation.about" = "Über";
-"navigation.developer" = "Entwickler";
 "navigation.general" = "Allgemein";
 "navigation.help" = "Hilfe";
 "navigation.settings" = "Einstellungen";

@@ -8,7 +8,7 @@
 		C617.1  size and type of the settings file in the App Group container (BoundedPreferencesData.swift)
 		DDA9.1  modified dates shown in folder listings (FolderScan.swift)
 		35F9.1  elapsed time of MIDI playback (NativeMIDIPlayback.swift)
-		CA92.1  the companion's own defaults, developer mode (CompanionPreferences.swift)
+		CA92.1  the companion's own defaults: the last page shown (CompanionPreferences.swift)
 	-->
 	<key>NSPrivacyAccessedAPITypes</key>
 	<array>

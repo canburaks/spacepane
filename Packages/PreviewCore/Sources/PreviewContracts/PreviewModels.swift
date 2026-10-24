@@ -142,7 +142,6 @@ public struct TextPresentation: Equatable, Sendable {
 public enum PreviewFailure: Error, Equatable, Sendable {
     case unsupportedFormat, missingFile, unreadableFile, notRegularFile, unavailableContent
     case inputTooLarge, outputTooLarge, binaryContent, unsupportedEncoding, malformedDocument
-    case cadImporterUnavailable
     /// Encrypted members, headers or DRM-protected content; never decrypted or guessed.
     case encryptedContent
     case structureTooDeep, tooManyNodes, tooManyLines, lineTooLong, invalidBudget, deadlineExceeded

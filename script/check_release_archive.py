@@ -571,6 +571,30 @@ def check_no_cad_code(report: Report, app: Path, machos: List[Path]) -> None:
                                  "without CAD (PREV_INCLUDE_CAD = NO) links it into no executable")
 
 
+# Text that only a hidden mode or the CAD helper would need (App Review rejected build 6 under Guideline 5.6 on
+# 2026-10-23 for "features that appear to have been intentionally hidden"). A build without CAD carries none of it.
+HIDDEN_FEATURE_MARKERS = ("companion.developerMode", "developerMode", "Developer Mode", "cadImporterUnavailable",
+                          "Open CASCADE", "openCascade", "spacepane-cad-source")
+
+
+def check_no_hidden_feature_text(report: Report, app: Path, machos: List[Path]) -> None:
+    """No executable or strings resource of the build without CAD names a hidden mode or the CAD helper."""
+    texts = machos + sorted(path for path in app.rglob("*") if path.is_file() and path.suffix in (".strings", ".stringsdict"))
+    for path in texts:
+        try:
+            data = path.read_bytes()
+        except OSError as error:
+            report.fail(f"{path.relative_to(app)} could not be read: {error}")
+            continue
+        variants = [data]
+        if data[:2] in (b"\xff\xfe", b"\xfe\xff"):
+            variants.append(data.decode("utf-16", errors="ignore").encode("utf-8"))
+        for marker in HIDDEN_FEATURE_MARKERS:
+            if any(marker.encode("utf-8") in variant for variant in variants):
+                report.fail(f"{path.relative_to(app)} contains '{marker}': a build without CAD names no hidden mode "
+                            "and no CAD helper (Guidelines 2.5.19 and 5.6)")
+
+
 def main_executables(bundles: List[Bundle]) -> Set[Path]:
     """The declared main executable of each bundle, whether or not the file exists."""
     executables: Set[Path] = set()
@@ -633,6 +657,7 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
                          f"{path.relative_to(app)} is a Mach-O file other than the main executable of the app or an "
                          "extension; the build without CAD (PREV_INCLUDE_CAD = NO) carries only those three")
         check_no_cad_code(report, app, machos)
+        check_no_hidden_feature_text(report, app, machos)
     for path in machos:
         architectures = tools.architectures(path)
         report.check(architectures == EXPECTED_ARCHITECTURES,

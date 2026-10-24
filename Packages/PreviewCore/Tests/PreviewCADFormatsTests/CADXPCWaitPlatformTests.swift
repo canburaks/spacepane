@@ -42,7 +42,7 @@ import PreviewContracts
     @Test func laterRepliesNeitherReplaceTheFirstNorWakeTheWaitAgain() {
         let reply = CADXPCClient.ReplyState(maximumBytes: 8)
         reply.receive(data: Data([1]), status: nil)
-        reply.complete(.failure(.cadImporterUnavailable))
+        reply.complete(.failure(.unreadableFile))
         #expect(reply.wait(milliseconds: Self.limitMilliseconds))
         // The one wakeup a reply produces is used up, so a second wait runs out its slice.
         #expect(!reply.wait(milliseconds: 1))
@@ -101,7 +101,7 @@ import PreviewContracts
 
     @Test func unusableServiceNamesAndOversizedInputFailBeforeAnyConnection() {
         for name in ["", String(repeating: "a", count: 256), "a/b", "a\0b"] {
-            #expect(throws: PreviewFailure.cadImporterUnavailable) {
+            #expect(throws: PreviewFailure.unreadableFile) {
                 try CADXPCClient.run(serviceName: name, kind: .iges, input: Data(),
                                      context: RequestContext(budget: .standard))
             }

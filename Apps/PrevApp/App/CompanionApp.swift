@@ -46,7 +46,7 @@ struct CompanionApp: App {
         .defaultSize(width: 1040, height: 720)
         .defaultLaunchBehavior(.presented)
         .commands {
-            CompanionCommands(configuration: configuration, route: $route, developerMode: preferences.developerMode)
+            CompanionCommands(configuration: configuration, route: $route)
         }
     }
 }
@@ -54,22 +54,18 @@ struct CompanionApp: App {
 private struct CompanionCommands: Commands {
     let configuration: HostedConfiguration
     @Binding var route: CompanionRoute
-    /// Passed by value from the scene so menus follow the saved choice.
-    let developerMode: Bool
     @FocusedValue(\.previewSession) private var session
     @Environment(\.openWindow) private var openWindow
     @Environment(\.locale) private var locale
 
     var body: some Commands {
         CommandGroup(replacing: .newItem) {
-            if developerMode {
-                Button(PreviewStrings.text(.openFile)) {
-                    route = .tryPreview
-                    session?.presentsFileImporter = true
-                }
-                    .keyboardShortcut("o", modifiers: .command)
-                    .disabled(session == nil)
+            Button(PreviewStrings.text(.openFile)) {
+                route = .tryPreview
+                session?.presentsFileImporter = true
             }
+                .keyboardShortcut("o", modifiers: .command)
+                .disabled(session == nil)
         }
         // The standard macOS title and shortcut. Settings live on the pages of this one window, so this opens
         // General, the page that sets the app up; it never creates a Settings window.
@@ -78,7 +74,7 @@ private struct CompanionCommands: Commands {
                 .keyboardShortcut(",", modifiers: .command)
         }
         CommandGroup(after: .sidebar) {
-            ForEach(CompanionRoute.available(developerMode: developerMode)) { destination in
+            ForEach(CompanionRoute.allCases) { destination in
                 Button(PreviewStrings.text(destination.title)) { select(destination) }
                     .keyboardShortcut(destination.shortcutKey, modifiers: .command)
             }
