@@ -104,7 +104,7 @@ Promotional text can change without a new version; switch to this when 1.1.0 is 
 Press Space and see what a file will do: scripts, editor tasks, AI models, extensions and packages explained. Made on your Mac, read-only, with likely secrets concealed.
 ```
 
-### Description (3,888 of 4,000 characters)
+### Description (3,986 of 4,000 characters)
 
 The 1.0 description with one bullet added under STRUCTURE, three under KNOW WHAT'S HIDDEN INSIDE, and 74 changed to 81
 (the catalog has 81 `id` entries; recounted 2026-10-17). Name, subtitle and keywords are unchanged. Two bullets were
@@ -132,13 +132,13 @@ STRUCTURE, NOT A WALL OF TEXT
 • CSV and TSV as sortable tables with a profile of every column, where macOS uses SpacePane for them
 • Mermaid and draw.io diagrams, Parquet files, EPUB books, comics and subtitles
 • MIDI files with play and scrub controls
-• Source code with syntax coloring for 84 languages
+• Source code with syntax coloring for 83 languages
 • Text files that have no extension, such as Makefile or zprofile
 • 3MF models you can turn
 • GGUF and safetensors models, PyTorch files, MCP bundles, editor and browser extensions and Python wheels, summarized without running anything
 • Right-click a table, an outline or a listing to copy a value, a row, every row or a path
 
-That is 81 file types, each with its own switch.
+That is 81 file types, among them app bundles, installers, disk images, certificates, map data and LaTeX, each with its own switch.
 
 KNOW WHAT'S HIDDEN INSIDE
 Most previews show what a file looks like. SpacePane also tells you what to check first.
@@ -154,13 +154,13 @@ These are things for you to review, not a verdict that a file is safe.
 PRIVATE BY DESIGN
 • Every preview is made on your Mac
 • The app and its extensions have no network access
-• Files are only read, never changed
+• Previewed files are only read, never changed
 • Scripts inside files never run
 • No account, no analytics, no ads
 
 MAKE IT YOURS
 • Turn any file type off and SpacePane leaves it alone
-• Light, Dark and High Contrast themes with 12 color schemes
+• Light and Dark themes with 12 color schemes, plus High Contrast
 • Your font, size, spacing and line numbers
 • Save your look as a profile and share it as a small theme file
 

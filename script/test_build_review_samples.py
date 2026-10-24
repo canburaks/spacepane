@@ -191,6 +191,10 @@ class ArchiveTests(unittest.TestCase):
         # Nothing in the app is revealed by a switch, so the notes name no hidden mode (App Review 5.6, 2026-10-23).
         for hidden in ("Developer Mode", "turn on", "unlock"):
             self.assertNotIn(hidden, notes)
+        # The prepared replies are pasted into App Store Connect too; they describe the same build (decision 031).
+        replies = SUBMISSION[SUBMISSION.index("## If App Review objects"):SUBMISSION.index("## App Store Connect answer worksheet")]
+        for stale in ("Developer Mode", "the companion app turns them on", "STEP", "IGES", "Open CASCADE"):
+            self.assertNotIn(stale, replies)
         # The identifiers belong to another developer's product and are no longer listed (decision 004, 2026-10-17).
         self.assertNotIn("quicklookpro", notes)
         for stale in ("STEP", "IGES", "CAD", "Open CASCADE", "LGPL", "spacepane-cad-source"):

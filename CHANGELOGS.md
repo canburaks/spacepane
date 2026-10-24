@@ -2,6 +2,18 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-24 — Build 10: no CAD name left in the product (implementation and validation)
+
+Owner request after a Guideline 5.6 audit of build 9 (no violation, one risk): "Get rid of all of them." Decision 031, amendment of the same day, records the scope.
+
+- Strings: the 21 `cad.*` keys the STL, OBJ, PLY and 3MF viewer uses are `geometry.*` keys (typed cases `geometryFit` and so on) in the catalog, all 13 translation inputs and the generated `.lproj` files; `cad.summary`, `cad.measurements.solid`, `cad.measurements.open` (unused) and the three STEP/IGES header strings are deleted. 1,261 keys remain.
+- Code: the IGES/STEP format IDs moved to `PreviewCADFormats/CADFormatIDs.swift` and the header types (`CADHeaderFacts`, `CADSchema`, `IGESRevision`) to `PreviewCADFormats/CADHeaderFacts.swift`; `PreviewMesh` no longer carries header facts and the viewer has no header line; the CAD adapter still reads the facts for unit provenance. Tests outside the CAD module use `CADTestFormatIDs` (test support); the header-type tests moved to `PreviewCADFormatsTests/CADHeaderFactsTests.swift`.
+- Configuration: `CADImportServiceIdentifier` left `Configuration/Preview-Info.plist`; `script/validate_project.py` requires the key only with CAD (tests in `script/test_catalog_manifests.py`).
+- Archive check: for a build without CAD, `script/check_release_archive.py` refuses `CADImportServiceIdentifier` in any Info.plist, the type names, `cad.iges`, `cad.step` and any `cad.` key (tests written first and failing for the right reason; words such as "arcade." pass). On the build 9 archive it reports 22 problems.
+- Store and review text: "83 languages" (the code has 83; 84 was wrong), "Previewed files are only read, never changed", "Light and Dark themes with 12 color schemes, plus High Contrast", and the 81-types line names app bundles, installers, disk images, certificates, map data and LaTeX (3,986 characters). The 4.2 and 2.1 replies in `docs/release/app-store-submission.md` no longer mention Developer Mode or say the app turns the extensions on; `script/test_build_review_samples.py` now checks the replies too. `CURRENT_PROJECT_VERSION = 10`; the notes name build 10.
+- Website (`spacepane-web`, pull request #5 into `app-store-launch`): 83 code languages and a data sync.
+- Validation (Mac, Xcode 27.0, Swift 6.4): `--check-static` (25 passed, 1 skipped), `--check`, `--check-compiler`, `--test`: 4,551 tests in 514 suites with the 2 known issues, 74 serial tests and every companion check pass; `validate_localization.py`: 1,261 keys, 14 locales; `test_check_release_archive` (131 tests), `test_catalog_manifests`, `test_build_review_samples`, `test_localization` pass.
+
 ## 2026-10-24 — Build 9: the UI polish on top of build 8 (implementation, validation and release)
 
 Owner request: "I want changes in the ui-ux polish in this newest build. Test it locally, and generate a new build and change the current submission to that build."

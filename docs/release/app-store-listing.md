@@ -184,7 +184,7 @@ STRUCTURE, NOT A WALL OF TEXT
 • CSV and TSV as sortable tables, with a profile of every column
 • Mermaid and draw.io diagrams, Parquet files, EPUB books, comics and subtitles
 • MIDI files with play and scrub controls
-• Source code with syntax coloring for 84 languages
+• Source code with syntax coloring for 83 languages
 • Text files that have no extension, such as Makefile or zprofile
 • STL, OBJ, PLY and 3MF models you can turn
 
@@ -324,7 +324,7 @@ Observed, but not the view the copy claims, or not by SpacePane:
 | CSV and TSV tables and Profile | `data.csv`, `data.tsv` | notObserved / notObserved / notObserved | Tested; macOS has its own CSV preview | Observe, or delete the bullet |
 | Mermaid, draw.io, Parquet, EPUB, comics, subtitles | `text.mermaid`, `data.drawio`, `data.parquet`, `document.epub`, `archive.comic-book`; subtitles: `text.subrip`, `text.webvtt`, `text.substation-alpha`, `text.ttml`, `text.sbv`, `text.microdvd` | notObserved / notObserved / notObserved (each) | Tested | Observe each, or delete it |
 | MIDI play and scrub controls | `audio.midi` | notObserved / provider / notObserved | Seen with a silent file | Confirm audible playback |
-| Source code, 84 languages | `text.source-code` | notObserved / otherProvider / notObserved | Tested; Swift went to another provider | See the swaps above |
+| Source code, 83 languages | `text.source-code` | notObserved / otherProvider / notObserved | Tested; Swift went to another provider | See the swaps above |
 | Extension-free text files | `text.extensionless` | provider / provider / notObserved | Seen | |
 | STL, OBJ, PLY, 3MF | `model.stl`, `model.obj`, `model.ply`, `model.3mf` | notObserved / notObserved / notObserved (each) | Tested; macOS has its own previews for some | Observe, or delete |
 | Hidden characters, archive risk notes, notebook health | none (findings on text, archive and notebook types; archive risk: `archive.zip`, `archive.tar`, `archive.rar`, `archive.7z`; notebooks: `text.jupyter-notebook`) | no row | Tested | Observe one of each in Finder |

@@ -32,3 +32,14 @@ Checked and not found in build 6: network access, remote configuration, launch-a
 - Settings that change how visible features behave (file-type switches, appearance, folder previews) stay: they are visible, described and change nothing hidden.
 - The reply to App Review is drafted in `docs/release/app-review-reply-2026-10-24.md`; it is sent, and build 8 uploaded and submitted, only on the owner's instruction.
 - Appealing to the App Review Board without these changes was rejected as an option: a repeated 5.6 finding can lead to a review of the developer account.
+
+## Amendment, 2026-10-24: build 10 carries no CAD name at all
+
+An audit of build 9 against Guideline 5.6 found no violation, but the binaries still carried the IGES and STEP format IDs (`cad.iges`, `cad.step`), the STEP and IGES header types (`CADHeaderFacts`, `CADSchema`, `IGESRevision`) and their three header strings, an empty `CADImportServiceIdentifier` key in the preview extension's Info.plist, and 27 localization keys in a `cad.` family, 21 of them used by the STL, OBJ, PLY and 3MF viewer. The owner asked to remove all of them ("Get rid of all of them"):
+
+- The viewer's keys are `geometry.*` in the catalog, every translation input and the typed `PreviewStrings` cases (`geometryFit` and so on); the unused `cad.summary`, `cad.measurements.solid` and `cad.measurements.open` and the three header strings are deleted.
+- The format IDs moved to `PreviewCADFormats/CADFormatIDs.swift` (raw values unchanged, so stored file-type choices stay valid); tests outside the CAD module use `CADTestFormatIDs` from the test-support target.
+- The header types moved to `PreviewCADFormats/CADHeaderFacts.swift`; `PreviewMesh` no longer carries header facts and the viewer shows no header line. The CAD adapter still reads the facts for unit provenance.
+- `Configuration/Preview-Info.plist` has no `CADImportServiceIdentifier`; `script/validate_project.py` requires it only with CAD.
+- `script/check_release_archive.py` refuses, in a build without CAD, the key in any Info.plist, the type names, the two IDs and any `cad.` key (a look-behind keeps words such as "arcade." from matching). On the build 9 archive it reports 22 problems.
+- Store text: 83 source-code languages (84 was wrong), "Previewed files are only read, never changed", High Contrast named apart from the 12 schemes, and one line naming app bundles, installers, disk images, certificates, map data and LaTeX among the 81 types. The prepared App Review replies no longer mention Developer Mode, and `script/test_build_review_samples.py` checks them.
