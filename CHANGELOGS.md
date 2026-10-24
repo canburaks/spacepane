@@ -2,6 +2,16 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-10-24 — Build 8 uploaded and resubmitted (release)
+
+Owner instruction after merging pull request #17: "The rest is yours."
+
+- Build: `release-build8` at merged `main` (`8b8f2b0`, tree identical to `approval-build8`). `PREV_ALLOW_PROVISIONING_UPDATES=1 --archive`: ARCHIVE SUCCEEDED, "Release archive checks passed for SpacePane.app 1.1.0 (8)" (the earlier build 8 archive from the branch is kept as `.build/archive/SpacePane-1.1.0-build8.xcarchive`). `--export`: Apple Distribution on the app and both extensions. Upload with `xcodebuild -exportArchive` and `.build/archive/ExportOptions-upload.plist` (destination upload) with `-allowProvisioningUpdates` through the Xcode account signed in on this Mac, no API key: "Upload succeeded" at 10:06; build 8 was "Ready to Submit" in TestFlight minutes later.
+- App Store Connect (browser pane): the description replaced with the 3,797-character text of `docs/release/version-1.1.0.md` (the saved one lacked the Safety Lens 2 and 3 lines); the notes replaced with the build 8 block (2,830 bytes); `09-theme.png` removed (it showed a four-page sidebar), five screenshots remain; build 6 removed from the version and build 8 selected; release option Manual (unchanged); the review attachment `SpacePane-Review-Samples.zip` kept. Reply sent to App Review at 10:11 with the text of `docs/release/app-review-reply-2026-10-24.md`; "Update Review", then "Resubmit to App Review": the submission of 2026-10-17 now shows 1.1.0 (8) **Waiting for Review**.
+- Records: the status table in `docs/release/version-1.1.0.md` and the screenshot record in `docs/release/store-listing/screenshots.md` (also its last Developer Mode sentence).
+- Not done: the Theme screenshot retake (needs a Retina display mode); Finder previews of build 8 and a store-signed install were not observed.
+- Note: the local `main` branch of this checkout shares no history with `origin/main` (the remote history was rewritten earlier); it was left untouched and the release was built from `origin/main`.
+
 ## 2026-10-24 — Nothing hidden: build 8 after the Guideline 5.6 rejection of build 6 (implementation and validation)
 
 Owner request after App Review rejected 1.1.0 (6) on 2026-10-23 under Guideline 5.6 ("features that appear to have been intentionally hidden during the review process"): "Get rid of everything and make the app approveable." Analysis and decision: [decision 031](docs/decisions/031-nothing-hidden.md).
