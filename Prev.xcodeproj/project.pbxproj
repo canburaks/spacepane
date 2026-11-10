@@ -274,6 +274,7 @@
 				0ED737CB8B3AD6BD768A7326 /* Compile localized branding metadata */,
 				AE9152291FF4451F9D76891F /* Prune draft languages */,
 				CAD200000000000000000002 /* Embed CAD worker */,
+				5A2000000000000000000001 /* Embed Sparkle framework */,
 				AFC32963E7959E7A34264826 /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -554,6 +555,29 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${PREV_INCLUDE_CAD}\" = YES ]; then\n  /usr/bin/python3 \"${SRCROOT}/script/embed_cad_worker.py\"\nelse\n  /usr/bin/python3 \"${SRCROOT}/script/embed_notices.py\"\nfi\n";
 		};
+		5A2000000000000000000001 /* Embed Sparkle framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(PREV_SPARKLE_BUNDLE_INPUTS)",
+			);
+			inputPaths = (
+				"$(SRCROOT)/script/embed_sparkle.py",
+				"$(SRCROOT)/Configuration/SparkleDownloader.entitlements",
+			);
+			name = "Embed Sparkle framework";
+			outputFileListPaths = (
+				"$(PREV_SPARKLE_BUNDLE_OUTPUTS)",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/python3 \"${SRCROOT}/script/embed_sparkle.py\"\n";
+		};
 		DAAA0B33AB8B4E519699DDB0 /* Prune draft languages */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -675,17 +699,26 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(PREV_APP_ENTITLEMENTS)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PREV_SPARKLE_FRAMEWORK_SEARCH_PATHS)",
+				);
 				INFOPLIST_FILE = "Configuration/App-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(PREV_SPARKLE_LDFLAGS)",
 				);
 				PREVIEW_METADATA_ROLE = app;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER)";
 				PRODUCT_MODULE_NAME = Prev;
 				PRODUCT_NAME = "$(PREV_EXECUTABLE_NAME)";
 				SKIP_INSTALL = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION) $(PREV_SPARKLE_SWIFT_CONDITION)";
 			};
 			name = Debug;
 		};
@@ -712,17 +745,26 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(PREV_APP_ENTITLEMENTS)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PREV_SPARKLE_FRAMEWORK_SEARCH_PATHS)",
+				);
 				INFOPLIST_FILE = "Configuration/App-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(PREV_SPARKLE_LDFLAGS)",
 				);
 				PREVIEW_METADATA_ROLE = app;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(PREVIEW_BASE_BUNDLE_IDENTIFIER)";
 				PRODUCT_MODULE_NAME = Prev;
 				PRODUCT_NAME = "$(PREV_EXECUTABLE_NAME)";
 				SKIP_INSTALL = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(PREV_CAD_SWIFT_CONDITION) $(PREV_SPARKLE_SWIFT_CONDITION)";
 			};
 			name = Release;
 		};

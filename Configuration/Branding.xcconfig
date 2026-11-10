@@ -22,3 +22,7 @@ PREV_FEEDBACK_URL =
 // section 6). Empty while the product ships without CAD (decision 028): About has no link to a helper the app does
 // not contain. Bringing CAD back sets it to https://github.com/canburaks/spacepane-cad-source again.
 PREV_OPEN_SOURCE_URL =
+
+// Direct-distribution Sparkle 2 appcast feed URL and Ed25519 public key (used when PREV_INCLUDE_SPARKLE = YES).
+PREV_SPARKLE_FEED_URL = https:/$()/github.com/canburaks/spacepane/releases/latest/download/appcast.xml
+PREV_SPARKLE_PUBLIC_ED_KEY = jnwDvjU8EA2Q0Ju2KR8B/iBfcZF6aA/udB/Ff50J4U4=

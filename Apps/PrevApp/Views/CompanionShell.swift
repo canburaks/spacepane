@@ -7,6 +7,7 @@ struct CompanionShell: View {
     let configuration: HostedConfiguration
     let settings: CompanionSettings
     let preferences: CompanionPreferences
+    let updater: SparkleUpdater
     @Binding var route: CompanionRoute
     @CompanionState private var session: PreviewSession
     @CompanionState private var sampleSession: AppearanceSampleSession
@@ -17,10 +18,11 @@ struct CompanionShell: View {
     @Environment(\.undoManager) private var undoManager
 
     init(configuration: HostedConfiguration, settings: CompanionSettings, preferences: CompanionPreferences,
-         pipeline: PreviewPipeline, route: Binding<CompanionRoute>) {
+         updater: SparkleUpdater, pipeline: PreviewPipeline, route: Binding<CompanionRoute>) {
         self.configuration = configuration
         self.settings = settings
         self.preferences = preferences
+        self.updater = updater
         _route = route
         _session = CompanionState(initialValue: PreviewSession(pipeline: pipeline))
         _sampleSession = CompanionState(initialValue: AppearanceSampleSession(pipeline: pipeline))
@@ -100,7 +102,7 @@ struct CompanionShell: View {
         case .fileTypes:
             FileTypeSettingsView(settings: settings, overlappingProvidersByFormat: overlappingProvidersByFormat)
         case .theme: AppearanceSettingsView(settings: settings, sample: sampleSession)
-        case .about: AboutView(configuration: configuration)
+        case .about: AboutView(configuration: configuration, updater: updater)
         case .tryPreview:
             DirectPreviewView(session: session, settings: settings,
                               overlappingProvidersByFormat: overlappingProvidersByFormat)

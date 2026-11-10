@@ -15,6 +15,7 @@
 "about.privacy.title" = "Privacy";
 "about.resources.title" = "Resources";
 "about.subtitle" = "App information, help and acknowledgements.";
+"about.updates.automatic" = "Automatically check for updates";
 "about.version" = "Version %1$@ (%2$@)";
 "action.aboutApp" = "About %@";
 "action.disableAll" = "Disable All Types";
@@ -31,6 +32,7 @@
 "action.themeImport" = "Import theme…";
 "action.tryAgain" = "Try Again";
 "action.undo" = "Undo";
+"app.menu.checkForUpdates" = "Check for Updates…";
 "appearance.characterSpacing" = "Character spacing";
 "appearance.colorMode" = "Color mode";
 "appearance.fontFallbackNotice" = "Unavailable fonts or traits use the closest supported font. The sample shows a notice when a fallback is needed.";

@@ -1,0 +1,38 @@
+{
+  "app.menu.checkForUpdates": {
+    "case": "checkForUpdates",
+    "comment": "Command in the application menu (under About) and button on the About page that asks Sparkle to check for a newer release now. Ends with an ellipsis because it opens the update progress/result sheet.",
+    "en": "Check for Updates…",
+    "tr": "Güncellemeleri Denetle…",
+    "de": "Nach Updates suchen…",
+    "fr": "Vérifier les mises à jour…",
+    "zh-Hans": "检查更新…",
+    "ja": "アップデートを確認…",
+    "hi": "अपडेट की जाँच करें…",
+    "ku-Latn": "Rojanekirinan kontrol bike…",
+    "ru": "Проверить обновления…",
+    "id": "Periksa Pembaruan…",
+    "bn": "আপডেট পরীক্ষা করুন…",
+    "ha": "Duba sabuntawa…",
+    "pt": "Buscar Atualizações…",
+    "es": "Buscar actualizaciones…"
+  },
+  "about.updates.automatic": {
+    "case": "automaticUpdateChecks",
+    "comment": "Toggle label on the About page that controls whether Sparkle checks the release feed for updates automatically in the background.",
+    "en": "Automatically check for updates",
+    "tr": "Güncellemeleri otomatik olarak denetle",
+    "de": "Automatisch nach Updates suchen",
+    "fr": "Vérifier automatiquement les mises à jour",
+    "zh-Hans": "自动检查更新",
+    "ja": "アップデートを自動的に確認",
+    "hi": "अपने आप अपडेट की जाँच करें",
+    "ku-Latn": "Rojanekirinan bixweber kontrol bike",
+    "ru": "Автоматически проверять обновления",
+    "id": "Periksa pembaruan secara otomatis",
+    "bn": "স্বয়ংক্রিয়ভাবে আপডেট পরীক্ষা করুন",
+    "ha": "Duba sabuntawa ta atomatik",
+    "pt": "Buscar atualizações automaticamente",
+    "es": "Buscar actualizaciones automáticamente"
+  }
+}

@@ -4,6 +4,7 @@ import PreviewRenderers
 
 struct AboutView: View {
     let configuration: HostedConfiguration
+    let updater: SparkleUpdater
     @Environment(\.locale) private var locale
     @Environment(\.openURL) private var openURL
     private let acknowledgements = AboutAcknowledgements(notices: BundledNotices())
@@ -64,6 +65,24 @@ struct AboutView: View {
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, 6)
+            #if PREV_INCLUDE_SPARKLE
+            Divider().padding(.vertical, 6)
+            VStack(spacing: 8) {
+                Button(PreviewStrings.text(.checkForUpdates)) {
+                    updater.checkForUpdates()
+                }
+                .disabled(!updater.canCheckForUpdates)
+                Toggle(
+                    PreviewStrings.text(.automaticUpdateChecks),
+                    isOn: Binding(
+                        get: { updater.automaticallyChecksForUpdates },
+                        set: { updater.automaticallyChecksForUpdates = $0 }
+                    )
+                )
+                .toggleStyle(.checkbox)
+                .font(CompanionTypography.note)
+            }
+            #endif
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, CompanionMetrics.cardPadding + 6)

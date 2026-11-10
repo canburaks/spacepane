@@ -12,6 +12,7 @@ from build_cad_worker import NOTICE_FOLDERS
 from build_metadata import compile_metadata
 from cad_mode import include_cad
 from package_link import package_objects, package_module_flags
+from sparkle_mode import include_sparkle
 
 ROOT = Path(__file__).resolve().parents[1]
 bin_dir = Path(sys.argv[1])
@@ -40,9 +41,17 @@ architecture = os.uname().machine
 sources = sorted((ROOT / "Apps/PrevApp").rglob("*.swift"))
 # PREV_INCLUDE_CAD (decision 028): the CAD registration is compiled, and the helper and OCCT notices staged, only for YES.
 with_cad = include_cad()
+with_sparkle = include_sparkle()
 command = ["/usr/bin/xcrun", "swiftc", "-parse-as-library", "-module-name", "Prev", "-sdk", sdk, "-target", f"{architecture}-apple-macosx15.0", "-swift-version", "6", "-strict-concurrency=complete", "-default-isolation", "nonisolated", "-I", str(bin_dir), "-I", str(bin_dir / "Modules"), "-o", str(macos / "PrevPrototype")]
 if with_cad:
     command += ["-D", "PREV_INCLUDE_CAD"]
+if with_sparkle:
+    command += [
+        "-D", "PREV_INCLUDE_SPARKLE",
+        "-F", str(ROOT / ".build/sparkle/dist"),
+        "-framework", "Sparkle",
+        "-Xlinker", "-rpath", "-Xlinker", "@executable_path/../Frameworks",
+    ]
 subprocess.run(command + package_module_flags(bin_dir) + [str(source) for source in sources] + [str(obj) for obj in dict.fromkeys(objects)], check=True)
 bundles = list(bin_dir.glob("*.bundle"))
 if not bundles:
@@ -73,6 +82,22 @@ if with_cad:
     helper_target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(helper, helper_target)
     subprocess.run(['/usr/bin/codesign', '--force', '--sign', '-', '--timestamp=none', str(helper_target)], check=True)
+if with_sparkle:
+    sparkle_fw = ROOT / '.build/sparkle' / ('runtime-' + architecture) / 'Sparkle.framework'
+    if not sparkle_fw.is_dir():
+        raise SystemExit('Prepare the Sparkle runtime framework with script/build_sparkle.py before staging.')
+    fw_target = app / 'Contents/Frameworks/Sparkle.framework'
+    fw_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(sparkle_fw, fw_target, symlinks=True)
+    versions_b = fw_target / 'Versions/B'
+    for item in (
+        versions_b / 'XPCServices/Downloader.xpc',
+        versions_b / 'XPCServices/Installer.xpc',
+        versions_b / 'Autoupdate',
+        versions_b / 'Updater.app',
+        fw_target,
+    ):
+        subprocess.run(['/usr/bin/codesign', '--force', '--sign', '-', '--timestamp=none', str(item)], check=True)
 # The same notice folders the Xcode phase embeds (script/embed_cad_worker.py for YES, script/embed_notices.py for NO),
 # so About shows the same rows: the OCCT folder belongs to the helper and is absent without it.
 for notice_source, notice_name in NOTICE_FOLDERS:

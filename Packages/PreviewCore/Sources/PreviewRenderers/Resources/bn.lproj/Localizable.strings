@@ -15,6 +15,7 @@
 "about.privacy.title" = "গোপনীয়তা";
 "about.resources.title" = "সংস্থান";
 "about.subtitle" = "অ্যাপের তথ্য, সাহায্য ও কৃতজ্ঞতা স্বীকার।";
+"about.updates.automatic" = "স্বয়ংক্রিয়ভাবে আপডেট পরীক্ষা করুন";
 "about.version" = "সংস্করণ %1$@ (%2$@)";
 "action.aboutApp" = "%@ সম্পর্কে";
 "action.disableAll" = "সব ধরন নিষ্ক্রিয় করুন";
@@ -31,6 +32,7 @@
 "action.themeImport" = "থিম আমদানি করুন…";
 "action.tryAgain" = "আবার চেষ্টা করুন";
 "action.undo" = "পূর্বাবস্থায় ফেরান";
+"app.menu.checkForUpdates" = "আপডেট পরীক্ষা করুন…";
 "appearance.characterSpacing" = "অক্ষরের ব্যবধান";
 "appearance.colorMode" = "রঙের মোড";
 "appearance.fontFallbackNotice" = "অনুপলব্ধ ফন্ট বা বৈশিষ্ট্যের জন্য কাছাকাছি সমর্থিত ফন্ট ব্যবহার করা হয়। বিকল্প দরকার হলে নমুনায় বিজ্ঞপ্তি দেখা যায়।";

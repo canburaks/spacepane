@@ -15,6 +15,7 @@
 "about.privacy.title" = "गोपनीयता";
 "about.resources.title" = "संसाधन";
 "about.subtitle" = "ऐप की जानकारी, मदद और आभार।";
+"about.updates.automatic" = "अपने आप अपडेट की जाँच करें";
 "about.version" = "संस्करण %1$@ (%2$@)";
 "action.aboutApp" = "%@ के बारे में";
 "action.disableAll" = "सभी प्रकार अक्षम करें";
@@ -31,6 +32,7 @@
 "action.themeImport" = "थीम आयात करें…";
 "action.tryAgain" = "फिर से कोशिश करें";
 "action.undo" = "पूर्ववत करें";
+"app.menu.checkForUpdates" = "अपडेट की जाँच करें…";
 "appearance.characterSpacing" = "अक्षर अंतराल";
 "appearance.colorMode" = "रंग मोड";
 "appearance.fontFallbackNotice" = "अनुपलब्ध फ़ॉन्ट या विशेषताओं के लिए सबसे निकट समर्थित फ़ॉन्ट उपयोग होता है। विकल्प आवश्यक होने पर नमूना सूचना दिखाता है।";

@@ -69,6 +69,10 @@ include_cad() {
   /usr/bin/python3 "$ROOT_DIR/script/cad_mode.py"
 }
 
+include_sparkle() {
+  /usr/bin/python3 "$ROOT_DIR/script/sparkle_mode.py"
+}
+
 if [[ $# -gt 1 ]]; then usage >&2; exit 2; fi
 case "$CONFIGURATION" in Debug|Release) ;; *) echo "Configuration must be Debug or Release." >&2; exit 2 ;; esac
 case "$MODE" in
@@ -128,6 +132,10 @@ case "$MODE" in
     SDK_PATH="$(/usr/bin/xcrun --sdk macosx --show-sdk-path)"
     ARCHITECTURE="$(uname -m)"
     CAD_MODE="$(include_cad)"
+    SPARKLE_MODE="$(include_sparkle)"
+    if [[ "$SPARKLE_MODE" == YES ]]; then
+      /usr/bin/python3 "$ROOT_DIR/script/build_sparkle.py" --architecture "$ARCHITECTURE" >/dev/null
+    fi
     for SOURCE_DIR in Apps/PrevApp Extensions/PrevPreviewExtension Extensions/PrevThumbnailExtension Native/CADImportService; do
       SOURCES=()
       while IFS= read -r SOURCE; do SOURCES+=("$SOURCE"); done < <(find "$ROOT_DIR/$SOURCE_DIR" -type f -name '*.swift' | sort)
@@ -138,6 +146,7 @@ case "$MODE" in
       if [[ "$SOURCE_DIR" != Apps/* ]]; then FLAGS+=(-application-extension); fi
       # The companion and the preview extension register the CAD adapters under this condition.
       if [[ "$CAD_MODE" == YES && ( "$SOURCE_DIR" == Apps/PrevApp || "$SOURCE_DIR" == Extensions/PrevPreviewExtension ) ]]; then FLAGS+=(-D PREV_INCLUDE_CAD); fi
+      if [[ "$SPARKLE_MODE" == YES && "$SOURCE_DIR" == Apps/PrevApp ]]; then FLAGS+=(-D PREV_INCLUDE_SPARKLE -F "$ROOT_DIR/.build/sparkle/dist"); fi
       /usr/bin/xcrun swiftc "${FLAGS[@]}" "${SOURCES[@]}"
       echo "Typechecked $SOURCE_DIR (does not validate Xcode resource linking/signing/Finder)."
     done
@@ -147,6 +156,9 @@ case "$MODE" in
     # stage_companion.py reads the same setting: it adds the helper and compiles the CAD registration only for YES.
     if [[ "$(include_cad)" == YES ]]; then
       /usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture "$(uname -m)"
+    fi
+    if [[ "$(include_sparkle)" == YES ]]; then
+      /usr/bin/python3 "$ROOT_DIR/script/build_sparkle.py" --architecture "$(uname -m)" >/dev/null
     fi
     if [[ "$MODE" == --run-companion ]]; then pkill -u "$(id -u)" -x PrevPrototype >/dev/null 2>&1 || true; fi
     /usr/bin/xcrun swift build "${SWIFT_PACKAGE_ARGS[@]}"
@@ -184,7 +196,8 @@ ARCHIVE_PATH="$ROOT_DIR/.build/archive/Release.xcarchive"
 ARCHIVE_SETTINGS="$ROOT_DIR/.build/archive/build-settings.json"
 # Release 1.0 ships for Apple silicon only (Base.xcconfig ARCHS); archive that slice on any host.
 CAD_MODE="$(include_cad)"
-ARCHIVE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration Release -destination "generic/platform=macOS" -derivedDataPath "$ROOT_DIR/.build/xcode-archive" ARCHS=arm64 PREV_INCLUDE_CAD="$CAD_MODE")
+SPARKLE_MODE="$(include_sparkle)"
+ARCHIVE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration Release -destination "generic/platform=macOS" -derivedDataPath "$ROOT_DIR/.build/xcode-archive" ARCHS=arm64 PREV_INCLUDE_CAD="$CAD_MODE" PREV_INCLUDE_SPARKLE="$SPARKLE_MODE")
 
 # Writes the export options for App Store Connect. $1 is the destination: export (a signed package and app
 # under .build/export for inspection) or upload (App Store Connect receives the build; TestFlight processes it).
@@ -222,9 +235,19 @@ if [[ "$MODE" == --archive || "$MODE" == --archive-unsigned ]]; then
   mkdir -p "$ROOT_DIR/.build/archive"
   UNSIGNED_ARGS=()
   if [[ "$MODE" == --archive ]]; then
+    if [[ "$SPARKLE_MODE" == YES ]]; then
+      /usr/bin/python3 "$ROOT_DIR/script/build_sparkle.py" --architecture arm64 --sign-identity - >/dev/null
+    fi
     /usr/bin/xcrun xcodebuild "${ARCHIVE_ARGS[@]}" -showBuildSettings -json > "$ARCHIVE_SETTINGS"
     /usr/bin/python3 "$ROOT_DIR/script/validate_signing.py" "$ARCHIVE_SETTINGS"
+    if [[ "$SPARKLE_MODE" == YES ]]; then
+      SPARKLE_IDENTITY="$(/usr/bin/python3 -c 'import json,sys; d=json.loads(open(sys.argv[1]).read()); print(next(x["buildSettings"].get("EXPANDED_CODE_SIGN_IDENTITY") or "-" for x in d if x.get("target")=="Prev"))' "$ARCHIVE_SETTINGS")"
+      /usr/bin/python3 "$ROOT_DIR/script/build_sparkle.py" --architecture arm64 --sign-identity "$SPARKLE_IDENTITY"
+    fi
   else
+    if [[ "$SPARKLE_MODE" == YES ]]; then
+      /usr/bin/python3 "$ROOT_DIR/script/build_sparkle.py" --architecture arm64 --sign-identity -
+    fi
     # No identity is needed to prove that the project archives: a helper (YES only) is embedded unsigned and the
     # archive is never uploaded. The signing-dependent checks are skipped, not weakened.
     UNSIGNED_ARGS=(CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=)
@@ -346,10 +369,13 @@ fi
 if [[ "$CAD_MODE" == YES ]]; then
   /usr/bin/python3 "$ROOT_DIR/script/build_cad_worker.py" --architecture "$(uname -m)"
 fi
+if [[ "$SPARKLE_MODE" == YES ]]; then
+  /usr/bin/python3 "$ROOT_DIR/script/build_sparkle.py" --architecture "$(uname -m)" --sign-identity - >/dev/null
+fi
 mkdir -p "$DERIVED_DIR"
 # Only the host CAD worker (YES only) is prepared above. Xcode 27 rejects `-arch` combined with a destination,
 # so the destination names the host architecture and ARCHS keeps Release builds single-architecture.
-XCODE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration "$CONFIGURATION" -destination "platform=macOS,arch=$(uname -m)" -derivedDataPath "$DERIVED_DIR" ARCHS="$(uname -m)" PREV_INCLUDE_CAD="$CAD_MODE")
+XCODE_ARGS=(-project "$ROOT_DIR/Prev.xcodeproj" -scheme Prev -configuration "$CONFIGURATION" -destination "platform=macOS,arch=$(uname -m)" -derivedDataPath "$DERIVED_DIR" ARCHS="$(uname -m)" PREV_INCLUDE_CAD="$CAD_MODE" PREV_INCLUDE_SPARKLE="$SPARKLE_MODE")
 if [[ "$MODE" == --build-unsigned ]]; then
   /usr/bin/xcrun xcodebuild "${XCODE_ARGS[@]}" CODE_SIGNING_ALLOWED=NO build
   echo "Unsigned build completed; no extension installation or Finder routing was validated."
@@ -359,6 +385,10 @@ fi
 SETTINGS_PATH="$DERIVED_DIR/build-settings.json"
 /usr/bin/xcrun xcodebuild "${XCODE_ARGS[@]}" -showBuildSettings -json > "$SETTINGS_PATH"
 /usr/bin/python3 "$ROOT_DIR/script/validate_signing.py" "$SETTINGS_PATH"
+if [[ "$SPARKLE_MODE" == YES ]]; then
+  SPARKLE_IDENTITY="$(/usr/bin/python3 -c 'import json,sys; d=json.loads(open(sys.argv[1]).read()); print(next(x["buildSettings"].get("EXPANDED_CODE_SIGN_IDENTITY") or "-" for x in d if x.get("target")=="Prev"))' "$SETTINGS_PATH")"
+  /usr/bin/python3 "$ROOT_DIR/script/build_sparkle.py" --architecture "$(uname -m)" --sign-identity "$SPARKLE_IDENTITY" >/dev/null
+fi
 APP_BUNDLE="$(/usr/bin/python3 "$ROOT_DIR/script/validate_signing.py" "$SETTINGS_PATH" bundle)"
 APP_PROCESS="$(/usr/bin/python3 "$ROOT_DIR/script/validate_signing.py" "$SETTINGS_PATH" executable)"
 BUNDLE_ID="$(/usr/bin/python3 "$ROOT_DIR/script/validate_signing.py" "$SETTINGS_PATH" identifier)"

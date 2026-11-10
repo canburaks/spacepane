@@ -1144,6 +1144,11 @@ public enum PreviewStrings {
         case openAPIColumnDeprecated = "preview.openapi.column.deprecated"
         case openAPIUnresolvedReferences = "preview.openapi.unresolvedReferences"
         // (end of tq-openapi)
+        // ----
+        // [release-sparkle] Direct-distribution Sparkle 2 update controls.
+        case checkForUpdates = "app.menu.checkForUpdates"
+        case automaticUpdateChecks = "about.updates.automatic"
+        // (end of release-sparkle)
     }
 
     public static func text(_ key: Key, languagePreferences: [String]? = nil) -> String {

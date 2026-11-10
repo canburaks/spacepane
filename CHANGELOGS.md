@@ -2,6 +2,15 @@
 
 Record material changes under dated entries, newest first. Distinguish research, implementation, and validation. Dates use Europe/Istanbul.
 
+## 2026-11-10 — Open-source GitHub Release v1.1.0 and Sparkle 2 direct-distribution updater (implementation, validation and release)
+
+Owner instructions: "spacepane app repo will be completely open-source. In order to do that, you must generate a build in release section of github" and "use sparkle 2".
+
+- Dependency and notice audit (`docs/dependencies/sparkle.md`, `ThirdPartyNotices/Sparkle/LICENSE`): pinned Sparkle 2.10.1 (`Sparkle-2.10.1.tar.xz`, SHA-256 `1a856d2a9edb8e628de88121d7be04cf0e2167f8641650b78fca00b14244cf27`) under MIT/BSD-2-Clause/zlib terms.
+- Build and sandbox configuration (`Configuration/Branding.xcconfig`, `Configuration/Base.xcconfig`, `Configuration/App-Info.plist`, `Configuration/app-sparkle.entitlements`, `Configuration/SparkleDownloader.entitlements`, `Prev.xcodeproj/project.pbxproj`, `script/sparkle_mode.py`, `script/build_sparkle.py`, `script/embed_sparkle.py`): added `PREV_INCLUDE_SPARKLE = YES` for direct-distribution builds (`PREV_INCLUDE_SPARKLE = NO` leaves Mac App Store builds free of Sparkle). Neither Quick Look extension (`PrevPreviewExtension`, `PrevThumbnailExtension`) links or embeds Sparkle, and `SpacePane.app` retains zero network entitlements (`com.apple.security.network.client` is granted only to `Sparkle.framework/Versions/B/XPCServices/Downloader.xpc`).
+- Companion UI and localization (`Apps/PrevApp/App/SparkleUpdater.swift`, `Apps/PrevApp/App/CompanionApp.swift`, `Apps/PrevApp/Views/CompanionShell.swift`, `Apps/PrevApp/Views/AboutView.swift`, `tools/localization/additions/release-sparkle-updates.json`, `Packages/PreviewCore/Sources/PreviewRenderers/PreviewStrings.swift`): added `Check for Updates…` (`app.menu.checkForUpdates`) in the application menu and About identity card, and `Automatically check for updates` (`about.updates.automatic`) on the About page, translated across all 14 locales (1,263 keys).
+- Validation and release (`script/validate_project.py`, `script/check_release_archive.py`, `script/build_and_run.sh`, `script/stage_companion.py`): `--check-static`, `--check`, `--check-compiler` (both `PREV_INCLUDE_SPARKLE=YES` and `NO`), companion model checks, and `--archive` passed (`Release archive checks passed for SpacePane.app 1.1.0 (10): 8 Mach-O files, 3 sandboxed bundles, 0 helpers, 3 privacy manifests; Sparkle 2 embedded`). Exported with `Developer ID Application: Can Burak Sofyalioglu (Z743N6D8DS)`, notarized and stapled `SpacePane-1.1.0.dmg` and `SpacePane-1.1.0.zip`, signed with Sparkle Ed25519 key (`generate_appcast`), and published `SpacePane-1.1.0.dmg`, `SpacePane-1.1.0.zip`, `appcast.xml`, and `SHA256SUMS.txt` to GitHub Release `v1.1.0` (`https://github.com/canburaks/spacepane/releases/tag/v1.1.0`).
+
 ## 2026-10-24 — Build 10 uploaded and submitted (release)
 
 Owner instruction: "Go and do everything."

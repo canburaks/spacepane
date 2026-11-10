@@ -15,6 +15,7 @@
 "about.privacy.title" = "Sirri";
 "about.resources.title" = "Albarkatu";
 "about.subtitle" = "Bayanin manhaja, taimako da godiya.";
+"about.updates.automatic" = "Duba sabuntawa ta atomatik";
 "about.version" = "Sigar %1$@ (%2$@)";
 "action.aboutApp" = "Game da %@";
 "action.disableAll" = "Kashe Duk Nauʼoʼi";
@@ -31,6 +32,7 @@
 "action.themeImport" = "Shigo da Jigo…";
 "action.tryAgain" = "Sake Gwadawa";
 "action.undo" = "Soke";
+"app.menu.checkForUpdates" = "Duba sabuntawa…";
 "appearance.characterSpacing" = "Tazara tsakanin haruffa";
 "appearance.colorMode" = "Yanayin launi";
 "appearance.fontFallbackNotice" = "Idan nauʼin rubutu ko halayensa ba su samuwa, ana amfani da mafi kusa da ake tallafawa. Samfurin yana nuna sanarwa idan an yi hakan.";

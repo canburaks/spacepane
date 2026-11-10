@@ -146,10 +146,15 @@ def validate_cad_wiring(root, objects, targets, include_cad):
         for configuration in objects[target["buildConfigurationList"]]["buildConfigurations"]:
             settings = objects[configuration]["buildSettings"]
             conditions = settings.get("SWIFT_ACTIVE_COMPILATION_CONDITIONS")
-            check((conditions == "$(inherited) $(PREV_CAD_SWIFT_CONDITION)") == (name in CAD_CONDITION_TARGETS),
+            tokens = (conditions or "").split()
+            check(("$(PREV_CAD_SWIFT_CONDITION)" in tokens) == (name in CAD_CONDITION_TARGETS),
                   f"{name} must {'add' if name in CAD_CONDITION_TARGETS else 'not add'} the PREV_INCLUDE_CAD compilation condition")
+            check(("$(PREV_SPARKLE_SWIFT_CONDITION)" in tokens) == (name == "Prev"),
+                  f"{name} must {'add' if name == 'Prev' else 'not add'} the PREV_INCLUDE_SPARKLE compilation condition")
             check("PREV_INCLUDE_CAD" not in (conditions or "").replace("PREV_CAD_SWIFT_CONDITION", ""),
                   f"{name} must not name PREV_INCLUDE_CAD in its compilation conditions; the xcconfig selects it")
+            check("PREV_INCLUDE_SPARKLE" not in (conditions or "").replace("PREV_SPARKLE_SWIFT_CONDITION", ""),
+                  f"{name} must not name PREV_INCLUDE_SPARKLE in its compilation conditions; the xcconfig selects it")
             if name == "CADImportService" and objects[configuration]["name"] == "Release":
                 check(settings.get("DEBUG_INFORMATION_FORMAT") == "$(PREV_CAD_SERVICE_DEBUG_FORMAT)",
                       "The CAD service's release build must take its debug format from PREV_CAD_SERVICE_DEBUG_FORMAT, "

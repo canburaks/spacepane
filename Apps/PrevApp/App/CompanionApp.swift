@@ -13,6 +13,7 @@ struct CompanionApp: App {
     private let pipeline = PreviewPipeline(registrations: Self.adapterRegistrations)
     @CompanionState private var settings: CompanionSettings
     @CompanionState private var preferences: CompanionPreferences
+    @CompanionState private var updater: SparkleUpdater
     @CompanionState private var route: CompanionRoute
     @NSApplicationDelegateAdaptor(CompanionAppDelegate.self) private var appDelegate
 
@@ -30,6 +31,7 @@ struct CompanionApp: App {
         let savedPreferences = CompanionPreferences()
         _settings = State(initialValue: CompanionSettings(configuration: HostedConfiguration()))
         _preferences = State(initialValue: savedPreferences)
+        _updater = State(initialValue: SparkleUpdater())
         // The window opens on the page it was left on, unless that page is no longer offered.
         _route = State(initialValue: savedPreferences.restoredRoute)
     }
@@ -37,7 +39,7 @@ struct CompanionApp: App {
     var body: some Scene {
         Window(configuration.displayName, id: CompanionSceneID.main.rawValue) {
             CompanionShell(configuration: configuration, settings: settings, preferences: preferences,
-                           pipeline: pipeline, route: $route)
+                           updater: updater, pipeline: pipeline, route: $route)
                 .flushesSaveWhenInactive(settings)
                 .onAppear { appDelegate.settings = settings }
         }
@@ -46,13 +48,14 @@ struct CompanionApp: App {
         .defaultSize(width: 1040, height: 720)
         .defaultLaunchBehavior(.presented)
         .commands {
-            CompanionCommands(configuration: configuration, route: $route)
+            CompanionCommands(configuration: configuration, updater: updater, route: $route)
         }
     }
 }
 
 private struct CompanionCommands: Commands {
     let configuration: HostedConfiguration
+    let updater: SparkleUpdater
     @Binding var route: CompanionRoute
     @FocusedValue(\.previewSession) private var session
     @Environment(\.openWindow) private var openWindow
@@ -83,6 +86,12 @@ private struct CompanionCommands: Commands {
             Button(PreviewStrings.format(.aboutApp, arguments: [configuration.displayName], locale: locale)) {
                 select(.about)
             }
+            #if PREV_INCLUDE_SPARKLE
+            Button(PreviewStrings.text(.checkForUpdates)) {
+                updater.checkForUpdates()
+            }
+            .disabled(!updater.canCheckForUpdates)
+            #endif
         }
         // The short help section sits on the About page, inside the same window.
         CommandGroup(replacing: .help) {

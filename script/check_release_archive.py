@@ -38,6 +38,7 @@ from xml.parsers.expat import ExpatError
 # be imported by a test that isolates `sys.path`.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import cad_mode  # noqa: E402
+import sparkle_mode  # noqa: E402
 
 EXPECTED_ARCHITECTURES = {"arm64"}
 
@@ -45,9 +46,24 @@ SANDBOX = "com.apple.security.app-sandbox"
 INHERIT = "com.apple.security.inherit"
 USER_SELECTED_READ_WRITE = "com.apple.security.files.user-selected.read-write"
 APP_GROUPS = "com.apple.security.application-groups"
+MACH_LOOKUP_EXCEPTION = "com.apple.security.temporary-exception.mach-lookup.global-name"
+NETWORK_CLIENT = "com.apple.security.network.client"
 GET_TASK_ALLOW = "com.apple.security.get-task-allow"
 APPLICATION_IDENTIFIER = "com.apple.application-identifier"
 DEVELOPER_TEAM_IDENTIFIER = "com.apple.developer.team-identifier"
+
+SPARKLE_FRAMEWORK_REL = Path("Contents/Frameworks/Sparkle.framework")
+SPARKLE_MACHOS = (
+    SPARKLE_FRAMEWORK_REL / "Versions/B/Sparkle",
+    SPARKLE_FRAMEWORK_REL / "Versions/B/Autoupdate",
+    SPARKLE_FRAMEWORK_REL / "Versions/B/Updater.app/Contents/MacOS/Updater",
+    SPARKLE_FRAMEWORK_REL / "Versions/B/XPCServices/Downloader.xpc/Contents/MacOS/Downloader",
+    SPARKLE_FRAMEWORK_REL / "Versions/B/XPCServices/Installer.xpc/Contents/MacOS/Installer",
+)
+SPARKLE_XPC_SERVICES = (
+    SPARKLE_FRAMEWORK_REL / "Versions/B/XPCServices/Downloader.xpc",
+    SPARKLE_FRAMEWORK_REL / "Versions/B/XPCServices/Installer.xpc",
+)
 
 # The exact entitlements of each bundle role (security review R11). The App Group array of the three roles in
 # GROUP_ROLES is compared across bundles and with each Info.plist instead of being listed here. A role grants
@@ -296,7 +312,13 @@ def configured_include_cad() -> bool:
     return cad_mode.include_cad()
 
 
-def find_bundles(report: Report, app: Path, app_info: Dict[str, Any], include_cad: bool = True) -> List[Bundle]:
+def configured_include_sparkle() -> bool:
+    """PREV_INCLUDE_SPARKLE as the repository and the environment set it (script/sparkle_mode.py)."""
+    return sparkle_mode.include_sparkle()
+
+
+def find_bundles(report: Report, app: Path, app_info: Dict[str, Any], include_cad: bool = True,
+                 include_sparkle: bool = False) -> List[Bundle]:
     """The app, its Quick Look extensions by role and, with CAD, the CAD service, reporting any other layout."""
     bundles = [Bundle("app", app, app_info, app.name)]
     found: Dict[str, List[Bundle]] = {"preview": [], "thumbnail": []}
@@ -315,9 +337,13 @@ def find_bundles(report: Report, app: Path, app_info: Dict[str, Any], include_ca
     for role in ("preview", "thumbnail"):
         report.check(len(found[role]) == 1, f"Expected exactly one {role} extension, found {len(found[role])}")
         bundles.extend(found[role][:1])
-    services = sorted(app.rglob("*.xpc"))
+    sparkle_xpcs = {app / rel for rel in SPARKLE_XPC_SERVICES} if include_sparkle else set()
+    services = [
+        service for service in sorted(app.rglob("*.xpc"))
+        if not service.is_symlink() and service not in sparkle_xpcs
+    ]
     if not include_cad:
-        # Version 1.0 ships no service of any kind: a bundle in any folder is a failure, not a layout to accept.
+        # Version 1.0 ships no CAD service: a non-Sparkle XPC bundle in any folder is a failure.
         for service in services:
             report.fail(f"{service.relative_to(app)} is an XPC service; the build without CAD (PREV_INCLUDE_CAD = NO) "
                         "carries none (decision 028)")
@@ -412,7 +438,8 @@ def check_extension_attributes(report: Report, bundles: List[Bundle]) -> None:
                          f"{bundle.name} must set a positive QLThumbnailMinimumDimension")
 
 
-def entitlement_problems(role: str, granted: Dict[str, Any]) -> List[str]:
+def entitlement_problems(role: str, granted: Dict[str, Any], include_sparkle: bool = False,
+                         bundle_identifier: Optional[str] = None) -> List[str]:
     """Why a granted entitlement set differs from its role's exact set; empty when it matches."""
     problems: List[str] = []
     required = ROLE_ENTITLEMENTS[role]
@@ -425,6 +452,12 @@ def entitlement_problems(role: str, granted: Dict[str, Any]) -> List[str]:
         groups = granted.get(APP_GROUPS)
         if not (isinstance(groups, list) and len(groups) == 1 and isinstance(groups[0], str) and groups[0]):
             problems.append(f"must grant exactly one App Group in {APP_GROUPS}")
+    if role == "app" and include_sparkle:
+        allowed.add(MACH_LOOKUP_EXCEPTION)
+        expected_mach = [f"{bundle_identifier}-spks", f"{bundle_identifier}-spki"] if bundle_identifier else None
+        actual_mach = granted.get(MACH_LOOKUP_EXCEPTION)
+        if expected_mach is not None and actual_mach != expected_mach:
+            problems.append(f"must grant {MACH_LOOKUP_EXCEPTION} = {expected_mach}, found {actual_mach!r}")
     extras = sorted(key for key in granted if key not in allowed)
     cs = [key for key in extras if key.startswith("com.apple.security.cs.")]
     temporary = [key for key in extras if "temporary-exception" in key]
@@ -441,20 +474,22 @@ def entitlement_problems(role: str, granted: Dict[str, Any]) -> List[str]:
     return problems
 
 
-def check_entitlements_and_signatures(report: Report, tools: Any, bundles: List[Bundle]) -> Dict[str, Signing]:
+def check_entitlements_and_signatures(report: Report, tools: Any, bundles: List[Bundle],
+                                      include_sparkle: bool = False) -> Dict[str, Signing]:
     """Entitlements, hardened runtime and signing identity of every bundle; returns each bundle's signing by name."""
     signings: Dict[str, Signing] = {}
     groups: Dict[str, Tuple[Any, ...]] = {}
     for bundle in bundles:
         granted = tools.entitlements(bundle.path)
-        for problem in entitlement_problems(bundle.role, granted):
+        identifier = bundle.info.get("CFBundleIdentifier")
+        for problem in entitlement_problems(bundle.role, granted, include_sparkle=include_sparkle,
+                                            bundle_identifier=identifier if isinstance(identifier, str) else None):
             report.fail(f"{bundle.name} {problem}")
         if granted.get(GET_TASK_ALLOW):
             report.note(f"{bundle.name} carries get-task-allow from development signing; distribution export removes it")
         signing = tools.signing(bundle.path)
         signings[bundle.name] = signing
         report.check(signing.hardened_runtime, f"{bundle.name} is not signed with the hardened runtime (codesign flags 0x{signing.flags:x})")
-        identifier = bundle.info.get("CFBundleIdentifier")
         report.check(signing.identifier == identifier,
                      f"{bundle.name} signing identifier {signing.identifier!r} differs from its CFBundleIdentifier {identifier!r}")
         team = signing.team
@@ -635,10 +670,38 @@ def check_privacy_manifests(report: Report, bundles: List[Bundle]) -> int:
     return present
 
 
+def check_sparkle(report: Report, tools: Any, app: Path, info: Dict[str, Any]) -> None:
+    """Verify the embedded Sparkle 2 framework, feed metadata, license, and XPC sandbox isolation."""
+    fw = app / SPARKLE_FRAMEWORK_REL
+    report.check(fw.is_dir(), "Sparkle.framework is missing from Contents/Frameworks")
+    if not fw.is_dir():
+        return
+    feed_url = info.get("SUFeedURL")
+    pub_key = info.get("SUPublicEDKey")
+    report.check(isinstance(feed_url, str) and feed_url.startswith("https://"),
+                 f"App Info.plist SUFeedURL must be an https:// URL, found {feed_url!r}")
+    report.check(isinstance(pub_key, str) and len(pub_key) >= 40,
+                 f"App Info.plist SUPublicEDKey must be a base64 Ed25519 public key, found {pub_key!r}")
+    report.check(info.get("SUEnableDownloaderService") is True and info.get("SUEnableInstallerLauncherService") is True,
+                 "App Info.plist must enable SUEnableDownloaderService and SUEnableInstallerLauncherService for sandboxed updates")
+    report.check((fw / "Versions/B/Resources/LICENSE").is_file(),
+                 "Sparkle.framework/Versions/B/Resources/LICENSE is missing")
+    downloader = fw / "Versions/B/XPCServices/Downloader.xpc"
+    installer = fw / "Versions/B/XPCServices/Installer.xpc"
+    dl_ent = tools.entitlements(downloader)
+    report.check(dl_ent.get(SANDBOX) is True and dl_ent.get(NETWORK_CLIENT) is True,
+                 f"Sparkle Downloader.xpc must grant {SANDBOX} and {NETWORK_CLIENT}, found {dl_ent!r}")
+    inst_ent = tools.entitlements(installer)
+    report.check(not inst_ent.get(SANDBOX),
+                 f"Sparkle Installer.xpc must not be sandboxed, found {inst_ent!r}")
+
+
 def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = None,
-                    include_cad: Optional[bool] = None) -> Report:
+                    include_cad: Optional[bool] = None,
+                    include_sparkle: Optional[bool] = None) -> Report:
     """Check an archive. `shipped` and `include_cad` default to the repository's configuration; tests name them."""
     include_cad = configured_include_cad() if include_cad is None else include_cad
+    include_sparkle = False if include_sparkle is None else include_sparkle
     report = Report()
     applications = sorted((archive / "Products/Applications").glob("*.app"))
     report.check(len(applications) == 1, "Archive must contain exactly one application")
@@ -653,7 +716,7 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
         report.fail(f"{app.name} has no readable Contents/Info.plist")
         return report
     check_app_info(report, info, app)
-    bundles = find_bundles(report, app, info, include_cad)
+    bundles = find_bundles(report, app, info, include_cad, include_sparkle=include_sparkle)
     check_info_plists(report, bundles)
     check_extension_attributes(report, bundles)
     check_languages(report, bundles, shipped if shipped is not None else shipped_languages())
@@ -664,6 +727,8 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
     if not include_cad:
         check_no_cad_residue(report, app, bundles)
         allowed = main_executables(bundles)
+        if include_sparkle:
+            allowed |= {app / rel for rel in SPARKLE_MACHOS}
         for path in machos:
             report.check(path in allowed,
                          f"{path.relative_to(app)} is a Mach-O file other than the main executable of the app or an "
@@ -677,10 +742,12 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
     valid, message = tools.verify(app)
     report.check(valid, "codesign --verify --deep --strict failed: " + message)
 
-    signings = check_entitlements_and_signatures(report, tools, bundles)
+    signings = check_entitlements_and_signatures(report, tools, bundles, include_sparkle=include_sparkle)
     helper_signings = check_helpers(report, tools, app, bundles) if include_cad else {}
     check_signing_teams(report, {**signings, **helper_signings})
     check_cad_service(report, bundles, signings)
+    if include_sparkle:
+        check_sparkle(report, tools, app, info)
     manifests = check_privacy_manifests(report, bundles)
     frameworks = sorted(app.glob("Contents/Frameworks/*.framework"))
     if frameworks:
@@ -696,12 +763,21 @@ def inspect_archive(archive: Path, tools: Any, shipped: Optional[List[str]] = No
                       f"({info.get('CFBundleVersion')}): {len(machos)} Mach-O files, {len(bundles)} sandboxed bundles, "
                       f"{len(helper_signings)} helpers, {manifests} privacy manifests"
                       + ("" if include_cad else "; no CAD service, helper or OCCT notices (PREV_INCLUDE_CAD is NO)")
+                      + ("; Sparkle 2 embedded" if include_sparkle else "")
                       + ". Run Validate App in Organizer next.")
     return report
 
 
-def main(archive: Path, tools: Optional[Any] = None, include_cad: Optional[bool] = None) -> int:
-    report = inspect_archive(archive, tools if tools is not None else SystemTools(), include_cad=include_cad)
+def main(archive: Path, tools: Optional[Any] = None, include_cad: Optional[bool] = None,
+         include_sparkle: Optional[bool] = None) -> int:
+    if include_sparkle is None:
+        include_sparkle = configured_include_sparkle() if tools is None else False
+    report = inspect_archive(
+        archive,
+        tools if tools is not None else SystemTools(),
+        include_cad=include_cad,
+        include_sparkle=include_sparkle,
+    )
     for note in report.notes:
         print("note:", note)
     if report.failures:

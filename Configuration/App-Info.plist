@@ -52,6 +52,14 @@
 	<string>$(PREV_FEEDBACK_URL)</string>
 	<key>PreviewOpenSourceURL</key>
 	<string>$(PREV_OPEN_SOURCE_URL)</string>
+	<key>SUFeedURL</key>
+	<string>$(PREV_EFFECTIVE_SPARKLE_FEED_URL)</string>
+	<key>SUPublicEDKey</key>
+	<string>$(PREV_EFFECTIVE_SPARKLE_PUBLIC_ED_KEY)</string>
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUEnableDownloaderService</key>
+	<true/>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
