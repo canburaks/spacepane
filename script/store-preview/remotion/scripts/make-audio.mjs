@@ -69,7 +69,7 @@ const chord = (t0, gain) => {
 };
 
 thunk(HOOK_PRESS_FRAME / FPS, 0.55);
-const ids = ['secrets', 'database', 'archive', 'notebook', 'markdown', 'model', 'settings'];
+const ids = ['secrets', 'database', 'archive', 'notebook', 'markdown', 'settings'];
 ids.forEach((id, k) => tick(sceneStart(id) / FPS + 0.02, 0.07, 1500 + (k % 3) * 160, k % 2 ? 0.25 : -0.25));
 thunk(sceneStart('end') / FPS + 8 / FPS, 0.3);
 chord(sceneStart('end') / FPS + 0.2, 0.16);

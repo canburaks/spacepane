@@ -71,10 +71,9 @@ and textual or video overlays are allowed to explain things. See Weaknesses for 
 | 12.2 to 15.4 | Archive (`ArchiveScene`) | "Look inside. Nothing is extracted." | `5-panel` | Window fills the frame; ring on the listing counts |
 | 15.0 to 18.1 | Notebook (`NotebookScene`) | "Notebooks as saved. Never run." | `3-panel` (Rendered) | Push to code cell and saved output; dim and ring |
 | 17.7 to 20.6 | Markdown (`MarkdownScene`) | "Markdown, ready to read." | `6-panel` | Push in, then a pan down the rendered document |
-| 20.2 to 23.2 | Model (`ModelScene`) | "Models you can turn." and "STEP and IGES are off until you switch them on." | `7-panel` | Push toward the gear and the view buttons |
-| 22.8 to 24.9 | File Types (`SettingsScene`) | "A switch for every file type." | `8-app` | Push in on the companion window |
-| 24.9 to 26.8 | Theme (same scene) | "Your colors. Your type." | `9-app` | Dissolve to Theme (sidebar selection changes), hold |
-| 26.4 to 29.0 | End card (`EndScene`) | "SpacePane for Quick Look", "Preview JSON, SQLite, Markdown" | `public/icon.svg` | Icon pops with a violet glow, text rises |
+| 20.2 to 22.3 | File Types (`SettingsScene`) | "A switch for every file type." | `8-app` | Push in on the companion window |
+| 22.3 to 24.2 | Theme (same scene) | "Your colors. Your type." | `9-app` | Dissolve to Theme (sidebar selection changes), hold |
+| 23.8 to 26.4 | End card (`EndScene`) | "SpacePane for Quick Look", "Preview JSON, SQLite, Markdown" | `public/icon.svg` | Icon pops with a violet glow, text rises |
 
 Where things live: `src/theme/tokens.ts` (brand tokens, easings, springs, layout), `src/theme/timing.ts` (every
 duration and start frame), `src/data/captures.ts` (capture names and native sizes),

@@ -11,7 +11,7 @@ const repo = resolve(root, '../../..');
 const raw = resolve(repo, '.build/store-screenshots/raw');
 const captures = [
   '1-finder', '1-panel', '2-panel', '3-panel', '4-panel-summary', '4-panel-table',
-  '5-panel', '6-panel', '7-panel', '8-app', '9-app',
+  '5-panel', '6-panel', '8-app', '9-app',
 ];
 
 mkdirSync(resolve(root, 'public/captures'), {recursive: true});

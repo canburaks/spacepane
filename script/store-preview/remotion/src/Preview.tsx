@@ -6,7 +6,6 @@ import {DatabaseScene} from './scenes/DatabaseScene';
 import {EndScene} from './scenes/EndScene';
 import {HookScene} from './scenes/HookScene';
 import {MarkdownScene} from './scenes/MarkdownScene';
-import {ModelScene} from './scenes/ModelScene';
 import {NotebookScene} from './scenes/NotebookScene';
 import {SecretsScene} from './scenes/SecretsScene';
 import {SettingsScene} from './scenes/SettingsScene';
@@ -19,7 +18,6 @@ const scenes: {id: SceneId; Component: React.FC}[] = [
   {id: 'archive', Component: ArchiveScene},
   {id: 'notebook', Component: NotebookScene},
   {id: 'markdown', Component: MarkdownScene},
-  {id: 'model', Component: ModelScene},
   {id: 'settings', Component: SettingsScene},
   {id: 'end', Component: EndScene},
 ];

@@ -12,7 +12,6 @@ export const captures = {
   sqliteTable: cap('4-panel-table', 2580, 1560),
   archive: cap('5-panel', 2580, 1560),
   markdown: cap('6-panel', 2580, 1560),
-  model: cap('7-panel', 2580, 1200),
   fileTypes: cap('8-app', 2580, 1640),
   theme: cap('9-app', 2580, 1640),
 } as const;

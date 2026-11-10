@@ -124,10 +124,9 @@ lines; the first drops its full stop after the keycap.
 | 13.0 – 15.4 | Press. ZIP tree | Look inside. *Nothing* is extracted. | `5-panel.png` |
 | 15.4 – 17.8 | Press. Notebook, Rendered view | Notebooks as saved. *Never* run. | `3-panel.png` |
 | 17.8 – 20.0 | Press. Markdown, Rendered view | Markdown, *ready* to read. | `6-panel.png` |
-| 20.0 – 22.6 | Press. STEP model; an arc hints that it turns | Models you can *turn*. Small line: STEP and IGES are off until you switch them on. | `7-panel.png` |
-| 22.6 – 24.8 | The key leaves. The app window rises: File Types | A switch for *every* file type. | `8-app.png` |
-| 24.8 – 27.0 | Theme page; the scheme changes from GitHub Dark to Aurora and the live sample recolors | *Your* colors. *Your* type. | `9-app.png`, `9-app-aurora.png` |
-| 27.0 – 29.8 | End card, on paper. The icon builds, its space bar is pressed, the name comes up | SpacePane *for Quick Look* / Preview JSON, SQLite, Markdown | `icon.svg` |
+| 20.0 – 22.2 | The key leaves. The app window rises: File Types | A switch for *every* file type. | `8-app.png` |
+| 22.2 – 24.4 | Theme page; the scheme changes from GitHub Dark to Aurora and the live sample recolors | *Your* colors. *Your* type. | `9-app.png`, `9-app-aurora.png` |
+| 24.4 – 27.2 | End card, on paper. The icon builds, its space bar is pressed, the name comes up | SpacePane *for Quick Look* / Preview JSON, SQLite, Markdown | `icon.svg` |
 
 Poster frame: 5.0 s, the Outline view under "Press [Space] / See what's really inside." It is also Apple's default
 poster time, so the preview is right even if the poster is never set by hand.

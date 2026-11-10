@@ -23,13 +23,12 @@ const T = {
   s4: 13.0,     // Space: release-1.4.zip
   s5: 15.4,     // Space: tide-analysis.ipynb
   s6: 17.8,     // Space: README.md
-  s7: 20.0,     // Space: winch-gear.step
-  s8: 22.6,     // the app: File Types
-  s9: 24.8,     // the app: Theme
-  end: 27.0,    // end card
+  s8: 20.0,     // the app: File Types
+  s9: 22.2,     // the app: Theme
+  end: 24.4,    // end card
 };
-const DURATION = 29.8;
-const PRESSES = [T.press1, T.s3, T.s4, T.s5, T.s6, T.s7];
+const DURATION = 27.2;
+const PRESSES = [T.press1, T.s3, T.s4, T.s5, T.s6];
 
 // ---- Grid ------------------------------------------------------------------------------------------------------
 const COL_X = 96;          // left margin and headline column
@@ -127,7 +126,6 @@ const WORLDS = [
   { t: T.s4 + 0.02, kind: 'wipe', dur: 0.85, colors: ['#7b43ff', '#d44fd0', '#ff4f9a'] },
   { t: T.s5 + 0.02, kind: 'wipe', dur: 0.85, colors: ['#d6307f', '#ff5b6e', '#ff9a4a'] },
   { t: T.s6 + 0.02, kind: 'wipe', dur: 0.85, colors: ['#1f5fd6', '#2a9fd6', '#3fd3b5'] },
-  { t: T.s7 + 0.02, kind: 'wipe', dur: 0.85, colors: ['#1a1466', '#4b3cff', '#a64dff'] },
   { t: T.s8 - 0.05, kind: 'fade', dur: 0.7, colors: ['#e0358a', '#a64dff', '#4b3cff'] },
   { t: T.s9 - 0.1, kind: 'fade', dur: 0.8, colors: ['#4b3cff', '#a64dff', '#ff4f9a', '#ffb547'] },
   { t: T.end + 0.12, kind: 'wipe', dur: 0.9, origin: 'center', paper: true },
@@ -236,7 +234,6 @@ const rigs = {
   zip: makeRig(['5-panel']),
   notebook: makeRig(['3-panel']),
   markdown: makeRig(['6-panel']),
-  step: makeRig(['7-panel']),
   app: makeRig(['8-app', '9-app', '9-app-aurora']),
 };
 
@@ -253,12 +250,6 @@ const marks = {
   chip2: mark(rigs.settings, chipCss(301, 825), '2'),
   count: mark(rigs.settings, `left:86px;top:192px;width:246px;height:5px;border-radius:3px;background:${AMBER};transform-origin:0 50%;box-shadow:0 0 16px ${rgba(AMBER, 0.5)};`),
   readOnly: mark(rigs.sqlite, ringCss(70, 370, 650, 420, MINT, 13, 3)),
-  orbit: mark(rigs.step, 'left:913px;top:440px;width:800px;height:520px;',
-    '<svg viewBox="0 0 800 520" width="800" height="520" style="overflow:visible">' +
-    '<defs><linearGradient id="orbitFade" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="740" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.45" stop-color="#fff" stop-opacity="0.7"/><stop offset="1" stop-color="#fff" stop-opacity="0.95"/></linearGradient></defs>' +
-    '<path id="orbitPath" d="M 60 290 C 120 500, 680 500, 740 290" fill="none" stroke="url(#orbitFade)" stroke-width="4" stroke-linecap="round" pathLength="100" stroke-dasharray="0 200"/>' +
-    '<path id="orbitHead" d="M 714 317 L 740 290 L 748 326" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '</svg>'),
 };
 
 // A rig is placed by the screen position of its top-left corner and a scale in output pixels per capture pixel.
@@ -401,24 +392,8 @@ function renderCaptures(t) {
     { rate: 0.007, elapsed: t - T.s5, ax: CAP_X, ay: 100 }));
 
   // README.md
-  placeRig(rigs.markdown, standardPanel(t, T.s6 + 0.07, T.s7 + 0.03, { s: 0.584, x: CAP_X, y: 100 },
+  placeRig(rigs.markdown, standardPanel(t, T.s6 + 0.07, T.s8 - 0.02, { s: 0.584, x: CAP_X, y: 100 },
     { rate: 0.007, elapsed: t - T.s6, ax: CAP_X, ay: 100 }));
-
-  // winch-gear.step
-  {
-    const cam = track(t, [
-      { t: T.s7, s: 0.6, x: CAP_X, y: 196 },
-      { t: T.s8, s: 0.66, x: CAP_X, y: 172, e: ease.glide },
-    ]);
-    placeRig(rigs.step, standardPanel(t, T.s7 + 0.07, T.s8 - 0.02, cam));
-    const p = ease.inOut(prog(t, T.s7 + 0.75, 0.9));
-    const path = marks.orbit.querySelector('#orbitPath');
-    const head = marks.orbit.querySelector('#orbitHead');
-    // An arc under the model that draws itself, then its arrowhead: a hint that the model can be turned.
-    path.setAttribute('stroke-dasharray', `${Math.round(p * 1e4) / 100} 200`);
-    head.style.opacity = prog(t, T.s7 + 1.5, 0.12);
-    marks.orbit.style.opacity = prog(t, T.s7 + 0.75, 0.1);
-  }
 
   // The app: File Types, then Theme, then the Aurora scheme picked on the Theme page. One window, pixel-aligned.
   {
@@ -449,8 +424,7 @@ const EYEBROWS = [
   { text: 'stations.sqlite', t0: T.s3 - SELECT, t1: T.s4 - SELECT },
   { text: 'release-1.4.zip', t0: T.s4 - SELECT, t1: T.s5 - SELECT },
   { text: 'tide-analysis.ipynb', t0: T.s5 - SELECT, t1: T.s6 - SELECT },
-  { text: 'README.md', t0: T.s6 - SELECT, t1: T.s7 - SELECT },
-  { text: 'winch-gear.step', t0: T.s7 - SELECT, t1: T.s8 - 0.04 },
+  { text: 'README.md', t0: T.s6 - SELECT, t1: T.s8 - 0.04 },
   { text: 'File Types', caps: true, t0: T.s8 + 0.2, t1: T.s9 - 0.06 },
   { text: 'Theme', caps: true, t0: T.s9 - 0.06, t1: T.end - 0.04 },
 ];
@@ -466,9 +440,7 @@ const HEADLINES = [
   { t0: T.s3 + 0.16, t1: T.s4 - LEAVE, lines: [['A ', 'database'], ['at ', 'a ', 'glance.'], [{ em: 'Read-only.' }]] },
   { t0: T.s4 + 0.16, t1: T.s5 - LEAVE, lines: [['Look ', 'inside.'], [{ em: 'Nothing' }, ' is'], ['extracted.']] },
   { t0: T.s5 + 0.16, t1: T.s6 - LEAVE, lines: [['Notebooks'], ['as ', 'saved.'], [{ em: 'Never' }, ' run.']] },
-  { t0: T.s6 + 0.16, t1: T.s7 - LEAVE, lines: [['Markdown,'], [{ em: 'ready' }, ' to ', 'read.']] },
-  { t0: T.s7 + 0.16, t1: T.s8 - 0.04, lines: [['Models ', 'you'], ['can ', { em: 'turn' }, '.']],
-    note: 'STEP and IGES are off until<br>you switch them on.' },
+  { t0: T.s6 + 0.16, t1: T.s8 - 0.04, lines: [['Markdown,'], [{ em: 'ready' }, ' to ', 'read.']] },
   { t0: T.s8 + 0.26, t1: T.s9 - 0.06, center: true, lines: [['A ', 'switch ', 'for ', { em: 'every' }, ' file ', 'type.']] },
   { t0: T.s9 + 0.1, t1: T.end - 0.04, center: true, lines: [[{ em: 'Your' }, ' colors. ', { em: 'Your' }, ' type.']] },
 ];

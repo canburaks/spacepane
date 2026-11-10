@@ -10,7 +10,6 @@ export const sceneDurations = {
   archive: 96,
   notebook: 93,
   markdown: 87,
-  model: 90,
   settings: 120,
   end: 78,
 } as const;
