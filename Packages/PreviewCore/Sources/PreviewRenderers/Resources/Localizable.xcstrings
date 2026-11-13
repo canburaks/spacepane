@@ -110,7 +110,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vorschau und Miniaturbilder für Text, strukturierte Daten, Archive, Datenbanken und 3D-Modelle direkt im Finder – vollständig auf Ihrem Mac."
+            "value": "Vorschau und Miniaturbilder für Text, strukturierte Daten, Archive, Datenbanken und 3D-Modelle direkt im Finder – vollständig auf dem Mac."
           }
         },
         "fr": {
@@ -1100,7 +1100,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ verarbeitet Dateien lokal auf Ihrem Mac. Kein Dateiinhalt verlässt Ihr Gerät."
+            "value": "%@ verarbeitet Dateien lokal auf dem Mac. Kein Dateiinhalt verlässt das Gerät."
           }
         },
         "fr": {
@@ -5574,7 +5574,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sie können bis zu 32 Profile speichern."
+            "value": "Bis zu 32 Profile lassen sich speichern."
           }
         },
         "fr": {
@@ -5932,7 +5932,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geben Sie einen Namen ein, um die aktuelle Darstellung zu speichern."
+            "value": "Einen Namen eingeben, um die aktuelle Darstellung zu speichern."
           }
         },
         "fr": {
@@ -6022,7 +6022,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verwenden Sie einen kürzeren Namen ohne Zeilenumbrüche oder Steuerzeichen."
+            "value": "Einen kürzeren Namen ohne Zeilenumbrüche oder Steuerzeichen verwenden."
           }
         },
         "fr": {
@@ -6291,7 +6291,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wählen Sie einen Dateityp, um ein integriertes Beispiel mit Ihren Einstellungen zu sehen. Beispiele enthalten keine persönlichen Daten."
+            "value": "Einen Dateityp wählen, um ein integriertes Beispiel mit den aktuellen Einstellungen zu sehen. Beispiele enthalten keine persönlichen Daten."
           }
         },
         "fr": {
@@ -9508,7 +9508,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Importieren Sie nur ein begrenztes JSON-Darstellungsdokument. Schriften werden nie installiert."
+            "value": "Nur ein begrenztes JSON-Darstellungsdokument importieren. Schriften werden nie installiert."
           }
         },
         "fr": {
@@ -12024,7 +12024,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sie enthält Binärdaten und keinen Text. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Sie enthält Binärdaten und keinen Text. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -12114,7 +12114,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Verarbeitung dieser Datei hat länger gedauert als erlaubt. Versuchen Sie es erneut oder öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Die Verarbeitung dieser Datei hat länger gedauert als erlaubt. Erneut versuchen oder die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -12204,7 +12204,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Vorschau erlaubt %@ für die Verarbeitung einer Datei, diese hat länger gedauert. Versuchen Sie es erneut oder öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Diese Vorschau erlaubt %@ für die Verarbeitung einer Datei, diese hat länger gedauert. Erneut versuchen oder die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -12294,7 +12294,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Inhalt kann nicht angezeigt werden. Öffnen Sie die Datei in einer App, die sie entsperren kann."
+            "value": "Der Inhalt kann nicht angezeigt werden. Die Datei in einer App öffnen, die sie entsperren kann."
           }
         },
         "fr": {
@@ -12384,7 +12384,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Es enthält mehr Details, als diese Vorschau sicher darstellen kann. Öffnen Sie die Datei in einer App für 3D-Modelle."
+            "value": "Es enthält mehr Details, als diese Vorschau sicher darstellen kann. Die Datei in einer App für 3D-Modelle öffnen."
           }
         },
         "fr": {
@@ -12474,7 +12474,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Datei ist größer, als diese Vorschau lesen kann. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Diese Datei ist größer, als diese Vorschau lesen kann. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -12564,7 +12564,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Datei ist größer als die %@, die diese Vorschau lesen kann. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Diese Datei ist größer als die %@, die diese Vorschau lesen kann. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -12654,7 +12654,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Begrenzungen sind ungültig. Versuchen Sie es erneut und installieren Sie die App neu, falls das Problem bestehen bleibt."
+            "value": "Die Begrenzungen sind ungültig. Erneut versuchen und die App neu installieren, falls das Problem bestehen bleibt."
           }
         },
         "fr": {
@@ -12744,7 +12744,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Eine Zeile ist länger, als diese Vorschau anzeigen kann. Öffnen Sie die Datei in einem Texteditor."
+            "value": "Eine Zeile ist länger, als diese Vorschau anzeigen kann. Die Datei in einem Texteditor öffnen."
           }
         },
         "fr": {
@@ -12834,7 +12834,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Eine Zeile ist länger als die %@, die diese Vorschau anzeigen kann. Öffnen Sie die Datei in einem Texteditor."
+            "value": "Eine Zeile ist länger als die %@, die diese Vorschau anzeigen kann. Die Datei in einem Texteditor öffnen."
           }
         },
         "fr": {
@@ -12924,7 +12924,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Inhalt entspricht nicht den Regeln des Formats, oder die Datei ist beschädigt. Öffnen Sie sie zur Prüfung in der App, mit der sie erstellt wurde."
+            "value": "Der Inhalt entspricht nicht den Regeln des Formats, oder die Datei ist beschädigt. Die Datei zur Prüfung in der App öffnen, mit der sie erstellt wurde."
           }
         },
         "fr": {
@@ -13014,7 +13014,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sie wurde möglicherweise verschoben, umbenannt oder gelöscht. Prüfen Sie, ob sie noch vorhanden ist, und versuchen Sie es dann erneut."
+            "value": "Sie wurde möglicherweise verschoben, umbenannt oder gelöscht. Prüfen, ob sie noch vorhanden ist, und dann erneut versuchen."
           }
         },
         "fr": {
@@ -13104,7 +13104,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Es ist eine spezielle Systemdatei und keine reguläre Datei. Versuchen Sie stattdessen eine reguläre Datei."
+            "value": "Es ist eine spezielle Systemdatei und keine reguläre Datei. Stattdessen eine reguläre Datei auswählen."
           }
         },
         "fr": {
@@ -13194,7 +13194,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Anzeige dieser Datei würde mehr Platz benötigen, als diese Vorschau zulässt. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Die Anzeige dieser Datei würde mehr Platz benötigen, als diese Vorschau zulässt. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -13284,7 +13284,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Anzeige dieser Datei würde mehr als die %@ benötigen, die diese Vorschau zulässt. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Die Anzeige dieser Datei würde mehr als die %@ benötigen, die diese Vorschau zulässt. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -13374,7 +13374,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seine Struktur ist tiefer, als diese Vorschau sicher lesen kann. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Seine Struktur ist tiefer, als diese Vorschau sicher lesen kann. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -13491,13 +13491,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Ebene Tiefe, dieses ist tiefer verschachtelt. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Ebene Tiefe, dieses ist tiefer verschachtelt. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Ebenen Tiefe, dieses ist tiefer verschachtelt. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Ebenen Tiefe, dieses ist tiefer verschachtelt. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
                 }
               }
             }
@@ -13716,7 +13716,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sie hat mehr Zeilen, als diese Vorschau anzeigt. Öffnen Sie die Datei in einem Texteditor, um sie vollständig zu lesen."
+            "value": "Sie hat mehr Zeilen, als diese Vorschau anzeigt. Zum vollständigen Lesen die Datei in einem Texteditor öffnen."
           }
         },
         "fr": {
@@ -13833,13 +13833,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Diese Vorschau zeigt bis zu %2$@ Zeile an, diese Datei hat mehr. Öffnen Sie die Datei in einem Texteditor, um sie vollständig zu lesen."
+                  "value": "Diese Vorschau zeigt bis zu %2$@ Zeile an, diese Datei hat mehr. Zum vollständigen Lesen die Datei in einem Texteditor öffnen."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Diese Vorschau zeigt bis zu %2$@ Zeilen an, diese Datei hat mehr. Öffnen Sie die Datei in einem Texteditor, um sie vollständig zu lesen."
+                  "value": "Diese Vorschau zeigt bis zu %2$@ Zeilen an, diese Datei hat mehr. Zum vollständigen Lesen die Datei in einem Texteditor öffnen."
                 }
               }
             }
@@ -14058,7 +14058,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Es enthält mehr Elemente, als diese Vorschau sicher lesen kann. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+            "value": "Es enthält mehr Elemente, als diese Vorschau sicher lesen kann. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
           }
         },
         "fr": {
@@ -14175,13 +14175,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Element, dieses hat mehr. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Element, dieses hat mehr. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Elementen, dieses hat mehr. Öffnen Sie die Datei in einer App, die für diesen Dateityp gedacht ist."
+                  "value": "Diese Vorschau liest Dokumente mit bis zu %2$@ Elementen, dieses hat mehr. Die Datei in einer App öffnen, die für diesen Dateityp gedacht ist."
                 }
               }
             }
@@ -14400,7 +14400,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Inhalt liegt online, zum Beispiel in iCloud Drive. Laden Sie die Datei zuerst herunter und zeigen Sie sie dann erneut in der Vorschau an."
+            "value": "Der Inhalt liegt online, zum Beispiel in iCloud Drive. Die Datei zuerst herunterladen und dann erneut in der Vorschau anzeigen."
           }
         },
         "fr": {
@@ -14490,7 +14490,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Möglicherweise fehlt Ihnen die Berechtigung zum Lesen, oder der Datenträger, auf dem sie liegt, ist nicht verfügbar. Prüfen Sie den Zugriff auf die Datei und versuchen Sie es dann erneut."
+            "value": "Möglicherweise fehlt die Leseberechtigung, oder der Datenträger, auf dem sie liegt, ist nicht verfügbar. Den Zugriff auf die Datei prüfen und dann erneut versuchen."
           }
         },
         "fr": {
@@ -14580,7 +14580,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Vorschau liest UTF-8- und UTF-16-Text. Speichern Sie die Datei in einer dieser Kodierungen und zeigen Sie sie dann erneut an."
+            "value": "Diese Vorschau liest UTF-8- und UTF-16-Text. Die Datei in einer dieser Kodierungen speichern und dann erneut anzeigen."
           }
         },
         "fr": {
@@ -14670,7 +14670,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Vorschau kann diesen Dateityp nicht anzeigen. Öffnen Sie die Datei in einer App, die ihn unterstützt."
+            "value": "Diese Vorschau kann diesen Dateityp nicht anzeigen. Die Datei in einer App öffnen, die ihn unterstützt."
           }
         },
         "fr": {
@@ -14760,7 +14760,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Dateityp wird unterstützt, diese Version davon jedoch nicht. Öffnen Sie die Datei in der App, mit der sie erstellt wurde."
+            "value": "Der Dateityp wird unterstützt, diese Version davon jedoch nicht. Die Datei in der App öffnen, mit der sie erstellt wurde."
           }
         },
         "fr": {
@@ -15480,7 +15480,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wählen Sie eine reguläre Datei für die Vorschau."
+            "value": "Eine reguläre Datei für die Vorschau auswählen."
           }
         },
         "fr": {
@@ -18540,7 +18540,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wählen Sie, welche Dateitypen %@ in der Vorschau anzeigen darf. macOS entscheidet, welche App jede Datei in der Vorschau anzeigt."
+            "value": "Auswählen, welche Dateitypen %@ in der Vorschau anzeigen darf. macOS entscheidet, welche App jede Datei in der Vorschau anzeigt."
           }
         },
         "fr": {
@@ -23427,13 +23427,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "%2$@ Einstellung gibt dem Server Zugriff auf Ihren Benutzerordner oder auf „Dokumente“, „Downloads“ oder „Schreibtisch“."
+                  "value": "%2$@ Einstellung gibt dem Server Zugriff auf den Benutzerordner oder auf „Dokumente“, „Downloads“ oder „Schreibtisch“."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "%2$@ Einstellungen geben dem Server Zugriff auf Ihren Benutzerordner oder auf „Dokumente“, „Downloads“ oder „Schreibtisch“."
+                  "value": "%2$@ Einstellungen geben dem Server Zugriff auf den Benutzerordner oder auf „Dokumente“, „Downloads“ oder „Schreibtisch“."
                 }
               }
             }
@@ -23787,13 +23787,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "%2$@ Werkzeugbeschreibung weist die KI an, andere Dateien zu lesen oder Ihnen etwas zu verschweigen."
+                  "value": "%2$@ Werkzeugbeschreibung weist die KI an, andere Dateien zu lesen oder etwas zu verheimlichen."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "%2$@ Werkzeugbeschreibungen weisen die KI an, andere Dateien zu lesen oder Ihnen etwas zu verschweigen."
+                  "value": "%2$@ Werkzeugbeschreibungen weisen die KI an, andere Dateien zu lesen oder etwas zu verheimlichen."
                 }
               }
             }
@@ -25857,13 +25857,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "%2$@ Passwortmanager-Login ist hier in lesbarer Form gespeichert. Löschen Sie diesen Export, wenn Sie ihn nicht mehr brauchen."
+                  "value": "%2$@ Passwortmanager-Login ist hier in lesbarer Form gespeichert. Diesen Export löschen, sobald er nicht mehr benötigt wird."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "%2$@ Passwortmanager-Logins sind hier in lesbarer Form gespeichert. Löschen Sie diesen Export, wenn Sie ihn nicht mehr brauchen."
+                  "value": "%2$@ Passwortmanager-Logins sind hier in lesbarer Form gespeichert. Diesen Export löschen, sobald er nicht mehr benötigt wird."
                 }
               }
             }
@@ -26100,7 +26100,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kann jede von Ihnen besuchte Website lesen und ändern."
+            "value": "Kann jede besuchte Website lesen und ändern."
           }
         },
         "fr": {
@@ -35190,7 +35190,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Datei enthält Geheimnisse und liegt in %@, wodurch sie in die Cloud und auf Ihre anderen Geräte kopiert wird."
+            "value": "Diese Datei enthält Geheimnisse und liegt in %@, wodurch sie in die Cloud und auf weitere Geräte kopiert wird."
           }
         },
         "fr": {
@@ -51250,7 +51250,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aktivieren Sie die Erweiterungen in den Systemeinstellungen. macOS wählt den Anbieter für Vorschau und Miniaturbilder."
+            "value": "Die Erweiterungen in den Systemeinstellungen aktivieren. macOS wählt den Anbieter für Vorschau und Miniaturbilder."
           }
         },
         "fr": {
@@ -54130,7 +54130,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wählen Sie, welche Modellachse nach oben zeigt. 3D-Druckdateien (STL, 3MF) zeigen meist mit Z nach oben, die meisten anderen 3D-Dateien mit Y nach oben. Die Auswahl gilt nur für diese Ansicht und wird nicht gespeichert."
+            "value": "Auswählen, welche Modellachse nach oben zeigt. 3D-Druckdateien (STL, 3MF) zeigen meist mit Z nach oben, die meisten anderen 3D-Dateien mit Y nach oben. Die Auswahl gilt nur für diese Ansicht und wird nicht gespeichert."
           }
         },
         "fr": {
@@ -55532,7 +55532,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Wiedergabe startet erst, wenn Sie „Wiedergabe“ drücken."
+            "value": "Die Wiedergabe startet erst beim Drücken von „Wiedergabe“."
           }
         },
         "fr": {
@@ -62083,7 +62083,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Schreibgeschützter Text. Wählen Sie Text zum Kopieren aus; durchsuchen Sie den geladenen Inhalt mit „Suchen“."
+            "value": "Schreibgeschützter Text. Text zum Kopieren auswählen; den geladenen Inhalt mit „Suchen“ durchsuchen."
           }
         },
         "fr": {
@@ -72667,7 +72667,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aktivieren Sie diesen Dateityp in den Dateityp-Einstellungen der Begleit-App, um seinen Inhalt anzuzeigen."
+            "value": "Diesen Dateityp in den Dateityp-Einstellungen der Begleit-App aktivieren, um seinen Inhalt anzuzeigen."
           }
         },
         "fr": {
@@ -74015,7 +74015,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Legen Sie nur eine lokale Datei ab. Weblinks und mehrere Objekte werden nicht unterstützt."
+            "value": "Nur eine lokale Datei ablegen. Weblinks und mehrere Objekte werden nicht unterstützt."
           }
         },
         "fr": {
@@ -74825,7 +74825,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mit den Pfeiltasten, der Leertaste oder Bild auf und Bild ab blättern Sie durch die Seiten. Mit Befehl-Pfeil-nach-oben oder Befehl-Pfeil-nach-unten springen Sie zum Anfang oder Ende."
+            "value": "Mit den Pfeiltasten, der Leertaste oder Bild auf und Bild ab durch die Seiten blättern. Mit Befehl-Pfeil-nach-oben oder Befehl-Pfeil-nach-unten zum Anfang oder Ende springen."
           }
         },
         "fr": {
@@ -75905,7 +75905,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffnen Sie eine unterstützte lokale Datei. Wahrscheinliche Geheimnisse werden vor Anzeige, Auswahl und Kopieren verborgen."
+            "value": "Eine unterstützte lokale Datei öffnen. Wahrscheinliche Geheimnisse werden vor Anzeige, Auswahl und Kopieren verborgen."
           }
         },
         "fr": {
@@ -81557,7 +81557,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Geben Sie eine ganze Zahl von 1 bis %lld ein."
+            "value": "Eine ganze Zahl von 1 bis %lld eingeben."
           }
         },
         "fr": {
@@ -86956,7 +86956,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aus den BibTeX-Feldern mit vereinfachten Stilregeln formatiert. Prüfen Sie vor dem Zitieren den Stilleitfaden."
+            "value": "Aus den BibTeX-Feldern mit vereinfachten Stilregeln formatiert. Vor dem Zitieren den Stilleitfaden prüfen."
           }
         },
         "fr": {
@@ -115491,7 +115491,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Diese Kopie der App kann keine Einstellungen mit ihren Vorschauen teilen, und das Öffnen der App ändert daran nichts. Installieren Sie die App neu aus ihrer ursprünglichen Quelle."
+            "value": "Diese Kopie der App kann keine Einstellungen mit ihren Vorschauen teilen, und das Öffnen der App ändert daran nichts. Die App aus ihrer ursprünglichen Quelle neu installieren."
           }
         },
         "fr": {
@@ -115671,7 +115671,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die gespeicherten Einstellungen sind möglicherweise beschädigt oder stammen von einer neueren Version. Öffnen Sie die Begleit-App, um Einrichtung und gespeicherte Auswahl zu prüfen."
+            "value": "Die gespeicherten Einstellungen sind möglicherweise beschädigt oder stammen von einer neueren Version. Die Begleit-App öffnen, um Einrichtung und gespeicherte Auswahl zu prüfen."
           }
         },
         "fr": {
@@ -116928,7 +116928,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS wählt für jeden Dateityp einen Quick Look-Anbieter. Die Quick Look-Erweiterung einer anderen App können Sie in den Systemeinstellungen > Allgemein > Anmeldeobjekte & Erweiterungen ausschalten. Die Suche liest nur installierte Apps und kann nicht sagen, welchen Anbieter der Finder für eine Datei verwendet."
+            "value": "macOS wählt für jeden Dateityp einen Quick Look-Anbieter. Die Quick Look-Erweiterung einer anderen App lässt sich unter Systemeinstellungen > Allgemein > Anmeldeobjekte & Erweiterungen ausschalten. Die Suche liest nur installierte Apps und kann nicht sagen, welchen Anbieter der Finder für eine Datei verwendet."
           }
         },
         "fr": {
@@ -118098,7 +118098,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die gespeicherten Einstellungen konnten nicht verwendet werden. Dateitypen bleiben deaktiviert, bis Sie neue Einstellungen wählen und speichern."
+            "value": "Die gespeicherten Einstellungen konnten nicht verwendet werden. Dateitypen bleiben deaktiviert, bis neue Einstellungen gewählt und gespeichert werden."
           }
         },
         "fr": {
@@ -120438,7 +120438,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aktivieren Sie die Quick Look-Erweiterungen unter Systemeinstellungen > Allgemein > Anmeldeobjekte & Erweiterungen. Wählen Sie dann eine unterstützte Datei im Finder aus und drücken Sie die Leertaste."
+            "value": "Die Quick Look-Erweiterungen unter Systemeinstellungen > Allgemein > Anmeldeobjekte & Erweiterungen aktivieren. Dann eine unterstützte Datei im Finder auswählen und die Leertaste drücken."
           }
         },
         "fr": {

@@ -940,6 +940,73 @@ class GermanQuoteTests(unittest.TestCase):
         self.assertEqual(len(warnings_for("de", 'A "b" and "c"')), 1)
 
 
+class GermanAddressTests(unittest.TestCase):
+    def test_formal_imperatives_and_mid_sentence_formal_pronouns_are_flagged(self):
+        for text in (
+            "Öffnen Sie die Datei",
+            "Wählen Sie einen Dateityp.",
+            "Schreibgeschützter Text; durchsuchen Sie den Inhalt.",
+            "Die Wiedergabe startet erst, wenn Sie „Wiedergabe“ drücken.",
+            "Möglicherweise fehlt Ihnen die Berechtigung.",
+            "Vorschau direkt im Finder – vollständig auf Ihrem Mac.",
+            "Zugriff auf Ihren Benutzerordner oder Ihre anderen Geräte.",
+        ):
+            with self.subTest(text):
+                warnings = warnings_for("de", text)
+                self.assertEqual(len(warnings), 1, text)
+                self.assertIn("formal address", warnings[0])
+
+    def test_sentence_initial_formal_sie_ihr_and_ihnen_are_flagged(self):
+        for text in (
+            "Sie können bis zu 32 Profile speichern.",
+            "Sie sollten die Datei prüfen.",
+            "Erster Satz. Sie müssen neu starten.",
+            "„Sie verwenden die Standardeinstellungen.“",
+            "Ihre Dateien bleiben lokal.",
+            "Ihr Gerät verlässt kein Inhalt.",
+            "Hinweis: Ihren Ordner prüfen.",
+            "Ihnen fehlt der Zugriff.",
+        ):
+            with self.subTest(text):
+                warnings = warnings_for("de", text)
+                self.assertEqual(len(warnings), 1, text)
+                self.assertIn("formal address", warnings[0])
+
+    def test_mid_sentence_uppercase_informal_pronouns_are_flagged(self):
+        for text in (
+            "Öffne die Datei, wenn Du möchtest.",
+            "Auf Deinem Mac gespeichert.",
+            "Das hilft Dir weiter.",
+            "Melde Dich erneut an.",
+            "Speichere Deine Auswahl.",
+        ):
+            with self.subTest(text):
+                warnings = warnings_for("de", text)
+                self.assertEqual(len(warnings), 1, text)
+                self.assertIn("mid-sentence uppercase informal address", warnings[0])
+
+    def test_neutral_copy_third_person_sie_and_lowercase_du_pass(self):
+        self.assertEqual(warnings_for(
+            "de",
+            "Die Datei in einem Texteditor öffnen.",
+            "Sie enthält Binärdaten.",
+            "Signaturen werden angezeigt. Sie werden nicht geprüft.",
+            "Hinweis: Sie hat keinen Inhalt.",
+            "„Sie wurde möglicherweise verschoben.“",
+            "Öffne die Datei, wenn du möchtest.",
+            "Auf deinem Mac bleibt alles lokal, was dir gehört.",
+            "Du kannst bis zu 32 Profile speichern. Deine Auswahl bleibt erhalten.",
+            "Sieben Zeilen im Verzeichnis.",
+        ), [])
+
+    def test_plural_variants_are_scanned_and_other_languages_are_unaffected(self):
+        warnings = validate_localization.typography_warnings(
+            {"de": {"a.count": {"one": "%2$@ Zeile. Öffnen Sie die Datei.", "other": "%2$@ Zeilen."}}})
+        self.assertEqual(len(warnings), 1)
+        self.assertIn("de/a.count: formal address", warnings[0])
+        self.assertEqual(warnings_for("en", "Open Sie Ihre Du"), [])
+
+
 class ShippedTypographyTests(unittest.TestCase):
     """The shipped catalog holds none of the mechanical typography problems. A new French or Hausa string with an
     ordinary space before a colon, or an apostrophe in a Hausa word, fails here; fix it with

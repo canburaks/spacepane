@@ -152,6 +152,9 @@ first five) about:
   instead, which is one constant and one run of the normalizer below);
 - German quotation marks other than `„…“` (U+201E and U+201C): straight quotes, the English
   closing mark, guillemets, and a mark that is not paired;
+- German formal address (`Sie`, `Ihnen`, `Ihr*`) and mid-sentence uppercase informal address
+  (`Du`, `Dir`, `Dich`, `Dein*`), keeping sentence-initial third-person `Sie` (`Sie enthält…`,
+  `Sie werden…`);
 - a translation longer than its language's budget (below);
 - English values over 12 words for keys whose comment mentions a header or notice. A key under
   `format.` is skipped, because a format description is a File Types row, not a header or notice.
@@ -161,7 +164,8 @@ zero warnings on the shipped catalog. The mechanical ones, French spaces and the
 character, are fixed by `python3 tools/normalize_localization_typography.py --write` for the
 translation inputs and by adding `--additions tools/localization/additions/<workstream>.json` for
 an additions file before the lead applies it; without `--write` it only reports. Run `merge` and
-`generate` afterwards. The tool never inserts a missing space and never touches German quotes.
+`generate` afterwards. The tool never inserts a missing space and never touches German quotes or
+address forms.
 
 ### Length budgets
 
@@ -196,6 +200,30 @@ right-to-left run, where an arrow (U+2192) keeps pointing right. Kept as they ar
 `window.title` and the Russian dash, which are punctuation, an en dash for a range, a slash between
 alternatives that names them (`front/side/top`, `1/2/3`, `+/−`, `key/value`), and `KML / KMZ`, two
 technical names.
+
+### Tone, register and translator prompt
+
+Avoid direct forms of address across translations. Write neutrally and descriptively in the
+platform's UI style: use infinitives for actions, hints and recovery steps (*Die Datei in einem
+Texteditor öffnen*, not *Öffnen Sie die Datei…*), nominalizations for clauses (*vor dem
+Entpacken*, *beim Drücken von „Wiedergabe“*), and neutral determiners (*auf dem Mac*, *mit den
+aktuellen Einstellungen*, *Zugriff auf den Benutzerordner*) instead of possessive pronouns.
+
+In German (`de`), never use formal `"Sie"` (`Sie`, `Ihnen`, `Ihr*`). When direct address is
+genuinely unavoidable, use informal `"du"` (`du`, `dir`, `dich`, `dein*`, spelled lowercase
+mid-sentence per Duden). Keep valid sentence-initial third-person `Sie` when referring to a
+feminine or plural noun such as *die Datei* or *Signaturen* (*Sie enthält Binärdaten…*, *Sie
+werden nicht geprüft…*).
+
+Reusable translator prompt snippet:
+
+> Translate into natural, concise macOS UI copy. Avoid addressing the reader directly: prefer
+> neutral statements, infinitives for instructions and tooltips, nominalizations (e.g. *vor dem
+> Entpacken*), and neutral articles (*auf dem Mac*, *den Benutzerordner*) instead of *you/your*.
+> In German (`de`), never use formal *Sie/Ihnen/Ihr\**; if direct address cannot be avoided, use
+> informal *du/dir/dich/dein\** (lowercase mid-sentence per Duden) and German quotes `„…“`.
+> Preserve printf placeholders (`%@`, `%1$@`, `%2$@`, `%lld`), technical names, keyboard
+> shortcuts and `>` in System Settings paths.
 
 Generated `.strings` files are compared with the catalog through `plutil` when it is
 installed. Without it (Linux), a strict reader accepts only the generator's own output: the

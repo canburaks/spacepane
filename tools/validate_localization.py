@@ -103,6 +103,15 @@ TYPOGRAPHY_RULES = (
 GERMAN_OPENING, GERMAN_CLOSING = "\u201e", "\u201c"
 GERMAN_FOREIGN_QUOTES = '"\u201d\u00ab\u00bb\u2039\u203a'
 
+# German copy avoids formal address (Sie, Ihnen, Ihr*) in favor of neutral phrasing or informal du (spelled lowercase
+# mid-sentence per Duden). Sentence-initial Sie with a third-person verb ("Sie enthält...", "Sie werden...") stays.
+GERMAN_SENTENCE_START = re.compile(r"(?:\A\s*|(?:[.!?…:]\u201c?\s+|\n\s*))\u201e?\Z")
+GERMAN_FORMAL_PRONOUN = re.compile(r"(?<![-\w])(?:Ihnen|Ihr|Ihre|Ihren|Ihrem|Ihrer|Ihres|Sie)(?![-\w])")
+GERMAN_FORMAL_INITIAL_SIE = re.compile(
+    r"Sie\s+(?:können|sollten|müssen|dürfen|möchten|wollen|erhalten|sehen|wählen|finden|brauchen|nutzen|verwenden|haben)\b"
+)
+GERMAN_UPPERCASE_INFORMAL = re.compile(r"(?<![-\w])(?:Du|Dir|Dich|Dein|Deine|Deinen|Deinem|Deiner|Deines)(?![-\w])")
+
 # Length budgets (warnings): the most characters a translation may have, as a multiple of the English characters, for
 # chrome that has to fit (labels, buttons, chips, headers, status lines). One-word labels would exceed any ratio,
 # so a budget is never under LENGTH_FLOOR characters, and English text of more than LENGTH_MAX_ENGLISH characters
@@ -500,9 +509,38 @@ def german_quote_problems(text):
     return list(dict.fromkeys(problems))
 
 
+def _is_german_sentence_start(text, offset):
+    return GERMAN_SENTENCE_START.search(text[:offset]) is not None
+
+
+def german_address_problems(text):
+    """Formal address (`Sie`, `Ihnen`, `Ihr*`) and mid-sentence uppercase informal address (`Du`, `Dein*`) in
+    German copy, leaving sentence-initial third-person `Sie` ("Sie enthält...", "Sie werden...") alone."""
+    formal = []
+    for match in GERMAN_FORMAL_PRONOUN.finditer(text):
+        word = match.group(0)
+        if word != "Sie" or not _is_german_sentence_start(text, match.start()):
+            formal.append(word)
+        elif GERMAN_FORMAL_INITIAL_SIE.match(text, match.start()):
+            formal.append(word)
+    problems = []
+    if formal:
+        problems.append("formal address (" + ", ".join(dict.fromkeys(formal)) + "); write neutrally or use informal du")
+    informal_upper = [
+        match.group(0)
+        for match in GERMAN_UPPERCASE_INFORMAL.finditer(text)
+        if not _is_german_sentence_start(text, match.start())
+    ]
+    if informal_upper:
+        problems.append("mid-sentence uppercase informal address (" + ", ".join(dict.fromkeys(informal_upper))
+                        + "); spell du/dein lowercase mid-sentence")
+    return problems
+
+
 # Typography checks written as functions: (languages, text -> messages).
 TYPOGRAPHY_CHECKS = (
     (("de",), german_quote_problems),
+    (("de",), german_address_problems),
 )
 
 
